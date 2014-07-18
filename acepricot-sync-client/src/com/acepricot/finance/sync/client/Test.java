@@ -51,7 +51,7 @@ public class Test {
 		});
 		
 		msg = process(msg, "", false);
-		
+		/*
 		FileInputStream fin = new FileInputStream(new File("D:\\Dokumenty\\My Documents.rar"));
 		byte[] b = new byte[4096];
 		md.reset();
@@ -69,7 +69,7 @@ public class Test {
 		
 		msg = process(msg, "", false);
 		
-		msg = process(msg, "?id=1", true);		
+		msg = process(msg, "?id=1", true);*/		
 	}
 	
 	public static JSONMessage process(JSONMessage msg, String param, boolean put) throws Exception {
