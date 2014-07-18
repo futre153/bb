@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <entry key="com.acepricot.finance.db.url">jdbc:sapdb://p3600x006/aceserve</entry>
+    <entry key="com.acepricot.finance.db.driver">com.sap.dbtech.jdbc.DriverSapDB</entry>
+    <entry key="com.acepricot.finance.db.user">acesvradm</entry>
+    <entry key="com.acepricot.finance.db.pass">nahradnik06</entry>
+    <entry key="com.acepricot.finance.db.maxactive">60</entry>
+    <entry key="com.acepricot.finance.db.intisize">10</entry>
+    <entry key="com.acepricot.finance.db.maxwait">10000</entry>
+    <entry key="com.acepricot.finance.db.maxabandoned">60</entry>
+    <entry key="com.acepricot.finance.db.minidle">10</entry>
+    <entry key="com.acepricot.finance.db.dsn">jdbc/aceserver</entry>
+</properties>
