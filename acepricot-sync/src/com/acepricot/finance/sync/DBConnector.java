@@ -45,6 +45,9 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		p.setMaxWait(Integer.parseInt(pro.getProperty(DB_MAX_WAIT_KEY)));
 		p.setRemoveAbandonedTimeout(Integer.parseInt(pro.getProperty(DB_REM_ABANDONED_KEY)));
 		p.setMinEvictableIdleTimeMillis(Integer.parseInt(pro.getProperty(DB_MIN_IDLE_KEY)));
+		System.out.println(pro);
+		System.out.println(p.getUsername());
+		System.out.println(p.getPassword());
 		DataSource ds = new DataSource();
 		ds.setPoolProperties(p);
 		DBConnector.db.put(name, ds);

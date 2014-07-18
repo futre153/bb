@@ -51,6 +51,7 @@ final class JSONMessageProcessor {
 				Properties pro = new Properties();
 				InputStream in = JSONMessageProcessor.class.getResourceAsStream("/com/acepricot/finance/sync/db_aceserver.xml");
 				pro.loadFromXML(in);
+				System.out.println(pro);
 				in.close();
 				dsn = pro.getProperty(DBConnector.DB_DSN_KEY);
 				DBConnector.bind(pro, dsn);
