@@ -6,8 +6,6 @@ import java.util.Date;
 
 import org.h2.api.Trigger;
 
-import com.acepricot.finance.sync.DBConnector;
-
 public class CommonTrigger implements Trigger {
 	
 	private static final String SYNC_SCHEMA = "SYNC";
@@ -24,6 +22,7 @@ public class CommonTrigger implements Trigger {
 
 	@Override
 	public void fire(Connection con, Object[] oldRow, Object[] newRow)	throws SQLException {
+		
 		Object[] row;
 		StringBuffer sb = new StringBuffer();
 		switch(this.getType()) {
@@ -53,17 +52,26 @@ public class CommonTrigger implements Trigger {
 		}
 	}
 
-	private void insert(Connection con, Object[] row, StringBuffer sb) {
-		Object[] temp = new Object[row.length + 3];
+	private void insert(Connection con, Object[] row, StringBuffer sb) throws SQLException {
+		Object[] temp = new Object[row.length + DBSchemas.getSyncExtensionCols().length];
 		temp[row.length] = sb.toString();
 		temp[row.length + 1] = this.getType();
 		temp[row.length + 2] = new Date().getTime();
 		temp[row.length + 3] = this.getSchemaName();
 		temp[row.length + 4] = this.getTableName();
 		String cols[] = new String[temp.length]; 
-		System.arraycopy(DBSchemas.getColumns(this.getTableName()), 0, cols, 0, DBSchemas.getColumns(this.getTableName()).length);
-		System.arraycopy(DBSchemas.getSyncExtensionCols(), 0, cols, DBSchemas.getColumns(this.getTableName()).length, cols.length);
-		DBConnector.insert(con, SYNC_SCHEMA + "." + this.getTriggerName(), cols, values);
+		System.arraycopy(DBSchemas.getColumns(con, this.getTableName()), 0, cols, 0, DBSchemas.getColumns(con, this.getTableName()).length);
+		System.arraycopy(DBSchemas.getSyncExtensionCols(), 0, cols, DBSchemas.getColumns(con, this.getTableName()).length, DBSchemas.getSyncExtensionCols().length);
+		System.arraycopy(row, 0, temp, 0, row.length);
+		DBConnectorLt.insert(con, SYNC_SCHEMA + "." + this.getTableName(), cols, toStringArray(temp), (char) 0);
+	}
+
+	private static String[] toStringArray(Object[] temp) {
+		String[] tmp = new String[temp.length];
+		for(int i = 0; i < temp.length; i ++) {
+			tmp[i] = temp[i].toString();
+		}
+		return tmp;
 	}
 
 	@Override

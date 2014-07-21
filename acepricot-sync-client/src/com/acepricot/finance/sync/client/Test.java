@@ -3,10 +3,11 @@ package com.acepricot.finance.sync.client;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.security.MessageDigest;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.Date;
 
 import org.pabk.net.http.DefaultContent;
@@ -18,6 +19,13 @@ import com.google.gson.Gson;
 
 public class Test {
 	public static void main(final String[] a) throws Exception {
+		
+		Class.forName("org.h2.Driver");
+		Connection con = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/DATABASE01;AUTO_SERVER=TRUE;LOCK_TIMEOUT=60000;CIPHER=AES", "", "cnuewf092no ptraajtn39ln");
+		DBSchemas.setTrigger(false);
+		DBSchemas.loadSchemas(con);
+		DBSchemas.setTrigger(true);
+		con.close();
 		
 		MessageDigest md = MessageDigest.getInstance("SHA-256");
 		byte[] digest = md.digest(new byte[]{});
