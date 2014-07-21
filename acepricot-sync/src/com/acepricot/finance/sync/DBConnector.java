@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Properties;
 
@@ -45,9 +46,6 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		p.setMaxWait(Integer.parseInt(pro.getProperty(DB_MAX_WAIT_KEY)));
 		p.setRemoveAbandonedTimeout(Integer.parseInt(pro.getProperty(DB_REM_ABANDONED_KEY)));
 		p.setMinEvictableIdleTimeMillis(Integer.parseInt(pro.getProperty(DB_MIN_IDLE_KEY)));
-		System.out.println(pro);
-		System.out.println(p.getUsername());
-		System.out.println(p.getPassword());
 		DataSource ds = new DataSource();
 		ds.setPoolProperties(p);
 		DBConnector.db.put(name, ds);
@@ -66,10 +64,13 @@ public class DBConnector extends Hashtable<String, DataSource> {
 	}
 
 	public static Hashtable<String, Object> getFirstRowOf(Connection con, String table, char env, String[] cols, Object[] where) throws SQLException {
-		ResultSet rs = select(con, table, cols, env, where);
-		Hashtable<String, Object> row = nextRow(rs);
-		close(rs);
-		return row;
+		ArrayList<Hashtable<String, Object>> rows = select(con, table, cols, env, where);
+		if(rows.size() == 0) {
+			return null;
+		}
+		else {
+			return rows.get(0);
+		}
 	}
 	
 	private static final void close(ResultSet rs) {
@@ -159,7 +160,7 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		return status;
 	}
 	
-	static ResultSet select(Connection con, String table, String[] cols, char env, Object[] where) throws SQLException {
+	static ArrayList<Hashtable<String, Object>> select(Connection con, String table, String[] cols, char env, Object[] where) throws SQLException {
 		StringBuffer sb = new StringBuffer("SELECT ");
 		if(cols == null) {
 			sb.append('*');
@@ -179,8 +180,14 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		ResultSet rs = ps.executeQuery();
 		con.commit();
 		con.setAutoCommit(true);
-		//ps.close();
-		return rs;
+		ArrayList<Hashtable<String, Object>> rows = new ArrayList<Hashtable<String, Object>>();
+		Hashtable<String, Object> row;
+		while((row = nextRow(rs)) != null) {
+			rows.add(row);
+		};
+		ps.close();
+		rs.close();
+		return rows;
 	}
 
 	private static void setPrepared(PreparedStatement ps, Object[] where, int index) throws SQLException {
