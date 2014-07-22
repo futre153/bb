@@ -11,6 +11,8 @@ import java.util.Hashtable;
 
 import org.h2.api.Trigger;
 
+import com.acepricot.finance.sync.ConstraintImpl;
+
 public class DBConnectorLt  {
 	
 	private static boolean prepared = true;
@@ -311,5 +313,73 @@ public class DBConnectorLt  {
 		con.setAutoCommit(true);
 		ps.close();
 		return status;
+	}
+
+
+	public static int dropTable(Connection con, boolean ifExists, String schemaName, String tableName, char env) throws SQLException {
+		StringBuffer sb = new StringBuffer("DROP TABLE ");
+		if(ifExists) {
+			sb.append("IF EXISTS ");
+		}
+		envelope(sb, schemaName + "." + tableName, env);
+		System.out.println(sb);
+		con.setAutoCommit(false);
+		PreparedStatement ps = con.prepareStatement(sb.toString());
+		int status = ps.executeUpdate();
+		con.commit();
+		con.setAutoCommit(true);
+		ps.close();
+		return status;
+	}
+
+
+	public static int dropSchema(Connection con, boolean ifExists, String schemaName, char env) throws SQLException {
+		StringBuffer sb = new StringBuffer("DROP SCHEMA ");
+		if(ifExists) {
+			sb.append("IF EXISTS ");
+		}
+		envelope(sb, schemaName, env);
+		System.out.println(sb);
+		con.setAutoCommit(false);
+		PreparedStatement ps = con.prepareStatement(sb.toString());
+		int status = ps.executeUpdate();
+		con.commit();
+		con.setAutoCommit(true);
+		ps.close();
+		return status;
+	}
+
+
+	public static int dropTrigger(Connection con, boolean ifExists, String schemaName, String triggerName, char env) throws SQLException {
+		StringBuffer sb = new StringBuffer("DROP TRIGGER ");
+		if(ifExists) {
+			sb.append("IF EXISTS ");
+		}
+		envelope(sb, schemaName + "." + triggerName, env);
+		System.out.println(sb);
+		con.setAutoCommit(false);
+		PreparedStatement ps = con.prepareStatement(sb.toString());
+		int status = ps.executeUpdate();
+		con.commit();
+		con.setAutoCommit(true);
+		ps.close();
+		return status;
+	}
+
+
+	public static int alterTable(Connection con, ConstraintImpl cons, char env) throws SQLException {
+		StringBuffer sb = new StringBuffer("ALTER TABLE ");
+		envelope(sb, cons.getTableName(), env);
+		sb.append(' ');
+		cons.getSQLText(sb, env);
+		System.out.println(sb);
+		con.setAutoCommit(false);
+		PreparedStatement ps = con.prepareStatement(sb.toString());
+		int status = ps.executeUpdate();
+		con.commit();
+		con.setAutoCommit(true);
+		ps.close();
+		return status;
+		
 	}	
 }

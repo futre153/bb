@@ -3,11 +3,11 @@ package com.acepricot.finance.sync.client;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.security.MessageDigest;
-import java.sql.Connection;
-import java.sql.DriverManager;
+import java.util.Arrays;
 import java.util.Date;
 
 import org.pabk.net.http.DefaultContent;
@@ -19,14 +19,16 @@ import com.google.gson.Gson;
 
 public class Test {
 	public static void main(final String[] a) throws Exception {
-		
+		/*
 		Class.forName("org.h2.Driver");
 		Connection con = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/DATABASE01;AUTO_SERVER=TRUE;LOCK_TIMEOUT=60000;CIPHER=AES", "", "cnuewf092no ptraajtn39ln");
 		DBSchemas.setTrigger(false);
+		//DBSchemas.dropSyncSchema(con);
 		DBSchemas.loadSchemas(con);
 		DBSchemas.setTrigger(true);
 		con.close();
-		
+		System.exit(0);
+		*/
 		MessageDigest md = MessageDigest.getInstance("SHA-256");
 		byte[] digest = md.digest(new byte[]{});
 		
@@ -59,7 +61,7 @@ public class Test {
 		});
 		
 		msg = process(msg, "", false);
-		/*
+		
 		FileInputStream fin = new FileInputStream(new File("D:\\Dokumenty\\My Documents.rar"));
 		byte[] b = new byte[4096];
 		md.reset();
@@ -77,12 +79,37 @@ public class Test {
 		
 		msg = process(msg, "", false);
 		
-		msg = process(msg, "?id=1", true);*/		
+		if(msg.getBody()[0].equals("OK")) {
+			while(true) {
+				int uri = ((Double) msg.getBody()[2]).intValue();
+				if(uri < 0) {break;}
+				int grpid = ((Double) msg.getBody()[1]).intValue();
+				msg = upload(msg, "?id=" + uri + "&grpid=" + grpid);	
+			}
+		}
+				
 	}
 	
+	private static JSONMessage upload(JSONMessage msg, String param) throws Exception {
+		SimpleClient client = new SimpleClient("http://localhost:9000/acepricot-sync/" + param);
+		DefaultContent c = new DefaultContent(HttpClientConst.APP_H2DB_CONTENT);
+		client.setMethod(HttpClientConst.HEAD_METHOD);
+		int response = client.getResponseCode(c);
+		switch(response) {
+		case 200:
+			return process(msg, param, true);
+		case 204:
+			return msg.returnOK("File upload is not required");
+		case 403:
+			return msg.sendAppError("Unauthorized access");
+		default:
+			return msg.sendAppError("Server returned " + response);
+		}
+	}
+
 	public static JSONMessage process(JSONMessage msg, String param, boolean put) throws Exception {
 		System.out.println(msg==null?"NULL":msg.getHeader());
-		SimpleClient client = new SimpleClient("http://localhost:8080/acepricot-sync/" + param);
+		SimpleClient client = new SimpleClient("http://localhost:9000/acepricot-sync/" + param);
 		DefaultContent c = null;
 		if(put) {
 			client.setMethod(HttpClientConst.PUT_METHOD);
@@ -100,7 +127,7 @@ public class Test {
 		while((i = in.read()) >= 0) {
 			out.write(i);
 		}
-		client.close();
+		//client.close();
 		InputStreamReader bin = new InputStreamReader(new ByteArrayInputStream(out.toByteArray()), "UTF-8");
 		try {
 			msg = new Gson().fromJson(bin, JSONMessage.class);

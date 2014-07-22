@@ -7,6 +7,7 @@ import java.util.Hashtable;
 
 import org.h2.api.Trigger;
 
+import com.acepricot.finance.sync.RefConstraint;
 import com.acepricot.finance.sync.Where;
 
 public class DBSchemas {
@@ -48,11 +49,33 @@ public class DBSchemas {
 	private static final String IS_COLUMNS_IS_NULLABLE = "IS_NULLABLE";
 	private static final String IS_IS_NULLABLE_NO = "NO";
 	private static final String USER_SCHEMA = "USER";
+	private static final String IS_TRIGGERS = "TRIGGERS";
+	private static final String IS_TRIGGERS_TRIGGER_SCHEMA = "TRIGGER_SCHEMA";
+	private static final String IS_TRIGGERS_TRIGGER_NAME = "TRIGGER_NAME";
+	private static final String IS_TRIGGERS_JAVA_CLASS = "JAVA_CLASS";
+	private static final String IS_CROSS_REFERENCES = "CROSS_REFERENCES";
+	private static final String IS_CROSS_REFERENCES_PKTABLE_SCHEMA = "PKTABLE_SCHEMA";
+	private static final String IS_CROSS_REFERENCES_PKTABLE_NAME = "PKTABLE_NAME";
+	private static final String IS_CROSS_REFERENCES_PKCOLUMN_NAME = "PKCOLUMN_NAME";
+	private static final String IS_CROSS_REFERENCES_FKTABLE_SCHEMA = "FKTABLE_SCHEMA";
+	private static final String IS_CROSS_REFERENCES_FKTABLE_NAME = "FKTABLE_NAME";
+	private static final String IS_CROSS_REFERENCES_FKCOLUMN_NAME = "FKCOLUMN_NAME";
+	private static final String IS_CROSS_REFERENCES_UPDATE_RULE = "UPDATE_RULE";
+	private static final String IS_CROSS_REFERENCES_DELETE_RULE = "DELETE_RULE";
+	private static final String IS_CONSTRAINTS = "CONSTRAINTS";
+	private static final String IS_CONSTRAINTS_CONSTRAINT_SCHEMA = "CONSTRAINT_SCHEMA";
+	private static final String IS_CONSTRAINTS_CONSTRAINT_NAME = "CONSTRAINT_NAME";
+	private static final String IS_CONSTRAINTS_TABLE_SCHEMA = "TABLE_SCHEMA";
+	private static final String IS_CONSTRAINTS_TABLE_NAME = "TABLE_NAME";
+	private static final String IS_CONSTRAINTS_COLUMN_LIST = "COLUMN_LIST";
+	private static final Object IS_CONSTRAINTS_CONSTRAINT_TYPE = "CONSTRAINT_TYPE";
+	private static final Object PRIMARY_KEY_VALUE = "PRIMARY KEY";
 
 	private static String[] tables;
 	private static String[][] columns;
 	private static String[][] dataTypes;
 	private static String[][] constraints;
+	private static Hashtable<String, String> primaries;
 	
 	private static boolean trigger = true;
 	
@@ -92,7 +115,30 @@ public class DBSchemas {
 		}
 		throw new SQLException("Failed to retrieve tableName");
 	}
-
+	
+	public static void dropSyncSchema(Connection con) throws SQLException {
+		loadSchemas(con);
+		if(tables != null) {
+			for(int i = 0; i < tables.length; i ++) {
+				DBConnectorLt.dropTable(con, true, SYNC_SCHEMA_NAME, tables[i], (char) 0);
+			}
+		}
+		else {
+			throw new SQLException("Failed to find sync tables");
+		}
+		DBConnectorLt.dropSchema(con, true, SYNC_SCHEMA_NAME, (char) 0);
+		String tableName = INFORMATION_SCHEMA + "." + IS_TRIGGERS;
+		String[] cols = {IS_TRIGGERS_TRIGGER_SCHEMA, IS_TRIGGERS_TRIGGER_NAME};
+		Where w = new Where();
+		Object[] where = w.set(w.equ(IS_TRIGGERS_JAVA_CLASS, CommonTrigger.class.getName()));
+		ArrayList<Hashtable<String, Object>> rows = DBConnectorLt.select(con, tableName, cols, (char) 0, where);
+		for(int i = 0; i < rows.size(); i ++) {
+			Hashtable<String, Object> row = rows.get(i);
+			DBConnectorLt.dropTrigger(con, true,(String) row.get(IS_TRIGGERS_TRIGGER_SCHEMA),(String) row.get(IS_TRIGGERS_TRIGGER_NAME), (char) 0);
+		}
+	}
+	
+	
 	public static void loadSchemas(Connection con) throws SQLException {
 		// TODO Auto-generated method stub
 		String table = INFORMATION_SCHEMA + "." + IS_TABLES;
@@ -173,6 +219,44 @@ public class DBSchemas {
 			DBConnectorLt.createTrigger(con, true, USER_SCHEMA, tables[i], false, Trigger.DELETE, true, CommonTrigger.class, (char) 0);
 			
 		}
+		table = INFORMATION_SCHEMA + "." + IS_CROSS_REFERENCES;
+		cols = new String[] {
+				IS_CROSS_REFERENCES_PKTABLE_SCHEMA, IS_CROSS_REFERENCES_PKTABLE_NAME, IS_CROSS_REFERENCES_PKCOLUMN_NAME,
+				IS_CROSS_REFERENCES_FKTABLE_SCHEMA, IS_CROSS_REFERENCES_FKTABLE_NAME, IS_CROSS_REFERENCES_FKCOLUMN_NAME,
+				IS_CROSS_REFERENCES_UPDATE_RULE, IS_CROSS_REFERENCES_DELETE_RULE};
+		w.clear();
+		where = w.set(w.equ(IS_CROSS_REFERENCES_PKTABLE_SCHEMA, USER_SCMEMA));
+		rows = DBConnectorLt.select(con, table, cols, (char) 0, where);
+		for(int i = 0; i < rows.size(); i ++) {
+			String consName = SYNC_SCHEMA_NAME + "_CONSTRIANT_" + i;
+			Hashtable<String, Object> row = rows.get(i);
+			row.put(IS_CROSS_REFERENCES_FKTABLE_SCHEMA, SYNC_SCHEMA_NAME);
+			DBConnectorLt.alterTable(con, new RefConstraint(consName, toArray(row, cols), true, true), (char) 0);
+		}
+		table = INFORMATION_SCHEMA + "." + IS_CONSTRAINTS;
+		cols = new String[] {IS_CONSTRAINTS_CONSTRAINT_SCHEMA, IS_CONSTRAINTS_CONSTRAINT_NAME,
+			IS_CONSTRAINTS_TABLE_SCHEMA, IS_CONSTRAINTS_TABLE_NAME, IS_CONSTRAINTS_COLUMN_LIST};
+		
+		w.clear();
+		where = w.set(w.and(w.equ(IS_CONSTRAINTS_TABLE_SCHEMA, USER_SCHEMA), w.equ(IS_CONSTRAINTS_CONSTRAINT_TYPE, PRIMARY_KEY_VALUE)));
+		rows = DBConnectorLt.select(con, table, cols, (char) 0, where);
+		primaries = new Hashtable<String, String>();
+		for(int i = 0; i < rows.size(); i ++) {
+			Hashtable<String, Object> row = rows.get(i);
+			String[] list = ((String) row.get(IS_CONSTRAINTS_COLUMN_LIST)).split(",");
+			for(int j = 0; j < list.length; j ++) {
+				primaries.put(row.get(IS_CONSTRAINTS_TABLE_SCHEMA) + "." + row.get(IS_CONSTRAINTS_TABLE_NAME) + "." + list[j], row.get(IS_CONSTRAINTS_CONSTRAINT_SCHEMA) + "." + row.get(IS_CONSTRAINTS_CONSTRAINT_NAME));
+			}
+		}
+		System.out.println(primaries);
+	}
+
+	private static Object[] toArray(Hashtable<String, Object> row, String[] key) {
+		Object[] objs = new Object[key.length];
+		for(int i = 0; i < objs.length; i ++) {
+			objs[i] = row.get(key[i]);
+		}
+		return objs;
 	}
 
 	private static int getDataType(ArrayList<Hashtable<String, Object>> typesRows, Object dataType) throws SQLException {

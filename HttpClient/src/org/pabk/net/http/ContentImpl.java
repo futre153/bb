@@ -56,8 +56,7 @@ abstract class ContentImpl implements Content {
 					return ((String) this.content).getBytes(getCharacterEncoding()).length;
 				}
 				if(this.content instanceof File) {
-					return -1;
-					//return ((File) this.content).length();
+					return ((File) this.content).length();
 				}
 			}
 			return -1;

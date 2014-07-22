@@ -136,6 +136,8 @@ public class SimpleClient {
 	
 	final public int getResponseCode(ContentImpl c) throws Exception {
 		applyAuthentication (con);
+		//con.addRequestProperty("Connection", "Keep-Alive");
+		//System.out.println(System.getProperty("http.keepAlive"));
 		SimpleClient.applyContent(con, c);
 		int rs = con.getResponseCode();
 		return rs;

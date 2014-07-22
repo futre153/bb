@@ -40,6 +40,7 @@ public class HttpClientConst {
 
 	public static final String POST_METHOD = "POST";
 	public static final String PUT_METHOD = "PUT";
+	public static final String HEAD_METHOD = "HEAD";
 	
 	/*
 	public static final String WSDL_PARSER_ERROR = "WSDL schema for OS service is not found!";
@@ -140,10 +141,6 @@ public class HttpClientConst {
 	public static final String TRANSFER_ENCODING = "Transfer-Encoding";
 	public static final String CHUNKED = "chunked";
 	public static final String CONTENT_ENCODING = "Content-Encoding";
-	
-	
-		
-	
 	
 	
 	/*
