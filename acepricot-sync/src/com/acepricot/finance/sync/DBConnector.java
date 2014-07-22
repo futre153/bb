@@ -241,9 +241,13 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		}
 	}
 	
-	private static void envelope(StringBuffer sb, String s, char c) {
-		sb.append(c);
+	static void envelope(StringBuffer sb, String s, char c) {
+		if(c > 0) {
+			sb.append(c);
+		}
 		sb.append(s);
-		sb.append(c);
+		if(c > 0) {
+			sb.append(c);
+		}
 	}	
 }

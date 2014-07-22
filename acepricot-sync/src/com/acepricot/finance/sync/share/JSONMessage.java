@@ -41,8 +41,16 @@ public class JSONMessage {
 		this.body = body;
 	}
 
-	public JSONMessage returnOK() {
-		this.setBody(new String[]{AppConst.OK_RESPONSE});
+	public JSONMessage returnOK(Object ... responses) {
+		if(responses == null) {
+			responses = new Object[]{};
+		}
+		Object[] body = new Object[responses.length + 1];
+		body[0] = AppConst.OK_RESPONSE;
+		for(int i = 0; i < responses.length ;i ++) {
+			body[i + 1] = responses[i];
+		}
+		this.setBody(body);
 		return this;
 	}
 

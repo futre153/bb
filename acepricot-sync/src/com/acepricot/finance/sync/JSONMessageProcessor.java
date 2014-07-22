@@ -15,15 +15,24 @@ import com.acepricot.finance.sync.share.JSONMessage;
 
 final class JSONMessageProcessor {
 	
+	public class UPLOADED_FILES {
+		private static final String GROUP_ID = "GROUP_ID";
+		private static final String DIGEST = "DIGEST";
+		private static final String DIGEST_ALGORITHM = "DIGEST_ALGORITHM";
+		public static final String URI = "URI";
+	}
+
+
 	private static final String UNIVERSAL_ID = "ID";
 	private static final String UNIVERSAL_ENABLED = "ENABLED";
 	private static final int ID_INDEX = 0;
 	private static final int OBJECT_INDEX = 1;
+	private static final String DEFAULT_DIGEST_ALGORITHM = "SHA-256";
 	
 	private static final class REGISTERED_GROUPS {
 		//private static final String TABLE_NAME = "REGISTERED_GROUPS";
 		//private static final String ID = UNIVERSAL_ID;
-		private static final String GROUP_NANE = "GROUP_NAME";
+		private static final String GROUP_NAME = "GROUP_NAME";
 		private static final String PASSWORD = "PASSWORD";
 		private static final String EMAIL = "EMAIL";
 		private static final String DB_VERSION = "DB_VERSION";
@@ -91,9 +100,67 @@ final class JSONMessageProcessor {
 	
 	@SuppressWarnings("unused")
 	private static final JSONMessage initUpload(JSONMessage msg) {
-		
+		String grpName = (String) msg.getBody()[0];
+		String fileDigest = JSONMessageProcessor.constructHexHash((ArrayList<?>) msg.getBody()[2]);
+		String digestAlgorithm = DEFAULT_DIGEST_ALGORITHM;
+		if(msg.getBody().length > 3) {
+			digestAlgorithm = (String) msg.getBody()[3];
+		}
+		msg = JSONMessageProcessor.login(msg);
+		if(msg.getBody()[0].equals(AppConst.OK_RESPONSE)) {
+			Connection con;
+			try {
+				con = DBConnector.lookup(dsn);
+			} catch (SQLException e) {
+				return msg.sendAppError(e);
+			}
+			int grpId;
+			try {
+				grpId = getGroupId(con, grpName);
+			} catch (SQLException | IOException e) {
+				return msg.sendAppError(e);
+			}
+			String table = JSONMessageProcessor.UPLOADED_FILES.class.getSimpleName();
+			String col = JSONMessageProcessor.UPLOADED_FILES.GROUP_ID;
+			String[] cols = {
+				JSONMessageProcessor.UPLOADED_FILES.GROUP_ID,
+				JSONMessageProcessor.UPLOADED_FILES.DIGEST,
+				JSONMessageProcessor.UPLOADED_FILES.DIGEST_ALGORITHM,
+				JSONMessageProcessor.UPLOADED_FILES.URI
+			};
+			int[] indexes = {0, AppError.DUPLICATE_FILE_INSERT, AppError.MULTIPLE_FILE_INSERT, AppError.FILE_UNEXPECTED_RETURN_VALUE};
+			String[] values = {Integer.toString(grpId), fileDigest, digestAlgorithm, Integer.toString((int) (Math.random() * Integer.MAX_VALUE))};
+			Where w = new Where();
+			Object[] where = w.set(w.equ(col, grpId));
+			try {
+				JSONMessageProcessor.insertRow(con, table, indexes, cols, values, where, true);
+			} catch (SQLException | IOException e) {
+				return msg.sendAppError(e);
+			}
+			col = JSONMessageProcessor.UPLOADED_FILES.URI;
+			indexes = null;
+			indexes = new int[]{AppError.DUPLICATE_FILE_INSERT, AppError.MULTIPLE_FILE_INSERT, AppError.FILE_INSERT_NOT_ENABLED};
+			Object[] uri = null;
+			try {
+				uri = JSONMessageProcessor.getObject(con, table, indexes, col, grpName, where, true);
+			} catch (SQLException | IOException e) {
+				return msg.sendAppError(e);
+			}
+			return msg.returnOK(uri[0], uri[1]);
+		}
 		return msg;
 	}
+	
+	private static final int getGroupId(Connection con, String grpName) throws SQLException, IOException {
+		String table = JSONMessageProcessor.REGISTERED_GROUPS.class.getSimpleName();
+		String col = JSONMessageProcessor.REGISTERED_GROUPS.GROUP_NAME;
+		Where w = new Where();
+		Object[] where = w.set(w.equ(col, grpName));
+		int[] indexes = {AppError.GROUP_NOT_REGISTERED, AppError.GROUP_MULTIPLE_REGISTRATION, AppError.GROUP_NOT_ENABLED};
+		return (Integer) JSONMessageProcessor.getObject(con, table, indexes, col, grpName, where, true)[ID_INDEX];
+	}
+	
+	
 	
 	@SuppressWarnings("unused")
 	private static final JSONMessage registerDevice(JSONMessage msg) {
@@ -113,7 +180,7 @@ final class JSONMessageProcessor {
 		msg = JSONMessageProcessor.login(msg);
 		if(msg.getBody()[0].equals(AppConst.OK_RESPONSE)) {
 			String table = JSONMessageProcessor.REGISTERED_GROUPS.class.getSimpleName();
-			String col = JSONMessageProcessor.REGISTERED_GROUPS.GROUP_NANE;
+			String col = JSONMessageProcessor.REGISTERED_GROUPS.GROUP_NAME;
 			Where w = new Where();
 			Object[] where = w.set(w.equ(col, grpName));
 			int[] indexes = {AppError.GROUP_NOT_REGISTERED, AppError.GROUP_MULTIPLE_REGISTRATION, AppError.GROUP_NOT_ENABLED};
@@ -145,8 +212,9 @@ final class JSONMessageProcessor {
 			} catch (SQLException | IOException e) {
 				return msg.sendAppError(e);
 			}
+			return msg.returnOK();
 		}
-		return msg.returnOK();
+		return msg;
 	}
 	
 	private static void setPrimaryDevice(Connection con, int grpId, String devName) throws SQLException, IOException {
@@ -207,10 +275,10 @@ final class JSONMessageProcessor {
 		double dbVersion = ((double) msg.getBody()[3]);
 		String table = JSONMessageProcessor.REGISTERED_GROUPS.class.getSimpleName();
 		Where w = new Where();
-		Object[] where = w.set(w.equ(JSONMessageProcessor.REGISTERED_GROUPS.GROUP_NANE, grpName));
+		Object[] where = w.set(w.equ(JSONMessageProcessor.REGISTERED_GROUPS.GROUP_NAME, grpName));
 		int[] indexes = {0, AppError.ALLREADY_REGISTERED, AppError.GROUP_MULTIPLE_REGISTRATION, AppError.UNEXPECTED_RETURN_VALUE};
 		String[] cols = {
-				JSONMessageProcessor.REGISTERED_GROUPS.GROUP_NANE,
+				JSONMessageProcessor.REGISTERED_GROUPS.GROUP_NAME,
 				JSONMessageProcessor.REGISTERED_GROUPS.PASSWORD,
 				JSONMessageProcessor.REGISTERED_GROUPS.EMAIL,
 				JSONMessageProcessor.REGISTERED_GROUPS.DB_VERSION
@@ -235,7 +303,7 @@ final class JSONMessageProcessor {
 		String hash = JSONMessageProcessor.constructHexHash((ArrayList<?>) msg.getBody()[1]);
 		String table = JSONMessageProcessor.REGISTERED_GROUPS.class.getSimpleName();
 		Where w = new Where();
-		Object[] where = w.set(w.equ(JSONMessageProcessor.REGISTERED_GROUPS.GROUP_NANE, grpName));
+		Object[] where = w.set(w.equ(JSONMessageProcessor.REGISTERED_GROUPS.GROUP_NAME, grpName));
 		//where.add(where.equ(JSONMessageProcessor.REGISTERED_GROUPS.GROUP_NANE, grpName));
 		int[] indexes = {AppError.GROUP_NOT_REGISTERED, AppError.GROUP_MULTIPLE_REGISTRATION, AppError.GROUP_NOT_ENABLED}; 
 		String col = JSONMessageProcessor.REGISTERED_GROUPS.PASSWORD;

@@ -10,5 +10,7 @@ public final class AppConst {
 	public static final String PUT_METHOD = "PUT";
 	public static final String JSON_ID_PARAM_KEY = "id";
 	public static final String OK_RESPONSE = "OK";
+	public static final Object HEAD_METHOD = "HEAD";
+	public static final String JSON_GROUP_ID_PARAM_KEY = "grpid";
 	private AppConst(){}
 }

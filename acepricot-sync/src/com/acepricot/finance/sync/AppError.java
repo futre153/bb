@@ -44,7 +44,20 @@ final class AppError {
 		"Multiple device name '%s' in this group",
 		"Unexpected return value, while registering device %s. Please contact support",
 		"No enabled devices for this group",
-		"Unexpected return value, while setting primary device (%d). Please contact support"
+		"Unexpected return value, while setting primary device (%d). Please contact support",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"File is allready reistered under group id %s. Please contact support",		//0x30 - File download - upload
+		"File is multiple registered under group id %s. Please contact support",
+		"Unexcpected return values for group id %s, while registering file for download. Please contact support",
+		"File download is not allowed for group id %s. Please contact support"
 	};
 	
 	public static final int HTTP_CT_ERROR = 0x00;
@@ -64,6 +77,11 @@ final class AppError {
 	public static final int DEVICE_UNEXPECTED_RETURN_VALUE = 0x24;
 	public static final int NO_ENABLED_DEVICES = 0x25;
 	public static final int PRIMARY_KEY_UNEXPECTED_ERROR = 0x26;
+
+	public static final int DUPLICATE_FILE_INSERT = 0x30;
+	public static final int MULTIPLE_FILE_INSERT = 0x031;
+	public static final int FILE_UNEXPECTED_RETURN_VALUE = 0x032;
+	public static final int FILE_INSERT_NOT_ENABLED = 0x33;
 	
 	
 	private AppError(){}
