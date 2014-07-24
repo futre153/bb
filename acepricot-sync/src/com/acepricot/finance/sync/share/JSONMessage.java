@@ -86,4 +86,8 @@ public class JSONMessage {
 		this.setBody(new String[]{message});
 		return null;
 	}
+
+	public boolean isError() {
+		return this.getHeader().equals(AppConst.JSON_ERROR_MSG);
+	}
 }

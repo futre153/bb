@@ -2,10 +2,16 @@ package org.pabk.net.http;
 
 import java.io.InputStream;
 import java.net.Authenticator;
+import java.net.CookieHandler;
+import java.net.CookieManager;
+import java.net.CookiePolicy;
+import java.net.HttpCookie;
 import java.net.HttpURLConnection;
 import java.net.InetSocketAddress;
 import java.net.ProtocolException;
 import java.net.Proxy;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 import org.pabk.net.http.auth.BBAuthenticator;
@@ -19,6 +25,9 @@ public class SimpleClient {
 		
 	private HttpURLConnection con;
 	private int authType;
+	private static boolean cookiesAllowed = false;
+	private static CookieManager cMan;
+	
 	
 	public SimpleClient(String url) throws Exception {
 		this(url, false);
@@ -139,7 +148,27 @@ public class SimpleClient {
 		//con.addRequestProperty("Connection", "Keep-Alive");
 		//System.out.println(System.getProperty("http.keepAlive"));
 		SimpleClient.applyContent(con, c);
-		int rs = con.getResponseCode();
+		int rs = con.getResponseCode();/*
+		if(cMan != null) {
+			CookieStore cs = cMan.getCookieStore();
+			List<HttpCookie> cookies = cs.getCookies();
+			for(HttpCookie cookie: cookies) {
+				System.out.printf ("%s%n", cookie);
+				System.out.printf ("%s%n", cookie.getComment());
+				System.out.printf ("%s%n", cookie.getCommentURL());
+				System.out.printf ("%s%n", cookie.getDiscard());
+				System.out.printf ("%s%n", cookie.getDomain());
+				System.out.printf ("%s%n", cookie.getMaxAge());
+				System.out.printf ("%s%n", cookie.getName());
+				System.out.printf ("%s%n", cookie.getPath());
+				System.out.printf ("%s%n", cookie.getPortlist());
+				System.out.printf ("%s%n", cookie.getSecure());
+				System.out.printf ("%s%n", cookie.getValue());
+				System.out.printf ("%s%n", cookie.getVersion());
+				System.out.printf ("%s%n", cookie.hasExpired());
+				System.out.printf ("%s%n", cookie.isHttpOnly());
+			}
+		}*/
 		return rs;
 	}
 	
@@ -198,11 +227,16 @@ public class SimpleClient {
 		if(enc != null) {
 			con.addRequestProperty(HttpClientConst.CONTENT_ENCODING, enc);
 		}
-		System.out.println(con.getRequestMethod());
+		//System.out.println(con.getRequestMethod());
 		content.applyAdditionalProperties(con);
 		
 		if(content.getLength() == 0) {
-			con.setRequestMethod(HttpClientConst.GET_METHOD);
+			if(con.getRequestMethod().equals(HttpClientConst.PUT_METHOD)) {
+				
+			}
+			else {
+				con.setRequestMethod(HttpClientConst.GET_METHOD);
+			}
 		}
 		else {
 			if(con.getRequestMethod().equals(HttpClientConst.PUT_METHOD)) {
@@ -213,6 +247,52 @@ public class SimpleClient {
 			}
 			con.setDoOutput(true);
 			content.doFinal(con.getOutputStream());
+		}
+	}
+
+	public static boolean isCookiesAllowed() {
+		return cookiesAllowed;
+	}
+
+	public static void setCookiesAllowed(boolean cookiesAllowed) {
+		if(cookiesAllowed ^ SimpleClient.cookiesAllowed) {
+			if(SimpleClient.cookiesAllowed = cookiesAllowed) {
+				if(cMan == null) {
+					cMan = new CookieManager(null, CookiePolicy.ACCEPT_ALL);
+					CookieHandler.setDefault(cMan);
+				}
+			}
+			else {
+				if(cMan != null) {
+					cMan.setCookiePolicy(CookiePolicy.ACCEPT_ORIGINAL_SERVER);
+				}
+			}
+		}
+	}
+
+	public static void setCookie(String url, HttpCookie cookie) {
+		if(isCookiesAllowed()) {
+			try {
+				URI uri = new URI(url);
+				cookie.setDomain(uri.getHost());
+				cookie.setPath(uri.getPath());
+				cookie.setVersion(0);
+				cookie.setHttpOnly(true);
+				cMan.getCookieStore().add(uri, cookie);
+				
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+
+	public static void removeCookie(String url, HttpCookie cookie) {
+		if(isCookiesAllowed()) {
+			try {
+				cMan.getCookieStore().remove(new URI(url), cookie);
+			} catch (URISyntaxException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	

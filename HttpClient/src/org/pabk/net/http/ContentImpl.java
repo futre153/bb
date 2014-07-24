@@ -58,6 +58,9 @@ abstract class ContentImpl implements Content {
 				if(this.content instanceof File) {
 					return ((File) this.content).length();
 				}
+				if(this.content instanceof ByteArrayInputStream) {
+					return ((ByteArrayInputStream) this.content).available();
+				}
 			}
 			return -1;
 		}

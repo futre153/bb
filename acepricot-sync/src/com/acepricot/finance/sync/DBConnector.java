@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Properties;
 
@@ -30,6 +31,9 @@ public class DBConnector extends Hashtable<String, DataSource> {
 	private static final String DB_MIN_IDLE_KEY = "com.acepricot.finance.db.minidle";
 	static final String DB_DSN_KEY = "com.acepricot.finance.db.dsn";
 	private static final DBConnector db = new DBConnector();
+	private static final int DEFAULT_INT_VALUE = -1;
+	private static final BigDecimal DEFAULT_BIGDECIMAL_VALUE = new BigDecimal(-1);
+	private static final boolean DEBUG = false;
 	private static boolean prepared = true;
 	
 		
@@ -56,15 +60,15 @@ public class DBConnector extends Hashtable<String, DataSource> {
 	}
 	
 	final public static int count(Connection con, String table, Object[] where) throws SQLException {
-		Hashtable<String, Object> row = getFirstRowOf (con, table, (char) 0, new String[]{"COUNT(*)"}, where);
+		HashMap<String, Object> row = getFirstRowOf (con, table, (char) 0, new String[]{"COUNT(*)"}, where);
 		if(row == null) {
 			throw new SQLException("Cannot get count of rows because ResultSet is null");
 		}
-		return ((BigDecimal) row.get(row.keys().nextElement())).intValue();
+		return ((BigDecimal) row.get(row.keySet().iterator().next())).intValue();
 	}
 
-	public static Hashtable<String, Object> getFirstRowOf(Connection con, String table, char env, String[] cols, Object[] where) throws SQLException {
-		ArrayList<Hashtable<String, Object>> rows = select(con, table, cols, env, where);
+	public static HashMap<String, Object> getFirstRowOf(Connection con, String table, char env, String[] cols, Object[] where) throws SQLException {
+		ArrayList<HashMap<String, Object>> rows = select(con, table, cols, env, where);
 		if(rows.size() == 0) {
 			return null;
 		}
@@ -86,9 +90,9 @@ public class DBConnector extends Hashtable<String, DataSource> {
 	}
 	
 	
-	private static Hashtable<String, Object> nextRow (ResultSet rs) throws SQLException {
+	private static HashMap<String, Object> nextRow (ResultSet rs) throws SQLException {
 		if(next(rs)) {
-			Hashtable<String, Object> row = new Hashtable<String, Object>();
+			HashMap<String, Object> row = new HashMap<String, Object>();
 			ResultSetMetaData rsmd = rs.getMetaData();
 			int j = rsmd.getColumnCount();
 			String[] cols = new String[j];
@@ -128,7 +132,7 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		sb.append(" SET ");
 		DBConnector.join(sb, cols, values, '"', prepared);
 		DBConnector.applyWhere(sb, where, prepared);
-		System.out.println(sb);
+		if(DEBUG)System.out.println(sb);
 		con.setAutoCommit(false);
 		PreparedStatement ps = con.prepareStatement(sb.toString());
 		if(prepared) {
@@ -150,7 +154,7 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		sb.append(" VALUES (");
 		DBConnector.join(sb, null, values, '"' , true);
 		sb.append(')');
-		System.out.println(sb);
+		if(DEBUG)System.out.println(sb);
 		con.setAutoCommit(false);
 		PreparedStatement ps = con.prepareStatement(sb.toString());
 		DBConnector.setValues(values, ps, 1);
@@ -160,7 +164,7 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		return status;
 	}
 	
-	static ArrayList<Hashtable<String, Object>> select(Connection con, String table, String[] cols, char env, Object[] where) throws SQLException {
+	static ArrayList<HashMap<String, Object>> select(Connection con, String table, String[] cols, char env, Object[] where) throws SQLException {
 		StringBuffer sb = new StringBuffer("SELECT ");
 		if(cols == null) {
 			sb.append('*');
@@ -171,7 +175,7 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		sb.append(" FROM ");
 		envelope(sb, table, '"');
 		DBConnector.applyWhere(sb, where, prepared);
-		System.out.println(sb);
+		if(DEBUG)System.out.println(sb);
 		con.setAutoCommit(false);
 		PreparedStatement ps = con.prepareStatement(sb.toString());
 		if(prepared) {
@@ -180,8 +184,8 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		ResultSet rs = ps.executeQuery();
 		con.commit();
 		con.setAutoCommit(true);
-		ArrayList<Hashtable<String, Object>> rows = new ArrayList<Hashtable<String, Object>>();
-		Hashtable<String, Object> row;
+		ArrayList<HashMap<String, Object>> rows = new ArrayList<HashMap<String, Object>>();
+		HashMap<String, Object> row;
 		while((row = nextRow(rs)) != null) {
 			rows.add(row);
 		};
@@ -249,5 +253,26 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		if(c > 0) {
 			sb.append(c);
 		}
+	}
+
+	public static int intValue(Object obj) {
+		if(obj == null || (!(obj instanceof Integer))) {
+			return DEFAULT_INT_VALUE;
+		}
+		return (int) obj;
+	}
+
+	public static BigDecimal bigDecimalValue(Object obj) {
+		if(obj == null || (!(obj instanceof BigDecimal))) {
+			return DEFAULT_BIGDECIMAL_VALUE;
+		}
+		return (BigDecimal) obj;
+	}
+
+	public static String toString(Object obj) {
+		if(obj == null) {
+			return null;
+		}
+		return obj.toString();
 	}	
 }

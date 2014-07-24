@@ -1,17 +1,15 @@
 package com.acepricot.finance.sync;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.util.zip.GZIPInputStream;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.acepricot.finance.sync.share.JSONMessage;
 import com.google.gson.Gson;
@@ -51,16 +49,6 @@ public class AceJSONInOutRcvr extends HttpServlet {
 	}
 	
 	private static final void doAction(HttpServletRequest req, HttpServletResponse res) throws IOException {
-		HttpSession ses = req.getSession();
-		Object brano = ses.getAttribute("Brandys");
-		if(brano == null) {
-			System.out.println("BRANO is NULL");
-			ses.setAttribute("Brandys", "BRANO");
-		}
-		else {
-			System.out.println(brano);
-		}
-		System.out.println(req.getSession().isNew());
 		res.setContentType(req.getContentType());
 		try {
 			doCheck(req, res);
@@ -94,13 +82,30 @@ public class AceJSONInOutRcvr extends HttpServlet {
 	}
 	
 	private static JSONMessage doPutJSON(HttpServletRequest req) throws IOException {
-		String id = req.getParameter(AppConst.JSON_ID_PARAM_KEY);
-		String grpId = req.getParameter(AppConst.JSON_GROUP_ID_PARAM_KEY);
+		Cookie[] c = req.getCookies();
+		String id = null;
+		String uri = null;
+		boolean last = false;
+		for (int i = 0; i < c.length; i ++) {
+			id = c[i].getName();
+			uri = c[i].getValue();
+			if(uri.matches(AppConst.JSON_LAST_URI_MASK)) {
+				last = true;
+				uri = uri.substring(4);
+			}
+			if(id != null && uri != null) { 
+				if(id.matches(AppConst.JSON_ID_MASK) && uri.matches(AppConst.JSON_URI_MASK)) {
+					break;
+				}
+			}
+			id = null;
+			uri = null;
+		}
 		if(id != null) {
-			return new JSONMessage(AppConst.JSON_UPLOAD_VALUE, new Object[] {id, grpId, req.getInputStream()});
+			return new JSONMessage(AppConst.JSON_UPLOAD_VALUE, new Object[] {id, uri, req.getInputStream(), last});
 		}
 		else {
-			throw new IOException(AppError.getMessage(AppError.HTTP_ID_PARAM_ERROR, AppConst.JSON_ID_PARAM_KEY, req.getMethod()));
+			throw new IOException(AppError.getMessage(AppError.HTTP_ID_PARAM_ERROR, AppConst.JSON_ID_MASK, req.getMethod()));
 		}
 	}
 	

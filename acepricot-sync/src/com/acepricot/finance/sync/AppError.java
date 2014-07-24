@@ -6,7 +6,7 @@ final class AppError {
 	
 	
 	private static final String[] APP_ERRORS = {
-		"Content type %s is not allowed for method %s",			//0x01 HTTP ERRORS
+		"Content type %s is not allowed for method %s",			//0x00 HTTP ERRORS
 		"Parameter %s is not defined",
 		"Error while procening message on HTTP method %s",
 		"Parameter %s is missing in request of HTTP method %s",
@@ -57,7 +57,8 @@ final class AppError {
 		"File is allready reistered under group id %s. Please contact support",		//0x30 - File download - upload
 		"File is multiple registered under group id %s. Please contact support",
 		"Unexcpected return values for group id %s, while registering file for download. Please contact support",
-		"File download is not allowed for group id %s. Please contact support"
+		"File download is not allowed for group id %s. Please contact support",
+		"File record not found"
 	};
 	
 	public static final int HTTP_CT_ERROR = 0x00;
@@ -82,6 +83,7 @@ final class AppError {
 	public static final int MULTIPLE_FILE_INSERT = 0x031;
 	public static final int FILE_UNEXPECTED_RETURN_VALUE = 0x032;
 	public static final int FILE_INSERT_NOT_ENABLED = 0x33;
+	public static final int FILE_INSERT_NOT_FOUND = 0x34;
 	
 	
 	private AppError(){}
