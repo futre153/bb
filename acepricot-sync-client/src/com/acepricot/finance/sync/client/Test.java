@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.security.MessageDigest;
+import java.util.Arrays;
 import java.util.Date;
 
 import org.pabk.net.http.DefaultContent;
@@ -108,6 +109,10 @@ public class Test {
 		
 		msg = new JSONMessage("heartbeat", new Object[]{new Date().getTime()});
 		msg = process(msg, "", false);
+		
+		msg = new JSONMessage("initSync",new Object[]{"MyGroup", digest, "MyDevice"});
+		msg = process(msg, "", false);
+		
 	}
 	
 	public static JSONMessage process(JSONMessage msg, String param, boolean put) throws Exception {
@@ -144,7 +149,7 @@ public class Test {
 			msg = new JSONMessage("error", new Object[]{"NULL"});
 		}
 		System.out.println(msg.getHeader());
-		//System.out.println(Arrays.toString(msg.getBody()));
+		System.out.println(Arrays.toString(msg.getBody()));
 		System.out.println(msg.getBody()[0]);
 		char[] chr = new char[1024];
 		i = 0;
