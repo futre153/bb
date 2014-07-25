@@ -6,7 +6,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Properties;
@@ -67,8 +66,8 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		return ((BigDecimal) row.get(row.keySet().iterator().next())).intValue();
 	}
 
-	public static HashMap<String, Object> getFirstRowOf(Connection con, String table, char env, String[] cols, Object[] where) throws SQLException {
-		ArrayList<HashMap<String, Object>> rows = select(con, table, cols, env, where);
+	public static Row getFirstRowOf(Connection con, String table, char env, String[] cols, Object[] where) throws SQLException {
+		Rows rows = select(con, table, cols, env, where);
 		if(rows.size() == 0) {
 			return null;
 		}
@@ -90,9 +89,9 @@ public class DBConnector extends Hashtable<String, DataSource> {
 	}
 	
 	
-	private static HashMap<String, Object> nextRow (ResultSet rs) throws SQLException {
+	private static Row nextRow (ResultSet rs) throws SQLException {
 		if(next(rs)) {
-			HashMap<String, Object> row = new HashMap<String, Object>();
+			Row row = new Row();
 			ResultSetMetaData rsmd = rs.getMetaData();
 			int j = rsmd.getColumnCount();
 			String[] cols = new String[j];
@@ -127,24 +126,32 @@ public class DBConnector extends Hashtable<String, DataSource> {
 	}
 	
 	static int update(Connection con, String table, String[] cols, String[] values, Object[] where) throws SQLException {
+		return DBConnector.update(con, table, cols, values, where, true);
+	}
+	
+	static int update(Connection con, String table, String[] cols, String[] values, Object[] where, boolean commit) throws SQLException {
 		StringBuffer sb = new StringBuffer("UPDATE ");
 		envelope(sb, table, '"');
 		sb.append(" SET ");
 		DBConnector.join(sb, cols, values, '"', prepared);
 		DBConnector.applyWhere(sb, where, prepared);
 		if(DEBUG)System.out.println(sb);
-		con.setAutoCommit(false);
 		PreparedStatement ps = con.prepareStatement(sb.toString());
 		if(prepared) {
 			DBConnector.setPrepared(ps, where, DBConnector.setValues(values, ps, 1));
 		}		
 		int status = ps.executeUpdate();
-		con.commit();
-		con.setAutoCommit(true);
+		if(commit) {
+			con.commit();
+		}
 		return status;
 	}
 	
 	static int insert (Connection con, String table, String[] cols, String[] values) throws SQLException {
+		return DBConnector.insert(con, table, cols, values, true);
+	}
+	
+	static int insert (Connection con, String table, String[] cols, String[] values, boolean commit) throws SQLException {
 		StringBuffer sb = new StringBuffer("INSERT INTO ");
 		envelope(sb, table, '"');
 		sb.append(' ');
@@ -155,16 +162,16 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		DBConnector.join(sb, null, values, '"' , true);
 		sb.append(')');
 		if(DEBUG)System.out.println(sb);
-		con.setAutoCommit(false);
 		PreparedStatement ps = con.prepareStatement(sb.toString());
 		DBConnector.setValues(values, ps, 1);
 		int status = ps.executeUpdate();
-		con.commit();
-		con.setAutoCommit(true);
+		if(commit) {
+			con.commit();
+		}
 		return status;
 	}
 	
-	static ArrayList<HashMap<String, Object>> select(Connection con, String table, String[] cols, char env, Object[] where) throws SQLException {
+	static Rows select(Connection con, String table, String[] cols, char env, Object[] where) throws SQLException {
 		StringBuffer sb = new StringBuffer("SELECT ");
 		if(cols == null) {
 			sb.append('*');
@@ -176,16 +183,15 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		envelope(sb, table, '"');
 		DBConnector.applyWhere(sb, where, prepared);
 		if(DEBUG)System.out.println(sb);
-		con.setAutoCommit(false);
 		PreparedStatement ps = con.prepareStatement(sb.toString());
 		if(prepared) {
 			setPrepared(ps, where, 1);
 		}
 		ResultSet rs = ps.executeQuery();
-		con.commit();
-		con.setAutoCommit(true);
-		ArrayList<HashMap<String, Object>> rows = new ArrayList<HashMap<String, Object>>();
-		HashMap<String, Object> row;
+		//con.commit();
+		//con.setAutoCommit(true);
+		Rows rows = new Rows();
+		Row row;
 		while((row = nextRow(rs)) != null) {
 			rows.add(row);
 		};

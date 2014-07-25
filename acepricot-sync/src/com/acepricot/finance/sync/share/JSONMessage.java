@@ -84,7 +84,7 @@ public class JSONMessage {
 	public JSONMessage sendAppError(String message) {
 		this.setHeader(AppConst.JSON_ERROR_MSG);
 		this.setBody(new String[]{message});
-		return null;
+		return this;
 	}
 
 	public boolean isError() {

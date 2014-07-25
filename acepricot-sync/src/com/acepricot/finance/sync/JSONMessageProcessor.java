@@ -16,21 +16,15 @@ import java.util.Properties;
 
 import javax.xml.bind.DatatypeConverter;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.acepricot.finance.sync.share.JSONMessage;
 
 final class JSONMessageProcessor {
 	
-	public class UPLOADED_FILES {
-		private static final String GROUP_ID = "GROUP_ID";
-		private static final String DIGEST = "DIGEST";
-		private static final String DIGEST_ALGORITHM = "DIGEST_ALGORITHM";
-		private static final String URI = "URI";
-		private static final String STATUS = "STATUS";
-		private static final String TMP_FILE = "TMP_FILE";
-		private static final String MD_INDEX = "MD_INDEX";
-	}
-
-
+	final static Logger logger = LoggerFactory.getLogger(JSONMessageProcessor.class);
+	
 	private static final String UNIVERSAL_ID = "ID";
 	private static final String UNIVERSAL_ENABLED = "ENABLED";
 	private static final int ID_INDEX = 0;
@@ -38,6 +32,35 @@ final class JSONMessageProcessor {
 	private static final String DEFAULT_DIGEST_ALGORITHM = "SHA-256";
 	private static final String TEMP_DIR = "D:\\TEMP\\acetmpdir";
 	private static final int MAX_READED_BYTES = 0x1000;
+
+	private static final String DB_PATH = "D:\\TEMP\\clientdb%s%s%s";
+	private static final String DB_EXTENSION = ".h2.db";
+	
+	
+	public class UPLOADED_FILES extends TableSchema {
+		private static final String GROUP_ID = "GROUP_ID";
+		private static final String STATUS = "STATUS";
+		private static final String DIGEST = "DIGEST";
+		private static final String DIGEST_ALGORITHM = "DIGEST_ALGORITHM";
+		private static final String URI = "URI";
+		private static final String TMP_FILE = "TMP_FILE";
+		private static final String MD_INDEX = "MD_INDEX";
+		private static final int STATUS_UPLOADED_NOT_STARTED = 0;
+		private static final int STATUS_UPLOAD_IN_PROGRESS = 1;
+		private static final int STATUS_FILE_UPLOADED = 2;
+		public static final int STATUS_DB_FILE_CREATED = 3;
+		private static final int STATUS_SYNC_ENABLED = 100;
+		int id;
+		int group_id;
+		BigDecimal status;
+		String digest;
+		String digest_algorithm;
+		int uri;
+		BigDecimal enabled;
+		String tmp_file;
+		int md_index;
+	}
+	
 	
 	private static final class REGISTERED_GROUPS {
 		//private static final String TABLE_NAME = "REGISTERED_GROUPS";
@@ -63,6 +86,8 @@ final class JSONMessageProcessor {
 	
 	//private static Connection con;
 	private static String dsn;
+	
+	private UPLOADED_FILES uploaded_files = new UPLOADED_FILES();
 				
 	private JSONMessageProcessor() throws IOException{
 		if(dsn == null) {
@@ -81,6 +106,7 @@ final class JSONMessageProcessor {
 			}
 			try {
 				Connection con = DBConnector.lookup(dsn);
+				con.setAutoCommit(false);
 				con.close();
 				con = null;
 			}
@@ -96,14 +122,17 @@ final class JSONMessageProcessor {
 	}
 	
 	JSONMessage process(JSONMessage msg) throws IOException {
+		logger.info("Incoming JSON message type " + msg.getHeader());
 		Connection con = null;
 		try {
 			con = DBConnector.lookup(dsn);
-			Method method = JSONMessageProcessor.class.getDeclaredMethod(msg.getHeader(), new Class<?>[]{Connection.class, JSONMessage.class});
-			msg = (JSONMessage) method.invoke(null, con, msg);
+			Method method = JSONMessageProcessor.class.getDeclaredMethod(msg.getHeader(), this.getClass(), Connection.class, JSONMessage.class);
+			msg = (JSONMessage) method.invoke(null, this, con, msg);
+			logger.info("Outgoing JSON message type " + msg.getHeader());
 			return msg;
 		}
 		catch(Exception e) {
+			logger.error("Error while processing incoming JSON message " + msg.getHeader(), e);
 			throw new IOException (e);
 		}
 		finally {
@@ -111,16 +140,110 @@ final class JSONMessageProcessor {
 				con.close();
 			} catch (SQLException e) {}
 		}
-		
 	}
 	
 	@SuppressWarnings("unused")
-	private static final JSONMessage upload(Connection con, JSONMessage msg) {
+	private static final JSONMessage initSync(JSONMessageProcessor mp, Connection con, JSONMessage msg) {
+		int grpId;
+		String grpName, table;
+		Object[] where;
+		Where w = new Where();
+		ArrayList<HashMap<String, Object>> rows;
+		grpName = (String) msg.getBody()[0];
+		if(!login(mp, con, msg).isError()) {
+			try {
+				grpId = JSONMessageProcessor.getGroupId(con, grpName);
+				table = JSONMessageProcessor.UPLOADED_FILES.class.getSimpleName();
+				where = w.set(w.equ(JSONMessageProcessor.UPLOADED_FILES.GROUP_ID, grpId));
+				msg = retrieveRows(mp, msg, con, mp.uploaded_files, (char) 0, where, true);
+				if(msg.isError()) {
+					return msg;
+				}
+				if(mp.uploaded_files.hasNext()) {
+					mp.uploaded_files.next();
+					switch(mp.uploaded_files.status.intValue()) {
+					case JSONMessageProcessor.UPLOADED_FILES.STATUS_UPLOADED_NOT_STARTED:
+						return msg.sendAppError(AppError.getMessage(AppError.DATABASE_FILE_UPLOAD_NOT_STARTED, grpId));
+					case JSONMessageProcessor.UPLOADED_FILES.STATUS_UPLOAD_IN_PROGRESS:
+						return msg.sendAppError(AppError.getMessage(AppError.DATABASE_FILE_UPLOAD_IN_PROGRESS, grpId));
+					case JSONMessageProcessor.UPLOADED_FILES.STATUS_FILE_UPLOADED:
+						createDBFile(mp, con);
+					case JSONMessageProcessor.UPLOADED_FILES.STATUS_DB_FILE_CREATED:
+						
+						
+					default:
+						
+					}
+				}
+				else {
+					return msg.sendAppError(AppError.getMessage(AppError.FILE_INSERT_NOT_FOUND, grpId));
+				}
+			}
+			catch(SQLException | IOException e) {
+				return msg.sendAppError(e);
+			}
+		}
+		return msg;
+	}
+	
+	private static void createDBFile(JSONMessageProcessor mp, Connection con) throws IOException, SQLException {
+		String dbFilename = String.format(DB_PATH, System.getProperty("file.separator"), Integer.toBinaryString(mp.uploaded_files.group_id), DB_EXTENSION);
+		String table = JSONMessageProcessor.UPLOADED_FILES.class.getSimpleName();
+		String[] cols = {JSONMessageProcessor.UPLOADED_FILES.TMP_FILE, JSONMessageProcessor.UPLOADED_FILES.STATUS};
+		String[] values = {dbFilename, Integer.toString(JSONMessageProcessor.UPLOADED_FILES.STATUS_DB_FILE_CREATED)};
+		Where w = new Where();
+		Object[] where = w.set(w.equ(JSONMessageProcessor.UPLOADED_FILES.GROUP_ID, mp.uploaded_files.group_id));
+		try {
+			DBConnector.update(con, table, cols, values, where, false);
+			File dbFile = new File(dbFilename);
+			if(dbFile.exists()) {
+				if(!dbFile.delete()) {
+					throw new IOException("Failed to remove previous DB file");
+				}
+			}
+			if(!(new File(mp.uploaded_files.tmp_file).renameTo(dbFile))) {
+				throw new IOException("Failed to move DB file");
+			}
+			
+		} catch (SQLException | IOException e) {
+			con.rollback();
+			throw (e);
+		} finally {
+			con.commit();
+		}
+		
+	}
+
+	private static final JSONMessage retrieveRows(Object ... o) {
+		try {
+			Class<?> _class = o[3].getClass();
+			String table = _class.getSimpleName();
+			Rows rows = DBConnector.select((Connection) o[2], table, null, (char) o[4], (Object[]) o[5]);
+			if(rows.size() == 0) {
+				throw new SQLException(AppError.getMessage(AppError.RECORD_NOT_FOUND));
+			}
+			if((boolean) o[6]) {
+				if(rows.size() != 1) {
+					throw new SQLException(AppError.getMessage(AppError.MULTIPLE_RECORD_FOUND));
+				}
+			}
+			TableSchema schema = (TableSchema) o[0].getClass().getDeclaredField(_class.getSimpleName().toLowerCase()).get(o[0]);
+			schema.rows = rows;
+			schema.index = -1;
+			return ((JSONMessage) o[1]).returnOK();
+		} catch (SQLException | IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
+			return ((JSONMessage) o[1]).sendAppError(e);
+		}
+	}
+	
+	
+	@SuppressWarnings("unused")
+	private static final JSONMessage upload(JSONMessageProcessor mp, Connection con, JSONMessage msg) {
 		String reqId, reqUri, table, digest, digestAlgorithm, tmpPath;
 		int id, status, uri, grpId, enabled, mdIndex = -1;
 		Where w;
 		Object[] where;
-		ArrayList<HashMap<String, Object>> rows;
+		Rows rows;
 		File tmpFile;
 		MessageDigestSerializer mds;
 		String[] cols, values;
@@ -228,14 +351,14 @@ final class JSONMessageProcessor {
 	}
 	
 	@SuppressWarnings("unused")
-	private static final JSONMessage initUpload(Connection con, JSONMessage msg) {
+	private static final JSONMessage initUpload(JSONMessageProcessor mp, Connection con, JSONMessage msg) {
 		String grpName = (String) msg.getBody()[0];
 		String fileDigest = JSONMessageProcessor.constructHexHash((ArrayList<?>) msg.getBody()[2]);
 		String digestAlgorithm = DEFAULT_DIGEST_ALGORITHM;
 		if(msg.getBody().length > 3) {
 			digestAlgorithm = (String) msg.getBody()[3];
 		}
-		msg = JSONMessageProcessor.login(con, msg);
+		msg = JSONMessageProcessor.login(mp, con, msg);
 		if(msg.getBody()[0].equals(AppConst.OK_RESPONSE)) {
 			int grpId;
 			try {
@@ -286,7 +409,7 @@ final class JSONMessageProcessor {
 	
 	
 	@SuppressWarnings("unused")
-	private static final JSONMessage registerDevice(Connection con, JSONMessage msg) {
+	private static final JSONMessage registerDevice(JSONMessageProcessor mp, Connection con, JSONMessage msg) {
 		String grpName = (String) msg.getBody()[0];
 		//String hash = JSONMessageProcessor.constructHexHash((ArrayList<?>) msg.getBody()[1]);
 		String devName = (String) msg.getBody()[2];
@@ -294,7 +417,7 @@ final class JSONMessageProcessor {
 		//double dbVersion = ((double) msg.getBody()[4]);
 		String grpIdCol = JSONMessageProcessor.REGISTERED_DEVICES.GROUP_ID;
 		String devNameCol = JSONMessageProcessor.REGISTERED_DEVICES.DEVICE_NAME;
-		msg = JSONMessageProcessor.login(con, msg);
+		msg = JSONMessageProcessor.login(mp, con, msg);
 		if(msg.getBody()[0].equals(AppConst.OK_RESPONSE)) {
 			String table = JSONMessageProcessor.REGISTERED_GROUPS.class.getSimpleName();
 			String col = JSONMessageProcessor.REGISTERED_GROUPS.GROUP_NAME;
@@ -379,7 +502,7 @@ final class JSONMessageProcessor {
 	
 	
 	@SuppressWarnings("unused")
-	private static final JSONMessage register(Connection con, JSONMessage msg) {
+	private static final JSONMessage register(JSONMessageProcessor mp, Connection con, JSONMessage msg) {
 		String grpName = (String) msg.getBody()[0];
 		String hash = JSONMessageProcessor.constructHexHash((ArrayList<?>) msg.getBody()[OBJECT_INDEX]);
 		String email = (String) msg.getBody()[2];
@@ -403,7 +526,7 @@ final class JSONMessageProcessor {
 		return msg.returnOK();
 	}
 		
-	private static final JSONMessage login(Connection con, JSONMessage msg) {
+	private static final JSONMessage login(JSONMessageProcessor mp, Connection con, JSONMessage msg) {
 		String grpName = (String) msg.getBody()[0];
 		String hash = JSONMessageProcessor.constructHexHash((ArrayList<?>) msg.getBody()[1]);
 		String table = JSONMessageProcessor.REGISTERED_GROUPS.class.getSimpleName();
@@ -471,14 +594,14 @@ final class JSONMessageProcessor {
 	
 
 	@SuppressWarnings("unused")
-	private static final JSONMessage heartbeat(Connection con, JSONMessage msg) {
+	private static final JSONMessage heartbeat(JSONMessageProcessor mp, Connection con, JSONMessage msg) {
 		Object[] objs = msg.getBody();
 		Object[] newObjs = new Object[objs.length + 1];
 		System.arraycopy(objs, 0, newObjs, 0, objs.length);
 		objs = null;
 		newObjs[newObjs.length - 1] = new Date().getTime();
+		logger.info("Proccess JSON message type " + msg.getHeader() + ", added outgoing date " + new Date((long) newObjs[newObjs.length - 1]));
 		msg.setBody(newObjs);
 		return msg;
 	}
-	
 }

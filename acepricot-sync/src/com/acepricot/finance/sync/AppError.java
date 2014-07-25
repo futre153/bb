@@ -58,7 +58,22 @@ final class AppError {
 		"File is multiple registered under group id %s. Please contact support",
 		"Unexcpected return values for group id %s, while registering file for download. Please contact support",
 		"File download is not allowed for group id %s. Please contact support",
-		"File record not found"
+		"File record not found",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"",
+		"Record not found",
+		"Multiple record found",
+		"Database file upload not started",
+		"Database file upload in progress"
 	};
 	
 	public static final int HTTP_CT_ERROR = 0x00;
@@ -84,7 +99,11 @@ final class AppError {
 	public static final int FILE_UNEXPECTED_RETURN_VALUE = 0x032;
 	public static final int FILE_INSERT_NOT_ENABLED = 0x33;
 	public static final int FILE_INSERT_NOT_FOUND = 0x34;
-	
+
+	public static final int RECORD_NOT_FOUND = 0x40;
+	public static final int MULTIPLE_RECORD_FOUND = 0x41;
+	public static final int DATABASE_FILE_UPLOAD_NOT_STARTED = 0x42;
+	public static final int DATABASE_FILE_UPLOAD_IN_PROGRESS = 0x43;
 	
 	private AppError(){}
 
