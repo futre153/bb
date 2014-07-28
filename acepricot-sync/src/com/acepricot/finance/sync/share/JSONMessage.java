@@ -40,10 +40,24 @@ public class JSONMessage {
 	public void setBody(Object[] body) {
 		this.body = body;
 	}
-
+	
+	public void appendBody(Object ... responses) {
+		if(responses == null) {
+			responses = new Object[0];
+		}
+		Object[] old = this.getBody();
+		if(old == null) {
+			old = new Object[0];
+		}
+		Object[] _new = new Object[responses.length + old.length];
+		System.arraycopy(old, 0, _new, 0, old.length);
+		System.arraycopy(responses, 0, _new, old.length, responses.length);
+		this.setBody(_new);
+	}
+	
 	public JSONMessage returnOK(Object ... responses) {
 		if(responses == null) {
-			responses = new Object[]{};
+			responses = new Object[0];
 		}
 		Object[] body = new Object[responses.length + 1];
 		body[0] = AppConst.OK_RESPONSE;

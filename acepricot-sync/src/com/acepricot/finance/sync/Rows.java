@@ -1,7 +1,6 @@
 package com.acepricot.finance.sync;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Rows extends ArrayList<Row>{
 

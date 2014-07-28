@@ -5,10 +5,10 @@
     <entry key="com.acepricot.finance.db.driver">com.sap.dbtech.jdbc.DriverSapDB</entry>
     <entry key="com.acepricot.finance.db.user">ACESVRADM</entry>
     <entry key="com.acepricot.finance.db.pass">nahradnik06</entry>
-    <entry key="com.acepricot.finance.db.maxactive">60</entry>
-    <entry key="com.acepricot.finance.db.intisize">10</entry>
+    <entry key="com.acepricot.finance.db.maxactive">10</entry>
+    <entry key="com.acepricot.finance.db.initsize">10</entry>
     <entry key="com.acepricot.finance.db.maxwait">10000</entry>
-    <entry key="com.acepricot.finance.db.maxabandoned">60</entry>
+    <entry key="com.acepricot.finance.db.maxabandoned">10</entry>
     <entry key="com.acepricot.finance.db.minidle">10</entry>
     <entry key="com.acepricot.finance.db.dsn">jdbc/aceserver</entry>
 </properties>

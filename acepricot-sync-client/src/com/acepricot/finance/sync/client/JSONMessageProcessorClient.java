@@ -38,7 +38,7 @@ public class JSONMessageProcessorClient {
 		char[] chr = new char[1024];
 		i = 0;
 		while((i = bin.read(chr)) >= 0) {
-			System.err.println(new String(chr, 0, i));
+			System.out.println(new String(chr, 0, i));
 		}
 		return msg;
 		

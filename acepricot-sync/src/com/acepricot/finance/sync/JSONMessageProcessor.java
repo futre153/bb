@@ -1,9 +1,11 @@
 package com.acepricot.finance.sync;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.security.MessageDigest;
@@ -16,6 +18,8 @@ import java.util.Properties;
 
 import javax.xml.bind.DatatypeConverter;
 
+import org.pabk.util.Base64Coder;
+import org.pabk.util.Huffman;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -31,10 +35,33 @@ final class JSONMessageProcessor {
 	private static final int OBJECT_INDEX = 1;
 	private static final String DEFAULT_DIGEST_ALGORITHM = "SHA-256";
 	private static final String TEMP_DIR = "D:\\TEMP\\acetmpdir";
+	private static final String TEMP_DIR_MASK = "D:\\TEMP\\acetmpdir%s%s%s";
+	
 	private static final int MAX_READED_BYTES = 0x1000;
 
 	private static final String DB_PATH = "D:\\TEMP\\clientdb%s%s%s";
 	private static final String DB_EXTENSION = ".h2.db";
+
+	private static final String ACTION_METHOD_NAME = "action";
+
+	private static final String H2_DSN_PREFIX = "H2-";
+	private static final String H2_JDBC_DRIVER = "org.h2.Driver";
+	//private static final String H2_JDBC_DRIVER = "org.h2.jdbcx.JdbcConnectionPool";
+	private static final String H2_USER = "";
+	private static final String H2_PASSWORD = "RTNvMFNSVHJmVUpqN1c4UytJazViOTUxREczMEFBPT0=";
+	private static final String H2_URL_MASK = "jdbc:h2:tcp://localhost/%s;AUTO_SERVER=TRUE;LOCK_TIMEOUT=60000;CIPHER=AES";
+
+	private static final String ENGINES_PROPERTIES_STORE = "D:\\TEMP\\engines%s%s%s";
+
+	private static final String XML_PROPERTIES_EXTENSIONS = ".properties.xml";
+
+	private static final String DEFAULT_CHARSET = "UTF-8";
+
+	private static final CharSequence DB_PASSWORD = "MlQzeEEyN3ZyY3dIMEE9PQ==";
+
+	private static final String TMP_FILE_EXTENSION = ".tmp";
+
+	
 	
 	
 	public class UPLOADED_FILES extends TableSchema {
@@ -50,6 +77,7 @@ final class JSONMessageProcessor {
 		private static final int STATUS_FILE_UPLOADED = 2;
 		public static final int STATUS_DB_FILE_CREATED = 3;
 		private static final int STATUS_SYNC_ENABLED = 100;
+		public static final int STATUS_DB_POOL_CREATED = 4;
 		int id;
 		int group_id;
 		BigDecimal status;
@@ -61,6 +89,13 @@ final class JSONMessageProcessor {
 		int md_index;
 	}
 	
+	public class DOWNLOADED_FILES extends TableSchema {
+		private static final String URI = "URI";
+		private static final String TMP_FILE = "TMP_FILE";
+		int id;
+		int uri;
+		String tmp_file;
+	}
 	
 	private static final class REGISTERED_GROUPS {
 		//private static final String TABLE_NAME = "REGISTERED_GROUPS";
@@ -86,19 +121,23 @@ final class JSONMessageProcessor {
 	
 	//private static Connection con;
 	private static String dsn;
+	private static Properties pro;
 	
 	private UPLOADED_FILES uploaded_files = new UPLOADED_FILES();
+	private DOWNLOADED_FILES downloaded_files = new DOWNLOADED_FILES();
 				
 	private JSONMessageProcessor() throws IOException{
 		if(dsn == null) {
 			try {
-				Properties pro = new Properties();
+				pro = new Properties();
 				InputStream in = JSONMessageProcessor.class.getResourceAsStream("/com/acepricot/finance/sync/db_aceserver.xml");
 				pro.loadFromXML(in);
 				//System.out.println(pro);
 				in.close();
 				dsn = pro.getProperty(DBConnector.DB_DSN_KEY);
+				setPassword(pro, DB_PASSWORD);
 				DBConnector.bind(pro, dsn);
+				pro.remove(DBConnector.DB_PASSWORD_KEY);
 			}
 			catch(Exception e) {
 				e.printStackTrace();
@@ -106,7 +145,6 @@ final class JSONMessageProcessor {
 			}
 			try {
 				Connection con = DBConnector.lookup(dsn);
-				con.setAutoCommit(false);
 				con.close();
 				con = null;
 			}
@@ -126,6 +164,7 @@ final class JSONMessageProcessor {
 		Connection con = null;
 		try {
 			con = DBConnector.lookup(dsn);
+			con.setAutoCommit(false);
 			Method method = JSONMessageProcessor.class.getDeclaredMethod(msg.getHeader(), this.getClass(), Connection.class, JSONMessage.class);
 			msg = (JSONMessage) method.invoke(null, this, con, msg);
 			logger.info("Outgoing JSON message type " + msg.getHeader());
@@ -137,8 +176,9 @@ final class JSONMessageProcessor {
 		}
 		finally {
 			try {
+				con.setAutoCommit(true);
 				con.close();
-			} catch (SQLException e) {}
+			} catch (SQLException e) {e.printStackTrace();}
 		}
 	}
 	
@@ -167,12 +207,31 @@ final class JSONMessageProcessor {
 					case JSONMessageProcessor.UPLOADED_FILES.STATUS_UPLOAD_IN_PROGRESS:
 						return msg.sendAppError(AppError.getMessage(AppError.DATABASE_FILE_UPLOAD_IN_PROGRESS, grpId));
 					case JSONMessageProcessor.UPLOADED_FILES.STATUS_FILE_UPLOADED:
-						createDBFile(mp, con);
+						msg = createAction(mp, con, msg); //create db file
+						if(msg.isError()) {
+							return msg;
+						}
 					case JSONMessageProcessor.UPLOADED_FILES.STATUS_DB_FILE_CREATED:
-						
-						
+						msg = createAction(mp, con, msg); //create connection pool
+						if(msg.isError()) {
+							return msg;
+						}
+					case JSONMessageProcessor.UPLOADED_FILES.STATUS_DB_POOL_CREATED:
+						msg = createAction(mp, con, msg); //add node
+						if(msg.isError()) {
+							return msg;
+						}
+						break;
+					case JSONMessageProcessor.UPLOADED_FILES.STATUS_SYNC_ENABLED:
+						long l = SyncEngine.nodeStop(grpId);
+						msg = prepareDownload(con, mp.uploaded_files.tmp_file, msg);
+						SyncEngine.nodeStart(grpId);
+						if(msg.isError()) {
+							return msg;
+						}
+						msg.appendBody(l);
 					default:
-						
+						throw new IOException("Action " + mp.uploaded_files.status.intValue() + " is not defined");
 					}
 				}
 				else {
@@ -186,32 +245,124 @@ final class JSONMessageProcessor {
 		return msg;
 	}
 	
-	private static void createDBFile(JSONMessageProcessor mp, Connection con) throws IOException, SQLException {
-		String dbFilename = String.format(DB_PATH, System.getProperty("file.separator"), Integer.toBinaryString(mp.uploaded_files.group_id), DB_EXTENSION);
+	private static JSONMessage prepareDownload(Connection con, String src_file, JSONMessage msg) throws IOException, SQLException {
+		File srcFile = new File(src_file);
+		String dstPath = String.format(TEMP_DIR_MASK, System.getProperty("file.separator"), srcFile.getName(), TMP_FILE_EXTENSION);
+		copy(srcFile, new File(dstPath));
+		int uri = (int) (Math.random() * Integer.MAX_VALUE);
+		String table = JSONMessageProcessor.DOWNLOADED_FILES.class.getSimpleName();
+		String[] cols = {JSONMessageProcessor.DOWNLOADED_FILES.URI, JSONMessageProcessor.DOWNLOADED_FILES.TMP_FILE};
+		String[] values = {Integer.toString(uri), dstPath};
+		DBConnector.insert(con, table, cols, values);
+		return msg.returnOK(uri);
+	}
+	
+	private static void copy(File srcFile, File dstFile) throws IOException {
+		if(!srcFile.exists()) {
+			throw new IOException("Source file " + srcFile.getAbsolutePath() + " does not exixts");
+		}
+		if(dstFile.exists()) {
+			if(!dstFile.delete()) {
+				throw new IOException("Failed to remove old destination file " + dstFile.getAbsolutePath());
+			}
+		}
+		if(!dstFile.createNewFile()) {
+			throw new IOException("Failed to create new destination file " + dstFile.getAbsolutePath());
+		}
+		FileInputStream in = new FileInputStream(srcFile);
+		FileOutputStream out = new FileOutputStream(dstFile);
+		byte[] b = new byte[MAX_READED_BYTES];
+		int i = -1;
+		while((i = in.read(b)) >= 0) {
+			out.write(b, 0, i);
+		}
+		in.close();
+		out.close();
+	}
+	
+	
+	private static JSONMessage createAction(JSONMessageProcessor mp, Connection con, JSONMessage msg) throws SQLException, IOException {		
 		String table = JSONMessageProcessor.UPLOADED_FILES.class.getSimpleName();
-		String[] cols = {JSONMessageProcessor.UPLOADED_FILES.TMP_FILE, JSONMessageProcessor.UPLOADED_FILES.STATUS};
-		String[] values = {dbFilename, Integer.toString(JSONMessageProcessor.UPLOADED_FILES.STATUS_DB_FILE_CREATED)};
+		String[] cols = {JSONMessageProcessor.UPLOADED_FILES.STATUS};
+		String[] values = {Integer.toString(mp.uploaded_files.status.intValue() + 1)};
 		Where w = new Where();
 		Object[] where = w.set(w.equ(JSONMessageProcessor.UPLOADED_FILES.GROUP_ID, mp.uploaded_files.group_id));
 		try {
 			DBConnector.update(con, table, cols, values, where, false);
-			File dbFile = new File(dbFilename);
-			if(dbFile.exists()) {
-				if(!dbFile.delete()) {
-					throw new IOException("Failed to remove previous DB file");
-				}
-			}
-			if(!(new File(mp.uploaded_files.tmp_file).renameTo(dbFile))) {
-				throw new IOException("Failed to move DB file");
-			}
-			
-		} catch (SQLException | IOException e) {
+			String methodName = ACTION_METHOD_NAME + mp.uploaded_files.status.intValue();
+			Method method = JSONMessageProcessor.class.getDeclaredMethod(methodName, mp.getClass(), Connection.class, msg.getClass());
+			msg = (JSONMessage) method.invoke(null, mp, con, msg);
+		} catch (SQLException e) {
 			con.rollback();
 			throw (e);
+		} catch (NoSuchMethodException | SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			con.rollback();
+			throw new IOException (e);
 		} finally {
+			mp.uploaded_files.status = mp.uploaded_files.status.add(BigDecimal.ONE);
 			con.commit();
 		}
-		
+		return msg;
+	}
+	
+	@SuppressWarnings("unused")
+	private static JSONMessage action4(JSONMessageProcessor mp, Connection con, JSONMessage msg) throws IOException, SQLException {
+		SyncEngine.addEngine(getEnginesPropertiesFilename(mp.uploaded_files.group_id));
+		SyncEngine.nodeStart(mp.uploaded_files.group_id);
+		return msg.returnOK(0x00L);
+	}
+	
+	@SuppressWarnings("unused")
+	private static JSONMessage action3(JSONMessageProcessor mp, Connection con, JSONMessage msg) throws IOException, SQLException {
+		Properties pro = new Properties(JSONMessageProcessor.pro);
+		pro.setProperty(DBConnector.DB_DSN_KEY, H2_DSN_PREFIX + Integer.toString(mp.uploaded_files.id));
+		pro.setProperty(DBConnector.DB_DRIVER_CLASS_KEY, H2_JDBC_DRIVER);
+		pro.setProperty(DBConnector.DB_URL_KEY, String.format(H2_URL_MASK, mp.uploaded_files.tmp_file.replaceAll("\\\\", "/").replaceAll("\\.h2\\.db", "")));
+		pro.setProperty(DBConnector.DB_USERNAME_KEY, H2_USER);
+		FileOutputStream out = new FileOutputStream(getEnginesPropertiesFilename(mp.uploaded_files.group_id));
+		pro.storeToXML(out, "propeties for engine id " + mp.uploaded_files.group_id, DEFAULT_CHARSET);
+		setPassword(pro, H2_PASSWORD);
+		String dsn = pro.getProperty(DBConnector.DB_DSN_KEY);
+		DBConnector.bind(pro, dsn);
+		Connection con2 = DBConnector.lookup(dsn);
+		con2.close();
+		con2 = null;
+		DBConnector.unbind(dsn);
+		return msg.returnOK();
+	}
+	
+	private static void setPassword(Properties pro, CharSequence pass) throws IOException {
+		try {
+			pro.setProperty(DBConnector.DB_PASSWORD_KEY, Huffman.decode(Base64Coder.decodeString(pass.toString()), null));
+		} catch (Exception e) {
+			throw new IOException(e);
+		}
+	}
+	
+	private static final String getEnginesPropertiesFilename(int grpId) {
+		return String.format(ENGINES_PROPERTIES_STORE, System.getProperty("file.separator"), Integer.toBinaryString(grpId), XML_PROPERTIES_EXTENSIONS);
+	}
+	
+	@SuppressWarnings("unused")
+	private static JSONMessage action2 (JSONMessageProcessor mp, Connection con, JSONMessage msg) throws IOException, SQLException {
+		String dbFilename = String.format(DB_PATH, System.getProperty("file.separator"), Integer.toBinaryString(mp.uploaded_files.group_id), DB_EXTENSION);
+		String table = JSONMessageProcessor.UPLOADED_FILES.class.getSimpleName();
+		String[] cols = {JSONMessageProcessor.UPLOADED_FILES.TMP_FILE};
+		String[] values = {dbFilename};
+		Where w = new Where();
+		Object[] where = w.set(w.equ(JSONMessageProcessor.UPLOADED_FILES.GROUP_ID, mp.uploaded_files.group_id));
+		DBConnector.update(con, table, cols, values, where, false);
+		File dbFile = new File(dbFilename);
+		if(dbFile.exists()) {
+			if(!dbFile.delete()) {
+				throw new IOException("Failed to remove previous DB file");
+			}
+		}
+		if(!(new File(mp.uploaded_files.tmp_file).renameTo(dbFile))) {
+			throw new IOException("Failed to move DB file");
+		}
+		mp.uploaded_files.tmp_file = dbFilename;
+		return msg.returnOK();
 	}
 
 	private static final JSONMessage retrieveRows(Object ... o) {

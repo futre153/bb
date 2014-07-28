@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.math.BigDecimal;
 import java.security.MessageDigest;
 import java.util.Arrays;
 import java.util.Date;
@@ -12,6 +13,8 @@ import java.util.Date;
 import org.pabk.net.http.DefaultContent;
 import org.pabk.net.http.HttpClientConst;
 import org.pabk.net.http.SimpleClient;
+import org.pabk.util.Base64Coder;
+import org.pabk.util.Huffman;
 
 import com.acepricot.finance.sync.share.JSONMessage;
 import com.google.gson.Gson;
@@ -19,9 +22,11 @@ import com.google.gson.Gson;
 public class Test {
 	
 	public static String url = "http://localhost:8080/acepricot-sync/";
-	public static File f = new File("D:\\Dokumenty\\My Documents.rar");
+	public static File f = new File("C:\\Users\\brandys\\Desktop\\database.h2.db");
 	public static void main(final String[] a) throws Exception {
-		
+		//String pass = "nahradnik06";
+		//System.out.println(Base64Coder.encodeString(Huffman.encode(pass, null)));
+		//System.out.println("D:\\TEMP\\clientdb\\11110.h2.db".replaceAll("\\\\", "/").replaceAll("\\.h2\\.db", ""));
 		//byte[] bt = DatatypeConverter.parseHexBinary("22f659366bab54ff041fb6c544d9aa9a798aaeee59b55a7c9bde792c15f400".toUpperCase());
 		
 		/*File f2 = new File("D:\\TEMp\\acetmpdir\\10000001406187367702");
@@ -101,11 +106,17 @@ public class Test {
 		UploadFile t = new UploadFile("MyGroup", "", f, url, null, null);
 		t.setDaemon(true);
 		t.start();
+		Sleeper s = new Sleeper();
 		while(t.isAlive()) {
-			System.out.println(t.getActionInProgress());
+			s.sleep(100);
+			//System.out.println(t.getActionInProgress());
+			System.out.print(">");
 		}
+		System.out.println();
 		msg = t.getMessage();
-		
+		System.out.println(msg.getHeader());
+		//System.out.println(Arrays.toString(msg.getBody()));
+		System.out.println(msg.getBody()[0]);
 		
 		msg = new JSONMessage("heartbeat", new Object[]{new Date().getTime()});
 		msg = process(msg, "", false);
@@ -149,7 +160,7 @@ public class Test {
 			msg = new JSONMessage("error", new Object[]{"NULL"});
 		}
 		System.out.println(msg.getHeader());
-		System.out.println(Arrays.toString(msg.getBody()));
+		//System.out.println(Arrays.toString(msg.getBody()));
 		System.out.println(msg.getBody()[0]);
 		char[] chr = new char[1024];
 		i = 0;

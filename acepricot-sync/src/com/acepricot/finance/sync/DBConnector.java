@@ -19,12 +19,12 @@ public class DBConnector extends Hashtable<String, DataSource> {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private static final String DB_URL_KEY = "com.acepricot.finance.db.url";
-	private static final String DB_DRIVER_CLASS_KEY = "com.acepricot.finance.db.driver";
-	private static final String DB_USERNAME_KEY = "com.acepricot.finance.db.user";
-	private static final String DB_PASSWORD_KEY = "com.acepricot.finance.db.pass";
+	static final String DB_URL_KEY = "com.acepricot.finance.db.url";
+	static final String DB_DRIVER_CLASS_KEY = "com.acepricot.finance.db.driver";
+	static final String DB_USERNAME_KEY = "com.acepricot.finance.db.user";
+	static final String DB_PASSWORD_KEY = "com.acepricot.finance.db.pass";
 	private static final String DB_MAX_ACTIVE_KEY = "com.acepricot.finance.db.maxactive";
-	private static final String DB_INIT_SIZE_KEY = "com.acepricot.finance.db.intisize";
+	private static final String DB_INIT_SIZE_KEY = "com.acepricot.finance.db.initsize";
 	private static final String DB_MAX_WAIT_KEY = "com.acepricot.finance.db.maxwait";
 	private static final String DB_REM_ABANDONED_KEY = "com.acepricot.finance.db.maxabandoned";
 	private static final String DB_MIN_IDLE_KEY = "com.acepricot.finance.db.minidle";
@@ -49,13 +49,27 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		p.setMaxWait(Integer.parseInt(pro.getProperty(DB_MAX_WAIT_KEY)));
 		p.setRemoveAbandonedTimeout(Integer.parseInt(pro.getProperty(DB_REM_ABANDONED_KEY)));
 		p.setMinEvictableIdleTimeMillis(Integer.parseInt(pro.getProperty(DB_MIN_IDLE_KEY)));
+		p.setMaxIdle(Integer.parseInt(pro.getProperty(DB_MAX_ACTIVE_KEY)));
 		DataSource ds = new DataSource();
 		ds.setPoolProperties(p);
 		DBConnector.db.put(name, ds);
 	}
 	
+	public static void unbind(String dsn) {
+		DataSource ds = db.remove(dsn);
+		if(ds != null) {
+			ds.close();
+		}
+	}	
+	
 	final public static Connection lookup(String dsn) throws SQLException {
-		return db.get(dsn).getConnection();
+		try {
+			return db.get(dsn).getConnection();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+			throw e;
+		}
 	}
 	
 	final public static int count(Connection con, String table, Object[] where) throws SQLException {
@@ -280,5 +294,6 @@ public class DBConnector extends Hashtable<String, DataSource> {
 			return null;
 		}
 		return obj.toString();
-	}	
+	}
+
 }
