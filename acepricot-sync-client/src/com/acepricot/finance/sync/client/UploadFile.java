@@ -12,6 +12,7 @@ import org.pabk.net.http.DefaultContent;
 import org.pabk.net.http.HttpClientConst;
 import org.pabk.net.http.SimpleClient;
 
+import com.acepricot.finance.sync.share.AppConst;
 import com.acepricot.finance.sync.share.JSONMessage;
 import com.google.gson.Gson;
 
@@ -119,7 +120,7 @@ public class UploadFile extends Thread {
 				int x = -1;
 				if((i + 1) == max) {
 					x = in.read(b, 0, last_size);
-					value = "LAST" + value;
+					value = AppConst.LAST_URI_SIGN + value;
 				}
 				else {
 					x = in.read(b, 0, size);

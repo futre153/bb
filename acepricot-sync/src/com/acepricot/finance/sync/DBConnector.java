@@ -32,7 +32,7 @@ public class DBConnector extends Hashtable<String, DataSource> {
 	private static final DBConnector db = new DBConnector();
 	private static final int DEFAULT_INT_VALUE = -1;
 	private static final BigDecimal DEFAULT_BIGDECIMAL_VALUE = new BigDecimal(-1);
-	private static final boolean DEBUG = false;
+	private static final boolean DEBUG = true;
 	private static boolean prepared = true;
 	
 		
@@ -145,9 +145,9 @@ public class DBConnector extends Hashtable<String, DataSource> {
 	
 	static int update(Connection con, String table, String[] cols, String[] values, Object[] where, boolean commit) throws SQLException {
 		StringBuffer sb = new StringBuffer("UPDATE ");
-		envelope(sb, table, '"');
+		envelope(sb, null, table, '"');
 		sb.append(" SET ");
-		DBConnector.join(sb, cols, values, '"', prepared);
+		DBConnector.join(sb, table, cols, values, '"', prepared);
 		DBConnector.applyWhere(sb, where, prepared);
 		if(DEBUG)System.out.println(sb);
 		PreparedStatement ps = con.prepareStatement(sb.toString());
@@ -167,13 +167,13 @@ public class DBConnector extends Hashtable<String, DataSource> {
 	
 	static int insert (Connection con, String table, String[] cols, String[] values, boolean commit) throws SQLException {
 		StringBuffer sb = new StringBuffer("INSERT INTO ");
-		envelope(sb, table, '"');
+		envelope(sb, null, table, '"');
 		sb.append(' ');
 		sb.append('(');
-		DBConnector.join(sb, null, cols, '"', false);
+		DBConnector.join(sb, table, null, cols, '"', false);
 		sb.append(')');
 		sb.append(" VALUES (");
-		DBConnector.join(sb, null, values, '"' , true);
+		DBConnector.join(sb, null, null, values, '"' , true);
 		sb.append(')');
 		if(DEBUG)System.out.println(sb);
 		PreparedStatement ps = con.prepareStatement(sb.toString());
@@ -182,8 +182,30 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		if(commit) {
 			con.commit();
 		}
+		ps.close();
 		return status;
 	}
+	
+	static int delete(Connection con, String table, Object[] where, char env) throws SQLException {
+		return delete(con, table, where, env, true);
+	}
+	
+	static int delete(Connection con, String table, Object[] where, char env, boolean commit) throws SQLException {
+		StringBuffer sb = new StringBuffer("DELETE FROM ");
+		envelope(sb, null, table, env);
+		DBConnector.applyWhere(sb, where, prepared);
+		PreparedStatement ps = con.prepareStatement(sb.toString());
+		if(prepared) {
+			setPrepared(ps, where, 1);
+		}
+		int status = ps.executeUpdate();
+		if(commit) {
+			con.commit();
+		}
+		ps.close();
+		return status;
+	}
+	
 	
 	static Rows select(Connection con, String table, String[] cols, char env, Object[] where) throws SQLException {
 		StringBuffer sb = new StringBuffer("SELECT ");
@@ -191,10 +213,10 @@ public class DBConnector extends Hashtable<String, DataSource> {
 			sb.append('*');
 		}
 		else {
-			DBConnector.join(sb, null, cols, env, false);
+			DBConnector.join(sb, table, null, cols, env, false);
 		}
 		sb.append(" FROM ");
-		envelope(sb, table, '"');
+		envelope(sb, null, table, '"');
 		DBConnector.applyWhere(sb, where, prepared);
 		if(DEBUG)System.out.println(sb);
 		PreparedStatement ps = con.prepareStatement(sb.toString());
@@ -242,12 +264,16 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		}
 	}
 
-	private static void join(StringBuffer sb, String[] cols, String[] val, char c, boolean ps) {
+	private static void join(StringBuffer sb, String table, String[] cols, String[] val, char c, boolean ps) {
 		for(int i = 0; i < val.length; i ++) {
 			if(i > 0) {
 				sb.append(',');
 			}
 			if(cols != null) {
+				if(table != null) {
+					sb.append(table);
+					sb.append('.');
+				}
 				sb.append(cols[i]);
 				sb.append('=');
 			}
@@ -256,7 +282,7 @@ public class DBConnector extends Hashtable<String, DataSource> {
 			}
 			else {
 				if(c > 0) {
-					envelope(sb, val[i], c);
+					envelope(sb, table, val[i], c);
 				}
 				else {
 					sb.append(val[i]);
@@ -265,9 +291,13 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		}
 	}
 	
-	static void envelope(StringBuffer sb, String s, char c) {
+	static void envelope(StringBuffer sb, String table, String s, char c) {
 		if(c > 0) {
 			sb.append(c);
+		}
+		if(table != null) {
+			sb.append(table);
+			sb.append('.');
 		}
 		sb.append(s);
 		if(c > 0) {

@@ -2,11 +2,10 @@ package com.acepricot.finance.sync.share;
 
 import java.util.ArrayList;
 
-import com.acepricot.finance.sync.AppConst;
-
 public class JSONMessage {
 
 	private static final String LS = System.getProperty("line.separator");
+	public static final String DOWNLOAD_HEADER = "download";
 	private String header;
 	private Object[] body;
 	
@@ -103,5 +102,9 @@ public class JSONMessage {
 
 	public boolean isError() {
 		return this.getHeader().equals(AppConst.JSON_ERROR_MSG);
+	}
+	
+	public boolean isGetError() {
+		return this.getHeader().equals(AppConst.JSON_GET_ERROR_MSG);
 	}
 }

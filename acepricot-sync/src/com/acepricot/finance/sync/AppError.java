@@ -45,8 +45,8 @@ final class AppError {
 		"Unexpected return value, while registering device %s. Please contact support",
 		"No enabled devices for this group",
 		"Unexpected return value, while setting primary device (%d). Please contact support",
-		"",
-		"",
+		"Device %s is not registered in context of this group",
+		"Device %s is not enabled in context of this group",
 		"",
 		"",
 		"",
@@ -59,9 +59,9 @@ final class AppError {
 		"Unexcpected return values for group id %s, while registering file for download. Please contact support",
 		"File download is not allowed for group id %s. Please contact support",
 		"File record not found",
-		"",
-		"",
-		"",
+		"File %s is not found for download. Please contact support",
+		"File %s has multiple records. Please contact support",
+		"File %s is not enabled for download",
 		"",
 		"",
 		"",
@@ -93,17 +93,26 @@ final class AppError {
 	public static final int DEVICE_UNEXPECTED_RETURN_VALUE = 0x24;
 	public static final int NO_ENABLED_DEVICES = 0x25;
 	public static final int PRIMARY_KEY_UNEXPECTED_ERROR = 0x26;
-
+	public static final int DEVICE_NOT_REGISTERED = 0x27;
+	public static final int DEVICE_NOT_ENABLED = 0x28;
+	
 	public static final int DUPLICATE_FILE_INSERT = 0x30;
 	public static final int MULTIPLE_FILE_INSERT = 0x031;
 	public static final int FILE_UNEXPECTED_RETURN_VALUE = 0x032;
 	public static final int FILE_INSERT_NOT_ENABLED = 0x33;
 	public static final int FILE_INSERT_NOT_FOUND = 0x34;
-
+	public static final int DOWNLOAD_NOT_FOUND = 0x35;
+	public static final int DOWNLOAD_MULTIPLE = 0x36;
+	public static final int DOWNLOAD_NOT_ENABLED = 0x37;
+	
 	public static final int RECORD_NOT_FOUND = 0x40;
 	public static final int MULTIPLE_RECORD_FOUND = 0x41;
 	public static final int DATABASE_FILE_UPLOAD_NOT_STARTED = 0x42;
 	public static final int DATABASE_FILE_UPLOAD_IN_PROGRESS = 0x43;
+
+	
+
+	
 	
 	private AppError(){}
 

@@ -7,8 +7,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.math.BigDecimal;
 import java.security.MessageDigest;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+
+import javax.xml.bind.DatatypeConverter;
 
 import org.pabk.net.http.DefaultContent;
 import org.pabk.net.http.HttpClientConst;
@@ -21,7 +24,7 @@ import com.google.gson.Gson;
 
 public class Test {
 	
-	public static String url = "http://localhost:8080/acepricot-sync/";
+	public static String url = "http://localhost:9000/acepricot-sync/";
 	public static File f = new File("C:\\Users\\brandys\\Desktop\\database.h2.db");
 	public static void main(final String[] a) throws Exception {
 		//String pass = "nahradnik06";
@@ -124,6 +127,29 @@ public class Test {
 		msg = new JSONMessage("initSync",new Object[]{"MyGroup", digest, "MyDevice"});
 		msg = process(msg, "", false);
 		
+		String dst = "D:\\TEMP\\jano.txt";
+		if(!msg.isError()) {
+			DownloadFile t2 = new DownloadFile(
+					dst,
+					url,
+					((Double) msg.getBody()[1]).intValue(),
+					((Double) msg.getBody()[2]).intValue(),
+					(String) msg.getBody()[3],
+					DatatypeConverter.parseHexBinary(JSONMessageProcessorClient.constructHexHash((ArrayList<?>) msg.getBody()[4])),
+					((Double) msg.getBody()[5]).intValue());
+			t2.start();
+			while(t2.isAlive()) {
+				s.sleep(1);
+				//System.out.println(t2.getActionInProgress());
+				System.out.print(">");
+			}
+			//msg = t2.download();
+			msg = t2.getMessage();
+			System.out.println(msg.getHeader());
+			System.out.println(Arrays.toString(msg.getBody()));
+			System.out.println(msg.getBody()[0]);
+			
+		}
 	}
 	
 	public static JSONMessage process(JSONMessage msg, String param, boolean put) throws Exception {
@@ -160,7 +186,9 @@ public class Test {
 			msg = new JSONMessage("error", new Object[]{"NULL"});
 		}
 		System.out.println(msg.getHeader());
-		//System.out.println(Arrays.toString(msg.getBody()));
+		if(!msg.isError()) {
+			System.out.println(Arrays.toString(msg.getBody()));
+		}
 		System.out.println(msg.getBody()[0]);
 		char[] chr = new char[1024];
 		i = 0;

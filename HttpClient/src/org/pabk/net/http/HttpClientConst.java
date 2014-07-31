@@ -141,6 +141,7 @@ public class HttpClientConst {
 	public static final String TRANSFER_ENCODING = "Transfer-Encoding";
 	public static final String CHUNKED = "chunked";
 	public static final String CONTENT_ENCODING = "Content-Encoding";
+	public static final int DEFAULT_ENCODING = UTF8_ENCODING;
 	
 	
 	/*

@@ -1,11 +1,14 @@
 package com.acepricot.finance.sync.client;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
+import com.acepricot.finance.sync.share.AppConst;
 import com.acepricot.finance.sync.share.JSONMessage;
 import com.google.gson.Gson;
 
@@ -43,4 +46,26 @@ public class JSONMessageProcessorClient {
 		return msg;
 		
 	}
+	
+	static final JSONMessage responseError(InputStream in, String encoding) throws IOException {
+		JSONMessage msg = new JSONMessage(AppConst.JSON_ERROR_MSG);
+		InputStreamReader bin = new InputStreamReader(in, encoding);
+		BufferedReader reader = new BufferedReader(bin);
+		String line;
+		while ((line = reader.readLine()) != null) {
+			msg.appendBody(line);
+		}
+		return msg;
+	}
+	
+	
+	static String constructHexHash(ArrayList<?> arrayList) {
+		StringBuffer sb = new StringBuffer(arrayList.size() * 2);
+		for(int i = 0; i < arrayList.size(); i ++) {
+			Double d = (Double) arrayList.get(i);
+			sb.append(String.format("%2s", Integer.toHexString(d.intValue() & 0xFF)).replaceAll(" ", "0"));
+		}
+		return sb.toString();
+	}
+	
 }

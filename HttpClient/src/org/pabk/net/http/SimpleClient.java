@@ -13,6 +13,7 @@ import java.net.Proxy;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.List;
 
 import org.pabk.net.http.auth.BBAuthenticator;
 import org.pabk.util.Huffman;
@@ -171,6 +172,33 @@ public class SimpleClient {
 		}*/
 		return rs;
 	}
+	/*
+	final private List<HttpCookie> getCookies() {
+		return cMan == null ? null : cMan.getCookieStore().getCookies();
+	}
+	*/
+	private final List<HttpCookie> getCookies(String url) {
+		URI uri;
+		try {
+			uri = new URI(url);
+		}
+		catch (URISyntaxException e) {
+			return null;
+		}
+		return cMan == null ? null : cMan.getCookieStore().get(uri);
+	}
+	
+	final public HttpCookie getCookie (String url, String cName) {
+		List<HttpCookie> list = this.getCookies(url);
+		if(list != null) {
+			for(HttpCookie cookie: list) {
+				if(cName.equals(cookie.getName())) {
+					return cookie;
+				}
+			}
+		}
+		return null;
+	}
 	
 	final public InputStream getInputStream() throws Exception {
 		return con.getInputStream();
@@ -295,5 +323,10 @@ public class SimpleClient {
 			}
 		}
 	}
+
+	public String getContentType() {
+		return con.getContentType();
+	}
+
 	
 }

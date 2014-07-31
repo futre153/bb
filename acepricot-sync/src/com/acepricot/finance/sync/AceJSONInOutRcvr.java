@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.acepricot.finance.sync.share.AppConst;
 import com.acepricot.finance.sync.share.JSONMessage;
 import com.google.gson.Gson;
 import com.google.gson.JsonIOException;
@@ -91,7 +92,7 @@ public class AceJSONInOutRcvr extends HttpServlet {
 			uri = c[i].getValue();
 			if(uri.matches(AppConst.JSON_LAST_URI_MASK)) {
 				last = true;
-				uri = uri.substring(4);
+				uri = uri.substring(AppConst.LAST_URI_SIGN.length());
 			}
 			if(id != null && uri != null) { 
 				if(id.matches(AppConst.JSON_ID_MASK) && uri.matches(AppConst.JSON_URI_MASK)) {
@@ -147,15 +148,22 @@ public class AceJSONInOutRcvr extends HttpServlet {
 	}
 	
 	private static final void doMessage(HttpServletResponse res, JSONMessage msg) throws IOException {
-		//System.out.println(res.getContentType());
-		//System.out.println(res.getCharacterEncoding());
-		//res.setContentLength(GSON.toJson(msg).getBytes(res.getCharacterEncoding()).length);
-		//ByteArrayOutputStream bout = new ByteArrayOutputStream(1024);
-		//PrintWriter out = new PrintWriter(bout, true);
-		//out.println(GSON.toJson(msg));
-		//res.setContentLength(bout.size());
-		//bout.writeTo(res.getOutputStream());
-		res.getWriter().append(GSON.toJson(msg));
+		if(msg.getHeader() == null) {
+			res.setContentType(HttpConst.H2DB_CT);
+			for(int i = 3; i < msg.getBody().length; i += 2) {
+				if((i + 1) < msg.getBody().length) {
+					Cookie c = new Cookie((String) msg.getBody()[i], (String) msg.getBody()[i + 1]);
+					c.setHttpOnly(true);
+					c.setVersion(0);
+					res.addCookie(c);
+				}
+			}
+			res.getOutputStream().write((byte[]) msg.getBody()[1], 0, (int) msg.getBody()[2]);
+		}
+		else {
+			res.setContentType(HttpConst.JSON_CT);
+			res.getWriter().append(GSON.toJson(msg));
+		}
 		res.flushBuffer();
 	}
 	

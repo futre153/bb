@@ -9,8 +9,10 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -23,6 +25,7 @@ import org.pabk.util.Huffman;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.acepricot.finance.sync.share.AppConst;
 import com.acepricot.finance.sync.share.JSONMessage;
 
 final class JSONMessageProcessor {
@@ -61,6 +64,10 @@ final class JSONMessageProcessor {
 
 	private static final String TMP_FILE_EXTENSION = ".tmp";
 
+	private static final int COMMON_NUMBER_OF_PARTS = 100;
+
+	private static final int MAX_BYTES = 0x100000;
+
 	
 	
 	
@@ -75,9 +82,9 @@ final class JSONMessageProcessor {
 		private static final int STATUS_UPLOADED_NOT_STARTED = 0;
 		private static final int STATUS_UPLOAD_IN_PROGRESS = 1;
 		private static final int STATUS_FILE_UPLOADED = 2;
-		public static final int STATUS_DB_FILE_CREATED = 3;
-		private static final int STATUS_SYNC_ENABLED = 100;
-		public static final int STATUS_DB_POOL_CREATED = 4;
+		private static final int STATUS_DB_FILE_CREATED = 3;
+		private static final int STATUS_SYNC_ENABLED = 5;
+		private static final int STATUS_DB_POOL_CREATED = 4;
 		int id;
 		int group_id;
 		BigDecimal status;
@@ -92,9 +99,13 @@ final class JSONMessageProcessor {
 	public class DOWNLOADED_FILES extends TableSchema {
 		private static final String URI = "URI";
 		private static final String TMP_FILE = "TMP_FILE";
+		public static final String POINTER = "POINTER";
 		int id;
 		int uri;
 		String tmp_file;
+		BigDecimal pointer;
+		BigDecimal enabled;
+		Timestamp insert_date;
 	}
 	
 	private static final class REGISTERED_GROUPS {
@@ -184,15 +195,20 @@ final class JSONMessageProcessor {
 	
 	@SuppressWarnings("unused")
 	private static final JSONMessage initSync(JSONMessageProcessor mp, Connection con, JSONMessage msg) {
-		int grpId;
-		String grpName, table;
+		int grpId, devId;
+		String grpName, devName, table;
 		Object[] where;
 		Where w = new Where();
 		ArrayList<HashMap<String, Object>> rows;
 		grpName = (String) msg.getBody()[0];
+		devName = (String) msg.getBody()[2];
 		if(!login(mp, con, msg).isError()) {
 			try {
 				grpId = JSONMessageProcessor.getGroupId(con, grpName);
+				devId = JSONMessageProcessor.getDeviceId(con, grpId, devName);
+				if(SyncEngine.isStarted(grpId, devId)) {
+					return msg.sendAppError("Device " + devName + " is allready active in context of group " + grpName);
+				}
 				table = JSONMessageProcessor.UPLOADED_FILES.class.getSimpleName();
 				where = w.set(w.equ(JSONMessageProcessor.UPLOADED_FILES.GROUP_ID, grpId));
 				msg = retrieveRows(mp, msg, con, mp.uploaded_files, (char) 0, where, true);
@@ -230,6 +246,7 @@ final class JSONMessageProcessor {
 							return msg;
 						}
 						msg.appendBody(l);
+						return msg;
 					default:
 						throw new IOException("Action " + mp.uploaded_files.status.intValue() + " is not defined");
 					}
@@ -238,23 +255,133 @@ final class JSONMessageProcessor {
 					return msg.sendAppError(AppError.getMessage(AppError.FILE_INSERT_NOT_FOUND, grpId));
 				}
 			}
-			catch(SQLException | IOException e) {
+			catch(SQLException | IOException | NoSuchAlgorithmException e) {
 				return msg.sendAppError(e);
 			}
 		}
 		return msg;
 	}
 	
-	private static JSONMessage prepareDownload(Connection con, String src_file, JSONMessage msg) throws IOException, SQLException {
+	@SuppressWarnings("unused")
+	private static final JSONMessage download(JSONMessageProcessor mp, Connection con, JSONMessage msg) {
+		Where w = new Where();
+		String table = JSONMessageProcessor.DOWNLOADED_FILES.class.getSimpleName();
+		String col = JSONMessageProcessor.UNIVERSAL_ID;
+		String col2 = JSONMessageProcessor.DOWNLOADED_FILES.URI;
+		int fileId = Integer.parseInt((String) msg.getBody()[0], 2);
+		int uri = Integer.parseInt((String) msg.getBody()[1], 2);
+		Object[] where = w.set(w.and(w.equ(col, fileId), w.equ(col2, uri)));
+		boolean last = false;
+		try {
+			msg = retrieveRows(mp, msg, con, mp.downloaded_files, (char) 0, where, true);
+			if(msg.isError()) {
+				throw new SQLException((String) msg.getBody()[0]);
+			}
+			if(!mp.downloaded_files.hasNext()) {
+				throw new SQLException(AppError.getMessage(AppError.DOWNLOAD_NOT_FOUND, "[UNKNOWN_FILE]"));
+			}
+			mp.downloaded_files.next();
+			File f = new File(mp.downloaded_files.tmp_file);
+			if(!f.exists()) {
+				throw new IOException(AppError.getMessage(AppError.DOWNLOAD_NOT_FOUND, mp.downloaded_files.tmp_file));
+			}
+			long l = f.length();
+			int i;
+			long pointer = mp.downloaded_files.pointer.longValue();
+			int max = l > (COMMON_NUMBER_OF_PARTS * MAX_BYTES) ? (int) (l / MAX_BYTES) + 1 : COMMON_NUMBER_OF_PARTS;
+				int size = (int) (l/max);
+				int last_size = (int) (l - size * (max - 1));
+				int bufferSize = size > last_size ? size : last_size;
+				last = (l - pointer) <= bufferSize;
+				byte[] b = new byte[bufferSize];
+				FileInputStream in = new FileInputStream(f);
+				try {
+					long skipped = in.skip(pointer);
+					if(skipped != pointer) {
+						throw new IOException("Operation skip failed on downloaded file " + mp.downloaded_files.tmp_file);
+					}
+					i = in.read(b);
+					pointer += i;
+				}
+				catch(IOException e) {
+					throw (e);
+				}
+				finally {
+					in.close();
+				}
+				int _uri = (int) (Math.random() * Integer.MAX_VALUE);
+				String[] cols = {col2, JSONMessageProcessor.DOWNLOADED_FILES.POINTER};
+				String[] values = {Integer.toString(_uri), Long.toString(pointer)}; 
+				DBConnector.update(con, table, cols, values, where);
+				msg = msg.returnOK(b, i, Integer.toBinaryString(fileId), (last ? AppConst.LAST_URI_SIGN : "") + Integer.toBinaryString(_uri));
+				msg.setHeader(null);
+				if(last) {
+					throw new IOException("End of download");
+				}
+				return msg;
+		}
+		catch(IOException | SQLException e) {
+			disable(con, table, fileId);
+			delete(con, table, fileId);
+			if(last) {
+				return msg;
+			}
+			return msg.sendAppError(e);
+		}
+	}
+	
+	private static boolean delete (Connection con, String table, int id) {
+		Where w = new Where();
+		Object[] where = w.set(w.equ(UNIVERSAL_ID, id));
+		try {
+			return DBConnector.delete(con, table, where, (char) 0) == 1;
+		} catch (SQLException e) {}
+		return false;
+	}
+	
+	private static boolean setEnabled(Connection con, String table, int id, boolean enabled) {
+		String[] cols = {UNIVERSAL_ENABLED};
+		String[] values = {enabled ? "1" : "0"};
+		Where w = new Where();
+		Object[] where = w.set(w.equ(UNIVERSAL_ID, id));
+		try {
+			return DBConnector.update(con, table, cols, values, where) == 1;
+		} catch (SQLException e) {}
+		return false;
+	}
+	
+	private static boolean disable(Connection con, String table, int id) {
+		return setEnabled(con, table, id, false);
+	}
+
+	private static JSONMessage prepareDownload(Connection con, String src_file, JSONMessage msg) throws IOException, SQLException, NoSuchAlgorithmException {
 		File srcFile = new File(src_file);
 		String dstPath = String.format(TEMP_DIR_MASK, System.getProperty("file.separator"), srcFile.getName(), TMP_FILE_EXTENSION);
-		copy(srcFile, new File(dstPath));
+		File dstFile = new File(dstPath);
+		copy(srcFile, dstFile);
 		int uri = (int) (Math.random() * Integer.MAX_VALUE);
 		String table = JSONMessageProcessor.DOWNLOADED_FILES.class.getSimpleName();
-		String[] cols = {JSONMessageProcessor.DOWNLOADED_FILES.URI, JSONMessageProcessor.DOWNLOADED_FILES.TMP_FILE};
+		String col = JSONMessageProcessor.DOWNLOADED_FILES.TMP_FILE;
+		String col2 = JSONMessageProcessor.DOWNLOADED_FILES.URI;
+		String[] cols = {col2, col};
 		String[] values = {Integer.toString(uri), dstPath};
 		DBConnector.insert(con, table, cols, values);
-		return msg.returnOK(uri);
+		int[] indexes = {AppError.DOWNLOAD_NOT_FOUND, AppError.DOWNLOAD_MULTIPLE, AppError.DOWNLOAD_NOT_ENABLED};
+		Where w = new Where();
+		Object[] where = w .set(w.and(w.equ(col, dstPath), w.equ(col2, uri)));
+		int id = (Integer) JSONMessageProcessor.getObject(con, table, indexes, col, dstPath, where, true)[ID_INDEX];
+		FileInputStream in = new FileInputStream(dstFile);
+		MessageDigestSerializer mds = MessageDigestSerializer.getMDS(MessageDigestSerializer.getInstance(DEFAULT_DIGEST_ALGORITHM));
+		byte[] b = new byte[MAX_BYTES];
+		int i;
+		while((i = in.read(b)) >= 0) {
+			mds.update(b, 0, i);
+		}
+		in.close();
+		b = mds.digest();
+		mds.reset();
+		long l = dstFile.length();
+		return msg.returnOK(uri, id, JSONMessageProcessor.DEFAULT_DIGEST_ALGORITHM, b, l > (COMMON_NUMBER_OF_PARTS * MAX_BYTES) ? (int) (l / MAX_BYTES) + 1 : COMMON_NUMBER_OF_PARTS);
 	}
 	
 	private static void copy(File srcFile, File dstFile) throws IOException {
@@ -365,7 +492,7 @@ final class JSONMessageProcessor {
 		return msg.returnOK();
 	}
 
-	private static final JSONMessage retrieveRows(Object ... o) {
+	static final JSONMessage retrieveRows(Object ... o) {
 		try {
 			Class<?> _class = o[3].getClass();
 			String table = _class.getSimpleName();
@@ -557,7 +684,15 @@ final class JSONMessageProcessor {
 		return (Integer) JSONMessageProcessor.getObject(con, table, indexes, col, grpName, where, true)[ID_INDEX];
 	}
 	
-	
+	private static final int getDeviceId(Connection con, int grpId, String devName) throws SQLException, IOException {
+		String table = JSONMessageProcessor.REGISTERED_DEVICES.class.getSimpleName();
+		String col = JSONMessageProcessor.REGISTERED_DEVICES.DEVICE_NAME;
+		String col2 = JSONMessageProcessor.REGISTERED_DEVICES.GROUP_ID;
+		Where w = new Where();
+		Object[] where = w.set(w.and(w.equ(col, devName), w.equ(col2, grpId)));
+		int[] indexes = {AppError.DEVICE_NOT_REGISTERED, AppError.DUPLICATE_DEVICE_NAME, AppError.DEVICE_NOT_ENABLED};
+		return (Integer) JSONMessageProcessor.getObject(con, table, indexes, col, devName, where, true)[ID_INDEX];
+	}
 	
 	@SuppressWarnings("unused")
 	private static final JSONMessage registerDevice(JSONMessageProcessor mp, Connection con, JSONMessage msg) {

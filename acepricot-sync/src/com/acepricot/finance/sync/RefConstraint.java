@@ -72,14 +72,14 @@ public class RefConstraint extends ConstraintImpl {
 		if((!add) & ifExists) {
 			sb.append("IF EXISTS ");
 		}
-		DBConnector.envelope(sb, this.getName(), e);
+		DBConnector.envelope(sb, null, this.getName(), e);
 		if(add) {
 			sb.append(" FOREIGN KEY (");
-			DBConnector.envelope(sb, column, e);
+			DBConnector.envelope(sb, null, column, e);
 			sb. append(") REFERENCES ");
-			DBConnector.envelope(sb, refSchema + "." + refTable, e);
+			DBConnector.envelope(sb, null, refSchema + "." + refTable, e);
 			sb.append(" (");
-			DBConnector.envelope(sb, refColumn, e);
+			DBConnector.envelope(sb, null, refColumn, e);
 			sb.append(')');
 			sb.append(" ON DELETE ");
 			sb.append(getAction(onDelete));
