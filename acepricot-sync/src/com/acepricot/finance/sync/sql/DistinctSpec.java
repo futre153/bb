@@ -17,7 +17,7 @@ public class DistinctSpec extends SQLSyntaxImpl {
 	}
 
 	@Override
-	public String toString() {
+	public String toSQLString() {
 		return distinct ? DISTINCT : (set ? ALL : EMPTY);
 	}
 

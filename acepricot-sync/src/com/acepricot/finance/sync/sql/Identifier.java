@@ -1,5 +1,7 @@
 package com.acepricot.finance.sync.sql;
 
+import java.sql.SQLException;
+
 public class Identifier extends SQLSyntaxImpl {
 	
 	private static String LETTER = "[a-zA-Z]";
@@ -11,14 +13,17 @@ public class Identifier extends SQLSyntaxImpl {
 	
 	private String identifier;
 	
-	public Identifier(String id) {
+	public Identifier(String id) throws SQLException {
+		if(id == null) {
+			throw new SQLException("Identifier cannot be null value");
+		}
 		identifier = id;
 		if(!id.matches(SIMLE_ID_MASK)) {
 			identifier = "\"" + identifier + "\"";
 		}
 	}
 	
-	public String toString() {
+	public String toSQLString() {
 		return identifier;
 	}
 }

@@ -4,7 +4,7 @@ public class FloatingPointLiteral extends SQLSyntaxImpl {
 	private float value;
 
 	@Override
-	public String toString () {
+	public String toSQLString () {
 		return Float.toString(value);
 	}
 	public FloatingPointLiteral (double d) {

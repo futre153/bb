@@ -1,6 +1,7 @@
 package com.acepricot.finance.sync.sql;
 
 import java.lang.reflect.Field;
+import java.sql.SQLException;
 
 abstract class SQLSyntaxImpl implements SQLSyntax {
 	
@@ -19,4 +20,20 @@ abstract class SQLSyntaxImpl implements SQLSyntax {
 			}
 		}
 	}
+	
+	public final String toString() {
+		try {
+			return this.toSQLString();
+		} catch (SQLException e) {
+			return null;
+		}
+	}
+
+	public static String toSQLString(Object object) throws SQLException {
+		if (object instanceof SQLSyntax) {
+			return ((SQLSyntax) object).toSQLString();
+		}
+		return object.toString();
+	}
+	
 }

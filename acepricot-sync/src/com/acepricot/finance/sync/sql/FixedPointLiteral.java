@@ -10,7 +10,7 @@ public class FixedPointLiteral extends SQLSyntaxImpl {
 	}
 
 	@Override
-	public String toString() {
+	public String toSQLString() {
 		return value.toString();
 	}
 	
