@@ -20,6 +20,22 @@ import org.pabk.util.Base64Coder;
 import org.pabk.util.Huffman;
 
 import com.acepricot.finance.sync.share.JSONMessage;
+import com.acepricot.finance.sync.share.sql.BoolFactor;
+import com.acepricot.finance.sync.share.sql.BoolTerm;
+import com.acepricot.finance.sync.share.sql.CompPred;
+import com.acepricot.finance.sync.share.sql.FromClause;
+import com.acepricot.finance.sync.share.sql.Identifier;
+import com.acepricot.finance.sync.share.sql.Predicate;
+import com.acepricot.finance.sync.share.sql.Query;
+import com.acepricot.finance.sync.share.sql.QueryExp;
+import com.acepricot.finance.sync.share.sql.QueryPrimary;
+import com.acepricot.finance.sync.share.sql.QuerySpec;
+import com.acepricot.finance.sync.share.sql.QueryTerm;
+import com.acepricot.finance.sync.share.sql.SearchCon;
+import com.acepricot.finance.sync.share.sql.Select;
+import com.acepricot.finance.sync.share.sql.SelectColumn;
+import com.acepricot.finance.sync.share.sql.TableExp;
+import com.acepricot.finance.sync.share.sql.WhereClause;
 import com.google.gson.Gson;
 
 public class Test {
@@ -62,7 +78,31 @@ public class Test {
 		
 		fin1.close();
 		fin2.close();*/
-		//System.exit(1);
+		
+		
+		CompPred p = new CompPred(new Object[]{new Identifier("jano")}, new String[]{"JANKO"}, Predicate.EQUAL);
+		
+		BoolFactor bfac = new BoolFactor(p);
+		BoolTerm bterm = new BoolTerm(bfac);
+		SearchCon search = new SearchCon(bterm);
+		
+		WhereClause where = new WhereClause(search);
+				
+		FromClause tableName = new FromClause(new Identifier("TableName"));
+		
+		TableExp texp = new TableExp(where, null, null, tableName);
+		SelectColumn cols = new SelectColumn(null);
+		QuerySpec qspec = new QuerySpec(texp, cols);
+		
+		QueryPrimary qprim = new QueryPrimary(qspec);
+		QueryTerm qterm = new QueryTerm(qprim);
+		QueryExp qexp = new QueryExp(qterm);
+		Select select = new Select(qexp);
+		
+		Query q = new Query(select);
+		System.out.println(q.toSQLString());
+		
+		System.exit(1);
 		/*
 		Class.forName("org.h2.Driver");
 		Connection con = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/DATABASE01;AUTO_SERVER=TRUE;LOCK_TIMEOUT=60000;CIPHER=AES", "", "cnuewf092no ptraajtn39ln");
