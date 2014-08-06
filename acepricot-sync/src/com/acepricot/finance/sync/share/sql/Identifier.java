@@ -5,7 +5,7 @@ import java.sql.SQLException;
 public class Identifier extends SQLSyntaxImpl {
 	
 	private static String LETTER = "[a-zA-Z]";
-	private static String EXTENDED_LETTER = "[\\#\\@\\$]";
+	private static String EXTENDED_LETTER = "[\\#\\@\\$\\_]";
 	
 	//private static String SPECIFIC_CHARACTER = null;
 	private static String DIGIT = "[0-9]";

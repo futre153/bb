@@ -15,7 +15,7 @@ public class GroupClause extends SQLSyntaxImpl {
 	
 	@Override
 	public String toSQLString() throws SQLException {
-		return "GROUP BY " + Predicate.join(exps);
+		return "GROUP BY " + Predicate.join(psb, exps);
 	}
 
 }

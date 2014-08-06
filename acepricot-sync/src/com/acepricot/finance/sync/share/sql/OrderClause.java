@@ -20,7 +20,7 @@ public class OrderClause extends SQLSyntaxImpl {
 					}
 				}
 			}
-			return "SORT BY " + Predicate.join(sortSpec);
+			return "SORT BY " + Predicate.join(psb, sortSpec);
 		}
 		else {
 			return EMPTY;

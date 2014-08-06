@@ -40,7 +40,7 @@ public class RecDecCursor extends SQLSyntaxImpl {
 		if(finSelect == null) {
 			throw new SQLException ("Final select name cannot be null in context of recursive declared query");
 		}
-		return "DECLARE " + identifier.toSQLString() + " CURSOR FOR WITH RECURSIVE " + refName.toSQLString() + "(" + Predicate.join(aliasName) + ") AS (" + initSelect + " UNION ALL " + recSelect.toSQLString() + ") "	+ finSelect.toSQLString();
+		return "DECLARE " + identifier.toSQLString() + " CURSOR FOR WITH RECURSIVE " + refName.toSQLString() + "(" + Predicate.join(psb, aliasName) + ") AS (" + initSelect + " UNION ALL " + recSelect.toSQLString() + ") "	+ finSelect.toSQLString();
 	}
 
 }

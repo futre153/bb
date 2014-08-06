@@ -43,7 +43,6 @@ public class Test {
 	public static String url = "http://localhost:9000/acepricot-sync/";
 	public static File f = new File("C:\\Users\\brandys\\Desktop\\database.h2.db");
 	public static void main(final String[] a) throws Exception {
-		//String pass = "nahradnik06";
 		//System.out.println(Base64Coder.encodeString(Huffman.encode(pass, null)));
 		//System.out.println("D:\\TEMP\\clientdb\\11110.h2.db".replaceAll("\\\\", "/").replaceAll("\\.h2\\.db", ""));
 		//byte[] bt = DatatypeConverter.parseHexBinary("22f659366bab54ff041fb6c544d9aa9a798aaeee59b55a7c9bde792c15f400".toUpperCase());
@@ -80,7 +79,7 @@ public class Test {
 		fin2.close();*/
 		
 		
-		CompPred p = new CompPred(new Object[]{new Identifier("jano")}, new String[]{"JANKO"}, Predicate.EQUAL);
+		CompPred p = new CompPred(new Object[]{new Identifier("GROUP_NAME")}, new String[]{"MyGroup"}, Predicate.EQUAL);
 		
 		BoolFactor bfac = new BoolFactor(p);
 		BoolTerm bterm = new BoolTerm(bfac);
@@ -88,7 +87,7 @@ public class Test {
 		
 		WhereClause where = new WhereClause(search);
 				
-		FromClause tableName = new FromClause(new Identifier("TableName"));
+		FromClause tableName = new FromClause(new Identifier("REGISTERED_GROUPS"));
 		
 		TableExp texp = new TableExp(where, null, null, tableName);
 		SelectColumn cols = new SelectColumn(null);

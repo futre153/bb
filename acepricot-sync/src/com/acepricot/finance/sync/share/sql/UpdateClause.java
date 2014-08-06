@@ -17,7 +17,7 @@ public class UpdateClause extends SQLSyntaxImpl {
 	}
 	
 	public String toSQLString() throws SQLException {
-		return "FOR UPDATE" + ((cols != null && cols.length > 0) ? " OF " + Predicate.join(cols) : EMPTY) + (nowait ? " NOWAIT" : EMPTY);
+		return "FOR UPDATE" + ((cols != null && cols.length > 0) ? " OF " + Predicate.join(psb, cols) : EMPTY) + (nowait ? " NOWAIT" : EMPTY);
 	}
 
 }

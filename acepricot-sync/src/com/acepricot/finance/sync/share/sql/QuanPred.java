@@ -31,7 +31,7 @@ public class QuanPred extends Predicate {
 	
 	public String toSQLString() throws SQLException {
 		super.toString();
-		return Predicate.join(objs) + " " + comp + " " + quantifier + " " + Predicate.join(objs2); 
+		return Predicate.join(psb, objs) + " " + comp + " " + quantifier + " " + Predicate.join(psb, objs2); 
 	}
 	
 }

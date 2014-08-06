@@ -21,7 +21,7 @@ public class TableExp extends SQLSyntaxImpl {
 		if(fromClause == null || fromClause.length < 1) {
 			throw new SQLException("Table expression must contains at least one table name definition"); 
 		}
-		return "FROM " + Predicate.join(fromClause) + (whereClause == null ? EMPTY : " " + whereClause.toSQLString()) + (groupClause == null ? EMPTY : " " + groupClause.toSQLString()) + (havingClause == null ? EMPTY : " " + havingClause.toSQLString());
+		return "FROM " + Predicate.join(psb, fromClause) + (whereClause == null ? EMPTY : " " + whereClause.toSQLString()) + (groupClause == null ? EMPTY : " " + groupClause.toSQLString()) + (havingClause == null ? EMPTY : " " + havingClause.toSQLString());
 	}
 
 }

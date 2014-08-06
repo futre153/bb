@@ -4,8 +4,8 @@ import java.sql.SQLException;
 
 public class BoolFactor extends SQLSyntaxImpl {
 	private boolean not = false;
-	private Predicate predicate;
-	private SearchCon searchCon;
+	protected Predicate predicate;
+	protected SearchCon searchCon;
 	
 	protected BoolFactor(boolean not, SQLSyntaxImpl ... objs) {
 		super(objs);
@@ -21,6 +21,6 @@ public class BoolFactor extends SQLSyntaxImpl {
 		if(predicate == null && searchCon == null) {
 			throw new SQLException("predicate and search conditions cannot be null both in context of boolean factor");
 		}
-		return (not ? "NOT " : EMPTY) + (predicate != null ? predicate.toSQLString() : searchCon.toSQLString());
+		return (not ? "NOT " : EMPTY) + (predicate != null ? predicate.toSQLString() : "(" + searchCon.toSQLString()) + ")";
 	}
 }

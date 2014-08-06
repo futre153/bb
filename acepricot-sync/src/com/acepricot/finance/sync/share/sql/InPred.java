@@ -23,7 +23,7 @@ public class InPred extends Predicate {
 	}
 	
 	public String toSQLString() throws SQLException {
-		super.toString();
-		return Predicate.join(objs) + (not ? EMPTY : " NOT") + " IN " + (objs.length != objs2.length ? "(" : EMPTY) + Predicate.join(objs2) + (objs.length != objs2.length ? ")" : EMPTY); 
+		super.toSQLString();
+		return Predicate.join(psb, objs) + (not ? EMPTY : " NOT") + " IN " + (objs.length != objs2.length ? "(" : EMPTY) + Predicate.join(psb, objs2) + (objs.length != objs2.length ? ")" : EMPTY); 
 	}
 }

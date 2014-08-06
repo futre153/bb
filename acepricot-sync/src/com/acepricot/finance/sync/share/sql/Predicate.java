@@ -4,22 +4,6 @@ import java.sql.SQLException;
 
 public abstract class Predicate extends SQLSyntaxImpl {
 	
-	
-	public static String LESS = "<";
-	public static String GREATHER = ">";
-	public static String LESS_OR_GREATHER = LESS + GREATHER;
-	public static String EQUAL = "=";
-	public static String NOT_EQUAL = "!" + EQUAL;
-	public static String LESS_OR_EQUAL = LESS + EQUAL;
-	public static String GREATHER_OR_EQUAL = GREATHER + EQUAL;
-	public static String ASCII_LESS = "~" + LESS;
-	public static String ASCII_EQUAL = "~" + EQUAL;
-	public static String ASCII_GRATHER = "~" + GREATHER;
-	
-	static final String QUAN_ALL = "All";
-	static final String QUAN_SOME = "SOME";
-	static final String QUAN_ANY = "ANY";
-		
 	private static String[] COMP_OP = {
 		LESS, GREATHER, LESS_OR_GREATHER,
 		EQUAL, NOT_EQUAL, LESS_OR_EQUAL,
@@ -70,7 +54,7 @@ public abstract class Predicate extends SQLSyntaxImpl {
 		return getIndex(Predicate.LOCK_LEVELS, level) >= 0;
 	}
 	
-	static String join(Object[] objs) throws SQLException {
+	static String join(PreparedBuffer pb, Object[] objs) throws SQLException {
 		StringBuffer sb = new StringBuffer();
 		for(int i = 0; i < objs.length; i ++) {
 			boolean qe = objs[i] instanceof QueryExp;
@@ -83,7 +67,19 @@ public abstract class Predicate extends SQLSyntaxImpl {
 				sb.append(qe ? ")" : EMPTY);
 			}
 			else {
-				objs[i].toString();
+				if(SQLSyntaxImpl.isPrepared()) {
+					sb.append(PREPARED_MARK);
+					pb.append(objs[i]);
+				}
+				else {
+					if(objs[i] instanceof String) {
+						sb.append("'");		
+					}
+					sb.append(objs[i]);
+					if(objs[i] instanceof String) {
+						sb.append("'");
+					}
+				}
 			}
 		}
 		return sb.toString();
