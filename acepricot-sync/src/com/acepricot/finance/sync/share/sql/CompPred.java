@@ -18,7 +18,7 @@ public class CompPred extends Predicate {
 			throw new SQLException ("If expression on figth side is Query expression than right side mus have only one expression");
 		}
 		Predicate.checkCopmarison(comp);
-		if(objs.length > 1 && Predicate.isEqualOrNot(comp)) {
+		if(objs.length > 1 && (!Predicate.isEqualOrNot(comp))) {
 			throw new SQLException("Comparison operator " + comp + " is not allowed for multiple expressions");
 		}
 		this.objs = objs;
@@ -28,7 +28,7 @@ public class CompPred extends Predicate {
 	
 	public String toSQLString() throws SQLException {
 		super.toSQLString();
-		return Predicate.join(psb, objs) + " " + comp + " " + Predicate.join(psb, objs2); 
+		return (objs.length > 1 ? Predicate.join(psb, objs, '(', ')') : Predicate.join(psb, objs)) + " " + comp + " " + (objs2.length > 1 ? ("(" + Predicate.join(psb, objs2, '(', ')') + ")") : Predicate.join(psb, objs2)); 
 	}
 	
 }

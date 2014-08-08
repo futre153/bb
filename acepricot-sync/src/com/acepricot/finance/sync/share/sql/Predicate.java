@@ -54,12 +54,13 @@ public abstract class Predicate extends SQLSyntaxImpl {
 		return getIndex(Predicate.LOCK_LEVELS, level) >= 0;
 	}
 	
-	static String join(PreparedBuffer pb, Object[] objs) throws SQLException {
+	static String join(PreparedBuffer pb, Object[] objs, char env1, char env2) throws SQLException {
 		StringBuffer sb = new StringBuffer();
+		sb.append(env1 == 0 ? EMPTY : env1);
 		for(int i = 0; i < objs.length; i ++) {
 			boolean qe = objs[i] instanceof QueryExp;
 			if(i > 0) {
-				sb.append(',');
+				sb.append(", ");
 			}
 			if(objs[i] instanceof SQLSyntaxImpl) {
 				sb.append(qe ? "(" : EMPTY);
@@ -82,7 +83,13 @@ public abstract class Predicate extends SQLSyntaxImpl {
 				}
 			}
 		}
+		sb.append(env2 == 0 ? EMPTY : env2);
 		return sb.toString();
+	
+	}
+	
+	static String join(PreparedBuffer pb, Object[] objs) throws SQLException {
+		return join(pb, objs, (char) 0, (char) 0);
 	}
 	
 	static void checkCopmarison(String comp) throws SQLException {
@@ -104,6 +111,7 @@ public abstract class Predicate extends SQLSyntaxImpl {
 		
 	}
 	*/
+	
 	static void checkClass(Predicate pred, Class<?> class1) throws SQLException {
 		if(pred.objs.length != 1) {
 			throw new SQLException ("Predicate " + pred.getClass().getSimpleName() + " requires one expression");

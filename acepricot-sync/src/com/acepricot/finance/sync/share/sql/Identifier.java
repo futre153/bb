@@ -18,12 +18,13 @@ public class Identifier extends SQLSyntaxImpl {
 			throw new SQLException("Identifier cannot be null value");
 		}
 		identifier = id;
-		if(!id.matches(SIMPLE_ID_MASK)) {
-			identifier = "\"" + identifier + "\"";
-		}
+	}
+	
+	public String getValue() {
+		return identifier;
 	}
 	
 	public String toSQLString() {
-		return identifier;
+		return getValue().matches(SIMPLE_ID_MASK) ? getValue() : ("\"" + getValue() + "\"");
 	}
 }

@@ -3,9 +3,12 @@ package com.acepricot.finance.sync.share.sql;
 import java.sql.SQLException;
 
 public class TableName extends SQLSyntaxImpl {
-	private SchemaName schemaName;
-	private Identifier identifier;
+	protected SchemaName schemaName;
+	protected Identifier identifier;
 	
+	public TableName(SQLSyntaxImpl ...impls) {
+		super(impls);
+	}
 	
 	public String toSQLString() throws SQLException {
 		if(identifier == null) {

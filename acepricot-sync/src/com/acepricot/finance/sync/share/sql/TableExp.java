@@ -9,6 +9,23 @@ public class TableExp extends SQLSyntaxImpl {
 	protected GroupClause groupClause;
 	protected HavingClause havingClause;
 	
+	public TableExp(SQLSyntaxImpl ...impls) {
+		super(impls);
+	}
+	
+	void addFromClause(FromClause from) {
+		if(fromClause == null) {
+			fromClause = new FromClause[] {from};
+		}
+		else {
+			FromClause[] _new  = new FromClause[fromClause.length + 1];
+			System.arraycopy(fromClause, 0, _new, 0, fromClause.length);
+			_new[fromClause.length] = from;
+			fromClause = null;
+			fromClause = _new;
+		}
+	}
+	
 	public TableExp(WhereClause where, GroupClause group, HavingClause having, FromClause ...clauses) {
 		this.whereClause = where;
 		this.havingClause = having;

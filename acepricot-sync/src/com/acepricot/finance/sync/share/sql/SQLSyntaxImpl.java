@@ -6,9 +6,8 @@ import java.sql.SQLException;
 public abstract class SQLSyntaxImpl implements SQLSyntax {
 	
 	protected static final String EMPTY = "";
-	protected final PreparedBuffer psb = new PreparedBuffer();
 	private static boolean prepared = true;
-	public static final Object PREPARED_MARK = "?";
+	public static final String PREPARED_MARK = "?";
 	
 	public static String LESS = "<";
 	public static String GREATHER = ">";
@@ -66,11 +65,17 @@ public abstract class SQLSyntaxImpl implements SQLSyntax {
 		}
 	}
 
-	public static String toSQLString(Object object) throws SQLException {
+	public static String toSQLString(PreparedBuffer psb, Object object) throws SQLException {
 		if (object instanceof SQLSyntax) {
 			return ((SQLSyntax) object).toSQLString();
 		}
-		return object.toString();
+		if(SQLSyntaxImpl.isPrepared()) {
+			psb.append(object);
+			return PREPARED_MARK;
+		}
+		else {
+			return object.toString();
+		}
 	}
 
 	public static boolean isPrepared() {
@@ -79,6 +84,10 @@ public abstract class SQLSyntaxImpl implements SQLSyntax {
 
 	public static void setPrepared(boolean prepared) {
 		SQLSyntaxImpl.prepared = prepared;
+	}
+	
+	public PreparedBuffer getPreparedBuffer() {
+		return psb;
 	}
 	
 	public void closePSBuffer() {

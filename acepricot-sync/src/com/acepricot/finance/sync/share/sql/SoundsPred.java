@@ -15,6 +15,6 @@ public class SoundsPred extends Predicate {
 	}
 	
 	public String toSQLString() throws SQLException {
-		return Predicate.toSQLString(objs[0]) + (not ? " NOT" : EMPTY) + " SOUNDS " + (like ? "LIKE " : EMPTY) + Predicate.toSQLString(objs[1]);
+		return Predicate.toSQLString(psb, objs[0]) + (not ? " NOT" : EMPTY) + " SOUNDS " + (like ? "LIKE " : EMPTY) + Predicate.toSQLString(psb, objs[1]);
 	}
 }

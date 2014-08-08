@@ -13,6 +13,6 @@ public class LikePred extends Predicate {
 	}
 	
 	public String toSQLString() throws SQLException {
-		return Predicate.toSQLString(objs[0]) + (not ? " NOT" : EMPTY) + " LIKE " + Predicate.toSQLString(objs[1]) + (objs.length == 3 ? " ESCAPE " + Predicate.toSQLString(objs[2]) : EMPTY);
+		return Predicate.toSQLString(psb, objs[0]) + (not ? " NOT" : EMPTY) + " LIKE " + Predicate.toSQLString(psb, objs[1]) + (objs.length == 3 ? " ESCAPE " + Predicate.toSQLString(psb, objs[2]) : EMPTY);
 	}
 }

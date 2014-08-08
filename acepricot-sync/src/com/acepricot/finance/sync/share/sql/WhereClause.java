@@ -4,34 +4,33 @@ import java.sql.SQLException;
 
 public class WhereClause extends SQLSyntaxImpl {
 	
-	private static final int OR = 1;
-	private static final int AND = 2;
-	private static final int NO_OPERATION = 0;
-	private static final int NOT = 3;
+	public static final int OR = 1;
+	public static final int AND = 2;
+	public static final int NOT = 3;
+	public static final String RIGHT_BRACKET = ")";
+	public static final String LEFT_BRACKET = "(";
 	protected SearchCon searchCon;
 	
-	public WhereClause(SQLSyntaxImpl ...s) {
-		super(s);
-		if(searchCon == null) {
-			searchCon = new SearchCon(); 
-		}
+	public WhereClause(Object ...objs) throws SQLException {
+		this.searchCon = addCondition(objs);
 	}
 	
-	public static SearchCon addCondition(Object ...objs) throws SQLException {
-		SearchCon se = new SearchCon(); 
+	private static SearchCon addCondition(Object ...objs) throws SQLException {
+		SearchCon se = null; 
 		if(objs.length > 0) {
 			int s = WhereClause.firstIndexOf("(", objs);
 			int e = WhereClause.lastIndexOf(")", objs);
-			if((s > 0 && e >= 0) || (s >= 0 && e < 0) || (e < s)) {
+			if((s < 0 && e >= 0) || (s >= 0 && e < 0) || (e < s)) {
 				throw new SQLException("Where clause bracket error");
 			}
 			if(s >= 0) {
-				Object[] a = new Object[s - e + objs.length];
-				Object[] b = new Object[e - s - 1];
+				Object[] a = new Object[e - s - 1];
+				System.arraycopy(objs, s + 1, a, 0, a.length);
+				Object obj = addCondition(a);
+				a = new Object[s - e + objs.length - (obj == null ? 1 : 0)];
 				System.arraycopy(objs, 0, a, 0, s);
-				System.arraycopy(objs, s + 1, b, 0, b.length);
-				System.arraycopy(objs, e + 1, a, s + 1, objs.length - e -1);
-				a[s] = addCondition(b);
+				System.arraycopy(objs, e + 1, a, s + (obj == null ? 0 : 1), objs.length - e -1);
+				a[s] = obj;
 				objs = a;
 			}
 			int index = 0;
@@ -42,23 +41,23 @@ public class WhereClause extends SQLSyntaxImpl {
 				Predicate p = null;
 				SearchCon in = null;
 				try {
-					not = objs[index].toString().equals(Integer.toString(NOT));
+					not = objs[index].equals(Integer.toString(NOT));
 					if(not) {
 						index ++;
 					}
 					else {
-						or = objs[index].toString().equals(Integer.toString(OR));
+						or = objs[index].equals(Integer.toString(OR));
 						if(or) {
 							index ++;
 						}
 						else {
-							and = objs[index].toString().equals(Integer.toString(AND));
+							and = objs[index].equals(Integer.toString(AND));
 							if(and) {
 								index ++;
 							}
 						}
 						if ((or | and) & (!not)) {
-							not = objs[index].toString().equals(Integer.toString(NOT));
+							not = objs[index].equals(Integer.toString(NOT));
 							if(not) {
 								index ++;
 							}
@@ -78,21 +77,18 @@ public class WhereClause extends SQLSyntaxImpl {
 						throw new SQLException("Missing predicate or search condition in contaxt of search");
 					}
 					if(or | and) {
-						if(in != null) {
-							
-							se.boolTerm = new BoolTerm(new BoolTerm(new BoolFactor(not, in)));
+						if(se == null) {
+							throw new SQLException("Operators AND or OR are not expected at this time");
+						}
+						if(or) {
+							se.getFreeSearchCon().addFields(new SearchCon(new BoolTerm(new BoolFactor(not, p == null ? in : p))));
+						}
+						else {
+							se.getFreeBoolTerm().boolTerm.addFields(new BoolTerm(new BoolFactor(not, p == null ? in : p)));
 						}
 					}
 					else {
-						if(se.boolTerm != null) {
-							throw new SQLException("If operator OR or AND is used then boolean term cannot be null in search");
-						}
-						if(in != null) {
-							se.boolTerm = new BoolTerm(new BoolFactor(not, in));
-						}
-						else {
-							se.boolTerm = new BoolTerm(new BoolFactor(not, p));
-						}
+						se = new SearchCon(new BoolTerm(new BoolFactor(not, p == null ? in : p)));
 					}
 				}
 				catch (IndexOutOfBoundsException err) {
@@ -114,7 +110,7 @@ public class WhereClause extends SQLSyntaxImpl {
 	private static int indexOf(String key, Object[] objs, boolean first) {
 		int index = -1;
 		for(int i = 0; i < objs.length; i ++) {
-			if(objs[i].toString().equals(key)) {
+			if(objs[i].equals(key)) {
 				index = i;
 				if(first) {
 					break;
@@ -124,10 +120,6 @@ public class WhereClause extends SQLSyntaxImpl {
 		return index;
 	}
 
-	private WhereClause addCondition2(Object[] objs) {
-		
-	}
-	
 	
 	@Override
 	public String toSQLString() throws SQLException {

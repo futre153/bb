@@ -21,7 +21,7 @@ public class SortSpec extends SQLSyntaxImpl {
 	
 	@Override
 	public String toSQLString() throws SQLException {
-		return Predicate.toSQLString(exp) + (display ? (asc ? " ASC" : " DESC") : EMPTY);
+		return Predicate.toSQLString(psb, exp) + (display ? (asc ? " ASC" : " DESC") : EMPTY);
 	}
 
 	public boolean hasColumnSpec() {

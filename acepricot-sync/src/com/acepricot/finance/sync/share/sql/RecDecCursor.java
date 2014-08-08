@@ -4,12 +4,12 @@ import java.sql.SQLException;
 
 public class RecDecCursor extends SQLSyntaxImpl {
 	
-	private Identifier identifier;
-	private Identifier refName;
-	private Identifier[] aliasName;
-	private QuerySpec initSelect;
-	private QuerySpec recSelect;
-	private Select finSelect;
+	protected Identifier identifier;
+	protected Identifier refName;
+	protected Identifier[] aliasName;
+	protected QuerySpec initSelect;
+	protected QuerySpec recSelect;
+	protected Select finSelect;
 	
 	public RecDecCursor(Identifier id, Identifier ref, Identifier[] aliases, QuerySpec initialSelect, QuerySpec recursiveSelect, Select finalSelect) {
 		this.identifier = id;

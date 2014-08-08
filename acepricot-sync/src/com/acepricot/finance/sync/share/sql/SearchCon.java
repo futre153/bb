@@ -16,25 +16,20 @@ public class SearchCon extends SQLSyntaxImpl {
 		return (searchCon == null ? EMPTY : searchCon.toSQLString() + " OR ") + boolTerm.toSQLString();
 	}
 	
-	public SearchCon getCondition() {
+	public SearchCon getFreeBoolTerm() {
+		if(this.boolTerm.boolTerm == null) {
+			return this;
+		}
+		return this.getFreeBoolTerm();
+	}
+	
+	public SearchCon getFreeSearchCon() {
 		if(searchCon == null) {
 			return this;
 		}
 		else {
-			return searchCon.getCondition();
+			return searchCon.getFreeSearchCon();
 		}
-	}
-	public SearchCon getFreeBoolFactor() {
-		if(this.boolTerm == null) {
-			return this;
-		}
-		if(this.boolTerm.boolFactor == null) {
-			return this;
-		}
-		if(this.boolTerm.boolFactor.searchCon == null) {
-			return this;
-		}
-		return this.boolTerm.boolFactor.searchCon.getFreeBoolFactor();
 	}
 	
 }

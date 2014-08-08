@@ -18,7 +18,7 @@ abstract class RowNoExp extends SQLSyntaxImpl {
 		if(!(exp instanceof UnsInt || exp instanceof ParameterName)) {
 			throw new SQLException("Row number accept only unsigned integer or parameter");
 		}
-		return Predicate.toSQLString(exp);
+		return Predicate.toSQLString(psb, exp);
 	}
 
 }

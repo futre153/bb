@@ -27,12 +27,18 @@ import org.slf4j.LoggerFactory;
 
 import com.acepricot.finance.sync.share.AppConst;
 import com.acepricot.finance.sync.share.JSONMessage;
+import com.acepricot.finance.sync.share.sql.CompPred;
+import com.acepricot.finance.sync.share.sql.Identifier;
+import com.acepricot.finance.sync.share.sql.Predicate;
+import com.acepricot.finance.sync.share.sql.Query;
+import com.acepricot.finance.sync.share.sql.TableName;
+import com.acepricot.finance.sync.share.sql.WhereClause;
 
 final class JSONMessageProcessor {
 	
 	final static Logger logger = LoggerFactory.getLogger(JSONMessageProcessor.class);
 	
-	private static final String UNIVERSAL_ID = "ID";
+	static final String UNIVERSAL_ID = "ID";
 	private static final String UNIVERSAL_ENABLED = "ENABLED";
 	private static final int ID_INDEX = 0;
 	private static final int OBJECT_INDEX = 1;
@@ -211,7 +217,8 @@ final class JSONMessageProcessor {
 				}
 				table = JSONMessageProcessor.UPLOADED_FILES.class.getSimpleName();
 				where = w.set(w.equ(JSONMessageProcessor.UPLOADED_FILES.GROUP_ID, grpId));
-				msg = retrieveRows(mp, msg, con, mp.uploaded_files, (char) 0, where, true);
+				Object com1 = new CompPred(new Object[]{new Identifier(JSONMessageProcessor.UPLOADED_FILES.GROUP_ID)}, new Object[]{grpId}, Predicate.EQUAL);
+				msg = retrieveRows2(mp, msg, con, mp.uploaded_files, new WhereClause(com1), true);
 				if(msg.isError()) {
 					return msg;
 				}
@@ -265,7 +272,8 @@ final class JSONMessageProcessor {
 	@SuppressWarnings("unused")
 	private static final JSONMessage download(JSONMessageProcessor mp, Connection con, JSONMessage msg) {
 		Where w = new Where();
-		String table = JSONMessageProcessor.DOWNLOADED_FILES.class.getSimpleName();
+		//String table = JSONMessageProcessor.DOWNLOADED_FILES.class.getSimpleName();
+		TableName tableName;
 		String col = JSONMessageProcessor.UNIVERSAL_ID;
 		String col2 = JSONMessageProcessor.DOWNLOADED_FILES.URI;
 		int fileId = Integer.parseInt((String) msg.getBody()[0], 2);
@@ -273,7 +281,8 @@ final class JSONMessageProcessor {
 		Object[] where = w.set(w.and(w.equ(col, fileId), w.equ(col2, uri)));
 		boolean last = false;
 		try {
-			msg = retrieveRows(mp, msg, con, mp.downloaded_files, (char) 0, where, true);
+			Object com1 = new CompPred(new Object[]{new Identifier(col), new Identifier(col2)}, new Object[]{fileId, uri}, Predicate.EQUAL);
+			msg = retrieveRows2(mp, msg, con, mp.downloaded_files, new WhereClause(com1), true);
 			if(msg.isError()) {
 				throw new SQLException((String) msg.getBody()[0]);
 			}
@@ -311,8 +320,8 @@ final class JSONMessageProcessor {
 				}
 				int _uri = (int) (Math.random() * Integer.MAX_VALUE);
 				String[] cols = {col2, JSONMessageProcessor.DOWNLOADED_FILES.POINTER};
-				String[] values = {Integer.toString(_uri), Long.toString(pointer)}; 
-				DBConnector.update(con, table, cols, values, where);
+				Object[] values = {Integer.toString(_uri), Long.toString(pointer)};
+				DBConnector.update(con, DBConnector.createUpdate(tableName, cols, values, new WhereClause(com1)));
 				msg = msg.returnOK(b, i, Integer.toBinaryString(fileId), (last ? AppConst.LAST_URI_SIGN : "") + Integer.toBinaryString(_uri));
 				msg.setHeader(null);
 				if(last) {
@@ -321,8 +330,8 @@ final class JSONMessageProcessor {
 				return msg;
 		}
 		catch(IOException | SQLException e) {
-			disable(con, table, fileId);
-			delete(con, table, fileId);
+			disable(con, tableName, fileId);
+			delete(con, tableName, fileId);
 			if(last) {
 				return msg;
 			}
@@ -339,18 +348,17 @@ final class JSONMessageProcessor {
 		return false;
 	}
 	
-	private static boolean setEnabled(Connection con, String table, int id, boolean enabled) {
+	private static boolean setEnabled(Connection con, TableName tableName, int id, boolean enabled) {
 		String[] cols = {UNIVERSAL_ENABLED};
-		String[] values = {enabled ? "1" : "0"};
-		Where w = new Where();
-		Object[] where = w.set(w.equ(UNIVERSAL_ID, id));
+		Object[] values = {enabled ? "1" : "0"};
 		try {
-			return DBConnector.update(con, table, cols, values, where) == 1;
+			Object com1 = new CompPred(new Object[]{new Identifier(UNIVERSAL_ID)}, new Object[]{id}, Predicate.EQUAL);
+			return DBConnector.update(con, DBConnector.createUpdate(tableName, cols, values, new WhereClause(com1 ))) == 1;
 		} catch (SQLException e) {}
 		return false;
 	}
 	
-	private static boolean disable(Connection con, String table, int id) {
+	private static boolean disable(Connection con, TableName table, int id) {
 		return setEnabled(con, table, id, false);
 	}
 
@@ -360,16 +368,14 @@ final class JSONMessageProcessor {
 		File dstFile = new File(dstPath);
 		copy(srcFile, dstFile);
 		int uri = (int) (Math.random() * Integer.MAX_VALUE);
-		String table = JSONMessageProcessor.DOWNLOADED_FILES.class.getSimpleName();
+		TableName tableName = new TableName(new Identifier(JSONMessageProcessor.DOWNLOADED_FILES.class.getSimpleName()));
 		String col = JSONMessageProcessor.DOWNLOADED_FILES.TMP_FILE;
 		String col2 = JSONMessageProcessor.DOWNLOADED_FILES.URI;
-		String[] cols = {col2, col};
 		String[] values = {Integer.toString(uri), dstPath};
-		DBConnector.insert(con, table, cols, values);
+		DBConnector.insert(con, DBConnector.createInsert(tableName, values, col2, col));
 		int[] indexes = {AppError.DOWNLOAD_NOT_FOUND, AppError.DOWNLOAD_MULTIPLE, AppError.DOWNLOAD_NOT_ENABLED};
-		Where w = new Where();
-		Object[] where = w .set(w.and(w.equ(col, dstPath), w.equ(col2, uri)));
-		int id = (Integer) JSONMessageProcessor.getObject(con, table, indexes, col, dstPath, where, true)[ID_INDEX];
+		CompPred com1 = new CompPred(new Object[]{new Identifier(col), new Identifier(col2)}, new Object[]{dstPath, uri}, Predicate.EQUAL);		
+		int id = (Integer) JSONMessageProcessor.getObject(con, tableName, indexes, col, dstPath, new WhereClause(com1), true)[ID_INDEX];
 		FileInputStream in = new FileInputStream(dstFile);
 		MessageDigestSerializer mds = MessageDigestSerializer.getMDS(MessageDigestSerializer.getInstance(DEFAULT_DIGEST_ALGORITHM));
 		byte[] b = new byte[MAX_BYTES];
@@ -491,21 +497,31 @@ final class JSONMessageProcessor {
 		mp.uploaded_files.tmp_file = dbFilename;
 		return msg.returnOK();
 	}
-
-	static final JSONMessage retrieveRows(Object ... o) {
+	
+	/*			mp, msg, con, mp.downloaded_files, (char) 0, where, true
+	 * 0 - JSONMessageProcessor
+	 * 1 - JSOnMessage
+	 * 2 - SQLConnection
+	 * 3 - TableSchema
+	 * 4 - WhereClause
+	 * 5 - unique
+	 */
+	
+	static final JSONMessage retrieveRows2(Object ... o) {
 		try {
-			Class<?> _class = o[3].getClass();
-			String table = _class.getSimpleName();
-			Rows rows = DBConnector.select((Connection) o[2], table, null, (char) o[4], (Object[]) o[5]);
+			Query select = DBConnector.createSelect();
+			select.addFromClause(new Identifier(o[3].getClass().getSimpleName()));
+			select.addTableSpec((WhereClause) o[4]);
+			Rows rows = DBConnector.select((Connection) o[2], select);
 			if(rows.size() == 0) {
 				throw new SQLException(AppError.getMessage(AppError.RECORD_NOT_FOUND));
 			}
-			if((boolean) o[6]) {
+			if((boolean) o[5]) {
 				if(rows.size() != 1) {
 					throw new SQLException(AppError.getMessage(AppError.MULTIPLE_RECORD_FOUND));
 				}
 			}
-			TableSchema schema = (TableSchema) o[0].getClass().getDeclaredField(_class.getSimpleName().toLowerCase()).get(o[0]);
+			TableSchema schema = (TableSchema) o[0].getClass().getDeclaredField(o[3].getClass().getSimpleName().toLowerCase()).get(o[0]);
 			schema.rows = rows;
 			schema.index = -1;
 			return ((JSONMessage) o[1]).returnOK();
@@ -517,27 +533,35 @@ final class JSONMessageProcessor {
 	
 	@SuppressWarnings("unused")
 	private static final JSONMessage upload(JSONMessageProcessor mp, Connection con, JSONMessage msg) {
-		String reqId, reqUri, table, digest, digestAlgorithm, tmpPath;
+		String reqId, reqUri, digest, digestAlgorithm, tmpPath;
 		int id, status, uri, grpId, enabled, mdIndex = -1;
-		Where w;
-		Object[] where;
 		Rows rows;
 		File tmpFile;
 		MessageDigestSerializer mds;
-		String[] cols, values;
+		String[] cols;
+		Object[] values;
 		boolean last;
 		InputStream in;
 		reqId = (String) msg.getBody()[0];
 		reqUri = (String) msg.getBody()[1];
+		TableName tableName;
+		Object com1;
 		try {
 			in = (InputStream) msg.getBody()[2];
 			last = (boolean) msg.getBody()[3];
 			
-			table = JSONMessageProcessor.UPLOADED_FILES.class.getSimpleName();
-			w = new Where();
-			//System.out.println(Integer.parseInt(reqId, 2) + "," + Integer.parseInt(reqUri, 2));
-			where = w.set(w.and(w.equ(UNIVERSAL_ID, Integer.parseInt(reqId, 2)), w.equ(JSONMessageProcessor.UPLOADED_FILES.URI, Integer.parseInt(reqUri, 2))));
-			rows = DBConnector.select(con, table, null, '"', where);
+			tableName = new TableName(new Identifier(JSONMessageProcessor.UPLOADED_FILES.class.getSimpleName()));
+			com1 = new CompPred(new Object[]{new Identifier(UNIVERSAL_ID), new Identifier(JSONMessageProcessor.UPLOADED_FILES.URI)},
+					new Object[]{Integer.parseInt(reqId, 2), Integer.parseInt(reqUri, 2)},
+					Predicate.EQUAL);
+			Query select = DBConnector.createSelect();
+			select.addFromClause(tableName);
+			com1 = new CompPred(
+					new Object[]{new Identifier(UNIVERSAL_ID), new Identifier(JSONMessageProcessor.UPLOADED_FILES.URI)},
+					new Object[]{Integer.parseInt(reqId, 2), Integer.parseInt(reqUri, 2)},
+					Predicate.EQUAL);
+			select.addTableSpec(new WhereClause(com1 ));
+			rows = DBConnector.select(con, select);
 			if(rows.size() == 0) {
 				throw new SQLException(AppError.getMessage(AppError.FILE_INSERT_NOT_FOUND));
 			}
@@ -569,8 +593,8 @@ final class JSONMessageProcessor {
 				}
 				mdIndex = MessageDigestSerializer.getInstance(digestAlgorithm);
 				cols = new String[] {JSONMessageProcessor.UPLOADED_FILES.STATUS, JSONMessageProcessor.UPLOADED_FILES.TMP_FILE, JSONMessageProcessor.UPLOADED_FILES.MD_INDEX};
-				values = new String[] {Integer.toString(status + 1), tmpPath, Integer.toString(mdIndex)};
-				DBConnector.update(con, table, cols, values, where);
+				values = new Object[] {Integer.toString(status + 1), tmpPath, Integer.toString(mdIndex)};
+				DBConnector.update(con, DBConnector.createUpdate(tableName, cols, values, new WhereClause(com1)));
 				status ++;
 			case 1:
 				tmpFile = new File(tmpPath);
@@ -593,16 +617,16 @@ final class JSONMessageProcessor {
 						throw new IOException("Message digest of dowloaded file is failed to check");
 					}
 					cols = new String[] {JSONMessageProcessor.UPLOADED_FILES.STATUS, JSONMessageProcessor.UPLOADED_FILES.MD_INDEX};
-					values = new String[] {Integer.toString(status + 1), "-1"};
-					DBConnector.update(con, table, cols, values, where);
+					values = new Object[] {Integer.toString(status + 1), "-1"};
+					DBConnector.update(con, DBConnector.createUpdate(tableName, cols, values, new WhereClause(com1)));
 					status ++;
 					return msg.returnOK();
 				}
 				else {
 					uri = (int) (Math.random() * Integer.MAX_VALUE);
 					cols = new String[] {JSONMessageProcessor.UPLOADED_FILES.URI};
-					values = new String[] {Integer.toString(uri)};
-					DBConnector.update(con, table, cols, values, where);
+					values = new Object[] {Integer.toString(uri)};
+					DBConnector.update(con, DBConnector.createUpdate(tableName, cols, values, new WhereClause(com1)));
 					return msg.returnOK(id, uri);
 				}
 			default:
@@ -611,15 +635,15 @@ final class JSONMessageProcessor {
 		}
 		catch(Exception e) {
 			try {	
-				table = JSONMessageProcessor.UPLOADED_FILES.class.getSimpleName();
-				w = new Where();
-				where = w.set(w.and(w.equ(UNIVERSAL_ID, Integer.parseInt(reqId, 2)), w.equ(JSONMessageProcessor.UPLOADED_FILES.URI, Integer.parseInt(reqUri, 2))));
+				tableName = new TableName(new Identifier(JSONMessageProcessor.UPLOADED_FILES.class.getSimpleName()));
+				com1 = new CompPred(new Object[]{new Identifier(UNIVERSAL_ID), new Identifier(JSONMessageProcessor.UPLOADED_FILES.URI)},
+						new Object[]{Integer.parseInt(reqId, 2), Integer.parseInt(reqUri, 2)}, Predicate.EQUAL);
 				cols = new String[] {JSONMessageProcessor.UPLOADED_FILES.STATUS, JSONMessageProcessor.UPLOADED_FILES.MD_INDEX};
-				values = new String[] {"0", "-1"};
+				values = new Object[] {"0", "-1"};
 				if(mdIndex >= 0) {
 					MessageDigestSerializer.reset(mdIndex);
 				}
-				DBConnector.update(con, table, cols, values, where);
+				DBConnector.update(con, DBConnector.createUpdate(tableName, cols, values, new WhereClause(com1)));
 			}
 			catch(Exception e1) {
 				e1.printStackTrace();
@@ -644,7 +668,7 @@ final class JSONMessageProcessor {
 			} catch (SQLException | IOException e) {
 				return msg.sendAppError(e);
 			}
-			String table = JSONMessageProcessor.UPLOADED_FILES.class.getSimpleName();
+			TableName tableName;
 			String col = JSONMessageProcessor.UPLOADED_FILES.GROUP_ID;
 			String[] cols = {
 				JSONMessageProcessor.UPLOADED_FILES.GROUP_ID,
@@ -656,8 +680,11 @@ final class JSONMessageProcessor {
 			String[] values = {Integer.toString(grpId), fileDigest, digestAlgorithm, Integer.toString((int) (Math.random() * Integer.MAX_VALUE))};
 			Where w = new Where();
 			Object[] where = w.set(w.equ(col, grpId));
+			Object com1;
 			try {
-				JSONMessageProcessor.insertRow(con, table, indexes, cols, values, where, true);
+				tableName = new TableName(new Identifier(JSONMessageProcessor.UPLOADED_FILES.class.getSimpleName()));
+				com1 = new CompPred(new Object[]{new Identifier(col)}, new Object[]{grpId}, Predicate.EQUAL);
+				JSONMessageProcessor.insertRow(con, tableName, indexes, cols, values, new WhereClause(com1), true);
 			} catch (SQLException | IOException e) {
 				return msg.sendAppError(e);
 			}
@@ -666,7 +693,8 @@ final class JSONMessageProcessor {
 			indexes = new int[]{AppError.DUPLICATE_FILE_INSERT, AppError.MULTIPLE_FILE_INSERT, AppError.FILE_INSERT_NOT_ENABLED};
 			Object[] uri = null;
 			try {
-				uri = JSONMessageProcessor.getObject(con, table, indexes, col, grpName, where, true);
+				tableName = new TableName(new Identifier(JSONMessageProcessor.UPLOADED_FILES.class.getSimpleName()));
+				uri = JSONMessageProcessor.getObject(con, tableName, indexes, col, grpName, new WhereClause(com1), true);
 			} catch (SQLException | IOException e) {
 				return msg.sendAppError(e);
 			}
@@ -676,22 +704,20 @@ final class JSONMessageProcessor {
 	}
 	
 	private static final int getGroupId(Connection con, String grpName) throws SQLException, IOException {
-		String table = JSONMessageProcessor.REGISTERED_GROUPS.class.getSimpleName();
+		TableName tableName = new TableName(new Identifier(JSONMessageProcessor.REGISTERED_GROUPS.class.getSimpleName()));
 		String col = JSONMessageProcessor.REGISTERED_GROUPS.GROUP_NAME;
-		Where w = new Where();
-		Object[] where = w.set(w.equ(col, grpName));
 		int[] indexes = {AppError.GROUP_NOT_REGISTERED, AppError.GROUP_MULTIPLE_REGISTRATION, AppError.GROUP_NOT_ENABLED};
-		return (Integer) JSONMessageProcessor.getObject(con, table, indexes, col, grpName, where, true)[ID_INDEX];
+		Object com1 = new CompPred(new Object[]{new Identifier(col)}, new Object[]{grpName}, Predicate.EQUAL);
+		return (Integer) JSONMessageProcessor.getObject(con, tableName, indexes, col, grpName, new WhereClause(com1), true)[ID_INDEX];
 	}
 	
 	private static final int getDeviceId(Connection con, int grpId, String devName) throws SQLException, IOException {
-		String table = JSONMessageProcessor.REGISTERED_DEVICES.class.getSimpleName();
+		TableName tableName = new TableName(new Identifier(JSONMessageProcessor.REGISTERED_DEVICES.class.getSimpleName()));
 		String col = JSONMessageProcessor.REGISTERED_DEVICES.DEVICE_NAME;
 		String col2 = JSONMessageProcessor.REGISTERED_DEVICES.GROUP_ID;
-		Where w = new Where();
-		Object[] where = w.set(w.and(w.equ(col, devName), w.equ(col2, grpId)));
 		int[] indexes = {AppError.DEVICE_NOT_REGISTERED, AppError.DUPLICATE_DEVICE_NAME, AppError.DEVICE_NOT_ENABLED};
-		return (Integer) JSONMessageProcessor.getObject(con, table, indexes, col, devName, where, true)[ID_INDEX];
+		Object com1 = new CompPred(new Object[]{new Identifier(col), new Identifier(col2)}, new Object[]{devName, grpId}, Predicate.EQUAL);
+		return (Integer) JSONMessageProcessor.getObject(con, tableName, indexes, col, devName, new WhereClause(com1), true)[ID_INDEX];
 	}
 	
 	@SuppressWarnings("unused")
@@ -705,18 +731,19 @@ final class JSONMessageProcessor {
 		String devNameCol = JSONMessageProcessor.REGISTERED_DEVICES.DEVICE_NAME;
 		msg = JSONMessageProcessor.login(mp, con, msg);
 		if(msg.getBody()[0].equals(AppConst.OK_RESPONSE)) {
-			String table = JSONMessageProcessor.REGISTERED_GROUPS.class.getSimpleName();
+			TableName tableName;
 			String col = JSONMessageProcessor.REGISTERED_GROUPS.GROUP_NAME;
 			Where w = new Where();
 			Object[] where = w.set(w.equ(col, grpName));
 			int[] indexes = {AppError.GROUP_NOT_REGISTERED, AppError.GROUP_MULTIPLE_REGISTRATION, AppError.GROUP_NOT_ENABLED};
 			int grpId;
 			try {
-				grpId = (Integer) JSONMessageProcessor.getObject(con, table, indexes, col, grpName, where, true)[ID_INDEX];
+				tableName = new TableName(new Identifier(JSONMessageProcessor.REGISTERED_GROUPS.class.getSimpleName()));
+				Object com1 = new CompPred(new Object[]{new Identifier(col)}, new Object[]{grpName}, Predicate.EQUAL);
+				grpId = (Integer) JSONMessageProcessor.getObject(con, tableName, indexes, col, grpName, new WhereClause(com1), true)[ID_INDEX];
 			} catch (SQLException | IOException e) {
 				return msg.sendAppError(e);
 			}
-			table = REGISTERED_DEVICES.class.getSimpleName();
 			w.clear();
 			where = w.set(w.and(w.equ(grpIdCol, grpId), w.equ(devNameCol, devName)));
 			//Object [] where2 = new Object[]{"(" + grpIdCol + " = ?) AND (" + devNameCol + " = ?)", grpId, devName};
@@ -729,7 +756,9 @@ final class JSONMessageProcessor {
 			};
 			String[] values = {Integer.toString(grpId), Double.toString(primary), devName};
 			try {
-				JSONMessageProcessor.insertRow(con, table, indexes, cols, values, where, true);
+				tableName = new TableName(new Identifier(REGISTERED_DEVICES.class.getSimpleName()));
+				Object com2 = new CompPred(new Object[]{new Identifier(grpIdCol), new Identifier(devNameCol)}, new Object[]{grpId, devName}, Predicate.EQUAL);
+				JSONMessageProcessor.insertRow(con, tableName, indexes, cols, values, new WhereClause(com2), true);
 			} catch (SQLException | IOException e) {
 				return msg.sendAppError(e);
 			}
@@ -744,33 +773,36 @@ final class JSONMessageProcessor {
 	}
 	
 	private static void setPrimaryDevice(Connection con, int grpId, String devName) throws SQLException, IOException {
-		String table = REGISTERED_DEVICES.class.getSimpleName();
+		TableName tableName = new TableName(new Identifier(REGISTERED_DEVICES.class.getSimpleName()));
 		String grpIdCol = JSONMessageProcessor.REGISTERED_DEVICES.GROUP_ID;
 		String enabledCol = JSONMessageProcessor.REGISTERED_DEVICES.ENABLED;
 		String primDevCol = JSONMessageProcessor.REGISTERED_DEVICES.PRIMARY_DEVICE;
 		String idCol = JSONMessageProcessor.REGISTERED_DEVICES.ID;
 		String devNameCol = JSONMessageProcessor.REGISTERED_DEVICES.DEVICE_NAME;
 		Where w = new Where();
-		Object[] where = w.set(w.and(w.equ(grpIdCol, grpId), w.equ(enabledCol, 1), w.equ(primDevCol, 1))); 
-		String[] cols = {JSONMessageProcessor.REGISTERED_DEVICES.PRIMARY_DEVICE}, values;
-		int count = DBConnector.count(con, table, where);
+		
+		CompPred com1 = new CompPred(
+				new Object[]{new Identifier(grpIdCol), new Identifier(enabledCol), new Identifier(primDevCol)},
+				new Object[]{grpId, 1, 1},
+				Predicate.EQUAL); 
+		String[] cols = {JSONMessageProcessor.REGISTERED_DEVICES.PRIMARY_DEVICE};
+		Object[] values;
+		int count = DBConnector.count(con, tableName, new WhereClause(com1));
 		switch(count) {
 		case 0:
 			w.clear();
 			if(devName == null) {
 				int[] indexes = {AppError.NO_ENABLED_DEVICES, 0, 0};
 				String col = JSONMessageProcessor.REGISTERED_DEVICES.DEVICE_NAME;
-				where = w.set(w.and(w.equ(grpIdCol, grpId), w.equ(enabledCol, 1)));
-				int devId = (int) JSONMessageProcessor.getObject(con, table, indexes, col, devName, where, false)[ID_INDEX];
-				w.clear();
-				where = w.set(w.equ(idCol, devId));
+				com1 = new CompPred(new Object[]{new Identifier(grpIdCol), new Identifier(enabledCol)}, new Object[]{grpId, 1}, Predicate.EQUAL);
+				int devId = (int) JSONMessageProcessor.getObject(con, tableName, indexes, col, devName, new WhereClause(com1), false)[ID_INDEX];
+				com1 = new CompPred(new Object[]{new Identifier(idCol)}, new Object[]{devId}, Predicate.EQUAL);
 			}
 			else {
-				//where = new Object[]{"(" + grpIdCol + " = ?) AND (" + devNameCol + " = ?)", grpId, devName};
-				where = w.set(w.and(w.equ(grpIdCol, grpId), w.equ(devNameCol, devName)));
+				com1 = new CompPred(new Object[]{new Identifier(grpIdCol), new Identifier(devNameCol)}, new Object[]{grpId, devName}, Predicate.EQUAL);
 			}
 			values = new String[]{"1"};
-			int status = DBConnector.update(con, table, cols, values, where);
+			int status = DBConnector.update(con, DBConnector.createUpdate(tableName, cols, values, new WhereClause(com1)));
 			if(status != 1) {
 				throw new IOException (AppError.getMessage(AppError.PRIMARY_KEY_UNEXPECTED_ERROR, status));
 			}
@@ -778,10 +810,9 @@ final class JSONMessageProcessor {
 		case 1:
 			break;
 		default:
-			w.clear();
-			where = w.set(w.equ(grpIdCol, grpId));
-			values = new String[]{"0"};
-			DBConnector.update(con, table, cols, values, where);
+			values = new Object[]{0};
+			com1 = new CompPred(new Object[]{new Identifier(grpIdCol)}, new Object[]{grpId}, Predicate.EQUAL);
+			DBConnector.update(con, DBConnector.createUpdate(tableName, cols, values, new WhereClause(com1)));
 			JSONMessageProcessor.setPrimaryDevice(con, grpId, devName);
 		}
 	}
@@ -793,7 +824,7 @@ final class JSONMessageProcessor {
 		String hash = JSONMessageProcessor.constructHexHash((ArrayList<?>) msg.getBody()[OBJECT_INDEX]);
 		String email = (String) msg.getBody()[2];
 		double dbVersion = ((double) msg.getBody()[3]);
-		String table = JSONMessageProcessor.REGISTERED_GROUPS.class.getSimpleName();
+		TableName tableName; 
 		Where w = new Where();
 		Object[] where = w.set(w.equ(JSONMessageProcessor.REGISTERED_GROUPS.GROUP_NAME, grpName));
 		int[] indexes = {0, AppError.ALLREADY_REGISTERED, AppError.GROUP_MULTIPLE_REGISTRATION, AppError.UNEXPECTED_RETURN_VALUE};
@@ -805,7 +836,9 @@ final class JSONMessageProcessor {
 		};
 		String[] values = {grpName, hash, email, Double.toString(dbVersion)};
 		try {
-			JSONMessageProcessor.insertRow(con, table, indexes, cols, values, where, true);
+			tableName = new TableName(new Identifier(JSONMessageProcessor.REGISTERED_GROUPS.class.getSimpleName()));
+			Object com1 = new CompPred(new Object[]{new Identifier(JSONMessageProcessor.REGISTERED_GROUPS.GROUP_NAME)}, new Object[]{grpName}, Predicate.EQUAL);
+			JSONMessageProcessor.insertRow(con, tableName, indexes, cols, values, new WhereClause(com1), true);
 		} catch (SQLException | IOException e) {
 			return msg.sendAppError(e);
 		}
@@ -815,15 +848,14 @@ final class JSONMessageProcessor {
 	private static final JSONMessage login(JSONMessageProcessor mp, Connection con, JSONMessage msg) {
 		String grpName = (String) msg.getBody()[0];
 		String hash = JSONMessageProcessor.constructHexHash((ArrayList<?>) msg.getBody()[1]);
-		String table = JSONMessageProcessor.REGISTERED_GROUPS.class.getSimpleName();
-		Where w = new Where();
-		Object[] where = w.set(w.equ(JSONMessageProcessor.REGISTERED_GROUPS.GROUP_NAME, grpName));
-		//where.add(where.equ(JSONMessageProcessor.REGISTERED_GROUPS.GROUP_NANE, grpName));
+		TableName tableName = null;
 		int[] indexes = {AppError.GROUP_NOT_REGISTERED, AppError.GROUP_MULTIPLE_REGISTRATION, AppError.GROUP_NOT_ENABLED}; 
 		String col = JSONMessageProcessor.REGISTERED_GROUPS.PASSWORD;
 		String hash2;
 		try {
-			hash2 = (String) JSONMessageProcessor.getObject(con, table, indexes, col, col, where, true)[1];
+			tableName = new TableName(new Identifier(JSONMessageProcessor.REGISTERED_GROUPS.class.getSimpleName()));
+			Object com1 = new CompPred(new Object[]{new Identifier(JSONMessageProcessor.REGISTERED_GROUPS.GROUP_NAME)}, new Object[]{grpName}, Predicate.EQUAL);
+			hash2 = (String) JSONMessageProcessor.getObject(con, tableName, indexes, col, col, new WhereClause(com1), true)[1];
 		} catch (SQLException | IOException e) {
 			return msg.sendAppError(e);
 		}
@@ -833,10 +865,10 @@ final class JSONMessageProcessor {
 		return msg.returnOK();
 	}
 	
-	private static void insertRow(Connection con, String table, int[] index, String[] cols, String[] values, Object[] where, boolean unique) throws SQLException, IOException {
+	private static void insertRow(Connection con, TableName tableName, int[] index, String[] cols, String[] values, WhereClause where, boolean unique) throws SQLException, IOException {
 		if(unique) {
 			int count = 0;
-			count = DBConnector.count(con, table, where);
+			count = DBConnector.count(con, tableName, where);
 			if(count == 1) {
 				throw new IOException (AppError.getMessage(index[1], values[index[0]]));
 			}
@@ -844,13 +876,13 @@ final class JSONMessageProcessor {
 				throw new IOException (AppError.getMessage(index[2], values[index[0]]));
 			}
 		}
-		int status = DBConnector.insert(con, table, cols, values);
+		int status = DBConnector.insert(con, DBConnector.createInsert(tableName, values, cols));
 		if(status != 1) {
 			throw new IOException (AppError.getMessage(index[3], values[index[0]]));
 		}
 	}
 	
-	private static Object[] getObject (Connection con, String table, int[] index, String col, String value, Object[] where, boolean unique) throws SQLException, IOException {
+	private static Object[] getObject (Connection con, TableName table, int[] index, String col, String value, WhereClause where, boolean unique) throws SQLException, IOException {
 		int count = 0;
 		count = DBConnector.count(con, table, where);
 		if(count == 0) {
@@ -859,7 +891,11 @@ final class JSONMessageProcessor {
 		if(count > 1 && unique) {
 			throw new IOException(AppError.getMessage(index[2], value));
 		}
-		HashMap<String, Object> row = DBConnector.getFirstRowOf(con, table, '"', new String[]{UNIVERSAL_ID, col, UNIVERSAL_ENABLED}, where);
+		Query select = DBConnector.createSelect();
+		select.addFromClause(table);
+		select.addTableSpec(where);
+		select.addColumns(UNIVERSAL_ID, col, UNIVERSAL_ENABLED);
+		HashMap<String, Object> row = DBConnector.getFirstRowOf(con, select);
 		boolean enabled = ((BigDecimal)row.get(UNIVERSAL_ENABLED)).intValue() == 1;
 		if(!enabled) {
 			throw new IOException(AppError.getMessage(index[2], value));

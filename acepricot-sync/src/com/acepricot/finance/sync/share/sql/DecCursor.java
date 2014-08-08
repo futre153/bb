@@ -4,8 +4,8 @@ import java.sql.SQLException;
 
 public class DecCursor extends SQLSyntaxImpl {
 	
-	private Identifier identifier;
-	private Select select;
+	protected Identifier identifier;
+	protected Select select;
 	
 	@Override
 	public String toSQLString() throws SQLException {

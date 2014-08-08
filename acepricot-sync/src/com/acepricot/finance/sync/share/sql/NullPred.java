@@ -14,6 +14,6 @@ public class NullPred extends Predicate {
 	
 	public String toSQLString() throws SQLException {
 		super.toSQLString();
-		return Predicate.toSQLString(objs[0]) + (not ? " NOT" : EMPTY + " NULL");
+		return Predicate.toSQLString(psb, objs[0]) + (not ? " NOT" : EMPTY + " NULL");
 	}
 }

@@ -6,12 +6,26 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Properties;
 
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.apache.tomcat.jdbc.pool.PoolProperties;
+
+import com.acepricot.finance.sync.share.sql.FromClause;
+import com.acepricot.finance.sync.share.sql.Insert;
+import com.acepricot.finance.sync.share.sql.Query;
+import com.acepricot.finance.sync.share.sql.QueryExp;
+import com.acepricot.finance.sync.share.sql.QueryPrimary;
+import com.acepricot.finance.sync.share.sql.QuerySpec;
+import com.acepricot.finance.sync.share.sql.QueryTerm;
+import com.acepricot.finance.sync.share.sql.SQLSyntaxImpl;
+import com.acepricot.finance.sync.share.sql.Select;
+import com.acepricot.finance.sync.share.sql.SelectColumn;
+import com.acepricot.finance.sync.share.sql.TableExp;
+import com.acepricot.finance.sync.share.sql.TableName;
+import com.acepricot.finance.sync.share.sql.Update;
+import com.acepricot.finance.sync.share.sql.WhereClause;
 
 public class DBConnector extends Hashtable<String, DataSource> {
 	
@@ -33,6 +47,7 @@ public class DBConnector extends Hashtable<String, DataSource> {
 	private static final int DEFAULT_INT_VALUE = -1;
 	private static final BigDecimal DEFAULT_BIGDECIMAL_VALUE = new BigDecimal(-1);
 	private static final boolean DEBUG = true;
+	private static final String COUNT_FUNCTION = "COUNT";
 	private static boolean prepared = true;
 	
 		
@@ -72,6 +87,19 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		}
 	}
 	
+	final public static int count(Connection con, TableName table, WhereClause where) throws SQLException {
+		Query q = DBConnector.createSelect();
+		q.addFromClause(new FromClause(table));
+		q.addTableSpec(where);
+		q.addSelectColumnFunction(COUNT_FUNCTION);
+		q.setDerived(COUNT_FUNCTION);
+		Rows rows = DBConnector.select(con, q);
+		if(rows == null || rows.size() == 0) {
+			throw new SQLException("Cannot get count of rows because ResultSet is null");
+		}
+		return ((BigDecimal) rows.get(0).get(COUNT_FUNCTION)).intValue();
+	}
+	/*
 	final public static int count(Connection con, String table, Object[] where) throws SQLException {
 		HashMap<String, Object> row = getFirstRowOf (con, table, (char) 0, new String[]{"COUNT(*)"}, where);
 		if(row == null) {
@@ -79,9 +107,9 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		}
 		return ((BigDecimal) row.get(row.keySet().iterator().next())).intValue();
 	}
-
-	public static Row getFirstRowOf(Connection con, String table, char env, String[] cols, Object[] where) throws SQLException {
-		Rows rows = select(con, table, cols, env, where);
+*/
+	public static Row getFirstRowOf(Connection con, Query select) throws SQLException {
+		Rows rows = select(con, select);
 		if(rows.size() == 0) {
 			return null;
 		}
@@ -139,10 +167,25 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		return status;
 	}
 	
-	static int update(Connection con, String table, String[] cols, String[] values, Object[] where) throws SQLException {
-		return DBConnector.update(con, table, cols, values, where, true);
+	static int update(Connection con, Update update) throws SQLException {
+		return DBConnector.update(con, update, true);
 	}
 	
+	static int update(Connection con, Update update, boolean commit) throws SQLException {
+		String sql = update.toSQLString();
+		if(DEBUG) System.out.println(sql);
+		PreparedStatement ps = con.prepareStatement(sql);
+		if(SQLSyntaxImpl.isPrepared()) {
+			update.getPreparedBuffer().setAll(ps);
+		}
+		int status = ps.executeUpdate();
+		if(commit) {
+			con.commit();
+		}
+		ps.close();
+		return status;
+	}
+	/*
 	static int update(Connection con, String table, String[] cols, String[] values, Object[] where, boolean commit) throws SQLException {
 		StringBuffer sb = new StringBuffer("UPDATE ");
 		envelope(sb, null, table, '"');
@@ -160,10 +203,27 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		}
 		return status;
 	}
-	
-	static int insert (Connection con, String table, String[] cols, String[] values) throws SQLException {
-		return DBConnector.insert(con, table, cols, values, true);
+	*/
+	static int insert (Connection con, Insert insert) throws SQLException {
+		return DBConnector.insert(con, insert, true);
 	}
+	
+	static int insert (Connection con, Insert insert, boolean commit) throws SQLException {
+		String sql = insert.toSQLString();
+		if(DEBUG) System.out.println(sql);
+		PreparedStatement ps = con.prepareStatement(sql);
+		if(SQLSyntaxImpl.isPrepared()) {
+			insert.getPreparedBuffer().setAll(ps);
+		}
+		int status = ps.executeUpdate();
+		if(commit) {
+			con.commit();
+		}
+		ps.close();
+		return status;
+	}
+	
+	/*
 	
 	static int insert (Connection con, String table, String[] cols, String[] values, boolean commit) throws SQLException {
 		StringBuffer sb = new StringBuffer("INSERT INTO ");
@@ -185,7 +245,7 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		ps.close();
 		return status;
 	}
-	
+	*/
 	static int delete(Connection con, String table, Object[] where, char env) throws SQLException {
 		return delete(con, table, where, env, true);
 	}
@@ -206,7 +266,30 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		return status;
 	}
 	
+	public static Query createSelect() throws SQLException {
+		return new Query(new Select(new QueryExp(new QueryTerm(new QueryPrimary(new QuerySpec(new SelectColumn(), new TableExp()))))));
+	}
 	
+	public static Rows select(Connection con, Query select) throws SQLException {
+		String sql = select.toSQLString();
+		if(DEBUG) System.out.println(sql);
+		PreparedStatement ps = con.prepareStatement(sql);
+		if(SQLSyntaxImpl.isPrepared()) {
+			select.getPreparedBuffer().setAll(ps);
+		}
+		ResultSet rs = ps.executeQuery();
+		Rows rows = new Rows();
+		Row row;
+		while((row = nextRow(rs)) != null) {
+			rows.add(row);
+		};
+		ps.close();
+		rs.close();
+		select.getPreparedBuffer().close();
+		return rows;
+
+	}
+	/*
 	static Rows select(Connection con, String table, String[] cols, char env, Object[] where) throws SQLException {
 		StringBuffer sb = new StringBuffer("SELECT ");
 		if(cols == null) {
@@ -235,7 +318,7 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		rs.close();
 		return rows;
 	}
-
+	*/
 	private static void setPrepared(PreparedStatement ps, Object[] where, int index) throws SQLException {
 		for(int i = 1; i < where.length; i ++) {
 			ps.setObject(index, where[i]);
@@ -243,7 +326,7 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		}
 		
 	}
-
+	/*
 	private static int setValues(String[] values, PreparedStatement ps, int index) throws SQLException {
 		for(int i = 0; i < values.length; i ++) {
 			ps.setString(index, values[i]);
@@ -251,7 +334,7 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		}
 		return index;
 	}
-	
+	*/
 	private static void applyWhere(StringBuffer sb, Object[] where, boolean ps) {
 		if(where != null) {
 			sb.append(" WHERE ");
@@ -263,7 +346,7 @@ public class DBConnector extends Hashtable<String, DataSource> {
 			sb.append(where[0]);
 		}
 	}
-
+	/*
 	private static void join(StringBuffer sb, String table, String[] cols, String[] val, char c, boolean ps) {
 		for(int i = 0; i < val.length; i ++) {
 			if(i > 0) {
@@ -290,7 +373,7 @@ public class DBConnector extends Hashtable<String, DataSource> {
 			}
 		}
 	}
-	
+	*/
 	static void envelope(StringBuffer sb, String table, String s, char c) {
 		if(c > 0) {
 			sb.append(c);
@@ -324,6 +407,16 @@ public class DBConnector extends Hashtable<String, DataSource> {
 			return null;
 		}
 		return obj.toString();
+	}
+
+	public static Insert createInsert(TableName tableName, Object values, String ...strings) throws SQLException {
+		return new Insert(tableName, values, strings);
+	}
+
+	public static Update createUpdate(TableName tableName, String[] cols, Object[] values, WhereClause whereClause) throws SQLException {
+		Update update = new Update(tableName, values, cols);
+		update.setWhereClause(whereClause);
+		return update;
 	}
 
 }

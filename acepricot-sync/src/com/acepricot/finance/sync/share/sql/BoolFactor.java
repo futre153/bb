@@ -21,6 +21,6 @@ public class BoolFactor extends SQLSyntaxImpl {
 		if(predicate == null && searchCon == null) {
 			throw new SQLException("predicate and search conditions cannot be null both in context of boolean factor");
 		}
-		return (not ? "NOT " : EMPTY) + (predicate != null ? predicate.toSQLString() : "(" + searchCon.toSQLString()) + ")";
+		return (not ? "NOT " : EMPTY) + (predicate != null ? predicate.toSQLString() : ("(" + searchCon.toSQLString()) + ")");
 	}
 }

@@ -8,61 +8,119 @@ public class SelectColumn extends SQLSyntaxImpl {
 	private SQLSyntaxImpl[] ids;
 	private Identifier[] cols;
 	private Identifier[] derivedAs;
+	private Identifier derived;
+	private String function;
+	
+	public SelectColumn() throws SQLException {
+		this(null);
+	}
 	
 	public SelectColumn(SQLSyntaxImpl id, String ... cols) throws SQLException {
+		setId(id);
+		setColumns(cols);
+	}
+	
+	void setFunction(String function) {
+		this.function = function;
+	}
+	
+	void setDerived(String der) throws SQLException {
+		this.derived = new Identifier(der);
+	}
+	
+	void setId(SQLSyntaxImpl id) {
 		if(id != null) {
 			this.id = id;
 		}
-		if(cols.length > 0) {
-			this.cols = new Identifier[cols.length];
-			for (int i = 0; i < cols.length; i ++) {
-				this.cols[i] = new Identifier(cols[i]);
-			}
-		}
 	}
 	
-	public void setIdentifiers(SQLSyntaxImpl ... ids) throws SQLException {
+	int setColumns(String ...cols) throws SQLException {
+		int index = 0;
+		if(cols.length > 0) {
+			Identifier[] c;
+			if(this.cols == null) {
+				c = new Identifier[cols.length];
+			}
+			else {
+				c = new Identifier[cols.length + this.cols.length];
+				index = cols.length;
+			}
+			for (int i = index; i < c.length; i ++) {
+				c[i] = new Identifier(cols[i]);
+			}
+			this.cols = c;
+		}
+		return index;
+	}
+	
+	void setIdentifier(int index, SQLSyntaxImpl ... ids) throws SQLException {
 		if(cols == null) {
 			throw new SQLException ("Cannot set the identifiers when the columns expresions is null");
 		}
-		this.ids = new SQLSyntaxImpl [cols.length];
-		for(int i = 0; i < cols.length; i ++) {
-			if(i <= ids.length) {
-				this.ids[i] = ids[i];
-			}
-			else {
-				this.ids[i] = null;
-			}
+		SQLSyntaxImpl[] s = new SQLSyntaxImpl [cols.length];
+		if(this.ids != null) {
+			System.arraycopy(this.ids, 0, s, 0, this.ids.length <= s.length ? this.ids.length: s.length);
 		}
+		int j = 0;
+		for(int i = index; i < cols.length; i ++) {
+			if(j >= ids.length) {
+				break;
+			}
+			s[i] = ids[j];
+			j ++;
+		}
+		this.ids = s;
 	}
 	
-	public void setDerived(String ... ders) throws SQLException {
+	
+	void setDerived(int index, String ... ders) throws SQLException {
 		if(cols == null) {
 			throw new SQLException ("Cannot set the derived columns when the columns expresions is null");
 		}
-		derivedAs = new Identifier[cols.length];
-		for(int i = 0; i < cols.length; i ++) {
-			if(i <= ders.length && ders[i] != null) {
-				derivedAs[i] = new Identifier(ders[i]);
-				continue;
-			}
-			derivedAs[i] = null;
+		Identifier[] s = new Identifier [cols.length];
+		if(this.derivedAs != null) {
+			System.arraycopy(this.derivedAs, 0, s, 0, this.derivedAs.length <= s.length ? this.derivedAs.length: s.length);
 		}
+		derivedAs = new Identifier[cols.length];
+		int j = 0;
+		for(int i = 0; i < cols.length; i ++) {
+			if(j >= ders.length) {
+				break;
+			}
+			s[i] = new Identifier(ders[j]);
+			j ++;
+		}
+		this.derivedAs = s;
 	}
 
 	@Override
 	public String toSQLString() throws SQLException {
+		StringBuffer sb = new StringBuffer();
 		if(cols == null) {
-			return id == null ? "*" : id.toSQLString() + ".*";
+			sb.append(function == null ? EMPTY : (function + "("));
+			sb.append(id == null ? "*" : id.toSQLString() + ".*");
+			sb.append(function == null ? EMPTY : (")"));
+			sb.append(derived == null ? EMPTY : (" AS " + derived.toSQLString()));
 		}
 		else {
-			StringBuffer sb = new StringBuffer();
 			for(int i = 0; i < cols.length; i++) {
-				sb.append(i > 0 ? "," : EMPTY);
-				sb.append(ids == null && ids[i] == null ? cols[i].toSQLString() : ids[i].toSQLString() + "." + cols[i].toSQLString());
-				sb.append(derivedAs == null && derivedAs[i] == null ? EMPTY : " AS " + derivedAs[i].toSQLString());
+				sb.append(i > 0 ? ", " : EMPTY);
+				sb.append(function == null ? EMPTY : (function + "("));
+				sb.append(ids == null || ids[i] == null ? cols[i].toSQLString() : ids[i].toSQLString() + "." + cols[i].toSQLString());
+				sb.append(function == null ? EMPTY : (")"));
+				sb.append(derivedAs == null || derivedAs[i] == null ? EMPTY : " AS " + derivedAs[i].toSQLString());
 			}
-			return sb.toString();
 		}
+		return sb.toString();
+	}
+
+	void setColumns(ColumnSpec ...specs) throws SQLException {
+		String[] d = new String[specs.length];
+		SQLSyntaxImpl[] s = new SQLSyntaxImpl[specs.length];
+		for(int i = 0; i < specs.length; i ++) {
+			d[i] = specs[i].identifier.getValue();
+			s[i] = specs[i].sQLSyntaxImpl;
+		}
+		this.setIdentifier(this.setColumns(d), s);
 	}
 }

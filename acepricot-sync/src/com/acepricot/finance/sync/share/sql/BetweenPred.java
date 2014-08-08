@@ -17,7 +17,7 @@ public class BetweenPred extends Predicate {
 		if(objs.length != 3) {
 			throw new SQLException ("Predicate between requires three expressions");
 		}
-		return SQLSyntaxImpl.toSQLString(objs[0]) + (not ? " NOT " : " ") + SQLSyntaxImpl.toSQLString(objs[1]) + "AND " + SQLSyntaxImpl.toSQLString(objs[2]);
+		return SQLSyntaxImpl.toSQLString(psb, objs[0]) + (not ? " NOT " : " ") + "BETWEEN "+ SQLSyntaxImpl.toSQLString(psb, objs[1]) + " AND " + SQLSyntaxImpl.toSQLString(psb, objs[2]);
 	}
 	
 }

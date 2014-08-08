@@ -16,6 +16,6 @@ public class RownoPred extends Predicate {
 	}
 	
 	public String toSQLString() throws SQLException {
-		return "ROWNO <" + (equ ? "=" : EMPTY) + Predicate.toSQLString(objs[0]) ;
+		return "ROWNO <" + (equ ? "=" : EMPTY) + Predicate.toSQLString(psb, objs[0]) ;
 	}
 }

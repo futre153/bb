@@ -5,8 +5,9 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.math.BigDecimal;
 import java.security.MessageDigest;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
@@ -16,31 +17,19 @@ import javax.xml.bind.DatatypeConverter;
 import org.pabk.net.http.DefaultContent;
 import org.pabk.net.http.HttpClientConst;
 import org.pabk.net.http.SimpleClient;
-import org.pabk.util.Base64Coder;
-import org.pabk.util.Huffman;
 
+import com.acepricot.finance.sync.DBConnector;
 import com.acepricot.finance.sync.share.JSONMessage;
-import com.acepricot.finance.sync.share.sql.BoolFactor;
-import com.acepricot.finance.sync.share.sql.BoolTerm;
 import com.acepricot.finance.sync.share.sql.CompPred;
-import com.acepricot.finance.sync.share.sql.FromClause;
 import com.acepricot.finance.sync.share.sql.Identifier;
 import com.acepricot.finance.sync.share.sql.Predicate;
 import com.acepricot.finance.sync.share.sql.Query;
-import com.acepricot.finance.sync.share.sql.QueryExp;
-import com.acepricot.finance.sync.share.sql.QueryPrimary;
-import com.acepricot.finance.sync.share.sql.QuerySpec;
-import com.acepricot.finance.sync.share.sql.QueryTerm;
-import com.acepricot.finance.sync.share.sql.SearchCon;
-import com.acepricot.finance.sync.share.sql.Select;
-import com.acepricot.finance.sync.share.sql.SelectColumn;
-import com.acepricot.finance.sync.share.sql.TableExp;
 import com.acepricot.finance.sync.share.sql.WhereClause;
 import com.google.gson.Gson;
 
 public class Test {
 	
-	public static String url = "http://localhost:9000/acepricot-sync/";
+	public static String url = "http://localhost:8080/acepricot-sync/";
 	public static File f = new File("C:\\Users\\brandys\\Desktop\\database.h2.db");
 	public static void main(final String[] a) throws Exception {
 		//System.out.println(Base64Coder.encodeString(Huffman.encode(pass, null)));
@@ -77,31 +66,49 @@ public class Test {
 		
 		fin1.close();
 		fin2.close();*/
+		/*
+		Class.forName("com.sap.dbtech.jdbc.DriverSapDB");
+		Connection con = DriverManager.getConnection("jdbc:sapdb://p3600x006/aceserve", "ACESVRADM", "nahradnik06");
 		
+		CompPred com1 = new CompPred(
+				new Object[]{new Identifier("GROUP_NAME")},
+				new Object[]{"MyGroup"},
+				Predicate.EQUAL);
+		int count = DBConnector.count(con, "REGISTERED_GROUPS", new WhereClause(com1));
+		System.out.println(count);
+		//com1.getPreparedBuffer().close();
+		Query select = DBConnector.createSelect();
+		select.addFromClause(new Identifier("REGISTERED_GROUPS"));
+		select.addColumns("ID", "PASSWORD", "ENABLED");
+		select.addTableSpec(new WhereClause(com1));
+		System.out.println(DBConnector.select(con, select));
+		
+		con.close();
+		*/
+		/*
+		SQLSyntaxImpl.setPrepared(false);
 		
 		CompPred p = new CompPred(new Object[]{new Identifier("GROUP_NAME")}, new String[]{"MyGroup"}, Predicate.EQUAL);
+		LikePred l = new LikePred(true, new Identifier("ID"), 1);
+		BetweenPred b = new BetweenPred(false, new Identifier("ID"), 0, 1000);
 		
-		BoolFactor bfac = new BoolFactor(p);
-		BoolTerm bterm = new BoolTerm(bfac);
-		SearchCon search = new SearchCon(bterm);
-		
-		WhereClause where = new WhereClause(search);
+		WhereClause where = new WhereClause(WhereClause.LEFT_BRACKET, WhereClause.NOT, WhereClause.LEFT_BRACKET, p, WhereClause.AND, l, WhereClause.RIGHT_BRACKET, WhereClause.OR, b, WhereClause.RIGHT_BRACKET);
 				
 		FromClause tableName = new FromClause(new Identifier("REGISTERED_GROUPS"));
 		
-		TableExp texp = new TableExp(where, null, null, tableName);
+		TableExp texp = new TableExp(where, null, null, tableName, new FromClause(new Identifier("Regina")));
 		SelectColumn cols = new SelectColumn(null);
 		QuerySpec qspec = new QuerySpec(texp, cols);
 		
-		QueryPrimary qprim = new QueryPrimary(qspec);
-		QueryTerm qterm = new QueryTerm(qprim);
-		QueryExp qexp = new QueryExp(qterm);
-		Select select = new Select(qexp);
 		
-		Query q = new Query(select);
+		Query q = DBConnector.createSelect();
+		q.addFromClause(new Identifier("REGISTERED_GROUPS"));
+		q.addSelectColumnFunction("COUNT");
+		q.addColumns("ID", "GROUP_NAME");
+		q.addDerived("COUNT_ID");
 		System.out.println(q.toSQLString());
-		
-		System.exit(1);
+		*/
+		//System.exit(1);
 		/*
 		Class.forName("org.h2.Driver");
 		Connection con = DriverManager.getConnection("jdbc:h2:tcp://localhost/~/DATABASE01;AUTO_SERVER=TRUE;LOCK_TIMEOUT=60000;CIPHER=AES", "", "cnuewf092no ptraajtn39ln");
