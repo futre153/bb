@@ -116,6 +116,13 @@ public class DBSchemas {
 		throw new SQLException("Failed to retrieve tableName");
 	}
 	
+	public static String[] getTableNames(Connection con) throws SQLException {
+		if(tables == null) {
+			loadSchemas(con);
+		}
+		return tables;
+	}
+	
 	public static void dropSyncSchema(Connection con) throws SQLException {
 		loadSchemas(con);
 		if(tables != null) {

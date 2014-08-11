@@ -25,10 +25,12 @@ public class Insert extends SQLSyntaxImpl {
 	}
 	
 	final void setValues(Object ...objs) throws SQLException {
-		if(objs.length == 1 && (objs[0] instanceof QueryExp)) {
-			values = objs[0];
+		if(objs.length == 1 && ((objs[0] instanceof QueryExp) || (objs[0] instanceof Object[]))) {
+				values = objs[0];
 		}
-		values = objs;
+		else {
+			values = objs;
+		}
 	}
 	
 	final void setColumns(String ...cols) throws SQLException {
@@ -72,7 +74,7 @@ public class Insert extends SQLSyntaxImpl {
 					throw new SQLException("Columns and values must have equal counts of elements in context of insert statement");
 				}
 			}
-			return "INSERT" + (into ? " INTO" : EMPTY) + tableName.toSQLString() +
+			return "INSERT " + (into ? " INTO " : EMPTY) + tableName.toSQLString() +
 			(cols == null ? EMPTY : " " + Predicate.join(psb, cols, '(', ')')) +
 			" " + (values instanceof QueryExp ? ((QueryExp) values).toSQLString() : ("VALUES " + Predicate.join(psb, (Object[]) values, '(', ')'))) +
 			DUPLICATE_STRINGS[duplicate] +

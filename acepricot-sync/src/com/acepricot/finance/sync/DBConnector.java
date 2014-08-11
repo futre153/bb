@@ -12,7 +12,9 @@ import java.util.Properties;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.apache.tomcat.jdbc.pool.PoolProperties;
 
+import com.acepricot.finance.sync.share.sql.Delete;
 import com.acepricot.finance.sync.share.sql.FromClause;
+import com.acepricot.finance.sync.share.sql.Identifier;
 import com.acepricot.finance.sync.share.sql.Insert;
 import com.acepricot.finance.sync.share.sql.Query;
 import com.acepricot.finance.sync.share.sql.QueryExp;
@@ -48,6 +50,7 @@ public class DBConnector extends Hashtable<String, DataSource> {
 	private static final BigDecimal DEFAULT_BIGDECIMAL_VALUE = new BigDecimal(-1);
 	private static final boolean DEBUG = true;
 	private static final String COUNT_FUNCTION = "COUNT";
+	@SuppressWarnings("unused")
 	private static boolean prepared = true;
 	
 		
@@ -246,10 +249,27 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		return status;
 	}
 	*/
-	static int delete(Connection con, String table, Object[] where, char env) throws SQLException {
-		return delete(con, table, where, env, true);
+	static int delete(Connection con, Delete delete) throws SQLException {
+		return delete(con, delete, true);
 	}
 	
+	static int delete(Connection con, Delete delete, boolean commit) throws SQLException {
+		String sql = delete.toSQLString();
+		if(DEBUG) System.out.println(sql);
+		PreparedStatement ps = con.prepareStatement(sql);
+		if(SQLSyntaxImpl.isPrepared()) {
+			delete.getPreparedBuffer().setAll(ps);
+		}
+		int status = ps.executeUpdate();
+		if(commit) {
+			con.commit();
+		}
+		ps.close();
+		return status;
+	}
+	
+	
+	/*
 	static int delete(Connection con, String table, Object[] where, char env, boolean commit) throws SQLException {
 		StringBuffer sb = new StringBuffer("DELETE FROM ");
 		envelope(sb, null, table, env);
@@ -265,9 +285,11 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		ps.close();
 		return status;
 	}
-	
+	*/
 	public static Query createSelect() throws SQLException {
-		return new Query(new Select(new QueryExp(new QueryTerm(new QueryPrimary(new QuerySpec(new SelectColumn(), new TableExp()))))));
+		Query q = new Query(new Select(new QueryExp(new QueryTerm(new QueryPrimary(new QuerySpec(new SelectColumn(), new TableExp()))))));
+		q.closePSBuffer();
+		return q;
 	}
 	
 	public static Rows select(Connection con, Query select) throws SQLException {
@@ -319,13 +341,14 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		return rows;
 	}
 	*/
+	/*
 	private static void setPrepared(PreparedStatement ps, Object[] where, int index) throws SQLException {
 		for(int i = 1; i < where.length; i ++) {
 			ps.setObject(index, where[i]);
 			index ++;
 		}
 		
-	}
+	}*/
 	/*
 	private static int setValues(String[] values, PreparedStatement ps, int index) throws SQLException {
 		for(int i = 0; i < values.length; i ++) {
@@ -335,6 +358,7 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		return index;
 	}
 	*/
+	/*
 	private static void applyWhere(StringBuffer sb, Object[] where, boolean ps) {
 		if(where != null) {
 			sb.append(" WHERE ");
@@ -345,7 +369,7 @@ public class DBConnector extends Hashtable<String, DataSource> {
 			}
 			sb.append(where[0]);
 		}
-	}
+	}*/
 	/*
 	private static void join(StringBuffer sb, String table, String[] cols, String[] val, char c, boolean ps) {
 		for(int i = 0; i < val.length; i ++) {
@@ -410,13 +434,28 @@ public class DBConnector extends Hashtable<String, DataSource> {
 	}
 
 	public static Insert createInsert(TableName tableName, Object values, String ...strings) throws SQLException {
-		return new Insert(tableName, values, strings);
+		Insert insert = new Insert(tableName, values, strings);
+		insert.closePSBuffer();
+		return insert;
 	}
 
 	public static Update createUpdate(TableName tableName, String[] cols, Object[] values, WhereClause whereClause) throws SQLException {
 		Update update = new Update(tableName, values, cols);
+		update.closePSBuffer();
 		update.setWhereClause(whereClause);
 		return update;
 	}
-
+	
+	public static Delete createDelete(TableName tableName, String referenceName, WhereClause where) throws SQLException {
+		Delete delete;
+		if(referenceName == null) {
+			delete = new Delete(tableName, where);
+		}
+		else {
+			delete = new Delete(tableName, new Identifier(referenceName), where);
+		}
+		delete.closePSBuffer();
+		return delete;
+	}
+	
 }

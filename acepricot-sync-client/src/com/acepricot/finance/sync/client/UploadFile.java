@@ -86,7 +86,7 @@ public class UploadFile extends Thread {
 				setProgress(l == 0 ? 0 : ((double) c)/l);
 			}
 			in.close();
-			JSONMessage msg = new JSONMessage("initUpload", new Object[] {
+			JSONMessage msg = new JSONMessage(JSONMessageProcessorClient.INIT_UPLOAD_HEADER, new Object[] {
 				this.getGroupName(),
 				this.getSecret(),
 				this.getMessageDigest().digest(),

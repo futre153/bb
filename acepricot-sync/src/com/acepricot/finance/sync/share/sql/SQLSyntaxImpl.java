@@ -66,8 +66,8 @@ public abstract class SQLSyntaxImpl implements SQLSyntax {
 	}
 
 	public static String toSQLString(PreparedBuffer psb, Object object) throws SQLException {
-		if (object instanceof SQLSyntax) {
-			return ((SQLSyntax) object).toSQLString();
+		if (object instanceof SQLSyntaxImpl) {
+			return ((SQLSyntaxImpl) object).toSQLString();
 		}
 		if(SQLSyntaxImpl.isPrepared()) {
 			psb.append(object);

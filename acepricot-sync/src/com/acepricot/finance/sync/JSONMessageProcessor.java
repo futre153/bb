@@ -203,8 +203,6 @@ final class JSONMessageProcessor {
 	private static final JSONMessage initSync(JSONMessageProcessor mp, Connection con, JSONMessage msg) {
 		int grpId, devId;
 		String grpName, devName, table;
-		Object[] where;
-		Where w = new Where();
 		ArrayList<HashMap<String, Object>> rows;
 		grpName = (String) msg.getBody()[0];
 		devName = (String) msg.getBody()[2];
@@ -216,7 +214,7 @@ final class JSONMessageProcessor {
 					return msg.sendAppError("Device " + devName + " is allready active in context of group " + grpName);
 				}
 				table = JSONMessageProcessor.UPLOADED_FILES.class.getSimpleName();
-				where = w.set(w.equ(JSONMessageProcessor.UPLOADED_FILES.GROUP_ID, grpId));
+				//where = w.set(w.equ(JSONMessageProcessor.UPLOADED_FILES.GROUP_ID, grpId));
 				Object com1 = new CompPred(new Object[]{new Identifier(JSONMessageProcessor.UPLOADED_FILES.GROUP_ID)}, new Object[]{grpId}, Predicate.EQUAL);
 				msg = retrieveRows2(mp, msg, con, mp.uploaded_files, new WhereClause(com1), true);
 				if(msg.isError()) {
@@ -273,14 +271,15 @@ final class JSONMessageProcessor {
 	private static final JSONMessage download(JSONMessageProcessor mp, Connection con, JSONMessage msg) {
 		Where w = new Where();
 		//String table = JSONMessageProcessor.DOWNLOADED_FILES.class.getSimpleName();
-		TableName tableName;
+		TableName tableName = null;
 		String col = JSONMessageProcessor.UNIVERSAL_ID;
 		String col2 = JSONMessageProcessor.DOWNLOADED_FILES.URI;
 		int fileId = Integer.parseInt((String) msg.getBody()[0], 2);
 		int uri = Integer.parseInt((String) msg.getBody()[1], 2);
-		Object[] where = w.set(w.and(w.equ(col, fileId), w.equ(col2, uri)));
+		//Object[] where = w.set(w.and(w.equ(col, fileId), w.equ(col2, uri)));
 		boolean last = false;
 		try {
+			tableName = new TableName(new Identifier(JSONMessageProcessor.DOWNLOADED_FILES.class.getSimpleName()));
 			Object com1 = new CompPred(new Object[]{new Identifier(col), new Identifier(col2)}, new Object[]{fileId, uri}, Predicate.EQUAL);
 			msg = retrieveRows2(mp, msg, con, mp.downloaded_files, new WhereClause(com1), true);
 			if(msg.isError()) {
@@ -330,21 +329,29 @@ final class JSONMessageProcessor {
 				return msg;
 		}
 		catch(IOException | SQLException e) {
-			disable(con, tableName, fileId);
-			delete(con, tableName, fileId);
-			if(last) {
-				return msg;
+			Exception e1 = e;
+			try {
+				tableName = new TableName(new Identifier(JSONMessageProcessor.DOWNLOADED_FILES.class.getSimpleName()));
+				disable(con, tableName, fileId);
+				delete(con, tableName, fileId);
+				if(last) {
+					return msg;
+				}
 			}
-			return msg.sendAppError(e);
+			catch (SQLException e2) {
+				e1 = e2;
+			}
+			return msg.sendAppError(e1);
 		}
 	}
 	
-	private static boolean delete (Connection con, String table, int id) {
-		Where w = new Where();
-		Object[] where = w.set(w.equ(UNIVERSAL_ID, id));
+	private static boolean delete (Connection con, TableName tableName, int id) {
 		try {
-			return DBConnector.delete(con, table, where, (char) 0) == 1;
-		} catch (SQLException e) {}
+			Object com1 = new CompPred(new Object[]{new Identifier(UNIVERSAL_ID)}, new Object[]{id}, Predicate.EQUAL);
+			return DBConnector.delete(con, DBConnector.createDelete(tableName, null, new WhereClause(com1))) == 1;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		return false;
 	}
 	
@@ -371,7 +378,7 @@ final class JSONMessageProcessor {
 		TableName tableName = new TableName(new Identifier(JSONMessageProcessor.DOWNLOADED_FILES.class.getSimpleName()));
 		String col = JSONMessageProcessor.DOWNLOADED_FILES.TMP_FILE;
 		String col2 = JSONMessageProcessor.DOWNLOADED_FILES.URI;
-		String[] values = {Integer.toString(uri), dstPath};
+		Object[] values = {Integer.toString(uri), dstPath};
 		DBConnector.insert(con, DBConnector.createInsert(tableName, values, col2, col));
 		int[] indexes = {AppError.DOWNLOAD_NOT_FOUND, AppError.DOWNLOAD_MULTIPLE, AppError.DOWNLOAD_NOT_ENABLED};
 		CompPred com1 = new CompPred(new Object[]{new Identifier(col), new Identifier(col2)}, new Object[]{dstPath, uri}, Predicate.EQUAL);		
@@ -415,13 +422,12 @@ final class JSONMessageProcessor {
 	
 	
 	private static JSONMessage createAction(JSONMessageProcessor mp, Connection con, JSONMessage msg) throws SQLException, IOException {		
-		String table = JSONMessageProcessor.UPLOADED_FILES.class.getSimpleName();
+		TableName tableName = new TableName(new Identifier(JSONMessageProcessor.UPLOADED_FILES.class.getSimpleName()));
 		String[] cols = {JSONMessageProcessor.UPLOADED_FILES.STATUS};
-		String[] values = {Integer.toString(mp.uploaded_files.status.intValue() + 1)};
-		Where w = new Where();
-		Object[] where = w.set(w.equ(JSONMessageProcessor.UPLOADED_FILES.GROUP_ID, mp.uploaded_files.group_id));
+		Object[] values = {Integer.toString(mp.uploaded_files.status.intValue() + 1)};
+		Object com1 = new CompPred(new Object[]{new Identifier(JSONMessageProcessor.UPLOADED_FILES.GROUP_ID)}, new Object[]{mp.uploaded_files.group_id}, Predicate.EQUAL);
 		try {
-			DBConnector.update(con, table, cols, values, where, false);
+			DBConnector.update(con, DBConnector.createUpdate(tableName, cols, values, new WhereClause(com1)), false);
 			String methodName = ACTION_METHOD_NAME + mp.uploaded_files.status.intValue();
 			Method method = JSONMessageProcessor.class.getDeclaredMethod(methodName, mp.getClass(), Connection.class, msg.getClass());
 			msg = (JSONMessage) method.invoke(null, mp, con, msg);
@@ -479,12 +485,14 @@ final class JSONMessageProcessor {
 	@SuppressWarnings("unused")
 	private static JSONMessage action2 (JSONMessageProcessor mp, Connection con, JSONMessage msg) throws IOException, SQLException {
 		String dbFilename = String.format(DB_PATH, System.getProperty("file.separator"), Integer.toBinaryString(mp.uploaded_files.group_id), DB_EXTENSION);
-		String table = JSONMessageProcessor.UPLOADED_FILES.class.getSimpleName();
+		TableName tableName = new TableName(new Identifier(JSONMessageProcessor.UPLOADED_FILES.class.getSimpleName()));
 		String[] cols = {JSONMessageProcessor.UPLOADED_FILES.TMP_FILE};
-		String[] values = {dbFilename};
+		Object[] values = {dbFilename};
 		Where w = new Where();
 		Object[] where = w.set(w.equ(JSONMessageProcessor.UPLOADED_FILES.GROUP_ID, mp.uploaded_files.group_id));
-		DBConnector.update(con, table, cols, values, where, false);
+		Object com1 = new CompPred(new Object[]{new Identifier(JSONMessageProcessor.UPLOADED_FILES.GROUP_ID)}, new Object[]{mp.uploaded_files.group_id}, Predicate.EQUAL);
+		//DBConnector.update(con, table, cols, values, where, false);
+		DBConnector.update(con, DBConnector.createUpdate(tableName, cols, values, new WhereClause(com1)), false);
 		File dbFile = new File(dbFilename);
 		if(dbFile.exists()) {
 			if(!dbFile.delete()) {

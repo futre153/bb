@@ -11,12 +11,14 @@ import java.sql.DriverManager;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.Properties;
 
 import javax.xml.bind.DatatypeConverter;
 
 import org.pabk.net.http.DefaultContent;
 import org.pabk.net.http.HttpClientConst;
 import org.pabk.net.http.SimpleClient;
+import org.pabk.util.Huffman;
 
 import com.acepricot.finance.sync.DBConnector;
 import com.acepricot.finance.sync.share.JSONMessage;
@@ -32,6 +34,9 @@ public class Test {
 	public static String url = "http://localhost:8080/acepricot-sync/";
 	public static File f = new File("C:\\Users\\brandys\\Desktop\\database.h2.db");
 	public static void main(final String[] a) throws Exception {
+		//System.out.println(Huffman.encode("cnuewf092no ptraajtn39ln", null));
+		JSONMessageProcessorClient.syncStart(null);
+		System.exit(0);
 		//System.out.println(Base64Coder.encodeString(Huffman.encode(pass, null)));
 		//System.out.println("D:\\TEMP\\clientdb\\11110.h2.db".replaceAll("\\\\", "/").replaceAll("\\.h2\\.db", ""));
 		//byte[] bt = DatatypeConverter.parseHexBinary("22f659366bab54ff041fb6c544d9aa9a798aaeee59b55a7c9bde792c15f400".toUpperCase());
@@ -232,7 +237,7 @@ public class Test {
 			msg = new JSONMessage("error", new Object[]{"NULL"});
 		}
 		System.out.println(msg.getHeader());
-		if(!msg.isError()) {
+		if(msg.isError()) {
 			System.out.println(Arrays.toString(msg.getBody()));
 		}
 		System.out.println(msg.getBody()[0]);
@@ -242,6 +247,18 @@ public class Test {
 			System.out.println(new String(chr, 0, i));
 		}
 		return msg;
+	}
+
+	public static Properties getSyncProperties() {
+		Properties pro = new Properties();
+		pro.put(JSONMessageProcessorClient.GRP_NAME_KEY, "MyGroup1");
+		pro.put(JSONMessageProcessorClient.GRP_PSWD_KEY, "MyGroup1");
+		pro.put(JSONMessageProcessorClient.GRP_PSCH_KEY, "UTF-8");
+		pro.put(JSONMessageProcessorClient.GRP_JOIN_KEY, false);
+		pro.put(JSONMessageProcessorClient.DEV_NAME_KEY, "MyDevice1-1");
+		pro.put(JSONMessageProcessorClient.GRP_EMAI_KEY, "futre@szm.sk");
+		pro.put(JSONMessageProcessorClient.DEV_PRIM_KEY, false);
+		return pro;
 	}
 	
 }

@@ -9,7 +9,7 @@ public class RownoPred extends Predicate {
 		if(objs.length != 1) {
 			throw new SQLException("Roqno predicate must have only one xpression");
 		}
-		if(!(objs[0] instanceof UnsInt || objs[0] instanceof ParamSpec)) {
+		if(!(objs[0] instanceof UnsInt || objs[0] instanceof ParamSpec || objs[0] instanceof Integer)) {
 			throw new SQLException ("Rowno predicate accept only unsigned integer or parameter");
 		}
 		this.equ = equ;

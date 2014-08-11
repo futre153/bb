@@ -32,7 +32,12 @@ public class Update extends SQLSyntaxImpl {
 	}
 		
 	final void setValues(Object ...objs) throws SQLException {
-		values = objs;
+		if(objs.length == 1 && objs[0] instanceof Object[]) {
+			values = objs[0];
+		}
+		else {
+			values = objs;
+		}
 	}
 	
 	final void setColumns(String ...cols) throws SQLException {
@@ -113,11 +118,11 @@ public class Update extends SQLSyntaxImpl {
 			if(((Object[]) values).length != cols.length) {
 				throw new SQLException("Columns and values must have equal counts of elements in context of update statement");
 			}
-			return "UPDATE" + (of ? " OF " : EMPTY) + tableName.toSQLString() +
+			return "UPDATE " + (of ? " OF " : EMPTY) + tableName.toSQLString() +
 			(reference == null ? EMPTY : reference.toSQLString()) +
 			" SET "	+ Update.joinSet(psb, cols, (Object[]) values) +
 			(whereCurrent == null ? EMPTY : (" WHERE CURRENT OF " + whereCurrent.toSQLString())) +
-			(whereClause == null ? EMPTY : (whereCurrent == null ? (" WHERE " + whereClause.toSQLString()) : EMPTY)) +
+			(whereClause == null ? EMPTY : (whereCurrent == null ? (" " + whereClause.toSQLString()) : EMPTY)) +
 			(ignoreTrigger ? (whereCurrent == null ? " IGNORE TRIGGER" : EMPTY) : EMPTY) + (nowait ? " NOWAIT" : EMPTY);
 		}
 		catch(Exception e) {

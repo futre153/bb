@@ -91,7 +91,7 @@ public class Huffman {
 		return c;
 	}
 	
-	static final String decode (String s, String c, String table) throws Exception {
+	public static final String decode (String s, String c, String table) throws Exception {
 		byte[] dec = Huffman.decode(Base64Coder.decode(s), table); 
 		return new String(dec, c);
 	}
@@ -104,7 +104,7 @@ public class Huffman {
 		byte[] enc = Huffman.encode(s.getBytes(Charset.defaultCharset()), table);
 		return new String(Base64Coder.encode(enc));
 	}
-	static final String encode(String s, String c, String table) throws Exception {
+	public static final String encode(String s, String c, String table) throws Exception {
 		byte[] enc = Huffman.encode(s.getBytes(c), table);
 		return Base64Coder.encodeString(new String(enc, c));
 	}
