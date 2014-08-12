@@ -1,5 +1,6 @@
 package com.acepricot.finance.sync.share;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class JSONMessage {
@@ -106,5 +107,52 @@ public class JSONMessage {
 	
 	public boolean isGetError() {
 		return this.getHeader().equals(AppConst.JSON_GET_ERROR_MSG);
+	}
+	
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
+		String nl = System.getProperty("line.separator");
+		sb.append("Header:");
+		sb.append(nl);
+		sb.append('\t');
+		sb.append(this.getHeader());
+		sb.append(nl);
+		sb.append("Body:");
+		Object[] body = this.getBody();
+		for(int i = 0; i < body.length; i ++) {
+			Object obj = body[i];
+			if(obj instanceof String) {
+				String[] a = ((String) obj).split(nl);
+				for(int j = 0; j < a.length; j ++) {
+					sb.append(nl);
+					sb.append('\t');
+					if(j > 0) {
+						sb.append('\t');
+					}
+					sb.append(a[j]);
+				}
+			}
+			else {
+				sb.append(nl);
+				sb.append('\t');
+				if (obj.getClass().isArray()) {
+					int k = Array.getLength(obj);
+					sb.append('[');
+					for(int j = 0; j < k; j ++) {
+						if(j > 0) {
+							sb.append(", ");
+						}
+						sb.append('"');
+						sb.append(Array.get(obj, j));
+						sb.append('"');
+					}
+					sb.append(']');
+				}
+				else {
+					sb.append(obj);
+				}
+			}
+		}
+		return sb.toString();
 	}
 }

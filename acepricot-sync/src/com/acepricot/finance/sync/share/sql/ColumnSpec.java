@@ -7,6 +7,10 @@ public class ColumnSpec extends SQLSyntaxImpl {
 	protected SQLSyntaxImpl sQLSyntaxImpl;
 	protected Identifier identifier;
 	
+	public ColumnSpec(SQLSyntaxImpl ...impls) {
+		super(impls);
+	}
+
 	@Override
 	public String toSQLString() throws SQLException {
 		if(identifier == null) {

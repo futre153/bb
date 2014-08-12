@@ -75,9 +75,10 @@ final class JSONMessageProcessor {
 	private static final int MAX_BYTES = 0x100000;
 
 	
+	private static volatile int syncRequests = 0x00;
+	private static final int MAX_SYNC_REQUESTS = 0x40;
 	
-	
-	public class UPLOADED_FILES extends TableSchema {
+	public final class UPLOADED_FILES extends TableSchema {
 		private static final String GROUP_ID = "GROUP_ID";
 		private static final String STATUS = "STATUS";
 		private static final String DIGEST = "DIGEST";
@@ -102,7 +103,7 @@ final class JSONMessageProcessor {
 		int md_index;
 	}
 	
-	public class DOWNLOADED_FILES extends TableSchema {
+	public final class DOWNLOADED_FILES extends TableSchema {
 		private static final String URI = "URI";
 		private static final String TMP_FILE = "TMP_FILE";
 		public static final String POINTER = "POINTER";
@@ -114,21 +115,27 @@ final class JSONMessageProcessor {
 		Timestamp insert_date;
 	}
 	
-	private static final class REGISTERED_GROUPS {
+	public final class REGISTERED_GROUPS extends TableSchema {
 		//private static final String TABLE_NAME = "REGISTERED_GROUPS";
 		//private static final String ID = UNIVERSAL_ID;
-		private static final String GROUP_NAME = "GROUP_NAME";
+		public static final String GROUP_NAME = "GROUP_NAME";
 		private static final String PASSWORD = "PASSWORD";
 		private static final String EMAIL = "EMAIL";
 		private static final String DB_VERSION = "DB_VERSION";
 		//private static final String ENABLED = UNIVERSAL_ENABLED;
 		//public static final String[] COLS = {ID,GROUP_NANE,PASSWORD,EMAIL,DB_VERSION,ENABLED};
+		int id;
+		String group_name;
+		String password;
+		String email;
+		int db_version;
+		BigDecimal enabled;
 	}
 	
 	private static final class REGISTERED_DEVICES {
 		//private static final String TABLE_NAME = "REGISTERED_GROUPS";
 		private static final String ID = UNIVERSAL_ID;
-		private static final String GROUP_ID = "GROUP_ID";
+		public static final String GROUP_ID = "GROUP_ID";
 		private static final String DEVICE_NAME = "DEVICE_NAME";
 		private static final String PRIMARY_DEVICE = "PRIMARY_DEVICE";
 		private static final String ENABLED = UNIVERSAL_ENABLED;
@@ -142,6 +149,7 @@ final class JSONMessageProcessor {
 	
 	private UPLOADED_FILES uploaded_files = new UPLOADED_FILES();
 	private DOWNLOADED_FILES downloaded_files = new DOWNLOADED_FILES();
+	private REGISTERED_GROUPS registered_groups = new REGISTERED_GROUPS();
 				
 	private JSONMessageProcessor() throws IOException{
 		if(dsn == null) {
@@ -200,10 +208,54 @@ final class JSONMessageProcessor {
 	}
 	
 	@SuppressWarnings("unused")
+	private static final JSONMessage syncRequest (JSONMessageProcessor mp, Connection con, JSONMessage msg) {
+		String grpName, devName;
+		int grpId, devId;
+		grpName = (String) msg.getBody()[0];
+		devName = (String) msg.getBody()[2];
+		Row syncRow;
+		
+		syncRow = new Row();
+		for(int i = 4; i < msg.getBody().length; i ++) {
+			Object obj = msg.getBody()[i];
+			if(!(obj instanceof String)) {
+				return msg.sendAppError("String is expected, " + obj.getClass().getSimpleName() + " was found");
+			}
+			String key = (String) obj;
+			if(i + 1 == msg.getBody().length) {
+				return msg.sendAppError("Unexpected end of JSON syncRequest message was found");
+			}
+			syncRow.put(key, msg.getBody()[i + 1]);
+		}
+				
+		try {
+			JSONMessageProcessor.setSyncRequests(1);
+		} catch (IOException e) {
+			return msg.sendAppError(e);
+		}
+		if(!login (mp, con, msg).isError()) {
+			try {
+				grpId = JSONMessageProcessor.getGroupId(con, grpName);
+				devId = JSONMessageProcessor.getDeviceId(con, grpId, devName);
+				syncRow.put(JSONMessageProcessor.REGISTERED_GROUPS.GROUP_NAME, grpName);
+				syncRow.put(JSONMessageProcessor.REGISTERED_DEVICES.DEVICE_NAME, devName);
+				syncRow.put(JSONMessageProcessor.REGISTERED_DEVICES.GROUP_ID, grpId);
+				syncRow.put(JSONMessageProcessor.UNIVERSAL_ID, devId);
+				syncRow.put(JSONMessageProcessor.class.getName(), mp);
+				msg = SyncEngine.processSyncRequest(syncRow);
+			}
+			catch(SQLException | IOException e) {
+				return msg.sendAppError(e);
+			}
+		}
+		return msg;
+	}
+	
+	@SuppressWarnings("unused")
 	private static final JSONMessage initSync(JSONMessageProcessor mp, Connection con, JSONMessage msg) {
 		int grpId, devId;
 		String grpName, devName, table;
-		ArrayList<HashMap<String, Object>> rows;
+		Rows rows;
 		grpName = (String) msg.getBody()[0];
 		devName = (String) msg.getBody()[2];
 		if(!login(mp, con, msg).isError()) {
@@ -933,5 +985,44 @@ final class JSONMessageProcessor {
 		logger.info("Proccess JSON message type " + msg.getHeader() + ", added outgoing date " + new Date((long) newObjs[newObjs.length - 1]));
 		msg.setBody(newObjs);
 		return msg;
+	}
+
+	private static int getSyncRequests() {
+		return JSONMessageProcessor.syncRequests;
+	}
+
+	private static void setSyncRequests(int add) throws IOException {
+		switch(add > 0 ? 1 : (add < 0 ? -1 : 0)) {
+		case 1:
+			if(JSONMessageProcessor.getSyncRequests() == JSONMessageProcessor.MAX_SYNC_REQUESTS) {
+				throw new IOException("Max sync requests (" + JSONMessageProcessor.MAX_SYNC_REQUESTS + ") reached");
+			}
+			JSONMessageProcessor.syncRequests ++;
+			break;
+		case -1:
+			if(JSONMessageProcessor.getSyncRequests() > 0) {
+				JSONMessageProcessor.syncRequests --;
+			}
+			break;
+		default:
+			throw new IOException("Unknown status of sync requests counter ");
+		}
+		
+			
+	}
+
+	public static Rows retrieveRunnableGroups() {
+		Rows rows = null;
+		try {
+			Query select = DBConnector.createSelect();
+			TableName regGroups = new TableName(new Identifier(JSONMessageProcessor.REGISTERED_GROUPS.class.getSimpleName()));
+			TableName regDevs = new TableName(new Identifier(JSONMessageProcessor.REGISTERED_GROUPS.class.getSimpleName()));
+			TableName uFiles = new TableName(new Identifier(JSONMessageProcessor.UPLOADED_FILES.class.getSimpleName()));
+			
+		} catch (SQLException e) {
+			rows = null;
+			e.printStackTrace();
+		}
+		return null;
 	}
 }

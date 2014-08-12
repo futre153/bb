@@ -1,8 +1,8 @@
 package com.acepricot.finance.sync.share.sql;
 
 public class UnsInt extends SQLSyntaxImpl {
-	private FixedPointLiteral fixedPointLiteral;
-	private FloatingPointLiteral floatingPointLiteral;
+	protected FixedPointLiteral fixedPointLiteral;
+	protected FloatingPointLiteral floatingPointLiteral;
 	
 	
 	public UnsInt(SQLSyntaxImpl ...impls) {

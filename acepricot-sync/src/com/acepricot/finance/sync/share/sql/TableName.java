@@ -5,7 +5,7 @@ import java.sql.SQLException;
 public class TableName extends SQLSyntaxImpl {
 	protected SchemaName schemaName;
 	protected Identifier identifier;
-	
+		
 	public TableName(SQLSyntaxImpl ...impls) {
 		super(impls);
 	}

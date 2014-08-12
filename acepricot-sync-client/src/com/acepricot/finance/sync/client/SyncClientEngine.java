@@ -39,17 +39,27 @@ public class SyncClientEngine extends Thread {
 		Sleeper s = new Sleeper();
 		long interval = Long.parseLong(props.getProperty(INTERVAL_KEY, INTERVAL_DEF));
 		int counter = Integer.parseInt(props.getProperty(ACTION_COUNTER_KEY, ACTION_COUNTER_DEF));
+		JSONMessage inMsg = null;
+		JSONMessage outMsg = null;
 		while(!isShutdown()) {
 			try {
-				JSONMessage msg = JSONMessageProcessorClient.process(Heartbeat.getInstance(), url, null);
-				if(!msg.isError()) {
-					msg = /*JSONMessageProcessorClient.process(*/SyncRequest.getInstance(props)/*, url, null)*/;
+				inMsg = JSONMessageProcessorClient.process(Heartbeat.getInstance(), url, null);
+				if(!inMsg.isError()) {
+					inMsg = SyncRequest.getInstance(props);
+					if (inMsg != null) {
+						outMsg = JSONMessageProcessorClient.process(inMsg, url, null);
+					}
 				}
 			} catch (Exception e) {
+				// spracuj vynimku;
 				e.printStackTrace();
 			}
 			finally {
 				// TODO spracuj JSONMessage
+				System.out.println("INPUT MSG -----------------------------------------------------------");
+				System.out.println(inMsg);
+				System.out.println("OUTPUT MSG -----------------------------------------------------------");
+				System.out.println(outMsg);
 			}
 			for(int i = 0; (i < counter && (!isShutdown())); i ++) {
 				s.sleep(interval);

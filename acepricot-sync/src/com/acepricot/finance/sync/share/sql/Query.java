@@ -93,7 +93,31 @@ public class Query extends SQLSyntaxImpl {
 			this.select.queryExp.queryTerm.queryPrimary.querySpec.selectColumn.setDerived(string);
 		}
 	}
-
+	
+	public void addQuerySpec(SQLSyntaxImpl ...impls) {
+		if(this.decCursor != null) {
+			this.decCursor.select.queryExp.queryTerm.queryPrimary.querySpec.addFields(impls);
+		}
+		if(this.recDecCursor != null) {
+			this.recDecCursor.finSelect.queryExp.queryTerm.queryPrimary.querySpec.addFields(impls);
+		}
+		if(this.select != null) {
+			this.select.queryExp.queryTerm.queryPrimary.querySpec.addFields(impls);
+		}	
+	}
+	
+	public void addSelectSpec(SQLSyntaxImpl ...impls) {
+		if(this.decCursor != null) {
+			this.decCursor.select.addFields(impls);
+		}
+		if(this.recDecCursor != null) {
+			this.recDecCursor.finSelect.addFields(impls);
+		}
+		if(this.select != null) {
+			this.select.addFields(impls);
+		}	
+	}
+	
 	public void addTableSpec(SQLSyntaxImpl ...impls) {
 		if(this.decCursor != null) {
 			this.decCursor.select.queryExp.queryTerm.queryPrimary.querySpec.tableExp.addFields(impls);

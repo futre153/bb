@@ -9,7 +9,6 @@ public class OrderClause extends SQLSyntaxImpl {
 	public OrderClause (SortSpec ... specs) {
 		this.sortSpec = specs;
 	}
-	
 	@Override
 	public String toSQLString() throws SQLException {
 		if(sortSpec != null && sortSpec.length > 0) {
@@ -20,7 +19,7 @@ public class OrderClause extends SQLSyntaxImpl {
 					}
 				}
 			}
-			return "SORT BY " + Predicate.join(psb, sortSpec);
+			return "ORDER BY " + Predicate.join(psb, sortSpec);
 		}
 		else {
 			return EMPTY;

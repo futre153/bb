@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.zip.GZIPInputStream;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
@@ -23,12 +24,23 @@ import com.google.gson.JsonSyntaxException;
 public class AceJSONInOutRcvr extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private static final Gson GSON = new Gson();
+	private static boolean initialized = false;
     /**
      * @see HttpServlet#HttpServlet()
      */
     public AceJSONInOutRcvr() {
         super();
         // TODO Auto-generated constructor stub
+    }
+    
+    
+    public void init(ServletConfig config) throws ServletException {
+    	try {
+			SyncEngine.startEngine();
+		} catch (IOException e) {
+			//TODO spracuj chybu startu enginu
+		}
+    	initialized = true;
     }
     
 	/**
@@ -52,6 +64,9 @@ public class AceJSONInOutRcvr extends HttpServlet {
 	private static final void doAction(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		res.setContentType(req.getContentType());
 		try {
+			if(!AceJSONInOutRcvr.isInitialized()) {
+				throw new IOException("Server is not initialized, please contact support");
+			}
 			doCheck(req, res);
 			if(req.getMethod().equals(AppConst.GET_METHOD)) {
 				doAction(req, res, doGetJSON(req));
@@ -71,6 +86,11 @@ public class AceJSONInOutRcvr extends HttpServlet {
 		}
 	}
 	
+	private static boolean isInitialized() {
+		return initialized ;
+	}
+
+
 	private static final void doCheck(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		boolean jsonct = req.getContentType().contains(HttpConst.JSON_CT);
 		boolean h2dbct = req.getContentType().contains(HttpConst.H2DB_CT);

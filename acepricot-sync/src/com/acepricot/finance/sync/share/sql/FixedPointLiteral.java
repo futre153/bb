@@ -11,7 +11,13 @@ public class FixedPointLiteral extends SQLSyntaxImpl {
 
 	@Override
 	public String toSQLString() {
-		return value.toString();
+		if(SQLSyntaxImpl.isPrepared()) {
+			getPreparedBuffer().append(value);
+			return "?";
+		}
+		else {
+			return value.toString();
+		}
 	}
 	
 }

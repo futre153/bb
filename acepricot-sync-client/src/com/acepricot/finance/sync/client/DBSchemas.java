@@ -14,8 +14,8 @@ public class DBSchemas {
 	
 	private static final String SYNC_CHANGES = "SYNC_CHANGES";
 	private static final String SYNC_TYPE = "SYNC_TYPE";
-	private static final String SYNC_INSERT = "SYNC_INSERT";
-	private static final String SYNC_SCHEMA = "SYNC_SHEMA";
+	public static final String SYNC_INSERT = "SYNC_INSERT";
+	private static final String SYNC_SCHEMA = "SYNC_SCHEMA";
 	private static final String SYNC_TABLE = "SYNC_TABLE";
 	private static final String[] SYNC_COLS_EXTENSIONS = {
 		SYNC_CHANGES, SYNC_TYPE, SYNC_INSERT, SYNC_SCHEMA, SYNC_TABLE
@@ -34,7 +34,7 @@ public class DBSchemas {
 	private static final String IS_TABLES = "TABLES";
 	private static final String IS_TABLES_TABLE_NAME = "TABLE_NAME";
 	private static final String IS_TABLES_TABLE_SCHEMA = "TABLE_SCHEMA";
-	private static final String USER_SCMEMA = "USER";
+	//private static final String USER_SCMEMA = "USER";
 	private static final String IS_COLUMNS_COLUMN_NAME = "COLUMN_NAME";
 	private static final String IS_COLUMNS = "COLUMNS";
 	private static final String IS_COLUMNS_CHARACTER_MAXIMUM_LENGTH = "CHARACTER_MAXIMUM_LENGTH";
@@ -147,11 +147,10 @@ public class DBSchemas {
 	
 	
 	public static void loadSchemas(Connection con) throws SQLException {
-		// TODO Auto-generated method stub
 		String table = INFORMATION_SCHEMA + "." + IS_TABLES;
 		String[] cols = new String[]{IS_TABLES_TABLE_NAME};
 		Where w = new Where();
-		Object[] where = w.set(w.equ(IS_TABLES_TABLE_SCHEMA, USER_SCMEMA));
+		Object[] where = w.set(w.equ(IS_TABLES_TABLE_SCHEMA, USER_SCHEMA));
 		ArrayList<Hashtable<String, Object>> rows = DBConnectorLt.select(con, table, cols, (char)0, where);
 		tables = new String[rows.size()];
 		columns = new String[rows.size()][];
@@ -166,7 +165,7 @@ public class DBSchemas {
 		cols = new String[]{IS_COLUMNS_COLUMN_NAME, IS_COLUMNS_DATA_TYPE, IS_COLUMNS_CHARACTER_MAXIMUM_LENGTH, IS_COLUMNS_NUMERIC_PRECISION, IS_COLUMNS_NUMERIC_SCALE, IS_COLUMNS_TYPE_NAME, IS_COLUMNS_IS_NULLABLE};
 		for(int i = 0; i < tables.length; i ++) {
 			w.clear();
-			where = w.set(w.and(w.equ(IS_TABLES_TABLE_SCHEMA, USER_SCMEMA), w.equ(IS_TABLES_TABLE_NAME, tables[i])));
+			where = w.set(w.and(w.equ(IS_TABLES_TABLE_SCHEMA, USER_SCHEMA), w.equ(IS_TABLES_TABLE_NAME, tables[i])));
 			rows = DBConnectorLt.select(con, table, cols, (char)0, where);
 			columns[i] = new String[rows.size()];
 			dataTypes[i] = new String[rows.size()];
@@ -232,7 +231,7 @@ public class DBSchemas {
 				IS_CROSS_REFERENCES_FKTABLE_SCHEMA, IS_CROSS_REFERENCES_FKTABLE_NAME, IS_CROSS_REFERENCES_FKCOLUMN_NAME,
 				IS_CROSS_REFERENCES_UPDATE_RULE, IS_CROSS_REFERENCES_DELETE_RULE};
 		w.clear();
-		where = w.set(w.equ(IS_CROSS_REFERENCES_PKTABLE_SCHEMA, USER_SCMEMA));
+		where = w.set(w.equ(IS_CROSS_REFERENCES_PKTABLE_SCHEMA, USER_SCHEMA));
 		rows = DBConnectorLt.select(con, table, cols, (char) 0, where);
 		for(int i = 0; i < rows.size(); i ++) {
 			String consName = SYNC_SCHEMA_NAME + "_CONSTRIANT_" + i;
@@ -295,8 +294,14 @@ public class DBSchemas {
 
 	public static void setTrigger(boolean trigger) {
 		DBSchemas.trigger = trigger;
+	}
+
+	public static String getSchemaName() {
+		return DBSchemas.USER_SCHEMA;
 	};
 	
-	
+	public static String getSyncSchemaName() {
+		return DBSchemas.SYNC_SCHEMA_NAME;
+	};
 	
 }

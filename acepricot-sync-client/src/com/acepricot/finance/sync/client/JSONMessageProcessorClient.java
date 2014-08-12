@@ -39,7 +39,7 @@ public class JSONMessageProcessorClient {
 	private static final String DEFAULT_MESSAGE_DIGEST_ALGORITHM = "SHA-256";
 	static final String HEARTBEAT_HEADER = "heartbeat";
 	private static final String REGISTER_HEADER = "register";
-	private static final Integer DEFAULT_DB_VERSION = 1;
+	static final Integer DEFAULT_DB_VERSION = 1;
 	private static final String DATABASE_FILENAME = "C:\\Users\\brandys\\Desktop\\database.h2.db"; 
 	//private static final File DATABASE_FILE = new File(DATABASE_FILENAME);
 	private static final String REGISTER_DEVICE_HEADER = "registerDevice";
@@ -57,6 +57,7 @@ public class JSONMessageProcessorClient {
 	private static final String URL_STRING = "jdbc:h2:tcp://localhost/%s;AUTO_SERVER=TRUE;LOCK_TIMEOUT=60000;CIPHER=AES";
 	public static final String EXT_REPL_KEY = "ExtRepl";
 	private static final String EXT_REPLACEMENT = "\\.h2\\.db";
+	public static final String SYNC_REQUEST_HEADER = "syncRequest";
 	
 
 
@@ -108,7 +109,7 @@ public class JSONMessageProcessorClient {
 						if(join == null) {
 							throw new IOException("Property grpJoin is missing");
 						}
-						if((boolean) join && (i > 0)) {
+						if((boolean) join || (i > 0)) {
 							try {
 								joinToGroup(p);
 							}
@@ -138,6 +139,9 @@ public class JSONMessageProcessorClient {
 				else {
 					throw new IOException(propath + " is directory, please set correct path to sync properties");
 				}
+				DBSchemas.setTrigger(false);
+				DBSchemas.loadSchemas(SyncRequest.getConnection(p));
+				DBSchemas.setTrigger(true);
 			}
 			catch (Exception e) {
 				try {
@@ -234,6 +238,7 @@ public class JSONMessageProcessorClient {
 		}
 		MessageDigest md = MessageDigest.getInstance(DEFAULT_MESSAGE_DIGEST_ALGORITHM);
 		byte[] digest = md.digest(Huffman.decode(p.getProperty(GRP_PSWD_KEY), p.getProperty(GRP_PSCH_KEY), null).getBytes(p.getProperty(GRP_PSCH_KEY)));
+		//p.put(GRP_PSWD_KEY, digest);
 		msg = new JSONMessage(REGISTER_HEADER, new Object[] {p.getProperty(GRP_NAME_KEY), digest, p.getProperty(GRP_EMAI_KEY), DEFAULT_DB_VERSION});
 		msg = process(msg, url, null);
 		if(msg.isError()) {
@@ -378,9 +383,11 @@ public class JSONMessageProcessorClient {
 		//System.out.println(msg.getBody()[0]);
 		char[] chr = new char[1024];
 		i = 0;
+		StringBuffer sb = new StringBuffer();
 		while((i = bin.read(chr)) >= 0) {
-			System.out.println(new String(chr, 0, i));
+			sb.append(chr, 0, i);
 		}
+		msg.appendBody(sb.toString());
 		return msg;
 		
 	}
