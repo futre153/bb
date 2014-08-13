@@ -10,7 +10,12 @@ public class ColumnSpec extends SQLSyntaxImpl {
 	public ColumnSpec(SQLSyntaxImpl ...impls) {
 		super(impls);
 	}
-
+	
+	public ColumnSpec(Identifier ref, Identifier name) {
+		sQLSyntaxImpl = ref;
+		identifier = name;
+	} 
+	
 	@Override
 	public String toSQLString() throws SQLException {
 		if(identifier == null) {

@@ -27,7 +27,11 @@ import org.slf4j.LoggerFactory;
 
 import com.acepricot.finance.sync.share.AppConst;
 import com.acepricot.finance.sync.share.JSONMessage;
+import com.acepricot.finance.sync.share.sql.ColumnSpec;
 import com.acepricot.finance.sync.share.sql.CompPred;
+import com.acepricot.finance.sync.share.sql.DistinctSpec;
+import com.acepricot.finance.sync.share.sql.FromClause;
+import com.acepricot.finance.sync.share.sql.FromTableSpec;
 import com.acepricot.finance.sync.share.sql.Identifier;
 import com.acepricot.finance.sync.share.sql.Predicate;
 import com.acepricot.finance.sync.share.sql.Query;
@@ -77,6 +81,10 @@ final class JSONMessageProcessor {
 	
 	private static volatile int syncRequests = 0x00;
 	private static final int MAX_SYNC_REQUESTS = 0x40;
+
+	private static final Object ENABLED = BigDecimal.ONE;
+
+	private static final String MAX_FUNCTION = "MAX";
 	
 	public final class UPLOADED_FILES extends TableSchema {
 		private static final String GROUP_ID = "GROUP_ID";
@@ -132,16 +140,27 @@ final class JSONMessageProcessor {
 		BigDecimal enabled;
 	}
 	
-	private static final class REGISTERED_DEVICES {
+	public final class REGISTERED_DEVICES {
 		//private static final String TABLE_NAME = "REGISTERED_GROUPS";
 		private static final String ID = UNIVERSAL_ID;
 		public static final String GROUP_ID = "GROUP_ID";
-		private static final String DEVICE_NAME = "DEVICE_NAME";
+		static final String DEVICE_NAME = "DEVICE_NAME";
 		private static final String PRIMARY_DEVICE = "PRIMARY_DEVICE";
 		private static final String ENABLED = UNIVERSAL_ENABLED;
 		//public static final String[] COLS = {ID,GROUP_ID,DEVICE_NAME,PRIMARY_DEVICE,ENABLED};
+		private static final String SYNC_ENABLED = "SYNC_ENABLED";
+		int id;
+		int group_id;
+		BigDecimal primary_device;
+		BigDecimal enabled;
+		BigDecimal sync_enabled;
 	}
 	
+	public final class SYNC_RESPONSES {
+		static final String GROUP_ID = "GROUP_ID";
+		int id;
+		int group_id;
+	}
 	
 	//private static Connection con;
 	private static String dsn;
@@ -296,9 +315,10 @@ final class JSONMessageProcessor {
 						}
 						break;
 					case JSONMessageProcessor.UPLOADED_FILES.STATUS_SYNC_ENABLED:
-						long l = SyncEngine.nodeStop(grpId);
+						Object lock = new Object();
+						long l = SyncEngine.nodePause(grpId, lock);
 						msg = prepareDownload(con, mp.uploaded_files.tmp_file, msg);
-						SyncEngine.nodeStart(grpId);
+						SyncEngine.nodeContinue(grpId, lock);
 						if(msg.isError()) {
 							return msg;
 						}
@@ -498,7 +518,7 @@ final class JSONMessageProcessor {
 	
 	@SuppressWarnings("unused")
 	private static JSONMessage action4(JSONMessageProcessor mp, Connection con, JSONMessage msg) throws IOException, SQLException {
-		SyncEngine.addEngine(getEnginesPropertiesFilename(mp.uploaded_files.group_id));
+		SyncEngine.nodeSt(getEnginesPropertiesFilename(mp.uploaded_files.group_id));
 		SyncEngine.nodeStart(mp.uploaded_files.group_id);
 		return msg.returnOK(0x00L);
 	}
@@ -522,7 +542,7 @@ final class JSONMessageProcessor {
 		return msg.returnOK();
 	}
 	
-	private static void setPassword(Properties pro, CharSequence pass) throws IOException {
+	static void setPassword(Properties pro, CharSequence pass) throws IOException {
 		try {
 			pro.setProperty(DBConnector.DB_PASSWORD_KEY, Huffman.decode(Base64Coder.decodeString(pass.toString()), null));
 		} catch (Exception e) {
@@ -530,7 +550,7 @@ final class JSONMessageProcessor {
 		}
 	}
 	
-	private static final String getEnginesPropertiesFilename(int grpId) {
+	static final String getEnginesPropertiesFilename(int grpId) {
 		return String.format(ENGINES_PROPERTIES_STORE, System.getProperty("file.separator"), Integer.toBinaryString(grpId), XML_PROPERTIES_EXTENSIONS);
 	}
 	
@@ -1011,18 +1031,100 @@ final class JSONMessageProcessor {
 			
 	}
 
-	public static Rows retrieveRunnableGroups() {
+	public static Rows retrieveRunnableGroups(int grpId) {
 		Rows rows = null;
+		Connection con = null;
 		try {
 			Query select = DBConnector.createSelect();
 			TableName regGroups = new TableName(new Identifier(JSONMessageProcessor.REGISTERED_GROUPS.class.getSimpleName()));
-			TableName regDevs = new TableName(new Identifier(JSONMessageProcessor.REGISTERED_GROUPS.class.getSimpleName()));
+			TableName regDevs = new TableName(new Identifier(JSONMessageProcessor.REGISTERED_DEVICES.class.getSimpleName()));
 			TableName uFiles = new TableName(new Identifier(JSONMessageProcessor.UPLOADED_FILES.class.getSimpleName()));
-			
+			Identifier rg = new Identifier("RG");
+			Identifier rd = new Identifier("RD");
+			Identifier uf = new Identifier("UF");
+			select.addFromClause(new FromTableSpec(new FromClause(regGroups, rg), new FromClause(regDevs, rd), new FromClause(uFiles, uf)));
+			ColumnSpec rgId = new ColumnSpec(rg, new Identifier(JSONMessageProcessor.UNIVERSAL_ID));
+			select.addColumns(
+					rgId,
+					new ColumnSpec(rg, new Identifier(JSONMessageProcessor.REGISTERED_GROUPS.GROUP_NAME)),
+					new ColumnSpec(rg, new Identifier(JSONMessageProcessor.REGISTERED_GROUPS.EMAIL)),
+					new ColumnSpec(rd, new Identifier(JSONMessageProcessor.UNIVERSAL_ID)),
+					new ColumnSpec(rd, new Identifier(JSONMessageProcessor.REGISTERED_DEVICES.DEVICE_NAME)),
+					new ColumnSpec(uf, new Identifier(JSONMessageProcessor.UPLOADED_FILES.TMP_FILE)));
+			select.addDerived(
+					JSONMessageProcessor.REGISTERED_DEVICES.GROUP_ID,
+					JSONMessageProcessor.REGISTERED_GROUPS.GROUP_NAME,
+					JSONMessageProcessor.REGISTERED_GROUPS.EMAIL,
+					JSONMessageProcessor.UNIVERSAL_ID,
+					JSONMessageProcessor.REGISTERED_DEVICES.DEVICE_NAME,
+					JSONMessageProcessor.UPLOADED_FILES.TMP_FILE);
+			Object com1 = new CompPred(
+					new Object[]{
+							rgId,
+							new ColumnSpec(rd, new Identifier(JSONMessageProcessor.REGISTERED_DEVICES.GROUP_ID)),
+							new ColumnSpec(rd, new Identifier(JSONMessageProcessor.UNIVERSAL_ENABLED)),
+							new ColumnSpec(rd, new Identifier(JSONMessageProcessor.REGISTERED_DEVICES.SYNC_ENABLED)),
+							new ColumnSpec(uf, new Identifier(JSONMessageProcessor.UNIVERSAL_ENABLED)),
+							new ColumnSpec(uf, new Identifier(JSONMessageProcessor.UPLOADED_FILES.GROUP_ID)),
+							new ColumnSpec(uf, new Identifier(JSONMessageProcessor.UPLOADED_FILES.STATUS))},
+					new Object[]{
+							JSONMessageProcessor.ENABLED,
+							rgId,
+							JSONMessageProcessor.ENABLED,
+							JSONMessageProcessor.ENABLED,
+							JSONMessageProcessor.ENABLED,
+							rgId,
+							JSONMessageProcessor.UPLOADED_FILES.STATUS_SYNC_ENABLED},
+					Predicate.EQUAL);
+			if(grpId < 0) {
+				select.addTableSpec(new WhereClause(com1));
+			}
+			else {
+				select.addTableSpec(new WhereClause(com1, WhereClause.AND, new CompPred(new Object[]{rgId}, new Object[]{grpId}, Predicate.EQUAL)));
+			}
+			select.addQuerySpec(DistinctSpec.Distinct);
+			//System.out.println(select.toSQLString());
+			con = DBConnector.lookup(dsn);
+			rows = DBConnector.select(con, select);
 		} catch (SQLException e) {
 			rows = null;
 			e.printStackTrace();
 		}
-		return null;
+		/*finally {
+			try {con.close();} catch (SQLException e) {}
+		}*/
+		return rows;
+	}
+
+	static CharSequence getDefaultUserPassword() {
+		return JSONMessageProcessor.DB_PASSWORD;
+	}
+
+	public static long getLastOperationId(int grpId) {
+		long l = -1;
+		Connection con = null;
+		try {
+			Query select = DBConnector.createSelect();
+			TableName tableName = new TableName (new Identifier(JSONMessageProcessor.SYNC_RESPONSES.class.getSimpleName()));
+			select.addFromClause(new FromClause(tableName));
+			Object com1 = new CompPred(new Object[] {new Identifier(JSONMessageProcessor.SYNC_RESPONSES.GROUP_ID)}, new Object[] {grpId}, Predicate.EQUAL);
+			select.addColumns(JSONMessageProcessor.UNIVERSAL_ID);
+			select.addTableSpec(new WhereClause(com1));
+			select.addDerived(MAX_FUNCTION);
+			select.addSelectColumnFunction(MAX_FUNCTION);
+			con = DBConnector.lookup(dsn);
+			Rows rows = DBConnector.select(con, select);
+			if(rows.size() > 0) {
+				Object obj = rows.get(0).get(JSONMessageProcessor.MAX_FUNCTION);
+				if(obj != null) {
+					l = (long) ((int) obj); 
+				}
+			}
+		} catch (SQLException e) {
+		}
+		finally {
+			try{con.close();} catch (SQLException e) {}
+		}
+		return l;
 	}
 }
