@@ -92,7 +92,7 @@ public class DBConnector extends Hashtable<String, DataSource> {
 	
 	final public static int count(Connection con, TableName table, WhereClause where) throws SQLException {
 		Query q = DBConnector.createSelect();
-		q.addFromClause(new FromClause(table));
+		q.addFromClause(table);
 		q.addTableSpec(where);
 		q.addSelectColumnFunction(COUNT_FUNCTION);
 		q.setDerived(COUNT_FUNCTION);
@@ -141,7 +141,7 @@ public class DBConnector extends Hashtable<String, DataSource> {
 			int j = rsmd.getColumnCount();
 			String[] cols = new String[j];
 			for(int i = 0; i < j; i ++) {
-				cols[i] = rsmd.getColumnName(i + 1); 
+				cols[i] = rsmd.getColumnLabel(i + 1);
 			}
 			for(int i = 0; i < cols.length; i ++) {
 				row.put(cols[i], rs.getObject(cols[i]));

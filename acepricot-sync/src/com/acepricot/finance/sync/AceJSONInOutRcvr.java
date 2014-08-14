@@ -37,7 +37,7 @@ public class AceJSONInOutRcvr extends HttpServlet {
     public void init(ServletConfig config) throws ServletException {
     	try {
     		JSONMessageProcessor.getInstance();
-			SyncEngine.startEngine();
+			SyncEngine.startEngine(-1);
 		} catch (IOException e) {
 			//TODO spracuj chybu startu enginu
 		}

@@ -40,7 +40,7 @@ public class JSONMessageProcessorClient {
 	static final String HEARTBEAT_HEADER = "heartbeat";
 	private static final String REGISTER_HEADER = "register";
 	static final Integer DEFAULT_DB_VERSION = 1;
-	private static final String DATABASE_FILENAME = "C:\\Users\\brandys\\Desktop\\database.h2.db"; 
+	private static final String DATABASE_FILENAME = "D:\\TEMP\\clientsamples\\database1-1.h2.db"; 
 	//private static final File DATABASE_FILE = new File(DATABASE_FILENAME);
 	private static final String REGISTER_DEVICE_HEADER = "registerDevice";
 	public static final String INIT_UPLOAD_HEADER = "initUpload";
@@ -191,9 +191,13 @@ public class JSONMessageProcessorClient {
 		//c.setAdditionalProperty("Accept-Encoding", "gzip");
 		//c.setContentEncoding(HttpClientConst.GZIP_INDEX);
 		//InputStreamReader in = new InputStreamReader(new GZIPInputStream(client.execute(c)), "UTF-8");
-		
-		InputStream in = client.execute(c);
-		return responseProcessor(in);
+		try {
+			InputStream in = client.execute(c);
+			return responseProcessor(in);
+		}
+		catch (Exception e) {
+			return new JSONMessage().sendAppError(e);
+		}
 		/*ByteArrayOutputStream out = new ByteArrayOutputStream();
 		int i = 0;
 		while((i = in.read()) >= 0) {
@@ -238,7 +242,6 @@ public class JSONMessageProcessorClient {
 		}
 		MessageDigest md = MessageDigest.getInstance(DEFAULT_MESSAGE_DIGEST_ALGORITHM);
 		byte[] digest = md.digest(Huffman.decode(p.getProperty(GRP_PSWD_KEY), p.getProperty(GRP_PSCH_KEY), null).getBytes(p.getProperty(GRP_PSCH_KEY)));
-		//p.put(GRP_PSWD_KEY, digest);
 		msg = new JSONMessage(REGISTER_HEADER, new Object[] {p.getProperty(GRP_NAME_KEY), digest, p.getProperty(GRP_EMAI_KEY), DEFAULT_DB_VERSION});
 		msg = process(msg, url, null);
 		if(msg.isError()) {
@@ -288,6 +291,7 @@ public class JSONMessageProcessorClient {
 		else {
 			//TODO zobrazit inicializacia synchronizacie OK
 		}
+		p.setProperty(GRP_PSWD_KEY, DatatypeConverter.printHexBinary(digest));
 	}
 
 	private static void joinToGroup(Properties p) throws Exception {
@@ -348,6 +352,7 @@ public class JSONMessageProcessorClient {
 				//TODO zobrazit stahovanie OK
 			}
 			msg = t2.getMessage();
+			p.setProperty(GRP_PSWD_KEY, DatatypeConverter.printHexBinary(digest));
 		}
 		catch (Exception e) {
 			throw e;

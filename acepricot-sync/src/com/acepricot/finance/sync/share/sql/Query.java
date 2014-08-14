@@ -19,19 +19,27 @@ public class Query extends SQLSyntaxImpl {
 		}
 		return select == null ? (decCursor == null ? recDecCursor.toSQLString() : decCursor.toSQLString()) : select.toSQLString();
 	}
-
-	public void addFromClause(SQLSyntaxImpl from) {
+	
+	public void addFromClause(FromClause ...from) {
 		if(this.decCursor != null) {
-			this.decCursor.select.queryExp.queryTerm.queryPrimary.querySpec.tableExp.addFromClause(new FromClause(from));
+			this.decCursor.select.queryExp.queryTerm.queryPrimary.querySpec.tableExp.addFromClause(from);
 		}
 		if(this.recDecCursor != null) {
-			this.recDecCursor.finSelect.queryExp.queryTerm.queryPrimary.querySpec.tableExp.addFromClause(new FromClause(from));
+			this.recDecCursor.finSelect.queryExp.queryTerm.queryPrimary.querySpec.tableExp.addFromClause(from);
 		}
 		if(this.select != null) {
-			this.select.queryExp.queryTerm.queryPrimary.querySpec.tableExp.addFromClause(new FromClause(from));
+			this.select.queryExp.queryTerm.queryPrimary.querySpec.tableExp.addFromClause(from);
 		}
 	}
-
+	
+	public void addFromClause(SQLSyntaxImpl from) {
+		addFromClause(from, null);
+	}
+	
+	public void addFromClause(SQLSyntaxImpl from, Identifier ref) {
+		addFromClause(new FromClause[]{new FromClause(from, ref)});
+	}
+	
 	public void addColumns(ColumnSpec ...specs) throws SQLException {
 		if(this.decCursor != null) {
 			this.decCursor.select.queryExp.queryTerm.queryPrimary.querySpec.selectColumn.setColumns(specs);

@@ -29,6 +29,8 @@ public class GroupNode extends Hashtable <String, DeviceNode> {
 	public static final int DEVICE_NODE_STOP = 0x30;
 	public static final int DEVICE_NODE_START = 0x31;
 
+	public static final String[] STATUS = {"UNKNOWN", "ACTIVE", "STARTUP", "PAUSED", "BUSY"};
+
 	
 
 	
@@ -106,7 +108,7 @@ public class GroupNode extends Hashtable <String, DeviceNode> {
 				}
 			}
 			else {
-				return new JSONMessage().sendAppError("Group node " + this.getName() + ": missing device name parameter for pause action");
+				return new JSONMessage().sendAppError("Group node " + this.getName() + ": missing device name parameter for stop action");
 			}
 		case DEVICE_NODE_START:
 			if(params.length > 0 && params[0] != null) {
@@ -114,11 +116,26 @@ public class GroupNode extends Hashtable <String, DeviceNode> {
 				this.put(node.getName(), node);
 				return new JSONMessage().returnOK("Device node " + this.getName() + ": " + node.getName() + " started successfully ");
 			}
+			else {
+				return new JSONMessage().sendAppError("Group node " + this.getName() + ": missing device name parameter for start action");
+			}
 		default:
-			this.status = BUSY;
-			JSONMessage msg = this.getDeviceNode((String) params[0]).action(params);
-			this.status = ACTIVE;
-			return msg;
+			if(params.length > 0 && params[0] != null) {
+				this.status = BUSY;
+				try {
+					System.out.println(params[0].toString());
+					return this.getDeviceNode((String) (((Row) params[0]).get(JSONMessageProcessor.REGISTERED_DEVICES.DEVICE_NAME))).action(params);
+				}
+				catch (Exception e) {
+					return new JSONMessage().sendAppError(e);
+				}
+				finally {
+					this.status = ACTIVE;
+				}
+			}
+			else {
+				return new JSONMessage().sendAppError("Group node " + this.getName() + ": missing parameter for synchronization action");
+			}
 		}
 	}
 	

@@ -13,14 +13,14 @@ public class TableExp extends SQLSyntaxImpl {
 		super(impls);
 	}
 	
-	void addFromClause(FromClause from) {
+	void addFromClause(FromClause ...froms) {
 		if(fromClause == null) {
-			fromClause = new FromClause[] {from};
+			fromClause = froms;
 		}
 		else {
-			FromClause[] _new  = new FromClause[fromClause.length + 1];
+			FromClause[] _new  = new FromClause[fromClause.length + froms.length];
 			System.arraycopy(fromClause, 0, _new, 0, fromClause.length);
-			_new[fromClause.length] = from;
+			System.arraycopy(froms, 0, _new, fromClause.length, froms.length);
 			fromClause = null;
 			fromClause = _new;
 		}

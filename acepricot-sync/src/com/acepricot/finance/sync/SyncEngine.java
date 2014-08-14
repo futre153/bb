@@ -21,8 +21,8 @@ public class SyncEngine extends Hashtable <String, GroupNode> {
 	
 	private SyncEngine() {};
 	
-	static void startEngine() throws IOException {
-		Rows rows = JSONMessageProcessor.retrieveRunnableGroups(-1);
+	static void startEngine(int grpId) throws IOException {
+		Rows rows = JSONMessageProcessor.retrieveRunnableGroups(grpId);
 		for(int i = 0; i < rows.size(); i ++) {
 			Row row = rows.get(i);
 			String grpName = (String) row.get(JSONMessageProcessor.REGISTERED_GROUPS.GROUP_NAME);
@@ -51,7 +51,11 @@ public class SyncEngine extends Hashtable <String, GroupNode> {
 		GroupNode node = null;	
 		Properties p = new Properties();
 		p.loadFromXML(new FileInputStream(new File(JSONMessageProcessor.getEnginesPropertiesFilename(grpId))));
-		JSONMessageProcessor.setPassword(p, JSONMessageProcessor.getDefaultUserPassword());
+		try {
+			JSONMessageProcessor.setPassword(p, JSONMessageProcessor.getDefaultUserPassword());
+		} catch (Exception e) {
+			throw new IOException(e);
+		}
 		node = new GroupNode(p);
 		SyncEngine.globalEngine.put(p.getProperty(JSONMessageProcessor.REGISTERED_GROUPS.GROUP_NAME), node);
 		return node;
@@ -74,9 +78,14 @@ public class SyncEngine extends Hashtable <String, GroupNode> {
 		grpNode.action(GroupNode.ACTIVE, lock);
 	}
 	
-	public static void addEngine(String enginesPropertiesFilename) {
-		// TODO Auto-generated method stub
-		
+	public static void addEngine(JSONMessageProcessor mp) throws IOException {
+		String filename = JSONMessageProcessor.getEnginesPropertiesFilename(mp.registered_groups.id);
+		Properties p = new Properties();
+		p.loadFromXML(new FileInputStream(filename));
+		p.setProperty(JSONMessageProcessor.REGISTERED_DEVICES.GROUP_ID, Integer.toString(mp.registered_groups.id));
+		p.setProperty(JSONMessageProcessor.REGISTERED_GROUPS.GROUP_NAME, mp.registered_groups.group_name);
+		p.setProperty(JSONMessageProcessor.REGISTERED_GROUPS.EMAIL, mp.registered_groups.email);
+		JSONMessageProcessor.storeEngineProps(mp.registered_groups.id, p);
 	}
 	
 	public static boolean isStarted(int grpId, int devId) {
@@ -95,8 +104,10 @@ public class SyncEngine extends Hashtable <String, GroupNode> {
 		if(grpNode != null) {
 			if(grpNode.getStatus() == GroupNode.ACTIVE) {
 				
+				return grpNode.action(-1, null, row);
+				//return new JSONMessage().sendAppError("Method not developed");
 			}
-			return new JSONMessage().sendAppError("Grop node for group name " + grpName + " is not in active state");
+			return new JSONMessage().sendAppError("Grop node for group name " + grpName + " is not in active state (Current state is " + GroupNode.STATUS[grpNode.getStatus()] + ")");
 		}
 		return new JSONMessage().sendAppError("Grop node for group name " + grpName + " does not exists");
 	}

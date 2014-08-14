@@ -31,7 +31,6 @@ import com.acepricot.finance.sync.share.sql.ColumnSpec;
 import com.acepricot.finance.sync.share.sql.CompPred;
 import com.acepricot.finance.sync.share.sql.DistinctSpec;
 import com.acepricot.finance.sync.share.sql.FromClause;
-import com.acepricot.finance.sync.share.sql.FromTableSpec;
 import com.acepricot.finance.sync.share.sql.Identifier;
 import com.acepricot.finance.sync.share.sql.Predicate;
 import com.acepricot.finance.sync.share.sql.Query;
@@ -128,7 +127,7 @@ final class JSONMessageProcessor {
 		//private static final String ID = UNIVERSAL_ID;
 		public static final String GROUP_NAME = "GROUP_NAME";
 		private static final String PASSWORD = "PASSWORD";
-		private static final String EMAIL = "EMAIL";
+		static final String EMAIL = "EMAIL";
 		private static final String DB_VERSION = "DB_VERSION";
 		//private static final String ENABLED = UNIVERSAL_ENABLED;
 		//public static final String[] COLS = {ID,GROUP_NANE,PASSWORD,EMAIL,DB_VERSION,ENABLED};
@@ -168,7 +167,7 @@ final class JSONMessageProcessor {
 	
 	private UPLOADED_FILES uploaded_files = new UPLOADED_FILES();
 	private DOWNLOADED_FILES downloaded_files = new DOWNLOADED_FILES();
-	private REGISTERED_GROUPS registered_groups = new REGISTERED_GROUPS();
+	REGISTERED_GROUPS registered_groups = new REGISTERED_GROUPS();
 				
 	private JSONMessageProcessor() throws IOException{
 		if(dsn == null) {
@@ -235,10 +234,10 @@ final class JSONMessageProcessor {
 		Row syncRow;
 		
 		syncRow = new Row();
-		for(int i = 4; i < msg.getBody().length; i ++) {
+		for(int i = 4; i < msg.getBody().length; i += 2) {
 			Object obj = msg.getBody()[i];
 			if(!(obj instanceof String)) {
-				return msg.sendAppError("String is expected, " + obj.getClass().getSimpleName() + " was found");
+				return msg.sendAppError("String is expected, " + obj + ", " + obj.getClass().getSimpleName() + " was found");
 			}
 			String key = (String) obj;
 			if(i + 1 == msg.getBody().length) {
@@ -266,6 +265,11 @@ final class JSONMessageProcessor {
 			catch(SQLException | IOException e) {
 				return msg.sendAppError(e);
 			}
+		}
+		try {
+			JSONMessageProcessor.setSyncRequests(-1);
+		} catch (IOException e) {
+			return msg.sendAppError(e);
 		}
 		return msg;
 	}
@@ -318,6 +322,20 @@ final class JSONMessageProcessor {
 						Object lock = new Object();
 						long l = SyncEngine.nodePause(grpId, lock);
 						msg = prepareDownload(con, mp.uploaded_files.tmp_file, msg);
+						
+						TableName tableName = new TableName(new Identifier(JSONMessageProcessor.REGISTERED_DEVICES.class.getSimpleName()));
+						String[] cols = {JSONMessageProcessor.REGISTERED_DEVICES.SYNC_ENABLED};
+						Object[] values = {BigDecimal.ONE};
+						com1 = new CompPred(new Object[]{new Identifier(JSONMessageProcessor.UNIVERSAL_ID)}, new Object[]{devId}, Predicate.EQUAL);
+						try {
+							DBConnector.update(con, DBConnector.createUpdate(tableName, cols, values, new WhereClause(com1)), false);
+						} catch (SQLException e) {
+							con.rollback();
+							throw (e);
+						} finally {
+							con.commit();
+						}
+						SyncEngine.startEngine(grpId);
 						SyncEngine.nodeContinue(grpId, lock);
 						if(msg.isError()) {
 							return msg;
@@ -518,7 +536,11 @@ final class JSONMessageProcessor {
 	
 	@SuppressWarnings("unused")
 	private static JSONMessage action4(JSONMessageProcessor mp, Connection con, JSONMessage msg) throws IOException, SQLException {
-		SyncEngine.nodeSt(getEnginesPropertiesFilename(mp.uploaded_files.group_id));
+		TableName tableName = new TableName(new Identifier(JSONMessageProcessor.REGISTERED_GROUPS.class.getSimpleName()));
+		WhereClause where = new WhereClause(new CompPred(new Object[]{new Identifier(JSONMessageProcessor.UNIVERSAL_ID)}, new Object[]{mp.uploaded_files.group_id}, Predicate.EQUAL));
+		JSONMessageProcessor.retrieveRows2(mp, msg, con, mp.registered_groups, where, true);
+		mp.registered_groups.next();
+		SyncEngine.addEngine(mp);
 		SyncEngine.nodeStart(mp.uploaded_files.group_id);
 		return msg.returnOK(0x00L);
 	}
@@ -530,8 +552,7 @@ final class JSONMessageProcessor {
 		pro.setProperty(DBConnector.DB_DRIVER_CLASS_KEY, H2_JDBC_DRIVER);
 		pro.setProperty(DBConnector.DB_URL_KEY, String.format(H2_URL_MASK, mp.uploaded_files.tmp_file.replaceAll("\\\\", "/").replaceAll("\\.h2\\.db", "")));
 		pro.setProperty(DBConnector.DB_USERNAME_KEY, H2_USER);
-		FileOutputStream out = new FileOutputStream(getEnginesPropertiesFilename(mp.uploaded_files.group_id));
-		pro.storeToXML(out, "propeties for engine id " + mp.uploaded_files.group_id, DEFAULT_CHARSET);
+		storeEngineProps(mp.uploaded_files.group_id, pro);
 		setPassword(pro, H2_PASSWORD);
 		String dsn = pro.getProperty(DBConnector.DB_DSN_KEY);
 		DBConnector.bind(pro, dsn);
@@ -540,6 +561,11 @@ final class JSONMessageProcessor {
 		con2 = null;
 		DBConnector.unbind(dsn);
 		return msg.returnOK();
+	}
+	
+	static void storeEngineProps(int grpId, Properties pro) throws IOException {
+		FileOutputStream out = new FileOutputStream(getEnginesPropertiesFilename(grpId));
+		pro.storeToXML(out, "propeties for engine id " + grpId, DEFAULT_CHARSET);
 	}
 	
 	static void setPassword(Properties pro, CharSequence pass) throws IOException {
@@ -582,7 +608,7 @@ final class JSONMessageProcessor {
 	 * 0 - JSONMessageProcessor
 	 * 1 - JSOnMessage
 	 * 2 - SQLConnection
-	 * 3 - TableSchema
+	 * 3 - FromClause
 	 * 4 - WhereClause
 	 * 5 - unique
 	 */
@@ -590,7 +616,7 @@ final class JSONMessageProcessor {
 	static final JSONMessage retrieveRows2(Object ... o) {
 		try {
 			Query select = DBConnector.createSelect();
-			select.addFromClause(new Identifier(o[3].getClass().getSimpleName()));
+			select.addFromClause(new TableName(new Identifier(o[3].getClass().getSimpleName())));
 			select.addTableSpec((WhereClause) o[4]);
 			Rows rows = DBConnector.select((Connection) o[2], select);
 			if(rows.size() == 0) {
@@ -1042,7 +1068,7 @@ final class JSONMessageProcessor {
 			Identifier rg = new Identifier("RG");
 			Identifier rd = new Identifier("RD");
 			Identifier uf = new Identifier("UF");
-			select.addFromClause(new FromTableSpec(new FromClause(regGroups, rg), new FromClause(regDevs, rd), new FromClause(uFiles, uf)));
+			select.addFromClause(new FromClause(regGroups, rg), new FromClause(regDevs, rd), new FromClause(uFiles, uf));
 			ColumnSpec rgId = new ColumnSpec(rg, new Identifier(JSONMessageProcessor.UNIVERSAL_ID));
 			select.addColumns(
 					rgId,
@@ -1060,7 +1086,7 @@ final class JSONMessageProcessor {
 					JSONMessageProcessor.UPLOADED_FILES.TMP_FILE);
 			Object com1 = new CompPred(
 					new Object[]{
-							rgId,
+							new ColumnSpec(rg, new Identifier(JSONMessageProcessor.UNIVERSAL_ENABLED)),
 							new ColumnSpec(rd, new Identifier(JSONMessageProcessor.REGISTERED_DEVICES.GROUP_ID)),
 							new ColumnSpec(rd, new Identifier(JSONMessageProcessor.UNIVERSAL_ENABLED)),
 							new ColumnSpec(rd, new Identifier(JSONMessageProcessor.REGISTERED_DEVICES.SYNC_ENABLED)),
@@ -1090,14 +1116,14 @@ final class JSONMessageProcessor {
 			rows = null;
 			e.printStackTrace();
 		}
-		/*finally {
+		finally {
 			try {con.close();} catch (SQLException e) {}
-		}*/
+		}
 		return rows;
 	}
 
 	static CharSequence getDefaultUserPassword() {
-		return JSONMessageProcessor.DB_PASSWORD;
+		return JSONMessageProcessor.H2_PASSWORD;
 	}
 
 	public static long getLastOperationId(int grpId) {
@@ -1106,7 +1132,7 @@ final class JSONMessageProcessor {
 		try {
 			Query select = DBConnector.createSelect();
 			TableName tableName = new TableName (new Identifier(JSONMessageProcessor.SYNC_RESPONSES.class.getSimpleName()));
-			select.addFromClause(new FromClause(tableName));
+			select.addFromClause(tableName);
 			Object com1 = new CompPred(new Object[] {new Identifier(JSONMessageProcessor.SYNC_RESPONSES.GROUP_ID)}, new Object[] {grpId}, Predicate.EQUAL);
 			select.addColumns(JSONMessageProcessor.UNIVERSAL_ID);
 			select.addTableSpec(new WhereClause(com1));

@@ -133,22 +133,29 @@ public class JSONMessage {
 				}
 			}
 			else {
-				sb.append(nl);
-				sb.append('\t');
-				if (obj.getClass().isArray()) {
-					int k = Array.getLength(obj);
-					sb.append('[');
-					for(int j = 0; j < k; j ++) {
-						if(j > 0) {
-							sb.append(", ");
+				if(obj != null) {
+					sb.append(nl);
+					sb.append('\t');
+					if (obj.getClass().isArray()) {
+						int k = Array.getLength(obj);
+						sb.append('[');
+						for(int j = 0; j < k; j ++) {
+							if(j > 0) {
+								sb.append(", ");
+							}
+							sb.append('"');
+							sb.append(Array.get(obj, j));
+							sb.append('"');
 						}
-						sb.append('"');
-						sb.append(Array.get(obj, j));
-						sb.append('"');
+						sb.append(']');
 					}
-					sb.append(']');
+					else {
+						sb.append(obj);
+					}
 				}
 				else {
+					sb.append(nl);
+					sb.append('\t');
 					sb.append(obj);
 				}
 			}

@@ -6,6 +6,8 @@ import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.Properties;
 
+import javax.xml.bind.DatatypeConverter;
+
 import org.pabk.util.Huffman;
 
 import com.acepricot.finance.sync.DBConnector;
@@ -82,7 +84,7 @@ public class SyncRequest extends JSONMessage {
 							JSONMessageProcessorClient.SYNC_REQUEST_HEADER,
 							new Object[] {
 									props.getProperty(JSONMessageProcessorClient.GRP_NAME_KEY),
-									props.get(JSONMessageProcessorClient.GRP_PSWD_KEY),
+									DatatypeConverter.parseHexBinary(props.getProperty(JSONMessageProcessorClient.GRP_PSWD_KEY)),
 									props.getProperty(JSONMessageProcessorClient.DEV_NAME_KEY),
 									JSONMessageProcessorClient.DEFAULT_DB_VERSION});
 					Row row = rows.get(0);
