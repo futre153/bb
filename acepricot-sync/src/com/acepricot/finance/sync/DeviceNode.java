@@ -1,5 +1,7 @@
 package com.acepricot.finance.sync;
 
+import java.sql.Connection;
+
 import com.acepricot.finance.sync.share.JSONMessage;
 
 public class DeviceNode {
@@ -15,8 +17,8 @@ public class DeviceNode {
 
 	public DeviceNode(Row row) {
 		this.status = STARTUP;
-		this.setName((String) row.get(JSONMessageProcessor.REGISTERED_GROUPS.GROUP_NAME));
-		this.setGroupName((String) row.get(JSONMessageProcessor.REGISTERED_DEVICES.DEVICE_NAME));
+		this.setName((String) row.get(JSONMessageProcessor.REGISTERED_DEVICES.DEVICE_NAME));
+		this.setGroupName((String) row.get(JSONMessageProcessor.REGISTERED_GROUPS.GROUP_NAME));
 		this.setDeviceId((int) row.get(JSONMessageProcessor.UNIVERSAL_ID));
 		this.status = ACTIVE;
 	}
@@ -58,15 +60,10 @@ public class DeviceNode {
 		this.grpName = grpName;
 	}
 
-	public JSONMessage action(Object[] params) {
-		return new JSONMessage().returnOK(params);
-	}
-	
 	public int getDeviceId() {
 		return this.devId;
 	}
 	private void setDeviceId(int deviceId) {
 		this.devId = deviceId;
 	}
-
 }

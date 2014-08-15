@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.security.MessageDigest;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Properties;
@@ -81,7 +82,7 @@ public class JSONMessageProcessorClient {
 			try {
 				
 				f = new File(propath[i]);
-				if(!(f.exists()) && i == 0) {
+				if(!f.exists()) {
 					if(f.createNewFile()) {
 						/*
 						 * odkaz na obrzovku, kde sa ziskaju nasledovne vlastnosti>
@@ -133,6 +134,31 @@ public class JSONMessageProcessorClient {
 						throw new IOException("Failed to create sync properties file " + propath + ". Please set correct path to sync properties");
 					}
 				}
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+				//zobraz chybu konfiguracie
+				/*
+				 * TODO synchronizacia sa nenakonfigurovala
+				 */
+				try {
+					f.delete();
+				}
+				catch(Exception e1) {
+					//TODO zobraz chybu
+					//TODO akcia pri chybe
+					e1.printStackTrace();
+				}
+				return;
+			}
+			finally {
+				/*
+				 * TODO database unlock
+				 */
+				
+				
+			}
+			try {
 				if(f.isFile()) {
 					p.loadFromXML(new FileInputStream(f));
 				}
@@ -142,30 +168,16 @@ public class JSONMessageProcessorClient {
 				DBSchemas.setTrigger(false);
 				DBSchemas.loadSchemas(SyncRequest.getConnection(p));
 				DBSchemas.setTrigger(true);
-			}
-			catch (Exception e) {
-				try {
-					f.delete();
-				}
-				catch(Exception e1) {
-					
-				}
-				//TODO zobraz chybu
-				//TODO akcia pri chybe
+				SyncClientEngine.start(p);
+				SyncClientEngine.joinTo();
+			} catch (InterruptedException | IOException | SQLException e) {
+				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			finally {
-				
 				/*
-				 * TODO database unlock
+				 * TODO synchronizacia koniec
 				 */
-			}
-			SyncClientEngine.start(p);
-			try {
-				SyncClientEngine.joinTo();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
 		}
 		

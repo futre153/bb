@@ -221,7 +221,9 @@ final class JSONMessageProcessor {
 			try {
 				con.setAutoCommit(true);
 				con.close();
-			} catch (SQLException e) {e.printStackTrace();}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	
@@ -317,12 +319,6 @@ final class JSONMessageProcessor {
 						if(msg.isError()) {
 							return msg;
 						}
-						break;
-					case JSONMessageProcessor.UPLOADED_FILES.STATUS_SYNC_ENABLED:
-						Object lock = new Object();
-						long l = SyncEngine.nodePause(grpId, lock);
-						msg = prepareDownload(con, mp.uploaded_files.tmp_file, msg);
-						
 						TableName tableName = new TableName(new Identifier(JSONMessageProcessor.REGISTERED_DEVICES.class.getSimpleName()));
 						String[] cols = {JSONMessageProcessor.REGISTERED_DEVICES.SYNC_ENABLED};
 						Object[] values = {BigDecimal.ONE};
@@ -335,6 +331,11 @@ final class JSONMessageProcessor {
 						} finally {
 							con.commit();
 						}
+						break;
+					case JSONMessageProcessor.UPLOADED_FILES.STATUS_SYNC_ENABLED:
+						Object lock = new Object();
+						long l = SyncEngine.nodePause(grpId, lock);
+						msg = prepareDownload(con, mp.uploaded_files.tmp_file, msg);
 						SyncEngine.startEngine(grpId);
 						SyncEngine.nodeContinue(grpId, lock);
 						if(msg.isError()) {
@@ -420,16 +421,11 @@ final class JSONMessageProcessor {
 		}
 		catch(IOException | SQLException e) {
 			Exception e1 = e;
-			try {
-				tableName = new TableName(new Identifier(JSONMessageProcessor.DOWNLOADED_FILES.class.getSimpleName()));
-				disable(con, tableName, fileId);
-				delete(con, tableName, fileId);
-				if(last) {
-					return msg;
-				}
-			}
-			catch (SQLException e2) {
-				e1 = e2;
+			tableName = new TableName(new Identifier(JSONMessageProcessor.DOWNLOADED_FILES.class.getSimpleName()));
+			disable(con, tableName, fileId);
+			delete(con, tableName, fileId);
+			if(last) {
+				return msg;
 			}
 			return msg.sendAppError(e1);
 		}

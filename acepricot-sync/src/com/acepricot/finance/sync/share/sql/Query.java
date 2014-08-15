@@ -20,7 +20,7 @@ public class Query extends SQLSyntaxImpl {
 		return select == null ? (decCursor == null ? recDecCursor.toSQLString() : decCursor.toSQLString()) : select.toSQLString();
 	}
 	
-	public void addFromClause(FromClause ...from) {
+	public Query addFromClause(FromClause ...from) {
 		if(this.decCursor != null) {
 			this.decCursor.select.queryExp.queryTerm.queryPrimary.querySpec.tableExp.addFromClause(from);
 		}
@@ -30,17 +30,18 @@ public class Query extends SQLSyntaxImpl {
 		if(this.select != null) {
 			this.select.queryExp.queryTerm.queryPrimary.querySpec.tableExp.addFromClause(from);
 		}
+		return this;
 	}
 	
-	public void addFromClause(SQLSyntaxImpl from) {
-		addFromClause(from, null);
+	public Query addFromClause(SQLSyntaxImpl from) {
+		return addFromClause(from, null);
 	}
 	
-	public void addFromClause(SQLSyntaxImpl from, Identifier ref) {
-		addFromClause(new FromClause[]{new FromClause(from, ref)});
+	public Query addFromClause(SQLSyntaxImpl from, Identifier ref) {
+		return addFromClause(new FromClause[]{new FromClause(from, ref)});
 	}
 	
-	public void addColumns(ColumnSpec ...specs) throws SQLException {
+	public Query addColumns(ColumnSpec ...specs) throws SQLException {
 		if(this.decCursor != null) {
 			this.decCursor.select.queryExp.queryTerm.queryPrimary.querySpec.selectColumn.setColumns(specs);
 		}
@@ -50,9 +51,10 @@ public class Query extends SQLSyntaxImpl {
 		if(this.select != null) {
 			this.select.queryExp.queryTerm.queryPrimary.querySpec.selectColumn.setColumns(specs);
 		}
+		return this;
 	}
 
-	public void addColumns(String ...strings) throws SQLException {
+	public Query addColumns(String ...strings) throws SQLException {
 		if(this.decCursor != null) {
 			this.decCursor.select.queryExp.queryTerm.queryPrimary.querySpec.selectColumn.setColumns(strings);
 		}
@@ -62,10 +64,10 @@ public class Query extends SQLSyntaxImpl {
 		if(this.select != null) {
 			this.select.queryExp.queryTerm.queryPrimary.querySpec.selectColumn.setColumns(strings);
 		}
-		
+		return this;
 	}
 
-	public void addDerived(String ...strings) throws SQLException {
+	public Query addDerived(String ...strings) throws SQLException {
 		if(this.decCursor != null) {
 			this.decCursor.select.queryExp.queryTerm.queryPrimary.querySpec.selectColumn.setDerived(0, strings);
 		}
@@ -75,10 +77,10 @@ public class Query extends SQLSyntaxImpl {
 		if(this.select != null) {
 			this.select.queryExp.queryTerm.queryPrimary.querySpec.selectColumn.setDerived(0, strings);
 		}
-		
+		return this;
 	}
 
-	public void addSelectColumnFunction(String string) {
+	public Query addSelectColumnFunction(String string) {
 		if(this.decCursor != null) {
 			this.decCursor.select.queryExp.queryTerm.queryPrimary.querySpec.selectColumn.setFunction(string);
 		}
@@ -87,10 +89,11 @@ public class Query extends SQLSyntaxImpl {
 		}
 		if(this.select != null) {
 			this.select.queryExp.queryTerm.queryPrimary.querySpec.selectColumn.setFunction(string);
-		}		
+		}
+		return this;
 	}
 
-	public void setDerived(String string) throws SQLException {
+	public Query setDerived(String string) throws SQLException {
 		if(this.decCursor != null) {
 			this.decCursor.select.queryExp.queryTerm.queryPrimary.querySpec.selectColumn.setDerived(string);
 		}
@@ -100,9 +103,10 @@ public class Query extends SQLSyntaxImpl {
 		if(this.select != null) {
 			this.select.queryExp.queryTerm.queryPrimary.querySpec.selectColumn.setDerived(string);
 		}
+		return this;
 	}
 	
-	public void addQuerySpec(SQLSyntaxImpl ...impls) {
+	public Query addQuerySpec(SQLSyntaxImpl ...impls) {
 		if(this.decCursor != null) {
 			this.decCursor.select.queryExp.queryTerm.queryPrimary.querySpec.addFields(impls);
 		}
@@ -111,10 +115,11 @@ public class Query extends SQLSyntaxImpl {
 		}
 		if(this.select != null) {
 			this.select.queryExp.queryTerm.queryPrimary.querySpec.addFields(impls);
-		}	
+		}
+		return this;
 	}
 	
-	public void addSelectSpec(SQLSyntaxImpl ...impls) {
+	public Query addSelectSpec(SQLSyntaxImpl ...impls) {
 		if(this.decCursor != null) {
 			this.decCursor.select.addFields(impls);
 		}
@@ -123,10 +128,11 @@ public class Query extends SQLSyntaxImpl {
 		}
 		if(this.select != null) {
 			this.select.addFields(impls);
-		}	
+		}
+		return this;
 	}
 	
-	public void addTableSpec(SQLSyntaxImpl ...impls) {
+	public Query addTableSpec(SQLSyntaxImpl ...impls) {
 		if(this.decCursor != null) {
 			this.decCursor.select.queryExp.queryTerm.queryPrimary.querySpec.tableExp.addFields(impls);
 		}
@@ -136,6 +142,6 @@ public class Query extends SQLSyntaxImpl {
 		if(this.select != null) {
 			this.select.queryExp.queryTerm.queryPrimary.querySpec.tableExp.addFields(impls);
 		}
-		
+		return this;
 	}
 }

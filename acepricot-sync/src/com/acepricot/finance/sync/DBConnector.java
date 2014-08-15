@@ -13,7 +13,6 @@ import org.apache.tomcat.jdbc.pool.DataSource;
 import org.apache.tomcat.jdbc.pool.PoolProperties;
 
 import com.acepricot.finance.sync.share.sql.Delete;
-import com.acepricot.finance.sync.share.sql.FromClause;
 import com.acepricot.finance.sync.share.sql.Identifier;
 import com.acepricot.finance.sync.share.sql.Insert;
 import com.acepricot.finance.sync.share.sql.Query;

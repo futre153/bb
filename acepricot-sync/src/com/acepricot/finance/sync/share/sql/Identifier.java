@@ -13,10 +13,7 @@ public class Identifier extends SQLSyntaxImpl {
 	
 	private String identifier;
 	
-	public Identifier(String id) throws SQLException {
-		if(id == null) {
-			throw new SQLException("Identifier cannot be null value");
-		}
+	public Identifier(String id) {
 		identifier = id;
 	}
 	
@@ -24,7 +21,10 @@ public class Identifier extends SQLSyntaxImpl {
 		return identifier;
 	}
 	
-	public String toSQLString() {
+	public String toSQLString() throws SQLException {
+		if(identifier == null) {
+			throw new SQLException("Identifier cannot be null value");
+		}
 		return getValue().matches(SIMPLE_ID_MASK) ? getValue() : ("\"" + getValue() + "\"");
 	}
 }

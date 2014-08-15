@@ -58,8 +58,10 @@ public class SyncClientEngine extends Thread {
 				// TODO spracuj JSONMessage
 				System.out.println("INPUT MSG -----------------------------------------------------------");
 				System.out.println(inMsg);
-				System.out.println("OUTPUT MSG -----------------------------------------------------------");
-				System.out.println(outMsg);
+				if(inMsg == null || !inMsg.isError()) {
+					System.out.println("OUTPUT MSG -----------------------------------------------------------");
+					System.out.println(outMsg);
+				}
 			}
 			for(int i = 0; (i < counter && (!isShutdown())); i ++) {
 				s.sleep(interval);

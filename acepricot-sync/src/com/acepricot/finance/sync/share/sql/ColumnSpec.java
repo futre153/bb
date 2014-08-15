@@ -24,4 +24,12 @@ public class ColumnSpec extends SQLSyntaxImpl {
 		return (sQLSyntaxImpl == null ? EMPTY : sQLSyntaxImpl.toSQLString() + ".") + identifier.toSQLString();
 	}
 
+	public static ColumnSpec[] getColSpecArray(SchemaName is, String ...strings) {
+		ColumnSpec[] cols = new ColumnSpec[strings.length];
+		for(int i = 0; i < cols.length; i ++) {
+			cols[i] = new ColumnSpec(is, new Identifier(strings[i]));
+		}
+		return cols;
+	}
+
 }

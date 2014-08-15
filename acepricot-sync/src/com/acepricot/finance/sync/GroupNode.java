@@ -1,5 +1,6 @@
 package com.acepricot.finance.sync;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Hashtable;
@@ -39,6 +40,7 @@ public class GroupNode extends Hashtable <String, DeviceNode> {
 
 	private Properties props = null;
 	private Object locker = null;
+	private DBSchema schema = null;
 
 	public GroupNode(Properties p) throws SQLException {
 		this.status = STARTUP;
@@ -46,6 +48,7 @@ public class GroupNode extends Hashtable <String, DeviceNode> {
 		String dsn = p.getProperty(DBConnector.DB_DSN_KEY);
 		DBConnector.bind(p, dsn);
 		Connection con2 = DBConnector.lookup(dsn);
+		schema = DBSchema.getInstance().loadSchemas(con2);
 		con2.close();
 		con2 = null;
 		this.status = ACTIVE;
@@ -119,26 +122,41 @@ public class GroupNode extends Hashtable <String, DeviceNode> {
 			else {
 				return new JSONMessage().sendAppError("Group node " + this.getName() + ": missing device name parameter for start action");
 			}
-		default:
-			if(params.length > 0 && params[0] != null) {
-				this.status = BUSY;
+		default:	
+			this.status = BUSY;
+			Connection con = null;
+			try {
+				con = DBConnector.lookup(props.getProperty(DBConnector.DB_DSN_KEY));
+				return action(con ,params);
+			}
+			catch (IOException | SQLException e) {
+				return new JSONMessage().sendAppError(e);
+			}
+			finally {
+				this.status = ACTIVE;
 				try {
-					System.out.println(params[0].toString());
-					return this.getDeviceNode((String) (((Row) params[0]).get(JSONMessageProcessor.REGISTERED_DEVICES.DEVICE_NAME))).action(params);
-				}
-				catch (Exception e) {
-					return new JSONMessage().sendAppError(e);
-				}
-				finally {
-					this.status = ACTIVE;
-				}
+					con.close();
+				} catch (SQLException e) {}
 			}
-			else {
-				return new JSONMessage().sendAppError("Group node " + this.getName() + ": missing parameter for synchronization action");
-			}
-		}
+		}	
 	}
 	
+	private JSONMessage action(Connection con, Object[] params) throws IOException {
+		if(params.length > 0 && params[0] != null) {
+			if(params[0] instanceof Row) {
+				Row row = (Row) params[0];
+				String devName = (String) row.get(JSONMessageProcessor.REGISTERED_DEVICES.DEVICE_NAME);
+				DeviceNode devNode = this.get(devName);
+				if(devNode == null) {
+					throw new IOException("Device node " + this.getName() + ":" + devName + " is not started");
+				}
+				System.out.println(row);
+				return new JSONMessage().returnOK(params);
+			}
+		}
+		throw new IOException ("Group node " + this.getName() + ": missing parameter for synchronization action");
+	}
+
 	private String getName() {
 		return this.props.getProperty(JSONMessageProcessor.REGISTERED_GROUPS.GROUP_NAME);
 	}

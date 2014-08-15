@@ -7,6 +7,7 @@ public class JSONMessage {
 
 	private static final String LS = System.getProperty("line.separator");
 	public static final String DOWNLOAD_HEADER = "download";
+	private static final String RESPONSE_HEADER = "response";
 	private String header;
 	private Object[] body;
 	
@@ -58,6 +59,9 @@ public class JSONMessage {
 	public JSONMessage returnOK(Object ... responses) {
 		if(responses == null) {
 			responses = new Object[0];
+		}
+		if(header == null) {
+			setHeader(RESPONSE_HEADER);
 		}
 		Object[] body = new Object[responses.length + 1];
 		body[0] = AppConst.OK_RESPONSE;
