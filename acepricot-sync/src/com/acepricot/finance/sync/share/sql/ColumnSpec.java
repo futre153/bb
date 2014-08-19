@@ -15,7 +15,7 @@ public class ColumnSpec extends SQLSyntaxImpl {
 		sQLSyntaxImpl = ref;
 		identifier = name;
 	} 
-	
+		
 	@Override
 	public String toSQLString() throws SQLException {
 		if(identifier == null) {
@@ -24,10 +24,10 @@ public class ColumnSpec extends SQLSyntaxImpl {
 		return (sQLSyntaxImpl == null ? EMPTY : sQLSyntaxImpl.toSQLString() + ".") + identifier.toSQLString();
 	}
 
-	public static ColumnSpec[] getColSpecArray(SchemaName is, String ...strings) {
+	public static ColumnSpec[] getColSpecArray(TableName tableName, String ...strings) {
 		ColumnSpec[] cols = new ColumnSpec[strings.length];
 		for(int i = 0; i < cols.length; i ++) {
-			cols[i] = new ColumnSpec(is, new Identifier(strings[i]));
+			cols[i] = new ColumnSpec(tableName, new Identifier(strings[i]));
 		}
 		return cols;
 	}

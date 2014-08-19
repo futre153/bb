@@ -4,9 +4,12 @@ import java.sql.SQLException;
 
 public class WhereClause extends SQLSyntaxImpl {
 	
-	public static final int OR = 1;
-	public static final int AND = 2;
-	public static final int NOT = 3;
+	public static final String OR = "OR";
+	public static final String AND = "AND";
+	public static final String NOT = "NOT";
+	//private static final int or = Integer.parseInt(OR);
+	//private static final int and = Integer.parseInt(AND);
+	//private static final int not = Integer.parseInt(NOT);
 	public static final String RIGHT_BRACKET = ")";
 	public static final String LEFT_BRACKET = "(";
 	protected SearchCon searchCon;
@@ -41,23 +44,23 @@ public class WhereClause extends SQLSyntaxImpl {
 				Predicate p = null;
 				SearchCon in = null;
 				try {
-					not = objs[index].equals(Integer.toString(NOT));
+					not = objs[index].equals(NOT);
 					if(not) {
 						index ++;
 					}
 					else {
-						or = objs[index].equals(Integer.toString(OR));
+						or = objs[index].equals(OR);
 						if(or) {
 							index ++;
 						}
 						else {
-							and = objs[index].equals(Integer.toString(AND));
+							and = objs[index].equals(AND);
 							if(and) {
 								index ++;
 							}
 						}
 						if ((or | and) & (!not)) {
-							not = objs[index].equals(Integer.toString(NOT));
+							not = objs[index].equals(NOT);
 							if(not) {
 								index ++;
 							}

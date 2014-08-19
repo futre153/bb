@@ -5,6 +5,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.security.MessageDigest;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,14 +20,17 @@ import javax.xml.bind.DatatypeConverter;
 import org.pabk.net.http.DefaultContent;
 import org.pabk.net.http.HttpClientConst;
 import org.pabk.net.http.SimpleClient;
+import org.pabk.util.Base64Coder;
 import org.pabk.util.Huffman;
 
 import com.acepricot.finance.sync.DBConnector;
 import com.acepricot.finance.sync.share.JSONMessage;
 import com.acepricot.finance.sync.share.sql.CompPred;
 import com.acepricot.finance.sync.share.sql.Identifier;
+import com.acepricot.finance.sync.share.sql.Insert;
 import com.acepricot.finance.sync.share.sql.Predicate;
 import com.acepricot.finance.sync.share.sql.Query;
+import com.acepricot.finance.sync.share.sql.TableName;
 import com.acepricot.finance.sync.share.sql.WhereClause;
 import com.google.gson.Gson;
 
@@ -35,8 +40,42 @@ public class Test {
 	//public static File f = new File("D:\\TEMP\\sampleclient\\database1-1.h2.db");
 	public static void main(final String[] a) throws Exception {
 		//System.out.println(Huffman.encode("cnuewf092no ptraajtn39ln", null));
+		/*
+		Object com1 = new CompPred(new Object[]{new Identifier("A"),new Identifier("B")}, new Object[]{1, 2}, Predicate.EQUAL);
+		Object com2 = new CompPred(new Object[]{new Identifier("C")}, new Object[]{3},Predicate.EQUAL);
+		Object where = new WhereClause(com1, WhereClause.AND, com2);
+		
+		System.out.println(where);
+		Class.forName("com.sap.dbtech.jdbc.DriverSapDB");
+		Connection con = DriverManager.getConnection("jdbc:sapdb://p3600x006/aceserve", "ACESVRADM", "nahradnik06");
+		
+		TableName tableName = new TableName(new Identifier("SYNC_RESPONSES"));
+		Object[] values = new Object[]{61, 10};
+		String[] cols = new String[]{"GROUP_ID","DEVICE_ID"};
+		Insert sql = DBConnector.createInsert(tableName, (Object)values, cols);
+		
+		ByteArrayOutputStream bout = new ByteArrayOutputStream();
+		ObjectOutputStream out = new ObjectOutputStream(bout);
+		out.writeObject(sql);
+		
+		String enc = new String(Base64Coder.encode(Huffman.encode(bout.toByteArray(), null)));
+		byte[] b = Huffman.decode(Base64Coder.decode(enc.toCharArray()), null);
+		
+		ByteArrayInputStream bin = new ByteArrayInputStream(b);
+		ObjectInputStream in = new ObjectInputStream(bin);
+		
+		Insert insert = (Insert) in.readObject();
+		
+		
+
+		try {
+			DBConnector.insert(con, insert);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		*/
 		JSONMessageProcessorClient.syncStart(new String[]{"D:\\TEMP\\clientprops\\sync_props1-1.xml"});
-		System.exit(0);
 
 	}
 	

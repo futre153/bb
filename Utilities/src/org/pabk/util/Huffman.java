@@ -133,7 +133,7 @@ public class Huffman {
 		out.close();
 	}
 	
-	private static final byte[] decode(byte[] b, String table) throws Exception {
+	public static final byte[] decode(byte[] b, String table) throws Exception {
 		ByteArrayOutputStream out=new ByteArrayOutputStream();
 		ByteArrayInputStream in=new ByteArrayInputStream(b);
 		decode(in,out, table);
@@ -174,7 +174,7 @@ public class Huffman {
 		code[2]>>=1;
 	}
 
-	private static final byte[] encode(byte[] b, String table) throws Exception {
+	public static final byte[] encode(byte[] b, String table) throws Exception {
 		ByteArrayOutputStream out=new ByteArrayOutputStream();
 		ByteArrayInputStream in=new ByteArrayInputStream(b);
 		encode(in,out, table);

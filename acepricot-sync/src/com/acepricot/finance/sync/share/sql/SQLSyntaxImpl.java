@@ -5,6 +5,10 @@ import java.sql.SQLException;
 
 public abstract class SQLSyntaxImpl implements SQLSyntax {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected static final String EMPTY = "";
 	private static boolean prepared = true;
 	public static final String PREPARED_MARK = "?";

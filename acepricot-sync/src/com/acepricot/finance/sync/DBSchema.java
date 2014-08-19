@@ -12,12 +12,12 @@ import com.acepricot.finance.sync.share.sql.TableName;
 import com.acepricot.finance.sync.share.sql.WhereClause;
 
 public class DBSchema {
-	
-	private static final String SYNC_CHANGES = "SYNC_CHANGES";
-	private static final String SYNC_TYPE = "SYNC_TYPE";
-	public static final String SYNC_INSERT = "SYNC_INSERT";
-	private static final String SYNC_SCHEMA = "SYNC_SCHEMA";
-	private static final String SYNC_TABLE = "SYNC_TABLE";
+	static final String SYNC_LABEL = "SYNC_";
+	private static final String SYNC_CHANGES = SYNC_LABEL + "CHANGES";
+	public static final String SYNC_TYPE = SYNC_LABEL + "TYPE";
+	public static final String SYNC_INSERT = SYNC_LABEL + "INSERT";
+	static final String SYNC_SCHEMA = SYNC_LABEL + "SCHEMA";
+	static final String SYNC_TABLE = SYNC_LABEL + "TABLE";
 	private static final String[] SYNC_COLS_EXTENSIONS = {
 		SYNC_CHANGES, SYNC_TYPE, SYNC_INSERT, SYNC_SCHEMA, SYNC_TABLE
 	};
@@ -39,11 +39,30 @@ public class DBSchema {
 	private static final String SYNC_SCHEMA_NAME = "SYNC";
 	private static final String IS_COLUMNS_IS_NULLABLE = "IS_NULLABLE";
 	private static final String IS_IS_NULLABLE_NO = "NO";
-	private static final String USER_SCHEMA = "USER";
+	static final String USER_SCHEMA = "USER";
+	
+	private static final String IS_CONSTRAINTS = "CONSTRAINTS";
+	private static final String IS_CONSTRAINTS_CONSTRAINT_SCHEMA = "CONSTRAINT_SCHEMA";
+	//private static final String IS_CONSTRAINTS_CONSTRAINT_NAME = "CONSTRAINT_NAME";
+	private static final String IS_CONSTRAINTS_TABLE_SCHEMA = "TABLE_SCHEMA";
+	private static final String IS_CONSTRAINTS_TABLE_NAME = "TABLE_NAME";
+	private static final String IS_CONSTRAINTS_COLUMN_LIST = "COLUMN_LIST";
+	private static final String IS_CONSTRAINTS_CONSTRAINT_TYPE = "CONSTRAINT_TYPE";
+	private static final String PRIMARY_KEY_VALUE = "PRIMARY KEY";
+	private static final String UNIQUE_VALUE = "UNIQUE";
+	public static final String SYNC_OPERATION_ID = "SYNC_OPERATION_ID";
+	public static final String SYNC_OPERATION_RESPONSE_RESULT = "SYNC_OPERATION_RESPONSE_RESULT";
+	public static final int SYNC_OPERATION_RESULT_OK = 0;
+	public static final int SYNC_OPERATION_RESULT_FAILED = 1;
+	public static final int SYNC_OPERATION_RESULT_NO_OPERATION = 2;
+	
+	
 	private String[] tables;
 	private String[][] columns;
 	private String[][] dataTypes;
-	private String[][] constraints;
+	private String[][] nullables;
+	private Object[][] constraints;
+	
 	private static boolean trigger = true;
 	
 	private DBSchema() {}
@@ -120,26 +139,26 @@ public class DBSchema {
 	public DBSchema loadSchemas(Connection con) throws SQLException {
 		SchemaName is = new SchemaName(new Identifier(INFORMATION_SCHEMA));
 		TableName tableName = new TableName(is, new Identifier(IS_TABLES));
-		ColumnSpec[] cols = ColumnSpec.getColSpecArray(is, new String[]{IS_TABLES_TABLE_NAME});
+		ColumnSpec[] cols = ColumnSpec.getColSpecArray(tableName, new String[]{IS_TABLES_TABLE_NAME});
 		Object com1 = new CompPred(new Object[]{new Identifier(IS_TABLES_TABLE_SCHEMA)}, new Object[]{USER_SCHEMA}, Predicate.EQUAL);
 		Rows rows = DBConnector.select(con, DBConnector.createSelect().addFromClause(tableName).addColumns(cols).addTableSpec(new WhereClause(com1)));
 		tables = new String[rows.size()];
 		columns = new String[rows.size()][];
 		dataTypes = new String[rows.size()][];
-		constraints = new String[rows.size()][];
+		nullables = new String[rows.size()][];
 		for(int i = 0; i < tables.length; i ++) {
 			tables[i] = (String) rows.get(i).get(IS_TABLES_TABLE_NAME);
 		}
 		tableName = new TableName(is, new Identifier(IS_TYPE_INFO));
 		Rows typesRows = DBConnector.select(con, DBConnector.createSelect().addFromClause(tableName));		
 		tableName = new TableName(is, new Identifier(IS_COLUMNS));
-		cols = ColumnSpec.getColSpecArray(is, new String[]{IS_COLUMNS_COLUMN_NAME, IS_COLUMNS_DATA_TYPE, IS_COLUMNS_CHARACTER_MAXIMUM_LENGTH, IS_COLUMNS_NUMERIC_PRECISION, IS_COLUMNS_NUMERIC_SCALE, IS_COLUMNS_TYPE_NAME, IS_COLUMNS_IS_NULLABLE});
+		cols = ColumnSpec.getColSpecArray(tableName, new String[]{IS_COLUMNS_COLUMN_NAME, IS_COLUMNS_DATA_TYPE, IS_COLUMNS_CHARACTER_MAXIMUM_LENGTH, IS_COLUMNS_NUMERIC_PRECISION, IS_COLUMNS_NUMERIC_SCALE, IS_COLUMNS_TYPE_NAME, IS_COLUMNS_IS_NULLABLE});
 		for(int i = 0; i < tables.length; i ++) {
-			com1 = new CompPred(new Object[]{new Identifier(IS_TABLES_TABLE_SCHEMA), new Identifier(USER_SCHEMA)}, new Object[]{IS_TABLES_TABLE_NAME, tables[i]}, Predicate.EQUAL);
+			com1 = new CompPred(new Object[]{new Identifier(IS_TABLES_TABLE_SCHEMA), new Identifier(IS_TABLES_TABLE_NAME)}, new Object[]{USER_SCHEMA, tables[i]}, Predicate.EQUAL);
 			rows = DBConnector.select(con, DBConnector.createSelect().addFromClause(tableName).addColumns(cols).addTableSpec(new WhereClause(com1)));
 			columns[i] = new String[rows.size()];
 			dataTypes[i] = new String[rows.size()];
-			constraints[i] = new String[rows.size()];
+			nullables[i] = new String[rows.size()];
 			for(int j = 0; j < columns[i].length; j ++) {
 				Row row = rows.get(j);
 				columns[i][j] = (String) row.get(IS_COLUMNS_COLUMN_NAME);
@@ -158,12 +177,49 @@ public class DBSchema {
 				}
 				Object nullable = row.get(IS_COLUMNS_IS_NULLABLE);
 				if(nullable != null && nullable.equals(IS_IS_NULLABLE_NO)) {
-					constraints[i][j] = "NOT NULL";
+					nullables[i][j] = "NOT NULL";
 				}
 			}
 		}
-		
+		tableName = new TableName(is, new Identifier(IS_CONSTRAINTS));
+		cols = ColumnSpec.getColSpecArray(tableName, new String[]{IS_CONSTRAINTS_COLUMN_LIST});
+		Object com2 = new CompPred(new Object[]{new Identifier(IS_CONSTRAINTS_CONSTRAINT_TYPE)}, new Object[]{DBSchema.PRIMARY_KEY_VALUE}, Predicate.EQUAL);
+		Object com3 = new CompPred(new Object[]{new Identifier(IS_CONSTRAINTS_CONSTRAINT_TYPE)}, new Object[]{DBSchema.UNIQUE_VALUE}, Predicate.EQUAL);
+		constraints = new Object[tables.length][2];
+		for(int i = 0; i < tables.length; i ++) {
+			com1 = new CompPred (
+					new Object[]{new Identifier(IS_CONSTRAINTS_CONSTRAINT_SCHEMA),	new Identifier(IS_CONSTRAINTS_TABLE_SCHEMA),	new Identifier(IS_CONSTRAINTS_TABLE_NAME)},
+					new Object[]{USER_SCHEMA,										USER_SCHEMA,									tables[i]},
+					Predicate.EQUAL);
+			rows = DBConnector.select(con, DBConnector.createSelect().addFromClause(tableName).addColumns(cols).addTableSpec(new WhereClause(com1, WhereClause.AND, com2)));
+			constraints[i][0] = getList(rows);
+			rows = DBConnector.select(con, DBConnector.createSelect().addFromClause(tableName).addColumns(cols).addTableSpec(new WhereClause(com1, WhereClause.AND, com3)));
+			constraints[i][1] = getList(rows);
+		}
 		return this;
+	}
+	
+	
+	private static String[] getList(Rows rows) {
+		StringBuffer sb = new StringBuffer();
+		for(int j = 0; j < rows.size(); j ++) {
+			Object list = rows.get(j).get(IS_CONSTRAINTS_COLUMN_LIST);
+			if(list != null && (list instanceof String)) {
+				if(sb.length() > 0) {
+					sb.append(',');
+				}
+				sb.append(list);
+			}
+		}
+		if(sb.length() > 0) {
+			return sb.toString().split(",");
+		}
+		else {
+			return null;
+		}
+	}
+		
+		
 		//if(isTrigger()) return;
 		
 		/*
@@ -226,7 +282,7 @@ public class DBSchema {
 		}
 		System.out.println(primaries);
 		*/
-	}
+	
 
 	private static int getDataType(Rows typesRows, Object dataType) throws SQLException {
 		for(int i = 0; i < typesRows.size(); i ++) {
@@ -265,6 +321,19 @@ public class DBSchema {
 	
 	public static String getSyncSchemaName() {
 		return DBSchema.SYNC_SCHEMA_NAME;
+	}
+
+	public String[] getColumns(String table) throws SQLException {
+		return this.getColumns(null, table);
+	}
+
+	public String[] getPrimaryKeys(String table) throws SQLException {
+		int index = this.getIndexOfTable(null, table);
+		Object obj = this.constraints[index][0];
+		if(obj == null) {
+			return new String[]{};
+		}
+		return (String[]) obj;
 	};
 	
 }

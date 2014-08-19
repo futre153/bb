@@ -67,7 +67,7 @@ public class SyncEngine extends Hashtable <String, GroupNode> {
 			throw new IOException("Group node with id = " + grpId + " does not exists");
 		}
 		grpNode.action(GroupNode.PAUSED, lock);
-		return JSONMessageProcessor.getLastOperationId(grpId);
+		return 0;
 	}
 	
 	public static void nodeContinue(int grpId, Object lock) throws IOException {
@@ -98,7 +98,7 @@ public class SyncEngine extends Hashtable <String, GroupNode> {
 	
 
 	public static JSONMessage processSyncRequest(Row row) {
-		String grpName = (String) row.get(JSONMessageProcessor.REGISTERED_GROUPS.GROUP_NAME);
+		String grpName = (String) row.get(JSONMessageProcessor.LOCAL_LABEL + JSONMessageProcessor.REGISTERED_GROUPS.GROUP_NAME);
 		//JSONMessageProcessor mp = (JSONMessageProcessor) row.get(JSONMessageProcessor.class.getName());
 		GroupNode grpNode = SyncEngine.getGroupNode(grpName);
 		if(grpNode != null) {

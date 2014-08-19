@@ -206,7 +206,7 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		return status;
 	}
 	*/
-	static int insert (Connection con, Insert insert) throws SQLException {
+	public static int insert (Connection con, Insert insert) throws SQLException {
 		return DBConnector.insert(con, insert, true);
 	}
 	
