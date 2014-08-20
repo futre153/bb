@@ -17,18 +17,22 @@ public class DBSchemas {
 	public static final String SYNC_INSERT = "SYNC_INSERT";
 	private static final String SYNC_SCHEMA = "SYNC_SCHEMA";
 	private static final String SYNC_TABLE = "SYNC_TABLE";
+	private static final String SYNC_ID = "SYNC_ID";
+	static final String SYNC_STATUS = "SYNC_STATUS";
 	private static final String[] SYNC_COLS_EXTENSIONS = {
-		SYNC_CHANGES, SYNC_TYPE, SYNC_INSERT, SYNC_SCHEMA, SYNC_TABLE
+		SYNC_CHANGES, SYNC_TYPE, SYNC_INSERT, SYNC_SCHEMA, SYNC_TABLE, SYNC_ID, SYNC_STATUS
 	};
 	private static final String[] SYNC_DATATYPES_EXTENSIONS = {
-		"VARCHAR(256)", "TINYINT", "BIGINT", "VARCHAR(256)", "VARCHAR(256)"
+		"VARCHAR(256)", "TINYINT", "BIGINT", "VARCHAR(256)", "VARCHAR(256)", "INT", "TINYINT"
 	};
 	private static final String[] SYNC_CONSTRAINTS_EXTENSIONS = {
 		"NOT NULL",
 		"DEFAULT " + Trigger.INSERT + " OR " + Trigger.UPDATE + " OR " + Trigger.DELETE + " OR " + Trigger.SELECT + " NOT NULL",
 		"NOT NULL",
 		"NOT NULL",
-		"NOT NULL"
+		"NOT NULL",
+		"NOT NULL AUTO_INCREMENT",
+		"NOT NULL DEFAULT 0"
 	};
 	private static final String INFORMATION_SCHEMA = "INFORMATION_SCHEMA";
 	private static final String IS_TABLES = "TABLES";

@@ -18,9 +18,12 @@ public class DBSchema {
 	public static final String SYNC_INSERT = SYNC_LABEL + "INSERT";
 	static final String SYNC_SCHEMA = SYNC_LABEL + "SCHEMA";
 	static final String SYNC_TABLE = SYNC_LABEL + "TABLE";
+	static final String SYNC_ID = SYNC_LABEL + "ID";
+	private static final String SYNC_STATUS = SYNC_LABEL + "STATUS";
 	private static final String[] SYNC_COLS_EXTENSIONS = {
-		SYNC_CHANGES, SYNC_TYPE, SYNC_INSERT, SYNC_SCHEMA, SYNC_TABLE
+		SYNC_CHANGES, SYNC_TYPE, SYNC_INSERT, SYNC_SCHEMA, SYNC_TABLE, SYNC_ID, SYNC_STATUS
 	};
+	
 	private static final String INFORMATION_SCHEMA = "INFORMATION_SCHEMA";
 	private static final String IS_TABLES = "TABLES";
 	private static final String IS_TABLES_TABLE_NAME = "TABLE_NAME";
@@ -50,7 +53,7 @@ public class DBSchema {
 	private static final String IS_CONSTRAINTS_CONSTRAINT_TYPE = "CONSTRAINT_TYPE";
 	private static final String PRIMARY_KEY_VALUE = "PRIMARY KEY";
 	private static final String UNIQUE_VALUE = "UNIQUE";
-	public static final String SYNC_OPERATION_ID = "SYNC_OPERATION_ID";
+	//public static final String SYNC_OPERATION_ID = "SYNC_OPERATION_ID";
 	public static final String SYNC_OPERATION_RESPONSE_RESULT = "SYNC_OPERATION_RESPONSE_RESULT";
 	public static final int SYNC_OPERATION_RESULT_OK = 0;
 	public static final int SYNC_OPERATION_RESULT_FAILED = 1;

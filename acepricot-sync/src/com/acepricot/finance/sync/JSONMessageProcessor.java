@@ -92,7 +92,7 @@ final class JSONMessageProcessor {
 
 	private static final String MAX_FUNCTION = "MAX";
 
-	static final String LOCAL_LABEL = "***";
+	//static final String LOCAL_LABEL = "***";
 	
 	public final class UPLOADED_FILES extends TableSchema {
 		private static final String GROUP_ID = "GROUP_ID";
@@ -148,7 +148,7 @@ final class JSONMessageProcessor {
 		BigDecimal enabled;
 	}
 	
-	public final class REGISTERED_DEVICES {
+	public final class REGISTERED_DEVICES extends TableSchema {
 		//private static final String TABLE_NAME = "REGISTERED_GROUPS";
 		private static final String ID = UNIVERSAL_ID;
 		public static final String GROUP_ID = "GROUP_ID";
@@ -164,20 +164,25 @@ final class JSONMessageProcessor {
 		BigDecimal sync_enabled;
 	}
 	
-	public final class SYNC_RESPONSES {
+	public final class SYNC_RESPONSES extends TableSchema {
 		static final String GROUP_ID = "GROUP_ID";
 		static final String DEVICE_ID = "DEVICE_ID";
 		static final String STATUS = "STATUS";
 		static final String QUERY = "QUERY";
 		static final String TYPE = "TYPE";
+		static final String TABLE_NAME = "TABLE_NAME";
+		static final String SYNC_ID = "SYNC_ID";
 		static final int PENDING = 1;
 		public static final int WAITING = 0;
-		int BigDecimal;
+		int id;
 		int group_id;
 		int device_id;
 		BigDecimal status;
 		Clob query;
 		int type;
+		String table_name;
+		int sync_id;
+		
 	}
 	
 	//private static Connection con;
@@ -187,6 +192,7 @@ final class JSONMessageProcessor {
 	private UPLOADED_FILES uploaded_files = new UPLOADED_FILES();
 	private DOWNLOADED_FILES downloaded_files = new DOWNLOADED_FILES();
 	REGISTERED_GROUPS registered_groups = new REGISTERED_GROUPS();
+	SYNC_RESPONSES sync_responses = new SYNC_RESPONSES();
 				
 	private JSONMessageProcessor() throws IOException{
 		if(dsn == null) {
@@ -274,16 +280,10 @@ final class JSONMessageProcessor {
 		}
 		if(!login (mp, con, msg).isError()) {
 			try {
-				grpId = JSONMessageProcessor.getGroupId(con, grpName);
-				devId = JSONMessageProcessor.getDeviceId(con, grpId, devName);
-				syncRow.put(JSONMessageProcessor.LOCAL_LABEL + JSONMessageProcessor.REGISTERED_GROUPS.GROUP_NAME, grpName);
-				syncRow.put(JSONMessageProcessor.LOCAL_LABEL + JSONMessageProcessor.REGISTERED_DEVICES.DEVICE_NAME, devName);
-				syncRow.put(JSONMessageProcessor.LOCAL_LABEL + JSONMessageProcessor.REGISTERED_DEVICES.GROUP_ID, grpId);
-				syncRow.put(JSONMessageProcessor.LOCAL_LABEL + JSONMessageProcessor.UNIVERSAL_ID, devId);
-				syncRow.put(JSONMessageProcessor.LOCAL_LABEL + JSONMessageProcessor.class.getName(), mp);
-				msg = SyncEngine.processSyncRequest(syncRow);
+				Operation op = new Operation(mp, syncRow, grpName, devName);
+				msg = SyncEngine.processSyncRequest(op);
 			}
-			catch(SQLException | IOException e) {
+			catch(IOException e) {
 				return msg.sendAppError(e);
 			}
 		}
@@ -628,29 +628,40 @@ final class JSONMessageProcessor {
 	 * 5 - unique
 	 */
 	
+	
+	static final int retrieveRows (Object ...o) throws SQLException, IllegalArgumentException, IllegalAccessException, NoSuchFieldException, SecurityException {
+		Rows rows = DBConnector.select((Connection) o[1], DBConnector.createSelect().addFromClause(new TableName(new Identifier(o[2].getClass().getSimpleName()))).addTableSpec((WhereClause) o[3]));
+		TableSchema schema = (TableSchema) o[0].getClass().getDeclaredField(o[2].getClass().getSimpleName().toLowerCase()).get(o[0]);
+		schema.rows = rows;
+		schema.index = -1;
+		return rows.size();
+	}
+	
 	static final JSONMessage retrieveRows2(Object ... o) {
 		try {
-			Query select = DBConnector.createSelect();
-			select.addFromClause(new TableName(new Identifier(o[3].getClass().getSimpleName())));
-			select.addTableSpec((WhereClause) o[4]);
-			Rows rows = DBConnector.select((Connection) o[2], select);
-			if(rows.size() == 0) {
-				throw new SQLException(AppError.getMessage(AppError.RECORD_NOT_FOUND));
-			}
-			if((boolean) o[5]) {
-				if(rows.size() != 1) {
-					throw new SQLException(AppError.getMessage(AppError.MULTIPLE_RECORD_FOUND));
-				}
-			}
+			
+			/*
+			Rows rows = DBConnector.select((Connection) o[2], DBConnector.createSelect().addFromClause(new TableName(new Identifier(o[3].getClass().getSimpleName()))).addTableSpec((WhereClause) o[4]));
 			TableSchema schema = (TableSchema) o[0].getClass().getDeclaredField(o[3].getClass().getSimpleName().toLowerCase()).get(o[0]);
 			schema.rows = rows;
 			schema.index = -1;
+			int l  = rows.size();
+			
+			*/
+			int l = retrieveRows(o[0], o[2], o[3], o[4]); 
+			if(l == 0) {
+				throw new SQLException(AppError.getMessage(AppError.RECORD_NOT_FOUND));
+			}
+			if((boolean) o[5]) {
+				if(l != 1) {
+					throw new SQLException(AppError.getMessage(AppError.MULTIPLE_RECORD_FOUND));
+				}
+			}
 			return ((JSONMessage) o[1]).returnOK();
 		} catch (SQLException | IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
 			return ((JSONMessage) o[1]).sendAppError(e);
 		}
 	}
-	
 	
 	@SuppressWarnings("unused")
 	private static final JSONMessage upload(JSONMessageProcessor mp, Connection con, JSONMessage msg) {
@@ -1168,9 +1179,10 @@ final class JSONMessageProcessor {
 		}
 		return l;
 	}
-*/	
-	public static int getOperation(int grpId, int devId, int status) {
-		int l = -1;
+	
+	public static int getOperation(Operation op, int status) throws SQLException {
+		int grpId = op.getGroupNode().getGroupId();
+		int devId = op.getDeviceNode().getDeviceId();
 		Connection con = null;
 		try {
 			TableName tableName = new TableName (new Identifier(JSONMessageProcessor.SYNC_RESPONSES.class.getSimpleName()));
@@ -1185,20 +1197,54 @@ final class JSONMessageProcessor {
 			if(rows.size() > 0) {
 				return (int) rows.get(0).get(JSONMessageProcessor.UNIVERSAL_ID);
 			}
+			try {
+				return JSONMessageProcessor.retrieveRows(op.getMessageProcessor(), con, op.getMessageProcessor().sync_responses, new WhereClause(com1));
+			} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
+				throw new SQLException(e);
+			}
 		}
 		catch (SQLException e) { 
+			throw e;
 		}
 		finally {
 			try{con.close();} catch (SQLException e) {}
 		}
-		return l;
 	}
 	
-	public static int getWaitingOperation(int grpId, int devId) {
-		return JSONMessageProcessor.getOperation(grpId, devId, JSONMessageProcessor.SYNC_RESPONSES.WAITING);
+	
+	
+*/	
+	public static int getOperation(Operation op, int status) throws SQLException {
+		int grpId = op.getGroupNode().getGroupId();
+		int devId = op.getDeviceNode().getDeviceId();
+		Connection con = null;
+		try {
+			Object com1 = new CompPred(
+				new Object[] {
+					new Identifier(JSONMessageProcessor.SYNC_RESPONSES.GROUP_ID),
+					new Identifier(JSONMessageProcessor.SYNC_RESPONSES.DEVICE_ID),
+					new Identifier(JSONMessageProcessor.SYNC_RESPONSES.STATUS)},
+				new Object[] {grpId, devId, status}, Predicate.EQUAL);
+			con = DBConnector.lookup(dsn);
+			try {
+				return JSONMessageProcessor.retrieveRows(op.getMessageProcessor(), con, op.getMessageProcessor().sync_responses, new WhereClause(com1));
+			} catch (IllegalArgumentException | IllegalAccessException | NoSuchFieldException | SecurityException e) {
+				throw new SQLException(e);
+			}
+		}
+		catch (SQLException e) { 
+			throw e;
+		}
+		finally {
+			try{con.close();} catch (SQLException e) {}
+		}
 	}
-	public static int getPendingOperation(int grpId, int devId) {
-		return JSONMessageProcessor.getOperation(grpId, devId, JSONMessageProcessor.SYNC_RESPONSES.PENDING);
+	
+	public static int getWaitingOperation(Operation op) throws SQLException {
+		return JSONMessageProcessor.getOperation(op, JSONMessageProcessor.SYNC_RESPONSES.WAITING);
+	}
+	public static int getPendingOperation(Operation op) throws SQLException {
+		return JSONMessageProcessor.getOperation(op, JSONMessageProcessor.SYNC_RESPONSES.PENDING);
 	}
 
 	public static void deleteOperation(int l) {
@@ -1217,13 +1263,13 @@ final class JSONMessageProcessor {
 		}
 	}
 	
-	public static boolean[] checkPartial(String dsn, String schema, String table, String[] cols, Object[] vals, String[] pks) throws SQLException {
+	public static boolean[] checkPartial(String dsn, Operation op) throws SQLException {
 		Connection con = null;
-		boolean[] retValue = new boolean[pks.length + 1];
+		boolean[] retValue = new boolean[op.getPrimaryKeys().length + 1];
 		try {
 			con = DBConnector.lookup(dsn);
-			for(int i = 0; i < pks.length; i ++) {
-				retValue[i] = checkAll (dsn, schema, table, new String[]{pks[i]}, new Object[]{vals[getIndexOfArray(cols, pks[i])]});
+			for(int i = 0; i < op.getPrimaryKeys().length; i ++) {
+				retValue[i] = check (con, op.getSchemaName(), op.getTableName(), new String[]{op.getPrimaryKeys()[i]}, new Object[]{op.getPrimaryKeysValues()[i]});
 				retValue[retValue.length - 1] |= retValue[i];
 			}
 			return retValue;
@@ -1236,20 +1282,20 @@ final class JSONMessageProcessor {
 		}
 	}
 	
-	public static boolean check(Connection con, String schema, String table, String[] cols, Object[] vals) throws SQLException {
+	private static boolean check(Connection con, String schema, String table, String[] columns, Object[] values) throws SQLException {
 		SchemaName schemaName = new SchemaName(new Identifier(schema));
 		TableName tableName = new TableName(schemaName, new Identifier(table));
-		ColumnSpec[] columnSpecs = JSONMessageProcessor.getColumnSpec(tableName, cols);
-		Object com1 = new CompPred(columnSpecs, vals, Predicate.EQUAL);
+		ColumnSpec[] columnSpecs = JSONMessageProcessor.getColumnSpec(tableName, columns);
+		Object com1 = new CompPred(columnSpecs, values, Predicate.EQUAL);
 		return DBConnector.select(con, DBConnector.createSelect().addFromClause(tableName).addTableSpec(new WhereClause(com1))).size() == 1;
 	}
 
 	
-	public static boolean checkAll(String dsn, String schema, String table,	String[] cols, Object[] vals) throws SQLException {
+	public static boolean checkAll(String dsn, Operation op) throws SQLException {
 		Connection con = null;
 		try {
 			con = DBConnector.lookup(dsn);
-			return check(con, schema, table, cols, vals);
+			return check(con, op.getSchemaName(), op.getTableName(), op.getColumns(), op.getValues());
 		}
 		catch(SQLException e) {
 			throw e;
@@ -1285,7 +1331,7 @@ final class JSONMessageProcessor {
 		ArrayList<String> a = new ArrayList<String>();
 		while(i.hasNext()) {
 			String key = i.next();
-			if(!(key.startsWith(LOCAL_LABEL) || key.startsWith(DBSchema.SYNC_LABEL))) {
+			if(!(key.startsWith(DBSchema.SYNC_LABEL))) {
 				a.add(key);
 			}
 		}
@@ -1320,41 +1366,71 @@ final class JSONMessageProcessor {
 		return DBConnector.lookup(dsn);
 	}
 
-	public static void insertOperation(String dsn2, String schema, String table, String[] cols, Object[] values, DeviceNode[] devNodes, int grpId, ArrayList<Object> pksNew, int devId) throws SQLException {
+	public static void insertOperation(String dsn2, Operation op) throws SQLException {
 		Connection con = DBConnector.lookup(dsn);
 		Connection con2 =  DBConnector.lookup(dsn2);
 		try {
-			Insert insert = DBConnector.createInsert (new TableName(new SchemaName(new Identifier(schema)), new Identifier(table)), (Object)values, cols);
-			String query = save(insert);
+			Object[] values = op.getValues();
+			if(op.getNewPrimaryKeysValues() != null) {
+				for(int i = 0; i < op.getPrimaryKeys().length; i ++) {
+					values[JSONMessageProcessor.getIndexOfArray(op.getColumns(), op.getPrimaryKeys()[i])] = op.getNewPrimaryKeysValues()[i];
+				}
+			}
+			Insert insert = DBConnector.createInsert (new TableName(new SchemaName(new Identifier(op.getSchemaName())), new Identifier(op.getTableName())), (Object)values, op.getColumns());
+			op.setQuery(save(insert));
 			DBConnector.insert(con2, insert);
 			TableName tableName = new TableName(new Identifier(JSONMessageProcessor.SYNC_RESPONSES.class.getSimpleName()));
 			String[] colNames = {
 					JSONMessageProcessor.SYNC_RESPONSES.GROUP_ID,
 					JSONMessageProcessor.SYNC_RESPONSES.DEVICE_ID,
 					JSONMessageProcessor.SYNC_RESPONSES.QUERY,
-					JSONMessageProcessor.SYNC_RESPONSES.TYPE
+					JSONMessageProcessor.SYNC_RESPONSES.TYPE,
+					JSONMessageProcessor.SYNC_RESPONSES.TABLE_NAME,
+					JSONMessageProcessor.SYNC_RESPONSES.SYNC_ID
 			};
 			Object vals = new Object[] {
-					grpId, null, query, JSONMessage.INSERT_OPERATION
+					op.getGroupNode().getGroupId(), null, op.getQuery(), JSONMessage.INSERT_OPERATION, op.getTableName(), op.getId()
 			};
+			DeviceNode[] devNodes = JSONMessageProcessor.getOtherDevNodes(op);
 			for(int i = 0; i < devNodes.length; i ++) {
 				((Object[]) vals)[1] = devNodes[i].getDeviceId();
 				DBConnector.insert(con, DBConnector.createInsert(tableName, vals, colNames));
 			}
-			if(pksNew.size() > 0) {
-				query = save(pksNew.toArray());
-				((Object[]) vals)[1] = devId;
-				((Object[]) vals)[3] = JSONMessage.INSERT_UPDATE_PK;
+			if(op.getNewPrimaryKeysValues() != null) {
+				ArrayList<Object> pkVal = new ArrayList<Object>();
+				for(int i = 0; i < op.getPrimaryKeys().length; i ++) {
+					if((op.getPrimaryKeys()[i] != null) && (op.getNewPrimaryKeysValues()[i] != null) && (op.getPrimaryKeysValues()[i] != null)) {
+						pkVal.add(op.getPrimaryKeys()[i]);
+						pkVal.add(op.getPrimaryKeysValues()[i]);
+						pkVal.add(op.getNewPrimaryKeysValues()[i]);
+					}
+				}
+				op.setQuery(save(pkVal.toArray()));
+				colNames = new String[] {
+						JSONMessageProcessor.SYNC_RESPONSES.GROUP_ID,
+						JSONMessageProcessor.SYNC_RESPONSES.DEVICE_ID,
+						JSONMessageProcessor.SYNC_RESPONSES.STATUS,
+						JSONMessageProcessor.SYNC_RESPONSES.QUERY,
+						JSONMessageProcessor.SYNC_RESPONSES.TYPE,
+						JSONMessageProcessor.SYNC_RESPONSES.TABLE_NAME,
+						JSONMessageProcessor.SYNC_RESPONSES.SYNC_ID
+				};
+				vals = new Object[] {
+						op.getGroupNode().getGroupId(), op.getDeviceNode().getDeviceId(), JSONMessageProcessor.SYNC_RESPONSES.PENDING, op.getQuery(), JSONMessage.INSERT_UPDATE_PK, op.getTableName(), op.getId()
+				};
 				DBConnector.insert(con, DBConnector.createInsert(tableName, vals, colNames));
 			}
 			else {
 				colNames = new String[] {
 						JSONMessageProcessor.SYNC_RESPONSES.GROUP_ID,
 						JSONMessageProcessor.SYNC_RESPONSES.DEVICE_ID,
-						JSONMessageProcessor.SYNC_RESPONSES.TYPE
+						JSONMessageProcessor.SYNC_RESPONSES.STATUS,
+						JSONMessageProcessor.SYNC_RESPONSES.TYPE,
+						JSONMessageProcessor.SYNC_RESPONSES.TABLE_NAME,
+						JSONMessageProcessor.SYNC_RESPONSES.SYNC_ID
 				};
 				vals = new Object[] {
-						grpId, devId, JSONMessage.INSERT_NO_ACTION
+						op.getGroupNode().getGroupId(), op.getDeviceNode().getDeviceId(), JSONMessageProcessor.SYNC_RESPONSES.PENDING, JSONMessage.INSERT_NO_ACTION, op.getTableName(), op.getId()
 				};
 				DBConnector.insert(con, DBConnector.createInsert(tableName, vals, colNames));
 			}
@@ -1382,6 +1458,20 @@ final class JSONMessageProcessor {
 		}
 	}
 
+
+	private static DeviceNode[] getOtherDevNodes(Operation op) {
+		DeviceNode[] devNodes = new DeviceNode[op.getGroupNode().size() -1];
+		Iterator<String> i = op.getGroupNode().keySet().iterator();
+		int j = 0;
+		while (i.hasNext()) {
+			DeviceNode node = op.getGroupNode().get(i.next());
+			if(node.getDeviceId() != op.getDeviceNode().getDeviceId()) {
+				devNodes[j] = node;
+				j ++;
+			}
+		}
+		return devNodes;
+	}
 	private static String save(Object obj) throws Exception {
 		ByteArrayOutputStream bout = new ByteArrayOutputStream();
 		ObjectOutputStream out = new ObjectOutputStream(bout);
@@ -1389,13 +1479,13 @@ final class JSONMessageProcessor {
 		return new String(Base64Coder.encode(Huffman.encode(bout.toByteArray(), null)));
 	}
 
-	public static Object getNewPKValue(String dsn, String schema, String table, String[] cols, Object[] vals, String pkCol) throws SQLException {
+	public static Object getNewPKValue(String dsn, Operation op, int index) throws SQLException {
 		Connection con = null;
 		try {
 			con = DBConnector.lookup(dsn);
-			SchemaName schemaName = new SchemaName(new Identifier(schema));
-			TableName tableName = new TableName(schemaName, new Identifier(table));
-			ColumnSpec[] specs= new ColumnSpec[]{new ColumnSpec(tableName, new Identifier(pkCol))};
+			SchemaName schemaName = new SchemaName(new Identifier(op.getSchemaName()));
+			TableName tableName = new TableName(schemaName, new Identifier(op.getTableName()));
+			ColumnSpec[] specs= new ColumnSpec[]{new ColumnSpec(tableName, new Identifier(op.getPrimaryKeys()[index]))};
 			Rows rows = DBConnector.select(con, DBConnector.createSelect().addFromClause(tableName).addColumns(specs).addDerived(JSONMessageProcessor.MAX_FUNCTION).addSelectColumnFunction(JSONMessageProcessor.MAX_FUNCTION));
 			Object obj = rows.get(0).get(JSONMessageProcessor.MAX_FUNCTION);
 			if(obj == null) {
@@ -1422,6 +1512,17 @@ final class JSONMessageProcessor {
 		finally {
 			try {con.close();}catch(SQLException e){}
 		}
+	}
+
+	public static int findAffectedOperation(Operation op) {
+		JSONMessageProcessor mp = op.getMessageProcessor();
+		while(mp.sync_responses.hasNext()) {
+			mp.sync_responses.next();
+			if(mp.sync_responses.table_name.equals(op.getTableName()) && (mp.sync_responses.sync_id == op.getId())) {
+				return mp.sync_responses.id;
+			}
+		}
+		return -1;
 	}
 	
 }

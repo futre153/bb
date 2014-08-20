@@ -3,19 +3,13 @@ package com.acepricot.finance.sync;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Properties;
 
-import org.apache.catalina.connector.Connector;
 import org.h2.api.Trigger;
 
 import com.acepricot.finance.sync.share.JSONMessage;
-import com.acepricot.finance.sync.share.sql.Identifier;
-import com.acepricot.finance.sync.share.sql.Insert;
-import com.acepricot.finance.sync.share.sql.SchemaName;
-import com.acepricot.finance.sync.share.sql.TableName;
 
 public class GroupNode extends Hashtable <String, DeviceNode> {
 
@@ -132,155 +126,170 @@ public class GroupNode extends Hashtable <String, DeviceNode> {
 			}
 		default:	
 			this.status = BUSY;
-			Connection con = null;
 			try {
-				con = DBConnector.lookup(props.getProperty(DBConnector.DB_DSN_KEY));
-				return action(con ,params);
+				return action(params);
 			}
 			catch (IOException | SQLException e) {
 				return new JSONMessage().sendAppError(e);
 			}
 			finally {
 				this.status = ACTIVE;
-				try {
-					con.close();
-				} catch (SQLException e) {}
 			}
 		}	
 	}
 	
-	private JSONMessage action(Connection con, Object[] params) throws IOException {
+	private JSONMessage action(Object[] params) throws IOException, SQLException {
 		if(params.length > 0 && params[0] != null) {
-			if(params[0] instanceof Row) {
-				Row row = (Row) params[0];
-				String devName = (String) row.get(JSONMessageProcessor.LOCAL_LABEL + JSONMessageProcessor.REGISTERED_DEVICES.DEVICE_NAME);
-				DeviceNode devNode = this.get(devName);
-				if(devNode == null) {
-					throw new IOException("Device node " + this.getName() + ":" + devName + " is not started");
-				}
-				System.out.println(row);
-				return checkForPendingOperation(row, devNode);
+			if(params[0] instanceof Operation) {
+				return checkForForceOperation((Operation) params[0]);
 			}
 		}
 		throw new IOException ("Group node " + this.getName() + ": missing parameter for synchronization action");
 	}
 
-	private JSONMessage checkForPendingOperation(Row row, DeviceNode devNode) {
-		int opid  = JSONMessageProcessor.getPendingOperation(this.getGroupId(), devNode.getDeviceId());
-		if(opid < 0) {
-			opid = JSONMessageProcessor.getWaitingOperation(this.getGroupId(), devNode.getDeviceId());
-			if(opid < 0) {
-				return checkForSyncRequest(row, devNode);
+	private JSONMessage checkForForceOperation(Operation op) throws IOException, SQLException {
+		switch(op.getType()) {
+		case JSONMessage.FORCE_OPERATION:
+			throw new IOException ("Force operation is not allowed for this version");
+		default:
+			return checkForPendingOperation(op);
+		}
+	}
+
+	private JSONMessage checkForPendingOperation(Operation op) throws SQLException, IOException {
+		int opid  = JSONMessageProcessor.getPendingOperation(op);
+		if(opid == 0) {
+			opid = JSONMessageProcessor.getWaitingOperation(op);
+			if(opid == 0) {
+				return checkForSyncRequest(op);
 			}
 			else {
-				return sendWaitingOperation(opid);
+				return sendWaitingOperation(op);
 			}
 		}
 		else {
-			switch(((Double) row.get(DBSchema.SYNC_TYPE)).intValue()) {
-			case JSONMessage.RESPONSE_FOR_PENDING:
-				if(opid == (int) row.get(DBSchema.SYNC_OPERATION_ID)) {
-					switch((int) row.get(DBSchema.SYNC_OPERATION_RESPONSE_RESULT)) {
-					case DBSchema.SYNC_OPERATION_RESULT_NO_OPERATION:
-						return retryOperation(opid);
-					case DBSchema.SYNC_OPERATION_RESULT_FAILED:
-						/*
-						 * TODO force download database file ????
-						 */
-					case DBSchema.SYNC_OPERATION_RESULT_OK:
-						removePendingOperation(opid);
-						opid = JSONMessageProcessor.getWaitingOperation(this.getGroupId(), devNode.getDeviceId());
-						if(opid < 0) {
-							return new JSONMessage().returnOK();
-						}
-						else {
-							return sendWaitingOperation(opid);
-						}
-					}
-				}
+			switch(op.getType()) {
+			case JSONMessage.RESPONSE_FOR_PENDING_NO_OPERATION:
+				return PendingNoOperation(op);
+			case JSONMessage.RESPONSE_FOR_PENDING_RESULT_FAILED:
+				return PendingResultFailed(op);
+			case JSONMessage.RESPONSE_FOR_PENDING_RESULT_OK:
+				return PendingResultOK(op);
 			default:
-				return requestForPendingResponse(opid);
+				return requestForPendingResponse(op);
 			}
 		}
 	}
 
-	private JSONMessage requestForPendingResponse(int l) {
-		return new JSONMessage().returnOK(JSONMessage.REQUEST_PENDING_RESPONSE, l);
+	private JSONMessage PendingResultOK(Operation op) throws SQLException, IOException {
+		int opid = JSONMessageProcessor.findAffectedOperation(op);
+		if(opid < 0) {
+			return requestForPendingResponse(op);
+		}
+		else {
+			removePendingOperation(opid);
+			opid = JSONMessageProcessor.getWaitingOperation(op);
+			if(opid == 0) {
+				return checkForSyncRequest(op);
+			}
+			else {
+				return sendWaitingOperation(op);
+			}
+		}
+	}
+
+	private JSONMessage PendingResultFailed(Operation op) throws IOException {
+		op.setType(JSONMessage.REQUEST_FOR_FORCE);
+		return op.constructJSONMessage();
+	}
+
+	private JSONMessage PendingNoOperation(Operation op) throws SQLException, IOException {
+		int opid = JSONMessageProcessor.findAffectedOperation(op);
+		if(opid < 0) {
+			return requestForPendingResponse(op);
+		}
+		return retryOperation(op);
+	}
+
+	private JSONMessage requestForPendingResponse(Operation op) throws SQLException {
+		JSONMessageProcessor mp = op.getMessageProcessor();
+		mp.sync_responses.reset();
+		if(mp.sync_responses.next()) {
+			return new JSONMessage().returnOK(JSONMessage.REQUEST_PENDING_RESPONSE, mp.sync_responses.sync_id, mp.sync_responses.table_name);
+		}
+		else {
+			throw new SQLException("Failed to retrieve data for penging response request");
+		}
 	}
 
 	private void removePendingOperation(int l) {
 		JSONMessageProcessor.deleteOperation(l);
 	}
 
-	private JSONMessage sendWaitingOperation(long l) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	private JSONMessage checkForSyncRequest(Row row, DeviceNode devNode) {
-		switch(((Double) row.get(DBSchema.SYNC_TYPE)).intValue()) {
-		case Trigger.INSERT:
-			return insertOperation(row, devNode);
-		case Trigger.UPDATE:
-			return updateOperation(row, devNode);
-		case Trigger.DELETE:
-			return deleteOperation(row, devNode);
-		default:
-			return new JSONMessage().sendAppError("Sync request type " + DBSchema.SYNC_TYPE + " is not defined");
+	private JSONMessage sendWaitingOperation(Operation op) throws IOException {
+		if (op.getMessageProcessor().sync_responses.next()) {
+			return new Operation(op.getMessageProcessor()).constructJSONMessage();
+		}
+		else {
+			throw new IOException("Failed to retrieve date for waiting operation");
 		}
 	}
 
+	private JSONMessage checkForSyncRequest(Operation op) throws IOException {
+		switch(op.getType()) {
+		case Trigger.INSERT:
+			return insertOperation(op);
+		/*case Trigger.UPDATE:
+			return updateOperation(op);
+		case Trigger.DELETE:
+			return deleteOperation(op);*/
+		default:
+			throw new IOException ("Sync request type " + op.getType() + " is not defined");
+		}
+	}
+
+	@SuppressWarnings("unused")
 	private JSONMessage deleteOperation(Row row, DeviceNode devNode) {
 		// TODO Auto-generated method stub
 		return new JSONMessage().returnOK();
 	}
 
+	@SuppressWarnings("unused")
 	private JSONMessage updateOperation(Row row, DeviceNode devNode) {
 		// TODO Auto-generated method stub
 		return new JSONMessage().returnOK();
 	}
 
-	private JSONMessage insertOperation(Row row, DeviceNode devNode) {
+	private JSONMessage insertOperation(Operation op) throws IOException {
 		String dsn = this.getDSN();
-		String schema = (String) row.remove(DBSchema.SYNC_SCHEMA);
-		String table = (String) row.remove(DBSchema.SYNC_TABLE);
-		String[] cols = JSONMessageProcessor.getSyncColumnNames(row);
-		Object[] values = JSONMessageProcessor.getSyncColumnValues(cols, row);
 		try {
-			String[] pks = this.schema.getPrimaryKeys(table);
-			if(!GroupNode.checkColumns(cols, this.schema.getColumns(table))) {
+			op.setPrimaryKeys(this.schema.getPrimaryKeys(op.getTableName()));
+			if(!GroupNode.checkColumns(op.getColumns(), this.schema.getColumns(op.getTableName()))) {
 				throw new SQLException("Columns failed to check. May versions of databases are not equals");
 			}
-			if(!GroupNode.checkColumns(pks, cols)) {
+			if(!GroupNode.checkColumns(op.getPrimaryKeys(), op.getColumns())) {
 				throw new SQLException("Primary keys failed to check. May versions of databases are not equals");
 			}
-			if(JSONMessageProcessor.checkAll(dsn, schema, table, cols, values)) {
-				return new JSONMessage().returnOK();
+			if(JSONMessageProcessor.checkAll(dsn, op)) {
+				op.setType(JSONMessage.INSERT_NO_ACTION);
 			}
 			else {
-				DeviceNode[] devNodes = getOtherDevNodes(devNode);
-				ArrayList<Object> pksNew = new ArrayList<Object>();
-				boolean[] b = JSONMessageProcessor.checkPartial(dsn, schema, table, cols, values, pks);
+				boolean[] b = JSONMessageProcessor.checkPartial(dsn, op);
 				if(b[b.length-1]) {
-					for(int i = 0; i < b.length; i ++) {
+					for(int i = 0; i < (b.length - 1); i ++) {
 						if(b[i]) {
-							pksNew.add(pks[i]);
-							int index = JSONMessageProcessor.getIndexOfArray(cols, pks[i]);
-							pksNew.add(values[index]);
-							values[index] = JSONMessageProcessor.getNewPKValue(dsn, schema, table, cols, values, pks[i]);
-							pksNew.add(values[index]);
+							op.setNewPrimaryKeysValues(i, JSONMessageProcessor.getNewPKValue(dsn, op, i)); 
 						}
 					}
-					JSONMessageProcessor.insertOperation(dsn, schema, table, cols, values, devNodes, this.getGroupId(), pksNew, devNode.getDeviceId());
-					pksNew.add(0, JSONMessage.INSERT_UPDATE_PK);
-					return new JSONMessage().returnOK(pksNew.toArray());
-					
+					JSONMessageProcessor.insertOperation(dsn, op);
+					op.setType(JSONMessage.INSERT_UPDATE_PK);
 				}
 				else {
-					JSONMessageProcessor.insertOperation(dsn, schema, table, cols, values, devNodes, this.getGroupId(), pksNew, devNode.getDeviceId());
-					return new JSONMessage().returnOK(JSONMessage.INSERT_NO_ACTION);
+					JSONMessageProcessor.insertOperation(dsn, op);
+					op.setType(JSONMessage.INSERT_NO_ACTION);
 				}
 			}
+			return op.constructJSONMessage();
 		}
 		catch (SQLException e) {
 			return new JSONMessage().sendAppError(e);
@@ -289,19 +298,6 @@ public class GroupNode extends Hashtable <String, DeviceNode> {
 
 	
 
-	private DeviceNode[] getOtherDevNodes(DeviceNode devNode) {
-		DeviceNode[] devNodes = new DeviceNode[this.size() -1];
-		Iterator<String> i = this.keySet().iterator();
-		int j = 0;
-		while (i.hasNext()) {
-			DeviceNode node = this.get(i.next());
-			if(node.getDeviceId() != devNode.getDeviceId()) {
-				devNodes[j] = node;
-				j ++;
-			}
-		}
-		return devNodes;
-	}
 
 	
 	private static boolean checkColumns(String[] cols, String[] order) {
@@ -327,21 +323,12 @@ public class GroupNode extends Hashtable <String, DeviceNode> {
 		return this.props.getProperty(DBConnector.DB_DSN_KEY);
 	}
 
-	private JSONMessage retryOperation(long l) {
-		// TODO Auto-generated method stub
-		return null;
+	private JSONMessage retryOperation(Operation op) throws IOException {
+		return new Operation(op.getMessageProcessor()).constructJSONMessage();
 	}
 
-	private JSONMessage checkForWaitingOperation(Row row, DeviceNode devNode) {
-		long l = JSONMessageProcessor.getWaitingOperation(this.getGroupId(), devNode.getDeviceId());
-		if(l < 0) {
-			return checkForWaitingOperation(row, devNode);
-		}
-		return new JSONMessage().returnOK(JSONMessage.REQUEST_PENDING_RESPONSE, l);
-		//return null;
-	}
 
-	private String getName() {
+	String getName() {
 		return this.props.getProperty(JSONMessageProcessor.REGISTERED_GROUPS.GROUP_NAME);
 	}
 

@@ -10,6 +10,10 @@ class TableSchema {
 	
 	protected TableSchema(){}
 	
+	public void reset() {
+		this.index = -1;
+	}
+	
 	boolean hasNext() {
 		return (index + 1) <= rows.size();
 	}

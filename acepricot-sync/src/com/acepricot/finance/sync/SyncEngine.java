@@ -97,26 +97,19 @@ public class SyncEngine extends Hashtable <String, GroupNode> {
 	}
 	
 
-	public static JSONMessage processSyncRequest(Row row) {
-		String grpName = (String) row.get(JSONMessageProcessor.LOCAL_LABEL + JSONMessageProcessor.REGISTERED_GROUPS.GROUP_NAME);
-		//JSONMessageProcessor mp = (JSONMessageProcessor) row.get(JSONMessageProcessor.class.getName());
-		GroupNode grpNode = SyncEngine.getGroupNode(grpName);
-		if(grpNode != null) {
-			if(grpNode.getStatus() == GroupNode.ACTIVE) {
-				
-				return grpNode.action(-1, null, row);
-				//return new JSONMessage().sendAppError("Method not developed");
-			}
-			return new JSONMessage().sendAppError("Grop node for group name " + grpName + " is not in active state (Current state is " + GroupNode.STATUS[grpNode.getStatus()] + ")");
+	public static JSONMessage processSyncRequest(Operation op) throws IOException {
+		if(op.getGroupNode().getStatus() == GroupNode.ACTIVE) {
+			return op.getGroupNode().action(-1, null, op);
 		}
-		return new JSONMessage().sendAppError("Grop node for group name " + grpName + " does not exists");
+		op.setType(JSONMessage.BUSY_RESPONSE);
+		return op.constructJSONMessage();
 	}
 
-	private static GroupNode getGroupNode(String grpName) {
+	static GroupNode getGroupNode(String grpName) {
 		return globalEngine.get(grpName);
 	}
 	
-	private static GroupNode getGroupNode(int grpId) {
+	static GroupNode getGroupNode(int grpId) {
 		Iterator<String> i = SyncEngine.globalEngine.keySet().iterator();
 		while(i.hasNext()) {
 			GroupNode grpNode = SyncEngine.globalEngine.get(i.next());

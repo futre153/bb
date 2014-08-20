@@ -9,11 +9,16 @@ public class JSONMessage {
 	public static final String DOWNLOAD_HEADER = "download";
 	private static final String RESPONSE_HEADER = "response";
 	public static final int REQUEST_PENDING_RESPONSE = 0x400;
-	public static final int RESPONSE_FOR_PENDING = 0x401;
+	public static final int RESPONSE_FOR_PENDING_NO_OPERATION = 0x401;
+	public static final int RESPONSE_FOR_PENDING_RESULT_FAILED = 0x402;
+	public static final int RESPONSE_FOR_PENDING_RESULT_OK = 0x403;
+	public static final int BUSY_RESPONSE = 0x404;
 	public static final int INSERT_NO_ACTION = 0x410;
 	public static final int INSERT_OPERATION = 0x411;
 	public static final int INSERT_UPDATE_PK = 0x412;
-	
+	public static final int FORCE_OPERATION = 0xFFF;
+	public static final int REQUEST_FOR_FORCE = 0xFFE;
+		
 	private String header;
 	private Object[] body;
 	
@@ -48,7 +53,7 @@ public class JSONMessage {
 		this.body = body;
 	}
 	
-	public void appendBody(Object ... responses) {
+	public JSONMessage appendBody(Object ... responses) {
 		if(responses == null) {
 			responses = new Object[0];
 		}
@@ -60,6 +65,7 @@ public class JSONMessage {
 		System.arraycopy(old, 0, _new, 0, old.length);
 		System.arraycopy(responses, 0, _new, old.length, responses.length);
 		this.setBody(_new);
+		return this;
 	}
 	
 	public JSONMessage returnOK(Object ... responses) {
