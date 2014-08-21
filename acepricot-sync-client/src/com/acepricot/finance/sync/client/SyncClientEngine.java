@@ -1,7 +1,12 @@
 package com.acepricot.finance.sync.client;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
+
+import org.pabk.util.Huffman;
 
 import com.acepricot.finance.sync.share.JSONMessage;
 
@@ -16,14 +21,24 @@ public class SyncClientEngine extends Thread {
 	private static final String ACTION_COUNTER_DEF = "10";
 	private static boolean shutdown = false;
 	
-	public static void start(Properties p) {
+	private String password;
+	private String user;
+	private boolean propsLoaded = false;
+	private String dbUrl;
+	private Class<?> _class;
+	
+	public static void start(Properties p) throws SQLException {
 		int i = 0;
 		for(; i < engines.size(); i ++) {
 			if(!engines.get(i).isAlive()) {
 				break;
 			}
 		}
-		engines.add(i, new SyncClientEngine(p));
+		SyncClientEngine engine = new SyncClientEngine(p); 
+		DBSchemas.setTrigger(false);
+		DBSchemas.loadSchemas(engine.getConnection(p));
+		DBSchemas.setTrigger(true);
+		engines.add(i, engine);
 		engines.get(i).setDaemon(true);
 		engines.get(i).start();
 	}
@@ -33,38 +48,101 @@ public class SyncClientEngine extends Thread {
 		this.props = p;
 	}
 	
+	private Connection getConnection(Properties p) throws SQLException {
+		try {
+			if(!propsLoaded) {
+				loadProperties(p);
+			}
+			if(propsLoaded) {
+				return DriverManager.getConnection(dbUrl, user, Huffman.decode(password, null));
+			}
+			throw new SQLException("Properties not loaded");
+		}
+		catch (Exception e) {
+			throw new SQLException (e);
+		}
+	}
+	
+	private void loadProperties(Properties p) throws ClassNotFoundException {
+		if(_class == null) {
+			_class = Class.forName(p.getProperty(JSONMessageProcessorClient.JDBC_DRIVER_KEY));
+		}
+		if(dbUrl == null) {
+			dbUrl = String.format(p.getProperty(JSONMessageProcessorClient.URL_STRING_KEY), p.getProperty(JSONMessageProcessorClient.DB_NAME_KEY).replaceAll("\\\\", "/").replaceAll(p.getProperty(JSONMessageProcessorClient.EXT_REPL_KEY), ""));			
+		}
+		if(user == null) {
+			user = p.getProperty(JSONMessageProcessorClient.DB_USER_KEY);
+		}
+		if(password == null) {
+			password = p.getProperty(JSONMessageProcessorClient.DB_PSWD_KEY);
+		}
+		propsLoaded = true;
+	}
+	
+	
 	public void run() {
-		
+		Connection con = null;
 		String url = props.getProperty(JSONMessageProcessorClient.DEFAULT_URL_KEY);
 		Sleeper s = new Sleeper();
 		long interval = Long.parseLong(props.getProperty(INTERVAL_KEY, INTERVAL_DEF));
 		int counter = Integer.parseInt(props.getProperty(ACTION_COUNTER_KEY, ACTION_COUNTER_DEF));
+		JSONMessage heartbeat = null;
 		JSONMessage inMsg = null;
 		JSONMessage outMsg = null;
+		long _interval = 1;
 		while(!isShutdown()) {
+			Exception error = null;
 			try {
-				inMsg = JSONMessageProcessorClient.process(Heartbeat.getInstance(), url, null);
-				if(!inMsg.isError()) {
-					inMsg = SyncRequest.getInstance(props);
-					if (inMsg != null) {
-						outMsg = JSONMessageProcessorClient.process(inMsg, url, null);
+				con = getConnection(props);
+				if(outMsg != null) {
+					inMsg = JSONMessageProcessorClient.processIncomming(con, props, outMsg, inMsg);
+					outMsg = null;
+				}
+			}
+			catch (Exception e) {
+				error = e;
+			}
+			for(int i = 0; (i < counter && (!isShutdown())); i ++) {
+				s.sleep(_interval);
+			}
+			_interval = interval;
+			try {
+				if(error != null) {
+					throw error;
+				}
+				heartbeat = JSONMessageProcessorClient.process(Heartbeat.getInstance(), url, null);
+				if(heartbeat.isError()) {
+					/*
+					 * TODO spracuj chybu spojenia
+					 */
+				}
+				else {
+					if(inMsg == null) {
+						inMsg = SyncRequest.getResponseForUnasweredPending(con, props);
+						if(inMsg == null) {
+							inMsg = SyncRequest.getRequestForWaiting(con, props);
+						}
+						if(inMsg == null) {
+							inMsg = SyncRequest.getEmptyRequest(props);
+						}
+					}
+					System.out.println("--- Outgoing message ---");
+					System.out.println(inMsg);
+					outMsg = JSONMessageProcessorClient.process(inMsg, url, null);
+					System.out.println("--- Incomming message ---");
+					System.out.println(outMsg);
+					if(outMsg.isError()) {
+						outMsg = null;
 					}
 				}
 			} catch (Exception e) {
-				// spracuj vynimku;
+				outMsg = null;
+				inMsg = null;
+				// TODO spracuj vynimku;
 				e.printStackTrace();
 			}
 			finally {
-				// TODO spracuj JSONMessage
-				System.out.println("INPUT MSG -----------------------------------------------------------");
-				System.out.println(inMsg);
-				if(inMsg == null || !inMsg.isError()) {
-					System.out.println("OUTPUT MSG -----------------------------------------------------------");
-					System.out.println(outMsg);
-				}
-			}
-			for(int i = 0; (i < counter && (!isShutdown())); i ++) {
-				s.sleep(interval);
+				try {con.close();} catch (SQLException e) {	e.printStackTrace();}
 			}
 		};
 		

@@ -4,6 +4,10 @@ import java.sql.SQLException;
 
 public class WhereClause extends SQLSyntaxImpl {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public static final String OR = "OR";
 	public static final String AND = "AND";
 	public static final String NOT = "NOT";
@@ -87,7 +91,7 @@ public class WhereClause extends SQLSyntaxImpl {
 							se.getFreeSearchCon().addFields(new SearchCon(new BoolTerm(new BoolFactor(not, p == null ? in : p))));
 						}
 						else {
-							se.getFreeBoolTerm().boolTerm.addFields(new BoolTerm(new BoolFactor(not, p == null ? in : p)));
+							se.getFreeBoolTerm().addFields(new BoolTerm(new BoolFactor(not, p == null ? in : p)));
 						}
 					}
 					else {

@@ -3,6 +3,10 @@ package com.acepricot.finance.sync.share.sql;
 import java.sql.SQLException;
 
 public class Update extends SQLSyntaxImpl {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private TableName tableName;
 	private Identifier reference;
 	private Identifier whereCurrent;
@@ -30,7 +34,7 @@ public class Update extends SQLSyntaxImpl {
 		setColumns(cols);
 		setValues(values);
 	}
-		
+	
 	final void setValues(Object ...objs) throws SQLException {
 		if(objs.length == 1 && objs[0] instanceof Object[]) {
 			values = objs[0];
@@ -39,6 +43,8 @@ public class Update extends SQLSyntaxImpl {
 			values = objs;
 		}
 	}
+	
+	
 	
 	final void setColumns(String ...cols) throws SQLException {
 		if(cols.length > 0) {

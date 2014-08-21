@@ -8,6 +8,8 @@ public class JSONMessage {
 	private static final String LS = System.getProperty("line.separator");
 	public static final String DOWNLOAD_HEADER = "download";
 	private static final String RESPONSE_HEADER = "response";
+	public static final int EMPTY_REQUEST = 0x10;
+	public static final int NO_ACTION = 0x11;
 	public static final int REQUEST_PENDING_RESPONSE = 0x400;
 	public static final int RESPONSE_FOR_PENDING_NO_OPERATION = 0x401;
 	public static final int RESPONSE_FOR_PENDING_RESULT_FAILED = 0x402;
@@ -18,7 +20,8 @@ public class JSONMessage {
 	public static final int INSERT_UPDATE_PK = 0x412;
 	public static final int FORCE_OPERATION = 0xFFF;
 	public static final int REQUEST_FOR_FORCE = 0xFFE;
-		
+	
+			
 	private String header;
 	private Object[] body;
 	

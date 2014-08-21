@@ -35,7 +35,8 @@ class Operation {
 		this.setTableName((String) row.remove(DBSchema.SYNC_TABLE));
 		this.setColumns(JSONMessageProcessor.getSyncColumnNames(row));
 		this.setValues(JSONMessageProcessor.getSyncColumnValues(this.getColumns(), row));
-		this.setId(((Double) row.get(DBSchema.SYNC_ID)).intValue());
+		Object id = row.remove(DBSchema.SYNC_ID);
+		this.setId(id == null ? -1 : ((Double) id).intValue());
 		this.setMessageProcessor(mp);
 	}
 
@@ -45,7 +46,9 @@ class Operation {
 		this.setDeviceNode(this.getGroupNode().getDeviceNode(mp.sync_responses.device_id));
 		this.setType(mp.sync_responses.type);
 		this.setTableName(mp.sync_responses.table_name);
-		this.setQuery(mp.sync_responses.query.toString());
+		this.setId(mp.sync_responses.sync_id);
+		Object query = mp.sync_responses.query;
+		this.setQuery(query == null ? null : (String) query);
 	}
 
 	final int getType() {
@@ -168,14 +171,16 @@ class Operation {
 	public JSONMessage constructJSONMessage() throws IOException {
 		JSONMessage msg = new JSONMessage().returnOK(this.getType());
 		switch(this.getType()) {
+		case JSONMessage.NO_ACTION:
+			return msg;
 		case JSONMessage.BUSY_RESPONSE:
 			return msg.appendBody("Grop node " + this.getGroupNode().getName() + " is not in active state (Current state is " + GroupNode.STATUS[this.getGroupNode().getStatus()] + ")");
 		case JSONMessage.REQUEST_FOR_FORCE:
 			return msg.appendBody("Server request for force synchronization action due to unrecoverable error");
 		case JSONMessage.INSERT_UPDATE_PK:
-			return msg.appendBody(this.getQuery());
+			return msg.appendBody(this.getId(), this.getTableName(), this.getQuery());
 		case JSONMessage.INSERT_NO_ACTION:
-			return msg;
+			return msg.appendBody(this.getId(), this.getTableName());
 		default: throw new IOException("Type " + this.getType() + " is not defined");	
 		}
 	}

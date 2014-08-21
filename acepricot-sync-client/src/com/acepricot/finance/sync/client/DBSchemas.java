@@ -12,13 +12,14 @@ import com.acepricot.finance.sync.Where;
 
 public class DBSchemas {
 	
-	private static final String SYNC_CHANGES = "SYNC_CHANGES";
-	private static final String SYNC_TYPE = "SYNC_TYPE";
-	public static final String SYNC_INSERT = "SYNC_INSERT";
-	private static final String SYNC_SCHEMA = "SYNC_SCHEMA";
-	private static final String SYNC_TABLE = "SYNC_TABLE";
-	private static final String SYNC_ID = "SYNC_ID";
-	static final String SYNC_STATUS = "SYNC_STATUS";
+	static final String SYNC_LABEL = "SYNC_";
+	private static final String SYNC_CHANGES = SYNC_LABEL + "CHANGES";
+	static final String SYNC_TYPE = SYNC_LABEL + "TYPE";
+	public static final String SYNC_INSERT = SYNC_LABEL + "INSERT";
+	private static final String SYNC_SCHEMA = SYNC_LABEL + "SCHEMA";
+	static final String SYNC_TABLE = SYNC_LABEL + "TABLE";
+	static final String SYNC_ID = SYNC_LABEL + "ID";
+	static final String SYNC_STATUS = SYNC_LABEL + "STATUS";
 	private static final String[] SYNC_COLS_EXTENSIONS = {
 		SYNC_CHANGES, SYNC_TYPE, SYNC_INSERT, SYNC_SCHEMA, SYNC_TABLE, SYNC_ID, SYNC_STATUS
 	};

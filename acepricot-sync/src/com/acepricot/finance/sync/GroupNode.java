@@ -161,7 +161,14 @@ public class GroupNode extends Hashtable <String, DeviceNode> {
 		if(opid == 0) {
 			opid = JSONMessageProcessor.getWaitingOperation(op);
 			if(opid == 0) {
-				return checkForSyncRequest(op);
+				switch(op.getType()) {
+				case JSONMessage.RESPONSE_FOR_PENDING_NO_OPERATION:
+				case JSONMessage.RESPONSE_FOR_PENDING_RESULT_FAILED:
+				case JSONMessage.RESPONSE_FOR_PENDING_RESULT_OK:
+					return PhantomPendingResult(op);
+				default:
+					return checkForSyncRequest(op);
+				}
 			}
 			else {
 				return sendWaitingOperation(op);
@@ -181,6 +188,11 @@ public class GroupNode extends Hashtable <String, DeviceNode> {
 		}
 	}
 
+	private JSONMessage PhantomPendingResult(Operation op) throws IOException {
+		op.setType(JSONMessage.NO_ACTION);
+		return op.constructJSONMessage();
+	}
+
 	private JSONMessage PendingResultOK(Operation op) throws SQLException, IOException {
 		int opid = JSONMessageProcessor.findAffectedOperation(op);
 		if(opid < 0) {
@@ -190,7 +202,8 @@ public class GroupNode extends Hashtable <String, DeviceNode> {
 			removePendingOperation(opid);
 			opid = JSONMessageProcessor.getWaitingOperation(op);
 			if(opid == 0) {
-				return checkForSyncRequest(op);
+				op.setType(JSONMessage.NO_ACTION);
+				return op.constructJSONMessage();
 			}
 			else {
 				return sendWaitingOperation(op);
@@ -243,6 +256,9 @@ public class GroupNode extends Hashtable <String, DeviceNode> {
 			return updateOperation(op);
 		case Trigger.DELETE:
 			return deleteOperation(op);*/
+		case JSONMessage.EMPTY_REQUEST:
+			op.setType(JSONMessage.NO_ACTION);
+			return op.constructJSONMessage();
 		default:
 			throw new IOException ("Sync request type " + op.getType() + " is not defined");
 		}

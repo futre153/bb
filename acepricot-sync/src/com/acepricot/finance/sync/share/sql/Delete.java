@@ -3,6 +3,10 @@ package com.acepricot.finance.sync.share.sql;
 import java.sql.SQLException;
 
 public class Delete extends SQLSyntaxImpl {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected TableName tableName;
 	protected Identifier identifier;
 	private Identifier whereCurrent;

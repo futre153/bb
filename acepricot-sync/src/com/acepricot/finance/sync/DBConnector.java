@@ -50,7 +50,7 @@ public class DBConnector extends Hashtable<String, DataSource> {
 	private static final boolean DEBUG = true;
 	private static final String COUNT_FUNCTION = "COUNT";
 	@SuppressWarnings("unused")
-	private static boolean prepared = true;
+	private static boolean prepared = false;
 	
 		
 	private DBConnector(){}
@@ -169,11 +169,11 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		return status;
 	}
 	
-	static int update(Connection con, Update update) throws SQLException {
+	public static int update(Connection con, Update update) throws SQLException {
 		return DBConnector.update(con, update, true);
 	}
 	
-	static int update(Connection con, Update update, boolean commit) throws SQLException {
+	public static int update(Connection con, Update update, boolean commit) throws SQLException {
 		String sql = update.toSQLString();
 		if(DEBUG) System.out.println(sql);
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -252,7 +252,7 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		return delete(con, delete, true);
 	}
 	
-	static int delete(Connection con, Delete delete, boolean commit) throws SQLException {
+	public static int delete(Connection con, Delete delete, boolean commit) throws SQLException {
 		String sql = delete.toSQLString();
 		if(DEBUG) System.out.println(sql);
 		PreparedStatement ps = con.prepareStatement(sql);
@@ -456,5 +456,5 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		delete.closePSBuffer();
 		return delete;
 	}
-	
+
 }

@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.security.MessageDigest;
+import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,8 +23,18 @@ import org.pabk.net.http.HttpClientConst;
 import org.pabk.net.http.SimpleClient;
 import org.pabk.util.Huffman;
 
+import com.acepricot.finance.sync.DBConnector;
+import com.acepricot.finance.sync.DBSchema;
+import com.acepricot.finance.sync.Row;
 import com.acepricot.finance.sync.share.AppConst;
 import com.acepricot.finance.sync.share.JSONMessage;
+import com.acepricot.finance.sync.share.sql.ColumnSpec;
+import com.acepricot.finance.sync.share.sql.CompPred;
+import com.acepricot.finance.sync.share.sql.Identifier;
+import com.acepricot.finance.sync.share.sql.Predicate;
+import com.acepricot.finance.sync.share.sql.SchemaName;
+import com.acepricot.finance.sync.share.sql.TableName;
+import com.acepricot.finance.sync.share.sql.WhereClause;
 import com.google.gson.Gson;
 
 public class JSONMessageProcessorClient {
@@ -165,9 +176,6 @@ public class JSONMessageProcessorClient {
 				else {
 					throw new IOException(propath + " is directory, please set correct path to sync properties");
 				}
-				DBSchemas.setTrigger(false);
-				DBSchemas.loadSchemas(SyncRequest.getConnection(p));
-				DBSchemas.setTrigger(true);
 				SyncClientEngine.start(p);
 				SyncClientEngine.joinTo();
 			} catch (InterruptedException | IOException | SQLException e) {
@@ -428,6 +436,97 @@ public class JSONMessageProcessorClient {
 			sb.append(String.format("%2s", Integer.toHexString(d.intValue() & 0xFF)).replaceAll(" ", "0"));
 		}
 		return sb.toString();
+	}
+
+	public static JSONMessage processIncomming(Connection con, Properties props, JSONMessage msg, JSONMessage inMsg) throws IOException, SQLException {
+		JSONMessage _new = null;
+		if(!msg.isError()) {
+			Object[] body = msg.getBody();
+			if(body.length > 1) {
+				if(body[1] instanceof Double) {
+					int type = ((Double) body[1]).intValue();
+					switch(type) {
+					case JSONMessage.NO_ACTION:
+						break;
+					case JSONMessage.REQUEST_PENDING_RESPONSE:
+						_new = processIncommingPendingRequest(con, props, msg);
+						break;
+					case JSONMessage.INSERT_NO_ACTION:
+						_new = processInsertNoAction(con, props, msg);
+						break;
+					default:
+						throw new IOException("Message type " + type + " is not defined");
+					}
+					if(inMsg != null) {
+						Row row = getRow(inMsg.getBody());
+						type = ((Number) row.get(DBSchemas.SYNC_TYPE)).intValue();
+						switch(type) {
+						case JSONMessage.RESPONSE_FOR_PENDING_RESULT_OK:
+							processResponseForPending(con, props, row);
+						default:
+						}
+					}
+					return _new;
+				}
+			}
+			/*
+			 * TODO spracuj chybu
+			 */
+		}
+		return null;
+	}
+
+	private static void processResponseForPending(Connection con, Properties props, Row row) throws SQLException {
+		update(con, DBSchema.getSyncSchemaName(), (String) row.get(DBSchemas.SYNC_TABLE), DBSchemas.SYNC_STATUS, SyncRequest.STATUS_ARCHIVED_OK, DBSchemas.SYNC_ID, row.get(DBSchemas.SYNC_ID));		
+	}
+
+	private static JSONMessage processInsertNoAction(Connection con, Properties props, JSONMessage msg) throws SQLException {
+		Object[] body = msg.getBody();
+		try {
+			con.setAutoCommit(false);
+			update(con, DBSchema.getSyncSchemaName(), (String) body[3], DBSchemas.SYNC_STATUS, SyncRequest.STATUS_PENDING_OK, DBSchemas.SYNC_ID, body[2]);
+			return SyncRequest.getInstance(props).appendBody(DBSchemas.SYNC_TYPE, JSONMessage.RESPONSE_FOR_PENDING_RESULT_OK, DBSchemas.SYNC_ID, body[2], DBSchemas.SYNC_TABLE, body[3]);
+		} catch (SQLException e) {
+			con.rollback();
+			throw e;
+		}
+		finally {
+			con.commit();
+			con.setAutoCommit(true);
+		}
+	}
+	
+	private static void update(Connection con, String schema, String table, String targerCol, Object targetVal, String col, Object val) throws SQLException {
+		TableName tableName = new TableName(new SchemaName(new Identifier(schema)), new Identifier(table));
+		Object com1 = new CompPred(new Object[]{new ColumnSpec(tableName, new Identifier(col))}, new Object[]{val}, Predicate.EQUAL);
+		DBConnector.update(con, DBConnector.createUpdate(tableName, new String[]{targerCol}, new Object[]{targetVal}, new WhereClause(com1)), false);
+	}
+	/*
+	private static void delete(Connection con, String schema, String table, String col, Object val) throws SQLException {
+		TableName tableName = new TableName(new SchemaName(new Identifier(schema)), new Identifier(table));
+		Object com1 = new CompPred(new Object[]{new ColumnSpec(tableName, new Identifier(col))}, new Object[]{val}, Predicate.EQUAL);
+		DBConnector.delete(con, DBConnector.createDelete(tableName, null, new WhereClause(com1)), false);
+	}
+	*/
+	private static JSONMessage processIncommingPendingRequest(Connection con, Properties props, JSONMessage msg) throws SQLException {
+		Object[] body = msg.getBody();
+		return SyncRequest.getInstance(props).appendBody(SyncRequest.checkForPending(con, SyncRequest.ALL, ((Double)body[2]).intValue(), (String) body[3]));
+	}
+	
+	private static Row getRow(Object body[]) throws IOException {
+		Row syncRow = new Row();
+		for(int i = 4; i < body.length; i += 2) {
+			Object obj = body[i];
+			if(!(obj instanceof String)) {
+				throw new IOException("String is expected, " + obj + ", " + obj.getClass().getSimpleName() + " was found");
+			}
+			String key = (String) obj;
+			if(i + 1 == body.length) {
+				throw new IOException("Unexpected end of JSON syncRequest message was found");
+			}
+			syncRow.put(key, body[i + 1]);
+		}
+		return syncRow;
 	}
 	
 }
