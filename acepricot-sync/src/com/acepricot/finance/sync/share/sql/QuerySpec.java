@@ -3,6 +3,10 @@ package com.acepricot.finance.sync.share.sql;
 import java.sql.SQLException;
 
 public class QuerySpec extends SQLSyntaxImpl {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected DistinctSpec distinctSpec;
 	protected TopSpec topSpec;
 	protected SelectColumn selectColumn;

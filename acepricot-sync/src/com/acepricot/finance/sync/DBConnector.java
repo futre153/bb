@@ -50,7 +50,7 @@ public class DBConnector extends Hashtable<String, DataSource> {
 	private static final boolean DEBUG = true;
 	private static final String COUNT_FUNCTION = "COUNT";
 	@SuppressWarnings("unused")
-	private static boolean prepared = false;
+	private static boolean prepared = true;
 	
 		
 	private DBConnector(){}

@@ -148,4 +148,13 @@ public class Query extends SQLSyntaxImpl {
 		}
 		return this;
 	}
+
+	public Query unionTo(Query q) {
+		Select qSelect = q.decCursor != null ? q.decCursor.select : (q.recDecCursor != null ? q.recDecCursor.finSelect : (q.select != null ? q.select : null));
+		Select tSelect = this.decCursor != null ? this.decCursor.select : (this.recDecCursor != null ? this.recDecCursor.finSelect : (this.select != null ? this.select : null));
+		qSelect.queryExp.addFields(qSelect.queryExp);
+		qSelect.queryExp = tSelect.queryExp;
+		qSelect.queryExp.setUnion(true);
+		return this;
+	}
 }

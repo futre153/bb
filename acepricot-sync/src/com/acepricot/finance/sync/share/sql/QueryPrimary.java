@@ -4,6 +4,10 @@ import java.sql.SQLException;
 
 public class QueryPrimary extends SQLSyntaxImpl {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected QuerySpec querySpec;
 	protected QueryExp queryExp;
 	

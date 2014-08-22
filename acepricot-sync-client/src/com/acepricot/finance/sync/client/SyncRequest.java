@@ -101,24 +101,40 @@ public class SyncRequest {
 	private static Row checkFor (Connection con, Object ... predicates) throws SQLException {
 		String[] tables = DBSchemas.getTableNames(con);
 		SchemaName schemaName = new SchemaName(new Identifier(DBSchemas.getSyncSchemaName()));
-		TopSpec top = new TopSpec(new UnsInt(new FixedPointLiteral(1)));
-		OrderClause orderClause = new OrderClause(new SortSpec(new ColumnSpec(new Identifier(DBSchemas.SYNC_LABEL), new Identifier(DBSchemas.SYNC_INSERT))));
-		for(int i = 0; i < tables.length; i ++) {
-			TableName tableName = new TableName(new Identifier(tables[i]), schemaName);
+		TableName tableName = new TableName(new Identifier(tables[0]), schemaName);
+		ColumnSpec[] cols = ColumnSpec.getColSpecArray(new Identifier(DBSchemas.SYNC_LABEL), DBSchemas.SYNC_ID, DBSchemas.SYNC_TABLE, DBSchemas.SYNC_INSERT);
+		//Query query = DBConnector.createSelect().addColumns(cols).addFromClause(tableName, new Identifier(DBSchemas.SYNC_LABEL)).addQuerySpec(top).addSelectSpec(orderClause).addTableSpec(new WhereClause(predicates));
+		Query union = null, query = null;
+		for(int i = 1; i < tables.length; i ++) {
+			tableName = new TableName(new Identifier(tables[i]), schemaName);
 			Query select = DBConnector.createSelect();
-			select.addQuerySpec(top);
+			//select.addQuerySpec(top);
 			select.addFromClause(tableName, new Identifier(DBSchemas.SYNC_LABEL));
-			select.addSelectSpec(orderClause);
-			Rows rows = DBConnector.select(con, select.addTableSpec(new WhereClause(predicates)));
-			System.out.println(rows);
-			if(rows.size() == 1) {
-				return rows.get(0);
+			//select.addSelectSpec(orderClause);
+			select.addColumns(cols);
+			select.addTableSpec(new WhereClause(predicates));
+			if(union == null) {
+				query = select;
+				union = select;
 			}
 			else {
-				continue;
+				union = select.unionTo(union);
 			}
 		}
-		return null;
+		TopSpec top = new TopSpec(new UnsInt(new FixedPointLiteral(1)));
+		OrderClause orderClause = new OrderClause(new SortSpec(new ColumnSpec(new Identifier(DBSchemas.SYNC_LABEL), new Identifier(DBSchemas.SYNC_INSERT))));
+		query.addQuerySpec(top).addSelectSpec(orderClause);
+		Rows rows = DBConnector.select(con, query);
+		System.out.println(rows);
+		if(rows.size() == 1) {
+			tableName = new TableName(schemaName, new Identifier((String) rows.get(0).get(DBSchemas.SYNC_TABLE)));
+			
+			return rows.get(0);
+		}
+		else {
+			return null;
+		}
+		
 	}
 	
 	static Object[] checkForPending(Connection con, int pType, int id, String tableName) throws SQLException {

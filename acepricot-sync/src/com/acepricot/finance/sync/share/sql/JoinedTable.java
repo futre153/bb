@@ -4,6 +4,10 @@ import java.sql.SQLException;
 
 public class JoinedTable extends SQLSyntaxImpl {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static final int NO_OUTER = -0x01;
 	private static final int LEFT = 0x00;
 	private static final int RIGHT = 0x01;

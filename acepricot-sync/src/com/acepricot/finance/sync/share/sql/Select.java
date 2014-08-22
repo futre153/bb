@@ -4,6 +4,10 @@ import java.sql.SQLException;
 
 
 public class Select extends SQLSyntaxImpl {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected QueryExp queryExp;
 	protected OrderClause orderClause;
 	protected LimitClause limitClause;

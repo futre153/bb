@@ -4,6 +4,10 @@ import java.sql.SQLException;
 
 public class ColumnSpec extends SQLSyntaxImpl {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected SQLSyntaxImpl sQLSyntaxImpl;
 	protected Identifier identifier;
 	
@@ -11,7 +15,7 @@ public class ColumnSpec extends SQLSyntaxImpl {
 		super(impls);
 	}
 	
-	public ColumnSpec(Identifier ref, Identifier name) {
+	public ColumnSpec(SQLSyntaxImpl ref, Identifier name) {
 		sQLSyntaxImpl = ref;
 		identifier = name;
 	} 
@@ -24,10 +28,10 @@ public class ColumnSpec extends SQLSyntaxImpl {
 		return (sQLSyntaxImpl == null ? EMPTY : sQLSyntaxImpl.toSQLString() + ".") + identifier.toSQLString();
 	}
 
-	public static ColumnSpec[] getColSpecArray(TableName tableName, String ...strings) {
+	public static ColumnSpec[] getColSpecArray(SQLSyntaxImpl reference, String ...strings) {
 		ColumnSpec[] cols = new ColumnSpec[strings.length];
 		for(int i = 0; i < cols.length; i ++) {
-			cols[i] = new ColumnSpec(tableName, new Identifier(strings[i]));
+			cols[i] = new ColumnSpec(reference, new Identifier(strings[i]));
 		}
 		return cols;
 	}

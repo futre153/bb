@@ -4,6 +4,10 @@ import java.sql.SQLException;
 
 public class QueryExp extends SQLSyntaxImpl {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected QueryExp queryExp;
 	protected QueryTerm queryTerm;
 	private boolean union = false;
@@ -20,6 +24,14 @@ public class QueryExp extends SQLSyntaxImpl {
 	
 	public QueryExp(SQLSyntaxImpl ...s) {
 		super(s);
+	}
+
+	final boolean isUnion() {
+		return union;
+	}
+
+	final void setUnion(boolean union) {
+		this.union = union;
 	}
 
 	public String toSQLString() throws SQLException {
