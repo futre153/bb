@@ -4,15 +4,19 @@ import java.sql.SQLException;
 
 public class ParamSpec extends SQLSyntaxImpl {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ParameterName parameterName;
 	private IndicatorName indicatorName;
 	
 	@Override
-	public String toSQLString() throws SQLException {
+	public String toSQLString(PreparedBuffer psb) throws SQLException {
 		if(parameterName == null) {
 			throw new SQLException("Parameter name cannot be null");
 		}
-		return  parameterName.toSQLString() + (indicatorName == null ? EMPTY : " " + indicatorName.toSQLString());
+		return  parameterName.toSQLString(psb) + (indicatorName == null ? EMPTY : " " + indicatorName.toSQLString(psb));
 	}
 
 }

@@ -14,9 +14,12 @@ public class Select extends SQLSyntaxImpl {
 	protected UpdateClause updateClause;
 	protected LockOption lockOption;
 	private boolean forReuse = false;
-	
+	private PreparedBuffer psb = new PreparedBuffer();
+	public PreparedBuffer getPreparedBuffer() {
+		return psb;
+	}
 	public Select(boolean reuse, SQLSyntaxImpl ...impls) {
-		super(impls);
+		psb = new PreparedBuffer();
 		forReuse = reuse;
 	}
 	public Select(SQLSyntaxImpl ...impls) {
@@ -24,14 +27,14 @@ public class Select extends SQLSyntaxImpl {
 	}
 	
 	@Override
-	public String toSQLString() throws SQLException {
+	public String toSQLString(PreparedBuffer psb) throws SQLException {
 		if(queryExp == null) {
 			throw new SQLException("Query expression cannot be null in context of select statement");
 		}
-		return queryExp.toSQLString() + (orderClause == null ? EMPTY : " " + orderClause.toSQLString())
-				+ (limitClause == null ? EMPTY : " " + limitClause.toSQLString())
-				+ (updateClause == null ? EMPTY : " " + updateClause.toSQLString())
-				+ (lockOption == null ? EMPTY : " " + lockOption.toSQLString())
+		return queryExp.toSQLString(psb) + (orderClause == null ? EMPTY : " " + orderClause.toSQLString(psb))
+				+ (limitClause == null ? EMPTY : " " + limitClause.toSQLString(psb))
+				+ (updateClause == null ? EMPTY : " " + updateClause.toSQLString(psb))
+				+ (lockOption == null ? EMPTY : " " + lockOption.toSQLString(psb))
 				+ (forReuse ? " FOR REUSE" : EMPTY);
 	}
 	

@@ -13,10 +13,10 @@ import com.acepricot.finance.sync.Where;
 public class DBSchemas {
 	
 	static final String SYNC_LABEL = "SYNC_";
-	private static final String SYNC_CHANGES = SYNC_LABEL + "CHANGES";
+	static final String SYNC_CHANGES = SYNC_LABEL + "CHANGES";
 	static final String SYNC_TYPE = SYNC_LABEL + "TYPE";
 	public static final String SYNC_INSERT = SYNC_LABEL + "INSERT";
-	private static final String SYNC_SCHEMA = SYNC_LABEL + "SCHEMA";
+	static final String SYNC_SCHEMA = SYNC_LABEL + "SCHEMA";
 	static final String SYNC_TABLE = SYNC_LABEL + "TABLE";
 	static final String SYNC_ID = SYNC_LABEL + "ID";
 	static final String SYNC_STATUS = SYNC_LABEL + "STATUS";
@@ -73,8 +73,41 @@ public class DBSchemas {
 	private static final String IS_CONSTRAINTS_TABLE_SCHEMA = "TABLE_SCHEMA";
 	private static final String IS_CONSTRAINTS_TABLE_NAME = "TABLE_NAME";
 	private static final String IS_CONSTRAINTS_COLUMN_LIST = "COLUMN_LIST";
-	private static final Object IS_CONSTRAINTS_CONSTRAINT_TYPE = "CONSTRAINT_TYPE";
-	private static final Object PRIMARY_KEY_VALUE = "PRIMARY KEY";
+	private static final String IS_CONSTRAINTS_CONSTRAINT_TYPE = "CONSTRAINT_TYPE";
+	private static final String PRIMARY_KEY_VALUE = "PRIMARY KEY";
+	static final String SYNC_INCOMMING_REQUESTS = "SYNC_INCOMMING_REQUESTS";
+	static final String SYNC_INCOMMING_REQUESTS_ID = "ID";
+	private static final String[] SYNC_INCOMMING_REQUESTS_COLS = {
+		SYNC_INCOMMING_REQUESTS_ID,
+		SYNC_ID,
+		SYNC_TYPE,
+		SYNC_INSERT,
+		SYNC_SCHEMA,
+		SYNC_TABLE,
+		SYNC_STATUS,
+		SYNC_CHANGES
+	};
+	private static final String[] SYNC_INCOMMING_REQUESTS_DATATYPES = {
+		"INT",
+		"INT",
+		"INT",
+		"BIGINT",
+		"VARCHAR(256)",
+		"VARCHAR(256)",
+		"TINYINT",
+		"CLOB"
+	};
+	
+	private static final String[] SYNC_INCOMMING_REQUESTS_CONSTRAINTS = {
+		"NOT NULL AUTO_INCREMENT",
+		"NOT NULL",
+		"NOT NULL",
+		"NOT NULL",
+		"NOT NULL",
+		"NOT NULL",
+		"NOT NULL DEFAULT 0",
+		null
+	};
 
 	private static String[] tables;
 	private static String[][] columns;
@@ -210,6 +243,7 @@ public class DBSchemas {
 			System.out.println(Arrays.toString(dataTypes[i]));
 			System.out.println(Arrays.toString(constraints[i]));
 		}*/
+		DBConnectorLt.createTable(con, SYNC_SCHEMA_NAME, SYNC_INCOMMING_REQUESTS, SYNC_INCOMMING_REQUESTS_COLS, SYNC_INCOMMING_REQUESTS_DATATYPES, SYNC_INCOMMING_REQUESTS_CONSTRAINTS, true, (char) 0);
 		for(int i = 0; i < tables.length; i ++) {
 			cols = new String[columns[i].length + SYNC_COLS_EXTENSIONS.length];
 			System.arraycopy(columns[i], 0, cols, 0, columns[i].length);
@@ -224,6 +258,8 @@ public class DBSchemas {
 			//System.out.println(Arrays.toString(types));
 			//System.out.println(Arrays.toString(cons));
 			DBConnectorLt.createTable(con, SYNC_SCHEMA_NAME, tables[i], cols, types, cons, true, (char) 0);
+			
+			
 			
 			DBConnectorLt.createTrigger(con, true, USER_SCHEMA, tables[i], false, Trigger.INSERT, true, CommonTrigger.class, (char) 0); 
 			DBConnectorLt.createTrigger(con, true, USER_SCHEMA, tables[i], false, Trigger.UPDATE, true, CommonTrigger.class, (char) 0);

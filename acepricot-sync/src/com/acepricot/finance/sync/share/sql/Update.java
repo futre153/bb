@@ -6,6 +6,7 @@ public class Update extends SQLSyntaxImpl {
 	/**
 	 * 
 	 */
+	private PreparedBuffer psb = new PreparedBuffer();
 	private static final long serialVersionUID = 1L;
 	private TableName tableName;
 	private Identifier reference;
@@ -30,6 +31,7 @@ public class Update extends SQLSyntaxImpl {
 	}
 
 	public Update(TableName tableName, Object values, String[] cols) throws SQLException {
+		psb = new PreparedBuffer();
 		this.tableName = tableName;
 		setColumns(cols);
 		setValues(values);
@@ -86,11 +88,11 @@ public class Update extends SQLSyntaxImpl {
 			if(i > 0) {
 				sb.append(", ");
 			}
-			sb.append(cols[i]);
+			sb.append(cols[i].toSQLString(pb));
 			sb.append(" = ");
 			if(objs[i] instanceof SQLSyntaxImpl) {
 				sb.append(qe ? "(" : EMPTY);
-				sb.append(((SQLSyntaxImpl) objs[i]).toSQLString());
+				sb.append(((SQLSyntaxImpl) objs[i]).toSQLString(pb));
 				sb.append(qe ? ")" : EMPTY);
 			}
 			else {
@@ -113,7 +115,10 @@ public class Update extends SQLSyntaxImpl {
 	}
 	
 	@Override
-	public String toSQLString() throws SQLException {
+	public String toSQLString(PreparedBuffer psb) throws SQLException {
+		if(psb == null) {
+			psb = getPreparedBuffer();
+		}
 		try {
 			if(cols == null) {
 				throw new SQLException("Column must be defined in contex of update statement");
@@ -124,16 +129,20 @@ public class Update extends SQLSyntaxImpl {
 			if(((Object[]) values).length != cols.length) {
 				throw new SQLException("Columns and values must have equal counts of elements in context of update statement");
 			}
-			return "UPDATE " + (of ? " OF " : EMPTY) + tableName.toSQLString() +
-			(reference == null ? EMPTY : reference.toSQLString()) +
+			return "UPDATE " + (of ? " OF " : EMPTY) + tableName.toSQLString(psb) +
+			(reference == null ? EMPTY : reference.toSQLString(psb)) +
 			" SET "	+ Update.joinSet(psb, cols, (Object[]) values) +
-			(whereCurrent == null ? EMPTY : (" WHERE CURRENT OF " + whereCurrent.toSQLString())) +
-			(whereClause == null ? EMPTY : (whereCurrent == null ? (" " + whereClause.toSQLString()) : EMPTY)) +
+			(whereCurrent == null ? EMPTY : (" WHERE CURRENT OF " + whereCurrent.toSQLString(psb))) +
+			(whereClause == null ? EMPTY : (whereCurrent == null ? (" " + whereClause.toSQLString(psb)) : EMPTY)) +
 			(ignoreTrigger ? (whereCurrent == null ? " IGNORE TRIGGER" : EMPTY) : EMPTY) + (nowait ? " NOWAIT" : EMPTY);
 		}
 		catch(Exception e) {
 			throw new SQLException(e);
 		}
+	}
+
+	public PreparedBuffer getPreparedBuffer() {
+		return psb;
 	}
 	
 }

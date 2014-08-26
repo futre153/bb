@@ -129,8 +129,8 @@ public class WhereClause extends SQLSyntaxImpl {
 
 	
 	@Override
-	public String toSQLString() throws SQLException {
-		return searchCon == null ? EMPTY : "WHERE " + searchCon.toSQLString();
+	public String toSQLString(PreparedBuffer psb) throws SQLException {
+		return searchCon == null ? EMPTY : "WHERE " + searchCon.toSQLString(psb);
 	}
 
 }

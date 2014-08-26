@@ -4,6 +4,10 @@ import java.sql.SQLException;
 
 public class UpdateClause extends SQLSyntaxImpl {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private ColumnSpec[] cols;
 	boolean nowait = false;
 	
@@ -16,7 +20,7 @@ public class UpdateClause extends SQLSyntaxImpl {
 		this.nowait = nowait;
 	}
 	
-	public String toSQLString() throws SQLException {
+	public String toSQLString(PreparedBuffer psb) throws SQLException {
 		return "FOR UPDATE" + ((cols != null && cols.length > 0) ? " OF " + Predicate.join(psb, cols) : EMPTY) + (nowait ? " NOWAIT" : EMPTY);
 	}
 

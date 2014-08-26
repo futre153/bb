@@ -34,11 +34,11 @@ public class QueryExp extends SQLSyntaxImpl {
 		this.union = union;
 	}
 
-	public String toSQLString() throws SQLException {
+	public String toSQLString(PreparedBuffer psb) throws SQLException {
 		if(queryTerm == null) {
 			throw new SQLException("Query term cannot be null in context of query expression");
 		}
-		return (((union | except) && (queryExp != null)) ? queryExp.toSQLString() + " " + (union ? "UNION " : "EXCEPT ") + (all ? "ALL " : EMPTY) : EMPTY) + queryTerm.toSQLString();
+		return (((union | except) && (queryExp != null)) ? queryExp.toSQLString(psb) + " " + (union ? "UNION " : "EXCEPT ") + (all ? "ALL " : EMPTY) : EMPTY) + queryTerm.toSQLString(psb);
 	}
 	
 

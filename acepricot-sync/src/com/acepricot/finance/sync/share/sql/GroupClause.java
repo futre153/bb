@@ -4,6 +4,10 @@ import java.sql.SQLException;
 
 public class GroupClause extends SQLSyntaxImpl {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Object[] exps; 
 	
 	public GroupClause(Object ... objs) throws SQLException {
@@ -14,7 +18,7 @@ public class GroupClause extends SQLSyntaxImpl {
 	}
 	
 	@Override
-	public String toSQLString() throws SQLException {
+	public String toSQLString(PreparedBuffer psb) throws SQLException {
 		return "GROUP BY " + Predicate.join(psb, exps);
 	}
 

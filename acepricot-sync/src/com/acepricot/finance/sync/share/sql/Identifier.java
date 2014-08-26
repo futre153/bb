@@ -4,6 +4,10 @@ import java.sql.SQLException;
 
 public class Identifier extends SQLSyntaxImpl {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static String LETTER = "[a-zA-Z]";
 	private static String EXTENDED_LETTER = "[\\#\\@\\$\\_]";
 	
@@ -21,7 +25,7 @@ public class Identifier extends SQLSyntaxImpl {
 		return identifier;
 	}
 	
-	public String toSQLString() throws SQLException {
+	public String toSQLString(PreparedBuffer psb) throws SQLException {
 		if(identifier == null) {
 			throw new SQLException("Identifier cannot be null value");
 		}

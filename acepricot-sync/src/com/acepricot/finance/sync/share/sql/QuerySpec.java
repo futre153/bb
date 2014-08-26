@@ -15,13 +15,13 @@ public class QuerySpec extends SQLSyntaxImpl {
 		super(s);
 	}
 	@Override
-	public String toSQLString() throws SQLException {
+	public String toSQLString(PreparedBuffer psb) throws SQLException {
 		if(selectColumn == null) {
 			throw new SQLException ("Columns specification cannot be null on query specification");
 		}
 		if(tableExp == null) {
 			throw new SQLException ("Table specification cannot be null on query specification");
 		}
-		return "SELECT " + (distinctSpec == null ? EMPTY : distinctSpec.toSQLString() + " ") + (topSpec == null ? EMPTY : topSpec.toSQLString() + " ") + selectColumn.toSQLString() + " " + tableExp.toSQLString();
+		return "SELECT " + (distinctSpec == null ? EMPTY : distinctSpec.toSQLString(psb) + " ") + (topSpec == null ? EMPTY : topSpec.toSQLString(psb) + " ") + selectColumn.toSQLString(psb) + " " + tableExp.toSQLString(psb);
 	}
 }

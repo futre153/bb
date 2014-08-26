@@ -2,6 +2,7 @@ package com.acepricot.finance.sync;
 
 import java.lang.reflect.Field;
 import java.math.BigDecimal;
+import java.sql.Clob;
 import java.util.Iterator;
 
 class TableSchema {
@@ -35,6 +36,12 @@ class TableSchema {
 					}
 					else if(field.getType().equals(String.class)) {
 						field.set(this, DBConnector.toString(row.get(key)));
+					}
+					else if(field.getType().equals(Clob.class)) {
+						field.set(this, row.get(key));
+					}
+					else {
+						System.out.println(field.getType() + " is not defined in Server Tables Schemas");
 					}
 				} catch (NoSuchFieldException | SecurityException | IllegalArgumentException | IllegalAccessException e) {
 					return false;

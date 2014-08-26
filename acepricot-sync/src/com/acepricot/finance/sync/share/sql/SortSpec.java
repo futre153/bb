@@ -4,6 +4,10 @@ import java.sql.SQLException;
 
 public class SortSpec extends SQLSyntaxImpl {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Object exp;
 	private boolean display = false;
 	private boolean asc = true;
@@ -20,7 +24,7 @@ public class SortSpec extends SQLSyntaxImpl {
 	}
 	
 	@Override
-	public String toSQLString() throws SQLException {
+	public String toSQLString(PreparedBuffer psb) throws SQLException {
 		return Predicate.toSQLString(psb, exp) + (display ? (asc ? " ASC" : " DESC") : EMPTY);
 	}
 

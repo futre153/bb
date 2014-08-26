@@ -239,8 +239,9 @@ public class GroupNode extends Hashtable <String, DeviceNode> {
 		JSONMessageProcessor.deleteOperation(l);
 	}
 
-	private JSONMessage sendWaitingOperation(Operation op) throws IOException {
+	private JSONMessage sendWaitingOperation(Operation op) throws IOException, SQLException {
 		if (op.getMessageProcessor().sync_responses.next()) {
+			JSONMessageProcessor.updateWaitingToPending(op);
 			return new Operation(op.getMessageProcessor()).constructJSONMessage();
 		}
 		else {

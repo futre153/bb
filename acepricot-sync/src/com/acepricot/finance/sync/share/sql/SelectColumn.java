@@ -4,6 +4,10 @@ import java.sql.SQLException;
 
 public class SelectColumn extends SQLSyntaxImpl {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private SQLSyntaxImpl id;
 	private SQLSyntaxImpl[] ids;
 	private Identifier[] cols;
@@ -94,21 +98,21 @@ public class SelectColumn extends SQLSyntaxImpl {
 	}
 
 	@Override
-	public String toSQLString() throws SQLException {
+	public String toSQLString(PreparedBuffer psb) throws SQLException {
 		StringBuffer sb = new StringBuffer();
 		if(cols == null) {
 			sb.append(function == null ? EMPTY : (function + "("));
-			sb.append(id == null ? "*" : id.toSQLString() + ".*");
+			sb.append(id == null ? "*" : id.toSQLString(psb) + ".*");
 			sb.append(function == null ? EMPTY : (")"));
-			sb.append(derived == null ? EMPTY : (" AS " + derived.toSQLString()));
+			sb.append(derived == null ? EMPTY : (" AS " + derived.toSQLString(psb)));
 		}
 		else {
 			for(int i = 0; i < cols.length; i++) {
 				sb.append(i > 0 ? ", " : EMPTY);
 				sb.append(function == null ? EMPTY : (function + "("));
-				sb.append(ids == null || ids[i] == null ? cols[i].toSQLString() : ids[i].toSQLString() + "." + cols[i].toSQLString());
+				sb.append(ids == null || ids[i] == null ? cols[i].toSQLString(psb) : ids[i].toSQLString(psb) + "." + cols[i].toSQLString(psb));
 				sb.append(function == null ? EMPTY : (")"));
-				sb.append(derivedAs == null || derivedAs[i] == null ? EMPTY : " AS " + derivedAs[i].toSQLString());
+				sb.append(derivedAs == null || derivedAs[i] == null ? EMPTY : " AS " + derivedAs[i].toSQLString(psb));
 			}
 		}
 		return sb.toString();

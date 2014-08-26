@@ -60,18 +60,18 @@ public abstract class SQLSyntaxImpl implements SQLSyntax {
 			}
 		}
 	}
-
+/*
 	public final String toString() {
 		try {
-			return this.toSQLString();
+			return this.toSQLString(null);
 		} catch (SQLException e) {
 			return null;
 		}
 	}
-
+*/
 	public static String toSQLString(PreparedBuffer psb, Object object) throws SQLException {
 		if (object instanceof SQLSyntaxImpl) {
-			return ((SQLSyntaxImpl) object).toSQLString();
+			return ((SQLSyntaxImpl) object).toSQLString(psb);
 		}
 		if(SQLSyntaxImpl.isPrepared()) {
 			psb.append(object);
@@ -90,11 +90,6 @@ public abstract class SQLSyntaxImpl implements SQLSyntax {
 		SQLSyntaxImpl.prepared = prepared;
 	}
 	
-	public PreparedBuffer getPreparedBuffer() {
-		return psb;
-	}
+	//abstract PreparedBuffer getPreparedBuffer();
 	
-	public void closePSBuffer() {
-		psb.close();
-	}
 }

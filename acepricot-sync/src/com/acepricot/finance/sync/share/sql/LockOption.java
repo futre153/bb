@@ -4,6 +4,10 @@ import java.sql.SQLException;
 
 public class LockOption extends SQLSyntaxImpl {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private boolean ignore = false;
 	private boolean nowait = false;
 	private boolean exclusive = false;
@@ -19,11 +23,11 @@ public class LockOption extends SQLSyntaxImpl {
 	}
 	
 	@Override
-	public String toSQLString() throws SQLException {
-		if(unsInt != null && (!Predicate.isLockLevel(unsInt.toSQLString()))) {
-			throw new SQLException ("Lock level " + unsInt.toSQLString() + " is nor allowed");
+	public String toSQLString(PreparedBuffer psb) throws SQLException {
+		if(unsInt != null && (!Predicate.isLockLevel(unsInt.toSQLString(psb)))) {
+			throw new SQLException ("Lock level " + unsInt.toSQLString(psb) + " is nor allowed");
 		}
-		return "WITH LOCK" + (ignore | nowait ? (ignore ? " IGNORE" : " NOWAIT") : EMPTY) + (exclusive | optimistic ? (exclusive ? " EXCLUSIVE" : " OPTIMISTIC") : EMPTY) + (unsInt != null ? " ISOLATION LEVEL " + unsInt.toSQLString() : EMPTY);
+		return "WITH LOCK" + (ignore | nowait ? (ignore ? " IGNORE" : " NOWAIT") : EMPTY) + (exclusive | optimistic ? (exclusive ? " EXCLUSIVE" : " OPTIMISTIC") : EMPTY) + (unsInt != null ? " ISOLATION LEVEL " + unsInt.toSQLString(psb) : EMPTY);
 	}
 
 }

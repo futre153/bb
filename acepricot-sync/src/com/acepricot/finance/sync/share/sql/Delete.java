@@ -14,9 +14,11 @@ public class Delete extends SQLSyntaxImpl {
 	private boolean from = false;
 	private boolean ignoreTrigger = false;
 	private boolean nowait = false;
+	private PreparedBuffer psb;
 	
 	public Delete (SQLSyntaxImpl ...impls) throws SQLException {
 		super(impls);
+		psb = new PreparedBuffer();
 	}
 		
 	public final void setWhereCurrent(Identifier whereCurrent) {
@@ -31,14 +33,19 @@ public class Delete extends SQLSyntaxImpl {
 		this.nowait = nowait;
 	}
 	
-	
+	public PreparedBuffer getPreparedBuffer() {
+		return psb;
+	}
 	@Override
-	public String toSQLString() throws SQLException {
+	public String toSQLString(PreparedBuffer psb) throws SQLException {
+		if(psb == null) {
+			psb = this.getPreparedBuffer();
+		}
 		try {
-			return "DELETE " + (from ? " FROM " : EMPTY) + tableName.toSQLString() +
-			(identifier == null ? EMPTY : identifier.toSQLString()) +
-			(whereCurrent == null ? EMPTY : (" WHERE CURRENT OF " + whereCurrent.toSQLString())) +
-			(whereClause == null ? EMPTY : (whereCurrent == null ? (" " + whereClause.toSQLString()) : EMPTY)) +
+			return "DELETE " + (from ? " FROM " : EMPTY) + tableName.toSQLString(psb) +
+			(identifier == null ? EMPTY : identifier.toSQLString(psb)) +
+			(whereCurrent == null ? EMPTY : (" WHERE CURRENT OF " + whereCurrent.toSQLString(psb))) +
+			(whereClause == null ? EMPTY : (whereCurrent == null ? (" " + whereClause.toSQLString(psb)) : EMPTY)) +
 			(ignoreTrigger ? (whereCurrent == null ? " IGNORE TRIGGER" : EMPTY) : EMPTY) + (nowait ? " NOWAIT" : EMPTY);
 		}
 		catch(Exception e) {

@@ -3,6 +3,10 @@ package com.acepricot.finance.sync.share.sql;
 import java.sql.SQLException;
 
 public class RownoPred extends Predicate {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	boolean equ = false;
 	public RownoPred(boolean equ, Object ...objs) throws SQLException {
 		super(objs);
@@ -15,7 +19,7 @@ public class RownoPred extends Predicate {
 		this.equ = equ;
 	}
 	
-	public String toSQLString() throws SQLException {
+	public String toSQLString(PreparedBuffer psb) throws SQLException {
 		return "ROWNO <" + (equ ? "=" : EMPTY) + " " + Predicate.toSQLString(psb, objs[0]) ;
 	}
 }

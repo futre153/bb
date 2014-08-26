@@ -174,7 +174,7 @@ public class DBConnector extends Hashtable<String, DataSource> {
 	}
 	
 	public static int update(Connection con, Update update, boolean commit) throws SQLException {
-		String sql = update.toSQLString();
+		String sql = update.toSQLString(null);
 		if(DEBUG) System.out.println(sql);
 		PreparedStatement ps = con.prepareStatement(sql);
 		if(SQLSyntaxImpl.isPrepared()) {
@@ -211,7 +211,7 @@ public class DBConnector extends Hashtable<String, DataSource> {
 	}
 	
 	static int insert (Connection con, Insert insert, boolean commit) throws SQLException {
-		String sql = insert.toSQLString();
+		String sql = insert.toSQLString(null);
 		if(DEBUG) System.out.println(sql);
 		PreparedStatement ps = con.prepareStatement(sql);
 		if(SQLSyntaxImpl.isPrepared()) {
@@ -253,7 +253,7 @@ public class DBConnector extends Hashtable<String, DataSource> {
 	}
 	
 	public static int delete(Connection con, Delete delete, boolean commit) throws SQLException {
-		String sql = delete.toSQLString();
+		String sql = delete.toSQLString(null);
 		if(DEBUG) System.out.println(sql);
 		PreparedStatement ps = con.prepareStatement(sql);
 		if(SQLSyntaxImpl.isPrepared()) {
@@ -287,12 +287,11 @@ public class DBConnector extends Hashtable<String, DataSource> {
 	*/
 	public static Query createSelect() throws SQLException {
 		Query q = new Query(new Select(new QueryExp(new QueryTerm(new QueryPrimary(new QuerySpec(new SelectColumn(), new TableExp()))))));
-		q.closePSBuffer();
 		return q;
 	}
 	
 	public static Rows select(Connection con, Query select) throws SQLException {
-		String sql = select.toSQLString();
+		String sql = select.toSQLString(null);
 		if(DEBUG) System.out.println(sql);
 		PreparedStatement ps = con.prepareStatement(sql);
 		if(SQLSyntaxImpl.isPrepared()) {
@@ -306,7 +305,6 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		};
 		ps.close();
 		rs.close();
-		select.getPreparedBuffer().close();
 		return rows;
 
 	}
@@ -434,13 +432,11 @@ public class DBConnector extends Hashtable<String, DataSource> {
 
 	public static Insert createInsert(TableName tableName, Object values, String ...strings) throws SQLException {
 		Insert insert = new Insert(tableName, values, strings);
-		insert.closePSBuffer();
 		return insert;
 	}
 
 	public static Update createUpdate(TableName tableName, String[] cols, Object[] values, WhereClause whereClause) throws SQLException {
 		Update update = new Update(tableName, values, cols);
-		update.closePSBuffer();
 		update.setWhereClause(whereClause);
 		return update;
 	}
@@ -453,7 +449,6 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		else {
 			delete = new Delete(tableName, new Identifier(referenceName), where);
 		}
-		delete.closePSBuffer();
 		return delete;
 	}
 

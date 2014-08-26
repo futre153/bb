@@ -21,11 +21,11 @@ public class ColumnSpec extends SQLSyntaxImpl {
 	} 
 		
 	@Override
-	public String toSQLString() throws SQLException {
+	public String toSQLString(PreparedBuffer psb) throws SQLException {
 		if(identifier == null) {
 			throw new SQLException("Identifier cannot be null in context of column specification");
 		}
-		return (sQLSyntaxImpl == null ? EMPTY : sQLSyntaxImpl.toSQLString() + ".") + identifier.toSQLString();
+		return (sQLSyntaxImpl == null ? EMPTY : sQLSyntaxImpl.toSQLString(psb) + ".") + identifier.toSQLString(psb);
 	}
 
 	public static ColumnSpec[] getColSpecArray(SQLSyntaxImpl reference, String ...strings) {

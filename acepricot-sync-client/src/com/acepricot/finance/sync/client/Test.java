@@ -75,7 +75,7 @@ public class Test {
 			e.printStackTrace();
 		}
 		*/
-		JSONMessageProcessorClient.syncStart(new String[]{"D:\\TEMP\\clientprops\\sync_props1-1.xml"});
+		JSONMessageProcessorClient.syncStart(new String[]{"D:\\TEMP\\clientprops\\sync_props1-1.xml", "D:\\TEMP\\clientprops\\sync_props1-2.xml"});
 
 	}
 	
@@ -129,10 +129,11 @@ public class Test {
 		pro.put(JSONMessageProcessorClient.GRP_NAME_KEY, "MyGroup1");
 		pro.put(JSONMessageProcessorClient.GRP_PSWD_KEY, "MyGroup1");
 		pro.put(JSONMessageProcessorClient.GRP_PSCH_KEY, "UTF-8");
-		pro.put(JSONMessageProcessorClient.GRP_JOIN_KEY, false);
-		pro.put(JSONMessageProcessorClient.DEV_NAME_KEY, "MyDevice1-1");
-		pro.put(JSONMessageProcessorClient.GRP_EMAI_KEY, "futre@szm.sk");
+		pro.put(JSONMessageProcessorClient.GRP_JOIN_KEY, true);
+		pro.put(JSONMessageProcessorClient.DEV_NAME_KEY, "MyDevice1-2");
+		pro.put(JSONMessageProcessorClient.GRP_EMAI_KEY, "futre2@szm.sk");
 		pro.put(JSONMessageProcessorClient.DEV_PRIM_KEY, false);
+		pro.put(JSONMessageProcessorClient.DB_NAME_KEY, "D:\\TEMP\\clientsamples\\database1-2.h2.db");
 		return pro;
 	}
 	

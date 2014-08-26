@@ -4,6 +4,10 @@ import java.sql.SQLException;
 
 public class RecDecCursor extends SQLSyntaxImpl {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected Identifier identifier;
 	protected Identifier refName;
 	protected Identifier[] aliasName;
@@ -21,7 +25,7 @@ public class RecDecCursor extends SQLSyntaxImpl {
 	}
 	
 	@Override
-	public String toSQLString() throws SQLException {
+	public String toSQLString(PreparedBuffer psb) throws SQLException {
 		if(identifier == null) {
 			throw new SQLException ("Result table name cannot be null in context of recursive declared query");
 		}
@@ -40,7 +44,7 @@ public class RecDecCursor extends SQLSyntaxImpl {
 		if(finSelect == null) {
 			throw new SQLException ("Final select name cannot be null in context of recursive declared query");
 		}
-		return "DECLARE " + identifier.toSQLString() + " CURSOR FOR WITH RECURSIVE " + refName.toSQLString() + "(" + Predicate.join(psb, aliasName) + ") AS (" + initSelect + " UNION ALL " + recSelect.toSQLString() + ") "	+ finSelect.toSQLString();
+		return "DECLARE " + identifier.toSQLString(psb) + " CURSOR FOR WITH RECURSIVE " + refName.toSQLString(psb) + "(" + Predicate.join(psb, aliasName) + ") AS (" + initSelect + " UNION ALL " + recSelect.toSQLString(psb) + ") "	+ finSelect.toSQLString(psb);
 	}
 
 }

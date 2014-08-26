@@ -8,7 +8,7 @@ public class SubQuery extends Query {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	public String toSQLString() throws SQLException {
-		return "(" + super.toSQLString() + ")";
+	public String toSQLString(PreparedBuffer psb) throws SQLException {
+		return "(" + super.toSQLString(psb) + ")";
 	}
 }

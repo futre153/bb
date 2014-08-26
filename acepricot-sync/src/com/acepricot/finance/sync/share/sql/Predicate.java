@@ -4,6 +4,10 @@ import java.sql.SQLException;
 
 public abstract class Predicate extends SQLSyntaxImpl {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static String[] COMP_OP = {
 		LESS, GREATHER, LESS_OR_GREATHER,
 		EQUAL, NOT_EQUAL, LESS_OR_EQUAL,
@@ -22,7 +26,7 @@ public abstract class Predicate extends SQLSyntaxImpl {
 		}
 	}
 	
-	public String toSQLString() throws SQLException {
+	public String toSQLString(PreparedBuffer psb) throws SQLException {
 		if(objs == null) {
 			throw new SQLException("Predicate expressions cannot be null");
 		}
@@ -64,7 +68,7 @@ public abstract class Predicate extends SQLSyntaxImpl {
 			}
 			if(objs[i] instanceof SQLSyntaxImpl) {
 				sb.append(qe ? "(" : EMPTY);
-				sb.append(((SQLSyntaxImpl) objs[i]).toSQLString());
+				sb.append(((SQLSyntaxImpl) objs[i]).toSQLString(pb));
 				sb.append(qe ? ")" : EMPTY);
 			}
 			else {

@@ -9,6 +9,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
 import java.security.MessageDigest;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -21,6 +22,7 @@ import javax.xml.bind.DatatypeConverter;
 import org.pabk.net.http.DefaultContent;
 import org.pabk.net.http.HttpClientConst;
 import org.pabk.net.http.SimpleClient;
+import org.pabk.util.Base64Coder;
 import org.pabk.util.Huffman;
 
 import com.acepricot.finance.sync.DBConnector;
@@ -31,6 +33,7 @@ import com.acepricot.finance.sync.share.JSONMessage;
 import com.acepricot.finance.sync.share.sql.ColumnSpec;
 import com.acepricot.finance.sync.share.sql.CompPred;
 import com.acepricot.finance.sync.share.sql.Identifier;
+import com.acepricot.finance.sync.share.sql.Insert;
 import com.acepricot.finance.sync.share.sql.Predicate;
 import com.acepricot.finance.sync.share.sql.SchemaName;
 import com.acepricot.finance.sync.share.sql.TableName;
@@ -52,7 +55,7 @@ public class JSONMessageProcessorClient {
 	static final String HEARTBEAT_HEADER = "heartbeat";
 	private static final String REGISTER_HEADER = "register";
 	static final Integer DEFAULT_DB_VERSION = 1;
-	private static final String DATABASE_FILENAME = "D:\\TEMP\\clientsamples\\database1-1.h2.db"; 
+	//private static final String DATABASE_FILENAME = "D:\\TEMP\\clientsamples\\database1-2.h2.db"; 
 	//private static final File DATABASE_FILE = new File(DATABASE_FILENAME);
 	private static final String REGISTER_DEVICE_HEADER = "registerDevice";
 	public static final String INIT_UPLOAD_HEADER = "initUpload";
@@ -89,6 +92,7 @@ public class JSONMessageProcessorClient {
 			propath = new String[] {DEFAULT_SYNC_PROPATH};
 		}
 		for(int i = 0; i < propath.length; i ++) {
+			Exception error = null;
 			Properties p = new Properties();
 			try {
 				
@@ -113,7 +117,6 @@ public class JSONMessageProcessorClient {
 						p.setProperty(URL_STRING_KEY, URL_STRING);
 						p.setProperty(JDBC_DRIVER_KEY, JDBC_DRIVER);
 						p.setProperty(DEFAULT_URL_KEY, DEFAULT_URL);
-						p.setProperty(DB_NAME_KEY, DATABASE_FILENAME);
 						p.setProperty(DB_USER_KEY, LOCAL_DB_USER);
 						p.setProperty(DB_PSWD_KEY, LOCAL_DB_USER_PASSWORD);
 						p.put(GRP_PSWD_KEY, Huffman.encode((String) p.get(GRP_PSWD_KEY), p.getProperty(GRP_PSCH_KEY), null));
@@ -160,7 +163,7 @@ public class JSONMessageProcessorClient {
 					//TODO akcia pri chybe
 					e1.printStackTrace();
 				}
-				return;
+				error = e;
 			}
 			finally {
 				/*
@@ -169,26 +172,41 @@ public class JSONMessageProcessorClient {
 				
 				
 			}
-			try {
-				if(f.isFile()) {
-					p.loadFromXML(new FileInputStream(f));
+			if(error == null) {
+				try {
+					if(f.isFile()) {
+						p.loadFromXML(new FileInputStream(f));
+					}
+					else {
+						throw new IOException(propath + " is directory, please set correct path to sync properties");
+					}
+					SyncClientEngine.start(p);
+				} catch (IOException | SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
 				}
-				else {
-					throw new IOException(propath + " is directory, please set correct path to sync properties");
+				
+				finally {
+					/*
+					 * TODO synchronizacia pre node i koniec
+					 */
 				}
-				SyncClientEngine.start(p);
-				SyncClientEngine.joinTo();
-			} catch (InterruptedException | IOException | SQLException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
 			}
-			finally {
+			else {
 				/*
-				 * TODO synchronizacia koniec
+				 * spracuj chybu 2
 				 */
 			}
 		}
-		
+		try {
+			SyncClientEngine.joinTo();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		/*
+		 * TODO synchroniyacia koniec
+		 */
 	}
 	
 	public static JSONMessage process(JSONMessage msg, String url, String param) throws Exception {
@@ -454,6 +472,8 @@ public class JSONMessageProcessorClient {
 					case JSONMessage.INSERT_NO_ACTION:
 						_new = processInsertNoAction(con, props, msg);
 						break;
+					case JSONMessage.INSERT_OPERATION:
+						_new = processInsertAction(con, props, msg);
 					default:
 						throw new IOException("Message type " + type + " is not defined");
 					}
@@ -474,6 +494,42 @@ public class JSONMessageProcessorClient {
 			 */
 		}
 		return null;
+	}
+
+	private static JSONMessage processInsertAction(Connection con, Properties props, JSONMessage msg) throws SQLException {
+		Object com1 = null;
+		TableName tableName = null;
+		Object[] body = msg.getBody();
+		try {
+			String schema = DBSchemas.getSyncSchemaName();
+			SchemaName schemaName = new SchemaName(new Identifier(schema));
+			tableName = new TableName(schemaName, new Identifier(DBSchemas.SYNC_INCOMMING_REQUESTS));
+			String[] cols = {DBSchemas.SYNC_ID, DBSchemas.SYNC_TYPE, DBSchemas.SYNC_INSERT, DBSchemas.SYNC_SCHEMA, DBSchemas.SYNC_TABLE, DBSchemas.SYNC_STATUS, DBSchemas.SYNC_CHANGES};
+			//ColumnSpec[] colspecs = ColumnSpec.getColSpecArray(tableName, cols);
+			Object[] vals = {body[2], body[1], new Date().getTime(), schema, body[3], SyncRequest.STATUS_NEW, body[4]};
+			DBConnector.insert(con, DBConnector.createInsert(tableName, vals, cols).setIgnoreTrigger(true));
+			con.setAutoCommit(false);
+			com1 = new CompPred(new Object[]{new Identifier(DBSchemas.SYNC_ID), new Identifier(DBSchemas.SYNC_TABLE)}, new Object[]{body[2], body[3]}, Predicate.EQUAL);
+			int id = (int) DBConnector.select(con, DBConnector.createSelect().addFromClause(tableName).addColumns(DBSchemas.SYNC_INCOMMING_REQUESTS_ID).addTableSpec(new WhereClause(com1))).get(0).get(DBSchemas.SYNC_INCOMMING_REQUESTS_ID);
+			byte[] b = Huffman.decode(Base64Coder.decode(((String) body[4]).toCharArray()), null);
+			ByteArrayInputStream bin = new ByteArrayInputStream(b);
+			ObjectInputStream in = new ObjectInputStream(bin);
+			Insert insert = (Insert) in.readObject();
+			DBConnector.insert(con, insert);
+			com1 = new CompPred(new Object[]{new Identifier(DBSchemas.SYNC_INCOMMING_REQUESTS_ID)}, new Object[]{id}, Predicate.EQUAL);
+			DBConnector.update(con, DBConnector.createUpdate(tableName, new String[]{DBSchemas.SYNC_STATUS}, new Object[]{SyncRequest.STATUS_PENDING_OK}, new WhereClause(com1)), false);
+			return SyncRequest.getInstance(props).appendBody(DBSchemas.SYNC_TYPE, JSONMessage.RESPONSE_FOR_PENDING_RESULT_OK, DBSchemas.SYNC_ID, body[2], DBSchemas.SYNC_TABLE, body[3]);
+		}
+		catch(Exception e) {
+			con.rollback();
+			DBConnector.update(con, DBConnector.createUpdate(tableName, new String[]{DBSchemas.SYNC_STATUS}, new Object[]{SyncRequest.STATUS_PENDING_FAILED}, new WhereClause(com1)), false);
+			throw new SQLException(e);
+			//return SyncRequest.getInstance(props).appendBody(DBSchemas.SYNC_TYPE, JSONMessage.RESPONSE_FOR_PENDING_RESULT_FAILED, DBSchemas.SYNC_ID, body[2], DBSchemas.SYNC_TABLE, body[3]);
+		}
+		finally {
+			con.commit();
+			con.setAutoCommit(true);
+		}
 	}
 
 	private static void processResponseForPending(Connection con, Properties props, Row row) throws SQLException {

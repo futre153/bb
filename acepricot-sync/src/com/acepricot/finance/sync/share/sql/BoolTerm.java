@@ -13,11 +13,11 @@ public class BoolTerm extends SQLSyntaxImpl {
 		super(s);
 	}
 	@Override
-	public String toSQLString() throws SQLException {
+	public String toSQLString(PreparedBuffer psb) throws SQLException {
 		if(boolFactor == null) {
 			throw new SQLException("Boolean factor cannot be null under boolean term");
 		}
-		return (boolTerm == null ? EMPTY : boolTerm.toSQLString() + " AND ") + boolFactor.toSQLString();
+		return (boolTerm == null ? EMPTY : boolTerm.toSQLString(psb) + " AND ") + boolFactor.toSQLString(psb);
 	}
 	public BoolTerm getFreeBoolTerm() {
 		if(this.boolTerm == null) {

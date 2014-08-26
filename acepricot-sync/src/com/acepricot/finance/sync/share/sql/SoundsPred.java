@@ -3,6 +3,10 @@ package com.acepricot.finance.sync.share.sql;
 import java.sql.SQLException;
 
 public class SoundsPred extends Predicate {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	boolean not = false;
 	boolean like = false;
 	public SoundsPred(boolean not, boolean like, Object ...objs) throws SQLException {
@@ -14,7 +18,7 @@ public class SoundsPred extends Predicate {
 		this.like = like;
 	}
 	
-	public String toSQLString() throws SQLException {
+	public String toSQLString(PreparedBuffer psb) throws SQLException {
 		return Predicate.toSQLString(psb, objs[0]) + (not ? " NOT" : EMPTY) + " SOUNDS " + (like ? "LIKE " : EMPTY) + Predicate.toSQLString(psb, objs[1]);
 	}
 }

@@ -4,6 +4,5 @@ import java.io.Serializable;
 import java.sql.SQLException;
 
 public interface SQLSyntax extends Serializable {
-	public final PreparedBuffer psb = new PreparedBuffer();
-	public String toSQLString() throws SQLException;
+	public String toSQLString(PreparedBuffer psb) throws SQLException;
 }

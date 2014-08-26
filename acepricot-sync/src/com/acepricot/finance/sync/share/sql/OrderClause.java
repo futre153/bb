@@ -4,13 +4,17 @@ import java.sql.SQLException;
 
 public class OrderClause extends SQLSyntaxImpl {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private SortSpec[] sortSpec;
 	
 	public OrderClause (SortSpec ... specs) {
 		this.sortSpec = specs;
 	}
 	@Override
-	public String toSQLString() throws SQLException {
+	public String toSQLString(PreparedBuffer psb) throws SQLException {
 		if(sortSpec != null && sortSpec.length > 0) {
 			if(sortSpec.length > 1) {
 				for(int i = 0; i < sortSpec.length; i ++) {

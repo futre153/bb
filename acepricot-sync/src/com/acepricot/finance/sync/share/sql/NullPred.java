@@ -3,6 +3,10 @@ package com.acepricot.finance.sync.share.sql;
 import java.sql.SQLException;
 
 public class NullPred extends Predicate {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	boolean not = false;
 	public NullPred(boolean not, Object ...objs) throws SQLException {
 		super(objs);
@@ -12,8 +16,8 @@ public class NullPred extends Predicate {
 		this.not = not;
 	}
 	
-	public String toSQLString() throws SQLException {
-		super.toSQLString();
+	public String toSQLString(PreparedBuffer psb) throws SQLException {
+		super.toSQLString(psb);
 		return Predicate.toSQLString(psb, objs[0]) + (not ? " NOT" : EMPTY + " NULL");
 	}
 }

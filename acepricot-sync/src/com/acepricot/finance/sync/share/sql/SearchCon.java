@@ -13,11 +13,11 @@ public class SearchCon extends SQLSyntaxImpl {
 		super(s);
 	}
 	@Override
-	public String toSQLString() throws SQLException {
+	public String toSQLString(PreparedBuffer psb) throws SQLException {
 		if(boolTerm == null) {
 			throw new SQLException("Boolean term cannot be null under search condition");
 		}
-		return (searchCon == null ? EMPTY : searchCon.toSQLString() + " OR ") + boolTerm.toSQLString();
+		return (searchCon == null ? EMPTY : searchCon.toSQLString(psb) + " OR ") + boolTerm.toSQLString(psb);
 	}
 	/*
 	public SearchCon getFreeBoolTerm() {

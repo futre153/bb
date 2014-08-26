@@ -11,29 +11,28 @@ public class Query extends SQLSyntaxImpl {
 	protected DecCursor decCursor;
 	protected RecDecCursor recDecCursor;
 	protected Select select;
-	
+	private PreparedBuffer psb = new PreparedBuffer();
 	public Query(SQLSyntaxImpl ...s) {
 		super(s);
+		psb = new PreparedBuffer();
 	}
-
+	
+	public PreparedBuffer getPreparedBuffer() {
+		return psb;
+	}
 	@Override
-	public String toSQLString() throws SQLException {
+	public String toSQLString(PreparedBuffer psb) throws SQLException {
+		if(psb == null) {
+			psb = getPreparedBuffer();
+		}
 		if(select == null && decCursor == null && recDecCursor == null) {
 			throw new SQLException("At least one of query statements must not be null");
 		}
-		return select == null ? (decCursor == null ? recDecCursor.toSQLString() : decCursor.toSQLString()) : select.toSQLString();
+		return select == null ? (decCursor == null ? recDecCursor.toSQLString(psb) : decCursor.toSQLString(psb)) : select.toSQLString(psb);
 	}
 	
 	public Query addFromClause(FromClause ...from) {
-		if(this.decCursor != null) {
-			this.decCursor.select.queryExp.queryTerm.queryPrimary.querySpec.tableExp.addFromClause(from);
-		}
-		if(this.recDecCursor != null) {
-			this.recDecCursor.finSelect.queryExp.queryTerm.queryPrimary.querySpec.tableExp.addFromClause(from);
-		}
-		if(this.select != null) {
-			this.select.queryExp.queryTerm.queryPrimary.querySpec.tableExp.addFromClause(from);
-		}
+		findFirstQE(this).queryTerm.queryPrimary.querySpec.tableExp.addFromClause(from);
 		return this;
 	}
 	
@@ -46,80 +45,32 @@ public class Query extends SQLSyntaxImpl {
 	}
 	
 	public Query addColumns(ColumnSpec ...specs) throws SQLException {
-		if(this.decCursor != null) {
-			this.decCursor.select.queryExp.queryTerm.queryPrimary.querySpec.selectColumn.setColumns(specs);
-		}
-		if(this.recDecCursor != null) {
-			this.recDecCursor.finSelect.queryExp.queryTerm.queryPrimary.querySpec.selectColumn.setColumns(specs);
-		}
-		if(this.select != null) {
-			this.select.queryExp.queryTerm.queryPrimary.querySpec.selectColumn.setColumns(specs);
-		}
+		findFirstQE(this).queryTerm.queryPrimary.querySpec.selectColumn.setColumns(specs);
 		return this;
 	}
 
 	public Query addColumns(String ...strings) throws SQLException {
-		if(this.decCursor != null) {
-			this.decCursor.select.queryExp.queryTerm.queryPrimary.querySpec.selectColumn.setColumns(strings);
-		}
-		if(this.recDecCursor != null) {
-			this.recDecCursor.finSelect.queryExp.queryTerm.queryPrimary.querySpec.selectColumn.setColumns(strings);
-		}
-		if(this.select != null) {
-			this.select.queryExp.queryTerm.queryPrimary.querySpec.selectColumn.setColumns(strings);
-		}
+		findFirstQE(this).queryTerm.queryPrimary.querySpec.selectColumn.setColumns(strings);
 		return this;
 	}
 
 	public Query addDerived(String ...strings) throws SQLException {
-		if(this.decCursor != null) {
-			this.decCursor.select.queryExp.queryTerm.queryPrimary.querySpec.selectColumn.setDerived(0, strings);
-		}
-		if(this.recDecCursor != null) {
-			this.recDecCursor.finSelect.queryExp.queryTerm.queryPrimary.querySpec.selectColumn.setDerived(0, strings);
-		}
-		if(this.select != null) {
-			this.select.queryExp.queryTerm.queryPrimary.querySpec.selectColumn.setDerived(0, strings);
-		}
+		findFirstQE(this).queryTerm.queryPrimary.querySpec.selectColumn.setDerived(0, strings);
 		return this;
 	}
 
 	public Query addSelectColumnFunction(String string) {
-		if(this.decCursor != null) {
-			this.decCursor.select.queryExp.queryTerm.queryPrimary.querySpec.selectColumn.setFunction(string);
-		}
-		if(this.recDecCursor != null) {
-			this.recDecCursor.finSelect.queryExp.queryTerm.queryPrimary.querySpec.selectColumn.setFunction(string);
-		}
-		if(this.select != null) {
-			this.select.queryExp.queryTerm.queryPrimary.querySpec.selectColumn.setFunction(string);
-		}
+		findFirstQE(this).queryTerm.queryPrimary.querySpec.selectColumn.setFunction(string);
 		return this;
 	}
 
 	public Query setDerived(String string) throws SQLException {
-		if(this.decCursor != null) {
-			this.decCursor.select.queryExp.queryTerm.queryPrimary.querySpec.selectColumn.setDerived(string);
-		}
-		if(this.recDecCursor != null) {
-			this.recDecCursor.finSelect.queryExp.queryTerm.queryPrimary.querySpec.selectColumn.setDerived(string);
-		}
-		if(this.select != null) {
-			this.select.queryExp.queryTerm.queryPrimary.querySpec.selectColumn.setDerived(string);
-		}
+		findFirstQE(this).queryTerm.queryPrimary.querySpec.selectColumn.setDerived(string);
 		return this;
 	}
 	
 	public Query addQuerySpec(SQLSyntaxImpl ...impls) {
-		if(this.decCursor != null) {
-			this.decCursor.select.queryExp.queryTerm.queryPrimary.querySpec.addFields(impls);
-		}
-		if(this.recDecCursor != null) {
-			this.recDecCursor.finSelect.queryExp.queryTerm.queryPrimary.querySpec.addFields(impls);
-		}
-		if(this.select != null) {
-			this.select.queryExp.queryTerm.queryPrimary.querySpec.addFields(impls);
-		}
+		findFirstQE(this).queryTerm.queryPrimary.querySpec.addFields(impls);
 		return this;
 	}
 	
@@ -136,25 +87,24 @@ public class Query extends SQLSyntaxImpl {
 		return this;
 	}
 	
+	private static final QueryExp findFirstQE(Query q) {
+		QueryExp tQE = q.decCursor != null ? q.decCursor.select.queryExp : (q.recDecCursor != null ? q.recDecCursor.finSelect.queryExp : (q.select != null ? q.select.queryExp : null));
+		while(tQE.queryExp != null) {
+			tQE = tQE.queryExp;
+		}
+		return tQE;
+	}
+	
 	public Query addTableSpec(SQLSyntaxImpl ...impls) {
-		if(this.decCursor != null) {
-			this.decCursor.select.queryExp.queryTerm.queryPrimary.querySpec.tableExp.addFields(impls);
-		}
-		if(this.recDecCursor != null) {
-			this.recDecCursor.finSelect.queryExp.queryTerm.queryPrimary.querySpec.tableExp.addFields(impls);
-		}
-		if(this.select != null) {
-			this.select.queryExp.queryTerm.queryPrimary.querySpec.tableExp.addFields(impls);
-		}
+		findFirstQE(this).queryTerm.queryPrimary.querySpec.tableExp.addFields(impls);
 		return this;
 	}
 
 	public Query unionTo(Query q) {
 		Select qSelect = q.decCursor != null ? q.decCursor.select : (q.recDecCursor != null ? q.recDecCursor.finSelect : (q.select != null ? q.select : null));
 		Select tSelect = this.decCursor != null ? this.decCursor.select : (this.recDecCursor != null ? this.recDecCursor.finSelect : (this.select != null ? this.select : null));
-		qSelect.queryExp.addFields(qSelect.queryExp);
-		qSelect.queryExp = tSelect.queryExp;
-		qSelect.queryExp.setUnion(true);
+		tSelect.queryExp.addFields(qSelect.queryExp);
+		tSelect.queryExp.setUnion(true);
 		return this;
 	}
 }

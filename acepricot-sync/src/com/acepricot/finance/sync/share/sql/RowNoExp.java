@@ -4,6 +4,10 @@ import java.sql.SQLException;
 
 abstract class RowNoExp extends SQLSyntaxImpl {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Object exp;
 	
 	protected RowNoExp(Object obj) {
@@ -11,7 +15,7 @@ abstract class RowNoExp extends SQLSyntaxImpl {
 	}
 	
 	@Override
-	public String toSQLString() throws SQLException {
+	public String toSQLString(PreparedBuffer psb) throws SQLException {
 		if(exp == null) {
 			throw new SQLException("Row number cannot be null");
 		}

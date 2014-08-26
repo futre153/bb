@@ -4,6 +4,10 @@ import java.sql.SQLException;
 
 public class BetweenPred extends Predicate {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private boolean not;
 	
 	public BetweenPred(boolean not, Object ... objs) {
@@ -12,8 +16,8 @@ public class BetweenPred extends Predicate {
 	}
 	
 	@Override
-	public String toSQLString() throws SQLException {
-		super.toSQLString();
+	public String toSQLString(PreparedBuffer psb) throws SQLException {
+		super.toSQLString(psb);
 		if(objs.length != 3) {
 			throw new SQLException ("Predicate between requires three expressions");
 		}

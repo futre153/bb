@@ -32,14 +32,14 @@ public class JoinedTable extends SQLSyntaxImpl {
 	}
 	
 	@Override
-	public String toSQLString() throws SQLException {
+	public String toSQLString(PreparedBuffer psb) throws SQLException {
 		if(table1 == null || table2 == null) {
 			throw new SQLException ("Joined table expressions cannot be null");
 		}
 		if((!cross) && join == null) {
 			throw new SQLException ("Joined table search contition cannot be null when the tables is not specifies as cross");
 		}		
-		return table1.toSQLString() + (cross ? " CROSS" : (outer == NO_OUTER ? (display ? " INNER" : EMPTY) : ((outer == LEFT ? " LEFT" : (outer == RIGHT ? "RIGHT" : "FULL")) + (display ? " OUTER" : EMPTY)))) + " JOIN " + table2.toSQLString() + (cross ? EMPTY : " " + join.toSQLString());
+		return table1.toSQLString(psb) + (cross ? " CROSS" : (outer == NO_OUTER ? (display ? " INNER" : EMPTY) : ((outer == LEFT ? " LEFT" : (outer == RIGHT ? "RIGHT" : "FULL")) + (display ? " OUTER" : EMPTY)))) + " JOIN " + table2.toSQLString(psb) + (cross ? EMPTY : " " + join.toSQLString(psb));
 	}
 
 }

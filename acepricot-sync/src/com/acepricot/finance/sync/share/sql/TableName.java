@@ -3,6 +3,10 @@ package com.acepricot.finance.sync.share.sql;
 import java.sql.SQLException;
 
 public class TableName extends SQLSyntaxImpl {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected SchemaName schemaName;
 	protected Identifier identifier;
 		
@@ -10,10 +14,10 @@ public class TableName extends SQLSyntaxImpl {
 		super(impls);
 	}
 	
-	public String toSQLString() throws SQLException {
+	public String toSQLString(PreparedBuffer psb) throws SQLException {
 		if(identifier == null) {
 			throw new SQLException ("Table name identifier cannot be null");
 		}
-		return schemaName == null ? identifier.toSQLString() : schemaName.toSQLString() + "." + identifier.toSQLString();
+		return schemaName == null ? identifier.toSQLString(psb) : schemaName.toSQLString(psb) + "." + identifier.toSQLString(psb);
 	}
 }

@@ -3,6 +3,10 @@ package com.acepricot.finance.sync.share.sql;
 import java.math.BigDecimal;
 
 public class FixedPointLiteral extends SQLSyntaxImpl {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private BigDecimal value = BigDecimal.ZERO;
 	
 	public FixedPointLiteral(double d) {
@@ -10,9 +14,9 @@ public class FixedPointLiteral extends SQLSyntaxImpl {
 	}
 
 	@Override
-	public String toSQLString() {
+	public String toSQLString(PreparedBuffer psb) {
 		if(SQLSyntaxImpl.isPrepared()) {
-			getPreparedBuffer().append(value);
+			psb.append(value);
 			return "?";
 		}
 		else {

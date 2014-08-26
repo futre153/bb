@@ -4,6 +4,10 @@ import java.sql.SQLException;
 
 public class FromTableSpec extends SQLSyntaxImpl {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private SQLSyntaxImpl[] fromClause;
 	
 	public FromTableSpec(SQLSyntaxImpl ... clauses) {
@@ -28,7 +32,7 @@ public class FromTableSpec extends SQLSyntaxImpl {
 	}
 	
 	@Override
-	public String toSQLString() throws SQLException {
+	public String toSQLString(PreparedBuffer psb) throws SQLException {
 		StringBuffer sb = new StringBuffer();
 		if(fromClause == null) {
 			throw new SQLException("Freom table specification cannot be null");
@@ -47,7 +51,7 @@ public class FromTableSpec extends SQLSyntaxImpl {
 			else {
 				comma = true;
 			}
-			sb.append(fromClause[i].toSQLString());
+			sb.append(fromClause[i].toSQLString(psb));
 		}
 		return sb.toString();
 	}

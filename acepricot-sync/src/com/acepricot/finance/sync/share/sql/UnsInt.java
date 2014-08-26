@@ -1,6 +1,10 @@
 package com.acepricot.finance.sync.share.sql;
 
 public class UnsInt extends SQLSyntaxImpl {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected FixedPointLiteral fixedPointLiteral;
 	protected FloatingPointLiteral floatingPointLiteral;
 	
@@ -9,7 +13,7 @@ public class UnsInt extends SQLSyntaxImpl {
 		super(impls);
 	}
 	@Override
-	public String toSQLString () {
-		return fixedPointLiteral == null ? (fixedPointLiteral == null ? EMPTY : floatingPointLiteral.toSQLString()) : fixedPointLiteral.toSQLString();
+	public String toSQLString (PreparedBuffer psb) {
+		return fixedPointLiteral == null ? (fixedPointLiteral == null ? EMPTY : floatingPointLiteral.toSQLString(psb)) : fixedPointLiteral.toSQLString(psb);
 	} 
 }

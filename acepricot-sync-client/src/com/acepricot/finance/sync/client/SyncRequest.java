@@ -28,9 +28,9 @@ import com.acepricot.finance.sync.share.sql.WhereClause;
 
 public class SyncRequest {
 
-	private static final int STATUS_NEW = 0;
+	static final int STATUS_NEW = 0;
 	static final int STATUS_PENDING_OK = 1;
-	private static final int STATUS_PENDING_FAILED = 2;
+	static final int STATUS_PENDING_FAILED = 2;
 	static final int STATUS_ARCHIVED_OK = 3;
 	private static final int STATUS_ARCHIVED_FAILED = 4;
 	private static final int UNANSWERED = 0;
@@ -104,7 +104,7 @@ public class SyncRequest {
 		TableName tableName = new TableName(new Identifier(tables[0]), schemaName);
 		ColumnSpec[] cols = ColumnSpec.getColSpecArray(new Identifier(DBSchemas.SYNC_LABEL), DBSchemas.SYNC_ID, DBSchemas.SYNC_TABLE, DBSchemas.SYNC_INSERT);
 		//Query query = DBConnector.createSelect().addColumns(cols).addFromClause(tableName, new Identifier(DBSchemas.SYNC_LABEL)).addQuerySpec(top).addSelectSpec(orderClause).addTableSpec(new WhereClause(predicates));
-		Query union = null, query = null;
+		Query query = null;
 		for(int i = 1; i < tables.length; i ++) {
 			tableName = new TableName(new Identifier(tables[i]), schemaName);
 			Query select = DBConnector.createSelect();
@@ -113,23 +113,25 @@ public class SyncRequest {
 			//select.addSelectSpec(orderClause);
 			select.addColumns(cols);
 			select.addTableSpec(new WhereClause(predicates));
-			if(union == null) {
+			if(query == null) {
 				query = select;
-				union = select;
 			}
 			else {
-				union = select.unionTo(union);
+				query = select.unionTo(query);
 			}
 		}
 		TopSpec top = new TopSpec(new UnsInt(new FixedPointLiteral(1)));
-		OrderClause orderClause = new OrderClause(new SortSpec(new ColumnSpec(new Identifier(DBSchemas.SYNC_LABEL), new Identifier(DBSchemas.SYNC_INSERT))));
+		OrderClause orderClause = new OrderClause(new SortSpec(new ColumnSpec(new Identifier(DBSchemas.SYNC_INSERT))));
 		query.addQuerySpec(top).addSelectSpec(orderClause);
 		Rows rows = DBConnector.select(con, query);
 		System.out.println(rows);
 		if(rows.size() == 1) {
 			tableName = new TableName(schemaName, new Identifier((String) rows.get(0).get(DBSchemas.SYNC_TABLE)));
-			
-			return rows.get(0);
+			Object com1 = new CompPred(
+					ColumnSpec.getColSpecArray(tableName, DBSchemas.SYNC_ID, DBSchemas.SYNC_TABLE),
+					new Object[]{rows.get(0).get(DBSchemas.SYNC_ID), rows.get(0).get(DBSchemas.SYNC_TABLE)},
+					Predicate.EQUAL);
+			return DBConnector.select(con, DBConnector.createSelect().addFromClause(tableName).addTableSpec(new WhereClause(com1))).get(0);
 		}
 		else {
 			return null;

@@ -3,6 +3,10 @@ package com.acepricot.finance.sync.share.sql;
 import java.sql.SQLException;
 
 public class QuanPred extends Predicate {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Object[] objs;
 	private Object[] objs2;
 	private String comp;
@@ -29,7 +33,7 @@ public class QuanPred extends Predicate {
 		this.quantifier = quan;
 	}
 	
-	public String toSQLString() throws SQLException {
+	public String toSQLString(PreparedBuffer psb) throws SQLException {
 		super.toString();
 		return Predicate.join(psb, objs) + " " + comp + " " + quantifier + " " + Predicate.join(psb, objs2); 
 	}

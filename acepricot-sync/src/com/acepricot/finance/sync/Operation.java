@@ -181,6 +181,8 @@ class Operation {
 			return msg.appendBody(this.getId(), this.getTableName(), this.getQuery());
 		case JSONMessage.INSERT_NO_ACTION:
 			return msg.appendBody(this.getId(), this.getTableName());
+		case JSONMessage.INSERT_OPERATION:
+			return msg.appendBody(this.getId(), this.getTableName(), this.getQuery());
 		default: throw new IOException("Type " + this.getType() + " is not defined");	
 		}
 	}

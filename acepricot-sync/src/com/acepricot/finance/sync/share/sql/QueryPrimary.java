@@ -15,11 +15,11 @@ public class QueryPrimary extends SQLSyntaxImpl {
 		super(s);
 	}
 	@Override
-	public String toSQLString() throws SQLException {
+	public String toSQLString(PreparedBuffer psb) throws SQLException {
 		if(querySpec == null && queryExp == null) {
 			throw new SQLException("Query apecification and query expression cannot be null both");
 		}
-		return querySpec == null ? "(" + queryExp.toSQLString() + ")" : querySpec.toSQLString();
+		return querySpec == null ? "(" + queryExp.toSQLString(psb) + ")" : querySpec.toSQLString(psb);
 	}
 	
 }

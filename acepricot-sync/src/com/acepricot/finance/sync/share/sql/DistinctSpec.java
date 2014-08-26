@@ -2,6 +2,10 @@ package com.acepricot.finance.sync.share.sql;
 
 public class DistinctSpec extends SQLSyntaxImpl {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private static final String DISTINCT = "DISTINCT";
 	private static final String ALL = "ALL";
 	
@@ -17,7 +21,7 @@ public class DistinctSpec extends SQLSyntaxImpl {
 	}
 
 	@Override
-	public String toSQLString() {
+	public String toSQLString(PreparedBuffer psb) {
 		return distinct ? DISTINCT : (set ? ALL : EMPTY);
 	}
 

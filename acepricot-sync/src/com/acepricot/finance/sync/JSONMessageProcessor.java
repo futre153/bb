@@ -12,7 +12,6 @@ import java.lang.reflect.Method;
 import java.math.BigDecimal;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.sql.Clob;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -178,7 +177,7 @@ final class JSONMessageProcessor {
 		int group_id;
 		int device_id;
 		BigDecimal status;
-		Clob query;
+		String query;
 		int type;
 		String table_name;
 		int sync_id;
@@ -352,6 +351,18 @@ final class JSONMessageProcessor {
 						}
 						break;
 					case JSONMessageProcessor.UPLOADED_FILES.STATUS_SYNC_ENABLED:
+						tableName = new TableName(new Identifier(JSONMessageProcessor.REGISTERED_DEVICES.class.getSimpleName()));
+						cols = new String[] {JSONMessageProcessor.REGISTERED_DEVICES.SYNC_ENABLED};
+						values = new Object[]{BigDecimal.ONE};
+						com1 = new CompPred(new Object[]{new Identifier(JSONMessageProcessor.UNIVERSAL_ID)}, new Object[]{devId}, Predicate.EQUAL);
+						try {
+							DBConnector.update(con, DBConnector.createUpdate(tableName, cols, values, new WhereClause(com1)), false);
+						} catch (SQLException e) {
+							con.rollback();
+							throw (e);
+						} finally {
+							con.commit();
+						}
 						Object lock = new Object();
 						long l = SyncEngine.nodePause(grpId, lock);
 						msg = prepareDownload(con, mp.uploaded_files.tmp_file, msg);
@@ -1523,6 +1534,27 @@ final class JSONMessageProcessor {
 			}
 		}
 		return -1;
+	}
+
+	public static void updateWaitingToPending(Operation op) throws SQLException {
+		Connection con = null;
+		try {
+			con = DBConnector.lookup(dsn);
+			TableName tableName = new TableName(new Identifier(JSONMessageProcessor.SYNC_RESPONSES.class.getSimpleName()));
+			String[] cols = {JSONMessageProcessor.SYNC_RESPONSES.STATUS};
+			Object[] values = {JSONMessageProcessor.SYNC_RESPONSES.PENDING};
+			Object com1 = new CompPred (
+					new Object[]{new Identifier(JSONMessageProcessor.UNIVERSAL_ID)},
+					new Object[]{op.getMessageProcessor().sync_responses.id},
+					Predicate.EQUAL);
+			DBConnector.update(con, DBConnector.createUpdate(tableName, cols, values, new WhereClause(com1)));
+		}
+		catch(SQLException e) {
+			throw e;
+		}
+		finally {
+			con.close();
+		}
 	}
 	
 }

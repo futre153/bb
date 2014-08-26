@@ -22,10 +22,10 @@ public class QueryTerm extends SQLSyntaxImpl {
 	}
 
 	@Override
-	public String toSQLString() throws SQLException {
+	public String toSQLString(PreparedBuffer psb) throws SQLException {
 		if(queryPrimary == null) {
 			throw new SQLException("Primary query cannot be null");
 		}
-		return (queryTerm == null ? EMPTY : (queryTerm.toSQLString() + " INTERSECT ")) + (all ? "ALL " : EMPTY) + queryPrimary.toSQLString();
+		return (queryTerm == null ? EMPTY : (queryTerm.toSQLString(psb) + " INTERSECT ")) + (all ? "ALL " : EMPTY) + queryPrimary.toSQLString(psb);
 	}
 }
