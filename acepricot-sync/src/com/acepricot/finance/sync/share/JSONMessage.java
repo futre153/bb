@@ -18,6 +18,9 @@ public class JSONMessage {
 	public static final int INSERT_NO_ACTION = 0x410;
 	public static final int INSERT_OPERATION = 0x411;
 	public static final int INSERT_UPDATE_PK = 0x412;
+	public static final int UPDATE_NO_ACTION = 0x420;
+	public static final int UPDATE_OPERATION = 0x421;
+	public static final int UPDATE_UPDATE_PK = 0x422;
 	public static final int FORCE_OPERATION = 0xFFF;
 	public static final int REQUEST_FOR_FORCE = 0xFFE;
 	

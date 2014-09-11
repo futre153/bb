@@ -1,6 +1,7 @@
 package com.acepricot.finance.sync;
 
 import java.io.IOException;
+import java.util.HashMap;
 
 import com.acepricot.finance.sync.share.JSONMessage;
 
@@ -18,6 +19,7 @@ class Operation {
 	private String[] primaryKeys;
 	private Object[] primaryKeysValues;
 	private Object[] newPrimaryKeysValues;
+	private HashMap<?, ?> syncChanges;
 	
 	Operation(JSONMessageProcessor mp, Row row, String grpName, String devName) throws IOException {
 		this.setType(((Double) row.get(DBSchema.SYNC_TYPE)).intValue());
@@ -33,6 +35,7 @@ class Operation {
 		this.setDeviceNode(devNode);
 		this.setSchemaName((String) row.remove(DBSchema.SYNC_SCHEMA));
 		this.setTableName((String) row.remove(DBSchema.SYNC_TABLE));
+		this.setSyncChanges(row.remove(DBSchema.SYNC_CHANGES));
 		this.setColumns(JSONMessageProcessor.getSyncColumnNames(row));
 		this.setValues(JSONMessageProcessor.getSyncColumnValues(this.getColumns(), row));
 		Object id = row.remove(DBSchema.SYNC_ID);
@@ -40,6 +43,24 @@ class Operation {
 		this.setMessageProcessor(mp);
 	}
 
+	private void setSyncChanges(Object c) {
+		if(c != null) {
+			String s = ((String) c);
+			if(s.length() > 0) {
+				try {
+					Object obj = JSONMessageProcessor.load(s);
+					this.syncChanges = (HashMap<?, ?>) obj ;
+				} catch (Exception e) {
+					this.syncChanges = null;
+				}
+			}
+		}
+	}
+	
+	HashMap<?, ?> getSyncChanges() {
+		return this.syncChanges;
+	}
+	
 	public Operation(JSONMessageProcessor mp) {
 		this.setMessageProcessor(mp);
 		this.setGroupNode(SyncEngine.getGroupNode(mp.sync_responses.group_id));
@@ -182,6 +203,12 @@ class Operation {
 		case JSONMessage.INSERT_NO_ACTION:
 			return msg.appendBody(this.getId(), this.getTableName());
 		case JSONMessage.INSERT_OPERATION:
+			return msg.appendBody(this.getId(), this.getTableName(), this.getQuery());
+		case JSONMessage.UPDATE_NO_ACTION:
+			return msg.appendBody(this.getId(), this.getTableName());
+		case JSONMessage.UPDATE_UPDATE_PK:
+			return msg.appendBody(this.getId(), this.getTableName(), this.getQuery());
+		case JSONMessage.UPDATE_OPERATION:
 			return msg.appendBody(this.getId(), this.getTableName(), this.getQuery());
 		default: throw new IOException("Type " + this.getType() + " is not defined");	
 		}

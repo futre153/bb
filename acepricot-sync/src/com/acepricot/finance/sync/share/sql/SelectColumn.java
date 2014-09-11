@@ -38,6 +38,24 @@ public class SelectColumn extends SQLSyntaxImpl {
 		}
 	}
 	
+	int setColumns(Identifier ...ids) {
+		int index = 0;
+		if(ids.length > 0) {
+			Identifier[] c;
+			if(this.cols == null) {
+				c = new Identifier[ids.length];
+			}
+			else {
+				c = new Identifier[ids.length + this.cols.length];
+				System.arraycopy(this.cols, 0, c, 0, this.cols.length);
+				index = ids.length;
+			}
+			System.arraycopy(ids, 0, c, index, ids.length);
+			this.cols = c;
+		}
+		return this.cols.length;
+	}
+	
 	int setColumns(String ...cols) throws SQLException {
 		int index = 0;
 		if(cols.length > 0) {
@@ -47,6 +65,7 @@ public class SelectColumn extends SQLSyntaxImpl {
 			}
 			else {
 				c = new Identifier[cols.length + this.cols.length];
+				System.arraycopy(this.cols, 0, c, 0, this.cols.length);
 				index = cols.length;
 			}
 			for (int i = index; i < c.length; i ++) {
@@ -117,7 +136,7 @@ public class SelectColumn extends SQLSyntaxImpl {
 		}
 		return sb.toString();
 	}
-
+	
 	void setColumns(ColumnSpec ...specs) throws SQLException {
 		String[] d = new String[specs.length];
 		SQLSyntaxImpl[] s = new SQLSyntaxImpl[specs.length];

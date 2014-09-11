@@ -18,7 +18,7 @@ public class SyncClientEngine extends Thread {
 	private static final String INTERVAL_KEY = "interval";
 	private static final String INTERVAL_DEF = "1000";
 	private static final String ACTION_COUNTER_KEY = "actionCounter";
-	private static final String ACTION_COUNTER_DEF = "10";
+	private static final String ACTION_COUNTER_DEF = "3";
 	private static boolean shutdown = false;
 	
 	private String password;
@@ -36,7 +36,10 @@ public class SyncClientEngine extends Thread {
 		}
 		SyncClientEngine engine = new SyncClientEngine(p); 
 		DBSchemas.setTrigger(false);
+		p.setProperty(JSONMessageProcessorClient.DB_USER_KEY, JSONMessageProcessorClient.LOCAL_DB_USER);
 		DBSchemas.loadSchemas(engine.getConnection(p));
+		p.setProperty(JSONMessageProcessorClient.DB_USER_KEY, JSONMessageProcessorClient.SYNC_ADMIN);
+		engine.user = JSONMessageProcessorClient.SYNC_ADMIN;
 		DBSchemas.setTrigger(true);
 		engines.add(i, engine);
 		engines.get(i).setDaemon(true);
@@ -94,6 +97,7 @@ public class SyncClientEngine extends Thread {
 			Exception error = null;
 			try {
 				con = getConnection(props);
+				System.out.println(con);
 				if(outMsg != null) {
 					inMsg = JSONMessageProcessorClient.processIncomming(con, props, outMsg, inMsg);
 					outMsg = null;

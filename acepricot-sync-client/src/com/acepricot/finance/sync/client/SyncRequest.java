@@ -120,12 +120,12 @@ public class SyncRequest {
 				query = select.unionTo(query);
 			}
 		}
-		TopSpec top = new TopSpec(new UnsInt(new FixedPointLiteral(1)));
+		//TopSpec top = new TopSpec(new UnsInt(new FixedPointLiteral(1)));
 		OrderClause orderClause = new OrderClause(new SortSpec(new ColumnSpec(new Identifier(DBSchemas.SYNC_INSERT))));
-		query.addQuerySpec(top).addSelectSpec(orderClause);
+		query.addSelectSpec(orderClause);
 		Rows rows = DBConnector.select(con, query);
 		System.out.println(rows);
-		if(rows.size() == 1) {
+		if(rows.size() > 0) {
 			tableName = new TableName(schemaName, new Identifier((String) rows.get(0).get(DBSchemas.SYNC_TABLE)));
 			Object com1 = new CompPred(
 					ColumnSpec.getColSpecArray(tableName, DBSchemas.SYNC_ID, DBSchemas.SYNC_TABLE),

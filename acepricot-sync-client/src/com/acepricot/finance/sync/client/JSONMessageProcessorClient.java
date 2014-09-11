@@ -28,14 +28,18 @@ import org.pabk.util.Huffman;
 import com.acepricot.finance.sync.DBConnector;
 import com.acepricot.finance.sync.DBSchema;
 import com.acepricot.finance.sync.Row;
+import com.acepricot.finance.sync.Rows;
 import com.acepricot.finance.sync.share.AppConst;
 import com.acepricot.finance.sync.share.JSONMessage;
 import com.acepricot.finance.sync.share.sql.ColumnSpec;
 import com.acepricot.finance.sync.share.sql.CompPred;
 import com.acepricot.finance.sync.share.sql.Identifier;
 import com.acepricot.finance.sync.share.sql.Insert;
+import com.acepricot.finance.sync.share.sql.OrderClause;
 import com.acepricot.finance.sync.share.sql.Predicate;
+import com.acepricot.finance.sync.share.sql.Query;
 import com.acepricot.finance.sync.share.sql.SchemaName;
+import com.acepricot.finance.sync.share.sql.SortSpec;
 import com.acepricot.finance.sync.share.sql.TableName;
 import com.acepricot.finance.sync.share.sql.WhereClause;
 import com.google.gson.Gson;
@@ -61,9 +65,10 @@ public class JSONMessageProcessorClient {
 	public static final String INIT_UPLOAD_HEADER = "initUpload";
 	private static final String INIT_SYNC_HEADER = "initSync";
 	public static final String DB_USER_KEY = "dbUser";
-	private static final String LOCAL_DB_USER = "";
+	static final String LOCAL_DB_USER = "";
 	public static final String DB_PSWD_KEY = "DBPswd";
 	private static final String LOCAL_DB_USER_PASSWORD = "E3o0SRTrfUJj7W8S+Ik5b951DG30AA==";
+	static final String LOCAL_DB_ADMIN_PASSWORD = "4l8RJy37zqGNvoA=";
 	public static final String DB_NAME_KEY = "DBName";
 	public static final String DEFAULT_URL_KEY = "DefUrl";
 	public static final String JDBC_DRIVER_KEY = "JDBCDriver";
@@ -73,6 +78,7 @@ public class JSONMessageProcessorClient {
 	public static final String EXT_REPL_KEY = "ExtRepl";
 	private static final String EXT_REPLACEMENT = "\\.h2\\.db";
 	public static final String SYNC_REQUEST_HEADER = "syncRequest";
+	public static final String SYNC_ADMIN = "SYNC_ADMIN";
 	
 
 
@@ -117,7 +123,7 @@ public class JSONMessageProcessorClient {
 						p.setProperty(URL_STRING_KEY, URL_STRING);
 						p.setProperty(JDBC_DRIVER_KEY, JDBC_DRIVER);
 						p.setProperty(DEFAULT_URL_KEY, DEFAULT_URL);
-						p.setProperty(DB_USER_KEY, LOCAL_DB_USER);
+						p.setProperty(DB_USER_KEY, SYNC_ADMIN);
 						p.setProperty(DB_PSWD_KEY, LOCAL_DB_USER_PASSWORD);
 						p.put(GRP_PSWD_KEY, Huffman.encode((String) p.get(GRP_PSWD_KEY), p.getProperty(GRP_PSCH_KEY), null));
 						Object join = p.remove(GRP_JOIN_KEY);
@@ -474,6 +480,12 @@ public class JSONMessageProcessorClient {
 						break;
 					case JSONMessage.INSERT_OPERATION:
 						_new = processInsertAction(con, props, msg);
+						break;
+					case JSONMessage.UPDATE_NO_ACTION:
+						_new = processUpdateNoAction(con, props, msg);
+						break;
+					case JSONMessage.UPDATE_OPERATION:
+						_new = processUpdateOperation(con, props, msg);
 					default:
 						throw new IOException("Message type " + type + " is not defined");
 					}
@@ -495,34 +507,251 @@ public class JSONMessageProcessorClient {
 		}
 		return null;
 	}
+	
+	private static boolean checkEquity(Connection con, Insert insert, String schema, String table) throws SQLException {
+		SchemaName schemaName = new SchemaName(new Identifier(schema));
+		TableName tableName = new TableName(schemaName, new Identifier(table));
+		Object com1 = getEquityPredicate(insert);
+		return DBConnector.select(con, DBConnector.createSelect().addColumns(insert.getColumns()).addFromClause(tableName).addTableSpec(new WhereClause(com1))).size() > 0;
+	}
+	
+	private static Object getEquityPredicate(Insert insert) throws SQLException {
+		Identifier[] cols = insert.getColumns();
+		Object values = insert.getValues();
+		if(cols == null) {
+			throw new SQLException("Columns cannot be null value in sync action");
+		}
+		if(values == null) {
+			throw new SQLException("Values cannot be null value in sync action");
+		}
+		if(values instanceof Object[]) {
+			return new CompPred(cols, (Object[])values, Predicate.EQUAL);
+		}
+		else {
+			throw new SQLException("Values must be an array in sync action");
+		}
+	}
+	
+	private static Object getPKPredicate(Identifier[] cols, Object[] values, String[] pks) throws SQLException {
+		if(cols == null) {
+			throw new SQLException("Columns cannot be null value in sync action");
+		}
+		if(values == null) {
+			throw new SQLException("Values cannot be null value in sync action");
+		}
+		Object [] pkCols = new Object[pks.length];
+		Object [] pkVals = new Object[pks.length];
+		for(int i = 0; i < pks.length; i ++) {
+			int index = getIndexOfArray(cols, new Identifier(pks[i]));
+			if(index < 0) {
+				throw new SQLException("Primary keys value is mandatory in sznc action");
+			}
+			pkCols[i] = cols[index];
+			pkVals[i] = ((Object[]) values)[index];
+		}
+		return new CompPred(pkCols, pkVals, Predicate.EQUAL);
+	}
+	
+	static <T> int getIndexOfArray(T[] array, Object key) {
+		for(int i = 0; i < array.length; i ++) {
+			if(array[i].equals(key)) {
+				return i;
+			}
+		}
+		return -1;
+	}
+	
+	private static Rows checkUniqueKey(Connection con, Identifier[] cols, Object[] values, String schema, String table) throws SQLException {
+		SchemaName schemaName = new SchemaName(new Identifier(schema));
+		TableName tableName = new TableName(schemaName, new Identifier(table));
+		String[] uqe = DBSchemas.getUniqueKeys(table);
+		if(uqe == null || uqe.length == 0) {
+			return new Rows();
+		}
+		Object com1 = getPKPredicate(cols, values, uqe);
+		return DBConnector.select(con, DBConnector.createSelect().addColumns(cols).addFromClause(tableName).addTableSpec(new WhereClause(com1)));
+	}
+	
+	private static Rows checkPrimaryKeys(Connection con, Identifier[] cols, Object[] values, String schema, String table) throws SQLException {
+		SchemaName schemaName = new SchemaName(new Identifier(schema));
+		TableName tableName = new TableName(schemaName, new Identifier(table));
+		String[] pks = DBSchemas.getPrimaryKeys(table);
+		if(pks == null || pks.length == 0) {
+			return new Rows();
+		}
+		Object com1 = getPKPredicate(cols, values, pks);
+		return DBConnector.select(con, DBConnector.createSelect().addColumns(cols).addFromClause(tableName).addTableSpec(new WhereClause(com1)));
+	}
+	
+	private static void upgradePK(Connection con, Rows rows, String table) throws SQLException {
+		Row row = rows.get(0);
+		String[] pks = DBSchemas.getPrimaryKeys(table);
+		if(pks == null || pks.length == 0) {
+			throw new SQLException("No primary keys found on sync action");
+		}
+		Object value = row.get(pks[0]);
+		if(value == null) {
+			throw new SQLException("Primary key values is null in sync request");
+		}
+		if(value instanceof Integer) {
+			upgradeID(con, table, pks[0], ((Integer) value).intValue());
+		}
+		else {
+			throw new SQLException("Primary key of class " + value.getClass().getSimpleName() + " is not upgradable");
+		}
+	}
+	
+	private static void upgradeUnique(Connection con, Rows rows, Identifier[] cols,  String table) throws SQLException {
+		TableName syncTable = new TableName(new SchemaName(new Identifier(DBSchemas.getSyncSchemaName())), new Identifier(table));
+		TableName userTable = new TableName(new SchemaName(new Identifier(DBSchemas.getSchemaName())), new Identifier(table));
+		Row row = rows.get(0);
+		String[] uqe = DBSchemas.getUniqueKeys(table);
+		String[] pks = DBSchemas.getPrimaryKeys(table);
+		if(uqe == null || uqe.length == 0) {
+			throw new SQLException("No primary keys found on sync action");
+		}
+		if(pks == null || pks.length == 0) {
+			throw new SQLException("No primary keys found on sync action");
+		}
+		Object value = row.get(uqe[0]);
+		if(value == null) {
+			throw new SQLException("Unique value is null in sync request");
+		}
+		Query select;
+		Object com1;;
+		do {
+			value = upgradeUniqueValue(value);
+			com1 = new CompPred(new Object[]{new Identifier(uqe[0])}, new Object[]{value}, Predicate.EQUAL);
+			select = DBConnector.createSelect().addFromClause(userTable).addColumns(uqe[0]).addTableSpec(new WhereClause(com1));
+		}
+		while(DBConnector.select(con, select).size() > 0);
+		com1 = new CompPred(new Object[]{new Identifier(uqe[0])}, new Object[]{row.get(uqe[0])}, Predicate.EQUAL);
+		DBConnector.update(con, DBConnector.createUpdate(userTable, new String[]{uqe[0]}, new Object[]{value}, new WhereClause(com1)));
+		DBConnector.update(con, DBConnector.createUpdate(syncTable, new String[]{uqe[0]}, new Object[]{value}, new WhereClause(com1)));
+	}
+	
+	private static String upgradeString(String s) throws SQLException {
+		String[] a = s.split("_");
+		if(a.length == 1) {
+			return a[0] + "_1";
+		}
+		else if(a.length > 1) {
+			int x;
+			try {
+				x = Integer.parseInt(a[a.length - 1]);
+			}
+			catch (Exception e) {
+				x = -1;
+			}
+			int y = x < 0 ? a.length : a.length - 1;
+			StringBuffer sb = new StringBuffer(s.length() + 2);
+			for(int i = 0; i < y; i ++) {
+				if(i > 0) {
+					sb.append('_');
+				}
+				sb.append(a[i]);
+			}
+			if(x < 0) {
+				sb.append('1');
+			}
+			else {
+				sb.append(x + 1);
+			}
+			return sb.toString();
+		}
+		else {
+			throw new SQLException("Unknown error while upgrading String");
+		}
+	}
+	
+	private static Object upgradeUniqueValue(Object obj) throws SQLException {
+		if(obj == null) {
+			throw new SQLException("Unique value cannot be null in sync request");
+		}
+		if(obj instanceof Integer) {
+			return ((Integer) obj).intValue() + 1;
+		}
+		else if(obj instanceof String) {
+			return upgradeString((String) obj);
+		}
+		throw new SQLException("Class " + obj.getClass() + " is not upgradable for unique in sync request");
+	}
 
+	private static void upgradeID(Connection con, String table, String idCol, int intValue) throws SQLException {
+		TableName syncTable = new TableName(new SchemaName(new Identifier(DBSchemas.getSyncSchemaName())), new Identifier(table));
+		TableName userTable = new TableName(new SchemaName(new Identifier(DBSchemas.getSchemaName())), new Identifier(table));
+		Object com1 = new CompPred(new Object[]{new Identifier(idCol)}, new Object[]{intValue}, Predicate.GREATHER_OR_EQUAL);
+		OrderClause orderClause = new OrderClause(new SortSpec(false, new ColumnSpec(new Identifier(idCol))));
+		Query select = DBConnector.createSelect().addColumns(idCol).addFromClause(userTable).addTableSpec(new WhereClause(com1)).addSelectSpec(orderClause);
+		Rows rows = DBConnector.select(con, select);
+		for(int i = 0; i < rows.size(); i ++) {
+			int id = ((Integer) rows.get(i).get(idCol)).intValue();
+			com1 = new CompPred(new Object[]{new Identifier(idCol)}, new Object[]{id}, Predicate.EQUAL);
+			DBConnector.update(con, DBConnector.createUpdate(userTable, new String[]{idCol}, new Object[]{id + 1}, new WhereClause(com1)));
+			DBConnector.update(con, DBConnector.createUpdate(syncTable, new String[]{idCol}, new Object[]{id + 1}, new WhereClause(com1)));
+		}
+	}
+
+	private static void processInsertConflict(Connection con, Insert insert, String schema, String table) throws SQLException {
+		Identifier[] cols = insert.getColumns();
+		Object obj = insert.getValues();
+		if(cols == null) {
+			throw new SQLException("Columns cannot be null value in sync action");
+		}
+		if(obj == null) {
+			throw new SQLException("Values cannot be null value in sync action");
+		}
+		if(!(obj instanceof Object[])) {
+			throw new SQLException("Values must be an array in sync action");
+		}
+		else {
+			Object[] values = ((Object[]) obj).clone();
+			Rows rows = null;
+			if(!checkEquity(con, insert, DBSchemas.getSchemaName(), table)) {
+				rows = checkPrimaryKeys(con, cols, values, schema, table);
+				if(rows.size() > 0) {
+					upgradePK(con, rows, table);
+				}
+				rows = checkUniqueKey(con, cols, values, schema, table);
+				if(rows.size() > 0) {
+					upgradeUnique(con, rows, cols, table);
+				}
+				DBConnector.insert(con, insert);
+			}
+		}
+	}
+	
+	
 	private static JSONMessage processInsertAction(Connection con, Properties props, JSONMessage msg) throws SQLException {
 		Object com1 = null;
 		TableName tableName = null;
 		Object[] body = msg.getBody();
 		try {
+			con.setAutoCommit(false);
 			String schema = DBSchemas.getSyncSchemaName();
 			SchemaName schemaName = new SchemaName(new Identifier(schema));
 			tableName = new TableName(schemaName, new Identifier(DBSchemas.SYNC_INCOMMING_REQUESTS));
 			String[] cols = {DBSchemas.SYNC_ID, DBSchemas.SYNC_TYPE, DBSchemas.SYNC_INSERT, DBSchemas.SYNC_SCHEMA, DBSchemas.SYNC_TABLE, DBSchemas.SYNC_STATUS, DBSchemas.SYNC_CHANGES};
 			//ColumnSpec[] colspecs = ColumnSpec.getColSpecArray(tableName, cols);
 			Object[] vals = {body[2], body[1], new Date().getTime(), schema, body[3], SyncRequest.STATUS_NEW, body[4]};
-			DBConnector.insert(con, DBConnector.createInsert(tableName, vals, cols).setIgnoreTrigger(true));
-			con.setAutoCommit(false);
+			DBConnector.insert(con, DBConnector.createInsert(tableName, vals, cols));
 			com1 = new CompPred(new Object[]{new Identifier(DBSchemas.SYNC_ID), new Identifier(DBSchemas.SYNC_TABLE)}, new Object[]{body[2], body[3]}, Predicate.EQUAL);
 			int id = (int) DBConnector.select(con, DBConnector.createSelect().addFromClause(tableName).addColumns(DBSchemas.SYNC_INCOMMING_REQUESTS_ID).addTableSpec(new WhereClause(com1))).get(0).get(DBSchemas.SYNC_INCOMMING_REQUESTS_ID);
 			byte[] b = Huffman.decode(Base64Coder.decode(((String) body[4]).toCharArray()), null);
 			ByteArrayInputStream bin = new ByteArrayInputStream(b);
 			ObjectInputStream in = new ObjectInputStream(bin);
 			Insert insert = (Insert) in.readObject();
-			DBConnector.insert(con, insert);
+			processInsertConflict(con, insert, DBSchemas.getSchemaName(), (String) body[3]);
+			/*if(!checkEquity(con, insert, DBSchemas.getSchemaName(), (String) body[3])) {
+				DBConnector.insert(con, insert);
+			}*/
 			com1 = new CompPred(new Object[]{new Identifier(DBSchemas.SYNC_INCOMMING_REQUESTS_ID)}, new Object[]{id}, Predicate.EQUAL);
 			DBConnector.update(con, DBConnector.createUpdate(tableName, new String[]{DBSchemas.SYNC_STATUS}, new Object[]{SyncRequest.STATUS_PENDING_OK}, new WhereClause(com1)), false);
 			return SyncRequest.getInstance(props).appendBody(DBSchemas.SYNC_TYPE, JSONMessage.RESPONSE_FOR_PENDING_RESULT_OK, DBSchemas.SYNC_ID, body[2], DBSchemas.SYNC_TABLE, body[3]);
 		}
 		catch(Exception e) {
 			con.rollback();
-			DBConnector.update(con, DBConnector.createUpdate(tableName, new String[]{DBSchemas.SYNC_STATUS}, new Object[]{SyncRequest.STATUS_PENDING_FAILED}, new WhereClause(com1)), false);
+			//DBConnector.update(con, DBConnector.createUpdate(tableName, new String[]{DBSchemas.SYNC_STATUS}, new Object[]{SyncRequest.STATUS_PENDING_FAILED}, new WhereClause(com1)), false);
 			throw new SQLException(e);
 			//return SyncRequest.getInstance(props).appendBody(DBSchemas.SYNC_TYPE, JSONMessage.RESPONSE_FOR_PENDING_RESULT_FAILED, DBSchemas.SYNC_ID, body[2], DBSchemas.SYNC_TABLE, body[3]);
 		}

@@ -104,4 +104,13 @@ public class Insert extends SQLSyntaxImpl {
 		}
 		this.duplicate = duplicate;
 	}
+
+	public Identifier[] getColumns() {
+		return cols;		
+	}
+	
+	public Object getValues() {
+		return values;
+	}
+	
 }

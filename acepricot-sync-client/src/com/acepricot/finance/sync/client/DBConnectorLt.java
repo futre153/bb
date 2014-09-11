@@ -381,5 +381,26 @@ public class DBConnectorLt  {
 		ps.close();
 		return status;
 		
+	}
+
+
+	public static int createUser(Connection con, String name, String pwd, boolean admin, boolean ifNotExists) throws SQLException {
+		StringBuffer sb = new StringBuffer("CREATE USER ");
+		if(ifNotExists) {
+			sb.append("IF NOT EXISTS ");
+		}
+		sb.append(name);
+		sb.append(" PASSWORD ");
+		envelope(sb, pwd, '\'');
+		if(admin) {
+			sb.append(" ADMIN");
+		}
+		con.setAutoCommit(false);
+		PreparedStatement ps = con.prepareStatement(sb.toString());
+		int status = ps.executeUpdate();
+		con.commit();
+		con.setAutoCommit(true);
+		ps.close();
+		return status;
 	}	
 }

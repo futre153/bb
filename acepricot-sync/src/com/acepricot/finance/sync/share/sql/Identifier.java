@@ -31,4 +31,14 @@ public class Identifier extends SQLSyntaxImpl {
 		}
 		return getValue().matches(SIMPLE_ID_MASK) ? getValue() : ("\"" + getValue() + "\"");
 	}
+	
+	public boolean equals(Object id) {
+		if(id instanceof Identifier) {
+			return this.identifier.equals(((Identifier) id).identifier);
+		}
+		else {
+			return super.equals(id);
+		}
+	}
+	
 }

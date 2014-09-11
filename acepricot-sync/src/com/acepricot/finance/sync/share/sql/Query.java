@@ -48,7 +48,12 @@ public class Query extends SQLSyntaxImpl {
 		findFirstQE(this).queryTerm.queryPrimary.querySpec.selectColumn.setColumns(specs);
 		return this;
 	}
-
+	
+	public Query addColumns(Identifier ... ids) {
+		findFirstQE(this).queryTerm.queryPrimary.querySpec.selectColumn.setColumns(ids);
+		return this;
+	}
+	
 	public Query addColumns(String ...strings) throws SQLException {
 		findFirstQE(this).queryTerm.queryPrimary.querySpec.selectColumn.setColumns(strings);
 		return this;
@@ -107,4 +112,5 @@ public class Query extends SQLSyntaxImpl {
 		tSelect.queryExp.setUnion(true);
 		return this;
 	}
+
 }

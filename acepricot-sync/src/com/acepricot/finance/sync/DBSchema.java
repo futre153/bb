@@ -13,7 +13,7 @@ import com.acepricot.finance.sync.share.sql.WhereClause;
 
 public class DBSchema {
 	static final String SYNC_LABEL = "SYNC_";
-	private static final String SYNC_CHANGES = SYNC_LABEL + "CHANGES";
+	static final String SYNC_CHANGES = SYNC_LABEL + "CHANGES";
 	public static final String SYNC_TYPE = SYNC_LABEL + "TYPE";
 	public static final String SYNC_INSERT = SYNC_LABEL + "INSERT";
 	static final String SYNC_SCHEMA = SYNC_LABEL + "SCHEMA";
@@ -77,7 +77,16 @@ public class DBSchema {
 	public String[] getColumns(Connection con, String tableName) throws SQLException {
 		return getColumnsForTableIndex(con, getIndexOfTable(con, tableName));
 	}
-
+	
+	public String[] getUniqueKeys(String table) throws SQLException {
+		int index = getIndexOfTable(null, table);
+		Object obj = constraints[index][1];
+		if(obj == null) {
+			return new String[]{};
+		}
+		return (String[]) obj;
+	};
+	
 	private String[] getColumnsForTableIndex(Connection con, int index) throws SQLException {
 		if(columns == null) {
 			loadSchemas(con);
