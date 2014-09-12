@@ -1,15 +1,10 @@
 package com.acepricot.finance.sync.client;
 
-import java.io.ByteArrayOutputStream;
-import java.io.ObjectOutputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Date;
-import java.util.HashMap;
 
 import org.h2.api.Trigger;
-import org.pabk.util.Base64Coder;
-import org.pabk.util.Huffman;
 
 public class CommonTrigger implements Trigger {
 	
@@ -29,29 +24,15 @@ public class CommonTrigger implements Trigger {
 	public void fire(Connection con, Object[] oldRow, Object[] newRow)	throws SQLException {
 		String user = getUser(con);
 		if(user == null || user.length() == 0 || !(user.equals(JSONMessageProcessorClient.SYNC_ADMIN))) {
-			Object[] row;
-			//StringBuffer sb = new StringBuffer();
-			HashMap<String, Object> changes = new HashMap<String, Object>();
 			switch(this.getType()) {
 			case Trigger.INSERT:
-				row = newRow;
-				this.insert(con, row, changes);
+				this.insert(con, newRow, newRow);
 				break;
 			case Trigger.UPDATE:
-				row = newRow;
-				String[] colNames = DBSchemas.getColumns(con, tableName);
-				for(int i = 0; i < newRow.length; i ++) {
-					if(((oldRow[i] == null) && (newRow[i] != null)) || ((oldRow[i] != null) && ((newRow[i] == null) || (!oldRow[i].equals(newRow[i]))))) {
-						changes.put(colNames[i], oldRow[i]);
-					}
-				}
-				if(changes.size() > 0) {
-					this.insert(con, row, changes);
-				}
+				this.insert(con, oldRow, newRow);
 				break;
 			case Trigger.DELETE:
-				row = oldRow;
-				this.insert(con, row, changes);
+				this.insert(con, oldRow, oldRow);
 				break;
 			default:
 			}
@@ -68,35 +49,26 @@ public class CommonTrigger implements Trigger {
 		return null;
 	}
 
-	private void insert(Connection con, Object[] row, HashMap<String, Object> changes) throws SQLException {
-		Object[] temp = new Object[row.length + DBSchemas.getSyncExtensionValuableCols().length];
-		String c = "";
-		if(changes.size() > 0) {
-			try {
-				c = save(changes);
-			} catch (Exception e) {
-				c = "";
-			}
-		}
-		temp[row.length] = c;
-		temp[row.length + 1] = this.getType();
-		temp[row.length + 2] = new Date().getTime();
-		temp[row.length + 3] = this.getSchemaName();
-		temp[row.length + 4] = this.getTableName();
-		String cols[] = new String[temp.length]; 
-		System.arraycopy(DBSchemas.getColumns(con, this.getTableName()), 0, cols, 0, DBSchemas.getColumns(con, this.getTableName()).length);
-		System.arraycopy(DBSchemas.getSyncExtensionValuableCols(), 0, cols, DBSchemas.getColumns(con, this.getTableName()).length, DBSchemas.getSyncExtensionValuableCols().length);
-		System.arraycopy(row, 0, temp, 0, row.length);
+	private void insert(Connection con, Object[] oldRow, Object[] newRow) throws SQLException {
+		int rl = oldRow.length + newRow.length;
+		Object[] temp = new Object[oldRow.length + newRow.length + DBSchemas.getSyncExtensionValuableCols().length];
+		temp[rl + 0] = this.getType();
+		temp[rl + 1] = new Date().getTime();
+		temp[rl + 2] = this.getSchemaName();
+		temp[rl + 3] = this.getTableName();
+		String cols[] = DBSchemas.getSyncTableValsCols(con, this.tableName); 
+		System.arraycopy(oldRow, 0, temp, 0, oldRow.length);
+		System.arraycopy(newRow, 0, temp, oldRow.length, newRow.length);
 		DBConnectorLt.insert(con, SYNC_SCHEMA + "." + this.getTableName(), cols, toStringArray(temp), (char) 0);
 	}
-	
+	/*
 	private static String save(Object obj) throws Exception {
 		ByteArrayOutputStream bout = new ByteArrayOutputStream();
 		ObjectOutputStream out = new ObjectOutputStream(bout);
 		out.writeObject(obj);
 		return new String(Base64Coder.encode(Huffman.encode(bout.toByteArray(), null)));
 	}
-	
+	*/
 	private static String[] toStringArray(Object[] temp) {
 		String[] tmp = new String[temp.length];
 		for(int i = 0; i < temp.length; i ++) {

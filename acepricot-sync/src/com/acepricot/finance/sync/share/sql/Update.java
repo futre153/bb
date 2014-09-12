@@ -46,6 +46,13 @@ public class Update extends SQLSyntaxImpl {
 		}
 	}
 	
+	final public Identifier[] getColumns() {
+		return cols;		
+	}
+	
+	final public Object getValues() {
+		return values;
+	}
 	
 	
 	final void setColumns(String ...cols) throws SQLException {
@@ -143,6 +150,10 @@ public class Update extends SQLSyntaxImpl {
 
 	public PreparedBuffer getPreparedBuffer() {
 		return psb;
+	}
+
+	public WhereClause getWhereClause() {
+		return this.whereClause;
 	}
 	
 }

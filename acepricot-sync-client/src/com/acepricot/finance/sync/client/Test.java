@@ -2,36 +2,16 @@ package com.acepricot.finance.sync.client;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.security.MessageDigest;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.Properties;
-
-import javax.xml.bind.DatatypeConverter;
 
 import org.pabk.net.http.DefaultContent;
 import org.pabk.net.http.HttpClientConst;
 import org.pabk.net.http.SimpleClient;
-import org.pabk.util.Base64Coder;
-import org.pabk.util.Huffman;
 
-import com.acepricot.finance.sync.DBConnector;
 import com.acepricot.finance.sync.share.JSONMessage;
-import com.acepricot.finance.sync.share.sql.CompPred;
-import com.acepricot.finance.sync.share.sql.Identifier;
-import com.acepricot.finance.sync.share.sql.Insert;
-import com.acepricot.finance.sync.share.sql.Predicate;
-import com.acepricot.finance.sync.share.sql.Query;
-import com.acepricot.finance.sync.share.sql.TableName;
-import com.acepricot.finance.sync.share.sql.WhereClause;
 import com.google.gson.Gson;
 
 public class Test {
@@ -78,8 +58,8 @@ public class Test {
 		*/
 		JSONMessageProcessorClient.syncStart(new String[]{
 				"D:\\TEMP\\clientprops\\sync_props1-1.xml",
-				"D:\\TEMP\\clientprops\\sync_props1-2.xml",
-				"D:\\TEMP\\clientprops\\sync_props1-3.xml"});
+				"D:\\TEMP\\clientprops\\sync_props1-2.xml"/*,
+				"D:\\TEMP\\clientprops\\sync_props1-3.xml"*/});
 
 	}
 	
@@ -134,10 +114,10 @@ public class Test {
 		pro.put(JSONMessageProcessorClient.GRP_PSWD_KEY, "MyGroup1");
 		pro.put(JSONMessageProcessorClient.GRP_PSCH_KEY, "UTF-8");
 		pro.put(JSONMessageProcessorClient.GRP_JOIN_KEY, true);
-		pro.put(JSONMessageProcessorClient.DEV_NAME_KEY, "MyDevice1-3");
+		pro.put(JSONMessageProcessorClient.DEV_NAME_KEY, "MyDevice1-2");
 		pro.put(JSONMessageProcessorClient.GRP_EMAI_KEY, "futre@szm.sk");
 		pro.put(JSONMessageProcessorClient.DEV_PRIM_KEY, false);
-		pro.put(JSONMessageProcessorClient.DB_NAME_KEY, "D:\\TEMP\\clientsamples\\database1-3.h2.db");
+		pro.put(JSONMessageProcessorClient.DB_NAME_KEY, "D:\\TEMP\\clientsamples\\database1-2.h2.db");
 		return pro;
 	}
 	

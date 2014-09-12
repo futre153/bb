@@ -1,6 +1,7 @@
 package com.acepricot.finance.sync;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 
 import com.acepricot.finance.sync.share.JSONMessage;
@@ -12,16 +13,17 @@ class Operation {
 	private String[] columns;
 	private String tableName;
 	private String schemaName;
-	private Object[] values;
+	private Object[] oldValues;
+	private Object[] newValues;
 	private int id;
 	private JSONMessageProcessor messageProcessor;
 	private String query;
-	private String[] primaryKeys;
-	private Object[] primaryKeysValues;
-	private Object[] newPrimaryKeysValues;
+	//private String[] primaryKeys;
+	//private Object[] primaryKeysValues;
+	//private Object[] newPrimaryKeysValues;
 	private HashMap<?, ?> syncChanges;
 	
-	Operation(JSONMessageProcessor mp, Row row, String grpName, String devName) throws IOException {
+	Operation(JSONMessageProcessor mp, Row row, String grpName, String devName) throws IOException, SQLException {
 		this.setType(((Double) row.get(DBSchema.SYNC_TYPE)).intValue());
 		GroupNode grpNode = SyncEngine.getGroupNode(grpName);
 		if(grpNode == null) {
@@ -36,8 +38,9 @@ class Operation {
 		this.setSchemaName((String) row.remove(DBSchema.SYNC_SCHEMA));
 		this.setTableName((String) row.remove(DBSchema.SYNC_TABLE));
 		this.setSyncChanges(row.remove(DBSchema.SYNC_CHANGES));
-		this.setColumns(JSONMessageProcessor.getSyncColumnNames(row));
-		this.setValues(JSONMessageProcessor.getSyncColumnValues(this.getColumns(), row));
+		this.setColumns(this.getGroupNode().getDBSchema().getColumns(this.getTableName()));
+		this.setOldValues(row);
+		this.setNewValues(row);
 		Object id = row.remove(DBSchema.SYNC_ID);
 		this.setId(id == null ? -1 : ((Double) id).intValue());
 		this.setMessageProcessor(mp);
@@ -120,14 +123,31 @@ class Operation {
 		this.schemaName = schemaName;
 	}
 
-	final Object[] getValues() {
-		return values;
+	final Object[] getOldValues() {
+		return oldValues;
 	}
 
-	final void setValues(Object[] values) {
-		this.values = values;
+	private final void setOldValues(Row row) {
+		this.oldValues = getValues(DBSchema.OLD_ROW_PREFIX, row);
 	}
 
+	private Object[] getValues(String pfx, Row row) {
+		Object[] vals = new Object[this.getColumns().length];
+		for(int i = 0; i < this.getColumns().length; i ++) {
+			vals[i] = row.get(pfx + this.getColumns()[i]);
+		}
+		return vals;
+	}
+
+	final Object[] getNewValues() {
+		return newValues;
+	}
+
+	private final void setNewValues(Row row) {
+		this.newValues = getValues(DBSchema.NEW_ROW_PREFIX, row);
+	}
+
+	
 	final int getId() {
 		return id;
 	}
@@ -151,7 +171,7 @@ class Operation {
 	final void setMessageProcessor(JSONMessageProcessor messageProcessor) {
 		this.messageProcessor = messageProcessor;
 	}
-
+/*
 	final String[] getPrimaryKeys() {
 		return primaryKeys;
 	}
@@ -188,7 +208,7 @@ class Operation {
 			this.newPrimaryKeysValues[i] = newPrimaryKeysValue;
 		}
 	}
-
+*/
 	public JSONMessage constructJSONMessage() throws IOException {
 		JSONMessage msg = new JSONMessage().returnOK(this.getType());
 		switch(this.getType()) {

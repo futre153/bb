@@ -68,6 +68,9 @@ public class DBSchema {
 	
 	private static boolean trigger = true;
 	
+	static final String OLD_ROW_PREFIX = "OLD_";
+	static final String NEW_ROW_PREFIX = "NEW_";
+	
 	private DBSchema() {}
 	
 	static DBSchema getInstance() {

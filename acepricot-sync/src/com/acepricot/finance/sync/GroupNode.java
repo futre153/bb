@@ -257,8 +257,8 @@ public class GroupNode extends Hashtable <String, DeviceNode> {
 		switch(op.getType()) {
 		case Trigger.INSERT:
 			return insertOperation(op);
-		case Trigger.UPDATE:
-			return updateOperation(op);
+		/*case Trigger.UPDATE:
+			return updateOperation(op);*/
 		/*case Trigger.DELETE:
 			return deleteOperation(op);*/
 		case JSONMessage.EMPTY_REQUEST:
@@ -274,23 +274,23 @@ public class GroupNode extends Hashtable <String, DeviceNode> {
 		// TODO Auto-generated method stub
 		return new JSONMessage().returnOK();
 	}
-
+/*
 	private JSONMessage updateOperation(Operation op) throws IOException {
 		// TODO Auto-generated method stub
 		String dsn = this.getDSN();
 		try {
-			op.setPrimaryKeys(this.schema.getPrimaryKeys(op.getTableName()));
+			//op.setPrimaryKeys(this.schema.getPrimaryKeys(op.getTableName()));
 			if(!GroupNode.checkColumns(op.getColumns(), this.schema.getColumns(op.getTableName()))) {
 				throw new SQLException("Columns failed to check. May versions of databases are not equals");
 			}
-			if(!GroupNode.checkColumns(op.getPrimaryKeys(), op.getColumns())) {
+			if(!GroupNode.checkColumns(this.schema.getPrimaryKeys(op.getTableName()), op.getColumns())) {
 				throw new SQLException("Primary keys failed to check. May versions of databases are not equals");
 			}
 			if(JSONMessageProcessor.checkAll(dsn, op)) {
 				op.setType(JSONMessage.UPDATE_NO_ACTION);
 			}
 			else {
-				/*
+				
 				boolean[] b = JSONMessageProcessor.checkUpdatePartial(dsn, op);
 				if(b[b.length-1]) {
 					for(int i = 0; i < (b.length - 1); i ++) {
@@ -301,7 +301,7 @@ public class GroupNode extends Hashtable <String, DeviceNode> {
 					JSONMessageProcessor.updateOperation(dsn, op);
 					op.setType(JSONMessage.UPDATE_UPDATE_PK);
 				}
-				else {*/
+				else {
 					JSONMessageProcessor.updateOperation(dsn, op);
 					op.setType(JSONMessage.UPDATE_NO_ACTION);
 				//}
@@ -312,15 +312,15 @@ public class GroupNode extends Hashtable <String, DeviceNode> {
 			return new JSONMessage().sendAppError(e);
 		}
 	}
-
+*/
 	private JSONMessage insertOperation(Operation op) throws IOException {
 		String dsn = this.getDSN();
 		try {
-			op.setPrimaryKeys(this.schema.getPrimaryKeys(op.getTableName()));
+			//op.setPrimaryKeys(this.schema.getPrimaryKeys(op.getTableName()));
 			if(!GroupNode.checkColumns(op.getColumns(), this.schema.getColumns(op.getTableName()))) {
 				throw new SQLException("Columns failed to check. May versions of databases are not equals");
 			}
-			if(!GroupNode.checkColumns(op.getPrimaryKeys(), op.getColumns())) {
+			if(!GroupNode.checkColumns(this.schema.getPrimaryKeys(op.getTableName()), op.getColumns())) {
 				throw new SQLException("Primary keys failed to check. May versions of databases are not equals");
 			}
 			if(JSONMessageProcessor.checkAll(dsn, op)) {

@@ -9,7 +9,6 @@ import org.h2.api.Trigger;
 import org.pabk.util.Huffman;
 
 import com.acepricot.finance.sync.DBConnector;
-import com.acepricot.finance.sync.RefConstraint;
 import com.acepricot.finance.sync.Row;
 import com.acepricot.finance.sync.Rows;
 import com.acepricot.finance.sync.Where;
@@ -32,16 +31,15 @@ public class DBSchemas {
 	static final String SYNC_ID = SYNC_LABEL + "ID";
 	static final String SYNC_STATUS = SYNC_LABEL + "STATUS";
 	private static final String[] SYNC_COLS_EXTENSIONS = {
-		SYNC_CHANGES, SYNC_TYPE, SYNC_INSERT, SYNC_SCHEMA, SYNC_TABLE, SYNC_ID, SYNC_STATUS
+		SYNC_TYPE, SYNC_INSERT, SYNC_SCHEMA, SYNC_TABLE, SYNC_ID, SYNC_STATUS
 	};
 	private static final String[] SYNC_VALUABLE_COLS_EXTENSIONS = {
-		SYNC_CHANGES, SYNC_TYPE, SYNC_INSERT, SYNC_SCHEMA, SYNC_TABLE
+		SYNC_TYPE, SYNC_INSERT, SYNC_SCHEMA, SYNC_TABLE
 	};
 	private static final String[] SYNC_DATATYPES_EXTENSIONS = {
-		"VARCHAR(4096)", "TINYINT", "BIGINT", "VARCHAR(256)", "VARCHAR(256)", "INT", "TINYINT"
+		"TINYINT", "BIGINT", "VARCHAR(256)", "VARCHAR(256)", "INT", "TINYINT"
 	};
 	private static final String[] SYNC_CONSTRAINTS_EXTENSIONS = {
-		"NOT NULL",
 		"DEFAULT " + Trigger.INSERT + " OR " + Trigger.UPDATE + " OR " + Trigger.DELETE + " OR " + Trigger.SELECT + " NOT NULL",
 		"NOT NULL",
 		"NOT NULL",
@@ -73,7 +71,7 @@ public class DBSchemas {
 	private static final String IS_TRIGGERS_TRIGGER_SCHEMA = "TRIGGER_SCHEMA";
 	private static final String IS_TRIGGERS_TRIGGER_NAME = "TRIGGER_NAME";
 	private static final String IS_TRIGGERS_JAVA_CLASS = "JAVA_CLASS";
-	private static final String IS_CROSS_REFERENCES = "CROSS_REFERENCES";
+	/*private static final String IS_CROSS_REFERENCES = "CROSS_REFERENCES";
 	private static final String IS_CROSS_REFERENCES_PKTABLE_SCHEMA = "PKTABLE_SCHEMA";
 	private static final String IS_CROSS_REFERENCES_PKTABLE_NAME = "PKTABLE_NAME";
 	private static final String IS_CROSS_REFERENCES_PKCOLUMN_NAME = "PKCOLUMN_NAME";
@@ -81,7 +79,7 @@ public class DBSchemas {
 	private static final String IS_CROSS_REFERENCES_FKTABLE_NAME = "FKTABLE_NAME";
 	private static final String IS_CROSS_REFERENCES_FKCOLUMN_NAME = "FKCOLUMN_NAME";
 	private static final String IS_CROSS_REFERENCES_UPDATE_RULE = "UPDATE_RULE";
-	private static final String IS_CROSS_REFERENCES_DELETE_RULE = "DELETE_RULE";
+	private static final String IS_CROSS_REFERENCES_DELETE_RULE = "DELETE_RULE";*/
 	private static final String IS_CONSTRAINTS = "CONSTRAINTS";
 	private static final String IS_CONSTRAINTS_CONSTRAINT_SCHEMA = "CONSTRAINT_SCHEMA";
 	//private static final String IS_CONSTRAINTS_CONSTRAINT_NAME = "CONSTRAINT_NAME";
@@ -123,6 +121,8 @@ public class DBSchemas {
 		"NOT NULL DEFAULT 0",
 		null
 	};
+	private static final String OLD_ROW_PREFIX = "OLD_";
+	private static final String NEW_ROW_PREFIX = "NEW_";
 
 	private static String[] tables;
 	private static String[][] columns;
@@ -230,6 +230,7 @@ public class DBSchemas {
 		nullables = new String[rows.size()][];
 		for(int i = 0; i < tables.length; i ++) {
 			tables[i] = (String) rows.get(i).get(IS_TABLES_TABLE_NAME);
+			System.out.println(rows.get(i).get(IS_TABLES_TABLE_NAME));
 		}
 		tableName = new TableName(is, new Identifier(IS_TYPE_INFO));
 		Rows typesRows = DBConnector.select(con, DBConnector.createSelect().addFromClause(tableName));		
@@ -299,17 +300,22 @@ public class DBSchemas {
 		DBConnectorLt.createTable(con, SYNC_SCHEMA_NAME, SYNC_INCOMMING_REQUESTS, SYNC_INCOMMING_REQUESTS_COLS, SYNC_INCOMMING_REQUESTS_DATATYPES, SYNC_INCOMMING_REQUESTS_CONSTRAINTS, true, (char) 0);
 		
 		String[] cols2;
-		String table;
+		//String table;
 		for(int i = 0; i < tables.length; i ++) {
-			cols2 = new String[columns[i].length + SYNC_COLS_EXTENSIONS.length];
-			System.arraycopy(columns[i], 0, cols2, 0, columns[i].length);
-			System.arraycopy(SYNC_COLS_EXTENSIONS, 0, cols2, columns[i].length, SYNC_COLS_EXTENSIONS.length);
-			String[] types = new String[dataTypes[i].length + SYNC_DATATYPES_EXTENSIONS.length];
+			cols2 = new String[columns[i].length * 2 + SYNC_COLS_EXTENSIONS.length];
+			for(int j = 0; j < columns[i].length; j ++) {
+				cols2[j] = DBSchemas.OLD_ROW_PREFIX + columns[i][j];
+				cols2[j + columns[i].length] = DBSchemas.NEW_ROW_PREFIX + columns[i][j];
+			}
+			System.arraycopy(SYNC_COLS_EXTENSIONS, 0, cols2, columns[i].length * 2, SYNC_COLS_EXTENSIONS.length);
+			String[] types = new String[dataTypes[i].length * 2 + SYNC_DATATYPES_EXTENSIONS.length];
 			System.arraycopy(dataTypes[i], 0, types, 0, dataTypes[i].length);
-			System.arraycopy(SYNC_DATATYPES_EXTENSIONS, 0, types, dataTypes[i].length, SYNC_DATATYPES_EXTENSIONS.length);
-			String[] cons = new String[nullables[i].length + SYNC_CONSTRAINTS_EXTENSIONS.length];
+			System.arraycopy(dataTypes[i], 0, types, dataTypes[i].length, dataTypes[i].length);
+			System.arraycopy(SYNC_DATATYPES_EXTENSIONS, 0, types, dataTypes[i].length * 2, SYNC_DATATYPES_EXTENSIONS.length);
+			String[] cons = new String[nullables[i].length * 2 + SYNC_CONSTRAINTS_EXTENSIONS.length];
 			System.arraycopy(nullables[i], 0, cons, 0, nullables[i].length);
-			System.arraycopy(SYNC_CONSTRAINTS_EXTENSIONS, 0, cons, nullables[i].length, SYNC_CONSTRAINTS_EXTENSIONS.length);
+			System.arraycopy(nullables[i], 0, cons, nullables[i].length, nullables[i].length);
+			System.arraycopy(SYNC_CONSTRAINTS_EXTENSIONS, 0, cons, nullables[i].length * 2, SYNC_CONSTRAINTS_EXTENSIONS.length);
 			//System.out.println(Arrays.toString(cols));
 			//System.out.println(Arrays.toString(types));
 			//System.out.println(Arrays.toString(cons));
@@ -322,6 +328,7 @@ public class DBSchemas {
 			DBConnectorLt.createTrigger(con, true, USER_SCHEMA, tables[i], false, Trigger.DELETE, true, CommonTrigger.class, (char) 0);
 			
 		}
+		/*
 		table = INFORMATION_SCHEMA + "." + IS_CROSS_REFERENCES;
 		cols2 = new String[] {
 				IS_CROSS_REFERENCES_PKTABLE_SCHEMA, IS_CROSS_REFERENCES_PKTABLE_NAME, IS_CROSS_REFERENCES_PKCOLUMN_NAME,
@@ -335,7 +342,18 @@ public class DBSchemas {
 			Hashtable<String, Object> row = rows2.get(i);
 			row.put(IS_CROSS_REFERENCES_FKTABLE_SCHEMA, SYNC_SCHEMA_NAME);
 			DBConnectorLt.alterTable(con, new RefConstraint(consName, toArray(row, cols2), true, true), (char) 0);
+		}*/
+	}
+	
+	static String[] getSyncTableValsCols(Connection con, String tableName) throws SQLException {
+		String[] cols = DBSchemas.getColumns(con, tableName);
+		String[] cols2 = new String[cols.length * 2 + SYNC_VALUABLE_COLS_EXTENSIONS.length];
+		for(int i = 0; i < cols.length; i ++) {
+			cols2[i] = DBSchemas.OLD_ROW_PREFIX + cols[i];
+			cols2[i + cols.length] = DBSchemas.NEW_ROW_PREFIX + cols[i];
 		}
+		System.arraycopy(SYNC_VALUABLE_COLS_EXTENSIONS, 0, cols2, cols.length * 2, SYNC_VALUABLE_COLS_EXTENSIONS.length);
+		return cols2;
 	}
 	
 	private static String[] getList(Rows rows) {
@@ -357,7 +375,7 @@ public class DBSchemas {
 		}
 	}
 	
-	
+	/*
 	private static Object[] toArray(Hashtable<String, Object> row, String[] key) {
 		Object[] objs = new Object[key.length];
 		for(int i = 0; i < objs.length; i ++) {
@@ -365,7 +383,7 @@ public class DBSchemas {
 		}
 		return objs;
 	}
-
+*/
 	private static int getDataType(Rows typesRows, Object dataType) throws SQLException {
 		for(int i = 0; i < typesRows.size(); i ++) {
 			Row row = typesRows.get(i);

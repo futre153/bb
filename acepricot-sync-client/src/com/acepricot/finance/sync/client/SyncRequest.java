@@ -14,7 +14,6 @@ import com.acepricot.finance.sync.Rows;
 import com.acepricot.finance.sync.share.JSONMessage;
 import com.acepricot.finance.sync.share.sql.ColumnSpec;
 import com.acepricot.finance.sync.share.sql.CompPred;
-import com.acepricot.finance.sync.share.sql.FixedPointLiteral;
 import com.acepricot.finance.sync.share.sql.Identifier;
 import com.acepricot.finance.sync.share.sql.OrderClause;
 import com.acepricot.finance.sync.share.sql.Predicate;
@@ -22,8 +21,6 @@ import com.acepricot.finance.sync.share.sql.Query;
 import com.acepricot.finance.sync.share.sql.SchemaName;
 import com.acepricot.finance.sync.share.sql.SortSpec;
 import com.acepricot.finance.sync.share.sql.TableName;
-import com.acepricot.finance.sync.share.sql.TopSpec;
-import com.acepricot.finance.sync.share.sql.UnsInt;
 import com.acepricot.finance.sync.share.sql.WhereClause;
 
 public class SyncRequest {

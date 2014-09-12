@@ -285,7 +285,7 @@ final class JSONMessageProcessor {
 				Operation op = new Operation(mp, syncRow, grpName, devName);
 				msg = SyncEngine.processSyncRequest(op);
 			}
-			catch(IOException e) {
+			catch(IOException | SQLException e) {
 				return msg.sendAppError(e);
 			}
 		}
@@ -1282,7 +1282,7 @@ final class JSONMessageProcessor {
 			try{con.close();} catch (SQLException e) {}
 		}
 	}
-	
+	/*
 	public static boolean[] checkPartial(String dsn, Operation op) throws SQLException {
 		Connection con = null;
 		boolean[] retValue = new boolean[op.getPrimaryKeys().length + 1];
@@ -1301,7 +1301,7 @@ final class JSONMessageProcessor {
 			try{con.close();} catch (SQLException e) {}
 		}
 	}
-	
+	*/
 	private static boolean check(Connection con, String schema, String table, String[] columns, Object[] values) throws SQLException {
 		SchemaName schemaName = new SchemaName(new Identifier(schema));
 		TableName tableName = new TableName(schemaName, new Identifier(table));
@@ -1315,7 +1315,7 @@ final class JSONMessageProcessor {
 		Connection con = null;
 		try {
 			con = DBConnector.lookup(dsn);
-			return check(con, op.getSchemaName(), op.getTableName(), op.getColumns(), op.getValues());
+			return check(con, op.getSchemaName(), op.getTableName(), op.getColumns(), op.getNewValues());
 		}
 		catch(SQLException e) {
 			throw e;
@@ -1385,9 +1385,11 @@ final class JSONMessageProcessor {
 	public static Connection getConnection() throws SQLException {
 		return DBConnector.lookup(dsn);
 	}
-	
+	/*
 	private static Object getUpdateData(Operation op) throws SQLException {
-		op.getGroupNode().getDBSchema().getColumns(op.getTableName());
+		String[] cols = op.getGroupNode().getDBSchema().getColumns(op.getTableName());
+		Object[] old = new Object[cols.length];
+		Object[] _new = new Object[cols.length];
 		String[] opCols = op.getColumns();
 		Object[] opVals = op.getValues();
 		HashMap<?, ?> changes = op.getSyncChanges();
@@ -1400,7 +1402,16 @@ final class JSONMessageProcessor {
 		Object[] c1 = new Object[pks.length + uqe.length];
 		Object[] c2 = new Object[pks.length + uqe.length];
 		int i = 0;
-		for(; i < changes.size(); i ++) {
+		for(i = 0; i < cols.length; i ++) {
+			int index = JSONMessageProcessor.getIndexOfArray(opCols, cols[i]);
+			if(index < 0) {
+				throw new SQLException("Index out of bounds when processing update data on server");
+			}
+			Object val = changes.get(cols[i]);
+			old[i] = val == null ? opVals[index] : val;
+			_new[i] = opVals[index];
+		}
+		for(i = 0; i < changes.size(); i ++) {
 			int index = JSONMessageProcessor.getIndexOfArray(opCols, (String) keys.next());
 			if(index < 0) {
 				throw new SQLException("Index out of bounds when processing update data on server");
@@ -1422,10 +1433,10 @@ final class JSONMessageProcessor {
 			Object val = changes.get(uqe[i - pks.length]);
 			c2[i] = val == null ? opVals[index] : val;
 		}
-		return new Object[]{nCols, nVals, new CompPred(c1, c2, Predicate.EQUAL)};
+		return new Object[]{nCols, nVals, new CompPred(c1, c2, Predicate.EQUAL), old, _new};
 	}
-	
-	
+	*/
+	/*
 	static void updateOperation(String dsn2, Operation op) throws SQLException {
 		Connection con = DBConnector.lookup(dsn);
 		Connection con2 =  DBConnector.lookup(dsn2);
@@ -1440,7 +1451,7 @@ final class JSONMessageProcessor {
 			SchemaName schemaName = new SchemaName(new Identifier(op.getSchemaName()));
 			TableName tableName = new TableName(schemaName, new Identifier(op.getTableName()));
 			Update update = DBConnector.createUpdate(tableName , (String[]) obj[0], (Object[]) obj[1], new WhereClause(obj[2]));
-			op.setQuery(save(update));
+			op.setQuery(save(new Object[]{obj[3], obj[4]}));
 			DBConnector.update(con2, update);
 			tableName = new TableName(new Identifier(JSONMessageProcessor.SYNC_RESPONSES.class.getSimpleName()));
 			String[] colNames = {
@@ -1520,17 +1531,17 @@ final class JSONMessageProcessor {
 			}
 		}
 	}
-	
+	*/
 	static void insertOperation(String dsn2, Operation op) throws SQLException {
 		Connection con = DBConnector.lookup(dsn);
 		Connection con2 =  DBConnector.lookup(dsn2);
 		try {
-			Object[] values = op.getValues();
-			if(op.getNewPrimaryKeysValues() != null) {
+			Object[] values = op.getNewValues();
+			/*if(op.getNewPrimaryKeysValues() != null) {
 				for(int i = 0; i < op.getPrimaryKeys().length; i ++) {
 					values[JSONMessageProcessor.getIndexOfArray(op.getColumns(), op.getPrimaryKeys()[i])] = op.getNewPrimaryKeysValues()[i];
 				}
-			}
+			}*/
 			Insert insert = DBConnector.createInsert (new TableName(new SchemaName(new Identifier(op.getSchemaName())), new Identifier(op.getTableName())), (Object)values, op.getColumns());
 			op.setQuery(save(insert));
 			DBConnector.insert(con2, insert);
@@ -1551,6 +1562,7 @@ final class JSONMessageProcessor {
 				((Object[]) vals)[1] = devNodes[i].getDeviceId();
 				DBConnector.insert(con, DBConnector.createInsert(tableName, vals, colNames));
 			}
+			/*
 			if(op.getNewPrimaryKeysValues() != null) {
 				ArrayList<Object> pkVal = new ArrayList<Object>();
 				for(int i = 0; i < op.getPrimaryKeys().length; i ++) {
@@ -1575,20 +1587,20 @@ final class JSONMessageProcessor {
 				};
 				DBConnector.insert(con, DBConnector.createInsert(tableName, vals, colNames));
 			}
-			else {
-				colNames = new String[] {
-						JSONMessageProcessor.SYNC_RESPONSES.GROUP_ID,
-						JSONMessageProcessor.SYNC_RESPONSES.DEVICE_ID,
-						JSONMessageProcessor.SYNC_RESPONSES.STATUS,
-						JSONMessageProcessor.SYNC_RESPONSES.TYPE,
-						JSONMessageProcessor.SYNC_RESPONSES.TABLE_NAME,
-						JSONMessageProcessor.SYNC_RESPONSES.SYNC_ID
-				};
-				vals = new Object[] {
-						op.getGroupNode().getGroupId(), op.getDeviceNode().getDeviceId(), JSONMessageProcessor.SYNC_RESPONSES.PENDING, JSONMessage.INSERT_NO_ACTION, op.getTableName(), op.getId()
-				};
-				DBConnector.insert(con, DBConnector.createInsert(tableName, vals, colNames));
-			}
+			else {*/
+			colNames = new String[] {
+					JSONMessageProcessor.SYNC_RESPONSES.GROUP_ID,
+					JSONMessageProcessor.SYNC_RESPONSES.DEVICE_ID,
+					JSONMessageProcessor.SYNC_RESPONSES.STATUS,
+					JSONMessageProcessor.SYNC_RESPONSES.TYPE,
+					JSONMessageProcessor.SYNC_RESPONSES.TABLE_NAME,
+					JSONMessageProcessor.SYNC_RESPONSES.SYNC_ID
+			};
+			vals = new Object[] {
+					op.getGroupNode().getGroupId(), op.getDeviceNode().getDeviceId(), JSONMessageProcessor.SYNC_RESPONSES.PENDING, JSONMessage.INSERT_NO_ACTION, op.getTableName(), op.getId()
+			};
+			DBConnector.insert(con, DBConnector.createInsert(tableName, vals, colNames));
+			//}
 		}
 		catch (Exception e) {
 			con2.rollback();
@@ -1641,7 +1653,7 @@ final class JSONMessageProcessor {
 		out.writeObject(obj);
 		return new String(Base64Coder.encode(Huffman.encode(bout.toByteArray(), null)));
 	}
-
+/*
 	public static Object getNewPKValue(String dsn, Operation op, int index) throws SQLException {
 		Connection con = null;
 		try {
@@ -1676,7 +1688,7 @@ final class JSONMessageProcessor {
 			try {con.close();}catch(SQLException e){}
 		}
 	}
-
+*/
 	public static int findAffectedOperation(Operation op) {
 		JSONMessageProcessor mp = op.getMessageProcessor();
 		while(mp.sync_responses.hasNext()) {
