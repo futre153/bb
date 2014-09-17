@@ -15,15 +15,19 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.Properties;
 
 import javax.xml.bind.DatatypeConverter;
 
+import org.h2.api.Trigger;
 import org.pabk.net.http.DefaultContent;
 import org.pabk.net.http.HttpClientConst;
 import org.pabk.net.http.SimpleClient;
 import org.pabk.util.Base64Coder;
 import org.pabk.util.Huffman;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.acepricot.finance.sync.DBConnector;
 import com.acepricot.finance.sync.DBSchema;
@@ -45,6 +49,8 @@ import com.acepricot.finance.sync.share.sql.WhereClause;
 import com.google.gson.Gson;
 
 public class JSONMessageProcessorClient {
+	
+	final static Logger logger = LoggerFactory.getLogger(JSONMessageProcessorClient.class);
 	
 	private static final String DEFAULT_SYNC_PROPATH = "D:\\TEMP\\sync_properties.xml";
 	public static final String GRP_NAME_KEY = "grpName";
@@ -83,6 +89,10 @@ public class JSONMessageProcessorClient {
 
 
 	private JSONMessageProcessorClient() {}
+	
+	static Logger getLogger() {
+		return logger;
+	}
 	
 	static final void syncStart(String[] propath) {
 		/*
@@ -486,15 +496,18 @@ public class JSONMessageProcessorClient {
 						break;
 					case JSONMessage.UPDATE_OPERATION:
 						_new = processUpdateOperation(con, props, msg);
+						break;
 					default:
 						throw new IOException("Message type " + type + " is not defined");
 					}
 					if(inMsg != null) {
 						Row row = getRow(inMsg.getBody());
-						type = ((Number) row.get(DBSchemas.SYNC_TYPE)).intValue();
-						switch(type) {
+						int inType = ((Number) row.get(DBSchemas.SYNC_TYPE)).intValue();
+						switch(inType) {
 						case JSONMessage.RESPONSE_FOR_PENDING_RESULT_OK:
 							processResponseForPending(con, props, row);
+						case JSONMessage.RESPONSE_FOR_INCOMMING_PENDING_RESULT_OK:
+							processResponseForIncommingPending(con, props, row);
 						default:
 						}
 					}
@@ -639,8 +652,8 @@ public class JSONMessageProcessorClient {
 		}
 		while(DBConnector.select(con, select).size() > 0);
 		com1 = new CompPred(new Object[]{new Identifier(uqe[0])}, new Object[]{row.get(uqe[0])}, Predicate.EQUAL);
-		DBConnector.update(con, DBConnector.createUpdate(userTable, new String[]{uqe[0]}, new Object[]{value}, new WhereClause(com1)));
-		DBConnector.update(con, DBConnector.createUpdate(syncTable, new String[]{uqe[0]}, new Object[]{value}, new WhereClause(com1)));
+		DBConnector.update(con, DBConnector.createUpdate(userTable, new String[]{uqe[0]}, new Object[]{value}, new WhereClause(com1)), false);
+		DBConnector.update(con, DBConnector.createUpdate(syncTable, new String[]{uqe[0]}, new Object[]{value}, new WhereClause(com1)), false);
 	}
 	
 	private static String upgradeString(String s) throws SQLException {
@@ -694,24 +707,126 @@ public class JSONMessageProcessorClient {
 		TableName syncTable = new TableName(new SchemaName(new Identifier(DBSchemas.getSyncSchemaName())), new Identifier(table));
 		TableName userTable = new TableName(new SchemaName(new Identifier(DBSchemas.getSchemaName())), new Identifier(table));
 		Object com1 = new CompPred(new Object[]{new Identifier(idCol)}, new Object[]{intValue}, Predicate.GREATHER_OR_EQUAL);
+		Object com2 = null;
 		OrderClause orderClause = new OrderClause(new SortSpec(false, new ColumnSpec(new Identifier(idCol))));
 		Query select = DBConnector.createSelect().addColumns(idCol).addFromClause(userTable).addTableSpec(new WhereClause(com1)).addSelectSpec(orderClause);
 		Rows rows = DBConnector.select(con, select);
 		for(int i = 0; i < rows.size(); i ++) {
 			int id = ((Integer) rows.get(i).get(idCol)).intValue();
 			com1 = new CompPred(new Object[]{new Identifier(idCol)}, new Object[]{id}, Predicate.EQUAL);
-			DBConnector.update(con, DBConnector.createUpdate(userTable, new String[]{idCol}, new Object[]{id + 1}, new WhereClause(com1)));
-			DBConnector.update(con, DBConnector.createUpdate(syncTable, new String[]{idCol}, new Object[]{id + 1}, new WhereClause(com1)));
+			com2 = new CompPred(new Object[]{new Identifier(DBSchemas.OLD_ROW_PREFIX + idCol), new Identifier(DBSchemas.NEW_ROW_PREFIX + idCol)}, new Object[]{id, id}, Predicate.EQUAL);
+			DBConnector.update(con, DBConnector.createUpdate(userTable, new String[]{idCol}, new Object[]{id + 1}, new WhereClause(com1)), false);
+			DBConnector.update(con, DBConnector.createUpdate(syncTable, new String[]{DBSchemas.OLD_ROW_PREFIX + idCol, DBSchemas.NEW_ROW_PREFIX + idCol}, new Object[]{id + 1, id + 1}, new WhereClause(com2)), false);
 		}
 	}
 	
 	private static void processUpdateConflict(Connection con, Object[] objs, String schema, String table) throws SQLException {
 		// TODO Auto-generated method stub
-		if(!checkEquity(con, toIdentifierArray(DBSchemas.getColumns(con, table)), objs[1], DBSchemas.getSchemaName(), table)) {
-			
+		Object[] oldRow = (Object[]) objs[0];
+		Object[] newRow = (Object[]) objs[1];
+		if(!checkEquity(con, toIdentifierArray(DBSchemas.getColumns(con, table)), newRow, DBSchemas.getSchemaName(), table)) {
+			if(!checkDeletion(con, table, oldRow)) {
+				Object[] row = identifyUpdateRecord(con, table, oldRow);
+				Object[] data = getUpdateData(row, oldRow, newRow, DBSchemas.getColumns(con, table));
+				if(data != null) {
+					TableName tableName = new TableName(new SchemaName(new Identifier(DBSchemas.getSchemaName())), new Identifier(table));
+					DBConnector.update(con, DBConnector.createUpdate(tableName , (String[]) data[0], (Object[]) data[1], new WhereClause(data[2])), false);
+				}
+			}
 		}
 	}
 	
+	private static Object[] getUpdateData(Object[] row, Object[] oldRow, Object[] newRow, String[] cols) throws SQLException {
+		Row r = new Row();
+		int i;
+		for(i = 0; i < row.length; i ++) {
+			if(oldRow[i].equals(row[i]) && (!(oldRow[i].equals(newRow[i])))) {
+				r.put(cols[i], newRow[i]);
+			}
+		}
+		if(r.size() == 0) {
+			return null;
+		}
+		String[] nCols = new String[r.size()];
+		Object[] nVals = new String[r.size()];
+		Iterator<?> iter = r.keySet().iterator();
+		i = 0;
+		while(iter.hasNext()) {
+			nCols[i] = (String) iter.next();
+			nVals[i] = r.get(nCols[i]);
+		}
+		i = 0;
+		Object[] c1 = new Object[cols.length];
+		Object[] c2 = new Object[cols.length];
+		for(; i < c1.length; i ++) {
+			c1[i] = new Identifier(cols[i]);
+			c2[i] = row[i];
+		}
+		return new Object[]{nCols, nVals, new CompPred(c1, c2, Predicate.EQUAL)};
+	}
+
+	private static boolean checkDeletion(Connection con, String table, Object[] oldRow) throws SQLException {
+		Object[] idRow = oldRow.clone();
+		String[] cols = DBSchemas.getColumns(con, table);
+		SchemaName schemaName = new SchemaName(new Identifier(DBSchemas.getSyncSchemaName()));
+		TableName tableName = new TableName(schemaName, new Identifier(table));
+		Rows rows;
+		do {
+			if(DBConnector.select(con, DBConnector.createSelect().addColumns(addPrefix(cols, DBSchemas.OLD_ROW_PREFIX)).addFromClause(tableName).addTableSpec(getIdentifyPredicate(cols, idRow, Trigger.DELETE))).size() > 0) {
+				return true;
+			}
+			rows = DBConnector.select(con, DBConnector.createSelect()/*.addColumns(addPrefix(cols, DBSchemas.OLD_ROW_PREFIX))*/.addFromClause(tableName).addTableSpec(getIdentifyPredicate(cols, idRow, Trigger.UPDATE)));
+			if(rows.size() == 0) {
+				return false;
+			}
+			Row row = rows.get(0);
+			for(int i = 0; i < cols.length; i ++) {
+				idRow[i] = row.get(DBSchemas.NEW_ROW_PREFIX + cols[i]);
+			}
+		}
+		while(true);
+	}
+	
+	private static String[] addPrefix(String[] a, String pfx) {
+		String[] tmp = new String[a.length];
+		for(int i = 0; i < a.length; i++) {
+			tmp[i] = pfx + a[i];
+		}
+		return tmp;
+	}
+	
+	
+	private static Object[] identifyUpdateRecord(Connection con, String table, Object[] oldRow) throws SQLException {
+		Object[] idRow = oldRow.clone();
+		String[] cols = DBSchemas.getColumns(con, table);
+		SchemaName schemaName = new SchemaName(new Identifier(DBSchemas.getSyncSchemaName()));
+		TableName tableName = new TableName(schemaName, new Identifier(table));
+		Rows rows;
+		while((rows = DBConnector.select(con, DBConnector.createSelect()/*.addColumns(addPrefix(cols, DBSchemas.OLD_ROW_PREFIX))*/.addFromClause(tableName).addTableSpec(getIdentifyPredicate(cols, idRow, Trigger.UPDATE)))).size() > 0) {
+			Row row = rows.get(0);
+			for(int i = 0; i < cols.length; i ++) {
+				idRow[i] = row.get(DBSchemas.NEW_ROW_PREFIX + cols[i]);
+			}
+		}
+		return idRow;
+	}
+	
+	private static WhereClause getIdentifyPredicate(String cols[], Object[] oldRow, int syncType) throws SQLException {
+		Object[] c1 = new Object[oldRow.length + 2];
+		Object[] c2 = new Object[c1.length];
+		int i = 0;
+		for(; i < oldRow.length; i ++) {
+			c1[i] = new Identifier(DBSchemas.OLD_ROW_PREFIX + cols[i]);
+			c2[i] = oldRow[i];
+		}
+		c1[i] = new Identifier(DBSchemas.SYNC_TYPE);
+		c2[i] = syncType;
+		i ++;
+		c1[i] = new Identifier(DBSchemas.SYNC_STATUS);
+		c2[i] = SyncRequest.STATUS_NEW;
+		Object com1 = new CompPred(c1, c2, Predicate.EQUAL);
+		return new WhereClause(com1);
+	}
 	
 	private static Identifier[] toIdentifierArray(String[] columns) {
 		Identifier[] ids = new Identifier[columns.length];
@@ -762,7 +877,7 @@ public class JSONMessageProcessorClient {
 				if(rows.size() > 0) {
 					upgradeUnique(con, rows, cols, table);
 				}
-				DBConnector.insert(con, insert);
+				DBConnector.insert(con, insert, false);
 			}
 		}
 	}
@@ -776,7 +891,7 @@ public class JSONMessageProcessorClient {
 			TableName tableName = new TableName(schemaName, new Identifier(DBSchemas.SYNC_INCOMMING_REQUESTS));
 			String[] cols = {DBSchemas.SYNC_ID, DBSchemas.SYNC_TYPE, DBSchemas.SYNC_INSERT, DBSchemas.SYNC_SCHEMA, DBSchemas.SYNC_TABLE, DBSchemas.SYNC_STATUS, DBSchemas.SYNC_CHANGES};
 			Object[] vals = {body[2], body[1], new Date().getTime(), schema, body[3], SyncRequest.STATUS_NEW, body[4]};
-			DBConnector.insert(con, DBConnector.createInsert(tableName, vals, cols));
+			DBConnector.insert(con, DBConnector.createInsert(tableName, vals, cols), false);
 			Object com1 = new CompPred(new Object[]{new Identifier(DBSchemas.SYNC_ID), new Identifier(DBSchemas.SYNC_TABLE)}, new Object[]{body[2], body[3]}, Predicate.EQUAL);
 			int id = (int) DBConnector.select(con, DBConnector.createSelect().addFromClause(tableName).addColumns(DBSchemas.SYNC_INCOMMING_REQUESTS_ID).addTableSpec(new WhereClause(com1))).get(0).get(DBSchemas.SYNC_INCOMMING_REQUESTS_ID);
 			byte[] b = Huffman.decode(Base64Coder.decode(((String) body[4]).toCharArray()), null);
@@ -810,7 +925,7 @@ public class JSONMessageProcessorClient {
 			String[] cols = {DBSchemas.SYNC_ID, DBSchemas.SYNC_TYPE, DBSchemas.SYNC_INSERT, DBSchemas.SYNC_SCHEMA, DBSchemas.SYNC_TABLE, DBSchemas.SYNC_STATUS, DBSchemas.SYNC_CHANGES};
 			//ColumnSpec[] colspecs = ColumnSpec.getColSpecArray(tableName, cols);
 			Object[] vals = {body[2], body[1], new Date().getTime(), schema, body[3], SyncRequest.STATUS_NEW, body[4]};
-			DBConnector.insert(con, DBConnector.createInsert(tableName, vals, cols));
+			DBConnector.insert(con, DBConnector.createInsert(tableName, vals, cols), false);
 			com1 = new CompPred(new Object[]{new Identifier(DBSchemas.SYNC_ID), new Identifier(DBSchemas.SYNC_TABLE)}, new Object[]{body[2], body[3]}, Predicate.EQUAL);
 			int id = (int) DBConnector.select(con, DBConnector.createSelect().addFromClause(tableName).addColumns(DBSchemas.SYNC_INCOMMING_REQUESTS_ID).addTableSpec(new WhereClause(com1))).get(0).get(DBSchemas.SYNC_INCOMMING_REQUESTS_ID);
 			byte[] b = Huffman.decode(Base64Coder.decode(((String) body[4]).toCharArray()), null);
@@ -823,7 +938,7 @@ public class JSONMessageProcessorClient {
 			}*/
 			com1 = new CompPred(new Object[]{new Identifier(DBSchemas.SYNC_INCOMMING_REQUESTS_ID)}, new Object[]{id}, Predicate.EQUAL);
 			DBConnector.update(con, DBConnector.createUpdate(tableName, new String[]{DBSchemas.SYNC_STATUS}, new Object[]{SyncRequest.STATUS_PENDING_OK}, new WhereClause(com1)), false);
-			return SyncRequest.getInstance(props).appendBody(DBSchemas.SYNC_TYPE, JSONMessage.RESPONSE_FOR_PENDING_RESULT_OK, DBSchemas.SYNC_ID, body[2], DBSchemas.SYNC_TABLE, body[3]);
+			return SyncRequest.getInstance(props).appendBody(DBSchemas.SYNC_TYPE, JSONMessage.RESPONSE_FOR_INCOMMING_PENDING_RESULT_OK, DBSchemas.SYNC_ID, body[2], DBSchemas.SYNC_TABLE, body[3]);
 		}
 		catch(Exception e) {
 			con.rollback();
@@ -841,6 +956,14 @@ public class JSONMessageProcessorClient {
 		update(con, DBSchema.getSyncSchemaName(), (String) row.get(DBSchemas.SYNC_TABLE), DBSchemas.SYNC_STATUS, SyncRequest.STATUS_ARCHIVED_OK, DBSchemas.SYNC_ID, row.get(DBSchemas.SYNC_ID));		
 	}
 
+	private static void processResponseForIncommingPending(Connection con, Properties props, Row row) throws SQLException {
+		TableName tableName = new TableName(new SchemaName(new Identifier(DBSchema.getSyncSchemaName())), new Identifier(DBSchemas.SYNC_INCOMMING_REQUESTS));
+		Object com1 = new CompPred(
+				new Object[]{new Identifier(DBSchemas.SYNC_TABLE), new Identifier(DBSchemas.SYNC_ID)},
+				new Object[]{row.get(DBSchemas.SYNC_TABLE), row.get(DBSchemas.SYNC_ID)}, Predicate.EQUAL);
+		DBConnector.update(con, DBConnector.createUpdate(tableName, new String[]{DBSchemas.SYNC_STATUS}, new Object[]{SyncRequest.STATUS_ARCHIVED_OK}, new WhereClause(com1)), false);		
+	}
+	
 	private static JSONMessage processInsertNoAction(Connection con, Properties props, JSONMessage msg) throws SQLException {
 		Object[] body = msg.getBody();
 		try {

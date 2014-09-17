@@ -2,6 +2,7 @@ package com.acepricot.finance.sync;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Arrays;
 
 import com.acepricot.finance.sync.share.sql.ColumnSpec;
 import com.acepricot.finance.sync.share.sql.CompPred;
@@ -163,7 +164,9 @@ public class DBSchema {
 		nullables = new String[rows.size()][];
 		for(int i = 0; i < tables.length; i ++) {
 			tables[i] = (String) rows.get(i).get(IS_TABLES_TABLE_NAME);
+			System.out.println(tables[i]);
 		}
+		System.out.println(Arrays.toString(tables));
 		tableName = new TableName(is, new Identifier(IS_TYPE_INFO));
 		Rows typesRows = DBConnector.select(con, DBConnector.createSelect().addFromClause(tableName));		
 		tableName = new TableName(is, new Identifier(IS_COLUMNS));

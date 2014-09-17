@@ -2,7 +2,6 @@ package com.acepricot.finance.sync;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.HashMap;
 
 import com.acepricot.finance.sync.share.JSONMessage;
 
@@ -21,8 +20,7 @@ class Operation {
 	//private String[] primaryKeys;
 	//private Object[] primaryKeysValues;
 	//private Object[] newPrimaryKeysValues;
-	private HashMap<?, ?> syncChanges;
-	
+		
 	Operation(JSONMessageProcessor mp, Row row, String grpName, String devName) throws IOException, SQLException {
 		this.setType(((Double) row.get(DBSchema.SYNC_TYPE)).intValue());
 		GroupNode grpNode = SyncEngine.getGroupNode(grpName);
@@ -37,8 +35,7 @@ class Operation {
 		this.setDeviceNode(devNode);
 		this.setSchemaName((String) row.remove(DBSchema.SYNC_SCHEMA));
 		this.setTableName((String) row.remove(DBSchema.SYNC_TABLE));
-		this.setSyncChanges(row.remove(DBSchema.SYNC_CHANGES));
-		this.setColumns(this.getGroupNode().getDBSchema().getColumns(this.getTableName()));
+		this.setColumns(this.getTableName() == null ? null : this.getGroupNode().getDBSchema().getColumns(this.getTableName()));
 		this.setOldValues(row);
 		this.setNewValues(row);
 		Object id = row.remove(DBSchema.SYNC_ID);
@@ -46,24 +43,6 @@ class Operation {
 		this.setMessageProcessor(mp);
 	}
 
-	private void setSyncChanges(Object c) {
-		if(c != null) {
-			String s = ((String) c);
-			if(s.length() > 0) {
-				try {
-					Object obj = JSONMessageProcessor.load(s);
-					this.syncChanges = (HashMap<?, ?>) obj ;
-				} catch (Exception e) {
-					this.syncChanges = null;
-				}
-			}
-		}
-	}
-	
-	HashMap<?, ?> getSyncChanges() {
-		return this.syncChanges;
-	}
-	
 	public Operation(JSONMessageProcessor mp) {
 		this.setMessageProcessor(mp);
 		this.setGroupNode(SyncEngine.getGroupNode(mp.sync_responses.group_id));
@@ -132,9 +111,12 @@ class Operation {
 	}
 
 	private Object[] getValues(String pfx, Row row) {
-		Object[] vals = new Object[this.getColumns().length];
-		for(int i = 0; i < this.getColumns().length; i ++) {
-			vals[i] = row.get(pfx + this.getColumns()[i]);
+		Object[] vals = null;
+		if(this.getColumns() != null) {
+			vals = new Object[this.getColumns().length];
+			for(int i = 0; i < this.getColumns().length; i ++) {
+				vals[i] = row.get(pfx + this.getColumns()[i]);
+			}
 		}
 		return vals;
 	}

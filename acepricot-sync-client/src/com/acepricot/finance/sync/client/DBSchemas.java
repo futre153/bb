@@ -121,8 +121,8 @@ public class DBSchemas {
 		"NOT NULL DEFAULT 0",
 		null
 	};
-	private static final String OLD_ROW_PREFIX = "OLD_";
-	private static final String NEW_ROW_PREFIX = "NEW_";
+	static final String OLD_ROW_PREFIX = "OLD_";
+	static final String NEW_ROW_PREFIX = "NEW_";
 
 	private static String[] tables;
 	private static String[][] columns;

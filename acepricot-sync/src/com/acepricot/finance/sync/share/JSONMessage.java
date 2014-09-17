@@ -14,6 +14,7 @@ public class JSONMessage {
 	public static final int RESPONSE_FOR_PENDING_NO_OPERATION = 0x401;
 	public static final int RESPONSE_FOR_PENDING_RESULT_FAILED = 0x402;
 	public static final int RESPONSE_FOR_PENDING_RESULT_OK = 0x403;
+	public static final int RESPONSE_FOR_INCOMMING_PENDING_RESULT_OK = 0x409;
 	public static final int BUSY_RESPONSE = 0x404;
 	public static final int INSERT_NO_ACTION = 0x410;
 	public static final int INSERT_OPERATION = 0x411;

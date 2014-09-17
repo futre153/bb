@@ -210,7 +210,7 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		return DBConnector.insert(con, insert, true);
 	}
 	
-	static int insert (Connection con, Insert insert, boolean commit) throws SQLException {
+	public static int insert (Connection con, Insert insert, boolean commit) throws SQLException {
 		String sql = insert.toSQLString(null);
 		if(DEBUG) System.out.println(sql);
 		PreparedStatement ps = con.prepareStatement(sql);

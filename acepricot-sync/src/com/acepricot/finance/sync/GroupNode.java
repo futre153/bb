@@ -169,6 +169,7 @@ public class GroupNode extends Hashtable <String, DeviceNode> {
 				case JSONMessage.RESPONSE_FOR_PENDING_NO_OPERATION:
 				case JSONMessage.RESPONSE_FOR_PENDING_RESULT_FAILED:
 				case JSONMessage.RESPONSE_FOR_PENDING_RESULT_OK:
+				case JSONMessage.RESPONSE_FOR_INCOMMING_PENDING_RESULT_OK: 
 					return PhantomPendingResult(op);
 				default:
 					return checkForSyncRequest(op);
@@ -185,6 +186,7 @@ public class GroupNode extends Hashtable <String, DeviceNode> {
 			case JSONMessage.RESPONSE_FOR_PENDING_RESULT_FAILED:
 				return PendingResultFailed(op);
 			case JSONMessage.RESPONSE_FOR_PENDING_RESULT_OK:
+			case JSONMessage.RESPONSE_FOR_INCOMMING_PENDING_RESULT_OK:
 				return PendingResultOK(op);
 			default:
 				return requestForPendingResponse(op);
@@ -257,8 +259,8 @@ public class GroupNode extends Hashtable <String, DeviceNode> {
 		switch(op.getType()) {
 		case Trigger.INSERT:
 			return insertOperation(op);
-		/*case Trigger.UPDATE:
-			return updateOperation(op);*/
+		case Trigger.UPDATE:
+			return updateOperation(op);
 		/*case Trigger.DELETE:
 			return deleteOperation(op);*/
 		case JSONMessage.EMPTY_REQUEST:
@@ -274,7 +276,7 @@ public class GroupNode extends Hashtable <String, DeviceNode> {
 		// TODO Auto-generated method stub
 		return new JSONMessage().returnOK();
 	}
-/*
+
 	private JSONMessage updateOperation(Operation op) throws IOException {
 		// TODO Auto-generated method stub
 		String dsn = this.getDSN();
@@ -290,7 +292,7 @@ public class GroupNode extends Hashtable <String, DeviceNode> {
 				op.setType(JSONMessage.UPDATE_NO_ACTION);
 			}
 			else {
-				
+				/*
 				boolean[] b = JSONMessageProcessor.checkUpdatePartial(dsn, op);
 				if(b[b.length-1]) {
 					for(int i = 0; i < (b.length - 1); i ++) {
@@ -301,7 +303,7 @@ public class GroupNode extends Hashtable <String, DeviceNode> {
 					JSONMessageProcessor.updateOperation(dsn, op);
 					op.setType(JSONMessage.UPDATE_UPDATE_PK);
 				}
-				else {
+				else {*/
 					JSONMessageProcessor.updateOperation(dsn, op);
 					op.setType(JSONMessage.UPDATE_NO_ACTION);
 				//}
@@ -312,7 +314,7 @@ public class GroupNode extends Hashtable <String, DeviceNode> {
 			return new JSONMessage().sendAppError(e);
 		}
 	}
-*/
+
 	private JSONMessage insertOperation(Operation op) throws IOException {
 		String dsn = this.getDSN();
 		try {
