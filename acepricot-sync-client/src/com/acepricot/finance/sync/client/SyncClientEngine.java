@@ -94,60 +94,70 @@ public class SyncClientEngine extends Thread {
 		JSONMessage outMsg = null;
 		long _interval = 1;
 		while(!isShutdown()) {
-			Exception error = null;
-			try {
-				con = getConnection(props);
-				System.out.println(con);
-				if(outMsg != null) {
-					inMsg = JSONMessageProcessorClient.processIncomming(con, props, outMsg, inMsg);
-					outMsg = null;
+			boolean alive = CommonTrigger.isAlive();
+			JSONMessageProcessorClient.getLogger().info("Trigger is " + (alive ? "" : "not ") + "alive");
+			if(alive) {
+				for(int i = 0; (i < counter && (!isShutdown())); i ++) {
+					s.sleep(_interval);
 				}
 			}
-			catch (Exception e) {
-				error = e;
-			}
-			for(int i = 0; (i < counter && (!isShutdown())); i ++) {
-				s.sleep(_interval);
-			}
-			_interval = interval;
-			try {
-				if(error != null) {
-					throw error;
-				}
-				heartbeat = JSONMessageProcessorClient.process(Heartbeat.getInstance(), url, null);
-				if(heartbeat.isError()) {
-					/*
-					 * TODO spracuj chybu spojenia
-					 */
-				}
-				else {
-					if(inMsg == null) {
-						inMsg = SyncRequest.getResponseForUnasweredPending(con, props);
-						if(inMsg == null) {
-							inMsg = SyncRequest.getRequestForWaiting(con, props);
-						}
-						if(inMsg == null) {
-							inMsg = SyncRequest.getEmptyRequest(props);
-						}
-					}
-					System.out.println("--- Outgoing message ---");
-					System.out.println(inMsg);
-					outMsg = JSONMessageProcessorClient.process(inMsg, url, null);
-					System.out.println("--- Incomming message ---");
-					System.out.println(outMsg);
-					if(outMsg.isError()) {
+			else {
+				Exception error = null;
+				try {
+					con = getConnection(props);
+					System.out.println(con);
+					if(outMsg != null) {
+						inMsg = JSONMessageProcessorClient.processIncomming(con, props, outMsg, inMsg);
 						outMsg = null;
 					}
 				}
-			} catch (Exception e) {
-				outMsg = null;
-				inMsg = null;
-				// TODO spracuj vynimku;
-				e.printStackTrace();
+				catch (Exception e) {
+					error = e;
+				}
+				for(int i = 0; (i < counter && (!isShutdown())); i ++) {
+					s.sleep(_interval);
+				}
+				_interval = interval;
+				try {
+					if(error != null) {
+						throw error;
+					}
+					heartbeat = JSONMessageProcessorClient.process(Heartbeat.getInstance(), url, null);
+					if(heartbeat.isError()) {
+						/*
+						 * TODO spracuj chybu spojenia
+						 */
+					}
+					else {
+						if(inMsg == null) {
+							inMsg = SyncRequest.getResponseForUnasweredPending(con, props);
+							if(inMsg == null) {
+								inMsg = SyncRequest.getRequestForWaiting(con, props);
+							}
+							if(inMsg == null) {
+								inMsg = SyncRequest.getEmptyRequest(props);
+							}
+						}
+						System.out.println("--- Outgoing message ---");
+						System.out.println(inMsg);
+						outMsg = JSONMessageProcessorClient.process(inMsg, url, null);
+						System.out.println("--- Incomming message ---");
+						System.out.println(outMsg);
+						if(outMsg.isError()) {
+							outMsg = null;
+						}
+					}
+				} catch (Exception e) {
+					outMsg = null;
+					inMsg = null;
+					// TODO spracuj vynimku;
+					e.printStackTrace();
+				}
+				finally {
+					try {con.close();} catch (SQLException e) {	e.printStackTrace();}
+				}
 			}
-			finally {
-				try {con.close();} catch (SQLException e) {	e.printStackTrace();}
-			}
+			
 		};
 		
 	}

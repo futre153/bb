@@ -248,7 +248,7 @@ public class DBConnector extends Hashtable<String, DataSource> {
 		return status;
 	}
 	*/
-	static int delete(Connection con, Delete delete) throws SQLException {
+	public static int delete(Connection con, Delete delete) throws SQLException {
 		return delete(con, delete, true);
 	}
 	

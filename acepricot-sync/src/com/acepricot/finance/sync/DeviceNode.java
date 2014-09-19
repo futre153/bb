@@ -1,7 +1,5 @@
 package com.acepricot.finance.sync;
 
-import java.sql.Connection;
-
 import com.acepricot.finance.sync.share.JSONMessage;
 
 public class DeviceNode {
