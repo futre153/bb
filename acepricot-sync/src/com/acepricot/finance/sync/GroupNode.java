@@ -261,8 +261,8 @@ public class GroupNode extends Hashtable <String, DeviceNode> {
 			return insertOperation(op);
 		case Trigger.UPDATE:
 			return updateOperation(op);
-		/*case Trigger.DELETE:
-			return deleteOperation(op);*/
+		case Trigger.DELETE:
+			return deleteOperation(op);
 		case JSONMessage.EMPTY_REQUEST:
 			op.setType(JSONMessage.NO_ACTION);
 			return op.constructJSONMessage();
@@ -271,10 +271,28 @@ public class GroupNode extends Hashtable <String, DeviceNode> {
 		}
 	}
 
-	@SuppressWarnings("unused")
-	private JSONMessage deleteOperation(Row row, DeviceNode devNode) {
+	private JSONMessage deleteOperation(Operation op) throws IOException {
 		// TODO Auto-generated method stub
-		return new JSONMessage().returnOK();
+		String dsn = this.getDSN();
+		try {
+			if(!GroupNode.checkColumns(op.getColumns(), this.schema.getColumns(op.getTableName()))) {
+				throw new SQLException("Columns failed to check. May versions of databases are not equals");
+			}
+			if(!GroupNode.checkColumns(this.schema.getPrimaryKeys(op.getTableName()), op.getColumns())) {
+				throw new SQLException("Primary keys failed to check. May versions of databases are not equals");
+			}
+			if(!JSONMessageProcessor.checkAll(dsn, op)) {
+				op.setType(JSONMessage.DELETE_NO_ACTION);
+			}
+			else {
+				JSONMessageProcessor.deleteOperation(dsn, op);
+				op.setType(JSONMessage.DELETE_NO_ACTION);
+			}
+			return op.constructJSONMessage();
+		}
+		catch (SQLException e) {
+			return new JSONMessage().sendAppError(e);
+		}
 	}
 
 	private JSONMessage updateOperation(Operation op) throws IOException {

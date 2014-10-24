@@ -34,6 +34,7 @@ import com.acepricot.finance.sync.share.AppConst;
 import com.acepricot.finance.sync.share.JSONMessage;
 import com.acepricot.finance.sync.share.sql.ColumnSpec;
 import com.acepricot.finance.sync.share.sql.CompPred;
+import com.acepricot.finance.sync.share.sql.Delete;
 import com.acepricot.finance.sync.share.sql.DistinctSpec;
 import com.acepricot.finance.sync.share.sql.FromClause;
 import com.acepricot.finance.sync.share.sql.Identifier;
@@ -261,21 +262,27 @@ final class JSONMessageProcessor {
 		int grpId, devId;
 		grpName = (String) msg.getBody()[0];
 		devName = (String) msg.getBody()[2];
-		Row syncRow;
-		
-		syncRow = new Row();
-		for(int i = 4; i < msg.getBody().length; i += 2) {
-			Object obj = msg.getBody()[i];
-			if(!(obj instanceof String)) {
-				return msg.sendAppError("String is expected, " + obj + ", " + obj.getClass().getSimpleName() + " was found");
+		Row syncRow = new Row();
+		if(msg.getBody().length == 5) {
+			try {
+				syncRow = (Row) load((String) msg.getBody()[4]);
+			} catch (Exception e) {
+				return msg.sendAppError(e);
 			}
-			String key = (String) obj;
-			if(i + 1 == msg.getBody().length) {
-				return msg.sendAppError("Unexpected end of JSON syncRequest message was found");
-			}
-			syncRow.put(key, msg.getBody()[i + 1]);
 		}
-				
+		else {
+			for(int i = 4; i < msg.getBody().length; i += 2) {
+				Object obj = msg.getBody()[i];
+				if(!(obj instanceof String)) {
+					return msg.sendAppError("String is expected, " + obj + ", " + obj.getClass().getSimpleName() + " was found");
+				}
+				String key = (String) obj;
+				if(i + 1 == msg.getBody().length) {
+					return msg.sendAppError("Unexpected end of JSON syncRequest message was found");
+				}
+				syncRow.put(key, msg.getBody()[i + 1]);
+			}
+		}	
 		try {
 			JSONMessageProcessor.setSyncRequests(1);
 		} catch (IOException e) {
@@ -1387,14 +1394,17 @@ final class JSONMessageProcessor {
 		return DBConnector.lookup(dsn);
 	}
 	
+	
 	private static Object getUpdateData(Operation op) throws SQLException {
 		String[] cols = op.getGroupNode().getDBSchema().getColumns(op.getTableName());
 		ArrayList<Integer> changes = new ArrayList<Integer>();
 		Object[] c1 = new Object[cols.length];
 		Object[] c2 = new Object[op.getOldValues().length];
+		Object[] oldVals = op.getOldValues();
+		Object[] newVals = op.getNewValues();
 		int i;
 		for(i = 0; i < cols.length; i ++) {
-			if(!(op.getOldValues()[i].equals(op.getNewValues()[i]))) {
+			if((oldVals[i] == null && newVals[i] != null) || (oldVals[i] != null && newVals[i] == null) || (oldVals[i] != null && newVals[i] != null && !oldVals[i].equals(newVals[i]))) {
 				changes.add(i);
 			}
 		}
@@ -1415,19 +1425,89 @@ final class JSONMessageProcessor {
 		return new Object[]{nCols, nVals, new CompPred(c1, c2, Predicate.EQUAL)};
 	}
 	
+	static void deleteOperation(String dsn2, Operation op) throws SQLException {
+		Connection con = DBConnector.lookup(dsn);
+		Connection con2 =  DBConnector.lookup(dsn2);
+		try {
+			con.setAutoCommit(false);
+			con.setAutoCommit(false);
+			Object obj[] = (Object[]) getUpdateData(op);
+			SchemaName schemaName = new SchemaName(new Identifier(op.getSchemaName()));
+			TableName tableName = new TableName(schemaName, new Identifier(op.getTableName()));
+			op.setQuery(save(new Object[]{op.getOldValues(), op.getNewValues()}));
+			Delete delete = DBConnector.createDelete(tableName , null, new WhereClause(obj[2]));
+			DBConnector.delete(con2, delete, false);
+			
+			tableName = new TableName(new Identifier(JSONMessageProcessor.SYNC_RESPONSES.class.getSimpleName()));
+			String[] colNames = {
+					JSONMessageProcessor.SYNC_RESPONSES.GROUP_ID,
+					JSONMessageProcessor.SYNC_RESPONSES.DEVICE_ID,
+					JSONMessageProcessor.SYNC_RESPONSES.QUERY,
+					JSONMessageProcessor.SYNC_RESPONSES.TYPE,
+					JSONMessageProcessor.SYNC_RESPONSES.TABLE_NAME,
+					JSONMessageProcessor.SYNC_RESPONSES.SYNC_ID
+			};
+			Object vals = new Object[] {
+					op.getGroupNode().getGroupId(), null, op.getQuery(), JSONMessage.DELETE_OPERATION, op.getTableName(), op.getId()
+			};
+			DeviceNode[] devNodes = JSONMessageProcessor.getOtherDevNodes(op);
+			for(int i = 0; i < devNodes.length; i ++) {
+				((Object[]) vals)[1] = devNodes[i].getDeviceId();
+				DBConnector.insert(con, DBConnector.createInsert(tableName, vals, colNames), false);
+			}
+			colNames = new String[] {
+					JSONMessageProcessor.SYNC_RESPONSES.GROUP_ID,
+					JSONMessageProcessor.SYNC_RESPONSES.DEVICE_ID,
+					JSONMessageProcessor.SYNC_RESPONSES.STATUS,
+					JSONMessageProcessor.SYNC_RESPONSES.TYPE,
+					JSONMessageProcessor.SYNC_RESPONSES.TABLE_NAME,
+					JSONMessageProcessor.SYNC_RESPONSES.SYNC_ID
+			};
+			vals = new Object[] {
+					op.getGroupNode().getGroupId(), op.getDeviceNode().getDeviceId(), JSONMessageProcessor.SYNC_RESPONSES.PENDING, JSONMessage.DELETE_NO_ACTION, op.getTableName(), op.getId()
+			};
+			DBConnector.insert(con, DBConnector.createInsert(tableName, vals, colNames), false);
+			
+			
+		}
+		catch (Exception e) {
+			con2.rollback();
+			con.rollback();
+			throw new SQLException(e);
+		}
+		finally {
+			try {
+				con.commit();
+				con2.commit();
+				con.setAutoCommit(true);
+				con.setAutoCommit(true);
+			}
+			catch (SQLException e) {
+				throw e;
+			}
+			finally {
+				try {
+					con.close();
+					con2.close();
+				}
+				catch (SQLException e) {}
+			}
+		}
+	}
 	
 	static void updateOperation(String dsn2, Operation op) throws SQLException {
 		Connection con = DBConnector.lookup(dsn);
 		Connection con2 =  DBConnector.lookup(dsn2);
 		try {
 			//Object[] values = op.getValues();
-
+			con.setAutoCommit(false);
+			con.setAutoCommit(false);
 			Object obj[] = (Object[]) getUpdateData(op);
 			SchemaName schemaName = new SchemaName(new Identifier(op.getSchemaName()));
 			TableName tableName = new TableName(schemaName, new Identifier(op.getTableName()));
 			Update update = DBConnector.createUpdate(tableName , (String[]) obj[0], (Object[]) obj[1], new WhereClause(obj[2]));
 			op.setQuery(save(new Object[]{op.getOldValues(), op.getNewValues()}));
-			DBConnector.update(con2, update);
+			DBConnector.update(con2, update, false);
 			tableName = new TableName(new Identifier(JSONMessageProcessor.SYNC_RESPONSES.class.getSimpleName()));
 			String[] colNames = {
 					JSONMessageProcessor.SYNC_RESPONSES.GROUP_ID,
@@ -1443,7 +1523,7 @@ final class JSONMessageProcessor {
 			DeviceNode[] devNodes = JSONMessageProcessor.getOtherDevNodes(op);
 			for(int i = 0; i < devNodes.length; i ++) {
 				((Object[]) vals)[1] = devNodes[i].getDeviceId();
-				DBConnector.insert(con, DBConnector.createInsert(tableName, vals, colNames));
+				DBConnector.insert(con, DBConnector.createInsert(tableName, vals, colNames), false);
 			}
 			colNames = new String[] {
 					JSONMessageProcessor.SYNC_RESPONSES.GROUP_ID,
@@ -1456,7 +1536,7 @@ final class JSONMessageProcessor {
 			vals = new Object[] {
 					op.getGroupNode().getGroupId(), op.getDeviceNode().getDeviceId(), JSONMessageProcessor.SYNC_RESPONSES.PENDING, JSONMessage.UPDATE_NO_ACTION, op.getTableName(), op.getId()
 			};
-			DBConnector.insert(con, DBConnector.createInsert(tableName, vals, colNames));
+			DBConnector.insert(con, DBConnector.createInsert(tableName, vals, colNames), false);
 		}
 		catch (Exception e) {
 			con2.rollback();
@@ -1467,6 +1547,8 @@ final class JSONMessageProcessor {
 			try {
 				con.commit();
 				con2.commit();
+				con.setAutoCommit(true);
+				con.setAutoCommit(true);
 			}
 			catch (SQLException e) {
 				throw e;
@@ -1485,6 +1567,8 @@ final class JSONMessageProcessor {
 		Connection con = DBConnector.lookup(dsn);
 		Connection con2 =  DBConnector.lookup(dsn2);
 		try {
+			con.setAutoCommit(false);
+			con.setAutoCommit(false);
 			Object[] values = op.getNewValues();
 			/*if(op.getNewPrimaryKeysValues() != null) {
 				for(int i = 0; i < op.getPrimaryKeys().length; i ++) {
@@ -1493,7 +1577,7 @@ final class JSONMessageProcessor {
 			}*/
 			Insert insert = DBConnector.createInsert (new TableName(new SchemaName(new Identifier(op.getSchemaName())), new Identifier(op.getTableName())), (Object)values, op.getColumns());
 			op.setQuery(save(insert));
-			DBConnector.insert(con2, insert);
+			DBConnector.insert(con2, insert, false);
 			TableName tableName = new TableName(new Identifier(JSONMessageProcessor.SYNC_RESPONSES.class.getSimpleName()));
 			String[] colNames = {
 					JSONMessageProcessor.SYNC_RESPONSES.GROUP_ID,
@@ -1509,7 +1593,7 @@ final class JSONMessageProcessor {
 			DeviceNode[] devNodes = JSONMessageProcessor.getOtherDevNodes(op);
 			for(int i = 0; i < devNodes.length; i ++) {
 				((Object[]) vals)[1] = devNodes[i].getDeviceId();
-				DBConnector.insert(con, DBConnector.createInsert(tableName, vals, colNames));
+				DBConnector.insert(con, DBConnector.createInsert(tableName, vals, colNames), false);
 			}
 			/*
 			if(op.getNewPrimaryKeysValues() != null) {
@@ -1548,7 +1632,7 @@ final class JSONMessageProcessor {
 			vals = new Object[] {
 					op.getGroupNode().getGroupId(), op.getDeviceNode().getDeviceId(), JSONMessageProcessor.SYNC_RESPONSES.PENDING, JSONMessage.INSERT_NO_ACTION, op.getTableName(), op.getId()
 			};
-			DBConnector.insert(con, DBConnector.createInsert(tableName, vals, colNames));
+			DBConnector.insert(con, DBConnector.createInsert(tableName, vals, colNames), false);
 			//}
 		}
 		catch (Exception e) {
@@ -1560,6 +1644,8 @@ final class JSONMessageProcessor {
 			try {
 				con.commit();
 				con2.commit();
+				con.setAutoCommit(true);
+				con.setAutoCommit(true);
 			}
 			catch (SQLException e) {
 				throw e;

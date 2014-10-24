@@ -22,6 +22,9 @@ public class JSONMessage {
 	public static final int UPDATE_NO_ACTION = 0x420;
 	public static final int UPDATE_OPERATION = 0x421;
 	public static final int UPDATE_UPDATE_PK = 0x422;
+	public static final int DELETE_NO_ACTION = 0x430;
+	public static final int DELETE_OPERATION = 0x431;
+	public static final int DELETE_UPDATE_PK = 0x432;
 	public static final int FORCE_OPERATION = 0xFFF;
 	public static final int REQUEST_FOR_FORCE = 0xFFE;
 	

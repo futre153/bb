@@ -22,7 +22,7 @@ class Operation {
 	//private Object[] newPrimaryKeysValues;
 		
 	Operation(JSONMessageProcessor mp, Row row, String grpName, String devName) throws IOException, SQLException {
-		this.setType(((Double) row.get(DBSchema.SYNC_TYPE)).intValue());
+		this.setType(((Number) row.get(DBSchema.SYNC_TYPE)).intValue());
 		GroupNode grpNode = SyncEngine.getGroupNode(grpName);
 		if(grpNode == null) {
 			throw new IOException("Grop node for group name " + grpName + " does not exists");
@@ -39,7 +39,7 @@ class Operation {
 		this.setOldValues(row);
 		this.setNewValues(row);
 		Object id = row.remove(DBSchema.SYNC_ID);
-		this.setId(id == null ? -1 : ((Double) id).intValue());
+		this.setId(id == null ? -1 : ((Number) id).intValue());
 		this.setMessageProcessor(mp);
 	}
 
@@ -211,6 +211,12 @@ class Operation {
 		case JSONMessage.UPDATE_UPDATE_PK:
 			return msg.appendBody(this.getId(), this.getTableName(), this.getQuery());
 		case JSONMessage.UPDATE_OPERATION:
+			return msg.appendBody(this.getId(), this.getTableName(), this.getQuery());
+		case JSONMessage.DELETE_NO_ACTION:
+			return msg.appendBody(this.getId(), this.getTableName());
+		case JSONMessage.DELETE_UPDATE_PK:
+			return msg.appendBody(this.getId(), this.getTableName(), this.getQuery());
+		case JSONMessage.DELETE_OPERATION:
 			return msg.appendBody(this.getId(), this.getTableName(), this.getQuery());
 		default: throw new IOException("Type " + this.getType() + " is not defined");	
 		}

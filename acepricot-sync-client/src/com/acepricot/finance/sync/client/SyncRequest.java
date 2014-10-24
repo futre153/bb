@@ -42,9 +42,8 @@ public class SyncRequest {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-			/*
-			 * TODO spracuj chybu
-			 */
+			// TODO spracuj chybu
+			
 		}
 		return null;
 	}
@@ -80,17 +79,23 @@ public class SyncRequest {
 		Object com1 = new CompPred(new Object[]{new ColumnSpec(new Identifier(DBSchemas.SYNC_LABEL), new Identifier(DBSchemas.SYNC_STATUS))}, new Object[]{STATUS_NEW}, Predicate.EQUAL);
 		Row row = checkFor(con, com1);
 		if(row != null) { 
-			Iterator<String> iterator = row.keySet().iterator();
-			ArrayList<Object> objs = new ArrayList<Object>();
-			while(iterator.hasNext()) {
-				String key = iterator.next();
-				Object value = row.get(key);
-				if(value != null) {
-					objs.add(key);
-					objs.add(value);
-				}
+			//Iterator<String> iterator = row.keySet().iterator();
+			//ArrayList<Object> objs = new ArrayList<Object>();
+			//while(iterator.hasNext()) {
+			//	String key = iterator.next();
+			//	Object value = row.get(key);
+			//	if(value != null) {
+			//		objs.add(key);
+			//		objs.add(value);
+			//	}
+			//}
+			//return objs.toArray();
+			try {
+				return new Object[] {JSONMessageProcessorClient.save(row)};
 			}
-			return objs.toArray();
+			catch (Exception e) {
+				//TODO chyba pri uschove dat
+			}
 		}
 		return null;
 	}
@@ -102,7 +107,7 @@ public class SyncRequest {
 		ColumnSpec[] cols = ColumnSpec.getColSpecArray(new Identifier(DBSchemas.SYNC_LABEL), DBSchemas.SYNC_ID, DBSchemas.SYNC_TABLE, DBSchemas.SYNC_INSERT);
 		//Query query = DBConnector.createSelect().addColumns(cols).addFromClause(tableName, new Identifier(DBSchemas.SYNC_LABEL)).addQuerySpec(top).addSelectSpec(orderClause).addTableSpec(new WhereClause(predicates));
 		Query query = null;
-		for(int i = 1; i < tables.length; i ++) {
+		for(int i = 0; i < tables.length; i ++) {
 			tableName = new TableName(new Identifier(tables[i]), schemaName);
 			Query select = DBConnector.createSelect();
 			//select.addQuerySpec(top);

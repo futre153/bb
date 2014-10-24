@@ -10,6 +10,7 @@ import java.util.Properties;
 import org.pabk.net.http.DefaultContent;
 import org.pabk.net.http.HttpClientConst;
 import org.pabk.net.http.SimpleClient;
+import org.pabk.util.Huffman;
 
 import com.acepricot.finance.sync.share.JSONMessage;
 import com.google.gson.Gson;
@@ -19,8 +20,10 @@ public class Test {
 	public static String url = "http://localhost:8080/acepricot-sync/";
 	//public static File f = new File("D:\\TEMP\\sampleclient\\database1-1.h2.db");
 	public static void main(final String[] a) throws Exception {
-		//System.out.println(Huffman.encode("ptraajtn39ln", null));
-		//System.exit(1);
+		System.out.println(Huffman.encode("Kristina16", null));
+		System.exit(1);
+		/*System.out.println(decrypt("KW6CQyedAIU=E/FDGv8tQiBWOk6XhGV/vg=="));
+		System.exit(1);*/
 		/*
 		Object com1 = new CompPred(new Object[]{new Identifier("A"),new Identifier("B")}, new Object[]{1, 2}, Predicate.EQUAL);
 		Object com2 = new CompPred(new Object[]{new Identifier("C")}, new Object[]{3},Predicate.EQUAL);
@@ -120,5 +123,13 @@ public class Test {
 		pro.put(JSONMessageProcessorClient.DB_NAME_KEY, "D:\\TEMP\\clientsamples\\database1-3.h2.db");
 		return pro;
 	}
-	
+	/*
+	private static String decrypt(String encrypted) {
+	    EncryptDecryptUtil en = new EncryptDecryptUtil();
+	    try { return EncryptDecryptUtil.getDecrypted(encrypted);
+	    } catch (BusinessException e) {
+	      System.out.println("Passphrase for private key not parsed successfully");
+	      System.err.println(e); }
+	    return null;
+	  }*/
 }
