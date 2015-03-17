@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.example.org/DistrListSchema" elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="http://www.example.org/DistrListSchema">
+
+
+
+    
+
+
+
+
+    
+
+    <xsd:complexType name="AdrList">
+    	<xsd:sequence>
+    		<xsd:element name="name" type="AdrItem" maxOccurs="unbounded" minOccurs="0"></xsd:element>
+    	</xsd:sequence>
+        <xsd:attributeGroup ref="AdrItemAtt"></xsd:attributeGroup>
+    </xsd:complexType>
+
+    <xsd:complexType name="AdrItem">
+    	<xsd:simpleContent>
+    		<xsd:extension base="AdritemType">
+    			<xsd:attribute name="enabled" type="xsd:boolean" use="required"></xsd:attribute>
+    		</xsd:extension>
+    	</xsd:simpleContent>
+    </xsd:complexType>
+
+    <xsd:simpleType name="AdritemType">
+    	<xsd:restriction base="xsd:string">
+    		<xsd:pattern value="[a-z]+ [a-z]+"></xsd:pattern>
+    	</xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:attributeGroup name="AdrItemAtt">
+
+    	<xsd:attribute name="main" use="required">
+    		<xsd:simpleType>
+    			<xsd:restriction base="xsd:string">
+    				<xsd:pattern value="[a-z]+ [a-z]+"></xsd:pattern>
+    			</xsd:restriction>
+    		</xsd:simpleType>
+    	</xsd:attribute>
+    	<xsd:attribute name="separator">
+    		<xsd:simpleType>
+    			<xsd:restriction base="xsd:string">
+    				<xsd:enumeration value="."></xsd:enumeration>
+    				<xsd:enumeration value="-"></xsd:enumeration>
+    			</xsd:restriction>
+    		</xsd:simpleType>
+    	</xsd:attribute>
+    	<xsd:attribute name="domain">
+    		<xsd:simpleType>
+    			<xsd:restriction base="xsd:string">
+    				<xsd:enumeration value="pabk.sk"></xsd:enumeration>
+    			</xsd:restriction>
+    		</xsd:simpleType>
+    	</xsd:attribute>
+    </xsd:attributeGroup>
+
+    <xsd:complexType name="DLSequnce">
+    	<xsd:sequence minOccurs="1">
+    		<xsd:element name="address-list" type="AdrList"></xsd:element>
+    		<xsd:element name="address-group-list" type="AdrGrpList">
+    		</xsd:element>
+    		<xsd:element name="condition-list" type="CondList"></xsd:element>
+    		<xsd:element name="msg-list" type="MsgListType"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="distribution-list" type="DLSequnce"></xsd:element>
+
+    <xsd:complexType name="AdrGrpList">
+    	<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+    		<xsd:element name="address-group" type="AdrGrpItem"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="AdrGrpItem">
+    	<xsd:sequence minOccurs="1" maxOccurs="unbounded">
+    		<xsd:element name="name" type="GrpItem"></xsd:element>
+    	</xsd:sequence>
+    	<xsd:attribute name="groupName" type="xsd:string" use="required"></xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:complexType name="GrpItem">
+    	<xsd:simpleContent>
+    		<xsd:extension base="GrpitemType"></xsd:extension>
+    	</xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="GrpitemType">
+    	<xsd:restriction base="xsd:string">
+    		<xsd:pattern value="[a-z]+ [a-z]+"></xsd:pattern>
+    	</xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="CondList">
+    	<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+    		<xsd:element name="condition" type="conditionType"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:attributeGroup name="CondAtt">
+    	<xsd:attribute name="name" type="xsd:string" use="required"></xsd:attribute>
+    	<xsd:attribute name="priority" type="xsd:string" use="required"></xsd:attribute>
+    </xsd:attributeGroup>
+
+    <xsd:complexType name="conditionType">
+    	<xsd:sequence minOccurs="1" maxOccurs="unbounded">
+    		<xsd:element name="condition-item" type="CondItemType"></xsd:element>
+    	</xsd:sequence>
+        <xsd:attributeGroup ref="CondAtt"></xsd:attributeGroup>
+    </xsd:complexType>
+
+    <xsd:complexType name="CondItemType">
+    	<xsd:sequence minOccurs="1" maxOccurs="unbounded">
+    		<xsd:element name="group" type="xsd:string"></xsd:element>
+    	</xsd:sequence>
+    	<xsd:attribute name="regExp" type="xsd:string" use="required"></xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:complexType name="MsgListType">
+    	<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+    		<xsd:element name="message-template" type="MsgTmplType"></xsd:element>
+    	</xsd:sequence>
+    	<xsd:attribute name="encoding" type="encodingType" use="required"></xsd:attribute>
+    </xsd:complexType>
+
+    <xsd:complexType name="MsgTmplType">
+    	<xsd:sequence minOccurs="1">
+    		<xsd:element name="recipients" type="RcpType"></xsd:element>
+    		<xsd:element name="subject" type="xsd:string"></xsd:element>
+    		<xsd:element name="body" type="bodyType"></xsd:element>
+    		<xsd:element name="attachments" type="AttType"></xsd:element>
+    	</xsd:sequence>
+        <xsd:attributeGroup ref="MsgTmplAtt"></xsd:attributeGroup>
+    </xsd:complexType>
+
+    <xsd:complexType name="RcpType">
+    	<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+    		<xsd:element name="group" type="RcpItem"></xsd:element>
+    	</xsd:sequence>
+    	<xsd:attribute name="type" type="OperType" use="required"></xsd:attribute>
+    </xsd:complexType>
+    
+    <xsd:simpleType name="groupType">
+    	<xsd:restriction base="xsd:string"></xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="AttType">
+    	<xsd:sequence minOccurs="0" maxOccurs="2">
+    		<xsd:element name="attachment" type="xsd:string"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="bodyType">
+    	<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+    		<xsd:element name="line" type="lineType"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+
+
+    <xsd:attributeGroup name="MsgTmplAtt">
+    	<xsd:attribute name="class" type="xsd:string" use="required"></xsd:attribute>
+    	<xsd:attribute name="encoding">
+    		<xsd:simpleType>
+    			<xsd:restriction base="encodingType">
+    				<xsd:enumeration value="utf-8"></xsd:enumeration>
+    			</xsd:restriction>
+    		</xsd:simpleType>
+    	</xsd:attribute>
+    	<xsd:attribute name="condition" type="xsd:string"></xsd:attribute>
+    </xsd:attributeGroup>
+
+    <xsd:simpleType name="encodingType">
+    	<xsd:restriction base="xsd:string"></xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="OperType">
+    	<xsd:restriction base="xsd:string">
+    		<xsd:enumeration value="fixed"></xsd:enumeration>
+    		<xsd:enumeration value="and"></xsd:enumeration>
+    	</xsd:restriction>
+    </xsd:simpleType>
+
+
+    <xsd:complexType name="RcpItem">
+    	<xsd:simpleContent>
+    		<xsd:extension base="xsd:string">
+    			<xsd:attribute name="condition" type="xsd:string"></xsd:attribute>
+    		</xsd:extension>
+    	</xsd:simpleContent>
+    </xsd:complexType>
+
+    <xsd:complexType name="lineType">
+    	<xsd:simpleContent>
+    		<xsd:extension base="xsd:string">
+    			<xsd:attribute name="condition" type="xsd:string"></xsd:attribute>
+    		</xsd:extension>
+    	</xsd:simpleContent>
+    </xsd:complexType>
+</xsd:schema>

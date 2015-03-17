@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="hostname">10.1.1.6</entry>
+	<entry key="port">22</entry>
+	<entry key="getInterval">0</entry>
+	<entry key="putInterval">0</entry>
+	<entry key="username">euroftp</entry>
+	<entry key="knownHosts">conf\known_hosts</entry>
+	<entry key="privateKey">conf\euroftp_2048</entry>
+	<entry key="getRemote">/s1/progress/work/toeuro</entry>
+	<entry key="putRemote">/s1/progress/work/fromeuro</entry>
+	<entry key="getLocal">C:/ELS/ELS_HOME/envelope/ex/xtic</entry>
+	<entry key="putLocal">C:/ELS/ELS_HOME/envelope/im/xtic</entry>
+	<entry key="getArchive">C:/ELS/ELS_HOME/envelope/ex/xtic/archive</entry>
+	<entry key="putArchive">C:/ELS/ELS_HOME/envelope/ex/xtic/archive</entry>
+	<entry key="passphrase">1z50JO2XLpgPoA==</entry>
+	<entry key="modify">-1</entry>
+	<entry key="getNextRun">-1</entry>
+	<entry key="putNextRun">-1</entry>
+	<entry key="maskGetFile"></entry>
+	<entry key="maskPutFile"></entry>
+	<entry key="getSequence">-1</entry>
+	<entry key="putSequence">-1</entry>
+	<entry key="checkFilenameDuplicity">true</entry>
+	<!-- 
+	<entry key="getSequenceFile">gSeq</entry>
+	<entry key="putSequenceFile">pSeq</entry>
+	 -->
+	<entry key="logbackPattern">%date %level [%thread] %logger{10} [%file:%line] %msg%n</entry>
+	<entry key="logDirectory">D:\TEMP\transporter\log</entry>
+	<entry key="logExtension">.log</entry>
+	<entry key="logHistory">60</entry>
+</properties>

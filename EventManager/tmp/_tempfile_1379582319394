@@ -1,0 +1,66 @@
+	---------------------  Instance Type and Transmission --------------	
+       Notification (Delivery) of Original sent to SWIFT (ACK)
+       User Delivery Status      : Delivered to Receiver
+       Priority/Delivery         : Urgent/Non-Deliv Warning & Deliv Notif
+       Message Input Reference   : 0952 130913POBNSKBAAXXX5383730955
+	--------------------------- Message Header -------------------------	
+       Swift Input                   : FIN 999 Free Format Message
+       Sender   : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       Receiver : LOYDGB2LXXX
+                  LLOYDS TSB BANK PLC.
+                  (U.K. INTERNATIONAL SERVICES)
+                  LONDON GB
+       MUR : 1308/4500/36140 
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            1308/4500/36140
+        21: Related Reference
+            BXQ130829-000074
+        79: Narrative
+            ATTN. INVESTIGATION DEPT.
+            SECOND REQUEST
+            .
+            URGENT  URGENT  URGENT
+            .
+            WE REFER TO OUR B/M P/O VIA TARGET2 DD 26/08/13,
+            OUR MT999 DD 28/08/2013 AND 03/09/13, YOUR MT999
+            DD 30/08/2013 AND 05/09/13.
+            PLEASE BE ADVISED THAT OUR CLIENT IS CLAIMING
+            UNAPPLIED PAYMENT IN VALUE DATE.THIS PAYMENT WAS
+            SENT AS A PRIORITY PAYMENT WITH VALUE DATE 26/8/13
+            VIA T2 ON 26.8.2013 AT 1.45 P.M. PLEASE INFORM US
+            ABOUT THE VALUE DATE OF CREDITING BENE ACCOUNT,
+            AND IF IS NOT ON 26.8.2013 PLEASE INFORM US ABOUT
+            REASON OF LATER VALUE DATE OR SEND US YOUR
+            DOMESTIC CUT OFF TIME.
+            THANKS FOR YOUR ADVANCE.
+            REGARDS, POSTOVA BANKA, REF. PS
+            .
+            CC OUR MT 103 DD 26/08/2013 VIA T2
+            20:1308/4500/36140
+            23B:CRED
+            32A:130826EUR240,
+            33B:EUR240,
+            50K:/SK4465000000000018080459
+            Kvasnakova Jana
+            Dubova 2021/6
+            05201 Spisska Nova Ves
+            57A:LOYDGB21545
+            59:/GB96LOYD30942613995568
+            Frantisek Izdenczy
+            735 A.London road, Wescliff on sea
+            SSC 9ST, Essex
+            Velka Britania
+            71A:SHA
+	--------------------------- Message Trailer ------------------------	
+       {CHK:E00C827B4365}
+	---------------------------- Interventions -------------------------	
+       Category      : Delivery report
+       Creation Time : 13/09/13 09:57:28
+       Application   : TRS
+       Operator      : SYSTEM
+       Text
+       {175:0952}{106:130913POBNSKBAAXXX5383730955}{108:1308/4500/36140}{175:0852}
+       {107:130913LOYDGB2LDXXX1701489366}

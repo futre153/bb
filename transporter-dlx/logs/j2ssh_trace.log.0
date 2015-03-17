@@ -1,0 +1,2039 @@
+<?xml version="1.0" encoding="windows-1250" standalone="no"?>
+<!DOCTYPE log SYSTEM "logger.dtd">
+<log>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784376</millis>
+  <sequence>0</sequence>
+  <logger>com.sshtools.j2ssh.transport.cipher.SshCipherFactory</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.cipher.SshCipherFactory</class>
+  <method>&lt;clinit&gt;</method>
+  <thread>23</thread>
+  <message>Loading supported cipher algorithms</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784408</millis>
+  <sequence>1</sequence>
+  <logger>com.sshtools.j2ssh.transport.kex.SshKeyExchangeFactory</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.kex.SshKeyExchangeFactory</class>
+  <method>&lt;clinit&gt;</method>
+  <thread>23</thread>
+  <message>Loading key exchange methods</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784423</millis>
+  <sequence>2</sequence>
+  <logger>com.sshtools.j2ssh.configuration.ConfigurationLoader</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.configuration.ConfigurationLoader</class>
+  <method>initialize</method>
+  <thread>23</thread>
+  <message>JAVA version is 1.7.0_71</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784423</millis>
+  <sequence>3</sequence>
+  <logger>com.sshtools.j2ssh.configuration.ConfigurationLoader</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.configuration.ConfigurationLoader</class>
+  <method>initialize</method>
+  <thread>23</thread>
+  <message>Extension C:\Program Files\Java\jre7\lib\ext\access-bridge-64.jar being added to classpath</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784423</millis>
+  <sequence>4</sequence>
+  <logger>com.sshtools.j2ssh.util.ExtensionClassLoader</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.util.ExtensionClassLoader</class>
+  <method>add</method>
+  <thread>23</thread>
+  <message>Adding C:\Program Files\Java\jre7\lib\ext\access-bridge-64.jar to the extension classpath</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784423</millis>
+  <sequence>5</sequence>
+  <logger>com.sshtools.j2ssh.configuration.ConfigurationLoader</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.configuration.ConfigurationLoader</class>
+  <method>initialize</method>
+  <thread>23</thread>
+  <message>Extension C:\Program Files\Java\jre7\lib\ext\base-core.jar being added to classpath</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784423</millis>
+  <sequence>6</sequence>
+  <logger>com.sshtools.j2ssh.util.ExtensionClassLoader</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.util.ExtensionClassLoader</class>
+  <method>add</method>
+  <thread>23</thread>
+  <message>Adding C:\Program Files\Java\jre7\lib\ext\base-core.jar to the extension classpath</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784423</millis>
+  <sequence>7</sequence>
+  <logger>com.sshtools.j2ssh.configuration.ConfigurationLoader</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.configuration.ConfigurationLoader</class>
+  <method>initialize</method>
+  <thread>23</thread>
+  <message>Extension C:\Program Files\Java\jre7\lib\ext\base-opt.jar being added to classpath</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784423</millis>
+  <sequence>8</sequence>
+  <logger>com.sshtools.j2ssh.util.ExtensionClassLoader</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.util.ExtensionClassLoader</class>
+  <method>add</method>
+  <thread>23</thread>
+  <message>Adding C:\Program Files\Java\jre7\lib\ext\base-opt.jar to the extension classpath</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784423</millis>
+  <sequence>9</sequence>
+  <logger>com.sshtools.j2ssh.configuration.ConfigurationLoader</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.configuration.ConfigurationLoader</class>
+  <method>initialize</method>
+  <thread>23</thread>
+  <message>Extension C:\Program Files\Java\jre7\lib\ext\comm.jar being added to classpath</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784423</millis>
+  <sequence>10</sequence>
+  <logger>com.sshtools.j2ssh.util.ExtensionClassLoader</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.util.ExtensionClassLoader</class>
+  <method>add</method>
+  <thread>23</thread>
+  <message>Adding C:\Program Files\Java\jre7\lib\ext\comm.jar to the extension classpath</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784423</millis>
+  <sequence>11</sequence>
+  <logger>com.sshtools.j2ssh.configuration.ConfigurationLoader</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.configuration.ConfigurationLoader</class>
+  <method>initialize</method>
+  <thread>23</thread>
+  <message>Extension C:\Program Files\Java\jre7\lib\ext\dnsns.jar being added to classpath</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784423</millis>
+  <sequence>12</sequence>
+  <logger>com.sshtools.j2ssh.util.ExtensionClassLoader</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.util.ExtensionClassLoader</class>
+  <method>add</method>
+  <thread>23</thread>
+  <message>Adding C:\Program Files\Java\jre7\lib\ext\dnsns.jar to the extension classpath</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784423</millis>
+  <sequence>13</sequence>
+  <logger>com.sshtools.j2ssh.configuration.ConfigurationLoader</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.configuration.ConfigurationLoader</class>
+  <method>initialize</method>
+  <thread>23</thread>
+  <message>Extension C:\Program Files\Java\jre7\lib\ext\gemplus-rad-terminals.jar being added to classpath</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784423</millis>
+  <sequence>14</sequence>
+  <logger>com.sshtools.j2ssh.util.ExtensionClassLoader</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.util.ExtensionClassLoader</class>
+  <method>add</method>
+  <thread>23</thread>
+  <message>Adding C:\Program Files\Java\jre7\lib\ext\gemplus-rad-terminals.jar to the extension classpath</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784423</millis>
+  <sequence>15</sequence>
+  <logger>com.sshtools.j2ssh.configuration.ConfigurationLoader</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.configuration.ConfigurationLoader</class>
+  <method>initialize</method>
+  <thread>23</thread>
+  <message>Extension C:\Program Files\Java\jre7\lib\ext\gemplus-terminals.jar being added to classpath</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784423</millis>
+  <sequence>16</sequence>
+  <logger>com.sshtools.j2ssh.util.ExtensionClassLoader</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.util.ExtensionClassLoader</class>
+  <method>add</method>
+  <thread>23</thread>
+  <message>Adding C:\Program Files\Java\jre7\lib\ext\gemplus-terminals.jar to the extension classpath</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784423</millis>
+  <sequence>17</sequence>
+  <logger>com.sshtools.j2ssh.configuration.ConfigurationLoader</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.configuration.ConfigurationLoader</class>
+  <method>initialize</method>
+  <thread>23</thread>
+  <message>Extension C:\Program Files\Java\jre7\lib\ext\gemplus-util.jar being added to classpath</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784423</millis>
+  <sequence>18</sequence>
+  <logger>com.sshtools.j2ssh.util.ExtensionClassLoader</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.util.ExtensionClassLoader</class>
+  <method>add</method>
+  <thread>23</thread>
+  <message>Adding C:\Program Files\Java\jre7\lib\ext\gemplus-util.jar to the extension classpath</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784423</millis>
+  <sequence>19</sequence>
+  <logger>com.sshtools.j2ssh.configuration.ConfigurationLoader</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.configuration.ConfigurationLoader</class>
+  <method>initialize</method>
+  <thread>23</thread>
+  <message>Extension C:\Program Files\Java\jre7\lib\ext\jaccess.jar being added to classpath</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784423</millis>
+  <sequence>20</sequence>
+  <logger>com.sshtools.j2ssh.util.ExtensionClassLoader</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.util.ExtensionClassLoader</class>
+  <method>add</method>
+  <thread>23</thread>
+  <message>Adding C:\Program Files\Java\jre7\lib\ext\jaccess.jar to the extension classpath</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784423</millis>
+  <sequence>21</sequence>
+  <logger>com.sshtools.j2ssh.configuration.ConfigurationLoader</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.configuration.ConfigurationLoader</class>
+  <method>initialize</method>
+  <thread>23</thread>
+  <message>Extension C:\Program Files\Java\jre7\lib\ext\localedata.jar being added to classpath</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784423</millis>
+  <sequence>22</sequence>
+  <logger>com.sshtools.j2ssh.util.ExtensionClassLoader</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.util.ExtensionClassLoader</class>
+  <method>add</method>
+  <thread>23</thread>
+  <message>Adding C:\Program Files\Java\jre7\lib\ext\localedata.jar to the extension classpath</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784423</millis>
+  <sequence>23</sequence>
+  <logger>com.sshtools.j2ssh.configuration.ConfigurationLoader</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.configuration.ConfigurationLoader</class>
+  <method>initialize</method>
+  <thread>23</thread>
+  <message>Extension C:\Program Files\Java\jre7\lib\ext\pcsc_wrapper.jar being added to classpath</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784423</millis>
+  <sequence>24</sequence>
+  <logger>com.sshtools.j2ssh.util.ExtensionClassLoader</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.util.ExtensionClassLoader</class>
+  <method>add</method>
+  <thread>23</thread>
+  <message>Adding C:\Program Files\Java\jre7\lib\ext\pcsc_wrapper.jar to the extension classpath</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784439</millis>
+  <sequence>25</sequence>
+  <logger>com.sshtools.j2ssh.configuration.ConfigurationLoader</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.configuration.ConfigurationLoader</class>
+  <method>initialize</method>
+  <thread>23</thread>
+  <message>Extension C:\Program Files\Java\jre7\lib\ext\sunec.jar being added to classpath</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784439</millis>
+  <sequence>26</sequence>
+  <logger>com.sshtools.j2ssh.util.ExtensionClassLoader</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.util.ExtensionClassLoader</class>
+  <method>add</method>
+  <thread>23</thread>
+  <message>Adding C:\Program Files\Java\jre7\lib\ext\sunec.jar to the extension classpath</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784439</millis>
+  <sequence>27</sequence>
+  <logger>com.sshtools.j2ssh.configuration.ConfigurationLoader</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.configuration.ConfigurationLoader</class>
+  <method>initialize</method>
+  <thread>23</thread>
+  <message>Extension C:\Program Files\Java\jre7\lib\ext\sunjce_provider.jar being added to classpath</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784439</millis>
+  <sequence>28</sequence>
+  <logger>com.sshtools.j2ssh.util.ExtensionClassLoader</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.util.ExtensionClassLoader</class>
+  <method>add</method>
+  <thread>23</thread>
+  <message>Adding C:\Program Files\Java\jre7\lib\ext\sunjce_provider.jar to the extension classpath</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784439</millis>
+  <sequence>29</sequence>
+  <logger>com.sshtools.j2ssh.configuration.ConfigurationLoader</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.configuration.ConfigurationLoader</class>
+  <method>initialize</method>
+  <thread>23</thread>
+  <message>Extension C:\Program Files\Java\jre7\lib\ext\sunmscapi.jar being added to classpath</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784439</millis>
+  <sequence>30</sequence>
+  <logger>com.sshtools.j2ssh.util.ExtensionClassLoader</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.util.ExtensionClassLoader</class>
+  <method>add</method>
+  <thread>23</thread>
+  <message>Adding C:\Program Files\Java\jre7\lib\ext\sunmscapi.jar to the extension classpath</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784439</millis>
+  <sequence>31</sequence>
+  <logger>com.sshtools.j2ssh.configuration.ConfigurationLoader</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.configuration.ConfigurationLoader</class>
+  <method>initialize</method>
+  <thread>23</thread>
+  <message>Extension C:\Program Files\Java\jre7\lib\ext\vopcardservice.jar being added to classpath</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784439</millis>
+  <sequence>32</sequence>
+  <logger>com.sshtools.j2ssh.util.ExtensionClassLoader</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.util.ExtensionClassLoader</class>
+  <method>add</method>
+  <thread>23</thread>
+  <message>Adding C:\Program Files\Java\jre7\lib\ext\vopcardservice.jar to the extension classpath</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784439</millis>
+  <sequence>33</sequence>
+  <logger>com.sshtools.j2ssh.configuration.ConfigurationLoader</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.configuration.ConfigurationLoader</class>
+  <method>initialize</method>
+  <thread>23</thread>
+  <message>Extension C:\Program Files\Java\jre7\lib\ext\zipfs.jar being added to classpath</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784439</millis>
+  <sequence>34</sequence>
+  <logger>com.sshtools.j2ssh.util.ExtensionClassLoader</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.util.ExtensionClassLoader</class>
+  <method>add</method>
+  <thread>23</thread>
+  <message>Adding C:\Program Files\Java\jre7\lib\ext\zipfs.jar to the extension classpath</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784439</millis>
+  <sequence>35</sequence>
+  <logger>com.sshtools.j2ssh.transport.publickey.SshKeyPairFactory</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.publickey.SshKeyPairFactory</class>
+  <method>&lt;clinit&gt;</method>
+  <thread>23</thread>
+  <message>Loading public key algorithms</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784439</millis>
+  <sequence>36</sequence>
+  <logger>com.sshtools.j2ssh.transport.compression.SshCompressionFactory</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.compression.SshCompressionFactory</class>
+  <method>&lt;clinit&gt;</method>
+  <thread>23</thread>
+  <message>Loading compression methods</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784439</millis>
+  <sequence>37</sequence>
+  <logger>com.sshtools.j2ssh.transport.hmac.SshHmacFactory</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.hmac.SshHmacFactory</class>
+  <method>&lt;clinit&gt;</method>
+  <thread>23</thread>
+  <message>Loading message authentication methods</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784454</millis>
+  <sequence>39</sequence>
+  <logger>com.sshtools.j2ssh.transport.publickey.SshPrivateKeyFile</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.publickey.SshPrivateKeyFile</class>
+  <method>parse</method>
+  <thread>23</thread>
+  <message>Parsing private key file</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784454</millis>
+  <sequence>38</sequence>
+  <logger>com.sshtools.j2ssh.transport.publickey.SshPrivateKeyFile</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.publickey.SshPrivateKeyFile</class>
+  <method>parse</method>
+  <thread>24</thread>
+  <message>Parsing private key file</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784454</millis>
+  <sequence>40</sequence>
+  <logger>com.sshtools.j2ssh.transport.publickey.SshPrivateKeyFormatFactory</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.publickey.SshPrivateKeyFormatFactory</class>
+  <method>&lt;clinit&gt;</method>
+  <thread>23</thread>
+  <message>Loading private key formats</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784720</millis>
+  <sequence>41</sequence>
+  <logger>com.sshtools.j2ssh.transport.TransportProtocolCommon</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.TransportProtocolCommon</class>
+  <method>startTransportProtocol</method>
+  <thread>23</thread>
+  <message>Starting transport protocol</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784720</millis>
+  <sequence>42</sequence>
+  <logger>com.sshtools.j2ssh.transport.TransportProtocolCommon</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.TransportProtocolCommon</class>
+  <method>run</method>
+  <thread>28</thread>
+  <message>Registering transport protocol messages with inputstream</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784720</millis>
+  <sequence>43</sequence>
+  <logger>com.sshtools.j2ssh.transport.TransportProtocolCommon</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.TransportProtocolCommon</class>
+  <method>negotiateVersion</method>
+  <thread>28</thread>
+  <message>Negotiating protocol version</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784720</millis>
+  <sequence>44</sequence>
+  <logger>com.sshtools.j2ssh.transport.TransportProtocolCommon</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.TransportProtocolCommon</class>
+  <method>negotiateVersion</method>
+  <thread>28</thread>
+  <message>Protocol negotiation complete</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784735</millis>
+  <sequence>45</sequence>
+  <logger>com.sshtools.j2ssh.transport.TransportProtocolCommon</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.TransportProtocolCommon</class>
+  <method>beginKeyExchange</method>
+  <thread>28</thread>
+  <message>Starting key exchange</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784735</millis>
+  <sequence>46</sequence>
+  <logger>com.sshtools.j2ssh.transport.kex.DhGroup1Sha1</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.kex.DhGroup1Sha1</class>
+  <method>performClientExchange</method>
+  <thread>28</thread>
+  <message>Starting client side key exchange.</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784766</millis>
+  <sequence>47</sequence>
+  <logger>com.sshtools.j2ssh.transport.HostKeyVerification</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.HostKeyVerification</class>
+  <method>verifyHost</method>
+  <thread>28</thread>
+  <message>Verifying 10.1.1.6 host key</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784766</millis>
+  <sequence>48</sequence>
+  <logger>com.sshtools.j2ssh.transport.TransportProtocolCommon</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.TransportProtocolCommon</class>
+  <method>verifyHostKey</method>
+  <thread>28</thread>
+  <message>The host key signature is  valid</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784766</millis>
+  <sequence>49</sequence>
+  <logger>com.sshtools.j2ssh.transport.TransportProtocolCommon</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.TransportProtocolCommon</class>
+  <method>completeKeyExchange</method>
+  <thread>28</thread>
+  <message>Completing key exchange</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784766</millis>
+  <sequence>50</sequence>
+  <logger>com.sshtools.j2ssh.transport.cipher.SshCipherFactory</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.cipher.SshCipherFactory</class>
+  <method>newInstance</method>
+  <thread>28</thread>
+  <message>Creating new blowfish-cbc cipher instance</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784782</millis>
+  <sequence>51</sequence>
+  <logger>com.sshtools.j2ssh.transport.cipher.SshCipherFactory</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.cipher.SshCipherFactory</class>
+  <method>newInstance</method>
+  <thread>28</thread>
+  <message>Creating new blowfish-cbc cipher instance</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784798</millis>
+  <sequence>52</sequence>
+  <logger>com.sshtools.j2ssh.authentication.PublicKeyAuthenticationClient</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.authentication.PublicKeyAuthenticationClient</class>
+  <method>authenticate</method>
+  <thread>23</thread>
+  <message>Generating data to sign</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784798</millis>
+  <sequence>53</sequence>
+  <logger>com.sshtools.j2ssh.authentication.PublicKeyAuthenticationClient</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.authentication.PublicKeyAuthenticationClient</class>
+  <method>authenticate</method>
+  <thread>23</thread>
+  <message>Preparing public key authentication request</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784876</millis>
+  <sequence>54</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>onServiceInit</method>
+  <thread>23</thread>
+  <message>Registering connection protocol messages</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784876</millis>
+  <sequence>55</sequence>
+  <logger>com.sshtools.j2ssh.transport.Service</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.Service</class>
+  <method>start</method>
+  <thread>23</thread>
+  <message>ssh-connection has been requested</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784876</millis>
+  <sequence>56</sequence>
+  <logger>com.sshtools.j2ssh.transport.Service</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.Service</class>
+  <method>onStart</method>
+  <thread>23</thread>
+  <message>Starting ssh-connection service thread</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784891</millis>
+  <sequence>57</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>openChannel</method>
+  <thread>23</thread>
+  <message>Channel 0 is open [session]</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784922</millis>
+  <sequence>58</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>openChannel</method>
+  <thread>23</thread>
+  <message>Channel 1 is open [sftp]</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784922</millis>
+  <sequence>59</sequence>
+  <logger>com.sshtools.j2ssh.sftp.SftpSubsystemClient</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.sftp.SftpSubsystemClient</class>
+  <method>initialize</method>
+  <thread>23</thread>
+  <message>Initializing SFTP protocol version 3</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784922</millis>
+  <sequence>60</sequence>
+  <logger>com.sshtools.j2ssh.subsystem.SubsystemChannel</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.subsystem.SubsystemChannel</class>
+  <method>startSubsystem</method>
+  <thread>23</thread>
+  <message>Starting sftp subsystem</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784922</millis>
+  <sequence>61</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>sendChannelRequest</method>
+  <thread>23</thread>
+  <message>Sending subsystem request for the session channel</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784922</millis>
+  <sequence>62</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>sendChannelRequest</method>
+  <thread>23</thread>
+  <message>Waiting for channel request reply</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784938</millis>
+  <sequence>63</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>sendChannelRequest</method>
+  <thread>23</thread>
+  <message>Channel request succeeded</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784938</millis>
+  <sequence>64</sequence>
+  <logger>com.sshtools.j2ssh.sftp.SftpSubsystemClient</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.sftp.SftpSubsystemClient</class>
+  <method>initialize</method>
+  <thread>23</thread>
+  <message>Server responded with version 3</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784969</millis>
+  <sequence>65</sequence>
+  <logger>com.sshtools.j2ssh.sftp.SftpSubsystemClient</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.sftp.SftpSubsystemClient</class>
+  <method>getOKRequestStatus</method>
+  <thread>23</thread>
+  <message>Received response</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784985</millis>
+  <sequence>66</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>closeChannel</method>
+  <thread>23</thread>
+  <message>Local computer has closed channel 1[sftp]</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784985</millis>
+  <sequence>67</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>onStop</method>
+  <thread>29</thread>
+  <message>Closing all active channels</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784985</millis>
+  <sequence>68</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>onStop</method>
+  <thread>29</thread>
+  <message>thread has 2 active channels to stop</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784985</millis>
+  <sequence>69</sequence>
+  <logger>com.sshtools.j2ssh.connection.Channel</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.Channel</class>
+  <method>close</method>
+  <thread>29</thread>
+  <message>Finializing channel close</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784985</millis>
+  <sequence>70</sequence>
+  <logger>com.sshtools.j2ssh.connection.ChannelInputStream</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ChannelInputStream</class>
+  <method>close</method>
+  <thread>29</thread>
+  <message>Closing ChannelInputStream</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784985</millis>
+  <sequence>71</sequence>
+  <logger>com.sshtools.j2ssh.connection.ChannelOutputStream</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ChannelOutputStream</class>
+  <method>close</method>
+  <thread>29</thread>
+  <message>Closing ChannelOutputStream</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784985</millis>
+  <sequence>72</sequence>
+  <logger>com.sshtools.j2ssh.connection.ChannelInputStream</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ChannelInputStream</class>
+  <method>close</method>
+  <thread>29</thread>
+  <message>Closing ChannelInputStream</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784985</millis>
+  <sequence>73</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>freeChannel</method>
+  <thread>29</thread>
+  <message>Freeing channel 0 [session]</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784985</millis>
+  <sequence>74</sequence>
+  <logger>com.sshtools.j2ssh.connection.Channel</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.Channel</class>
+  <method>close</method>
+  <thread>29</thread>
+  <message>Finializing channel close</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784985</millis>
+  <sequence>75</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>freeChannel</method>
+  <thread>29</thread>
+  <message>Freeing channel 1 [sftp]</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:44</date>
+  <millis>1417759784985</millis>
+  <sequence>76</sequence>
+  <logger>com.sshtools.j2ssh.transport.Service</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.Service</class>
+  <method>run</method>
+  <thread>29</thread>
+  <message>ssh-connection thread is exiting</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:45</date>
+  <millis>1417759785687</millis>
+  <sequence>77</sequence>
+  <logger>com.sshtools.j2ssh.transport.TransportProtocolCommon</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.TransportProtocolCommon</class>
+  <method>startTransportProtocol</method>
+  <thread>24</thread>
+  <message>Starting transport protocol</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:45</date>
+  <millis>1417759785687</millis>
+  <sequence>78</sequence>
+  <logger>com.sshtools.j2ssh.transport.TransportProtocolCommon</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.TransportProtocolCommon</class>
+  <method>run</method>
+  <thread>30</thread>
+  <message>Registering transport protocol messages with inputstream</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:45</date>
+  <millis>1417759785687</millis>
+  <sequence>79</sequence>
+  <logger>com.sshtools.j2ssh.transport.TransportProtocolCommon</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.TransportProtocolCommon</class>
+  <method>negotiateVersion</method>
+  <thread>30</thread>
+  <message>Negotiating protocol version</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:45</date>
+  <millis>1417759785702</millis>
+  <sequence>80</sequence>
+  <logger>com.sshtools.j2ssh.transport.TransportProtocolCommon</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.TransportProtocolCommon</class>
+  <method>negotiateVersion</method>
+  <thread>30</thread>
+  <message>Protocol negotiation complete</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:45</date>
+  <millis>1417759785702</millis>
+  <sequence>81</sequence>
+  <logger>com.sshtools.j2ssh.transport.TransportProtocolCommon</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.TransportProtocolCommon</class>
+  <method>beginKeyExchange</method>
+  <thread>30</thread>
+  <message>Starting key exchange</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:45</date>
+  <millis>1417759785702</millis>
+  <sequence>82</sequence>
+  <logger>com.sshtools.j2ssh.transport.kex.DhGroup1Sha1</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.kex.DhGroup1Sha1</class>
+  <method>performClientExchange</method>
+  <thread>30</thread>
+  <message>Starting client side key exchange.</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:45</date>
+  <millis>1417759785765</millis>
+  <sequence>83</sequence>
+  <logger>com.sshtools.j2ssh.transport.HostKeyVerification</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.HostKeyVerification</class>
+  <method>verifyHost</method>
+  <thread>30</thread>
+  <message>Verifying 10.1.1.6 host key</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:45</date>
+  <millis>1417759785765</millis>
+  <sequence>84</sequence>
+  <logger>com.sshtools.j2ssh.transport.TransportProtocolCommon</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.TransportProtocolCommon</class>
+  <method>verifyHostKey</method>
+  <thread>30</thread>
+  <message>The host key signature is  valid</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:45</date>
+  <millis>1417759785765</millis>
+  <sequence>85</sequence>
+  <logger>com.sshtools.j2ssh.transport.TransportProtocolCommon</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.TransportProtocolCommon</class>
+  <method>completeKeyExchange</method>
+  <thread>30</thread>
+  <message>Completing key exchange</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:45</date>
+  <millis>1417759785765</millis>
+  <sequence>86</sequence>
+  <logger>com.sshtools.j2ssh.transport.cipher.SshCipherFactory</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.cipher.SshCipherFactory</class>
+  <method>newInstance</method>
+  <thread>30</thread>
+  <message>Creating new blowfish-cbc cipher instance</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:45</date>
+  <millis>1417759785765</millis>
+  <sequence>87</sequence>
+  <logger>com.sshtools.j2ssh.transport.cipher.SshCipherFactory</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.cipher.SshCipherFactory</class>
+  <method>newInstance</method>
+  <thread>30</thread>
+  <message>Creating new blowfish-cbc cipher instance</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:45</date>
+  <millis>1417759785780</millis>
+  <sequence>88</sequence>
+  <logger>com.sshtools.j2ssh.authentication.PublicKeyAuthenticationClient</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.authentication.PublicKeyAuthenticationClient</class>
+  <method>authenticate</method>
+  <thread>24</thread>
+  <message>Generating data to sign</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:45</date>
+  <millis>1417759785780</millis>
+  <sequence>89</sequence>
+  <logger>com.sshtools.j2ssh.authentication.PublicKeyAuthenticationClient</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.authentication.PublicKeyAuthenticationClient</class>
+  <method>authenticate</method>
+  <thread>24</thread>
+  <message>Preparing public key authentication request</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:45</date>
+  <millis>1417759785843</millis>
+  <sequence>90</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>onServiceInit</method>
+  <thread>24</thread>
+  <message>Registering connection protocol messages</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:45</date>
+  <millis>1417759785843</millis>
+  <sequence>91</sequence>
+  <logger>com.sshtools.j2ssh.transport.Service</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.Service</class>
+  <method>start</method>
+  <thread>24</thread>
+  <message>ssh-connection has been requested</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:45</date>
+  <millis>1417759785843</millis>
+  <sequence>92</sequence>
+  <logger>com.sshtools.j2ssh.transport.Service</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.Service</class>
+  <method>onStart</method>
+  <thread>24</thread>
+  <message>Starting ssh-connection service thread</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:45</date>
+  <millis>1417759785874</millis>
+  <sequence>93</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>openChannel</method>
+  <thread>24</thread>
+  <message>Channel 0 is open [session]</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:45</date>
+  <millis>1417759785874</millis>
+  <sequence>94</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>openChannel</method>
+  <thread>24</thread>
+  <message>Channel 1 is open [sftp]</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:45</date>
+  <millis>1417759785874</millis>
+  <sequence>95</sequence>
+  <logger>com.sshtools.j2ssh.sftp.SftpSubsystemClient</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.sftp.SftpSubsystemClient</class>
+  <method>initialize</method>
+  <thread>24</thread>
+  <message>Initializing SFTP protocol version 3</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:45</date>
+  <millis>1417759785874</millis>
+  <sequence>96</sequence>
+  <logger>com.sshtools.j2ssh.subsystem.SubsystemChannel</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.subsystem.SubsystemChannel</class>
+  <method>startSubsystem</method>
+  <thread>24</thread>
+  <message>Starting sftp subsystem</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:45</date>
+  <millis>1417759785874</millis>
+  <sequence>97</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>sendChannelRequest</method>
+  <thread>24</thread>
+  <message>Sending subsystem request for the session channel</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:45</date>
+  <millis>1417759785874</millis>
+  <sequence>98</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>sendChannelRequest</method>
+  <thread>24</thread>
+  <message>Waiting for channel request reply</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:45</date>
+  <millis>1417759785874</millis>
+  <sequence>99</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>sendChannelRequest</method>
+  <thread>24</thread>
+  <message>Channel request succeeded</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:45</date>
+  <millis>1417759785890</millis>
+  <sequence>100</sequence>
+  <logger>com.sshtools.j2ssh.sftp.SftpSubsystemClient</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.sftp.SftpSubsystemClient</class>
+  <method>initialize</method>
+  <thread>24</thread>
+  <message>Server responded with version 3</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:45</date>
+  <millis>1417759785890</millis>
+  <sequence>101</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>closeChannel</method>
+  <thread>24</thread>
+  <message>Local computer has closed channel 1[sftp]</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:45</date>
+  <millis>1417759785890</millis>
+  <sequence>102</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>onStop</method>
+  <thread>31</thread>
+  <message>Closing all active channels</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:45</date>
+  <millis>1417759785890</millis>
+  <sequence>103</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>onStop</method>
+  <thread>31</thread>
+  <message>thread has 2 active channels to stop</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:45</date>
+  <millis>1417759785890</millis>
+  <sequence>104</sequence>
+  <logger>com.sshtools.j2ssh.connection.Channel</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.Channel</class>
+  <method>close</method>
+  <thread>31</thread>
+  <message>Finializing channel close</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:45</date>
+  <millis>1417759785890</millis>
+  <sequence>105</sequence>
+  <logger>com.sshtools.j2ssh.connection.ChannelInputStream</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ChannelInputStream</class>
+  <method>close</method>
+  <thread>31</thread>
+  <message>Closing ChannelInputStream</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:45</date>
+  <millis>1417759785890</millis>
+  <sequence>106</sequence>
+  <logger>com.sshtools.j2ssh.connection.ChannelOutputStream</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ChannelOutputStream</class>
+  <method>close</method>
+  <thread>31</thread>
+  <message>Closing ChannelOutputStream</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:45</date>
+  <millis>1417759785890</millis>
+  <sequence>107</sequence>
+  <logger>com.sshtools.j2ssh.connection.ChannelInputStream</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ChannelInputStream</class>
+  <method>close</method>
+  <thread>31</thread>
+  <message>Closing ChannelInputStream</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:45</date>
+  <millis>1417759785890</millis>
+  <sequence>108</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>freeChannel</method>
+  <thread>31</thread>
+  <message>Freeing channel 0 [session]</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:45</date>
+  <millis>1417759785890</millis>
+  <sequence>109</sequence>
+  <logger>com.sshtools.j2ssh.connection.Channel</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.Channel</class>
+  <method>close</method>
+  <thread>31</thread>
+  <message>Finializing channel close</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:45</date>
+  <millis>1417759785890</millis>
+  <sequence>110</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>freeChannel</method>
+  <thread>31</thread>
+  <message>Freeing channel 1 [sftp]</message>
+</record>
+<record>
+  <date>2014-12-05T07:09:45</date>
+  <millis>1417759785890</millis>
+  <sequence>111</sequence>
+  <logger>com.sshtools.j2ssh.transport.Service</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.Service</class>
+  <method>run</method>
+  <thread>31</thread>
+  <message>ssh-connection thread is exiting</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886354</millis>
+  <sequence>112</sequence>
+  <logger>com.sshtools.j2ssh.transport.publickey.SshPrivateKeyFile</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.publickey.SshPrivateKeyFile</class>
+  <method>parse</method>
+  <thread>32</thread>
+  <message>Parsing private key file</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886354</millis>
+  <sequence>113</sequence>
+  <logger>com.sshtools.j2ssh.transport.publickey.SshPrivateKeyFile</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.publickey.SshPrivateKeyFile</class>
+  <method>parse</method>
+  <thread>33</thread>
+  <message>Parsing private key file</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886369</millis>
+  <sequence>114</sequence>
+  <logger>com.sshtools.j2ssh.transport.TransportProtocolCommon</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.TransportProtocolCommon</class>
+  <method>startTransportProtocol</method>
+  <thread>33</thread>
+  <message>Starting transport protocol</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886369</millis>
+  <sequence>115</sequence>
+  <logger>com.sshtools.j2ssh.transport.TransportProtocolCommon</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.TransportProtocolCommon</class>
+  <method>run</method>
+  <thread>35</thread>
+  <message>Registering transport protocol messages with inputstream</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886369</millis>
+  <sequence>116</sequence>
+  <logger>com.sshtools.j2ssh.transport.TransportProtocolCommon</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.TransportProtocolCommon</class>
+  <method>negotiateVersion</method>
+  <thread>35</thread>
+  <message>Negotiating protocol version</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886385</millis>
+  <sequence>117</sequence>
+  <logger>com.sshtools.j2ssh.transport.TransportProtocolCommon</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.TransportProtocolCommon</class>
+  <method>startTransportProtocol</method>
+  <thread>32</thread>
+  <message>Starting transport protocol</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886385</millis>
+  <sequence>118</sequence>
+  <logger>com.sshtools.j2ssh.transport.TransportProtocolCommon</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.TransportProtocolCommon</class>
+  <method>run</method>
+  <thread>36</thread>
+  <message>Registering transport protocol messages with inputstream</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886385</millis>
+  <sequence>119</sequence>
+  <logger>com.sshtools.j2ssh.transport.TransportProtocolCommon</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.TransportProtocolCommon</class>
+  <method>negotiateVersion</method>
+  <thread>36</thread>
+  <message>Negotiating protocol version</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886401</millis>
+  <sequence>120</sequence>
+  <logger>com.sshtools.j2ssh.transport.TransportProtocolCommon</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.TransportProtocolCommon</class>
+  <method>negotiateVersion</method>
+  <thread>36</thread>
+  <message>Protocol negotiation complete</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886416</millis>
+  <sequence>121</sequence>
+  <logger>com.sshtools.j2ssh.transport.TransportProtocolCommon</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.TransportProtocolCommon</class>
+  <method>beginKeyExchange</method>
+  <thread>36</thread>
+  <message>Starting key exchange</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886416</millis>
+  <sequence>122</sequence>
+  <logger>com.sshtools.j2ssh.transport.kex.DhGroup1Sha1</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.kex.DhGroup1Sha1</class>
+  <method>performClientExchange</method>
+  <thread>36</thread>
+  <message>Starting client side key exchange.</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886416</millis>
+  <sequence>123</sequence>
+  <logger>com.sshtools.j2ssh.transport.TransportProtocolCommon</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.TransportProtocolCommon</class>
+  <method>negotiateVersion</method>
+  <thread>35</thread>
+  <message>Protocol negotiation complete</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886416</millis>
+  <sequence>124</sequence>
+  <logger>com.sshtools.j2ssh.transport.TransportProtocolCommon</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.TransportProtocolCommon</class>
+  <method>beginKeyExchange</method>
+  <thread>35</thread>
+  <message>Starting key exchange</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886416</millis>
+  <sequence>125</sequence>
+  <logger>com.sshtools.j2ssh.transport.kex.DhGroup1Sha1</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.kex.DhGroup1Sha1</class>
+  <method>performClientExchange</method>
+  <thread>35</thread>
+  <message>Starting client side key exchange.</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886479</millis>
+  <sequence>126</sequence>
+  <logger>com.sshtools.j2ssh.transport.HostKeyVerification</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.HostKeyVerification</class>
+  <method>verifyHost</method>
+  <thread>35</thread>
+  <message>Verifying 10.1.1.6 host key</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886479</millis>
+  <sequence>127</sequence>
+  <logger>com.sshtools.j2ssh.transport.TransportProtocolCommon</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.TransportProtocolCommon</class>
+  <method>verifyHostKey</method>
+  <thread>35</thread>
+  <message>The host key signature is  valid</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886479</millis>
+  <sequence>128</sequence>
+  <logger>com.sshtools.j2ssh.transport.TransportProtocolCommon</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.TransportProtocolCommon</class>
+  <method>completeKeyExchange</method>
+  <thread>35</thread>
+  <message>Completing key exchange</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886479</millis>
+  <sequence>129</sequence>
+  <logger>com.sshtools.j2ssh.transport.cipher.SshCipherFactory</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.cipher.SshCipherFactory</class>
+  <method>newInstance</method>
+  <thread>35</thread>
+  <message>Creating new blowfish-cbc cipher instance</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886479</millis>
+  <sequence>130</sequence>
+  <logger>com.sshtools.j2ssh.transport.HostKeyVerification</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.HostKeyVerification</class>
+  <method>verifyHost</method>
+  <thread>36</thread>
+  <message>Verifying 10.1.1.6 host key</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886479</millis>
+  <sequence>131</sequence>
+  <logger>com.sshtools.j2ssh.transport.cipher.SshCipherFactory</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.cipher.SshCipherFactory</class>
+  <method>newInstance</method>
+  <thread>35</thread>
+  <message>Creating new blowfish-cbc cipher instance</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886479</millis>
+  <sequence>132</sequence>
+  <logger>com.sshtools.j2ssh.transport.TransportProtocolCommon</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.TransportProtocolCommon</class>
+  <method>verifyHostKey</method>
+  <thread>36</thread>
+  <message>The host key signature is  valid</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886479</millis>
+  <sequence>133</sequence>
+  <logger>com.sshtools.j2ssh.transport.TransportProtocolCommon</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.TransportProtocolCommon</class>
+  <method>completeKeyExchange</method>
+  <thread>36</thread>
+  <message>Completing key exchange</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886479</millis>
+  <sequence>134</sequence>
+  <logger>com.sshtools.j2ssh.transport.cipher.SshCipherFactory</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.cipher.SshCipherFactory</class>
+  <method>newInstance</method>
+  <thread>36</thread>
+  <message>Creating new blowfish-cbc cipher instance</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886479</millis>
+  <sequence>135</sequence>
+  <logger>com.sshtools.j2ssh.transport.cipher.SshCipherFactory</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.cipher.SshCipherFactory</class>
+  <method>newInstance</method>
+  <thread>36</thread>
+  <message>Creating new blowfish-cbc cipher instance</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886479</millis>
+  <sequence>136</sequence>
+  <logger>com.sshtools.j2ssh.authentication.PublicKeyAuthenticationClient</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.authentication.PublicKeyAuthenticationClient</class>
+  <method>authenticate</method>
+  <thread>33</thread>
+  <message>Generating data to sign</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886479</millis>
+  <sequence>137</sequence>
+  <logger>com.sshtools.j2ssh.authentication.PublicKeyAuthenticationClient</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.authentication.PublicKeyAuthenticationClient</class>
+  <method>authenticate</method>
+  <thread>33</thread>
+  <message>Preparing public key authentication request</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886494</millis>
+  <sequence>138</sequence>
+  <logger>com.sshtools.j2ssh.authentication.PublicKeyAuthenticationClient</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.authentication.PublicKeyAuthenticationClient</class>
+  <method>authenticate</method>
+  <thread>32</thread>
+  <message>Generating data to sign</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886494</millis>
+  <sequence>139</sequence>
+  <logger>com.sshtools.j2ssh.authentication.PublicKeyAuthenticationClient</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.authentication.PublicKeyAuthenticationClient</class>
+  <method>authenticate</method>
+  <thread>32</thread>
+  <message>Preparing public key authentication request</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886525</millis>
+  <sequence>140</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>onServiceInit</method>
+  <thread>32</thread>
+  <message>Registering connection protocol messages</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886525</millis>
+  <sequence>141</sequence>
+  <logger>com.sshtools.j2ssh.transport.Service</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.Service</class>
+  <method>start</method>
+  <thread>32</thread>
+  <message>ssh-connection has been requested</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886525</millis>
+  <sequence>142</sequence>
+  <logger>com.sshtools.j2ssh.transport.Service</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.Service</class>
+  <method>onStart</method>
+  <thread>32</thread>
+  <message>Starting ssh-connection service thread</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886525</millis>
+  <sequence>143</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>onServiceInit</method>
+  <thread>33</thread>
+  <message>Registering connection protocol messages</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886525</millis>
+  <sequence>144</sequence>
+  <logger>com.sshtools.j2ssh.transport.Service</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.Service</class>
+  <method>start</method>
+  <thread>33</thread>
+  <message>ssh-connection has been requested</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886525</millis>
+  <sequence>145</sequence>
+  <logger>com.sshtools.j2ssh.transport.Service</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.Service</class>
+  <method>onStart</method>
+  <thread>33</thread>
+  <message>Starting ssh-connection service thread</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886541</millis>
+  <sequence>146</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>openChannel</method>
+  <thread>32</thread>
+  <message>Channel 0 is open [session]</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886541</millis>
+  <sequence>147</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>openChannel</method>
+  <thread>32</thread>
+  <message>Channel 1 is open [sftp]</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886541</millis>
+  <sequence>148</sequence>
+  <logger>com.sshtools.j2ssh.sftp.SftpSubsystemClient</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.sftp.SftpSubsystemClient</class>
+  <method>initialize</method>
+  <thread>32</thread>
+  <message>Initializing SFTP protocol version 3</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886541</millis>
+  <sequence>149</sequence>
+  <logger>com.sshtools.j2ssh.subsystem.SubsystemChannel</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.subsystem.SubsystemChannel</class>
+  <method>startSubsystem</method>
+  <thread>32</thread>
+  <message>Starting sftp subsystem</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886541</millis>
+  <sequence>150</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>sendChannelRequest</method>
+  <thread>32</thread>
+  <message>Sending subsystem request for the session channel</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886541</millis>
+  <sequence>151</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>sendChannelRequest</method>
+  <thread>32</thread>
+  <message>Waiting for channel request reply</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886557</millis>
+  <sequence>152</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>openChannel</method>
+  <thread>33</thread>
+  <message>Channel 0 is open [session]</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886572</millis>
+  <sequence>153</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>sendChannelRequest</method>
+  <thread>32</thread>
+  <message>Channel request succeeded</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886572</millis>
+  <sequence>154</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>openChannel</method>
+  <thread>33</thread>
+  <message>Channel 1 is open [sftp]</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886572</millis>
+  <sequence>155</sequence>
+  <logger>com.sshtools.j2ssh.sftp.SftpSubsystemClient</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.sftp.SftpSubsystemClient</class>
+  <method>initialize</method>
+  <thread>33</thread>
+  <message>Initializing SFTP protocol version 3</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886572</millis>
+  <sequence>156</sequence>
+  <logger>com.sshtools.j2ssh.subsystem.SubsystemChannel</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.subsystem.SubsystemChannel</class>
+  <method>startSubsystem</method>
+  <thread>33</thread>
+  <message>Starting sftp subsystem</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886572</millis>
+  <sequence>157</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>sendChannelRequest</method>
+  <thread>33</thread>
+  <message>Sending subsystem request for the session channel</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886572</millis>
+  <sequence>158</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>sendChannelRequest</method>
+  <thread>33</thread>
+  <message>Waiting for channel request reply</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886572</millis>
+  <sequence>159</sequence>
+  <logger>com.sshtools.j2ssh.sftp.SftpSubsystemClient</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.sftp.SftpSubsystemClient</class>
+  <method>initialize</method>
+  <thread>32</thread>
+  <message>Server responded with version 3</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886572</millis>
+  <sequence>160</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>sendChannelRequest</method>
+  <thread>33</thread>
+  <message>Channel request succeeded</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886588</millis>
+  <sequence>161</sequence>
+  <logger>com.sshtools.j2ssh.sftp.SftpSubsystemClient</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.sftp.SftpSubsystemClient</class>
+  <method>initialize</method>
+  <thread>33</thread>
+  <message>Server responded with version 3</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886588</millis>
+  <sequence>162</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>closeChannel</method>
+  <thread>33</thread>
+  <message>Local computer has closed channel 1[sftp]</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886588</millis>
+  <sequence>163</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>onStop</method>
+  <thread>38</thread>
+  <message>Closing all active channels</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886588</millis>
+  <sequence>164</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>onStop</method>
+  <thread>38</thread>
+  <message>thread has 2 active channels to stop</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886588</millis>
+  <sequence>165</sequence>
+  <logger>com.sshtools.j2ssh.connection.Channel</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.Channel</class>
+  <method>close</method>
+  <thread>38</thread>
+  <message>Finializing channel close</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886588</millis>
+  <sequence>166</sequence>
+  <logger>com.sshtools.j2ssh.connection.ChannelInputStream</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ChannelInputStream</class>
+  <method>close</method>
+  <thread>38</thread>
+  <message>Closing ChannelInputStream</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886588</millis>
+  <sequence>167</sequence>
+  <logger>com.sshtools.j2ssh.connection.ChannelOutputStream</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ChannelOutputStream</class>
+  <method>close</method>
+  <thread>38</thread>
+  <message>Closing ChannelOutputStream</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886588</millis>
+  <sequence>168</sequence>
+  <logger>com.sshtools.j2ssh.connection.ChannelInputStream</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ChannelInputStream</class>
+  <method>close</method>
+  <thread>38</thread>
+  <message>Closing ChannelInputStream</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886588</millis>
+  <sequence>169</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>freeChannel</method>
+  <thread>38</thread>
+  <message>Freeing channel 0 [session]</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886588</millis>
+  <sequence>170</sequence>
+  <logger>com.sshtools.j2ssh.connection.Channel</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.Channel</class>
+  <method>close</method>
+  <thread>38</thread>
+  <message>Finializing channel close</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886588</millis>
+  <sequence>171</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>freeChannel</method>
+  <thread>38</thread>
+  <message>Freeing channel 1 [sftp]</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886588</millis>
+  <sequence>172</sequence>
+  <logger>com.sshtools.j2ssh.transport.Service</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.Service</class>
+  <method>run</method>
+  <thread>38</thread>
+  <message>ssh-connection thread is exiting</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886603</millis>
+  <sequence>173</sequence>
+  <logger>com.sshtools.j2ssh.sftp.SftpSubsystemClient</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.sftp.SftpSubsystemClient</class>
+  <method>getOKRequestStatus</method>
+  <thread>32</thread>
+  <message>Received response</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886619</millis>
+  <sequence>174</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>closeChannel</method>
+  <thread>32</thread>
+  <message>Local computer has closed channel 1[sftp]</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886619</millis>
+  <sequence>175</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>onStop</method>
+  <thread>37</thread>
+  <message>Closing all active channels</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886619</millis>
+  <sequence>176</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>onStop</method>
+  <thread>37</thread>
+  <message>thread has 2 active channels to stop</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886619</millis>
+  <sequence>177</sequence>
+  <logger>com.sshtools.j2ssh.connection.Channel</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.Channel</class>
+  <method>close</method>
+  <thread>37</thread>
+  <message>Finializing channel close</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886619</millis>
+  <sequence>178</sequence>
+  <logger>com.sshtools.j2ssh.connection.ChannelInputStream</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ChannelInputStream</class>
+  <method>close</method>
+  <thread>37</thread>
+  <message>Closing ChannelInputStream</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886619</millis>
+  <sequence>179</sequence>
+  <logger>com.sshtools.j2ssh.connection.ChannelOutputStream</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ChannelOutputStream</class>
+  <method>close</method>
+  <thread>37</thread>
+  <message>Closing ChannelOutputStream</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886619</millis>
+  <sequence>180</sequence>
+  <logger>com.sshtools.j2ssh.connection.ChannelInputStream</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ChannelInputStream</class>
+  <method>close</method>
+  <thread>37</thread>
+  <message>Closing ChannelInputStream</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886619</millis>
+  <sequence>181</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>freeChannel</method>
+  <thread>37</thread>
+  <message>Freeing channel 0 [session]</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886619</millis>
+  <sequence>182</sequence>
+  <logger>com.sshtools.j2ssh.connection.Channel</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.Channel</class>
+  <method>close</method>
+  <thread>37</thread>
+  <message>Finializing channel close</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886619</millis>
+  <sequence>183</sequence>
+  <logger>com.sshtools.j2ssh.connection.ConnectionProtocol</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.connection.ConnectionProtocol</class>
+  <method>freeChannel</method>
+  <thread>37</thread>
+  <message>Freeing channel 1 [sftp]</message>
+</record>
+<record>
+  <date>2014-12-05T07:11:26</date>
+  <millis>1417759886619</millis>
+  <sequence>184</sequence>
+  <logger>com.sshtools.j2ssh.transport.Service</logger>
+  <level>INFO</level>
+  <class>com.sshtools.j2ssh.transport.Service</class>
+  <method>run</method>
+  <thread>37</thread>
+  <message>ssh-connection thread is exiting</message>
+</record>
+</log>

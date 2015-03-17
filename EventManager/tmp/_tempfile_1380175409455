@@ -1,0 +1,45 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0649 130923POBNSKBAAXXX5389936985
+       Correspondent Input Reference     : 1946 130920BNDCCAMMAINT7861594559
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : BNDCCAMMINT 
+                  BANQUE NATIONALE DU CANADA
+                  (INTERNATIONAL DEPARTMENT)
+                  MONTREAL CA
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            VOSTRO 16438499
+        25: Account Identification
+            10202222800100101
+       28C: Statement Number/Sequence Number
+            936/001
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 19 September 2013
+            Currency       : CAD (CANADIAN DOLLAR)
+            Amount         :                 #26618,19#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130920        S103 1309/04860/1700                #1079,2#      D
+                               016436037
+            130920        S103 1309/4000/37857                #3000,#       D
+                               016435259
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 20 September 2013
+            Currency       : CAD (CANADIAN DOLLAR)
+            Amount         :                 #22538,99#
+        64: Closing Avail Bal (Avail Funds)
+            Debit/Credit   : Credit
+            Date           : 20 September 2013
+            Currency       : CAD (CANADIAN DOLLAR)
+            Amount         :                 #22538,99#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:74D5920740F6}
+       {DLM:}

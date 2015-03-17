@@ -1,0 +1,46 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0649 130925POBNSKBAAXXX5391937664
+       Correspondent Input Reference     : 0446 130925BREDFRPPAXXX7077722509
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 940 Customer Statement Message
+       Sender   : BREDFRPPXXX 
+                  BRED BANQUE POPULAIRE
+                  (HEAD OFFICE)
+                  PARIS FR
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : E66135          
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            550958159148359 
+        25: Account Identification
+            550958159                          
+       28C: Statement Number/Sequence Number
+            148/001
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 23 September 2013
+            Currency       : EUR (EURO)
+            Amount         :                 #28687,18#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130925        NTRF 1887102                          #29,69#     C
+                               B/O CAISSE DES FRANCAIS DE L ETRAN
+        86: Information to Account Owner
+            REGLEMENT ETRANGER
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 24 September 2013
+            Currency       : EUR (EURO)
+            Amount         :                 #28716,87#
+        64: Closing Avail Bal (Avail Funds)
+            Debit/Credit   : Credit
+            Date           : 24 September 2013
+            Currency       : EUR (EURO)
+            Amount         :                 #28687,18#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:FA39E5FDE5F0}
+       {DLM:}

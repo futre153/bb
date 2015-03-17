@@ -1,0 +1,58 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0650 130919POBNSKBAAXXX5387936279
+       Correspondent Input Reference     : 2340 130918BKTRUS33AXXX1376483060
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : BKTRUS33XXX 
+                  DEUTSCHE BANK TRUST COMPANY AMERICAS
+                  NEW YORK,NY US
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : ST04414171182508
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            ST04414171182508
+        25: Account Identification
+            04414171
+       28C: Statement Number/Sequence Number
+            00181/00001
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 18 September 2013
+            Currency       : USD (US DOLLAR)
+            Amount         :                #127146,73#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130918        NTRF 0067596261121262                #400,00#     C
+                               M203654IFD091813
+                               ORG 000009043850040 ANNA DUDASH 91
+            130918        S202 MM - DEAL                   #2200007,33#     C
+                               C290923BBK091813
+                               SLOVENSKA SPORITELNA AS
+            130918        NTRF 1309/04442/0100                  #60,00#     D
+                               C239776CCQ091813
+                               MONEY TRANSFER PAYMENT
+            130918        NTRF 1309/4300/37623                 #308,74#     D
+                               S195479OCP091813
+                               GLOBE EXPRESS SERVICES (OVERSEAS G
+            130918        NTRF 1309/0120/37590                #1800,00#     D
+                               C178519BBK091813
+                               GLOBAL OUTSOURCING
+            130918        S202 DEPO 30646/2                #2300000,00#     D
+                               C381199BBK091813
+                               SLOVENSKA SPORITELNA AS
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 18 September 2013
+            Currency       : USD (US DOLLAR)
+            Amount         :                 #25385,32#
+        64: Closing Avail Bal (Avail Funds)
+            Debit/Credit   : Credit
+            Date           : 18 September 2013
+            Currency       : USD (US DOLLAR)
+            Amount         :                 #25385,32#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:7E62924C53B1}

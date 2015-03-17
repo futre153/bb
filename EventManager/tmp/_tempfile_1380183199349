@@ -1,0 +1,84 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0648 130920POBNSKBAAXXX5388936587
+       Correspondent Input Reference     : 2131 130919PBNKDEFFAXXX7767725625
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : PBNKDEFFXXX 
+                  DEUTSCHE POSTBANK AG
+                  (FRANKFURT BRANCH)
+                  FRANKFURT AM MAIN DE
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : ESSP262212600934
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            0919153356320002
+        25: Account Identification
+            0755739609
+       28C: Statement Number/Sequence Number
+            00182/00001
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 18 September 2013
+            Currency       : EUR (EURO)
+            Amount         :                #214710,39#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130919 0919   NTRF UA000895                        #228,31#     C
+                               00080982007717
+                               CRED ESSP
+            130919 0919   NTRF 1309171745146940               #1487,7#      C
+                               02580092006718
+                               CRED ESSP
+            130919 0919   NTRF 130917SK0001                   #1000,#       C
+                               06122082006738
+                               CRED ESSP
+            130919 0919   NTRF 130918JPN-211932                #752,05#     C
+                               02218422007885
+                               CRED ESSP
+            130919 0919   NTRF CPG-130918216101               #6979,1#      C
+                               01040762008549
+                               CRED ESSP
+            130919 0919   NTRF HUPOST014384                     #73,#       C
+                               00368582008270
+                               CRED ESSP
+            130919 0919   NTRF CPG-130918216114               #1454,#       C
+                               01040932009508
+                               CRED ESSP
+            130919 0919   NTRF 130918SK25080009               #3421,56#     C
+                               01095932007950
+                               CRED ESSP
+            130919 0919   NTRF SK20130918T01                   #525,#       C
+                               00571022008058
+                               CRED ESSP
+            130919 0919   NTRF 130919SLO1/36                    #50,#       C
+                               00287862009938
+                               CRED ESSP
+            130919 0919   NTRF ELSE047344130918                 #50,#       D
+                               00473442008378
+                               DEB ESSP
+            130919 0919   NTRF ELSE047343130918               #1612,75#     D
+                               00473432008379
+                               DEB ESSP
+            130919 0919   NTRF ELSE047342130918                #390,#       D
+                               00473422008384
+                               DEB ESSP
+            130919 0919   NTRF ELSE047345130918               #3500,#       D
+                               00473452008382
+                               DEB ESSP
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 19 September 2013
+            Currency       : EUR (EURO)
+            Amount         :                #225128,36#
+        64: Closing Avail Bal (Avail Funds)
+            Debit/Credit   : Credit
+            Date           : 19 September 2013
+            Currency       : EUR (EURO)
+            Amount         :                #225128,36#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:07C3BB7078BF}
+       {DLM:}

@@ -2,13 +2,12 @@ package org.acepricot.asn1;
 
 import java.io.IOException;
 
-import org.acepricot.asn1.rfc2986.Attributes;
 import org.acepricot.ber.BER;
 import org.acepricot.ber.BERConst;
 
-public class ContextSpecific extends ASN1NodeImpl {
+abstract class ContextSpecific extends ASN1NodeImpl {
 	
-	public ContextSpecific(int tagNumber, int implicit, int optional, String name, Attributes attributes) {
+	public ContextSpecific(int tagNumber, int implicit, int optional, String name) {
 		super (
 				tagNumber,
 				BERConst.CONTEXT_SPECIFIC_CLASS,
@@ -17,7 +16,6 @@ public class ContextSpecific extends ASN1NodeImpl {
 				optional,
 				name
 				);
-		this.setSeq(new ASN1NodeImpl[]{attributes});
 	}
 
 	@Override

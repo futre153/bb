@@ -1,0 +1,49 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0649 130919POBNSKBAAXXX5387936276
+       Correspondent Input Reference     : 0503 130919OTPVHUHBAXXX7547833166
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : OTPVHUHBXXX 
+                  OTP BANK PLC.
+                  BUDAPEST HU
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            ST130918CYC/0094
+        25: Account Identification
+            11782007-81186257
+       28C: Statement Number/Sequence Number
+            00170/00001
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 18 September 2013
+            Currency       : HUF (FORINT)
+            Amount         :               #2409280,#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130918 0918 F NCOM 130916HU                       #1300,#       D
+                               BASV051912
+                               /OTPREF/BASV051912 B/O POBNSKBA
+            130918 0918 F S202 130916HU                     #172027,#       D
+                               BASV051912
+                               /OTPREF/BASV051912 B/O POBNSKBA
+            130918 0918 F S202 KH1309181C001234             #390000,#       C
+                               BAVL052396
+                               /OTPREF/BAVL052396 B/O OKHBHUHB
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 18 September 2013
+            Currency       : HUF (FORINT)
+            Amount         :               #2625953,#
+        64: Closing Avail Bal (Avail Funds)
+            Debit/Credit   : Credit
+            Date           : 18 September 2013
+            Currency       : HUF (FORINT)
+            Amount         :               #2625953,#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:082E9652D836}
+       {DLM:}

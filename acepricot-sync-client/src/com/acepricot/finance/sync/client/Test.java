@@ -20,7 +20,7 @@ public class Test {
 	public static String url = "http://localhost:8080/acepricot-sync/";
 	//public static File f = new File("D:\\TEMP\\sampleclient\\database1-1.h2.db");
 	public static void main(final String[] a) throws Exception {
-		System.out.println(Huffman.encode("Kristina16", null));
+		System.out.println(Huffman.encode("Nikoleta-5", null));
 		System.exit(1);
 		/*System.out.println(decrypt("KW6CQyedAIU=E/FDGv8tQiBWOk6XhGV/vg=="));
 		System.exit(1);*/

@@ -1,0 +1,45 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0649 130920POBNSKBAAXXX5388936647
+       Correspondent Input Reference     : 0519 130920OTPVHUHBAXXX7548847091
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : OTPVHUHBXXX 
+                  OTP BANK PLC.
+                  BUDAPEST HU
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            ST130919CYC/0067
+        25: Account Identification
+            11782007-81186257
+       28C: Statement Number/Sequence Number
+            00171/00001
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 19 September 2013
+            Currency       : HUF (FORINT)
+            Amount         :               #2625953,#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130919 0919 F S202 130917HU                      #10000,#       D
+                               BASV052175
+                               /OTPREF/BASV052175 B/O POBNSKBA
+            130919 0919 F NCOM 130917HU                       #1300,#       D
+                               BASV052175
+                               /OTPREF/BASV052175 B/O POBNSKBA
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 19 September 2013
+            Currency       : HUF (FORINT)
+            Amount         :               #2614653,#
+        64: Closing Avail Bal (Avail Funds)
+            Debit/Credit   : Credit
+            Date           : 19 September 2013
+            Currency       : HUF (FORINT)
+            Amount         :               #2614653,#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:E4F7DDE8FD88}

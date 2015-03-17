@@ -1,0 +1,128 @@
+júl 29, 2013 12:33:11 PM org.pabk.emanager.HandlerImpl init
+INFO: dbconnector: logger dbconnector is successfully initailized!
+júl 29, 2013 12:33:12 PM org.pabk.emanager.HandlerImpl run
+INFO: Module org.pabk.emanager.DBConnector is started!
+júl 29, 2013 12:33:12 PM org.pabk.emanager.DBConnector businessLogic
+INFO: Module org.pabk.emanager.DBConnector goes to SLEEP
+júl 29, 2013 12:33:13 PM org.pabk.emanager.DBConnector getDb
+INFO: Thread[Thread-8,5,main] LOCK the access to Thread[Thread-4,5,main]
+júl 29, 2013 12:33:13 PM org.pabk.emanager.DBConnector select
+INFO: SELECT * FROM MAIL_MSGS WHERE STATUS = '0'
+júl 29, 2013 12:33:13 PM org.pabk.emanager.DBConnector close
+INFO: Thread[Thread-8,5,main] UNLOCK the access to Thread[Thread-4,5,main]
+júl 29, 2013 12:33:14 PM org.pabk.emanager.DBConnector getDb
+INFO: Thread[Thread-7,5,main] LOCK the access to Thread[Thread-4,5,main]
+júl 29, 2013 12:33:14 PM org.pabk.emanager.DBConnector select
+INFO: SELECT * FROM SAA_TRAPS where SAA_IP_ADDRESS = '10.1.4.41' and STATUS ='0'
+júl 29, 2013 12:33:14 PM org.pabk.emanager.DBConnector close
+INFO: Thread[Thread-7,5,main] UNLOCK the access to Thread[Thread-4,5,main]
+júl 29, 2013 12:33:14 PM org.pabk.emanager.DBConnector getDb
+INFO: Thread[Thread-7,5,main] LOCK the access to Thread[Thread-4,5,main]
+júl 29, 2013 12:33:14 PM org.pabk.emanager.DBConnector select
+INFO: SELECT * FROM SAA_TRAPS where SAA_IP_ADDRESS = '192.168.210.10' and STATUS ='0'
+júl 29, 2013 12:33:14 PM org.pabk.emanager.DBConnector close
+INFO: Thread[Thread-7,5,main] UNLOCK the access to Thread[Thread-4,5,main]
+júl 29, 2013 12:33:14 PM org.pabk.emanager.DBConnector getDb
+INFO: Thread[Thread-8,5,main] LOCK the access to Thread[Thread-4,5,main]
+júl 29, 2013 12:33:14 PM org.pabk.emanager.DBConnector select
+INFO: SELECT * FROM MAIL_MSGS WHERE STATUS = '0'
+júl 29, 2013 12:33:14 PM org.pabk.emanager.DBConnector close
+INFO: Thread[Thread-8,5,main] UNLOCK the access to Thread[Thread-4,5,main]
+júl 29, 2013 12:33:14 PM org.pabk.emanager.DBConnector insert
+INFO: INSERT INTO MAIL_MSGS (STATUS,RECIPIENTS,SUBJECT,BODY,TIME_STAMP,ENCODING) VALUES ('0','YnJhbmlzbGF2LmJyYW5keXNAcGFiay5zaw==','U3Byw6F2YSBvIG9kb3NsYW7DrSBkw6F2a3kgZTMwNzA4MDEudHh0','U2VydmVyOglTV0lGVE5FVCAoMTkyLjE2OC4yMTAuMTApDQpEw6F2a2E6CUM6XFdJTjMyQVBQXFNXSUZUXEFMTElBTkNFXFNFUlZFUlxiYXRjaFxpbnB1dFxCSVNfQ1pcZTMwNzA4MDEudHh0DQpPZG9zbGFuw6kgc3Byw6F2eToJCTINCk9kbWlldG51dMOpIHNwcsOhdnk6CTANClByZXNrb8SNZW7DqSBzcHLDoXZ5OgkwDQoNClN0YXR1czogT0sNCg0KQWsgc2EgdMOhdG8gc3Byw6F2YSBuZXZ6xaVhaHVqZSBuYSBWw6FzLCBwcm9zw61tIHBvdmHFvnVqdGUganUgemEgYmV6cHJlZG1ldG7Dui4NCg0KViBwcsOtcGFkZSBha8O9Y2hrb8S+dmVrIG5lamFzbm9zdMOtIGtvbnRha3R1anRlOiBicmFuaXNsYXYuYnJhbmR5c0BwYWJrLnNr','2013-07-29 12:33:14.408','utf-8')
+júl 29, 2013 12:33:14 PM org.pabk.emanager.DBConnector update
+INFO: UPDATE SAA_TRAPS SET STATUS='1' WHERE ID = '66028'
+júl 29, 2013 12:33:14 PM org.pabk.emanager.DBConnector update
+INFO: UPDATE SAA_TRAPS SET STATUS='1' WHERE ID = '66027'
+júl 29, 2013 12:33:14 PM org.pabk.emanager.DBConnector getDb
+INFO: Thread[Thread-8,5,main] LOCK the access to Thread[Thread-4,5,main]
+júl 29, 2013 12:33:14 PM org.pabk.emanager.DBConnector select
+INFO: SELECT * FROM MAIL_MSGS WHERE STATUS = '0'
+júl 29, 2013 12:33:14 PM org.pabk.emanager.DBConnector close
+INFO: Thread[Thread-8,5,main] UNLOCK the access to Thread[Thread-4,5,main]
+júl 29, 2013 12:33:14 PM org.pabk.emanager.DBConnector insert
+INFO: INSERT INTO MAIL_MSGS (STATUS,RECIPIENTS,SUBJECT,BODY,TIME_STAMP,ENCODING) VALUES ('0','YnJhbmlzbGF2LmJyYW5keXNAcGFiay5zaw==','U3Byw6F2YSBvIG9kb3NsYW7DrSBkw6F2a3kgZTMwNzA5MDEudHh0','U2VydmVyOglTV0lGVE5FVCAoMTkyLjE2OC4yMTAuMTApDQpEw6F2a2E6CUM6XFdJTjMyQVBQXFNXSUZUXEFMTElBTkNFXFNFUlZFUlxiYXRjaFxpbnB1dFxCSVNfQ1pcZTMwNzA5MDEudHh0DQpPZG9zbGFuw6kgc3Byw6F2eToJCTINCk9kbWlldG51dMOpIHNwcsOhdnk6CTANClByZXNrb8SNZW7DqSBzcHLDoXZ5OgkwDQoNClN0YXR1czogT0sNCg0KQWsgc2EgdMOhdG8gc3Byw6F2YSBuZXZ6xaVhaHVqZSBuYSBWw6FzLCBwcm9zw61tIHBvdmHFvnVqdGUganUgemEgYmV6cHJlZG1ldG7Dui4NCg0KViBwcsOtcGFkZSBha8O9Y2hrb8S+dmVrIG5lamFzbm9zdMOtIGtvbnRha3R1anRlOiBicmFuaXNsYXYuYnJhbmR5c0BwYWJrLnNr','2013-07-29 12:33:14.423','utf-8')
+júl 29, 2013 12:33:14 PM org.pabk.emanager.DBConnector update
+INFO: UPDATE SAA_TRAPS SET STATUS='1' WHERE ID = '66327'
+júl 29, 2013 12:33:14 PM org.pabk.emanager.DBConnector update
+INFO: UPDATE SAA_TRAPS SET STATUS='1' WHERE ID = '66326'
+júl 29, 2013 12:33:14 PM org.pabk.emanager.DBConnector getDb
+INFO: Thread[Thread-7,5,main] LOCK the access to Thread[Thread-4,5,main]
+júl 29, 2013 12:33:14 PM org.pabk.emanager.DBConnector select
+INFO: SELECT * FROM SAA_TRAPS where SAA_IP_ADDRESS = '192.168.210.20' and STATUS ='0'
+júl 29, 2013 12:33:14 PM org.pabk.emanager.DBConnector close
+INFO: Thread[Thread-7,5,main] UNLOCK the access to Thread[Thread-4,5,main]
+júl 29, 2013 12:33:14 PM org.pabk.emanager.DBConnector getDb
+INFO: Thread[Thread-7,5,main] LOCK the access to Thread[Thread-4,5,main]
+júl 29, 2013 12:33:14 PM org.pabk.emanager.DBConnector select
+INFO: SELECT * FROM SAA_TRAPS where SAA_IP_ADDRESS = '192.168.210.30' and STATUS ='0'
+júl 29, 2013 12:33:14 PM org.pabk.emanager.DBConnector close
+INFO: Thread[Thread-7,5,main] UNLOCK the access to Thread[Thread-4,5,main]
+júl 29, 2013 12:33:14 PM org.pabk.emanager.DBConnector update
+INFO: UPDATE MAIL_MSGS SET STATUS='1' WHERE ID = '7280'
+júl 29, 2013 12:33:14 PM org.pabk.emanager.DBConnector getDb
+INFO: Thread[Thread-10,5,main] LOCK the access to Thread[Thread-4,5,main]
+júl 29, 2013 12:33:14 PM org.pabk.emanager.DBConnector select
+INFO: SELECT * FROM FIN_MSGS where SAA_SERVER = '10.1.4.41' and STATUS ='0'
+júl 29, 2013 12:33:14 PM org.pabk.emanager.DBConnector close
+INFO: Thread[Thread-10,5,main] UNLOCK the access to Thread[Thread-4,5,main]
+júl 29, 2013 12:33:14 PM org.pabk.emanager.DBConnector getDb
+INFO: Thread[Thread-10,5,main] LOCK the access to Thread[Thread-4,5,main]
+júl 29, 2013 12:33:14 PM org.pabk.emanager.DBConnector select
+INFO: SELECT * FROM FIN_MSGS where SAA_SERVER = '192.168.210.10' and STATUS ='0'
+júl 29, 2013 12:33:14 PM org.pabk.emanager.DBConnector close
+INFO: Thread[Thread-10,5,main] UNLOCK the access to Thread[Thread-4,5,main]
+júl 29, 2013 12:33:14 PM org.pabk.emanager.DBConnector getDb
+INFO: Thread[Thread-10,5,main] LOCK the access to Thread[Thread-4,5,main]
+júl 29, 2013 12:33:14 PM org.pabk.emanager.DBConnector select
+INFO: SELECT * FROM FIN_MSGS where SAA_SERVER = '192.168.210.20' and STATUS ='0'
+júl 29, 2013 12:33:14 PM org.pabk.emanager.DBConnector close
+INFO: Thread[Thread-10,5,main] UNLOCK the access to Thread[Thread-4,5,main]
+júl 29, 2013 12:33:14 PM org.pabk.emanager.DBConnector getDb
+INFO: Thread[Thread-10,5,main] LOCK the access to Thread[Thread-4,5,main]
+júl 29, 2013 12:33:14 PM org.pabk.emanager.DBConnector select
+INFO: SELECT * FROM FIN_MSGS where SAA_SERVER = '192.168.210.30' and STATUS ='0'
+júl 29, 2013 12:33:14 PM org.pabk.emanager.DBConnector close
+INFO: Thread[Thread-10,5,main] UNLOCK the access to Thread[Thread-4,5,main]
+júl 29, 2013 12:33:24 PM org.pabk.emanager.DBConnector getDb
+INFO: Thread[Thread-8,5,main] LOCK the access to Thread[Thread-4,5,main]
+júl 29, 2013 12:33:24 PM org.pabk.emanager.DBConnector select
+INFO: SELECT * FROM MAIL_MSGS WHERE STATUS = '0'
+júl 29, 2013 12:33:24 PM org.pabk.emanager.DBConnector close
+INFO: Thread[Thread-8,5,main] UNLOCK the access to Thread[Thread-4,5,main]
+júl 29, 2013 12:33:24 PM org.pabk.emanager.DBConnector update
+INFO: UPDATE MAIL_MSGS SET STATUS='1' WHERE ID = '7281'
+júl 29, 2013 12:33:34 PM org.pabk.emanager.DBConnector getDb
+INFO: Thread[Thread-8,5,main] LOCK the access to Thread[Thread-4,5,main]
+júl 29, 2013 12:33:34 PM org.pabk.emanager.DBConnector select
+INFO: SELECT * FROM MAIL_MSGS WHERE STATUS = '0'
+júl 29, 2013 12:33:34 PM org.pabk.emanager.DBConnector close
+INFO: Thread[Thread-8,5,main] UNLOCK the access to Thread[Thread-4,5,main]
+júl 29, 2013 12:33:44 PM org.pabk.emanager.DBConnector getDb
+INFO: Thread[Thread-8,5,main] LOCK the access to Thread[Thread-4,5,main]
+júl 29, 2013 12:33:44 PM org.pabk.emanager.DBConnector select
+INFO: SELECT * FROM MAIL_MSGS WHERE STATUS = '0'
+júl 29, 2013 12:33:44 PM org.pabk.emanager.DBConnector close
+INFO: Thread[Thread-8,5,main] UNLOCK the access to Thread[Thread-4,5,main]
+júl 29, 2013 12:33:54 PM org.pabk.emanager.DBConnector getDb
+INFO: Thread[Thread-8,5,main] LOCK the access to Thread[Thread-4,5,main]
+júl 29, 2013 12:33:54 PM org.pabk.emanager.DBConnector select
+INFO: SELECT * FROM MAIL_MSGS WHERE STATUS = '0'
+júl 29, 2013 12:33:54 PM org.pabk.emanager.DBConnector close
+INFO: Thread[Thread-8,5,main] UNLOCK the access to Thread[Thread-4,5,main]
+júl 29, 2013 12:34:04 PM org.pabk.emanager.DBConnector getDb
+INFO: Thread[Thread-8,5,main] LOCK the access to Thread[Thread-4,5,main]
+júl 29, 2013 12:34:04 PM org.pabk.emanager.DBConnector select
+INFO: SELECT * FROM MAIL_MSGS WHERE STATUS = '0'
+júl 29, 2013 12:34:04 PM org.pabk.emanager.DBConnector close
+INFO: Thread[Thread-8,5,main] UNLOCK the access to Thread[Thread-4,5,main]
+júl 29, 2013 12:34:14 PM org.pabk.emanager.DBConnector getDb
+INFO: Thread[Thread-8,5,main] LOCK the access to Thread[Thread-4,5,main]
+júl 29, 2013 12:34:14 PM org.pabk.emanager.DBConnector select
+INFO: SELECT * FROM MAIL_MSGS WHERE STATUS = '0'
+júl 29, 2013 12:34:14 PM org.pabk.emanager.DBConnector close
+INFO: Thread[Thread-8,5,main] UNLOCK the access to Thread[Thread-4,5,main]
+júl 29, 2013 12:34:17 PM org.pabk.emanager.DBConnector businessLogic
+INFO: Module org.pabk.emanager.DBConnector WAKE UP now
+júl 29, 2013 12:34:17 PM org.pabk.emanager.HandlerImpl run
+INFO: Module org.pabk.emanager.DBConnector was stopped!

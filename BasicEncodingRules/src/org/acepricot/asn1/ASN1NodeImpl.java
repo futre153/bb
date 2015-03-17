@@ -8,7 +8,7 @@ import org.acepricot.ber.BERFormatException;
 
 
 
-public abstract class ASN1NodeImpl implements ASN1Node {
+abstract class ASN1NodeImpl implements ASN1Node {
 	protected int tag = -1;
 	protected int css = -1;
 	protected int con = -1;
@@ -25,8 +25,7 @@ public abstract class ASN1NodeImpl implements ASN1Node {
 		this.setCss(css);
 		this.setCon(con);
 		this.setImp(imp);
-		this.setOpt(opt);
-		this.setSeq(seq);		
+		this.setOpt(opt);		
 		this.setNme(mne);
 	}
 
@@ -110,32 +109,38 @@ public abstract class ASN1NodeImpl implements ASN1Node {
 		this.ber = ber;
 	}
 	
-	abstract protected void loadFromExisting(BER ber) throws IOException;
+	//protected abstract ASN1NodeImpl clone();
+	
+	protected abstract void loadFromExisting(BER ber) throws IOException;
 
 	public static void checkPrimitive(ASN1NodeImpl node, BER ber) throws IOException {
-		if(node.getTag() != ber.getTagNumber()) {
-			throw new BERFormatException(String.format(BERFormatException.TAG_NUMBER_NOT_MATCH,ber.getTagNumber(), node.getTag()));
-		}
-		if(node.getCss() != ber.getClassType()) {
-			throw new BERFormatException(String.format(BERFormatException.CLASS_NOT_MATCH,BERConst.getClassType(ber.getClassType()), BERConst.getClassType(node.getCss())));
-		}
+		checkTagNumberAndClassType(node, ber);
 		if(!((node.getCon() == BERConst.PRIMITIVE_ENCODING) && ber.isPrimitive())) {
 			throw new BERFormatException(String.format(BERFormatException.TAG_ENCODING_NOT_MATCH,BERConst.getEncodingName(ber.isPrimitive()), BERConst.getEncodingName(node.getCon() == BERConst.PRIMITIVE_ENCODING)));
 		}
-		
 	}
 	
 	public static void checkConstructed(ASN1NodeImpl node, BER ber) throws IOException {
-		if(node.getTag() != ber.getTagNumber()) {
-			throw new BERFormatException(String.format(BERFormatException.TAG_NUMBER_NOT_MATCH,ber.getTagNumber(), node.getTag()));
-		}
-		if(node.getCss() != ber.getClassType()) {
-			throw new BERFormatException(String.format(BERFormatException.CLASS_NOT_MATCH,BERConst.getClassType(ber.getClassType()), BERConst.getClassType(node.getCss())));
-		}
+		checkTagNumberAndClassType(node, ber);
 		if(!((node.getCon() == BERConst.CONSTRUCTED_ENCODING) && (!ber.isPrimitive()))) {
 			throw new BERFormatException(String.format(BERFormatException.TAG_ENCODING_NOT_MATCH,BERConst.getEncodingName(ber.isPrimitive()), BERConst.getEncodingName(node.getCon() == BERConst.PRIMITIVE_ENCODING)));
 		}
-		
 	}
-
+	
+	public static void checkTagNumberAndClassType(ASN1NodeImpl node, BER ber) throws IOException {
+		checkTagNumber(node, ber);
+		checkClassType(node, ber);
+	}
+	
+	public static void checkClassType(ASN1NodeImpl node, BER ber) throws BERFormatException {
+		if(node.getCss() != ber.getClassType()) {
+			throw new BERFormatException(String.format(BERFormatException.CLASS_NOT_MATCH,BERConst.getClassType(ber.getClassType()), BERConst.getClassType(node.getCss())));
+		}
+	}
+	
+	public static void checkTagNumber(ASN1NodeImpl node, BER ber) throws IOException {
+		if(node.getTag() != ber.getTagNumber()) {
+			throw new BERFormatException(String.format(BERFormatException.TAG_NUMBER_NOT_MATCH,ber.getTagNumber(), node.getTag()));
+		}
+	}
 }

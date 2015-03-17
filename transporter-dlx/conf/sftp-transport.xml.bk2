@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>Properties for eurogiro-sftp</comment>
+<entry key="logHistory">60</entry>
+<entry key="logDirectory">logs</entry>
+<entry key="logbackPattern">%date %level [%thread] %logger{10} [%file:%line] %msg%n</entry>
+<entry key="checkFilenameDuplicity">true</entry>
+<entry key="username">euroftp</entry>
+<entry key="remote">/s1/progress/work/toeuro</entry>
+<entry key="sequence">-1</entry>
+<entry key="port">22</entry>
+<entry key="archive">D:\TEMP\transporter\ELS\ELS_HOME\envelope\im\xtic\archive</entry>
+<entry key="logExtension">.log</entry>
+<entry key="hostname">10.1.1.6</entry>
+<entry key="passphrase">1z50JO2XLpgPoA==</entry>
+<entry key="knownHosts">conf\known_hosts</entry>
+<entry key="local">D:\TEMP\transporter\ELS\ELS_HOME\envelope\ex\xtic</entry>
+<entry key="privateKey">conf\euroftp_2048</entry>
+<entry key="mask">e\d{6}</entry>
+<entry key="interval">0</entry>
+<entry key="propath">D:\Programy\BB\eclipse-kepler-ee\transporter-dlx\engines\sftp-transport.xml</entry>
+<entry key="direction">get</entry>
+<entry key="modify">1415253060947</entry>
+<entry key="name">eurogiro-sftp</entry>
+<entry key="timer">timer1,timer2</entry>
+<entry key="timerClass">org.pabk.transporter_dlx.core.MultiTimer</entry>
+<entry key="timer.timer1.timerClass">org.pabk.transporter_dlx.core.BasedTimer</entry>
+<entry key="timer.timer1.startAt">53400000</entry>
+<entry key="timer.timer1.interval">600000</entry>
+<entry key="timer.timer1.cycles">2</entry>
+</properties>

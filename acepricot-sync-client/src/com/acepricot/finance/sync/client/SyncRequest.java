@@ -3,7 +3,6 @@ package com.acepricot.finance.sync.client;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Properties;
 
 import javax.xml.bind.DatatypeConverter;

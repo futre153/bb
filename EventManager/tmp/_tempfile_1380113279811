@@ -1,0 +1,75 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0647 130920POBNSKBAAXXX5388936572
+       Correspondent Input Reference     : 2115 130919DEUTDEFFCXXX0433458643
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : DEUTDEFFXXX 
+                  DEUTSCHE BANK AG
+                  FRANKFURT AM MAIN DE
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 34TLDT00005O00FI
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            1009494450018404
+        25: Account Identification
+            100 9494451 0000
+       28C: Statement Number/Sequence Number
+            00184/004
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 19 September 2013
+            Currency       : EUR (EURO)
+            Amount         :               #2574905,39#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130919        NTRF 1309/0120/37861                 #300,91#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NTRF 1309/0120/37833                 #300,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NTRF 1309/0120/37816                 #298,80#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NTRF 1309/1200/37860                 #290,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NTRF 1309/04940/0100                 #290,00#     D
+                               03MT130918304723
+                               DOVRE NV 1/JOZEF HUPKA HB-FI 9696
+            130919        NTRF 1309/05037/0100                 #261,56#     D
+                               03MT130918304721
+                               ROBUSO SOLINGER 1/JAN TULAK  9696
+            130919        NTRF 1309/0120/37871                 #253,82#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NTRF 1309/0120/37839                 #250,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NTRF 1309/0120/37870                 #222,95#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NTRF 1309/0120/37823                 #205,91#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NTRF 1309/0120/37818                 #202,39#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NTRF 1309/0120/37807                 #191,90#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NTRF 1309/0120/37840                 #183,85#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NTRF 1309/4100/37854                 #151,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NTRF 1309/0120/37868                 #134,44#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NTRF 1309/0600/37856                 #133,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NTRF 1309/0120/37827                 #129,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NTRF 1309/0120/37853                 #120,00#     D
+                               03MT130918167677
+                               MR. THANCHART PRAPAN KASIKO  9696
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 19 September 2013
+            Currency       : EUR (EURO)
+            Amount         :               #2570985,86#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:09D401AE1D72}
+       {DLM:}

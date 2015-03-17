@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/win7up" xmlns:tns="http://www.example.org/win7up" elementFormDefault="qualified">
+
+    <element name="list" type="tns:WinUpItemListType"></element>
+    
+    <complexType name="WinUpItemListType">
+    	<sequence minOccurs="0" maxOccurs="1">
+    		<element name="item" type="tns:WinUpItemType" maxOccurs="unbounded" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="WinUpItemType">
+    	<sequence>
+    		<element name="name" type="tns:WinUpItemNameType"
+    			maxOccurs="1" minOccurs="1">
+    		</element>
+    		<element name="application" type="tns:AppType" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="suplier" type="tns:SuplierType" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="status" type="tns:StatusType" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="sources" type="tns:SourceListType"
+    			maxOccurs="1" minOccurs="1">
+    		</element>
+    		<element name="actions" type="tns:ActioListType"
+    			maxOccurs="1" minOccurs="1">
+    		</element>
+    		<element name="margins" type="tns:MarginListType" maxOccurs="1" minOccurs="1">
+    		</element>
+        </sequence>
+    </complexType>
+
+    <simpleType name="WinUpItemNameType">
+    	<restriction base="string">
+    		<minLength value="3"></minLength>
+    		<maxLength value="32"></maxLength>
+    	</restriction>
+    </simpleType>
+
+    <complexType name="AppType">
+    	<sequence>
+    		<element name="name" type="string" maxOccurs="1" minOccurs="1"></element>
+    		<element name="version" type="string" maxOccurs="1" minOccurs="0"></element>
+    		<element name="description" type="string" maxOccurs="1" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+
+
+
+    <complexType name="SuplierType">
+    	<sequence>
+    		<element name="legalAddress" type="tns:PostalAddressType"
+    			maxOccurs="1" minOccurs="1">
+    		</element>
+    		<sequence maxOccurs="1" minOccurs="0">
+    			<sequence maxOccurs="unbounded" minOccurs="1">
+    				<choice>
+    					<element name="contactPerson"
+    						type="tns:ContactPersonType" maxOccurs="1" minOccurs="1">
+    					</element>
+    					<element name="division" type="tns:DivisionType"
+    						maxOccurs="1" minOccurs="1">
+    					</element>
+    					<group ref="tns:ContactGroup" maxOccurs="1" minOccurs="1"></group>
+    				</choice>
+    			</sequence>
+    		</sequence>
+    	</sequence>
+    </complexType>
+    
+    <complexType name="PostalAddressType">
+    	<sequence>
+    		<element name="name" type="string" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="street" type="string" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="streetNumber" type="string" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="zip" type="string" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="city" type="string" maxOccurs="1"
+    			minOccurs="1">
+    		</element>
+    		<element name="country" type="string" maxOccurs="1" minOccurs="1"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="ContactPersonType">
+    	<sequence>
+    		<element name="contactName" type="tns:PersonNameType"
+    			maxOccurs="1" minOccurs="1">
+    		</element>
+    		
+    			
+
+             <group ref="tns:ContactGroup" maxOccurs="1" minOccurs="1"></group>
+    			
+    		
+    	</sequence>
+    </complexType>
+    
+    <complexType name="PersonNameType">
+    	<sequence>
+    		<element name="firstName" type="string" maxOccurs="1" minOccurs="1"></element>
+    		<element name="secondName" type="string" maxOccurs="unbounded" minOccurs="0"></element>
+    		<element name="surName" type="string" maxOccurs="1" minOccurs="1"></element>
+       	</sequence>
+    </complexType>
+
+    <complexType name="DivisionType">
+    	<sequence>
+    		<element name="divisionName" type="string"></element>
+    		<group ref="tns:ContactGroup" maxOccurs="1" minOccurs="1"></group>
+    	</sequence>
+    </complexType>
+
+    <group name="ContactGroup">
+    	<sequence>
+	    	<sequence maxOccurs="unbounded" minOccurs="1">
+		    	<choice>
+		    		<element name="e-mail" type="string" maxOccurs="1"
+		    			minOccurs="1">
+		    		</element>
+		    		<element name="fax" type="string" maxOccurs="1"
+		    			minOccurs="1">
+		    		</element>
+		    		<element name="telephone" type="string" maxOccurs="1"
+		    			minOccurs="1">
+		    		</element>
+		    		<element name="mobil" type="string" maxOccurs="1" minOccurs="1"></element>
+		    	</choice>
+		    </sequence>
+		</sequence>
+    </group>
+
+
+    <group name="NewGroupDefinition">
+    	<sequence></sequence>
+    </group>
+
+    <complexType name="StatusType">
+    	<sequence>
+    		<element name="statusCode" maxOccurs="1" minOccurs="1">
+    			<simpleType>
+    				<restriction base="string">
+    					<enumeration value="supported"></enumeration>
+    					<enumeration value="not supported"></enumeration>
+    					<enumeration value="qualified"></enumeration>
+    					<enumeration value="fully qualified"></enumeration>
+    				</restriction>
+    			</simpleType>
+    		</element>
+    		<element name="description" type="string" maxOccurs="1" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="SourceListType">
+    	<sequence>
+    		<element name="href" type="string" maxOccurs="unbounded" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="ActionType">
+    	<sequence>
+    		<element name="date" type="date"></element>
+    		<element name="time" type="time"></element>
+    		<element name="description" type="string"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="MarginListType">
+    	<sequence>
+    		<element name="margin" type="string" maxOccurs="unbounded" minOccurs="0"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="ActioListType">
+    	<sequence>
+    		<element name="action" type="tns:ActionType"
+    			maxOccurs="unbounded" minOccurs="0">
+    		</element>
+    	</sequence>
+    </complexType>
+</schema>

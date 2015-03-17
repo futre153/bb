@@ -1,0 +1,55 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0649 130924POBNSKBAAXXX5390937298
+       Correspondent Input Reference     : 0502 130924OTPVHUHBAXXX7550860660
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : OTPVHUHBXXX 
+                  OTP BANK PLC.
+                  BUDAPEST HU
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            ST130923CYC/0081
+        25: Account Identification
+            11782007-81186257
+       28C: Statement Number/Sequence Number
+            00173/00001
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 23 September 2013
+            Currency       : HUF (FORINT)
+            Amount         :               #2555278,#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130923 0923 F NCOM 130919HU                       #1300,#       D
+                               BASV052675
+                               /OTPREF/BASV052675 B/O POBNSKBA
+            130923 0923 F NCOM 1309/0120/37979                 #950,#       D
+                               A30H281075/0000
+                               ROBERT SZABO
+            130923 0923 F S202 130919HU                      #70018,#       D
+                               BASV052675
+                               /OTPREF/BASV052675 B/O POBNSKBA
+            130923 0923 F NMSC 1309/0120/37979              #175000,#       D
+                               A30H281075/0000
+                               ROBERT SZABO
+            130923 0923 F S202 KH1309231C000618             #625000,#       C
+                               BAVL053193
+                               /OTPREF/BAVL053193 B/O OKHBHUHB
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 23 September 2013
+            Currency       : HUF (FORINT)
+            Amount         :               #2933010,#
+        64: Closing Avail Bal (Avail Funds)
+            Debit/Credit   : Credit
+            Date           : 23 September 2013
+            Currency       : HUF (FORINT)
+            Amount         :               #2933010,#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:F85E385B52BB}
+       {DLM:}

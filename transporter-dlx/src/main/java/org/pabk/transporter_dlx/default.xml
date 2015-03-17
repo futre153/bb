@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="hostname">10.1.1.6</entry>
+	<entry key="port">22</entry>
+	<entry key="interval">0</entry>
+	<entry key="username">euroftp</entry>
+	<entry key="knownHosts">conf\known_hosts</entry>
+	<entry key="privateKey">conf\euroftp_2048</entry>
+	<entry key="remote">/s1/progress/work/toeuro</entry>
+	<entry key="local">C:/ELS/ELS_HOME/envelope/ex/xtic</entry>
+	<entry key="archive">C:/ELS/ELS_HOME/envelope/ex/xtic/archive</entry>
+	<entry key="passphrase">1z50JO2XLpgPoA==</entry>
+	<entry key="modify">-1</entry>
+	<entry key="mask"></entry>
+	<entry key="sequence">-1</entry>
+	<entry key="checkFilenameDuplicity">true</entry>
+	<entry key="logbackPattern">%date %level [%thread] %logger{10} [%file:%line] %msg%n</entry>
+	<entry key="logDirectory">logs</entry>
+	<entry key="logExtension">.log</entry>
+	<entry key="logHistory">60</entry>
+</properties>

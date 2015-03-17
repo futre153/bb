@@ -1,0 +1,90 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0649 130919POBNSKBAAXXX5387936224
+       Correspondent Input Reference     : 2138 130918PBNKDEFFAXXX7767723818
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : PBNKDEFFXXX 
+                  DEUTSCHE POSTBANK AG
+                  (FRANKFURT BRANCH)
+                  FRANKFURT AM MAIN DE
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : ESSP261213400932
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            0918152044300001
+        25: Account Identification
+            0755739609
+       28C: Statement Number/Sequence Number
+            00181/00001
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 17 September 2013
+            Currency       : EUR (EURO)
+            Amount         :                #159394,11#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130918 0918   NTRF 1309171745146939               #1729,6#      C
+                               02580082006719
+                               CRED ESSP
+            130918 0918   NTRF HUPOST014378                     #16,#       C
+                               00368302006460
+                               CRED ESSP
+            130918 0918   NTRF 130916SK0001                   #3195,14#     C
+                               06119552005026
+                               CRED ESSP
+            130918 0918   NTRF SK20130917T01                    #53,85#     C
+                               00570702006092
+                               CRED ESSP
+            130918 0918   NTRF 130917SK25077511               #3623,4#      C
+                               01095462006128
+                               CRED ESSP
+            130918 0918   NTRF HUPOST014376                    #304,#       C
+                               00368282006454
+                               CRED ESSP
+            130918 0918   NTRF ELSE047341130918                 #56,56#     D
+                               00473412008377
+                               DEB ESSP
+            130918 0918   NTRF REM0000000115268                #500,#       C
+                               00757192008397
+                               CRED ESSP
+            130918 0918   NTRF UA000893                        #247,26#     C
+                               00080932007225
+                               CRED ESSP
+            130918 0918   NTRF CPG-130917216080              #46962,16#     C
+                               01040462006699
+                               CRED ESSP
+            130918 0918   NTRF ELSE047317130917                #100,#       D
+                               00473172006558
+                               DEB ESSP
+            130918 0918   NTRF ELSE047316130917               #1111,07#     D
+                               00473162006559
+                               DEB ESSP
+            130918 0918   NTRF ELSE047315130917                 #40,#       D
+                               00473152006565
+                               DEB ESSP
+            130918 0918   NTRF ELSE047318130917                 #27,5#      D
+                               00473182006564
+                               DEB ESSP
+            130918 0918   NTRF ELSE047319130917                 #80,#       D
+                               00473192006563
+                               DEB ESSP
+            130918 0918   NTRF 93703R0000513907                #100,#       C
+                               05418482006247
+                               CRED ESSP
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 18 September 2013
+            Currency       : EUR (EURO)
+            Amount         :                #214710,39#
+        64: Closing Avail Bal (Avail Funds)
+            Debit/Credit   : Credit
+            Date           : 18 September 2013
+            Currency       : EUR (EURO)
+            Amount         :                #214710,39#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:3E60AC786686}
+       {DLM:}

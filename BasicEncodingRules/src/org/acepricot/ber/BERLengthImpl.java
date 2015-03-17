@@ -23,7 +23,7 @@ abstract class BERLengthImpl implements BERBase {
 			bt = new byte[]{(byte) b};			
 		}
 		setValue(bt);
-		return bt.length;
+		return bt == null ? 1 : bt.length;
 	}
 
 	@Override

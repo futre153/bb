@@ -1,0 +1,45 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0649 130923POBNSKBAAXXX5389936984
+       Correspondent Input Reference     : 0143 130921CEKOSKBXAXXX8899233236
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : CEKOSKBXXXX 
+                  CESKOSLOVENSKA OBCHODNA BANKA, A.S.
+                  (SLOVAK REPUBLIC DIVISION)
+                  BRATISLAVA SK
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 20SEP13DAILY    
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            20SEP13DAILY
+        25: Account Identification
+            0050120855513653
+       28C: Statement Number/Sequence Number
+            00176/1
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 19 September 2013
+            Currency       : EUR (EURO)
+            Amount         :                 #23477,36#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130920 0920   S103 NONREF                        #12673,86#     C
+                               4036454309
+                               4036454309  SK
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 20 September 2013
+            Currency       : EUR (EURO)
+            Amount         :                 #36151,22#
+        64: Closing Avail Bal (Avail Funds)
+            Debit/Credit   : Credit
+            Date           : 20 September 2013
+            Currency       : EUR (EURO)
+            Amount         :                 #36151,22#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:DF9C491479AA}
+       {DLM:}

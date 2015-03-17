@@ -1,0 +1,109 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0649 130925POBNSKBAAXXX5391937658
+       Correspondent Input Reference     : 2340 130924RBOSGB2LAXXX3069454683
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : RBOSGB2LXXX 
+                  ROYAL BANK OF SCOTLAND PLC
+                  LONDON GB
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 130924RH2PJ30101
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            GEA002952000S
+        25: Account Identification
+            10005823
+       28C: Statement Number/Sequence Number
+            7182/1
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 23 September 2013
+            Currency       : GBP (POUND STERLING)
+            Amount         :                  #8899,78#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130924        S103 1309/05583/0100                  #62,24#     D
+                               RBSDM2I13190015
+                               MARTIN HAMZA
+            130924        S103 1309/05737/1100                 #250,00#     D
+                               RBSDM2I13190082
+                               PETERKOVA MAGDAL
+            130924        S103 1309/05740/1100                #2481,00#     D
+                               RBSDM2I13190083
+                               ORACOVA MARIA
+            130924        S103 1309/0300/38020                #4461,50#     D
+                               RBSDM2I13190084
+                               SLAVOMIR KVASNOV
+            130924        S103 1309/0120/37992               #75000,00#     D
+                               RBSDM2I13184336
+                               PANTHEON FINANCE
+            130924        S202 DEPO 30661/2                 #340000,00#     D
+                               RBSDMFF09844826
+                               GIBASKBXXXX
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Debit
+            Date           : 24 September 2013
+            Currency       : GBP (POUND STERLING)
+            Amount         :                #413354,96#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:723D88D95952}
+       {DLM:}		---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0649 130925POBNSKBAAXXX5391937659
+       Correspondent Input Reference     : 2340 130924RBOSGB2LAXXX3069454784
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : RBOSGB2LXXX 
+                  ROYAL BANK OF SCOTLAND PLC
+                  LONDON GB
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 130924R010DH0101
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            GEA002953000S
+        25: Account Identification
+            10005823
+       28C: Statement Number/Sequence Number
+            7182/2
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Debit
+            Date           : 24 September 2013
+            Currency       : GBP (POUND STERLING)
+            Amount         :                #413354,96#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130924        NTRF FBAWI13090736444                #230,00#     C
+                               RBSDMFF09838000
+                               BKAUATWWXXX
+            130924        S103 MIDLGB22XXX                     #527,00#     C
+                               RBS55CI25033106
+                               PATENT TRADEMARK
+            130924        S103 MIDLGB22XXX                     #527,00#     C
+                               RBS55CI25036366
+                               ODM SRL SRO
+            130924        S103 BARCGB22XXX                    #2000,00#     C
+                               RBS55CI25031807
+                               KATARINA JANAKOV
+            130924        NTRF MM - DEAL                    #420004,60#     C
+                               RBSDMFF09840859
+                               GIBASKBXXXX
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 24 September 2013
+            Currency       : GBP (POUND STERLING)
+            Amount         :                  #9933,64#
+        64: Closing Avail Bal (Avail Funds)
+            Debit/Credit   : Credit
+            Date           : 24 September 2013
+            Currency       : GBP (POUND STERLING)
+            Amount         :                  #9933,64#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:0328B106210A}
+       {DLM:}

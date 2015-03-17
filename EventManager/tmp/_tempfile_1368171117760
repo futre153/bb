@@ -1,0 +1,321 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 1831 130419POBNSKBAAXXX5279896776
+       Correspondent Input Reference     : 1831 130419CEDELULLFXXX2647751247
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : CEDELULLXXX 
+                  CLEARSTREAM BANKING S.A., LUXEMBOURG
+                  LUXEMBOURG LU
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 0000078OFX17E58K
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            0419I1930DELT/01
+        25: Account Identification
+            82821-EUR
+       28C: Statement Number/Sequence Number
+            00281/00001
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 18 April 2013
+            Currency       : EUR (EURO)
+            Amount         :                #533528,4#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130419 0419   NTRF 4                            #500000,#       D
+                               03JMHS0002SX
+                               BOOK TRANSFER (83232)
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 19 April 2013
+            Currency       : EUR (EURO)
+            Amount         :                 #33528,4#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:865AAE8E69D9}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 1855 130419POBNSKBAAXXX5279896777
+       Correspondent Input Reference     : 1855 130419TRGTXE3MBXXX1465251098
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : TRGTXE3MXXX 
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 19184803368033  
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            1918480336803300
+        25: Account Identification
+            SK44919
+       28C: Statement Number/Sequence Number
+            00076/00004
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 19 April 2013
+            Currency       : EUR (EURO)
+            Amount         :             #240953574,51#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130419 0419   S103 1304/1400/26907              #216357,#       D
+                               0000000449750659
+                               POBNSKBAXXX/070126
+            130419 0419   S202 1804201373                  #1560000,#       D
+                               0000000449992270
+                               POBNSKBAXXX/070120
+            130419 0419   S204 20130419-001-012           #16526199,78#     C
+                               0000000450192005
+                               NBSBSKBXSIP/090222
+            130419 0419   S103 T1304/0120/27160           #55000000,#       D
+                               0000000450365011
+                               POBNSKBAXXX/151214
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 19 April 2013
+            Currency       : EUR (EURO)
+            Amount         :             #200703417,29#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:2472B9081904}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 1856 130419POBNSKBAAXXX5279896778
+       Correspondent Input Reference     : 1856 130419TRGTXE3MDXXX1465459720
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : TRGTXE3MXXX 
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 19184803368033  
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            1918480336803300
+        25: Account Identification
+            SK44919
+       28C: Statement Number/Sequence Number
+            00076/00002
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 19 April 2013
+            Currency       : EUR (EURO)
+            Amount         :             #240592737,68#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130419 0419   S103 1304/0120/27022                 #498,11#     D
+                               0000000450028742
+                               POBNSKBAXXX/071020
+            130419 0419   S103 2447105017630000                #524,83#     C
+                               0000000450209126
+                               KBLXLULLXXX/093758/KBLXLULLXXX
+            130419 0419   S103 1304/0120/27011                 #692,65#     D
+                               0000000450032709
+                               POBNSKBAXXX/071039
+            130419 0419   S103 007068779376                   #1000,9#      C
+                               0000000450283387
+                               SUBASKBXXXX/150001/SUBASKBXXXX
+            130419 0419   S103 1304/0110/26937                #1581,02#     D
+                               0000000449932510
+                               POBNSKBAXXX/070543
+            130419 0419   S103 081BGR011770BATC               #1650,#       C
+                               0000000450241658
+                               BAMAIT3AXXX/104035
+            130419 0419   S103 8311304185 01272               #2138,4#      C
+                               0000000450051779
+                               ABNAPLPWXXX/071808/ABNAPLPWXXX
+            130419 0419   S103 25-13788807-563                #2967,81#     C
+                               0000000450140546
+                               SOGEFRPPXXX/072404/SOGEDEFFXXX
+            130419 0419   S103 IN13/2600/529785               #3640,57#     C
+                               0000000450050335
+                               OTPVROBUXXX/071143
+            130419 0419   S103 2013041800000945               #4376,7#      C
+                               0000000450191738
+                               GEBABEBB36A/090222/GEBAATWWXXX
+            130419 0419   S103 007068779394                   #6261,16#     C
+                               0000000450283603
+                               SUBASKBXXXX/150001/SUBASKBXXXX
+            130419 0419   S103 2447106019630000               #6649,35#     C
+                               0000000450160209
+                               KBLXLULLXXX/075315/KBLXLULLXXX
+            130419 0419   S204 CDCP1630400025                 #9267,5#      C
+                               0000000450199484
+                               CSDSSKBAXXX/091444
+            130419 0419   S103 VC13041902655                 #10000,#       C
+                               0000000450270443
+                               TATRSKBXXXX/113749/TATRSKBXXXX
+            130419 0419   S103 SENDG16082182X13              #15020,4#      C
+                               0000000450307121
+                               BPKOPLPWXXX/130049
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 19 April 2013
+            Currency       : EUR (EURO)
+            Amount         :             #240653463,52#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:7D2DFD2EA250}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 1856 130419POBNSKBAAXXX5279896779
+       Correspondent Input Reference     : 1856 130419TRGTXE3MDXXX1465459769
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : TRGTXE3MXXX 
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 19184803368033  
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            1918480336803300
+        25: Account Identification
+            SK44919
+       28C: Statement Number/Sequence Number
+            00076/00001
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 19 April 2013
+            Currency       : EUR (EURO)
+            Amount         :             #240591524,93#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130419 0419   S103 1304/0120/26954                   #4,5#      D
+                               0000000449932451
+                               POBNSKBAXXX/070543
+            130419 0419   S103 GBA19043HE9ZG8N4                  #8,9#      C
+                               0000000450189749
+                               MIDLGB22XXX/090108/MIDLGB22XXX
+            130419 0419   S103 GBA19043HB9ZH9Q8                 #10,57#     C
+                               0000000450110787
+                               MIDLGB22XXX/071401/MIDLGB22XXX
+            130419 0419   S103 GBA190430K9ZG8W0                 #10,6#      C
+                               0000000450107250
+                               MIDLGB22XXX/071401/MIDLGB22XXX
+            130419 0419   S202 1304/1400/26861F                 #15,#       D
+                               0000000449784391
+                               POBNSKBAXXX/070154
+            130419 0419   S103 1304/4500/26908                  #30,#       D
+                               0000000449750657
+                               POBNSKBAXXX/070126
+            130419 0419   S202 3224103830130419                 #49,79#     C
+                               0000000450354608
+                               TUBDDEDDXXX/145035/TUBDDEDDXXX
+            130419 0419   S103 FT139275507271                  #100,#       C
+                               0000000450212428
+                               LOYDGB2LXXX/094518/LOYDGB2LXXX
+            130419 0419   S103 1304/3600/26970                 #126,#       D
+                               0000000450032757
+                               POBNSKBAXXX/071039
+            130419 0419   S103 3321877383                      #152,3#      C
+                               0000000450137207
+                               CITIGB2LXXX/072303/CITICZPXXXX
+            130419 0419   S103 007068779385                    #242,65#     C
+                               0000000450283137
+                               SUBASKBXXXX/150001/SUBASKBXXXX
+            130419 0419   S103 7712NOO04228828                 #328,17#     C
+                               0000000450177896
+                               DNBANOKKXXX/082043/DNBANOKKXXX
+            130419 0419   S103 1304/0120/26946                 #361,3#      D
+                               0000000449932504
+                               POBNSKBAXXX/070543
+            130419 0419   S103 08784134187785RB                #399,9#      C
+                               0000000450118349
+                               BCITITMMXXX/071549
+            130419 0419   S103 IN13/2600/529780                #446,67#     C
+                               0000000450050355
+                               OTPVROBUXXX/071143
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 19 April 2013
+            Currency       : EUR (EURO)
+            Amount         :             #240592737,68#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:F5FFB02BECFE}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 1857 130419POBNSKBAAXXX5279896780
+       Correspondent Input Reference     : 1857 130419TRGTXE3MEXXX1453982555
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : TRGTXE3MXXX 
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 19184803368033  
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            1918480336803300
+        25: Account Identification
+            SK44919
+       28C: Statement Number/Sequence Number
+            00076/00003
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 19 April 2013
+            Currency       : EUR (EURO)
+            Amount         :             #240653463,52#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130419 0419   S103 3322141994                    #15079,#       C
+                               0000000450257077
+                               CITIGB2LXXX/110847/HAABHR22XXX
+            130419 0419   S103 A075313418G7C015              #19400,#       C
+                               0000000450160812
+                               BCITITMMXXX/075353/SUBASKBXXXX
+            130419 0419   S103 ASW35703/190413               #19734,#       C
+                               0000000450163303
+                               RZBAATWWXXX/075921/BNLIITRRVRX
+            130419 0419   S103 ASW44181/190413               #21420,#       C
+                               0000000450339683
+                               RZBAATWWXXX/141932/JCCYRU21XXX
+            130419 0419   S103 1304/0120/26928               #22201,2#      D
+                               0000000449780204
+                               POBNSKBAXXX/070147
+            130419 0419   S103 130419019971451               #22800,#       C
+                               0000000450317098
+                               INGBPLPWXXX/132352
+            130419 0419   S204 1304190016500000              #34208,6#      D
+                               0000000450253944
+                               FDXXSKBAXXX/110300
+            130419 0419   S103 FT1310900749                  #35000,#       C
+                               0000000450279954
+                               NDEAPLP2XXX/115911/NDEAPLP2XXX
+            130419 0419   S103 H01304196150593               #44554,29#     C
+                               0000000450390547
+                               BBRUBEBB010/161124/MOSWRUM1KHA
+            130419 0419   S103 1304/0120/26902               #50000,#       D
+                               0000000449932505
+                               POBNSKBAXXX/070543
+            130419 0419   S202 A130419004184176              #50000,#       C
+                               0000000450376487
+                               NBSBSKBXXXX/153950
+            130419 0419   S103 1802943644130419              #58500,#       C
+                               0000000450206897
+                               TUBDDEDDXXX/093228/ALBPPLPWXXX
+            130419 0419   S204 20130419-002-012             #133379,08#     C
+                               0000000450307834
+                               NBSBSKBXSIP/130222
+            130419 0419   S103 3322144290                   #187654,42#     C
+                               0000000450264868
+                               CITIGB2LXXX/112604/CITISKBAXXX
+            130419 0419   S202 SPOT 7064/2                  #201000,#       D
+                               0000000449636101
+                               POBNSKBAXXX/100004
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 19 April 2013
+            Currency       : EUR (EURO)
+            Amount         :             #240953574,51#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:EA327C8E8FC1}

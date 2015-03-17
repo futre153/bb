@@ -1,0 +1,18 @@
+java.io.IOException: GET: File e000000 was allready processed
+	at org.pabk.transporter_dlx.core.SftpFileHandler.getFile(SftpFileHandler.java:340)
+	at org.pabk.transporter_dlx.core.SftpFileHandler.processGetFiles(SftpFileHandler.java:272)
+	at org.pabk.transporter_dlx.core.SftpFileHandler.getFiles(SftpFileHandler.java:217)
+	at org.pabk.transporter_dlx.core.SftpFileHandler.run(SftpFileHandler.java:99)
+java.io.IOException: GET: File e000000 was allready processed
+	at org.pabk.transporter_dlx.core.SftpFileHandler.getFile(SftpFileHandler.java:340)
+	at org.pabk.transporter_dlx.core.SftpFileHandler.processGetFiles(SftpFileHandler.java:272)
+	at org.pabk.transporter_dlx.core.SftpFileHandler.getFiles(SftpFileHandler.java:217)
+	at org.pabk.transporter_dlx.core.SftpFileHandler.run(SftpFileHandler.java:99)
+java.net.SocketException: Socket operation on nonsocket: configureBlocking
+	at java.net.DualStackPlainSocketImpl.configureBlocking(Native Method)
+	at java.net.DualStackPlainSocketImpl.socketAccept(Unknown Source)
+	at java.net.AbstractPlainSocketImpl.accept(Unknown Source)
+	at java.net.PlainSocketImpl.accept(Unknown Source)
+	at java.net.ServerSocket.implAccept(Unknown Source)
+	at java.net.ServerSocket.accept(Unknown Source)
+	at org.pabk.http.tserver.TServer$2.run(TServer.java:151)

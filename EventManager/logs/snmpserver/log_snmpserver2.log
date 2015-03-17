@@ -1,0 +1,18 @@
+mar 06, 2015 10:03:27 AM org.pabk.emanager.HandlerImpl init
+INFO: snmpserver: logger snmpserver is successfully initailized!
+mar 06, 2015 10:03:27 AM org.pabk.emanager.HandlerImpl run
+INFO: Module org.pabk.emanager.SNMPServer is started!
+mar 06, 2015 10:03:27 AM org.pabk.emanager.HandlerImpl checkNeededModules
+WARNING: Module org.pabk.emanager.SNMPServer needs module datagramcollector to working!
+mar 06, 2015 10:03:28 AM org.pabk.emanager.SNMPServer businessLogic
+INFO: SNMP Server listen on default port 8162
+mar 06, 2015 10:03:28 AM org.pabk.emanager.SNMPServer businessLogic
+INFO: SNMP server socket timeout is set to default value 5000 milis
+mar 06, 2015 10:03:28 AM org.pabk.emanager.SNMPServer businessLogic
+INFO: SNMP server socket was successfully bind on port 8162
+mar 06, 2015 10:03:29 AM org.pabk.emanager.SNMPServer businessLogic
+INFO: Datagram recieved from: 10.1.129.251
+mar 06, 2015 10:03:30 AM org.pabk.emanager.SNMPServer businessLogic
+INFO: Datagram recieved from: 10.1.129.251
+mar 06, 2015 10:03:31 AM org.pabk.emanager.SNMPServer businessLogic
+INFO: Datagram recieved from: 10.1.129.251

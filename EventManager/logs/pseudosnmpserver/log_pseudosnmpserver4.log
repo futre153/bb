@@ -1,0 +1,160 @@
+mar 06, 2015 9:57:13 AM org.pabk.emanager.HandlerImpl init
+INFO: pseudosnmpserver: logger pseudosnmpserver is successfully initailized!
+mar 06, 2015 9:57:13 AM org.pabk.emanager.HandlerImpl run
+INFO: Module org.pabk.emanager.PseudoSNMPServer is started!
+mar 06, 2015 9:57:13 AM org.pabk.emanager.PseudoSNMPServer getProperty
+INFO: Set default value , for property pseudo.separator
+mar 06, 2015 9:57:13 AM org.pabk.emanager.PseudoSNMPServer getProperty
+INFO: Loaded value P3600X006 for property pseudo.sourceServer from properties.
+mar 06, 2015 9:57:13 AM org.pabk.emanager.PseudoSNMPServer getProperty
+INFO: Loaded value D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp for property pseudo.srcDirectory from properties.
+mar 06, 2015 9:57:13 AM org.pabk.emanager.PseudoSNMPServer getProperty
+INFO: Loaded value trap\d{13} for property pseudo.sourceFileMask from properties.
+mar 06, 2015 9:57:13 AM org.pabk.emanager.PseudoSNMPServer getProperty
+INFO: Loaded value 8162 for property pseudo.snmp.port from properties.
+mar 06, 2015 9:57:13 AM org.pabk.emanager.PseudoSNMPServer getProperty
+INFO: Loaded value 6 for property pseudo.poolInterval from properties.
+mar 06, 2015 9:57:13 AM org.pabk.emanager.PseudoSNMPServer businessLogic
+INFO: PseudoSNMPServer is working
+mar 06, 2015 9:57:13 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: Source direcory \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp found
+mar 06, 2015 9:57:13 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File filter trap\d{13} will be used
+mar 06, 2015 9:57:13 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: Found 33 files on source directory \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp for mask trap\d{13}
+mar 06, 2015 9:57:13 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375773292512 was successfully processed on pseudo server
+mar 06, 2015 9:57:13 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375773292512 was deleted
+mar 06, 2015 9:57:14 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375773438466 was successfully processed on pseudo server
+mar 06, 2015 9:57:14 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375773438466 was deleted
+mar 06, 2015 9:57:15 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375773438559 was successfully processed on pseudo server
+mar 06, 2015 9:57:15 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375773438559 was deleted
+mar 06, 2015 9:57:16 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375773440197 was successfully processed on pseudo server
+mar 06, 2015 9:57:16 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375773440197 was deleted
+mar 06, 2015 9:57:17 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375773440369 was successfully processed on pseudo server
+mar 06, 2015 9:57:17 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375773440369 was deleted
+mar 06, 2015 9:57:18 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375773650501 was successfully processed on pseudo server
+mar 06, 2015 9:57:18 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375773650501 was deleted
+mar 06, 2015 9:57:19 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375773651703 was successfully processed on pseudo server
+mar 06, 2015 9:57:19 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375773651703 was deleted
+mar 06, 2015 9:57:20 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375773741684 was successfully processed on pseudo server
+mar 06, 2015 9:57:20 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375773741684 was deleted
+mar 06, 2015 9:57:21 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375773743010 was successfully processed on pseudo server
+mar 06, 2015 9:57:21 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375773743010 was deleted
+mar 06, 2015 9:57:22 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375774045354 was successfully processed on pseudo server
+mar 06, 2015 9:57:22 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375774045354 was deleted
+mar 06, 2015 9:57:23 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375774045634 was successfully processed on pseudo server
+mar 06, 2015 9:57:23 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375774045634 was deleted
+mar 06, 2015 9:57:24 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375774047054 was successfully processed on pseudo server
+mar 06, 2015 9:57:25 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375774047054 was deleted
+mar 06, 2015 9:57:26 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375774047413 was successfully processed on pseudo server
+mar 06, 2015 9:57:26 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375774047413 was deleted
+mar 06, 2015 9:57:27 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375774946006 was successfully processed on pseudo server
+mar 06, 2015 9:57:27 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375774946006 was deleted
+mar 06, 2015 9:57:28 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375774947300 was successfully processed on pseudo server
+mar 06, 2015 9:57:28 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375774947300 was deleted
+mar 06, 2015 9:57:29 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375775239302 was successfully processed on pseudo server
+mar 06, 2015 9:57:29 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375775239302 was deleted
+mar 06, 2015 9:57:30 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375775240487 was successfully processed on pseudo server
+mar 06, 2015 9:57:30 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375775240487 was deleted
+mar 06, 2015 9:57:31 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375776441471 was successfully processed on pseudo server
+mar 06, 2015 9:57:31 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375776441471 was deleted
+mar 06, 2015 9:57:32 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375776447009 was successfully processed on pseudo server
+mar 06, 2015 9:57:32 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375776447009 was deleted
+mar 06, 2015 9:57:33 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375777038094 was successfully processed on pseudo server
+mar 06, 2015 9:57:33 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375777038094 was deleted
+mar 06, 2015 9:57:34 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375777039280 was successfully processed on pseudo server
+mar 06, 2015 9:57:34 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375777039280 was deleted
+mar 06, 2015 9:57:35 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375777290471 was successfully processed on pseudo server
+mar 06, 2015 9:57:35 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375777290471 was deleted
+mar 06, 2015 9:57:36 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375777292031 was successfully processed on pseudo server
+mar 06, 2015 9:57:36 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375777292031 was deleted
+mar 06, 2015 9:57:37 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375777341327 was successfully processed on pseudo server
+mar 06, 2015 9:57:37 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375777341327 was deleted
+mar 06, 2015 9:57:38 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375777343075 was successfully processed on pseudo server
+mar 06, 2015 9:57:38 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375777343075 was deleted
+mar 06, 2015 9:57:39 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375777351982 was successfully processed on pseudo server
+mar 06, 2015 9:57:39 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375777351982 was deleted
+mar 06, 2015 9:57:40 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375777352216 was successfully processed on pseudo server
+mar 06, 2015 9:57:40 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375777352216 was deleted
+mar 06, 2015 9:57:41 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375777483288 was successfully processed on pseudo server
+mar 06, 2015 9:57:41 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375777483288 was deleted
+mar 06, 2015 9:57:42 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375777483366 was successfully processed on pseudo server
+mar 06, 2015 9:57:42 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375777483366 was deleted
+mar 06, 2015 9:57:43 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375777485300 was successfully processed on pseudo server
+mar 06, 2015 9:57:43 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375777485300 was deleted
+mar 06, 2015 9:57:44 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375777485331 was successfully processed on pseudo server
+mar 06, 2015 9:57:44 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375777485331 was deleted
+mar 06, 2015 9:57:45 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375777644857 was successfully processed on pseudo server
+mar 06, 2015 9:57:45 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375777644857 was deleted
+mar 06, 2015 9:57:46 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375777646058 was successfully processed on pseudo server
+mar 06, 2015 9:57:46 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375777646058 was deleted
+mar 06, 2015 9:57:47 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: Successfully ends pseudo server loop
+mar 06, 2015 9:57:47 AM org.pabk.emanager.PseudoSNMPServer businessLogic
+INFO: PseudoSNMPServer is SLEEPING

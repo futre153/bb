@@ -1,0 +1,45 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0649 130923POBNSKBAAXXX5389936989
+       Correspondent Input Reference     : 0447 130923BREDFRPPAXXX7075720025
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 940 Customer Statement Message
+       Sender   : BREDFRPPXXX 
+                  BRED BANQUE POPULAIRE
+                  (HEAD OFFICE)
+                  PARIS FR
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : E64446          
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            550958159146367 
+        25: Account Identification
+            550958159                          
+       28C: Statement Number/Sequence Number
+            146/001
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 19 September 2013
+            Currency       : EUR (EURO)
+            Amount         :                 #28718,65#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130920        NMSC 3006483                          #31,47#     D
+        86: Information to Account Owner
+            LIBELLE VARIABLE
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 20 September 2013
+            Currency       : EUR (EURO)
+            Amount         :                 #28687,18#
+        64: Closing Avail Bal (Avail Funds)
+            Debit/Credit   : Credit
+            Date           : 20 September 2013
+            Currency       : EUR (EURO)
+            Amount         :                 #28687,18#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:54FF66C28E1D}
+       {DLM:}

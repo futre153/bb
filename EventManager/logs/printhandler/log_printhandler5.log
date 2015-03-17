@@ -1,0 +1,52 @@
+feb 26, 2015 8:25:59 AM org.pabk.emanager.HandlerImpl init
+INFO: printhandler: logger printhandler is successfully initailized!
+feb 26, 2015 8:25:59 AM org.pabk.emanager.HandlerImpl run
+INFO: Module org.pabk.emanager.PrintHandler is started!
+feb 26, 2015 8:26:01 AM org.pabk.emanager.PrintHandler getProperty
+INFO: Loaded value , for property printhandler.separator from properties.
+feb 26, 2015 8:26:01 AM org.pabk.emanager.PrintHandler getProperty
+INFO: Loaded value 10.1.14.99 for property printhandler.printer.ip from properties.
+feb 26, 2015 8:26:01 AM org.pabk.emanager.PrintHandler getProperty
+INFO: Loaded value 9100 for property printhandler.printer.port from properties.
+feb 26, 2015 8:26:01 AM org.pabk.emanager.PrintHandler getProperty
+INFO: Loaded value HP for property printhandler.printer.type from properties.
+feb 26, 2015 8:26:01 AM org.pabk.emanager.PrintHandler getProperty
+INFO: Loaded value 27,40,115,49,49,104,27,38,108,54,68 for property printhandler.printer.HP.startPCLsequence from properties.
+feb 26, 2015 8:26:01 AM org.pabk.emanager.PrintHandler getProperty
+INFO: Loaded value 27,69 for property printhandler.printer.HP.endPCLsequence from properties.
+feb 26, 2015 8:26:01 AM org.pabk.emanager.PrintHandler getProperty
+INFO: Loaded value p1,p2,p3 for property printhandler.queues from properties.
+feb 26, 2015 8:26:01 AM org.pabk.emanager.PrintHandler getProperty
+INFO: Loaded value SOURCE for property printhandler.queue.p1.key from properties.
+feb 26, 2015 8:26:01 AM org.pabk.emanager.PrintHandler getProperty
+INFO: Loaded value C\$\\AMT\\amt\_pobn\\amt\\queues\\print\\P1\\\d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-6][0-9][0-5][0-9]\.prt for property printhandler.queue.p1.pattern from properties.
+feb 26, 2015 8:26:01 AM org.pabk.emanager.PrintHandler getProperty
+INFO: Loaded value SOURCE for property printhandler.queue.p2.key from properties.
+feb 26, 2015 8:26:01 AM org.pabk.emanager.PrintHandler getProperty
+INFO: Loaded value C\$\\AMT\\amt\_pobn\\amt\\queues\\print\\P2\\\d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-6][0-9][0-5][0-9]\.prt for property printhandler.queue.p2.pattern from properties.
+feb 26, 2015 8:26:01 AM org.pabk.emanager.PrintHandler getProperty
+INFO: Loaded value SOURCE for property printhandler.queue.p3.key from properties.
+feb 26, 2015 8:26:01 AM org.pabk.emanager.PrintHandler getProperty
+INFO: Loaded value C\$\\AMT\\amt\_pobn\\amt\\queues\\print\\P3\\\d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-6][0-9][0-5][0-9]\.prt for property printhandler.queue.p3.pattern from properties.
+feb 26, 2015 8:26:01 AM org.pabk.emanager.PrintHandler getProperty
+INFO: Loaded value TEST - TEST - TEST - TEST - TEST - TEST - TEST - TEST - TEST - TEST - TEST - TEST for property printhandler.page.header from properties.
+feb 26, 2015 8:26:01 AM org.pabk.emanager.PrintHandler getProperty
+INFO: Loaded value END TEST - END TEST - END TEST - END TEST - END TEST - END TEST - END TEST - END TEST for property printhandler.page.footer from properties.
+feb 26, 2015 8:26:01 AM org.pabk.emanager.PrintHandler getProperty
+INFO: Loaded value swiftnet1 for property printhandler.amtservers from properties.
+feb 26, 2015 8:26:01 AM org.pabk.emanager.PrintHandler getProperty
+INFO: Loaded value 10 for property printhandler.poolinterval from properties.
+feb 26, 2015 8:26:01 AM org.pabk.emanager.PrintHandler getProperty
+INFO: Loaded value EEEE, dd. MMMM YYYY - HH:mm:ss z for property printhandler.dateformat from properties.
+feb 26, 2015 8:26:01 AM org.pabk.emanager.PrintHandler getProperty
+INFO: Loaded value SK for property printhandler.localization from properties.
+feb 26, 2015 8:26:03 AM org.pabk.emanager.PrintHandler businessLogic
+INFO: PrintHandler is working
+feb 26, 2015 8:26:03 AM org.pabk.emanager.PrintHandler businessLogic
+INFO: PrintHandler found 1 AMT client servers
+feb 26, 2015 8:26:03 AM org.pabk.emanager.PrintHandler execute
+INFO: Found 1 global unprocessed message/s
+feb 26, 2015 8:26:03 AM org.pabk.emanager.PrintHandler executePrint
+INFO: Found 1 unprocessed message/s for printing from queue p1
+feb 26, 2015 8:26:03 AM org.pabk.emanager.PrintHandler printFINMessage
+INFO: File tmp\_tempfile_1380183198351 from source \\swiftnet1\C$\AMT\amt_pobn\amt\queues\print\P1\00162718_20150228102020.prt will be prepared to print on printer 10.1.14.99 from queue p1

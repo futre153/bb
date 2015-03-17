@@ -1,0 +1,24 @@
+sep 26, 2013 1:06:28 PM org.pabk.emanager.HandlerImpl init
+INFO: messagecollector: logger messagecollector is successfully initailized!
+sep 26, 2013 1:06:28 PM org.pabk.emanager.HandlerImpl run
+INFO: Module org.pabk.emanager.MessageCollector is started!
+sep 26, 2013 1:06:28 PM org.pabk.emanager.HandlerImpl checkNeededModules
+WARNING: Module org.pabk.emanager.MessageCollector needs module messagehandler to working!
+sep 26, 2013 1:06:29 PM org.pabk.emanager.MessageCollector businessLogic
+INFO: Used Default Alliance Access servers: P3600X006
+sep 26, 2013 1:06:29 PM org.pabk.emanager.MessageCollector businessLogic
+INFO: Used default print messages store folders:D$\Programy\BB\ARCHIVE\BATCH\DN_queue,D$\Programy\BB\ARCHIVE\BATCH\MT5XX_IO2,D$\Programy\BB\ARCHIVE\BATCH\Vypisy_DF
+sep 26, 2013 1:06:29 PM org.pabk.emanager.MessageCollector businessLogic
+INFO: Used default fin messages store folders:
+sep 26, 2013 1:06:29 PM org.pabk.emanager.MessageCollector businessLogic
+INFO: MessageCollector is WORKING
+sep 26, 2013 1:06:29 PM org.pabk.emanager.MessageCollector addMessages
+INFO: Found directory \\P3600X006\D$\Programy\BB\ARCHIVE\BATCH\DN_queue
+sep 26, 2013 1:06:29 PM org.pabk.emanager.MessageCollector addMessages
+INFO: Found directory \\P3600X006\D$\Programy\BB\ARCHIVE\BATCH\MT5XX_IO2
+sep 26, 2013 1:06:29 PM org.pabk.emanager.MessageCollector addMessages
+INFO: Found directory \\P3600X006\D$\Programy\BB\ARCHIVE\BATCH\Vypisy_DF
+sep 26, 2013 1:06:29 PM org.pabk.emanager.MessageCollector addMessages
+WARNING: Error while processing file \\P3600X006\D$\Programy\BB\ARCHIVE\BATCH\Vypisy_DF\Vypisy_DF.rar (Unknown print format)
+sep 26, 2013 1:06:29 PM org.pabk.emanager.MessageCollector businessLogic
+INFO: MessageCollector goes to SLEEP

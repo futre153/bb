@@ -1,0 +1,56 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0649 130919POBNSKBAAXXX5387936270
+       Correspondent Input Reference     : 2339 130918RBOSGB2LAXXX3052343111
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : RBOSGB2LXXX 
+                  ROYAL BANK OF SCOTLAND PLC
+                  LONDON GB
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 130918RWWMGF0101
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            GEA002981000S
+        25: Account Identification
+            10005823
+       28C: Statement Number/Sequence Number
+            7178/1
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 17 September 2013
+            Currency       : GBP (POUND STERLING)
+            Amount         :                  #3744,45#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130918        S103 1309/2800/37616                 #200,00#     D
+                               RBSDM2I13163593
+                               BUTAS JAROSLAV
+            130918        S103 1309/04067/0100                 #492,00#     D
+                               RBSDM2I13164624
+                               MARIAN FEJES
+            130918        S202 DEPO 30645/2                 #350000,00#     D
+                               RBSDMFF09828225
+                               GIBASKBXXXX
+            130918        S103 MIDLGB22XXX                     #300,00#     C
+                               RBS55CI24994861
+                               ALZBETA STADTHER
+            130918        NTRF MM - DEAL                    #350003,84#     C
+                               RBSDMFF09824340
+                               GIBASKBXXXX
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 18 September 2013
+            Currency       : GBP (POUND STERLING)
+            Amount         :                  #3356,29#
+        64: Closing Avail Bal (Avail Funds)
+            Debit/Credit   : Credit
+            Date           : 18 September 2013
+            Currency       : GBP (POUND STERLING)
+            Amount         :                  #3356,29#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:7613B3CCBCD4}
+       {DLM:}

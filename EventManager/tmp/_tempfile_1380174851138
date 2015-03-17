@@ -1,0 +1,78 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 1858 130924POBNSKBAAXXX5390937594
+       Correspondent Input Reference     : 1858 130924TRGTXE3MGXXX1563570063
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : TRGTXE3MXXX 
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 24185027049739  
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            2418502704973900
+        25: Account Identification
+            SK44919
+       28C: Statement Number/Sequence Number
+            00187/00002
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 24 September 2013
+            Currency       : EUR (EURO)
+            Amount         :              #73244091,#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130924 0924   S103 00204G32120                     #270,#       C
+                               0000000486055092
+                               HELADEFFXXX/071647/HELADEF1SLS
+            130924 0924   S204 CDCP1630900041                  #324,45#     C
+                               0000000486121729
+                               CSDSSKBAXXX/091021
+            130924 0924   S103 GBA240930LOGWQ0W                #360,#       C
+                               0000000486294367
+                               MIDLGB22XXX/155020/MIDLGB22XXX
+            130924 0924   S103 2013092420010108                #630,02#     C
+                               0000000486294788
+                               BOFIIE2DXXX/155121
+            130924 0924   S103 1309/0120/38111                 #670,#       D
+                               0000000485846619
+                               POBNSKBAXXX/070547
+            130924 0924   S103 GBA240930ROFPEM8                #687,#       C
+                               0000000486051239
+                               MIDLGB22XXX/071902/MIDLGB22XXX
+            130924 0924   S103 FTT6570649 01                   #710,#       C
+                               0000000486119116
+                               CHASDEFXXXX/090655/ICBCTWTP025
+            130924 0924   S103 1309/0120/38114                #1000,#       D
+                               0000000485857697
+                               POBNSKBAXXX/070555
+            130924 0924   S103 T1309/0120/38201               #1112,29#     D
+                               0000000485981984
+                               POBNSKBAXXX/070941
+            130924 0924   S103 526130924833291                #1756,54#     C
+                               0000000486297521
+                               SBINDEFFXXX/155629/SBININBB137
+            130924 0924   S103 1309/0110/38104                #1838,64#     D
+                               0000000485841412
+                               POBNSKBAXXX/070545
+            130924 0924   S103 H01309246106472                #1994,27#     C
+                               0000000486111069
+                               BBRUBEBB010/085436/SPTRNO22XXX
+            130924 0924   S103 T1309/4400/38257               #3000,#       D
+                               0000000486244746
+                               POBNSKBAXXX/135335
+            130924 0924   S103 1309/0120/38130                #5155,#       D
+                               0000000485857726
+                               POBNSKBAXXX/070555
+            130924 0924   S103 1309240852922912              #11800,#       C
+                               0000000486232150
+                               WBKPPLPPXXX/131844
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 24 September 2013
+            Currency       : EUR (EURO)
+            Amount         :              #73249847,35#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:56F2FEAFEB7C}

@@ -1,0 +1,73 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0648 130924POBNSKBAAXXX5390937245
+       Correspondent Input Reference     : 2112 130923DEUTDEFFCXXX0437488290
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : DEUTDEFFXXX 
+                  DEUTSCHE BANK AG
+                  FRANKFURT AM MAIN DE
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 34TLDT00005Q009A
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            1009494450018602
+        25: Account Identification
+            100 9494451 0000
+       28C: Statement Number/Sequence Number
+            00186/002
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 23 September 2013
+            Currency       : EUR (EURO)
+            Amount         :                 #69667,37#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130923        NTRF 1309/0120/38023               #20000,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130923        NTRF 1309/0120/38065               #18450,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130923        NTRF 1309/0120/38047               #16050,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130923        NTRF 1309/0120/38069               #15761,90#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130923        NTRF 1309/0120/38043               #15500,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130923        NTRF 1309/0120/38003               #14543,80#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130923        NTRF 1309/0120/38070               #13968,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130923        NTRF 1309/0120/37997                #9250,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130923        NTRF 1309/0120/38071                #6070,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130923        NTRF 1309/0120/38049                #4209,84#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130923        NTRF 1309/0110/38017                #3700,00#     D
+                               03MT130920165437
+                               EUROGIRO A/S TELEGADE 1,1. D 9696
+            130923        NTRF 1309/05735/4600                #3626,37#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130923        NTRF 1309/05736/2300                #3050,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130923        NTRF 1309/0120/38064                #2320,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130923        NTRF 1309/0120/38053                #2040,13#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130923        NTRF 1309/0120/38007                #2000,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130923        NTRF 1309/0120/38059                #1853,20#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130923        NTRF 1309/0120/38077                #1795,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Debit
+            Date           : 23 September 2013
+            Currency       : EUR (EURO)
+            Amount         :                 #84520,87#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:B7CB0D2D6EDD}
+       {DLM:}

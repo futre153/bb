@@ -18,6 +18,7 @@ public abstract class ObjectIdentifier extends ASN1NodeImpl {
 	}
 	
 	protected final void loadFromExisting(BER ber) throws IOException {
-		
+		ASN1NodeImpl.checkPrimitive(this, ber);
+		this.setBer(ber);
 	}
 }

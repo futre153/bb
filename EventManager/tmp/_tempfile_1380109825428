@@ -1,0 +1,81 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0648 130923POBNSKBAAXXX5389936931
+       Correspondent Input Reference     : 2114 130920DEUTDEFFCXXX0434473608
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : DEUTDEFFXXX 
+                  DEUTSCHE BANK AG
+                  FRANKFURT AM MAIN DE
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 34TLDT00005P00IM
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            1009494450018505
+        25: Account Identification
+            100 9494451 0000
+       28C: Statement Number/Sequence Number
+            00185/005
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Debit
+            Date           : 20 September 2013
+            Currency       : EUR (EURO)
+            Amount         :                #129136,32#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130920        NTRF 1309/0120/37942                  #80,50#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130920        NTRF 1309/0120/37904                  #65,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130920        NTRF 1309/0120/37940                  #50,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130920        NTRF 1309/0120/37959                  #48,47#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130920        NTRF 1309/0120/37928                  #36,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130920        NTRF 1309/0120/37913                  #33,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130920        NTRF 1309/05456/0100                  #30,00#     D
+                               03MT130919316363
+                               ANDREAS BAUER KROTTENHOLZ1 H 9696
+            130920        NTRF 1309/0120/37903                  #21,50#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130920        NTRF 1309/0120/37937                  #19,91#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130920        NCHG 1309/1000/37888                  #15,00#     D
+                               03MT130920119472
+                               CHARGES PO EUR1.000,00       9696
+            130920        NTRF 1309/0120/37944                  #11,61#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130920        NTRF BRS-DEUT-1393010             #608254,42#     C
+                               03MT130920344258
+                               S103 FAV Y/POBNSKBAXXX       9696
+            130920        NTRF FTT6314561 01                #452057,28#     C
+                               03MT130920189137
+                               M PO FAV Y/POBNSKBAXXX       9696
+            130920        NTRF PET001308263                 #100000,00#     C
+                               03MT130920143083
+                               S103 FAV Y/POBNSKBAXXX       9696
+            130920        NTRF 1326300432679429              #93804,74#     C
+                               1326300432679429
+                               INCOMING SEPA CT OUR REF 132 9075
+            130920        NTRF 1326300432679470              #85000,00#     C
+                               1326300432679470
+                               INCOMING SEPA CT OUR REF 132 9075
+            130920        NTRF EZU-                          #58720,63#     C
+                               NOS1309200002675
+                               UBERWEISUNG                  9796
+            130920        NTRF 1326300432679387              #58396,72#     C
+                               1326300432679387
+                               INCOMING SEPA CT OUR REF 132 9075
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 20 September 2013
+            Currency       : EUR (EURO)
+            Amount         :               #1326686,48#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:B108AD65F324}
+       {DLM:}

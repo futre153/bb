@@ -1568,7 +1568,7 @@ final class JSONMessageProcessor {
 		Connection con2 =  DBConnector.lookup(dsn2);
 		try {
 			con.setAutoCommit(false);
-			con.setAutoCommit(false);
+			con2.setAutoCommit(false);
 			Object[] values = op.getNewValues();
 			/*if(op.getNewPrimaryKeysValues() != null) {
 				for(int i = 0; i < op.getPrimaryKeys().length; i ++) {

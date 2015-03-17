@@ -1,0 +1,49 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 1846 130920POBNSKBAAXXX5388936917
+       Correspondent Input Reference     : 1846 130920JTBPCZPPAXXX4318131645
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : JTBPCZPPXXX 
+                  J AND T BANKA A.S.
+                  PRAGUE CZ
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 0920164609004   
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            2013092016460900
+        25: Account Identification
+            0001000010/5800 CZK
+       28C: Statement Number/Sequence Number
+            59/1
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 10 September 2013
+            Currency       : CZK (CZECH KORUNA)
+            Amount         :                #569414,82#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130920 0920   FTRF JTBPPP5968POBNBA         #1817760000,00#     D
+                               9021026
+                               Incoming payment bookings.
+            130920 0920   FTRF JTBPPP2579POBNBA         #1805300000,00#     C
+                               9021540
+                               Outgoing payment bookings.
+            130920 0920   FTRF Prevodovy ucet -           #12500000,00#     C
+                               PABKCZ
+                               20/09/2013
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 20 September 2013
+            Currency       : CZK (CZECH KORUNA)
+            Amount         :                #609414,82#
+        64: Closing Avail Bal (Avail Funds)
+            Debit/Credit   : Credit
+            Date           : 20 September 2013
+            Currency       : CZK (CZECH KORUNA)
+            Amount         :                #609414,82#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:03F615FDBCBB}

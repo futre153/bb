@@ -1,0 +1,78 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0649 130925POBNSKBAAXXX5391937660
+       Correspondent Input Reference     : 0124 130925CEKOCZPPAXXX9308763455
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : CEKOCZPPXXX 
+                  CESKOSLOVENSKA OBCHODNI BANKA, A.S.
+                  (HEAD OFFICE)
+                  PRAGUE CZ
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 24SEP13DAILY    
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            24SEP13DAILY
+        25: Account Identification
+            0080101866513653
+       28C: Statement Number/Sequence Number
+            00186/1
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 23 September 2013
+            Currency       : CZK (CZECH KORUNA)
+            Amount         :               #1839085,74#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130924 0920   S103 NONREF                         #1900,#       C
+                               3073468309
+                               3073468309
+            130924 0920   FMSC NONREF                         #5865,#       C
+                               1000126309
+                               1000126309
+            130924 0924   FMSC 9000202309                   #616822,08#     D
+                               9000202309
+                               38124
+            130924 0924   FCHG 9000202309                     #7910,#       D
+                               9000202309
+                               38124 OUR CHGS
+            130924 0920   FMSC 9000181309                     #6370,05#     D
+                               9000181309
+                               38121
+            130924 0920   FCHG 9000181309                      #175,#       D
+                               9000181309
+                               38121 OUR CHGS
+            130924 0920   FMSC 9000182309                    #17182,52#     D
+                               9000182309
+                               38122
+            130924 0920   FCHG 9000182309                      #350,#       D
+                               9000182309
+                               38122 OUR CHGS
+            130924 0924   FMSC NONREF                        #41505,04#     C
+                               8000242309
+                               0924POBNSKCZK93
+            130924 0924   FMSC NONREF                         #1780,#       C
+                               8000243309
+                               0924POBNSKCZK93
+            130924 0924   FMSC 89018619                        #579,#       C
+                               201309240035426
+                               BNF: SK1065000000000017308466 ANNA
+            130924 0924   FMSC 632000665                     #40730,#       C
+                               201309240114519
+                               PAYMENT FOR: POBNSKBAXXX OUR REFER
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 24 September 2013
+            Currency       : CZK (CZECH KORUNA)
+            Amount         :               #1282635,13#
+        64: Closing Avail Bal (Avail Funds)
+            Debit/Credit   : Credit
+            Date           : 24 September 2013
+            Currency       : CZK (CZECH KORUNA)
+            Amount         :               #1282635,13#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:5C8D65D5F936}
+       {DLM:}

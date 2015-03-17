@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="needed.modules">messagecollector,dbconnector</entry>
+	<entry key="printhandler.printer.ip">10.1.14.99</entry>
+	<entry key="printhandler.printer.port">9100</entry>
+	<entry key="printhandler.printer.type">HP</entry>
+	<entry key="printhandler.printer.HP.startPCLsequence">27,40,115,49,49,104,27,38,108,54,68</entry>
+	<entry key="printhandler.printer.HP.endPCLsequence">27,69</entry>
+	<entry key="printhandler.separator">,</entry>
+	<entry key="printhandler.amtservers">swiftnet1</entry>
+	<entry key="printhandler.queues">p1,p2,p3</entry>
+	<entry key="printhandler.queue.p1.key">SOURCE</entry>
+	<entry key="printhandler.queue.p1.pattern">C\\$\\\\AMT\\\\amt\\_pobn\\\\amt\\\\queues\\\\print\\\\P1\\\\\\d{8}\\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-6][0-9][0-5][0-9]\\.prt</entry>
+	<entry key="printhandler.queue.p2.key">SOURCE</entry>
+	<entry key="printhandler.queue.p2.pattern">C\\$\\\\AMT\\\\amt\\_pobn\\\\amt\\\\queues\\\\print\\\\P2\\\\\\d{8}\\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-6][0-9][0-5][0-9]\\.prt</entry>
+	<entry key="printhandler.queue.p3.key">SOURCE</entry>
+	<entry key="printhandler.queue.p3.pattern">C\\$\\\\AMT\\\\amt\\_pobn\\\\amt\\\\queues\\\\print\\\\P3\\\\\\d{8}\\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-6][0-9][0-5][0-9]\\.prt</entry>
+	<entry key="printhandler.page.header">TEST - TEST - TEST - TEST - TEST - TEST - TEST - TEST - TEST - TEST - TEST - TEST</entry>
+	<entry key="printhandler.page.footer">END TEST - END TEST - END TEST - END TEST - END TEST - END TEST - END TEST - END TEST</entry>
+	<entry key="printhandler.poolinterval">10</entry>
+</properties>

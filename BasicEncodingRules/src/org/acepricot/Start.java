@@ -7,6 +7,7 @@ import java.security.NoSuchAlgorithmException;
 
 import org.acepricot.ber.BER;
 import org.acepricot.ber.BERIOStream;
+import org.acepricot.finance.web.util.Base64Coder;
 
 
 public class Start {
@@ -26,21 +27,23 @@ public class Start {
 					"7d3gxSUHXgHDQc19IUj2TrV9KaXhvajzZrdOvPibDNfdKk0HJyUoFq0Xrb1kjtxZ"+
 					"ywdr+RW685DKm6a9Oj5O65lxmA0cDPsBi9zsWdXB6hCaf4wy+4SGwk7hyoZPgEGR"+
 					"6A5IrahRiKF7Q7MZq/swXmPJoVYO131CWhTGLlTLKW35HiJGVMC1A1eR/TaTNGLk"+
-					"tRIaUbBqDFizZWUMd54XyUr+RPKqnak=";
-*/		//byte[] v = new byte[0x0FFFFFFF];
+					"tRIaUbBqDFizZWUMd54XyUr+RPKqnak=";*/
+		//byte[] v = new byte[0x0FFFFFFF];
 		@SuppressWarnings("unused")
-		String xxx= "";//MHMwMAQRUmVnaXN0cmF0aW9uRW1haWwGAAQZYnJhbmlzbGFiLmJyYW5keXNAcGFiay5zazA/BBBEaWdlc3RlZFBhc3N3b3JkBglghkgBZQMEAgEEIMHrPpW+xypR19Ds4eN/zwBM6z8CZemoCZJQHRnGMu1x";
+		//String xxx= "";//MHMwMAQRUmVnaXN0cmF0aW9uRW1haWwGAAQZYnJhbmlzbGFiLmJyYW5keXNAcGFiay5zazA/BBBEaWdlc3RlZFBhc3N3b3JkBglghkgBZQMEAgEEIMHrPpW+xypR19Ds4eN/zwBM6z8CZemoCZJQHRnGMu1x";
 					//System.out.println(Arrays.toString(Base64Coder.decode(xxx)));
+		byte[] b = {4 + 32, -128, 4, 2, 64, 64, 4, 3, 65, 65, 65, 0, 0};
 		BERIOStream enc = new BERIOStream();
 		//enc.setInputStream(new ByteArrayInputStream(Base64Coder.decode(xxx)));
+		enc.setInputStream(new ByteArrayInputStream(b));
 		BER ber = new BER();
 		//AceData data = new AceData();
 		//CertificateRequest req = new CertificateRequest("request");
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		enc.setOutputStream(out);
-		ber.setValue(new byte[0]);
-		ber.encode(enc);
-		enc.setInputStream(new ByteArrayInputStream(out.toByteArray()));
+		//ber.setValue(new byte[0]);
+		//ber.encode(enc);
+		//enc.setInputStream(new ByteArrayInputStream(out.toByteArray()));
 		try {
 			ber.decode(enc);
 //			req.loadFromExisting(ber);

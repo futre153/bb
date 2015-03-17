@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>Properties for eurogiro-sftp</comment>
+<entry key="putInterval">0</entry>
+<entry key="putArchive">C:\ELS\ELS_HOME\envelope\im\archive</entry>
+<entry key="putLocal">C:\ELS\ELS_HOME\envelope\im\xtic</entry>
+<entry key="logHistory">60</entry>
+<entry key="logDirectory">logs</entry>
+<entry key="getLocal">C:\ELS\ELS_HOME\envelope\ex\xtic</entry>
+<entry key="getArchive">C:\ELS\ELS_HOME\envelope\ex\archive</entry>
+<entry key="logbackPattern">%date %level [%thread] %logger{10} [%file:%line] %msg%n</entry>
+<entry key="checkFilenameDuplicity">true</entry>
+<entry key="getRemote">/p1/progress/eurogiro/toeuro</entry>
+<entry key="username">euroftp</entry>
+<entry key="maskPutFile">i\d{6}</entry>
+<entry key="getSequence">044267</entry>
+<entry key="port">22</entry>
+<entry key="logExtension">.log</entry>
+<entry key="hostname">192.168.170.3</entry>
+<entry key="knownHosts">conf\known_hosts</entry>
+<entry key="passphrase">8ymbodPl5DvlmP1vl3UH0A==</entry>
+<entry key="putRemote">/p1/progress/eurogiro/fromeuro</entry>
+<entry key="putSequence">000000</entry>
+<entry key="getNextRun">-1</entry>
+<entry key="privateKey">conf\euroftp2</entry>
+<entry key="getInterval">600000</entry>
+<entry key="maskGetFile">e\d{6}</entry>
+<entry key="propath">D:\Programy\BB\eclipse-kepler-ee\transporter\engines\sftp-transport.xml</entry>
+<entry key="modify">1424266832768</entry>
+<entry key="putNextRun">-1</entry>
+<entry key="name">eurogiro-sftp</entry>
+</properties>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="needed.modules">messagecollector,datagramcollector,mailhandler,dbconnector</entry>
+	<entry key="mt5xx.key">SOURCE</entry>
+	<entry key="mt5xx.pattern">C\\$\\\\ARCHIVE\\\\BATCH\\\\MT5XX_IO2\\\\\\d{8}\\.prt</entry>
+	<entry key="deliveryNotification.key">SOURCE</entry>
+	<entry key="deliveryNotification.pattern">C\\$\\\\ARCHIVE\\\\BATCH\\\\DN_queue2\\\\\\d{8}\\.prt</entry>
+	<entry key="statement.key">SOURCE</entry>
+	<entry key="statement.pattern">C\\$\\\\ARCHIVE\\\\BATCH\\\\Vypisy_DF\\\\\\d{8}\\.prt</entry>
+</properties>

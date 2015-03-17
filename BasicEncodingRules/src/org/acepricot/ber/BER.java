@@ -48,6 +48,7 @@ public class BER extends BERImpl {
 		else {
 			try {
 				line+=("\t" + Arrays.toString(this.getValue())+ System.getProperty("line.separator"));
+				line+=("\t" + this.getContentDecoder().decodeValue(this) + System.getProperty("line.separator"));
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -66,6 +67,10 @@ public class BER extends BERImpl {
 
 	public boolean isPrimitive() {
 		return this.getIDOctets().isPrimitive();
+	}
+	
+	public int getConstructedContentLength () {
+		return super.getConctructedContent().size();
 	}
 	
 	public BER getCHildNode(int index) throws IOException {

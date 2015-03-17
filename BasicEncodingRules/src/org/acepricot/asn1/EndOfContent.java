@@ -3,7 +3,7 @@ package org.acepricot.asn1;
 import org.acepricot.ber.BER;
 import org.acepricot.ber.BERConst;
 
-public class EndOfContent extends ASN1NodeImpl {
+abstract class EndOfContent extends ASN1NodeImpl {
 	private static final String DEFAULT_EOC_NAME = "end-of-content";
 
 	public EndOfContent(int implicit, int optional) {

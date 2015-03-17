@@ -1,0 +1,76 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0647 130920POBNSKBAAXXX5388936571
+       Correspondent Input Reference     : 2115 130919DEUTDEFFCXXX0433458642
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : DEUTDEFFXXX 
+                  DEUTSCHE BANK AG
+                  FRANKFURT AM MAIN DE
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 34TLDT00005O00CE
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            1009494450018403
+        25: Account Identification
+            100 9494451 0000
+       28C: Statement Number/Sequence Number
+            00184/003
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 19 September 2013
+            Currency       : EUR (EURO)
+            Amount         :               #2584145,73#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130919        NTRF 1309/04932/2300                 #820,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NTRF 1309/0120/37825                 #768,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NTRF 1309/05084/0100                 #700,75#     D
+                               03MT130918337558
+                               EINKAUFS UND VERTRIEBS 1/ING 9696
+            130919        NTRF 1309/0120/37867                 #634,22#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NTRF 1309/0120/37809                 #611,35#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NTRF 1309/0120/37882                 #565,10#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NTRF 1309/0120/37869                 #530,29#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NTRF 1309/05152/1000                 #500,00#     D
+                               03MT130918337556
+                               SOMMER.GRUBBA G.B.R TURRSCH  9696
+            130919        NTRF 1309/0120/37806                 #494,38#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NTRF 1309/0120/37829                 #484,73#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NTRF 1309/0120/37841                 #472,02#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NTRF 1309/0120/37847                 #420,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NTRF 1309/05129/1000                 #400,00#     D
+                               03MT130918337573
+                               DR.NEUSER IMPORT GMBH DORNI  9696
+            130919        NTRF 1309/0120/37796                 #391,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NTRF 1309/0120/37830                 #390,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NTRF 1309/0120/37795                 #360,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NTRF 1309/0120/37843                 #350,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NTRF 1309/05086/0100                 #348,50#     D
+                               03MT130918337557
+                               202155923 SCHAMBECK 1/ING. M 9696
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 19 September 2013
+            Currency       : EUR (EURO)
+            Amount         :               #2574905,39#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:48A5497D6271}
+       {DLM:}

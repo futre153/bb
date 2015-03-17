@@ -1,0 +1,34 @@
+	---------------------  Instance Type and Transmission --------------	
+       Notification (Transmission) of Original received from SWIFT
+       Priority          : System
+       Message Output Reference  : 0952 130913POBNSKBAAXXX5383934820
+       Correspondent Input Reference     : 0752 130913DYLXXXXXHXXX0011032678
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 011 Delivery Notification
+       Sender   : DYLXXXXXXXX 
+       Receiver : POBNSKBAXXX
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+	--------------------------- Message Text ---------------------------	
+       175: time
+            0952
+       106: mir
+            Date           : 13 September 2013
+            POBNSKBAAXXX5383730955
+       108: mur
+            1308/4500/36140
+       175: time
+            0852
+       107: mor
+            Date           : 13 September 2013
+            LOYDGB2LDXXX1701489366
+	--------------------------- Message Trailer ------------------------	
+       {CHK:AB6E8DACFCC3}
+       {SYS:}
+	---------------------------- Interventions -------------------------	
+       Category      : Network Report
+       Creation Time : 13/09/13 09:55:10
+       Application   : SWIFT Interface
+       Operator      : SYSTEM
+       Text
+       {1:F21POBNSKBAAXXX5383934820}{4:{177:1309130955}{451:0}}

@@ -1,0 +1,43 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0649 130925POBNSKBAAXXX5391937661
+       Correspondent Input Reference     : 1946 130924BNDCCAMMAINT7864602764
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : BNDCCAMMINT 
+                  BANQUE NATIONALE DU CANADA
+                  (INTERNATIONAL DEPARTMENT)
+                  MONTREAL CA
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            VOSTRO 16449220
+        25: Account Identification
+            10202222800100101
+       28C: Statement Number/Sequence Number
+            937/001
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 20 September 2013
+            Currency       : CAD (CANADIAN DOLLAR)
+            Amount         :                 #22538,99#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130924        NRTI pola/3291                      #3950,43#     D
+                               0000016426053
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 24 September 2013
+            Currency       : CAD (CANADIAN DOLLAR)
+            Amount         :                 #18588,56#
+        64: Closing Avail Bal (Avail Funds)
+            Debit/Credit   : Credit
+            Date           : 24 September 2013
+            Currency       : CAD (CANADIAN DOLLAR)
+            Amount         :                 #18588,56#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:26465DB4C140}
+       {DLM:}

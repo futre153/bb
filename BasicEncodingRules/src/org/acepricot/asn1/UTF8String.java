@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.acepricot.ber.BER;
 import org.acepricot.ber.BERConst;
 
-public class UTF8String extends ASN1NodeImpl {
+abstract class UTF8String extends ASN1NodeImpl {
 	public UTF8String (int implicit, int optional, String name) {
 		super (
 				BERConst.T61STRING_TAG_NUMBER,

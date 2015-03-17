@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.example.org/club" elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:team="http://www.example.org/club">
+
+    <xsd:complexType name="ClubType"></xsd:complexType>
+
+    <xsd:simpleType name="ClubNameType">
+    	<xsd:restriction base="xsd:string">
+    		<xsd:minLength value="1"></xsd:minLength>
+    		<xsd:maxLength value="64"></xsd:maxLength>
+    		<xsd:whiteSpace value="collapse"></xsd:whiteSpace>
+    	</xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="ClubAddressType"></xsd:complexType>
+
+    <xsd:simpleType name="StreetType">
+    	<xsd:restriction base="xsd:string">
+    		<xsd:minLength value="1"></xsd:minLength>
+    		<xsd:maxLength value="64"></xsd:maxLength>
+    		<xsd:whiteSpace value="collapse"></xsd:whiteSpace>
+    	</xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="StreetNrType">
+    	<xsd:restriction base="xsd:string">
+    		<xsd:minLength value="1"></xsd:minLength>
+    		<xsd:maxLength value="16"></xsd:maxLength>
+    	</xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:simpleType name="ZIPType">
+    	<xsd:restriction base="xsd:string">
+    		<xsd:minLength value="2"></xsd:minLength>
+    		<xsd:maxLength value="16"></xsd:maxLength>
+    		<xsd:pattern value="[0-9]*$\d"></xsd:pattern>
+    	</xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

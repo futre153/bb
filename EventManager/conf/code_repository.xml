@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<code-list xmlns="http://www.example.org/CodeRepositorySchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.example.org/CodeRepositorySchema CodeRepositorySchema.xsd ">
+	<code>
+		<code-number>D19</code-number>
+		<code-description>Pre tento typ správy je IBAN formát čísla účtu pre podpole Account poľa 59 povinný (chybný IBAN format)!</code-description>
+	</code>
+	<code>
+		<code-number>H50</code-number>
+		<code-description>Chyba cieľovej adresy, adresa buď nie je známa (neexistuje) alebo nie je aktívna (nazapojený BIC)</code-description>
+	</code>
+	<code>
+		<code-number>T33</code-number>
+		<code-description>Chyba formátu poľa, riadku alebo podpoľa:
+		&#x9;&#x9;&#x9;&#x9;1. prekročená povolená dĺžka komponentu
+		&#x9;&#x9;&#x9;&#x9;2. komponent obsahuje na konci prázdny znak (napr. medzera, tabulátor, a.i.)
+		&#x9;&#x9;&#x9;&#x9;3. komponent obsahuje znak, ktorý nie je povolený alebo nekorešponduje s definovanou sadou znakov</code-description>
+	</code>
+	<code>
+		<code-number>T29</code-number>
+		<code-description>SWIFT BIC obsahuje chybný kód pobočky</code-description>
+	</code>
+	<code>
+		<code-number>T45</code-number>
+		<code-description>non-SWIFT BIC (nezapojený BIC) je chybný</code-description>
+	</code>
+	<code>
+		<code-number>35</code-number>
+		<code-description>Zatiaľ neautorizovaná/odietnutá FIN kopírovacou službou alebo sú na SWIFT účastníka uvalené sankcie</code-description>
+	</code>
+	<code>
+		<code-number>D1</code-number>
+		<code-description>Záložná platba nie je povolená alebo dátum spatnosti už uplynul.</code-description>
+	</code>
+</code-list>
+<!--
+11=Message is too old, but was authorised
+12=Too many delivery attempts, but message was authorised
+13=Destination is disabled, but message was authorised
+14=Message is too long, but was authorised
+21=Message is too old and was bypassed
+22=Too many delivery attempts and the message was bypassed
+23=Destination is disabled and the message was bypassed
+24=Message is too long and was bypassed
+32=Message is too old and was not authorised
+33=Copy message to the Copy Service Server was aborted
+35=SWIFTNet FIN Copy Service parameter(s) incorrectly defined in SWIFTNet FIN
+41=Message cannot be delivered to Phase 1 (BKE only) user as it only contains PKI signatures
+A0=MAC-error input
+A1=Request Timed Out
+B0=Generic error
+B1=Message format error
+B2=Invalid character or invalid numeric value
+B3=Unexpected data
+B4=Invalid decimal value
+B5=Too many fields
+B6=Field too short
+B7=Field too long
+B8=Mandatory field not found
+C1=Double input
+C2=Request out of cut-off time
+C3=Direct debit not accepted from receiver
+C4=Payments to CBs ECB account are not allowed
+C6=Exclusion of participant
+C7=BIC debtor and creditor must be different
+C8=Invalid sending/receiving BIC
+C9==Receiving CB has to be a non migrated CB
+D0=Field 72 using of codeword /CONPAY/ is only allowed if a CB is sender of the message
+D1=Backup payment is not allowed / Value date in past not allowed
+D2=Field 32A/30 - Value date too far in the future
+D3=Field 32A/32B - Currency is not EUR
+D4=Field 56a - Invalid field option
+D5=Field 57a - Invalid field option or missing account number
+D6=Invalid using codeword TILTIME, FROTIME, CLSTIME, REJTIME
+D7=Field 52a - Invalid field option
+D8=Latest debit time (option A) is reached
+D9=Field 58 is not filled with HAM participant
+E0=Field 53/58 must be filled with a BIC of a direct participant belonging to the sending CB if codeword /CONPAY/ is used
+E1=Sequence B is only allowed once in case of connected payment MT 204
+E2=Field 72 - amount following codeword /CONPAY/ is missing or has wrong format
+E3=Receiver not reachable because of stop sending
+E4=For definition or change of a credit line (also in case of connected payments) the related account must have the participant type "CI" and the account type "normal"
+E5=Field 58 account line for payments addressed to TRGTXEPMXXX no sub-account allowed
+E6=Liquidity transfers to sub-accounts or mirror accounts must be highly urgent
+E7=Wrong format or value of UTC shift
+E8=Daylight procedure is closed
+K0=Field not allowed because debtor or receiver of the payment is in module HAM
+K1=Field 72 - using of codeword /MANPAY/ is only allowed if a CB is sender of the message
+K2=Field 52 must be filled with a BIC of a direct participant if codeword /MANPAY/ is used
+K3=Priority highly urgent not allowed for this kind of payment
+L0=Revocation of payment by sender
+L1=Removal of payment because of missing cover or exceeding a limit / Decrease rejected due to insufficient balance
+L2=Exclusion of payment by PM / Exclusion Settlement Bank
+L3=Rejection of user order because payment not queued anymore
+L4=Decrease of credit line is greater than existing credit line
+L5=CB closed or end-of-day-procedure in progress
+F0=Unknown error
+F1=Field not supported (here)
+F2=Field option not supported
+F3=Fields out of sequence
+F4=Message type not supported
+F5=Invalid amount format
+F6=Invalid account number format
+F7=Line(s) too long
+F8=Too many lines
+F9=Field format error
+G0=Invalid date format
+G1=Invalid time format
+G2=Unexpected data
+G3=- not used -
+G4=Block is missing
+G5=Field is missing
+J0=Unknown Error
+J1=Message received too late
+J2=Unknown Error
+H0=Unknown error
+H1=Invalid date
+H2=Invalid BIC code
+H3=Invalid currency code
+H4=Invalid sequence of character(s)
+H5=Invalid combination of country codes
+H6=Unknown RTGS participant
+H7=Account number missing
+H8=Sender of ECMR on holiday
+H9=Sequence number error
+I0=Invalid codeword
+I1=Invalid combination of amount and sequence number
+I2=Invalid application code
+I3=Invalid country code
+I4=Business dates and times do not match
+I5=Invalid time
+I6=Counterparty on holiday
+I7=Invalid code
+I8=Invalid reason code
+I9=Duplicate information in ECMR
+J3=… to be provided by the ECB
+J4=… to be provided by the ECB
+J5=… to be provided by the ECB
+J6=… to be provided by the ECB
+J7=… to be provided by the ECB
+J8=… to be provided by the ECB
+J9=… to be provided by the ECB 
+ -->
+<!-- 
+C81=Pre tuto spravu plati, ze ak je v nej pritomne pole 56, tak sa v nej musi nachadzat aj pole 57!
+C98=Ak sa v tejto sprave nachadza nova sekvencia, potom posledne pole v nej nesmie byt 15!
+D19=Pre tento typ spravy je IBAN format povinny pre podpole Account pola 59 (chybny IBAN format)!
+D49=Pre tuto spravu je pole 33B povinne!
+E44=Ak nie je pritomne pole 56, potom sa v poli 23E nedaju pouzit klucove slova TELI alebo PHOI!
+T28=SWIFT BIC nie je platny!
+T29=SWIFT BIC obsahuje neplatny kod pre pobocku!
+T30=V sprave(poli) sa nachadza nadbytocny riadok(riadky), podpole(podpolia) alebo komponent (komponenty)! Napr. dlhy riadok, podpole alebo komponent.
+T32=System ocakava dielcie podpole, komponent alebo oddelovac komponentov! (Napr. je pouzity napovoleny znak). Niekedy sa chyba nachadza v predchadzajucom riadku, ako je uvedene v chybovom hlaseni.
+T33=Chyba pola, riadku alebo komponentu!\r\nMoznosti:\r\n - pole, riadok alebo komponent su prilis dlhe\r\n - obsahuju skryty znak (napr. posledny znak je medzera)\r\n - obsahuju znak nezlucitelny s definiciou ich formatu (napr. znak "@")
+T44=SWIFT BIC existuje, ale nie je povoleny pre FIN alebo nie je spristupneny v BIC adresari alebo nie je zapojeny!
+ -->

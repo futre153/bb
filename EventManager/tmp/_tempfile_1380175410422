@@ -1,0 +1,99 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0648 130925POBNSKBAAXXX5391937614
+       Correspondent Input Reference     : 2117 130924PBNKDEFFAXXX7768731997
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : PBNKDEFFXXX 
+                  DEUTSCHE POSTBANK AG
+                  (FRANKFURT BRANCH)
+                  FRANKFURT AM MAIN DE
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : ESSP267211201078
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            0924099615220002
+        25: Account Identification
+            0755739609
+       28C: Statement Number/Sequence Number
+            00185/00001
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 23 September 2013
+            Currency       : EUR (EURO)
+            Amount         :                #250220,38#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130924 0924   NTRF RO08/0014                        #42,#       D
+                               00383042013309
+                               DEB ESSP
+            130924 0924   NTRF ELSE047384130920                 #10,#       D
+                               00473842012024
+                               DEB ESSP
+            130924 0924   NTRF SK20130923T01                   #260,#       C
+                               00572492013525
+                               CRED ESSP
+            130924 0924   NTRF 130923PTFR514455                #365,96#     C
+                               05425442014031
+                               CRED ESSP
+            130924 0924   NTRF 1309231749147305               #1500,#       C
+                               02599962014068
+                               CRED ESSP
+            130924 0924   NTRF ELSE047401130923               #1004,5#      D
+                               00474012013871
+                               DEB ESSP
+            130924 0924   NTRF ELSE047403130923                #200,#       D
+                               00474032013870
+                               DEB ESSP
+            130924 0924   NTRF ELSE047406130923                 #25,#       D
+                               00474062013874
+                               DEB ESSP
+            130924 0924   NTRF ELSE047405130923                #208,#       D
+                               00474052013877
+                               DEB ESSP
+            130924 0924   NTRF ELSE047404130923                #205,#       D
+                               00474042013876
+                               DEB ESSP
+            130924 0924   NTRF ELSE047399130923                #230,#       D
+                               00473992013875
+                               DEB ESSP
+            130924 0924   NTRF ELSE047402130923                #250,#       D
+                               00474022013880
+                               DEB ESSP
+            130924 0924   NTRF ELSE047400130923                #200,#       D
+                               00474002013879
+                               DEB ESSP
+            130924 0924   NTRF REM0000000120662                #100,#       C
+                               00763792015867
+                               CRED ESSP
+            130924 0924   NTRF 130920SK0001                    #500,#       C
+                               06128692012184
+                               CRED ESSP
+            130923 0924   NTRF REM0000000117743                #110,#       C
+                               00762092014052
+                               CRED ESSP
+            130924 0924   NTRF CPG-130923216169               #7223,53#     C
+                               01041642014062
+                               CRED ESSP
+            130924 0924   NTRF 130923SK25090102                #734,#       C
+                               01097552014868
+                               CRED ESSP
+            130924 0924   NTRF HR08/0016                        #40,#       D
+                               00383032013304
+                               DEB ESSP
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 24 September 2013
+            Currency       : EUR (EURO)
+            Amount         :                #258599,37#
+        64: Closing Avail Bal (Avail Funds)
+            Debit/Credit   : Credit
+            Date           : 24 September 2013
+            Currency       : EUR (EURO)
+            Amount         :                #258599,37#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:2D9CEFA4009F}
+       {DLM:}

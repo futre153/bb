@@ -1,0 +1,34 @@
+mar 06, 2015 9:40:32 AM org.pabk.emanager.HandlerImpl init
+INFO: pseudosnmpserver: logger pseudosnmpserver is successfully initailized!
+mar 06, 2015 9:40:32 AM org.pabk.emanager.HandlerImpl run
+INFO: Module org.pabk.emanager.PseudoSNMPServer is started!
+mar 06, 2015 9:40:40 AM org.pabk.emanager.PseudoSNMPServer getProperty
+INFO: Set default value , for property pseudo.separator
+mar 06, 2015 9:40:51 AM org.pabk.emanager.PseudoSNMPServer getProperty
+INFO: Loaded value P3600X006 for property pseudo.sourceServer from properties.
+mar 06, 2015 9:40:55 AM org.pabk.emanager.PseudoSNMPServer getProperty
+INFO: Loaded value D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp for property pseudo.srcDirectory from properties.
+mar 06, 2015 9:40:59 AM org.pabk.emanager.PseudoSNMPServer getProperty
+INFO: Loaded value trap\d{13} for property pseudo.sourceFileMask from properties.
+mar 06, 2015 9:41:03 AM org.pabk.emanager.PseudoSNMPServer getProperty
+INFO: Loaded value 8162 for property pseudo.snmp.port from properties.
+mar 06, 2015 9:41:14 AM org.pabk.emanager.PseudoSNMPServer getProperty
+INFO: Loaded value 6 for property pseudo.poolInterval from properties.
+mar 06, 2015 9:41:22 AM org.pabk.emanager.PseudoSNMPServer businessLogic
+INFO: PseudoSNMPServer is working
+mar 06, 2015 9:41:36 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: Source direcory \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp found
+mar 06, 2015 9:41:37 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File filter trap\d{13} will be used
+mar 06, 2015 9:41:46 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: Found 33 files on source directory \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp for mask trap\d{13}
+mar 06, 2015 9:42:28 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375773292512 was successfully processed on pseudo server
+mar 06, 2015 9:42:38 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375773292512 was deleted
+mar 06, 2015 9:43:31 AM org.pabk.emanager.PseudoSNMPServer execute
+WARNING: Following error was found when file \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375773438466 was processed: Socket is closed
+mar 06, 2015 9:43:35 AM org.pabk.emanager.PseudoSNMPServer execute
+INFO: File \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375773438466 was deleted
+mar 06, 2015 9:44:18 AM org.pabk.emanager.PseudoSNMPServer execute
+WARNING: Following error was found when file \\P3600X006\D$\Programy\BB\eclipse_indigo\bkf\eclipse_indigo\EventManager\temp\trap1375773438559 was processed: Socket is closed

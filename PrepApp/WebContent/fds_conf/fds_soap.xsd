@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="windows-1250"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://www.firstdata.sk/txn-notify/soap"
+        elementFormDefault="qualified" >
+<annotation>
+  <documentation>
+     Description of SOAP body of transaction notification for credit cards
+  </documentation>
+</annotation>
+<element name="SOAPBody">
+<complexType>
+<sequence>
+<element name="MsgType" minOccurs="0" maxOccurs="1">
+  <annotation>
+    <documentation>
+      Message type identificator
+      Value 0 means this message definition
+      Element is not mandatory (this MsgType is default)
+    </documentation>
+  </annotation>
+  <simpleType>
+    <restriction base="decimal">
+      <enumeration value="0"/>
+    </restriction>
+  </simpleType>
+</element>
+<element name="InstitutionId" minOccurs="1" maxOccurs="1">
+  <annotation>
+    <documentation>
+      Bank code defined by National Bank
+    </documentation>
+  </annotation>
+  <simpleType>
+    <restriction base="integer">
+      <totalDigits value="4"/>
+    </restriction>
+  </simpleType>
+</element>
+<element name="CardNumber" minOccurs="1" maxOccurs="1">
+  <simpleType>
+    <restriction base="string">
+      <length value="16"/>
+    </restriction>
+  </simpleType>
+</element>  
+<element name="NotificationType" minOccurs="1" maxOccurs="1">
+<annotation>
+  <documentation>
+     Type of notification 1 - SMS, 2 - email
+  </documentation>
+</annotation>
+  <simpleType>
+    <restriction base="decimal">
+      <enumeration value="1"/>
+      <enumeration value="2"/>
+    </restriction>
+  </simpleType>
+</element>  
+<element name="Contact" minOccurs="1" maxOccurs="1">
+<annotation>
+  <documentation>
+     Contact: telephone number (NotificationType=1) or email (NotificationType=2)
+  </documentation>
+</annotation>
+  <simpleType>
+    <restriction base="string">
+      <maxLength value="60"/>
+    </restriction>
+  </simpleType>
+</element>  
+<element name="TransactionSource" minOccurs="1" maxOccurs="1">
+<annotation>
+  <documentation>
+     Source of transaction: 1 - ATM, 2 - POS
+  </documentation>
+</annotation>
+  <simpleType>
+    <restriction base="integer">
+      <enumeration value="1"/>
+      <enumeration value="2"/>
+    </restriction>
+  </simpleType>
+</element>  
+<element name="TransactionType" minOccurs="1" maxOccurs="1">
+<annotation>
+  <documentation>
+     Type of transaction:
+
+      ATM:
+        10	Withdrawal
+
+      POS:
+        10	Normal purchase
+        11	Preauthorization purchase
+        12	Preauthorization purchase completion
+        13	Mail/phone order
+        14	Merchandise return
+        15	Cash advance
+  </documentation>
+</annotation>
+  <simpleType>
+    <restriction base="integer">
+      <enumeration value="10"/>
+      <enumeration value="11"/>
+      <enumeration value="12"/>
+      <enumeration value="13"/>
+      <enumeration value="14"/>
+      <enumeration value="15"/>
+      <enumeration value="17"/>
+      <enumeration value="20"/>
+      <enumeration value="30"/>
+      <enumeration value="40"/>
+      <enumeration value="81"/>
+    </restriction>
+  </simpleType>
+</element>
+<element name="TransactionAmount" type="decimal" minOccurs="1" maxOccurs="1">
+  <annotation>
+    <documentation>
+      Transaction amount
+    </documentation>
+  </annotation>
+</element>
+<element name="TransactionCurrency" minOccurs="1" maxOccurs="1">
+  <annotation>
+    <documentation>
+      Either numeric or alphanumeric format
+    </documentation>
+  </annotation>
+  <simpleType>
+    <restriction base="string">
+      <pattern value="([0-9]{3})|([A-Z]{3})"/>
+    </restriction>
+  </simpleType>
+</element>
+<element name="AvailableBalance" type="decimal" minOccurs="1" maxOccurs="1">
+</element>
+<element name="AccountCurrency" minOccurs="1" maxOccurs="1">
+  <annotation>
+    <documentation>
+      Either numeric or alphanumeric format
+    </documentation>
+  </annotation>
+  <simpleType>
+    <restriction base="string">
+      <pattern value="([0-9]{3})|([A-Z]{3})"/>
+    </restriction>
+  </simpleType>
+</element>
+<element name="TransactionDateTime" type="string" minOccurs="1" maxOccurs="1">
+  <annotation>
+    <documentation>
+      Date and time of transaction, format YYYYMMDDHHMISS
+    </documentation>
+  </annotation>
+</element>
+<element name="MerchantName" nillable="true">
+  <simpleType>
+    <restriction base="string">
+      <maxLength value="25"/>
+    </restriction>
+  </simpleType>
+</element>
+<element name="TerminalOwnerName" nillable="true">
+  <simpleType>
+    <restriction base="string">
+      <maxLength value="22"/>
+    </restriction>
+  </simpleType>
+</element>
+<element name="MerchantCity" nillable="true">
+  <simpleType>
+    <restriction base="string">
+      <maxLength value="13"/>
+    </restriction>
+  </simpleType>
+</element>
+<element name="MerchantState" minOccurs="1" maxOccurs="1" nillable="true">
+  <simpleType>
+    <restriction base="string">
+      <maxLength value="2"/>
+    </restriction>
+  </simpleType>
+</element>
+<element name="TxnId" minOccurs="0" maxOccurs="1" nillable="false">
+  <annotation>
+    <documentation>
+      Internal transaction identification
+    </documentation>
+  </annotation>
+  <simpleType>
+    <restriction base="string">
+      <maxLength value="30"/>
+    </restriction>
+  </simpleType>
+</element>
+<element name="NotApproved" minOccurs="0" maxOccurs="1" nillable="false">
+  <annotation>
+    <documentation>
+      Identification of not approved transaction, value contains response code
+    </documentation>
+  </annotation>
+  <simpleType>
+    <restriction base="string">
+      <maxLength value="3"/>
+    </restriction>
+  </simpleType>
+</element>
+<element name="Language" minOccurs="0" maxOccurs="1" nillable="false">
+  <annotation>
+    <documentation>
+      Language of message
+    </documentation>
+  </annotation>
+  <simpleType>
+    <restriction base="string">
+      <pattern value="[a-z][a-z]"/>
+    </restriction>
+  </simpleType>
+</element>
+<element name="TerminalId" minOccurs="0" maxOccurs="1" nillable="false">
+  <annotation>
+    <documentation>
+      Terminal ID
+    </documentation>
+  </annotation>
+  <simpleType>
+    <restriction base="string">
+      <maxLength value="16"/>
+    </restriction>
+  </simpleType>
+</element>
+</sequence>
+</complexType>
+</element>
+</schema>

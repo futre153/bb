@@ -1,0 +1,72 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0948 130502POBNSKBAAXXX5287899366
+       Correspondent Input Reference     : 0948 130502OTPVHUHBAXXX7445546773
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : OTPVHUHBXXX 
+                  OTP BANK PLC.
+                  BUDAPEST HU
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            ST130430CYC/0109
+        25: Account Identification
+            11782007-81186257
+       28C: Statement Number/Sequence Number
+            00079/00001
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 30 April 2013
+            Currency       : HUF (FORINT)
+            Amount         :               #6195890,#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130430 0430 F FINT NONREF                        #11656,#       C
+                               NONREF
+                               INTEREST 31-MAR-13 TO 30-APR-13
+            130430 0430 F S202 130426HU                      #30380,#       D
+                               BASV021939
+                               /OTPREF/BASV021939 B/O POBNSKBA
+            130430 0430 F NCOM 130426HU                       #1300,#       D
+                               BASV021939
+                               /OTPREF/BASV021939 B/O POBNSKBA
+            130430 0430 F NMSC 1303/03351/010                 #8200,#       C
+                               81017-4-16/2013
+                               AT SENDER'S LEQUEST WE DELETED THE
+            130430 0430 F FCOM NOREF                          #4500,#       D
+                               ACMNTFEE201304
+                               ACCNT MAINT. FEE 04.02-04.30
+            130430 0430 F FCOM NOREF                          #5200,#       D
+                               ENTRYFEE1304
+                               BOOKING ENTRY FEE 04.02-04.30
+            130430 0430 F FCOM NOREF                          #1680,#       D
+                               STATMFEE1304
+                               STATEMENT FEE 04.02-04.30
+            130430 0430 F S202 DEV1995316                   #332317,#       C
+                               BAVL022213
+                               /OTPREF/BAVL022213 B/O CIBHHUHB
+            130430 0430 F S202 DEV1995318                   #332317,#       C
+                               BAVL022214
+                               /OTPREF/BAVL022214 B/O CIBHHUHB
+            130430 0430 F S202 DEV1995326                   #332317,#       C
+                               BAVL022215
+                               /OTPREF/BAVL022215 B/O CIBHHUHB
+            130430 0430 F S202 DEV1995328                   #332317,#       C
+                               BAVL022216
+                               /OTPREF/BAVL022216 B/O CIBHHUHB
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 30 April 2013
+            Currency       : HUF (FORINT)
+            Amount         :               #7501954,#
+        64: Closing Avail Bal (Avail Funds)
+            Debit/Credit   : Credit
+            Date           : 30 April 2013
+            Currency       : HUF (FORINT)
+            Amount         :               #7501954,#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:0F7E51295F2D}

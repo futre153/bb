@@ -1,0 +1,72 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0648 130923POBNSKBAAXXX5389936928
+       Correspondent Input Reference     : 2114 130920DEUTDEFFCXXX0434473605
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : DEUTDEFFXXX 
+                  DEUTSCHE BANK AG
+                  FRANKFURT AM MAIN DE
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 34TLDT00005P009A
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            1009494450018502
+        25: Account Identification
+            100 9494451 0000
+       28C: Statement Number/Sequence Number
+            00185/002
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Debit
+            Date           : 20 September 2013
+            Currency       : EUR (EURO)
+            Amount         :                 #80521,36#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130920        NTRF 1309/0120/37895                #5579,20#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130920        NTRF 1309/0120/37929                #5155,56#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130920        NTRF 1309/1400/37918                #5000,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130920        NTRF 1309/0120/37907                #3653,74#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130920        NTRF 1309/0120/37923                #3414,06#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130920        NTRF 1309/0120/37971                #2600,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130920        NTRF 1309/0120/37908                #2270,78#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130920        NTRF 1309/0120/37935                #2000,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130920        NTRF 1309/0120/37921                #1727,25#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130920        NTRF 1309/4500/37968                #1700,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130920        NTRF 1309/0120/37943                #1604,64#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130920        NTRF 1309/0120/37924                #1016,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130920        NTRF 1309/3600/37920                 #800,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130920        NTRF 1309/0120/37963                 #768,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130920        NTRF 1309/0120/37900                 #744,30#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130920        NTRF 1309/0120/37934                 #680,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130920        NTRF 1309/0120/37938                 #630,60#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130920        NTRF 1309/0120/37930                 #627,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Debit
+            Date           : 20 September 2013
+            Currency       : EUR (EURO)
+            Amount         :                #120492,49#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:7B1D43B77EEA}
+       {DLM:}

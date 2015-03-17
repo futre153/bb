@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<entry key="DatabaseURL">jdbc:sapdb://P3600X006/SWNT2</entry>
+	<entry key="Driver">com.sap.dbtech.jdbc.DriverSapDB</entry>
+	<entry key="user">swnt2</entry> 
+	<entry key="password">swnt2</entry>
+	<entry key="dbconnector.tables">fin_msgs,saa_traps,mail_msgs</entry>
+	<entry key="dbconnector.tables.separator">,</entry>
+	<entry key="dbconnector.tableBatchFormat">conf/table_%s.sql</entry>
+</properties>

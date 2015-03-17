@@ -1,0 +1,33 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 1449 130211POBNSKBAAXXX5232879632
+       Correspondent Input Reference     : 1449 130211POFICHBEAXXX3662894101
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : POFICHBEXXX 
+                  SWISS POST - POSTFINANCE
+                  BERNE CH
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 130211CH00000000
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            2013021114481610
+        25: Account Identification
+            910000417
+       28C: Statement Number/Sequence Number
+            28/1
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 08 February 2013
+            Currency       : CHF (SWISS FRANC)
+            Amount         :                  #3031,43#
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 11 February 2013
+            Currency       : CHF (SWISS FRANC)
+            Amount         :                  #3031,43#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:8ECC1C1A3ED2}

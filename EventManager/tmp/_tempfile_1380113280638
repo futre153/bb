@@ -1,0 +1,53 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0649 130923POBNSKBAAXXX5389936988
+       Correspondent Input Reference     : 1259 130921INGBPLPWAXXX6849669582
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : INGBPLPWXXX 
+                  ING BANK SLASKI SA
+                  KATOWICE PL
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : IRM1400269357431
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            20Sep13
+        25: Account Identification
+            PL93105000861000002341857114
+       28C: Statement Number/Sequence Number
+            168/1
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 19 September 2013
+            Currency       : PLN (ZLOTY)
+            Amount         :                  #6618,82#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130920 0920   S103 1309/0120/37863                 #500,#       D
+                               024347226/00000
+                               POBNSKBAXXX
+            130920 0920   S103 1309/0120/37797                #7461,67#     D
+                               024308379/00000
+                               POBNSKBAXXX
+            130920 0920   S202 DEPO 30652/2                 #400000,#       D
+                               024425989/00000
+                               POBNSKBAXXX
+            130920 0920   S202 KOMBPP4234POBNBA             #423400,#       C
+                               024411799/00000
+                               KOMBCZPPXXX
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 20 September 2013
+            Currency       : PLN (ZLOTY)
+            Amount         :                 #22057,15#
+        64: Closing Avail Bal (Avail Funds)
+            Debit/Credit   : Credit
+            Date           : 20 September 2013
+            Currency       : PLN (ZLOTY)
+            Amount         :                 #22057,15#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:10958A4CC49F}
+       {DLM:}

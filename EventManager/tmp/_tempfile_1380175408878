@@ -1,0 +1,84 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0648 130920POBNSKBAAXXX5388936643
+       Correspondent Input Reference     : 0138 130920CEKOCZPPAXXX9304721061
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : CEKOCZPPXXX 
+                  CESKOSLOVENSKA OBCHODNI BANKA, A.S.
+                  (HEAD OFFICE)
+                  PRAGUE CZ
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 19SEP13DAILY    
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            19SEP13DAILY
+        25: Account Identification
+            0080101866513653
+       28C: Statement Number/Sequence Number
+            00183/1
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 18 September 2013
+            Currency       : CZK (CZECH KORUNA)
+            Amount         :               #3844827,64#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130919 0917   S103 NONREF                        #22612,44#     C
+                               3059116309
+                               3059116309
+            130919 0917   S103 NONREF                         #1846,#       C
+                               3060091309
+                               3060091309
+            130919 0917   FMSC NONREF                         #8798,#       C
+                               1000082309
+                               1000082309
+            130919 0917   FMSC 9000142309                    #17079,02#     D
+                               9000142309
+                               38080
+            130919 0917   FCHG 9000142309                      #350,#       D
+                               9000142309
+                               38080 OUR CHGS
+            130919 0917   FMSC 9000143309                    #62915,64#     D
+                               9000143309
+                               38081
+            130919 0917   FCHG 9000143309                      #140,#       D
+                               9000143309
+                               38081 OUR CHGS
+            130919 0917   FMSC 9000144309                   #783031,69#     D
+                               9000144309
+                               38084
+            130919 0917   FCHG 9000144309                     #8085,#       D
+                               9000144309
+                               38084 OUR CHGS
+            130919 0917   FMSC 9000146309                     #1100,#       D
+                               9000146309
+                               38093
+            130919 0917   FCHG 9000146309                       #35,#       D
+                               9000146309
+                               38093 OUR CHGS
+            130919 0919   FMSC NONREF                        #31647,69#     C
+                               8000192309
+                               0919POBNSKCZK93
+            130919 0919   FMSC NONREF                          #580,#       C
+                               8000193309
+                               0919POBNSKCZK93
+            130919 0919   FMSC 632000822                      #4590,#       C
+                               201309190123417
+                               PAYMENT FOR: POBNSKBAXXX OUR REFER
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 19 September 2013
+            Currency       : CZK (CZECH KORUNA)
+            Amount         :               #3042165,42#
+        64: Closing Avail Bal (Avail Funds)
+            Debit/Credit   : Credit
+            Date           : 19 September 2013
+            Currency       : CZK (CZECH KORUNA)
+            Amount         :               #3042165,42#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:46108D6C6783}
+       {DLM:}

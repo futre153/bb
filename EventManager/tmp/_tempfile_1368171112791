@@ -1,0 +1,81 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 1237 130318POBNSKBAAXXX5257888512
+       Correspondent Input Reference     : 2037 130318BOTKJPJTAXXX1831437410
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : BOTKJPJTXXX 
+                  BANK OF TOKYO-MITSUBISHI UFJ, LTD., THE
+                  (HEAD OFFICE)
+                  TOKYO JP
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            50
+        25: Account Identification
+            653-0424277
+       28C: Statement Number/Sequence Number
+            50
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 15 March 2013
+            Currency       : JPY (YEN)
+            Amount         :               #1057599,#
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 18 March 2013
+            Currency       : JPY (YEN)
+            Amount         :               #1057599,#
+        64: Closing Avail Bal (Avail Funds)
+            Debit/Credit   : Credit
+            Date           : 18 March 2013
+            Currency       : JPY (YEN)
+            Amount         :               #1057599,#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:32C133FC2024}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 1541 130318POBNSKBAAXXX5257888540
+       Correspondent Input Reference     : 1541 130318POFICHBEAXXX3752110046
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : POFICHBEXXX 
+                  SWISS POST - POSTFINANCE
+                  BERNE CH
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 130318CH00000000
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            2013031815393410
+        25: Account Identification
+            910000417
+       28C: Statement Number/Sequence Number
+            53/1
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 15 March 2013
+            Currency       : CHF (SWISS FRANC)
+            Amount         :                #538888,36#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130318 0315   FMSC 35831                           #483,6#      D
+            130315 0315   FMSC INTERBANK PRICE                   #7,#       D
+                               35831
+            130318 0318   FMSC GIRO FROM ONLINE                #780,#       C
+                                SIC 6395 MAILER
+            130318 0318   FMSC GIRO FROM ONLINE                #918,8#      C
+                                SIC 6300 MAILER
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 18 March 2013
+            Currency       : CHF (SWISS FRANC)
+            Amount         :                #540096,56#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:05C84782AF91}

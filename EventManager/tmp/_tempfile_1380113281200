@@ -1,0 +1,45 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 1858 130924POBNSKBAAXXX5390937592
+       Correspondent Input Reference     : 1858 130924TRGTXE3MGXXX1563569875
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : TRGTXE3MXXX 
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 24185027049739  
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            2418502704973900
+        25: Account Identification
+            SK44919
+       28C: Statement Number/Sequence Number
+            00187/00004
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 24 September 2013
+            Currency       : EUR (EURO)
+            Amount         :              #73941315,01#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130924 0924   S103 03FH130923180852             #983871,38#     C
+                               0000000486049390
+                               DEUTDEFFXXX/071522
+            130924 0924   S204 20130924-002-012            #1616605,31#     C
+                               0000000486225415
+                               NBSBSKBXSIP/130207
+            130924 0924   S202 03MT130924333191            #3000000,#       C
+                               0000000486280733
+                               DEUTDEFFXXX/152322/POBNSKBAXXX
+            130924 0924   S204 20130924-001-012           #15281617,61#     D
+                               0000000486115545
+                               NBSBSKBXSIP/090224
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 24 September 2013
+            Currency       : EUR (EURO)
+            Amount         :              #64260174,09#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:EE69F1FC9AEA}

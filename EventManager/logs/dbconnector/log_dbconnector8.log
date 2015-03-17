@@ -1,0 +1,44 @@
+feb 26, 2015 9:14:19 AM org.pabk.emanager.HandlerImpl init
+INFO: dbconnector: logger dbconnector is successfully initailized!
+feb 26, 2015 9:14:19 AM org.pabk.emanager.HandlerImpl run
+INFO: Module org.pabk.emanager.DBConnector is started!
+feb 26, 2015 9:14:19 AM org.pabk.emanager.DBConnector businessLogic
+INFO: Defined table batch format server: conf/table_%s.sql
+feb 26, 2015 9:14:19 AM org.pabk.emanager.DBConnector businessLogic
+INFO: Load tables: fin_msgs,saa_traps,mail_msgs
+feb 26, 2015 9:14:20 AM org.pabk.emanager.DBConnector getDb
+INFO: Thread[Thread-3,5,main] LOCK the access to Thread[Thread-2,5,main]
+feb 26, 2015 9:14:20 AM org.pabk.emanager.DBConnector select
+INFO: SELECT * FROM FIN_MSGS where SAA_SERVER = 'swiftnet1' and STATUS ='0'
+feb 26, 2015 9:14:20 AM org.pabk.emanager.DBConnector businessLogic
+INFO: table fin_msgs already exixts and will not be loaded
+feb 26, 2015 9:14:20 AM org.pabk.emanager.DBConnector businessLogic
+INFO: table saa_traps already exixts and will not be loaded
+feb 26, 2015 9:14:20 AM org.pabk.emanager.DBConnector businessLogic
+INFO: table mail_msgs already exixts and will not be loaded
+feb 26, 2015 9:14:20 AM org.pabk.emanager.DBConnector businessLogic
+INFO: Module org.pabk.emanager.DBConnector goes to SLEEP
+feb 26, 2015 9:14:20 AM org.pabk.emanager.DBConnector close
+INFO: Thread[Thread-3,5,main] UNLOCK the access to Thread[Thread-2,5,main]
+feb 26, 2015 9:14:20 AM org.pabk.emanager.DBConnector update
+INFO: UPDATE FIN_MSGS SET STATUS='1' WHERE ID = '701'
+feb 26, 2015 9:14:20 AM org.pabk.emanager.DBConnector update
+INFO: UPDATE FIN_MSGS SET STATUS='1' WHERE ID = '853'
+feb 26, 2015 9:24:20 AM org.pabk.emanager.DBConnector getDb
+INFO: Thread[Thread-3,5,main] LOCK the access to Thread[Thread-2,5,main]
+feb 26, 2015 9:24:20 AM org.pabk.emanager.DBConnector select
+INFO: SELECT * FROM FIN_MSGS where SAA_SERVER = 'swiftnet1' and STATUS ='0'
+feb 26, 2015 9:24:20 AM org.pabk.emanager.DBConnector close
+INFO: Thread[Thread-3,5,main] UNLOCK the access to Thread[Thread-2,5,main]
+feb 26, 2015 9:34:20 AM org.pabk.emanager.DBConnector getDb
+INFO: Thread[Thread-3,5,main] LOCK the access to Thread[Thread-2,5,main]
+feb 26, 2015 9:34:20 AM org.pabk.emanager.DBConnector select
+INFO: SELECT * FROM FIN_MSGS where SAA_SERVER = 'swiftnet1' and STATUS ='0'
+feb 26, 2015 9:34:20 AM org.pabk.emanager.DBConnector close
+INFO: Thread[Thread-3,5,main] UNLOCK the access to Thread[Thread-2,5,main]
+feb 26, 2015 9:44:20 AM org.pabk.emanager.DBConnector getDb
+INFO: Thread[Thread-3,5,main] LOCK the access to Thread[Thread-2,5,main]
+feb 26, 2015 9:44:20 AM org.pabk.emanager.DBConnector select
+INFO: SELECT * FROM FIN_MSGS where SAA_SERVER = 'swiftnet1' and STATUS ='0'
+feb 26, 2015 9:44:20 AM org.pabk.emanager.DBConnector close
+INFO: Thread[Thread-3,5,main] UNLOCK the access to Thread[Thread-2,5,main]

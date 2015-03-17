@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+    <entry key="realm">transporter-dlx@pbit.sk</entry>
+    <entry key="authType">NTLM</entry>
+	<entry key="secretStorage">classpath:/org/pabk/http/tserver/secrets</entry>
+	<entry key="callbackHandler">org.pabk.http.tserver.context.TinyDigestCallbackHandler</entry>
+    <entry key="java.security.krb5.conf">C:\Program Files\PrepApp\conf\krb5.conf</entry>
+	<entry key="java.security.auth.login.config">C:\Program Files\PrepApp\conf\login.conf</entry>
+	<entry key="javax.security.auth.useSubjectCredsOnly">false</entry>
+	<entry key="javax.net.ssl.keyStore">classpath:/org/pabk/http/tserver/tserver.key</entry>
+	<entry key="javax.net.ssl.keyStorePassword">changeit</entry>
+	<entry key="javax.net.ssl.trustStore">classpath:/org/pabk/http/tserver/cacerts.jks</entry>
+	<entry key="javax.net.ssl.trustStorePassword">changeit</entry>
+	<entry key="javax.net.ssl.trustStoreType">JKS</entry>
+	<entry key="java.security.auth.login.config">D:\TEMP\login.conf</entry>
+	<!-- <entry key="javax.net.debug">all</entry> -->
+</properties>

@@ -1,0 +1,57 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 1854 130919POBNSKBAAXXX5387936564
+       Correspondent Input Reference     : 1854 130919TRGTXE3MDXXX1574968132
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : TRGTXE3MXXX 
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 19184725925815  
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            1918472592581500
+        25: Account Identification
+            SK44919
+       28C: Statement Number/Sequence Number
+            00184/00003
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 19 September 2013
+            Currency       : EUR (EURO)
+            Amount         :              #91185452,9#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130919 0919   S103 130919OSW001659               #95000,#       C
+                               0000000485294074
+                               ALBPPLPWXXX/125732/ALBPPLPWXXX
+            130919 0919   S202 0919FX00870831AA             #100000,#       C
+                               0000000485120916
+                               INGBSKBXXXX/070655/INGBSKBXXXX
+            130919 0919   S202 EUR000630919                 #120000,#       C
+                               0000000485195758
+                               CEKOSKBXXXX/090332/POBNSKBAXXX
+            130919 0919   S204 20130919-002-012             #146541,43#     C
+                               0000000485298025
+                               NBSBSKBXSIP/130641
+            130919 0919   S103 VI13091902644                #205000,#       C
+                               0000000485267290
+                               TATRSKBXXXX/115124/TATRSKBXXXX
+            130919 0919   S103 VC13091901646                #350000,#       C
+                               0000000485227378
+                               TATRSKBXXXX/101319/TATRSKBXXXX
+            130919 0919   S202 18092013179                 #3320000,#       D
+                               0000000484978176
+                               POBNSKBAXXX/070046
+            130919 0919   S204 20130919-001-012            #6204037,#       C
+                               0000000485194568
+                               NBSBSKBXSIP/093132
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 19 September 2013
+            Currency       : EUR (EURO)
+            Amount         :              #95086031,33#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:34E89E3F6153}

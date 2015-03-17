@@ -1,0 +1,87 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0649 130924POBNSKBAAXXX5390937296
+       Correspondent Input Reference     : 0150 130924CEKOCZPPAXXX9307754655
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : CEKOCZPPXXX 
+                  CESKOSLOVENSKA OBCHODNI BANKA, A.S.
+                  (HEAD OFFICE)
+                  PRAGUE CZ
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 23SEP13DAILY    
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            23SEP13DAILY
+        25: Account Identification
+            0080101866513653
+       28C: Statement Number/Sequence Number
+            00185/1
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 20 September 2013
+            Currency       : CZK (CZECH KORUNA)
+            Amount         :               #2290114,47#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130923 0919   S103 NONREF                        #40767,#       C
+                               3066580309
+                               3066580309
+            130923 0923   FMSC NONREF                        #35140,#       C
+                               CZK070130919
+                               B/O CEKOSKBX
+            130923 0919   S103 NONREF                        #14851,#       C
+                               3068776309
+                               3068776309
+            130923 0919   S103 NONREF                         #2244,#       C
+                               3071101309
+                               3071101309
+            130923 0919   FMSC 9000167309                    #23165,86#     D
+                               9000167309
+                               38109
+            130923 0919   FCHG 9000167309                      #350,#       D
+                               9000167309
+                               38109 OUR CHGS
+            130923 0919   FMSC 9000168309                   #124240,59#     D
+                               9000168309
+                               38110
+            130923 0919   FCHG 9000168309                      #280,#       D
+                               9000168309
+                               38110 OUR CHGS
+            130923 0919   FMSC 9000170309                   #450590,30#     D
+                               9000170309
+                               38111
+            130923 0919   FCHG 9000170309                     #6335,#       D
+                               9000170309
+                               38111 OUR CHGS
+            130923 0920   FMSC 9000183309                     #4089,#       D
+                               9000183309
+                               38135
+            130923 0920   FCHG 9000183309                      #105,#       D
+                               9000183309
+                               38135 OUR CHGS
+            130923 0923   FMSC NONREF                        #58175,02#     C
+                               8000225309
+                               0923POBNSKCZK93
+            130923 0923   FMSC NONREF                         #4950,#       C
+                               8000226309
+                               0923POBNSKCZK93
+            130923 0923   FMSC 130923PT36561                  #2000,#       C
+                               201309230099039
+                               B/O PMBPCZPPXXX
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 23 September 2013
+            Currency       : CZK (CZECH KORUNA)
+            Amount         :               #1839085,74#
+        64: Closing Avail Bal (Avail Funds)
+            Debit/Credit   : Credit
+            Date           : 23 September 2013
+            Currency       : CZK (CZECH KORUNA)
+            Amount         :               #1839085,74#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:252B9E1D2DDA}
+       {DLM:}

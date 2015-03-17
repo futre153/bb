@@ -1,0 +1,85 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0648 130924POBNSKBAAXXX5390937248
+       Correspondent Input Reference     : 2112 130923DEUTDEFFCXXX0437488293
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : DEUTDEFFXXX 
+                  DEUTSCHE BANK AG
+                  FRANKFURT AM MAIN DE
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 34TLDT00005Q00IM
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            1009494450018605
+        25: Account Identification
+            100 9494451 0000
+       28C: Statement Number/Sequence Number
+            00186/005
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Debit
+            Date           : 23 September 2013
+            Currency       : EUR (EURO)
+            Amount         :                 #98750,57#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130923        NTRF 1309/0120/38035                  #57,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130923        NTRF 1309/0120/38040                  #48,56#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130923        NTRF 1309/0120/38041                  #35,64#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130923        NTRF 1309/05884/0100                  #30,00#     D
+                               03MT130920339281
+                               D.GESELLSCHAFT FUR RELIGION  9696
+            130923        NMSC 1309/05948/0100                  #28,99#     D
+                               03MT130920343421
+                               IRYNA HOFFMANN BROSSENER DO  9696
+            130923        NTRF 1309/05755/0100                  #20,00#     D
+                               03MT130920316418
+                               BAYERISCHE LANESSBANK 1/GABR 9696
+            130923        NTRF 1309/0120/38004                  #18,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130923        NCHG 1309/2900/37981                  #15,00#     D
+                               03MT130919322554
+                               CHARGES PO EUR459,91         9696
+            130923        NCHG 1309/1900/37980                  #15,00#     D
+                               03MT130919322556
+                               CHARGES PO EUR640,77         9696
+            130923        NCHG 1309/0110/38017                  #15,00#     D
+                               03MT130920165437
+                               CHARGES PO EUR3.700,00       9696
+            130923        NTRF 1309/05747/0100                  #13,03#     D
+                               03MT130920316417
+                               BEURER GMBH 1/ALEXANDER MIKU 9696
+            130923        NTRF 1309/0120/38045                  #10,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130923        NTRF FTT6447437 01               #1130070,93#     C
+                               03MT130923178589
+                               M PO FAV Y/POBNSKBAXXX       9696
+            130923        NTRF 1326600434371258             #350000,00#     C
+                               1326600434371258
+                               INCOMING SEPA CT OUR REF 132 9075
+            130923        NTRF EZU-                         #212763,54#     C
+                               NOS1309230002558
+                               UBERWEISUNG                  9796
+            130923        NTRF 1326600433667214              #56439,40#     C
+                               1326600433667214
+                               INCOMING SEPA CT OUR REF 132 9075
+            130923        NTRF 1326600432829227              #48275,58#     C
+                               1326600432829227
+                               INCOMING SEPA CT OUR REF 132 9075
+            130923        NTRF FAAS326305902900              #46620,00#     C
+                               03MT130923122725
+                               M CA O/COBADEFF              9696
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 23 September 2013
+            Currency       : EUR (EURO)
+            Amount         :               #1745112,66#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:DF1C96BA00E2}
+       {DLM:}

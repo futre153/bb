@@ -1,0 +1,473 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<distribution-list xmlns="http://www.example.org/DistrListSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.example.org/DistrListSchema DistrListSchema.xsd ">
+  <br/>
+  <link janoe = "peter" />
+  <address-list main="branislav brandys" separator="." domain="pabk.sk">
+  	<name enabled="false">daniela stefanovicova</name>
+	<name enabled="false">dana urbankova</name>
+	<name enabled="true">nina poloncova</name>
+	<name enabled="true">branislav brandys</name>
+	<name enabled="false">stanislav kudlac</name>
+	<name enabled="false">jana lacna</name>
+	<name enabled="true">jana lobbova</name>
+	<name enabled="true">martina glittova</name>
+	<name enabled="true">zuzana stevlikova</name>
+	<name enabled="true">darina valentova</name>
+	<name enabled="true">viera zemancova</name>
+	<name enabled="false">michaela sobolicova</name>
+	<name enabled="false">tomas krehel</name>
+	<name enabled="true">andrea tothova</name>
+	<name enabled="false">denisa bartalosova</name>
+	<name enabled="true">blanka javorska</name>
+	<name enabled="true">lucia tejgiova</name>
+	<name enabled="true">martina horvathova</name>
+	<name enabled="true">branislav balaz</name>
+	<name enabled="false">zoltan allo</name>
+	<name enabled="false">bohuslav ukropec</name>
+	<name enabled="true">daniel hajdiak</name>
+	<name enabled="false">matej darovec</name>
+	<name enabled="true">branislav fasung</name>
+	<name enabled="false">martin novak</name>
+	<name enabled="true">alzbeta zahumenska</name>
+	<name enabled="true">peter suba</name>
+	<name enabled="false">marian pallay</name>
+	<name enabled="true">stanislav racek</name>
+	<name enabled="true">peter glasa</name>
+	<name enabled="true">zuzana bartalova</name>
+	<name enabled="true">juraj macko</name>
+	<name enabled="true">alena purdekova</name>
+	<name enabled="false">eva kosikova</name>
+	<name enabled="true">radka kalnassyova</name>
+	<name enabled="true">miroslava drzkova</name>
+	<name enabled="true">martin jelenciak</name>
+	<name enabled="true">tibor kovacs</name>
+	<name enabled="true">eva kleinova</name>
+	<name enabled="true">katarina silhanova</name>
+	<name enabled="false">stanislav mihalovic</name>
+	<name enabled="true">julia bohacova</name>
+	<name enabled="true">lucia gombikova</name>
+	<name enabled="true">zuzana holescakova</name>
+	<name enabled="true">katarina polakovicova</name>
+  </address-list>
+  <address-group-list>
+  	<address-group groupName="zps">
+  		<name>nina poloncova</name>
+  		<name>zuzana stevlikova</name>
+  		<name>andrea tothova</name>
+  		<name>eva kleinova</name>
+  		<name>katarina silhanova</name>
+  		<name>lucia gombikova</name>
+  	</address-group>
+  	<address-group groupName="mt7XX">
+  		<name>nina poloncova</name>
+  		<name>andrea tothova</name>
+  	</address-group>
+  	<address-group groupName="dealing">
+  		<name>branislav fasung</name>
+  		<name>zuzana holescakova</name>
+		<name>alzbeta zahumenska</name>
+  		<name>peter suba</name>
+  	</address-group>
+  	<address-group groupName="middleOffice">
+  		<name>darina valentova</name>
+  		<name>blanka javorska</name>
+  		<name>radka kalnassyova</name>
+  		<name>miroslava drzkova</name>
+  	</address-group>
+  	<address-group groupName="backOffice">
+  		<name>viera zemancova</name>
+  		<name>blanka javorska</name>
+  		<name>martin jelenciak</name>
+  		<name>tibor kovacs</name>
+  	</address-group>
+  	<address-group groupName="mt5XX">
+  		<name>daniel hajdiak</name>
+  		<name>stanislav racek</name>
+  		<name>peter glasa</name>
+  		<name>juraj macko</name>
+  		<name>alena purdekova</name>
+  	</address-group>
+  	<address-group groupName="boSecurities">
+  		<name>blanka javorska</name>
+  		<name>lucia tejgiova</name>
+  		<name>martina horvathova</name>
+  		<name>branislav balaz</name>
+  	</address-group>
+  	<address-group groupName="colpliance">
+  		<name>andrea tothova</name>
+  		<name>julia bohacova</name>
+  	</address-group>
+  	<address-group groupName="dit">
+  		<name>branislav brandys</name>
+  	</address-group>
+  	<address-group groupName="pdm">
+  		<name>nina poloncova</name>
+  		<name>eva kleinova</name>
+  		<name>zuzana stevlikova</name>
+  		<name>katarina polakovicova</name>
+  	</address-group>
+  </address-group-list>
+  <condition-list>
+  	<condition name="trn" priority="4">
+  		<condition-item regExp="NT.*">
+  			<group>middleOffice</group>
+  		</condition-item>
+  		<condition-item regExp="N?[DFLNPS][BEOPRW][AOPW][DNOPT].*">
+  			<group>backOffice</group>
+  		</condition-item>
+  		<condition-item regExp="\d{4}/\d{4}/\d{5}[BCc]?">
+  			<group>zps</group>
+  		</condition-item>
+  		<condition-item regExp="\d{4}/\d{5}/\d{4}[BCc]?">
+  			<group>zps</group>
+  		</condition-item>
+  		<condition-item regExp="[a-zA-Z]{4}/\d{4}">
+  			<group>zps</group>
+  		</condition-item>
+  	</condition>
+  	<condition name="fin" priority="1">
+  		<condition-item regExp="7\d\d">
+  			<group>mt7XX</group>
+  		</condition-item>
+  		<condition-item regExp="10\d">
+  			<group>zps</group>
+  			<group>middleOffice</group>
+  		</condition-item>
+  		<condition-item regExp="199">
+  			<group>zps</group>
+  		</condition-item>
+  		<condition-item regExp="999">
+  			<group>zps</group>
+  			<group>backOffice</group>
+  			<group>middleOffice</group>
+  		</condition-item>
+  		<condition-item regExp="2\d\d">
+  			<group>middleOffice</group>
+  			<group>backOffice</group>
+  			<group>zps</group>
+  		</condition-item>
+		<condition-item regExp="9[0145]0">
+			<group>middleOffice</group>
+		</condition-item>
+		<condition-item regExp="3\d\d">
+			<group>backOffice</group>
+		</condition-item>
+		<condition-item regExp="[19]9[1256]">
+			<group>zps</group>
+		</condition-item>
+		<condition-item regExp="5\d\d">
+			<group>mt5XX</group>
+			<group>dealing</group>
+			<group>boSecurities</group>
+		</condition-item>
+  	</condition>
+  	<condition name="event-number" priority="3">
+  		<condition-item regExp="8[01][23][56]">
+  			<group>zps</group>
+  		</condition-item>
+  	</condition>
+	<condition name="queue" priority="4">
+		<condition-item regExp="[M][o][n][e][y][L][a][u][n][d][e][r][i][n][g][IO][nu][t]?">
+			<group>compliance</group>
+		</condition-item>
+		<condition-item regExp=".+">
+			<group>dit</group>
+		</condition-item>
+	</condition>
+	<condition name="event" priority="5">
+		<condition-item regExp="trap">
+			<group>zps</group>
+			<group>middleOffice</group>
+			<group>backOffice</group>
+			<group>mt7XX</group>
+			<group>boSecurities</group>
+			<group>dit</group>
+			<group>pdm</group>
+		</condition-item>
+	</condition>
+  </condition-list>
+  <msg-list encoding="utf-8">
+  	<message-template class="trap10023" condition="MessagePartner=FileInput">
+  		<recipients type="fixed">
+  			<group>dit</group>
+  		</recipients>
+  		<subject>Správa o odoslaní dávky %Filename|shortName%</subject>
+  		<body>
+  			<line>Server:&#09;%SAA_IP_ADDRESS|lookup% (%SAA_IP_ADDRESS%)</line>
+  			<line>Dávka:&#09;%Filename%</line>
+  			<line>Odoslané správy:&#09;&#09;%InputMessagesAccepted|number%</line>
+  			<line>Odmietnuté správy:&#09;%InputMessagesRejected|number%</line>
+  			<line>Preskočené správy:&#09;%MessagesBypassed|number%</line>
+  			<line></line>
+  			<line>Status: %Result%</line>
+  			<line></line>
+  			<line>Ak sa táto správa nevzťahuje na Vás, prosím považujte ju za bezpredmetnú.</line>
+  			<line></line>
+  			<line>V prípade akýchkoľvek nejasností kontaktujte: %ID|mainRecipient%</line>
+  		</body>
+  		<attachments/>
+  	</message-template>
+  	<message-template class="trap10023" condition="MessagePartner=FileInputCZ">
+  		<recipients type="fixed">
+  			<group>dit</group>
+  		</recipients>
+  		<subject>Správa o odoslaní dávky %Filename|shortName%</subject>
+  		<body>
+  			<line>Server:&#09;%SAA_IP_ADDRESS|lookup% (%SAA_IP_ADDRESS%)</line>
+  			<line>Dávka:&#09;%Filename%</line>
+  			<line>Odoslané správy:&#09;&#09;%InputMessagesAccepted|number%</line>
+  			<line>Odmietnuté správy:&#09;%InputMessagesRejected|number%</line>
+  			<line>Preskočené správy:&#09;%MessagesBypassed|number%</line>
+  			<line></line>
+  			<line>Status: %Result%</line>
+  			<line></line>
+  			<line>Ak sa táto správa nevzťahuje na Vás, prosím považujte ju za bezpredmetnú.</line>
+  			<line></line>
+  			<line>V prípade akýchkoľvek nejasností kontaktujte: %ID|mainRecipient%</line>
+  		</body>
+  		<attachments/>
+  	</message-template>
+  	<message-template class="trap10117">
+  		<recipients type="and">
+  			<group condition="fin">UUMID|getFin</group>
+  			<group condition="trn">UUMID|getReference</group>
+  			<group condition="event">EventType</group>
+  		</recipients>
+  		<subject>Chyba formátovania správy</subject>
+  		<body>
+  			<line>MT%UUMID|getFin% do %UUMID|getBIC%, referencia: %UUMID|getReference%</line>
+  			<line>Názov chyby:&#09;%SAA_EVENT_NAME|decodeB64%</line>
+  			<line>Popis chyby:&#09;formát textu správy je pre tento typ správy nesprávny.</line>
+  			<line></line>
+  			<line>Chyba sa pravdepodobne nachádza na tomto mieste správy alebo tesne nad ním:</line>
+  			<line>%@MessageInfo|decodeB64%</line>
+  			<line></line>
+  			<line>Text pôvodného chybového hlásania je v priloženom súbore.</line>
+  			<line></line>
+  			<line>Ak sa táto správa nevzťahuje na Vás, prosím považujte ju za bezpredmetnú.</line>
+  			<line></line>
+  			<line>V prípade akýchkoľvek nejasností kontaktujte: %ID|mainRecipient%</line>
+  		</body>
+  		<attachments>
+  			<attachment>chybove_hlasenie.txt%SAA_EVENT_DESCRIPTION|decodeB64</attachment>
+  		</attachments>
+  	</message-template>
+  	<message-template class="trap8005">
+  		<recipients type="and">
+  			<group condition="fin">UMID|getFin</group>
+  			<group condition="trn">UMID|getReference</group>
+  			<group condition="event">eventType</group>
+  		</recipients>
+  		<subject>Negatívne potvrdená správa MT%UMID|getFin%</subject>
+  		<body>
+  			<line>MT%UMID|getFin% do %UMID|getBIC%, referencia: %UMID|getReference%</line>
+  			<line>Názov chyby:&#09;%SAA_EVENT_NAME|decodeB64%</line>
+  			<line>Kód chyby:&#09;&#09;%ReasonCode|nackCode%</line>
+  			<line>Chybný riadok:&#09;%ReasonCode|nackLine%</line>
+  			<line>Popis chyby:&#09;%ReasonCode|nackDesc%</line>
+  			<line></line>
+  			<line>Text pôvodného chybového hlásania je v priloženom súbore.</line>
+  			<line></line>
+  			<line>Ak sa táto správa nevzťahuje na Vás, prosím považujte ju za bezpredmetnú.</line>
+  			<line></line>
+  			<line>V prípade akýchkoľvek nejasností kontaktujte: %ID|mainRecipient%</line>
+  		</body>
+  		<attachments>
+  			<attachment>chybove_hlasenie.txt%SAA_EVENT_DESCRIPTION|decodeB64</attachment>
+  		</attachments>
+  	</message-template>
+  	<message-template class="trap2010">
+  		<recipients type="and">
+  			<group condition="queue">Queue</group>
+  			<group condition="event">eventType</group>
+  		</recipients>
+  		<subject>Pretečenie radu %Queue%</subject>
+  		<body>
+  			<line>Rad %Queue% obsahuje viac správ ako je povolené Prosím preverte ich zaradenie a vyprázdnite rad %Queue%.</line>
+  			<line></line>
+  			<line condition="Queue=MoneyLaunderingIn">Správy z automaticky spravovaného radu MoneyLaunderingIn sa nachádzajú na:</line>
+  			<line condition="Queue=MoneyLaunderingIn">https://192.168.210.30:8443/sprava-aplikacii/swift/spravy</line>
+  			<line condition="Queue=MoneyLaunderingOut">Správy z automaticky spravovaného radu MoneyLaunderingOut sa nachádzajú na:</line>
+  			<line condition="Queue=MoneyLaunderingOut">https://192.168.210.30:8443/sprava-aplikacii/swift/spravy</line>
+  			<line condition="Queue=MoneyLaunderingIn"></line>
+  			<line condition="Queue=MoneyLaunderingOut"></line>
+  			<line>Pokiaľ nie ste zodpovedná osoba, prosím kontaktujte SWIFT administrátora.</line>
+  			<line></line>
+  			<line>Text pôvodného chybového hlásania je v priloženom súbore.</line>
+  		</body>
+  		<attachments>
+  			<attachment>chybove_hlasenie.txt%SAA_EVENT_DESCRIPTION|decodeB64</attachment>
+  		</attachments>
+  	</message-template>
+  	<message-template class="trap8026">
+  		<recipients type="fixed">
+  			<group>pdm</group>
+  		</recipients>
+  		<subject>Potenciálne duplicitná správa</subject>
+  		<body>
+  			<line>MT%UMID|getFin% od %UMID|getBIC%, referencia: %UMID|getReference%</line>
+  			<line></line>
+  			<line>Správa bola prijatá ako potenciálne duplicitná, prisím preverte to.</line>
+  			<line></line>
+  			<line>Text pôvodného chybového hlásania je v priloženom súbore.</line>
+  			<line></line>
+  			<line>Ak sa táto správa nevzťahuje na Vás, prosím považujte ju za bezpredmetnú.</line>
+  			<line></line>
+  			<line>V prípade akýchkoľvek nejasností kontaktujte: %ID|mainRecipient%</line>
+  		</body>
+  		<attachments>
+  			<attachment>chybove_hlasenie.txt%SAA_EVENT_DESCRIPTION|decodeB64</attachment>
+  		</attachments>
+  	</message-template>
+  	<message-template class="trap8135">
+  		<recipients type="fixed">
+  			<group>pdm</group>
+  		</recipients>
+  		<subject>Potenciálne duplicitná správa</subject>
+  		<body>
+  			<line>MT%UMID|getFin% od %UMID|getBIC%, referencia: %UMID|getReference%</line>
+  			<line></line>
+  			<line>Správa bola prijatá ako potenciálne duplicitná, prisím preverte to.</line>
+  			<line></line>
+  			<line>Text pôvodného chybového hlásania je v priloženom súbore.</line>
+  			<line></line>
+  			<line>Ak sa táto správa nevzťahuje na Vás, prosím považujte ju za bezpredmetnú.</line>
+  			<line></line>
+  			<line>V prípade akýchkoľvek nejasností kontaktujte: %ID|mainRecipient%</line>
+  		</body>
+  		<attachments>
+  			<attachment>chybove_hlasenie.txt%SAA_EVENT_DESCRIPTION|decodeB64</attachment>
+  		</attachments>
+  	</message-template>
+  	<message-template class="trap10050">
+  		<recipients type="and">
+  			<group condition="fin">UUMID|getFin</group>
+  			<group condition="trn">UUMID|getReference</group>
+  			<group condition="event">eventType</group>
+  		</recipients>
+  		<subject>Chyba smerovania správy</subject>
+  		<body>
+  			<line>MT%UUMID|getFin% do %UUMID|getBIC%, referencia: %UUMID|getReference%</line>
+  			<line>Názov chyby:&#09;%SAA_EVENT_NAME|decodeB64%</line>
+  			<line>Popis chyby:&#09;pre daného korešpondenta nie je definovaná preferovaná sieť.</line>
+  			<line></line>
+  			<line>Možné príčiny chyby:</line>
+  			<line></line>
+  			<line>1. BIC %UUMID|getBIC% nie je definovaný v aplikácii Alliance Access alebo nemá definovanú preferovanú sieť. Kontaktujte prosím SWIFT administrátora.</line>
+  			<line>2. BIC %UUMID|getBIC% neexistuje a je definovaný len interne v BISe v číselníku Finančné inštitúcie. Správu nebude možné odoslať a bude vymazaná.</line>
+  			<line></line>
+  			<line>Text pôvodného chybového hlásania je v priloženom súbore.</line>
+  			<line></line>
+  			<line>Ak sa táto správa nevzťahuje na Vás, prosím považujte ju za bezpredmetnú.</line>
+  			<line></line>
+  			<line>V prípade akýchkoľvek nejasností kontaktujte: %ID|mainRecipient%</line>
+  		</body>
+  		<attachments>
+  			<attachment>chybove_hlasenie.txt%SAA_EVENT_DESCRIPTION|decodeB64</attachment>
+  		</attachments>
+  	</message-template>
+  	<message-template class="fin5XX">
+  		<recipients type="and">
+  			<group condition="fin">MT|getShortMT</group>
+  		</recipients>
+  		<subject>%IO|getDirection% %MT% od %Sender% do %Receiver% ref.%Reference%</subject>
+  		<body>
+  			<line condition="IO=Input">Odoslaná %MT%</line>
+  			<line condition="IO=Output">Prijatá %MT%</line>
+  			<line>Odosielateľ:&#09;%Sender%</line>
+  			<line>Príjemca:&#09;&#09;%Receiver%</line>
+  			<line>Referencia:&#09;&#09;%Reference%</line>
+  			<line></line>
+  			<line>Text správy sa nachádza v príloženom súbore.</line>
+  			<line></line>
+  			<line>Ak sa táto správa nevzťahuje na Vás, prosím považujte ju za bezpredmetnú.</line>
+  			<line></line>
+  			<line>V prípade akýchkoľvek nejasností kontaktujte: %ID|mainRecipient%</line>
+  		</body>
+  		<attachments>
+  			<attachment>AttName%MSG_TEXT</attachment>
+  		</attachments>
+  	</message-template>
+  	<message-template class="finDN">
+  		<recipients type="and">
+  			<group condition="fin">MT2|getShortMT</group>
+  			<group condition="trn">Reference</group>
+  			<group condition="event">eventType</group>
+  		</recipients>
+  		<subject>Oznam o stave %MT2% do %Receiver2% ref.%Reference%</subject>
+  		<body>
+  			<line condition="NumberMT=10">Vaša správa nebola doteraz doručená (%DeliveryStatus%). Prosím čakajte na ďalší oznam.</line>
+  			<!-- <line condition="NumberMT=12">Správa pre odosielateľa správy od správcu služby FIN Copy.</line> -->
+  			<line condition="NumberMT=12">FIN Copy služba:&#09;%ServiceCode%</line>
+  			<line condition="NumberMT=12">Vaša správa bola spracovaná službou FIN Copy a odoslaná do %SWIFTAddress%.</line>
+  			<line condition="NumberMT=12">Správa od správcu FIN Copy služby pre odosielateľa spravy (%Sender2%):</line>
+  			<line condition="NumberMT=12">%InformationForSender%</line>
+  			<line condition="NumberMT=11">Vaša správa bola doručená príjemcovi (%DeliveryStatus%).</line>
+  			<line condition="NumberMT=19">Vaša správa bola zrušená a nebude doručená (%DeliveryStatus%).</line>
+  			<line condition="NumberMT=10">Stav správy:&#09;%MessageStatus%</line>
+  			<line condition="NumberMT=10">Popis:&#09;&#09;%MessageStatus|msgStatusDesc%</line>
+  			<line condition="NumberMT=11"></line>
+  			<line condition="NumberMT=11">Dátum a čas odoslania:&#09;%MessageInputReference|getFullDateFromMIRsk%, %SendingTime|getTime%</line>
+  			<line condition="NumberMT=11">Dátum a čas doručenia:&#09;%MessageOutputReference|getFullDateFromMIRsk%, %ReceptionTime|getTime%</line>
+  			<line condition="NumberMT=19">Iniciátor zrušenia:&#09;%VASCode%</line>
+  			<line condition="NumberMT=19">Príčina zrušenia:&#09;&#09;%AbortCode%</line>
+  			<line condition="NumberMT=19">Popis:&#09;%AbortCode|msgStatusDesc%</line>
+  			<line></line>
+  			<line condition="NumberMT=11">Text doručenej správy sa nachádza v príloženom súbore (%AttName2%).</line>
+  			<line condition="NumberMT=10">Text po pozdržanej správy sa nachádza v príloženom súbore (%AttName2%).</line>
+  			<line condition="NumberMT=19">Text zrušenej správy sa nachádza v príloženom súbore (%AttName2%).</line>
+  			<line condition="NumberMT=12">Text spracovanej správy sa nachádza v príloženom súbore (%AttName2%).</line>
+  			<line></line>
+  			<line condition="NumberMT=11">Text doručenky sa nachádza v príloženom súbore (%AttName%).</line>
+  			<line condition="NumberMT=10">Text doručenky sa nachádza v príloženom súbore (%AttName%).</line>
+  			<line condition="NumberMT=19">Text doručenky sa nachádza v príloženom súbore (%AttName%).</line>
+  			<line condition="NumberMT=12">Text oznamu pre odosielateľa sa nachádza v príloženom súbore (%AttName%).</line>
+  			<line></line>
+  			<line>V prípade akýchkoľvek nejasností kontaktujte: %ID|mainRecipient%</line>
+  		</body>
+  		<attachments>
+  			<attachment>AttName2%MSG_TEXT2</attachment>
+  			<attachment>AttName%MSG_TEXT</attachment>
+  		</attachments>
+  	</message-template>
+  	<message-template class="finDN_NoMsg">
+  		<recipients type="and">
+  			<group condition="trn">MessageUserReference</group>
+  			<group condition="event">eventType</group>
+  		</recipients>
+  		<subject>Oznam o stave správy do %MessageOutputReference|getBICFromMIR% ref.%MessageUserReference%</subject>
+  		<body>
+  			<line condition="NumberMT=10">Vaša správa nebola doteraz doručená (%DeliveryStatus%). Prosím čakajte na ďalší oznam.</line>
+  			<line condition="NumberMT=11">Vaša správa bola doručená príjemcovi (%DeliveryStatus%).</line>
+  			<line condition="NumberMT=19">Vaša správa bola zrušená a nebude doručená (%DeliveryStatus%).</line>
+  			<line condition="NumberMT=10">Stav správy:&#09;%MessageStatus%</line>
+  			<line condition="NumberMT=10">Popis:&#09;&#09;%MessageStatus|msgStatusDesc%</line>
+  			<line condition="NumberMT=11"></line>
+  			<line condition="NumberMT=11">Dátum a čas odoslania:&#09;%MessageInputReference|getFullDateFromMIRsk%, %SendingTime|getTime%</line>
+  			<line condition="NumberMT=11">Dátum a čas doručenia:&#09;%MessageOutputReference|getFullDateFromMIRsk%, %ReceptionTime|getTime%</line>
+  			<line condition="NumberMT=19">Iniciátor zrušenia:&#09;%VASCode%</line>
+  			<line condition="NumberMT=19">Príčina zrušenie:&#09;&#09;%AbortCode%</line>
+  			<line condition="NumberMT=19">Popis:&#09;%AbortCode|msgStatusDesc%</line>
+  			<line condition="NumberMT=12">FIN Copy služba:&#09;%ServiceCode%</line>
+  			<line condition="NumberMT=12">Vaša správa bola spracovaná službou FIN Copy a odoslaná do %SWIFTAddress%.</line>
+  			<line condition="NumberMT=12">Správa od správcu FIN Copy služby pre odosielateľa spravy:</line>
+  			<line condition="NumberMT=12">%InformationForSender%</line>
+  			<line></line>
+  			<line condition="NumberMT=10">Text pozdržanej správy nie je k dispozícii.</line>
+  			<line condition="NumberMT=11">Text doručenej správy nie je k dispozícii.</line>
+  			<line condition="NumberMT=19">Text zrušenej správy nie je k dispozícii.</line>
+  			<line condition="NumberMT=12">Text spracovanej správy nie je k dispozícii.</line>
+  			<line></line>
+  			<line condition="NumberMT=11">Text doručenky sa nachádza v príloženom súbore (%AttName%).</line>
+  			<line condition="NumberMT=10">Text doručenky sa nachádza v príloženom súbore (%AttName%).</line>
+  			<line condition="NumberMT=19">Text doručenky sa nachádza v príloženom súbore (%AttName%).</line>
+  			<line condition="NumberMT=12">Text oznamu pre odosielateľa sa nachádza v príloženom súbore (%AttName%).</line>
+  			<line></line>
+  			<line>V prípade akýchkoľvek nejasností kontaktujte: %ID|mainRecipient%</line>
+  		</body>
+  		<attachments>
+  			<attachment>AttName%MSG_TEXT</attachment>
+  		</attachments>
+  	</message-template>
+  </msg-list>
+</distribution-list>

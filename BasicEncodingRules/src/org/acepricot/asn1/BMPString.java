@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.acepricot.ber.BER;
 import org.acepricot.ber.BERConst;
 
-public class BMPString extends ASN1NodeImpl {
+abstract class BMPString extends ASN1NodeImpl {
 	public BMPString (int implicit, int optional, String name) {
 		super (
 				BERConst.T61STRING_TAG_NUMBER,

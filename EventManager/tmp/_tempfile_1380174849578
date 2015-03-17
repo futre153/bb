@@ -1,0 +1,78 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0647 130920POBNSKBAAXXX5388936573
+       Correspondent Input Reference     : 2115 130919DEUTDEFFCXXX0433458644
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : DEUTDEFFXXX 
+                  DEUTSCHE BANK AG
+                  FRANKFURT AM MAIN DE
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 34TLDT00005O00IM
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            1009494450018405
+        25: Account Identification
+            100 9494451 0000
+       28C: Statement Number/Sequence Number
+            00184/005
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 19 September 2013
+            Currency       : EUR (EURO)
+            Amount         :               #2570985,86#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130919        NTRF 1309/0600/37822                 #100,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NTRF 1309/05134/0100                 #100,00#     D
+                               03MT130918337555
+                               ANDREA BANIKOVA 1/HELENA BAN 9696
+            130919        NTRF 1309/0120/37819                 #100,00#     D
+                               03MT130917337190
+                               COMCUT MESSESERVICE GMBH MA  9696
+            130919        NTRF 1309/0120/37865                  #99,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NTRF 1309/1100/37884                  #85,26#     D
+                               03MT130918313020
+                               CAMPING CALA GOGO AVEARMAND  9696
+            130919        NTRF 1309/1100/37885                  #75,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NTRF 1309/0120/37838                  #70,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NTRF 1309/3000/37859                  #68,98#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NTRF 1309/0120/37826                  #66,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NTRF 1309/4000/37855                  #50,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NRTI POLA/3288                        #50,00#     D
+                               OUTGOING SEPA CT RETURN      9075
+            130919        NTRF 1309/0120/37828                  #32,10#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NTRF 1309/0600/37821                  #31,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NTRF 1309/0120/37824                  #25,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NCHG 1309/0120/37880                  #17,00#     D
+                               03MT130918313019
+                               CHARGES PO EUR20.000,00      9696
+            130919        NTRF 1309/0120/37866                  #15,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130919        NCHG 1309/0120/37819                  #15,00#     D
+                               03MT130917337190
+                               CHARGES PO EUR100,00         9696
+            130919        NCHG 1309/0120/37853                  #15,00#     D
+                               03MT130918167677
+                               CHARGES PO EUR120,00         9696
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 19 September 2013
+            Currency       : EUR (EURO)
+            Amount         :               #2569971,52#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:8D9EFD386DA8}
+       {DLM:}

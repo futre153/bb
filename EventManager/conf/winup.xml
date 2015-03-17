@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tns:list xmlns:tns="http://www.example.org/win7up" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.example.org/win7up win7up.xsd ">
+	<tns:item>
+		<tns:name>BankSecure</tns:name>
+		<tns:application>
+			<tns:name>BankSecure</tns:name>
+			<tns:version>5.1/5.2/5.3</tns:version>
+			<tns:description>Aplikácia pre český klíring</tns:description>
+		</tns:application>
+		<tns:suplier>
+			<tns:legalAddress>
+				<tns:name>EDITEL CZ, s.r.o.</tns:name>
+				<tns:street>V parku</tns:street>
+				<tns:streetNumber>2309/6</tns:streetNumber>
+				<tns:zip>148 00</tns:zip>
+				<tns:city>Praha 4</tns:city>
+				<tns:country>Česká republika</tns:country>
+			</tns:legalAddress>
+			<tns:contactPerson>
+				<tns:contactName>
+					<tns:firstName>Luboš</tns:firstName>
+					<tns:surName>Peřina</tns:surName>
+				</tns:contactName>
+				<tns:e-mail>lubos.perina@editel.cz</tns:e-mail>
+			</tns:contactPerson>
+			<tns:contactPerson>
+				<tns:contactName>
+					<tns:firstName>Jakub</tns:firstName>
+					<tns:surName>Hora</tns:surName>
+				</tns:contactName>
+				<tns:e-mail>jakub.hora@edite.cz</tns:e-mail>
+			</tns:contactPerson>
+		</tns:suplier>
+		<tns:status>
+			<tns:statusCode>supported</tns:statusCode>
+		</tns:status>
+		<tns:sources>
+			<tns:href>\\pba04x041\rozne\win7up\doc\editel\BankSecure_5.1.pdf</tns:href>
+			<tns:href>\\pba04x041\rozne\win7up\doc\editel\BankSecure.htm</tns:href>
+		</tns:sources>
+		<tns:actions>
+			<tns:action>
+				<tns:date>2012-12-20</tns:date>
+				<tns:time>08:38:00</tns:time>
+				<tns:description>dodávateľ oslovený</tns:description>
+			</tns:action>
+			<tns:action>
+				<tns:date>2012-12-20</tns:date>
+				<tns:time>08:54:00</tns:time>
+				<tns:description>dodávateľ odpovedal - aplikácia je podporovaná</tns:description>
+			</tns:action>
+		</tns:actions>
+		<tns:margins>
+			<tns:margin>Aplikáciu je nutné odladiť a otestovať vzhľadom na odlišné podmienky pri vývoji a nasadení v Poštovej banke (DMZ).</tns:margin>
+		</tns:margins>
+	</tns:item>
+</tns:list>

@@ -1,0 +1,314 @@
+mar 16, 2015 11:40:43 AM org.pabk.emanager.HandlerImpl init
+INFO: movefilehandler: logger movefilehandler is successfully initailized!
+mar 16, 2015 11:40:43 AM org.pabk.emanager.HandlerImpl run
+INFO: Module org.pabk.emanager.MoveFileHandler is started!
+mar 16, 2015 11:40:58 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value , for property move.separator from properties.
+mar 16, 2015 11:40:58 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value p3600x006 for property move.sourceServer from properties.
+mar 16, 2015 11:40:59 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value p3600x006 for property move.destinationServer from properties.
+mar 16, 2015 11:40:59 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for property move.sourceFileMask from properties.
+mar 16, 2015 11:41:01 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value 0,8,23,27 for property move.renameFile from properties.
+mar 16, 2015 11:41:03 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value Broadcast,Broadcast_cz,OKB_DT,OKB_DT_CZ,prijate_spravy,prijate_spravy_cz,system,system_cz,Target,Vypisy_DF for property move.queues from properties.
+mar 16, 2015 11:41:05 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value move for property move.operation
+mar 16, 2015 11:41:13 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value \x09\x09 for property move.stmt.originalSeq
+mar 16, 2015 11:41:20 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value 9,12 for property move.stmt.replacementSeq
+mar 16, 2015 11:41:25 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value p3600x006 for property move.queue.Broadcast.sourceServer
+mar 16, 2015 11:41:25 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value p3600x006 for property move.queue.Broadcast.destinationServer
+mar 16, 2015 11:41:25 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value C$\AMT\amt_pobn\amt\queues\Broadcast\in for property move.queue.Broadcast.source from properties.
+mar 16, 2015 11:41:26 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value C$\ARCHIVE\BATCH\Broadcast for property move.queue.Broadcast.destination from properties.
+mar 16, 2015 11:41:26 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for property move.queue.Broadcast.sourceFileMask
+mar 16, 2015 11:41:26 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value null for property move.queue.Broadcast.renameFile
+mar 16, 2015 11:41:27 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value move for property move.queue.Broadcast.operation
+mar 16, 2015 11:41:28 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value p3600x006 for property move.queue.Broadcast_cz.sourceServer
+mar 16, 2015 11:41:28 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value p3600x006 for property move.queue.Broadcast_cz.destinationServer
+mar 16, 2015 11:41:28 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value C$\AMT\amt_pobn\amt\queues\Broadcast_cz\in for property move.queue.Broadcast_cz.source from properties.
+mar 16, 2015 11:41:29 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value C$\ARCHIVE\BATCH\Broadcast_cz for property move.queue.Broadcast_cz.destination from properties.
+mar 16, 2015 11:41:29 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for property move.queue.Broadcast_cz.sourceFileMask
+mar 16, 2015 11:41:29 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value null for property move.queue.Broadcast_cz.renameFile
+mar 16, 2015 11:41:30 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value move for property move.queue.Broadcast_cz.operation
+mar 16, 2015 11:41:30 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value p3600x006 for property move.queue.OKB_DT.sourceServer
+mar 16, 2015 11:41:31 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value p3600x006 for property move.queue.OKB_DT.destinationServer
+mar 16, 2015 11:41:31 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value C$\AMT\amt_pobn\amt\queues\OKB_DT\in for property move.queue.OKB_DT.source from properties.
+mar 16, 2015 11:41:31 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value C$\ARCHIVE\BATCH\OKB_DT for property move.queue.OKB_DT.destination from properties.
+mar 16, 2015 11:41:32 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for property move.queue.OKB_DT.sourceFileMask
+mar 16, 2015 11:41:32 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value null for property move.queue.OKB_DT.renameFile
+mar 16, 2015 11:41:33 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value move for property move.queue.OKB_DT.operation
+mar 16, 2015 11:41:33 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value p3600x006 for property move.queue.OKB_DT_CZ.sourceServer
+mar 16, 2015 11:41:34 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value p3600x006 for property move.queue.OKB_DT_CZ.destinationServer
+mar 16, 2015 11:41:34 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value C$\AMT\amt_pobn\amt\queues\OKB_DT_CZ\in for property move.queue.OKB_DT_CZ.source from properties.
+mar 16, 2015 11:41:34 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value C$\ARCHIVE\BATCH\OKB_DT_CZ for property move.queue.OKB_DT_CZ.destination from properties.
+mar 16, 2015 11:41:34 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for property move.queue.OKB_DT_CZ.sourceFileMask
+mar 16, 2015 11:41:34 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value null for property move.queue.OKB_DT_CZ.renameFile
+mar 16, 2015 11:41:35 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value move for property move.queue.OKB_DT_CZ.operation
+mar 16, 2015 11:41:36 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value p3600x006 for property move.queue.prijate_spravy.sourceServer
+mar 16, 2015 11:41:36 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value p3600x006 for property move.queue.prijate_spravy.destinationServer
+mar 16, 2015 11:41:37 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value C$\AMT\amt_pobn\amt\queues\prijate_spravy\in for property move.queue.prijate_spravy.source from properties.
+mar 16, 2015 11:41:37 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value C$\ARCHIVE\BATCH\Administration\prijate_spravy for property move.queue.prijate_spravy.destination from properties.
+mar 16, 2015 11:41:37 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for property move.queue.prijate_spravy.sourceFileMask
+mar 16, 2015 11:41:37 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value null for property move.queue.prijate_spravy.renameFile
+mar 16, 2015 11:41:38 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value move for property move.queue.prijate_spravy.operation
+mar 16, 2015 11:41:39 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value p3600x006 for property move.queue.prijate_spravy_cz.sourceServer
+mar 16, 2015 11:41:39 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value p3600x006 for property move.queue.prijate_spravy_cz.destinationServer
+mar 16, 2015 11:41:39 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value C$\AMT\amt_pobn\amt\queues\prijate_spravy_cz\in for property move.queue.prijate_spravy_cz.source from properties.
+mar 16, 2015 11:41:39 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz for property move.queue.prijate_spravy_cz.destination from properties.
+mar 16, 2015 11:41:40 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for property move.queue.prijate_spravy_cz.sourceFileMask
+mar 16, 2015 11:41:40 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value null for property move.queue.prijate_spravy_cz.renameFile
+mar 16, 2015 11:41:41 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value move for property move.queue.prijate_spravy_cz.operation
+mar 16, 2015 11:41:42 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value p3600x006 for property move.queue.system.sourceServer
+mar 16, 2015 11:41:42 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value p3600x006 for property move.queue.system.destinationServer
+mar 16, 2015 11:41:42 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value C$\AMT\amt_pobn\amt\queues\system\in for property move.queue.system.source from properties.
+mar 16, 2015 11:41:42 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value C$\ARCHIVE\BATCH\Administration\system for property move.queue.system.destination from properties.
+mar 16, 2015 11:41:42 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for property move.queue.system.sourceFileMask
+mar 16, 2015 11:41:43 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value null for property move.queue.system.renameFile
+mar 16, 2015 11:41:43 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value move for property move.queue.system.operation
+mar 16, 2015 11:41:44 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value p3600x006 for property move.queue.system_cz.sourceServer
+mar 16, 2015 11:41:45 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value p3600x006 for property move.queue.system_cz.destinationServer
+mar 16, 2015 11:41:45 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value C$\AMT\amt_pobn\amt\queues\system_cz\in for property move.queue.system_cz.source from properties.
+mar 16, 2015 11:41:45 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value C$\ARCHIVE\BATCH\Administration\system_cz for property move.queue.system_cz.destination from properties.
+mar 16, 2015 11:41:45 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for property move.queue.system_cz.sourceFileMask
+mar 16, 2015 11:41:45 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value null for property move.queue.system_cz.renameFile
+mar 16, 2015 11:41:47 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value move for property move.queue.system_cz.operation
+mar 16, 2015 11:41:48 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value p3600x006 for property move.queue.Target.sourceServer
+mar 16, 2015 11:41:48 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value p3600x006 for property move.queue.Target.destinationServer
+mar 16, 2015 11:41:48 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value C$\AMT\amt_pobn\amt\queues\Target\in for property move.queue.Target.source from properties.
+mar 16, 2015 11:41:48 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value C$\ARCHIVE\BATCH\Target for property move.queue.Target.destination from properties.
+mar 16, 2015 11:41:49 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for property move.queue.Target.sourceFileMask
+mar 16, 2015 11:41:49 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value null for property move.queue.Target.renameFile
+mar 16, 2015 11:41:49 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value move for property move.queue.Target.operation
+mar 16, 2015 11:41:55 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value p3600x006 for property move.queue.Vypisy_DF.sourceServer
+mar 16, 2015 11:41:55 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value p3600x006 for property move.queue.Vypisy_DF.destinationServer
+mar 16, 2015 11:41:56 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value C$\AMT\amt_pobn\amt\queues\Vypisy_DF\in for property move.queue.Vypisy_DF.source from properties.
+mar 16, 2015 11:41:56 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value C$\ARCHIVE\BATCH\Vypisy_DF for property move.queue.Vypisy_DF.destination from properties.
+mar 16, 2015 11:41:56 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for property move.queue.Vypisy_DF.sourceFileMask
+mar 16, 2015 11:41:57 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value null for property move.queue.Vypisy_DF.renameFile
+mar 16, 2015 11:41:58 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value convertStmtAndMove for property move.queue.Vypisy_DF.operation from properties.
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value 11 for property move.poolInterval
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler businessLogic
+INFO: MoveFileHandler is working
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Start moving files on queue Broadcast
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Found source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\Broadcast\in for queue Broadcast
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Found destination directory \\p3600x006\C$\ARCHIVE\BATCH\Broadcast for queue Broadcast
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for input files on queue Broadcast
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Rename output files [0, 8, 23, 27] applies on queue Broadcast
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: 0 files found on source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\Broadcast\in that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] on queue Broadcast
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Successfully ends moving files on queue Broadcast
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Start moving files on queue Broadcast_cz
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Found source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\Broadcast_cz\in for queue Broadcast_cz
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Found destination directory \\p3600x006\C$\ARCHIVE\BATCH\Broadcast_cz for queue Broadcast_cz
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for input files on queue Broadcast_cz
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Rename output files [0, 8, 23, 27] applies on queue Broadcast_cz
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: 0 files found on source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\Broadcast_cz\in that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] on queue Broadcast_cz
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Successfully ends moving files on queue Broadcast_cz
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Start moving files on queue OKB_DT
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Found source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\OKB_DT\in for queue OKB_DT
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Found destination directory \\p3600x006\C$\ARCHIVE\BATCH\OKB_DT for queue OKB_DT
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for input files on queue OKB_DT
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Rename output files [0, 8, 23, 27] applies on queue OKB_DT
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: 0 files found on source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\OKB_DT\in that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] on queue OKB_DT
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Successfully ends moving files on queue OKB_DT
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Start moving files on queue OKB_DT_CZ
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Found source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\OKB_DT_CZ\in for queue OKB_DT_CZ
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Found destination directory \\p3600x006\C$\ARCHIVE\BATCH\OKB_DT_CZ for queue OKB_DT_CZ
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for input files on queue OKB_DT_CZ
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Rename output files [0, 8, 23, 27] applies on queue OKB_DT_CZ
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: 0 files found on source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\OKB_DT_CZ\in that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] on queue OKB_DT_CZ
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Successfully ends moving files on queue OKB_DT_CZ
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Start moving files on queue prijate_spravy
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Found source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\prijate_spravy\in for queue prijate_spravy
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Found destination directory \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy for queue prijate_spravy
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for input files on queue prijate_spravy
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Rename output files [0, 8, 23, 27] applies on queue prijate_spravy
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: 0 files found on source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\prijate_spravy\in that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] on queue prijate_spravy
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Successfully ends moving files on queue prijate_spravy
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Start moving files on queue prijate_spravy_cz
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Found source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\prijate_spravy_cz\in for queue prijate_spravy_cz
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Found destination directory \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz for queue prijate_spravy_cz
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for input files on queue prijate_spravy_cz
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Rename output files [0, 8, 23, 27] applies on queue prijate_spravy_cz
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: 0 files found on source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\prijate_spravy_cz\in that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] on queue prijate_spravy_cz
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Successfully ends moving files on queue prijate_spravy_cz
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Start moving files on queue system
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Found source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\system\in for queue system
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Found destination directory \\p3600x006\C$\ARCHIVE\BATCH\Administration\system for queue system
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for input files on queue system
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Rename output files [0, 8, 23, 27] applies on queue system
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: 0 files found on source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\system\in that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] on queue system
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Successfully ends moving files on queue system
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Start moving files on queue system_cz
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Found source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\system_cz\in for queue system_cz
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Found destination directory \\p3600x006\C$\ARCHIVE\BATCH\Administration\system_cz for queue system_cz
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for input files on queue system_cz
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Rename output files [0, 8, 23, 27] applies on queue system_cz
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: 0 files found on source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\system_cz\in that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] on queue system_cz
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Successfully ends moving files on queue system_cz
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Start moving files on queue Target
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Found source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\Target\in for queue Target
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Found destination directory \\p3600x006\C$\ARCHIVE\BATCH\Target for queue Target
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for input files on queue Target
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Rename output files [0, 8, 23, 27] applies on queue Target
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: 0 files found on source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\Target\in that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] on queue Target
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Successfully ends moving files on queue Target
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Start moving files on queue Vypisy_DF
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Found source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\Vypisy_DF\in for queue Vypisy_DF
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Found destination directory \\p3600x006\C$\ARCHIVE\BATCH\Vypisy_DF for queue Vypisy_DF
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for input files on queue Vypisy_DF
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Rename output files [0, 8, 23, 27] applies on queue Vypisy_DF
+mar 16, 2015 11:42:49 AM org.pabk.emanager.MoveFileHandler execute
+INFO: 1 files found on source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\Vypisy_DF\in that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] on queue Vypisy_DF
+mar 16, 2015 11:43:08 AM org.pabk.emanager.MoveFileHandler execute
+INFO: File \\p3600x006\C$\AMT\amt_pobn\amt\queues\Vypisy_DF\in\00255294_20150310061025.prt found on queue Vypisy_DF
+mar 16, 2015 11:45:05 AM org.pabk.emanager.MoveFileHandler convertStmt
+INFO: File \\p3600x006\C$\AMT\amt_pobn\amt\queues\Vypisy_DF\in\00255294_20150310061025.prt was successfully stmt converted on queue Vypisy_DF
+mar 16, 2015 11:45:10 AM org.pabk.emanager.MoveFileHandler execute
+INFO: File \\p3600x006\C$\AMT\amt_pobn\amt\queues\Vypisy_DF\in\00255294_20150310061025.prt is successfully moved to \\p3600x006\C$\ARCHIVE\BATCH\Vypisy_DF\00255294.prt no queue Vypisy_DF
+mar 16, 2015 11:45:10 AM org.pabk.emanager.MoveFileHandler execute
+INFO: Successfully ends moving files on queue Vypisy_DF
+mar 16, 2015 11:45:10 AM org.pabk.emanager.MoveFileHandler businessLogic
+INFO: MoveFileHandler is SLEEPING

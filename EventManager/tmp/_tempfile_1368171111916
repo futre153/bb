@@ -1,0 +1,2329 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 1854 130311POBNSKBAAXXX5252886657
+       Correspondent Input Reference     : 1854 130311TRGTXE3MBXXX1436641544
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : TRGTXE3MXXX 
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 11184807583718  
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            1118480758371800
+        25: Account Identification
+            SK44919
+       28C: Statement Number/Sequence Number
+            00049/00002
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :             #145935573,77#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130311 0311   S103 1303/1500/24254                #1430,#       D
+                               0000000440603000
+                               POBNSKBAXXX/070731
+            130311 0311   S103 GBA110338X6FD3Y8               #1630,#       C
+                               0000000440739026
+                               MIDLGB22XXX/074400/MIDLGB22XXX
+            130311 0311   S103 1303/0120/24266                #1731,#       D
+                               0000000440618910
+                               POBNSKBAXXX/070759
+            130311 0311   S103 T1303/0120/24275               #2158,3#      D
+                               0000000440665594
+                               POBNSKBAXXX/070915
+            130311 0311   S103 MPBZ21346781260B               #3619,#       C
+                               0000000440701479
+                               INGBNL2AXXX/070817
+            130311 0311   S103 3315088803                     #7000,#       C
+                               0000000440744702
+                               CITIGB2LXXX/074610/NFSCUS3BXXX
+            130311 0311   S103 VR13031102583                  #8537,16#     C
+                               0000000440867574
+                               TATRSKBXXXX/112723/TATRSKBXXXX
+            130311 0311   S103 ASW72841/110313               #10000,#       C
+                               0000000440914574
+                               RZBAATWWXXX/131113/MOSWRUM1KHA
+            130311 0311   S103 GBA11033H96FZ0JK              #19822,22#     C
+                               0000000440884782
+                               MIDLGB22XXX/120522/MIDLGB22XXX
+            130311 0311   S103 3025908313008317              #38092,6#      C
+                               0000000440719343
+                               BAPPIT22XXX/071510/CREBIT22XXX
+            130311 0311   S202 A130311004117852              #50000,#       C
+                               0000000440973300
+                               NBSBSKBXXXX/153026
+            130311 0311   S103 1303/0120/24224               #70700,#       D
+                               0000000440532187
+                               POBNSKBAXXX/070537
+            130311 0311   S103 1303/1700/24278               #94718,95#     D
+                               0000000440656385
+                               POBNSKBAXXX/070902
+            130311 0311   S204 1303110016500000             #111041,14#     D
+                               0000000440851937
+                               FDXXSKBAXXX/105900
+            130311 0311   S202 SPOT 7006/2                  #150000,#       D
+                               0000000440305373
+                               POBNSKBAXXX/100002
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :             #145642495,36#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:392E3EB48120}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 1856 130311POBNSKBAAXXX5252886658
+       Correspondent Input Reference     : 1856 130311TRGTXE3MGXXX1421040287
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : TRGTXE3MXXX 
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 11184807583718  
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            1118480758371800
+        25: Account Identification
+            SK44919
+       28C: Statement Number/Sequence Number
+            00049/00001
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :             #145932278,81#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130311 0311   S202 FT13066111000430                  #6,64#     C
+                               0000000440358497
+                               BREXPLPWXXX/070218/BREXPLPWRCO
+            130311 0311   S103 GBA110338X6FD3K0                 #12,26#     C
+                               0000000440738854
+                               MIDLGB22XXX/074400/MIDLGB22XXX
+            130311 0311   S103 ASW59690/080313                  #52,5#      C
+                               0000000440561538
+                               RZBAATWWXXX/070623/RZBHHR2XXXX
+            130311 0311   S103 FT138202929271                  #200,#       C
+                               0000000440879285
+                               LOYDGB2LXXX/115233/LOYDGB2LXXX
+            130311 0311   S103 0143909240144533                #250,#       C
+                               0000000440795713
+                               IPBSIE2DXXX/091453/IPBSIE2DXXX
+            130311 0311   S103 FT138199180271                  #300,#       C
+                               0000000440854007
+                               LOYDGB2LXXX/110257/LOYDGB2LXXX
+            130311 0311   S204 CDCP1630300016                  #355,#       C
+                               0000000440789551
+                               CSDSSKBAXXX/090553
+            130311 0311   S103 O754233EUR                      #479,9#      C
+                               0000000440692567
+                               MANEHUHBXXX/070501/HUSTHUHBXXX
+            130311 0311   S103 FT138198450271                  #487,96#     C
+                               0000000440848460
+                               LOYDGB2LXXX/105346/LOYDGB2LXXX
+            130311 0311   S103 2447063018730000                #596,54#     C
+                               0000000440750647
+                               KBLXLULLXXX/075229/KBLXLULLXXX
+            130311 0311   S103 H01303116198625                 #671,18#     C
+                               0000000440861642
+                               BBRUBEBB010/111338/SPAVNOBBXXX
+            130311 0311   S103 1303/0120/24230                 #886,92#     D
+                               0000000440582149
+                               POBNSKBAXXX/070646
+            130311 0311   S103 CTDI13030807897                #1000,#       C
+                               0000000440751211
+                               CAIXESBBXXX/075325
+            130311 0311   S103 00901306711                    #1000,#       C
+                               0000000440766025
+                               BACRIT22XXX/082207
+            130311 0311   S103 1303/0120/23812                #1230,1#      D
+                               0000000440484811
+                               POBNSKBAXXX/070439
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :             #145935573,77#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:6A4BB0C1DA98}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 1856 130311POBNSKBAAXXX5252886659
+       Correspondent Input Reference     : 1856 130311TRGTXE3MCXXX1428604983
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : TRGTXE3MXXX 
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 11184807583718  
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            1118480758371800
+        25: Account Identification
+            SK44919
+       28C: Statement Number/Sequence Number
+            00049/00003
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :             #145642495,36#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130311 0311   S103 3315266733                   #166924,55#     C
+                               0000000440872115
+                               CITIGB2LXXX/113706/CITISKBAXXX
+            130311 0311   S103 130311OSW001329              #320000,#       C
+                               0000000440907820
+                               ALBPPLPWXXX/125657/ALBPPLPWXXX
+            130311 0311   S103 3200013031100931             #380000,#       C
+                               0000000440921763
+                               RLNWATWWXXX/132632/RLNWATWWXXX
+            130311 0311   S202 0803201346                   #710000,#       D
+                               0000000440564052
+                               POBNSKBAXXX/070052
+            130311 0311   S204 20130311-002-012             #983303,57#     C
+                               0000000440910438
+                               NBSBSKBXSIP/130159
+            130311 0311   S204 20130311-001-012            #3384654,62#     C
+                               0000000440785287
+                               NBSBSKBXSIP/093653
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :             #150167378,1#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:85C45A8B1AEA}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0651 130312POBNSKBAAXXX5253886663
+       Correspondent Input Reference     : 2115 130311DEUTDEFFCXXX0218272434
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : DEUTDEFFXXX 
+                  DEUTSCHE BANK AG
+                  FRANKFURT AM MAIN DE
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 34TLDT00001H0066
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            1009494450004901
+        25: Account Identification
+            100 9494451 0000
+       28C: Statement Number/Sequence Number
+            00049/001
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 08 March 2013
+            Currency       : EUR (EURO)
+            Amount         :               #2929819,80#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130311        NTRF 2013031123698086            #1132878,13#     D
+                               03MT130311178416
+                               MASTERCARD EUROPE S.P.R.L. C 9696
+            130311        NTRF 1303/0120/24272               #48110,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0120/24263               #40000,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0120/24257               #32544,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0120/24271               #29000,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0120/24258               #20000,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0120/24210               #19913,58#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0120/24220               #18892,68#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0120/24264               #17850,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0120/24216               #15962,46#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0120/24218               #14788,80#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/2100/24244               #10000,00#     D
+                               03MT130308173260
+                               KATARINA GRZNAROVA BOULEVAR  9696
+            130311        NTRF 1303/0120/24217                #9070,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/2800/24212                #7000,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0120/24268                #5814,40#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/2300/24247                #5000,00#     D
+                               03MT130308187892
+                               RENE BOSKOVIC NAGAUTI 303, R 9696
+            130311        NTRF 1303/0120/24221                #4939,14#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0120/24219                #4777,92#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :               #1493278,69#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:ACB246FB169F}
+       {DLM:}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0651 130312POBNSKBAAXXX5253886664
+       Correspondent Input Reference     : 2115 130311DEUTDEFFCXXX0218272435
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : DEUTDEFFXXX 
+                  DEUTSCHE BANK AG
+                  FRANKFURT AM MAIN DE
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 34TLDT00001H009A
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            1009494450004902
+        25: Account Identification
+            100 9494451 0000
+       28C: Statement Number/Sequence Number
+            00049/002
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :               #1493278,69#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130311        NTRF 1303/0120/24267                #4690,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0120/24232                #3912,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0120/24270                #3720,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0120/24240                #3433,12#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0120/24231                #3421,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0120/24256                #3214,58#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0120/24234                #2250,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0120/24260                #1740,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0120/24233                #1640,80#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0120/24265                #1560,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/02125/2300                #1400,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0120/24205                #1354,90#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/02295/0100                #1315,78#     D
+                               03MT130308332007
+                               STEHMENN FURTH 90766 1/ANNA  9696
+            130311        NTRF 1303/0600/24251                #1000,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/1900/24246                 #950,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0120/24206                 #852,20#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0120/24214                 #840,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0120/24262                 #686,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :               #1455298,31#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:466203FB07EB}
+       {DLM:}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0651 130312POBNSKBAAXXX5253886665
+       Correspondent Input Reference     : 2115 130311DEUTDEFFCXXX0218272436
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : DEUTDEFFXXX 
+                  DEUTSCHE BANK AG
+                  FRANKFURT AM MAIN DE
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 34TLDT00001H00CE
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            1009494450004903
+        25: Account Identification
+            100 9494451 0000
+       28C: Statement Number/Sequence Number
+            00049/003
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :               #1455298,31#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130311        NTRF 1303/0120/24243                 #684,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0400/24253                 #589,02#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0600/24198                 #589,02#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0120/24241                 #514,91#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0120/24223                 #501,48#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/1100/24250                 #479,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0120/24236                 #472,02#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0120/24201                 #424,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0120/24225                 #400,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0120/24222                 #358,78#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0120/24235                 #300,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0600/24273                 #200,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0120/24239                 #193,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0120/24242                 #184,14#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0600/24249                 #160,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0600/24199                 #144,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0120/24213                  #74,46#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0120/24261                  #60,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :               #1448970,48#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:FAB1B18364EB}
+       {DLM:}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0651 130312POBNSKBAAXXX5253886666
+       Correspondent Input Reference     : 2115 130311DEUTDEFFCXXX0218272437
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : DEUTDEFFXXX 
+                  DEUTSCHE BANK AG
+                  FRANKFURT AM MAIN DE
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 34TLDT00001H00FI
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            1009494450004904
+        25: Account Identification
+            100 9494451 0000
+       28C: Statement Number/Sequence Number
+            00049/004
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :               #1448970,48#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130311        NTRF 1303/0120/24229                  #21,13#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0120/24203                  #17,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NCHG 1303/2100/24244                  #15,00#     D
+                               03MT130308173260
+                               CHARGES PO EUR10.000,00      9696
+            130311        NCHG 1303/2300/24247                  #15,00#     D
+                               03MT130308187892
+                               CHARGES PO EUR5.000,00       9696
+            130311        NTRF 1303/0120/24238                  #10,80#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF 1303/0120/24228                   #0,72#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130311        NTRF FTT2574918 01                #532678,90#     C
+                               03MT130311186765
+                               M PO FAV Y/POBNSKBAXXX       9696
+            130311        NTRF 1307000323571967              #86263,10#     C
+                               1307000323571967
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343447              #71260,80#     C
+                               1307000323343447
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323745074              #70000,00#     C
+                               1307000323745074
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323603916              #58263,42#     C
+                               1307000323603916
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343437              #50000,00#     C
+                               1307000323343437
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323859854              #40582,00#     C
+                               1307000323859854
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343575              #40040,60#     C
+                               1307000323343575
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343599              #35250,00#     C
+                               1307000323343599
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF FT13067980102667              #34860,00#     C
+                               03MT130308168880
+                               S103 FAV Y/POBNSKBAXXX       9696
+            130311        NTRF 1307000323343445              #28600,32#     C
+                               1307000323343445
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF O00009057662                  #27580,00#     C
+                               03MT130311113490
+                               S103 FAV Y/POBNSKBAXXX       9696
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :               #2524269,97#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:7168586B60B6}
+       {DLM:}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0651 130312POBNSKBAAXXX5253886667
+       Correspondent Input Reference     : 2115 130311DEUTDEFFCXXX0218272438
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : DEUTDEFFXXX 
+                  DEUTSCHE BANK AG
+                  FRANKFURT AM MAIN DE
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 34TLDT00001H00IM
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            1009494450004905
+        25: Account Identification
+            100 9494451 0000
+       28C: Statement Number/Sequence Number
+            00049/005
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :               #2524269,97#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130311        NTRF 019938730705143A              #25000,00#     C
+                               03MT130311351499
+                               S103 FAV Y/POBNSKBAXXX       9696
+            130311        NTRF 1307000323343436              #23940,00#     C
+                               1307000323343436
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF OP13030800111470              #21448,40#     C
+                               03MT130311139818
+                               M CA O/PKOPPLPW              9696
+            130311        NTRF 11054611001                   #18223,36#     C
+                               03MT130311351574
+                               M CA O/11ALEIGB22AXXX686682  9696
+            130311        NTRF 1307000323556182              #17210,00#     C
+                               1307000323556182
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 868AU050042                   #16768,00#     C
+                               03MT130308332715
+                               S103 FAV Y/POBNSKBAXXX       9696
+            130311        NTRF FTT2516173 01                 #16571,96#     C
+                               03MT130311147253
+                               M PO FAV Y/POBNSKBAXXX       9696
+            130311        NTRF 1307000323343572              #15168,00#     C
+                               1307000323343572
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323746310              #15000,00#     C
+                               1307000323746310
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323745069              #13000,00#     C
+                               1307000323745069
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000322698058              #12789,48#     C
+                               1307000322698058
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343581              #12320,00#     C
+                               1307000323343581
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343456              #12000,00#     C
+                               1307000323343456
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343578              #11821,70#     C
+                               1307000323343578
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343441              #11288,13#     C
+                               1307000323343441
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343435              #11166,20#     C
+                               1307000323343435
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343597              #10880,43#     C
+                               1307000323343597
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343631              #10600,00#     C
+                               1307000323343631
+                               INCOMING SEPA CT OUR REF 130 9075
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :               #2799465,63#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:458CEAE30A52}
+       {DLM:}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0651 130312POBNSKBAAXXX5253886668
+       Correspondent Input Reference     : 2115 130311DEUTDEFFCXXX0218272439
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : DEUTDEFFXXX 
+                  DEUTSCHE BANK AG
+                  FRANKFURT AM MAIN DE
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 34TLDT00001H00LQ
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            1009494450004906
+        25: Account Identification
+            100 9494451 0000
+       28C: Statement Number/Sequence Number
+            00049/006
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :               #2799465,63#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130311        NTRF 1307000323343594               #9743,60#     C
+                               1307000323343594
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343454               #9569,92#     C
+                               1307000323343454
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343438               #7870,00#     C
+                               1307000323343438
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343603               #5391,44#     C
+                               1307000323343603
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343497               #4582,89#     C
+                               1307000323343497
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323745070               #4359,55#     C
+                               1307000323745070
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 863AU050901                    #3000,00#     C
+                               03MT130308334064
+                               S103 FAV Y/POBNSKBAXXX       9696
+            130311        NTRF 1307000323343613               #2543,40#     C
+                               1307000323343613
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 13308102829E0100               #2082,84#     C
+                               03MT130308197812
+                               S103 FAV Y/POBNSKBAXXX       9696
+            130311        NTRF 1307000323343455               #2020,00#     C
+                               1307000323343455
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343491               #1853,00#     C
+                               1307000323343491
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343552               #1848,00#     C
+                               1307000323343552
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 990RF13C03406150               #1470,00#     C
+                               03MT130311141601
+                               M CA O/ANZBAU3M              9696
+            130311        NTRF 1307000323343538               #1383,11#     C
+                               1307000323343538
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343577               #1355,00#     C
+                               1307000323343577
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323571963               #1350,00#     C
+                               1307000323571963
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF FT13067001012693               #1260,83#     C
+                               03MT130311137186
+                               M CA O/RCBWPLPW              9696
+            130311        NTRF 1307000323343470               #1250,00#     C
+                               1307000323343470
+                               INCOMING SEPA CT OUR REF 130 9075
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :               #2862399,21#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:E3D92883979C}
+       {DLM:}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0651 130312POBNSKBAAXXX5253886669
+       Correspondent Input Reference     : 2115 130311DEUTDEFFCXXX0218272440
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : DEUTDEFFXXX 
+                  DEUTSCHE BANK AG
+                  FRANKFURT AM MAIN DE
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 34TLDT00001H00OU
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            1009494450004907
+        25: Account Identification
+            100 9494451 0000
+       28C: Statement Number/Sequence Number
+            00049/007
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :               #2862399,21#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130311        NTRF 1307000323343624               #1238,60#     C
+                               1307000323343624
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF TIMTIM3203301084               #1208,85#     C
+                               03MT130311144128
+                               S103 FAV Y/POBNSKBAXXX       9696
+            130311        NTRF 1307000323343495               #1201,52#     C
+                               1307000323343495
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343465               #1200,00#     C
+                               1307000323343465
+                               INCOMING SEPA CT OUR REF 130 9075
+            130312        S202 NONREF                         #1117,09#     C
+                               0019626088
+                               F/OPOSTOVA BANKA, A.S.       9002
+            130311        NTRF 1307000323343494               #1094,54#     C
+                               1307000323343494
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 341312123080                   #1083,00#     C
+                               03MT130311115222
+                               S103 FAV Y/POBNSKBAXXX       9696
+            130311        NTRF 1307000323343443               #1062,50#     C
+                               1307000323343443
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343496               #1025,92#     C
+                               1307000323343496
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343482               #1010,00#     C
+                               1307000323343482
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343461               #1000,00#     C
+                               1307000323343461
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343462               #1000,00#     C
+                               1307000323343462
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343633               #1000,00#     C
+                               1307000323343633
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343570               #1000,00#     C
+                               1307000323343570
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343551                #944,05#     C
+                               1307000323343551
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343490                #927,50#     C
+                               1307000323343490
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343515                #925,75#     C
+                               1307000323343515
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343544                #903,07#     C
+                               1307000323343544
+                               INCOMING SEPA CT OUR REF 130 9075
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :               #2881341,60#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:0A165B9D3C8D}
+       {DLM:}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0651 130312POBNSKBAAXXX5253886670
+       Correspondent Input Reference     : 2115 130311DEUTDEFFCXXX0218272441
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : DEUTDEFFXXX 
+                  DEUTSCHE BANK AG
+                  FRANKFURT AM MAIN DE
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 34TLDT00001H00S2
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            1009494450004908
+        25: Account Identification
+            100 9494451 0000
+       28C: Statement Number/Sequence Number
+            00049/008
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :               #2881341,60#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130311        NTRF 1307000323571959                #900,00#     C
+                               1307000323571959
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343617                #826,40#     C
+                               1307000323343617
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343548                #810,96#     C
+                               1307000323343548
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323829512                #800,00#     C
+                               1307000323829512
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343467                #800,00#     C
+                               1307000323343467
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343453                #784,00#     C
+                               1307000323343453
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343449                #784,00#     C
+                               1307000323343449
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343607                #782,80#     C
+                               1307000323343607
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343606                #779,84#     C
+                               1307000323343606
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343508                #774,27#     C
+                               1307000323343508
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343446                #765,00#     C
+                               1307000323343446
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343547                #752,66#     C
+                               1307000323343547
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343440                #750,00#     C
+                               1307000323343440
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NRTI 1307000323070323                #736,00#     C
+                               1307000323070323
+                               INCOMING SEPA-CT RETURN OUR  9075
+            130311        NTRF 1307000323343540                #728,16#     C
+                               1307000323343540
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343533                #727,69#     C
+                               1307000323343533
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343521                #726,65#     C
+                               1307000323343521
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343511                #724,21#     C
+                               1307000323343511
+                               INCOMING SEPA CT OUR REF 130 9075
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :               #2895294,24#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:D731EFB29418}
+       {DLM:}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0651 130312POBNSKBAAXXX5253886671
+       Correspondent Input Reference     : 2115 130311DEUTDEFFCXXX0218272442
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : DEUTDEFFXXX 
+                  DEUTSCHE BANK AG
+                  FRANKFURT AM MAIN DE
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 34TLDT00001H00V6
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            1009494450004909
+        25: Account Identification
+            100 9494451 0000
+       28C: Statement Number/Sequence Number
+            00049/009
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :               #2895294,24#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130311        NTRF 1307000323343541                #724,13#     C
+                               1307000323343541
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343525                #710,80#     C
+                               1307000323343525
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343523                #710,65#     C
+                               1307000323343523
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343542                #701,85#     C
+                               1307000323343542
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323829513                #700,00#     C
+                               1307000323829513
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343545                #695,67#     C
+                               1307000323343545
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343526                #694,65#     C
+                               1307000323343526
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343609                #690,40#     C
+                               1307000323343609
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343452                #683,00#     C
+                               1307000323343452
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343543                #678,84#     C
+                               1307000323343543
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343546                #669,61#     C
+                               1307000323343546
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343549                #665,51#     C
+                               1307000323343549
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343550                #660,32#     C
+                               1307000323343550
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343535                #650,92#     C
+                               1307000323343535
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343512                #645,16#     C
+                               1307000323343512
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343539                #644,49#     C
+                               1307000323343539
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343513                #633,34#     C
+                               1307000323343513
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343509                #629,99#     C
+                               1307000323343509
+                               INCOMING SEPA CT OUR REF 130 9075
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :               #2907483,57#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:2C9967D92AE1}
+       {DLM:}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0651 130312POBNSKBAAXXX5253886672
+       Correspondent Input Reference     : 2115 130311DEUTDEFFCXXX0218272443
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : DEUTDEFFXXX 
+                  DEUTSCHE BANK AG
+                  FRANKFURT AM MAIN DE
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 34TLDT00001H0132
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            1009494450004910
+        25: Account Identification
+            100 9494451 0000
+       28C: Statement Number/Sequence Number
+            00049/010
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :               #2907483,57#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130311        NTRF 1307000323745066                #600,00#     C
+                               1307000323745066
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343529                #598,83#     C
+                               1307000323343529
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343528                #589,82#     C
+                               1307000323343528
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343532                #586,30#     C
+                               1307000323343532
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343524                #573,81#     C
+                               1307000323343524
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343519                #572,79#     C
+                               1307000323343519
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343531                #566,35#     C
+                               1307000323343531
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323571962                #550,00#     C
+                               1307000323571962
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343584                #549,52#     C
+                               1307000323343584
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343530                #537,78#     C
+                               1307000323343530
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343507                #535,72#     C
+                               1307000323343507
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343537                #521,83#     C
+                               1307000323343537
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343536                #510,24#     C
+                               1307000323343536
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343444                #500,00#     C
+                               1307000323343444
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343477                #500,00#     C
+                               1307000323343477
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343601                #500,00#     C
+                               1307000323343601
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343520                #497,93#     C
+                               1307000323343520
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343487                #489,00#     C
+                               1307000323343487
+                               INCOMING SEPA CT OUR REF 130 9075
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :               #2917263,49#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:F7D8A6FBEEA9}
+       {DLM:}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0651 130312POBNSKBAAXXX5253886673
+       Correspondent Input Reference     : 2115 130311DEUTDEFFCXXX0218272444
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : DEUTDEFFXXX 
+                  DEUTSCHE BANK AG
+                  FRANKFURT AM MAIN DE
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 34TLDT00001H0166
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            1009494450004911
+        25: Account Identification
+            100 9494451 0000
+       28C: Statement Number/Sequence Number
+            00049/011
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :               #2917263,49#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130311        NTRF 1307000323343451                #481,00#     C
+                               1307000323343451
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343450                #481,00#     C
+                               1307000323343450
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343637                #475,71#     C
+                               1307000323343637
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323571957                #450,00#     C
+                               1307000323571957
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343574                #424,00#     C
+                               1307000323343574
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323829510                #422,50#     C
+                               1307000323829510
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343608                #422,20#     C
+                               1307000323343608
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343625                #422,20#     C
+                               1307000323343625
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343610                #422,20#     C
+                               1307000323343610
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343636                #412,00#     C
+                               1307000323343636
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323745072                #410,00#     C
+                               1307000323745072
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323571960                #400,00#     C
+                               1307000323571960
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343616                #378,60#     C
+                               1307000323343616
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343615                #378,60#     C
+                               1307000323343615
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343605                #378,60#     C
+                               1307000323343605
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343626                #378,60#     C
+                               1307000323343626
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343614                #376,00#     C
+                               1307000323343614
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343514                #371,85#     C
+                               1307000323343514
+                               INCOMING SEPA CT OUR REF 130 9075
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :               #2924748,55#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:98A299643D5B}
+       {DLM:}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0651 130312POBNSKBAAXXX5253886674
+       Correspondent Input Reference     : 2115 130311DEUTDEFFCXXX0218272445
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : DEUTDEFFXXX 
+                  DEUTSCHE BANK AG
+                  FRANKFURT AM MAIN DE
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 34TLDT00001H019A
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            1009494450004912
+        25: Account Identification
+            100 9494451 0000
+       28C: Statement Number/Sequence Number
+            00049/012
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :               #2924748,55#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130311        NTRF 1307000323343439                #358,37#     C
+                               1307000323343439
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343612                #355,00#     C
+                               1307000323343612
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343527                #352,29#     C
+                               1307000323343527
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343592                #350,00#     C
+                               1307000323343592
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343611                #333,52#     C
+                               1307000323343611
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343489                #309,86#     C
+                               1307000323343489
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323829517                #306,45#     C
+                               1307000323829517
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323829516                #300,00#     C
+                               1307000323829516
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343468                #300,00#     C
+                               1307000323343468
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343596                #296,40#     C
+                               1307000323343596
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323745075                #270,00#     C
+                               1307000323745075
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343590                #255,20#     C
+                               1307000323343590
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323745077                #250,00#     C
+                               1307000323745077
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343464                #250,00#     C
+                               1307000323343464
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323829514                #248,84#     C
+                               1307000323829514
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323745067                #240,40#     C
+                               1307000323745067
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343635                #235,00#     C
+                               1307000323343635
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343522                #232,60#     C
+                               1307000323343522
+                               INCOMING SEPA CT OUR REF 130 9075
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :               #2929992,48#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:3CBB6C40C32A}
+       {DLM:}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0651 130312POBNSKBAAXXX5253886675
+       Correspondent Input Reference     : 2115 130311DEUTDEFFCXXX0218272446
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : DEUTDEFFXXX 
+                  DEUTSCHE BANK AG
+                  FRANKFURT AM MAIN DE
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 34TLDT00001H01CE
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            1009494450004913
+        25: Account Identification
+            100 9494451 0000
+       28C: Statement Number/Sequence Number
+            00049/013
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :               #2929992,48#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130311        NTRF 1307000323571958                #232,36#     C
+                               1307000323571958
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343442                #230,00#     C
+                               1307000323343442
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343506                #212,78#     C
+                               1307000323343506
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NRTI 1307000323745277                #200,00#     C
+                               1307000323745277
+                               INCOMING SEPA-CT RETURN OUR  9075
+            130311        NTRF 1307000323745071                #200,00#     C
+                               1307000323745071
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343480                #200,00#     C
+                               1307000323343480
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343586                #200,00#     C
+                               1307000323343586
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343593                #195,98#     C
+                               1307000323343593
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343560                #190,00#     C
+                               1307000323343560
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323745076                #160,00#     C
+                               1307000323745076
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343466                #160,00#     C
+                               1307000323343466
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343632                #160,00#     C
+                               1307000323343632
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF FT1303072224O6CY                #160,00#     C
+                               03MT130307199578
+                               S103 FAV Y/POBNSKBAXXX       9696
+            130311        NTRF 1307000323571966                #156,25#     C
+                               1307000323571966
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323571961                #151,00#     C
+                               1307000323571961
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343554                #140,00#     C
+                               1307000323343554
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323745073                #135,00#     C
+                               1307000323745073
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343628                #135,00#     C
+                               1307000323343628
+                               INCOMING SEPA CT OUR REF 130 9075
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :               #2933210,85#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:2F22D7550C0F}
+       {DLM:}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0651 130312POBNSKBAAXXX5253886676
+       Correspondent Input Reference     : 2115 130311DEUTDEFFCXXX0218272447
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : DEUTDEFFXXX 
+                  DEUTSCHE BANK AG
+                  FRANKFURT AM MAIN DE
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 34TLDT00001H01FI
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            1009494450004914
+        25: Account Identification
+            100 9494451 0000
+       28C: Statement Number/Sequence Number
+            00049/014
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :               #2933210,85#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130311        NTRF 1307000323343498                #135,00#     C
+                               1307000323343498
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343562                #135,00#     C
+                               1307000323343562
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323829511                #130,00#     C
+                               1307000323829511
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343600                #130,00#     C
+                               1307000323343600
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323745068                #121,35#     C
+                               1307000323745068
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343499                #120,00#     C
+                               1307000323343499
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343627                #110,00#     C
+                               1307000323343627
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323745078                #100,42#     C
+                               1307000323745078
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323745065                #100,00#     C
+                               1307000323745065
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343476                #100,00#     C
+                               1307000323343476
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343479                #100,00#     C
+                               1307000323343479
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343463                #100,00#     C
+                               1307000323343463
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343555                #100,00#     C
+                               1307000323343555
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343602                 #90,00#     C
+                               1307000323343602
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343503                 #82,00#     C
+                               1307000323343503
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323829515                 #80,92#     C
+                               1307000323829515
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343558                 #80,00#     C
+                               1307000323343558
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343580                 #75,00#     C
+                               1307000323343580
+                               INCOMING SEPA CT OUR REF 130 9075
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :               #2935100,54#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:BD964A504ED7}
+       {DLM:}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0651 130312POBNSKBAAXXX5253886677
+       Correspondent Input Reference     : 2115 130311DEUTDEFFCXXX0218272448
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : DEUTDEFFXXX 
+                  DEUTSCHE BANK AG
+                  FRANKFURT AM MAIN DE
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 34TLDT00001H01IM
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            1009494450004915
+        25: Account Identification
+            100 9494451 0000
+       28C: Statement Number/Sequence Number
+            00049/015
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :               #2935100,54#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130311        NTRF 1307000323343587                 #71,74#     C
+                               1307000323343587
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343568                 #70,00#     C
+                               1307000323343568
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343472                 #70,00#     C
+                               1307000323343472
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343557                 #67,00#     C
+                               1307000323343557
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343504                 #58,00#     C
+                               1307000323343504
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343634                 #58,00#     C
+                               1307000323343634
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343501                 #56,62#     C
+                               1307000323343501
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343493                 #56,29#     C
+                               1307000323343493
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343629                 #55,73#     C
+                               1307000323343629
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343502                 #54,00#     C
+                               1307000323343502
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343569                 #50,00#     C
+                               1307000323343569
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343598                 #50,00#     C
+                               1307000323343598
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343561                 #50,00#     C
+                               1307000323343561
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323571965                 #50,00#     C
+                               1307000323571965
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323571964                 #50,00#     C
+                               1307000323571964
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1303/1200/11977C                 #49,79#     C
+                               03MT130311138024
+                               M CA O/COBADEFF              9696
+            130311        NTRF 1307000323343505                 #46,00#     C
+                               1307000323343505
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343553                 #45,00#     C
+                               1307000323343553
+                               INCOMING SEPA CT OUR REF 130 9075
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :               #2936108,71#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:A29960357B88}
+       {DLM:}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0651 130312POBNSKBAAXXX5253886678
+       Correspondent Input Reference     : 2115 130311DEUTDEFFCXXX0218272449
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : DEUTDEFFXXX 
+                  DEUTSCHE BANK AG
+                  FRANKFURT AM MAIN DE
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 34TLDT00001H01LQ
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            1009494450004916
+        25: Account Identification
+            100 9494451 0000
+       28C: Statement Number/Sequence Number
+            00049/016
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :               #2936108,71#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130311        NTRF 1307000323343448                 #41,12#     C
+                               1307000323343448
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323745064                 #40,00#     C
+                               1307000323745064
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343559                 #40,00#     C
+                               1307000323343559
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323061819                 #35,00#     C
+                               1307000323061819
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343588                 #34,58#     C
+                               1307000323343588
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343500                 #32,62#     C
+                               1307000323343500
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343484                 #30,00#     C
+                               1307000323343484
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343563                 #30,00#     C
+                               1307000323343563
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343492                 #30,00#     C
+                               1307000323343492
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323745079                 #29,20#     C
+                               1307000323745079
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343556                 #23,00#     C
+                               1307000323343556
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343589                 #20,00#     C
+                               1307000323343589
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323852486                 #20,00#     C
+                               1307000323852486
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343591                 #11,10#     C
+                               1307000323343591
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1307000323343571                  #9,11#     C
+                               1307000323343571
+                               INCOMING SEPA CT OUR REF 130 9075
+            130311        NTRF 1303/0400/11978C                  #8,80#     C
+                               03MT130311136137
+                               M CA O/COBADEFF              9696
+            130311        NTRF 1303/4600/11847C                  #6,64#     C
+                               03MT130311136108
+                               M CA O/COBADEFF              9696
+            130311        NTRF 1307000323829518                  #3,90#     C
+                               1307000323829518
+                               INCOMING SEPA CT OUR REF 130 9075
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :               #2936553,78#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:4647C23C766F}
+       {DLM:}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0651 130312POBNSKBAAXXX5253886679
+       Correspondent Input Reference     : 2132 130311PBNKDEFFAXXX7740410249
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : PBNKDEFFXXX 
+                  DEUTSCHE POSTBANK AG
+                  (FRANKFURT BRANCH)
+                  FRANKFURT AM MAIN DE
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : ESSP070213001122
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            0311173015420001
+        25: Account Identification
+            0755739609
+       28C: Statement Number/Sequence Number
+            00049/00001
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 08 March 2013
+            Currency       : EUR (EURO)
+            Amount         :                #143061,12#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130311 0311   NTRF 130308JPN-201551                #300,#       C
+                               01970391729090
+                               CRED ESSP
+            130311 0311   NTRF ELS130308003295                  #50,#       C
+                               00500841729237
+                               CRED ESSP
+            130311 0311   NTRF JP02/0001                         #3,#       D
+                               00359101729641
+                               DEB ESSP
+            130311 0311   NTRF HR02/0044                       #110,#       D
+                               00359131729642
+                               DEB ESSP
+            130311 0311   NTRF BG02/0012                        #36,#       D
+                               00359151729716
+                               DEB ESSP
+            130311 0311   NTRF ELSE043667130308               #1000,#       D
+                               00436671729718
+                               DEB ESSP
+            130311 0311   NTRF ELSE043669130308               #3369,87#     D
+                               00436691729733
+                               DEB ESSP
+            130311 0311   NTRF ELSE043672130308                #400,#       D
+                               00436721729732
+                               DEB ESSP
+            130311 0311   NTRF ELSE043668130308                #250,#       D
+                               00436681729738
+                               DEB ESSP
+            130311 0311   NTRF ELSE043671130308                 #50,#       D
+                               00436711729737
+                               DEB ESSP
+            130311 0311   NTRF HU02/0018                        #66,#       C
+                               00324931729474
+                               CRED ESSP
+            130311 0311   NTRF CHARGES                          #54,#       C
+                               1303115850HARGES
+                               CRED ESSP
+            130311 0311   NTRF DE02/0021                        #74,55#     D
+                               00359321729876
+                               DEB ESSP
+            130311 0311   NTRF ELSE043647130307                #200,#       D
+                               00436471727532
+                               DEB ESSP
+            130311 0311   NTRF ELSE043643130307                #300,#       D
+                               00436431727538
+                               DEB ESSP
+            130311 0311   NTRF ELSE043642130307                #200,#       D
+                               00436421727544
+                               DEB ESSP
+            130311 0311   NTRF ENVREF-SK0002488                #106,01#     C
+                               04770781728940
+                               CRED ESSP
+            130311 0311   NTRF 1303081745136566               #5078,59#     C
+                               01852141729889
+                               CRED ESSP
+            130311 0311   NTRF 130308SK24653602                 #35,#       C
+                               01022341730067
+                               CRED ESSP
+            130311 0311   NTRF 1362989572663                   #500,#       C
+                               00528231732480
+                               CRED ESSP
+            130311 0311   NTRF 130307HRSK00010                  #60,#       C
+                               00533121726827
+                               CRED ESSP
+            130311 0311   NTRF 130306SK0002                   #7357,43#     C
+                               05769141725149
+                               CRED ESSP
+            130311 0311   NTRF 1362664731300                   #200,#       C
+                               00524951727525
+                               CRED ESSP
+            130311 0311   NTRF 1303071746136494                #960,#       C
+                               01846411727728
+                               CRED ESSP
+            130311 0311   NTRF 130307SK0004                    #100,#       C
+                               05775321727710
+                               CRED ESSP
+            130311 0311   NTRF 130307SK0003                   #1200,#       C
+                               05775391727756
+                               CRED ESSP
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :                #153134,73#
+        64: Closing Avail Bal (Avail Funds)
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :                #153382,23#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:C0E6C5CB9A76}
+       {DLM:}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0651 130312POBNSKBAAXXX5253886680
+       Correspondent Input Reference     : 2132 130311PBNKDEFFAXXX7740410250
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : PBNKDEFFXXX 
+                  DEUTSCHE POSTBANK AG
+                  (FRANKFURT BRANCH)
+                  FRANKFURT AM MAIN DE
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : ESSP070213001123
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            0311173015420001
+        25: Account Identification
+            0755739609
+       28C: Statement Number/Sequence Number
+            00049/00002
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :                #153134,73#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130311 0311   NTRF 130308SK24654004                #200,#       C
+                               01022381730065
+                               CRED ESSP
+            130311 0311   NTRF FR02/0019                        #47,5#      C
+                               05218801732179
+                               CRED ESSP
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :                #153382,23#
+        64: Closing Avail Bal (Avail Funds)
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :                #153382,23#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:0D38F5949997}
+       {DLM:}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0651 130312POBNSKBAAXXX5253886714
+       Correspondent Input Reference     : 2119 130311CITISKBADXXX3407829456
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 940 Customer Statement Message
+       Sender   : CITISKBAXXX 
+                  CITIBANK EUROPE PLC, POBOCKA ZAHRANICNEJ BANKY
+                  BRATISLAVA SK
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 30311ZFG27781BRA
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            0100014025
+        25: Account Identification
+            100014025
+       28C: Statement Number/Sequence Number
+            47/1
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :                #115022,17#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130311 0311 R NTRF 3730700453                      #213,1#      D
+                               SK0MANL13070000E
+        86: Information to Account Owner
+            By Order Of  /SK2281300000001000140200
+            Beneficiary  Citibank Europe plc, pob.zahr.banky
+            Payment Details  PABK
+            Payment Details  POPLATOK ZA TXNS 10/03/2013
+            Payment Details  0.047 EUR/TXN
+            By Order Of  POBNSKBA
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130311 0311 R NTRF 3730700450                      #352,95#     D
+                               SK0MANL13070000D
+        86: Information to Account Owner
+            By Order Of  /SK2281300000001000140200
+            Beneficiary  Citibank Europe plc, pob.zahr.banky
+            Payment Details  PABK
+            Payment Details  POPLATOK Z OBRATU 0.7P
+            Payment Details  10/03/2013
+            By Order Of  POBNSKBA
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130311 0311 R NTRF 3730700449                      #795,33#     D
+                               SK0MANL13070000C
+        86: Information to Account Owner
+            By Order Of  /SK2281300000001000140200
+            Beneficiary  Citibank Europe plc, pob.zahr.banky
+            Payment Details  PABK
+            Payment Details  POPLATOK ZA TXNS 09/03/2013
+            Payment Details  0.047 EUR/TXN
+            By Order Of  POBNSKBA
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130311 0311 R NTRF 3730700447                      #978,82#     D
+                               SK0MANL13070000A
+        86: Information to Account Owner
+            By Order Of  /SK2281300000001000140200
+            Beneficiary  Citibank Europe plc, pob.zahr.banky
+            Payment Details  PABK
+            Payment Details  POPLATOK ZA TXNS 08/03/2013
+            Payment Details  0.047 EUR/TXN
+            By Order Of  POBNSKBA
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :                #112681,97#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:324F569B6FAE}
+       {DLM:}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0651 130312POBNSKBAAXXX5253886715
+       Correspondent Input Reference     : 2119 130311CITISKBADXXX3407829459
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 940 Customer Statement Message
+       Sender   : CITISKBAXXX 
+                  CITIBANK EUROPE PLC, POBOCKA ZAHRANICNEJ BANKY
+                  BRATISLAVA SK
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 30311ZFG27782BRA
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            0100014025
+        25: Account Identification
+            100014025
+       28C: Statement Number/Sequence Number
+            47/2
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :                #112681,97#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130311 0311 R NTRF 3730700448                     #1776,58#     D
+                               SK0MANL13070000B
+        86: Information to Account Owner
+            By Order Of  /SK2281300000001000140200
+            Beneficiary  Citibank Europe plc, pob.zahr.banky
+            Payment Details  PABK
+            Payment Details  POPLATOK Z OBRATU 0.7P
+            Payment Details  09/03/2013
+            By Order Of  POBNSKBA
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130311 0311 R NTRF 3730700446                     #1933,16#     D
+                               SK0MANL130700009
+        86: Information to Account Owner
+            By Order Of  /SK2281300000001000140200
+            Beneficiary  Citibank Europe plc, pob.zahr.banky
+            Payment Details  PABK
+            Payment Details  POPLATOK Z OBRATU 0.7P
+            Payment Details  08/03/2013
+            By Order Of  POBNSKBA
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :                #108972,23#
+        64: Closing Avail Bal (Avail Funds)
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :                #108972,23#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:7804F22D4EEE}
+       {DLM:}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0651 130312POBNSKBAAXXX5253886717
+       Correspondent Input Reference     : 2255 130311RBOSGB2LAXXX2667572225
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : RBOSGB2LXXX 
+                  ROYAL BANK OF SCOTLAND PLC
+                  LONDON GB
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 130311RYXM7Y0101
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            GEA002887000S
+        25: Account Identification
+            10005823
+       28C: Statement Number/Sequence Number
+            7048/1
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 08 March 2013
+            Currency       : GBP (POUND STERLING)
+            Amount         :                  #9320,23#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130311        NCHG 1303/4000/24138                  #12,00#     D
+                               RBSDM2I12278461
+                               MAGDALENA HRABOV
+            130311        S103 1303/4000/24138                #1000,00#     D
+                               RBSDM2I12278461
+                               MAGDALENA HRABOV
+            130311        S202 DEPO 30162/2                 #410000,00#     D
+                               RBSDMFF09234506
+                               GIBASKBXXXX
+            130311        S103 MIDLGB22XXX                     #200,00#     C
+                               RBS55CI23684912
+                               SLOVENSKA POSTA
+            130311        S103 BARCGB22XXX                     #500,00#     C
+                               RBS55CI23685351
+                               MARTA KOVACIKOVA
+            130311        NTRF 140 RPS 2013                   #1458,44#     C
+                               CQCTBMC00053587
+            130311        NTRF MM - DEAL                    #410013,48#     C
+                               RBSDMFF09230528
+                               GIBASKBXXXX
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : GBP (POUND STERLING)
+            Amount         :                 #10480,15#
+        64: Closing Avail Bal (Avail Funds)
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : GBP (POUND STERLING)
+            Amount         :                 #10480,15#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:CF3125D4A1D9}
+       {DLM:}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0651 130312POBNSKBAAXXX5253886719
+       Correspondent Input Reference     : 0314 130312CEKOCZPPAXXX9136667826
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : CEKOCZPPXXX 
+                  CESKOSLOVENSKA OBCHODNI BANKA, A.S.
+                  (HEAD OFFICE)
+                  PRAGUE CZ
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 11MAR13DAILY    
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            11MAR13DAILY
+        25: Account Identification
+            0080101866513653
+       28C: Statement Number/Sequence Number
+            00049/1
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 08 March 2013
+            Currency       : CZK (CZECH KORUNA)
+            Amount         :                #333202,20#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130311 0311   FMSC 1303/01888/0100                 #114,#       C
+                               201303117984
+                               1303/01888/0100
+            130311 0311   FMSC 1301/07312/0100                 #477,#       C
+                               201303117984
+                               1301/07312/0100
+            130311 0311   FMSC 1301/07271/0100                 #502,#       C
+                               201303117984
+                               1301/07271/0100
+            130311 0311   FMSC 1301/07311/0100                #1926,#       C
+                               201303117984
+                               1301/07311/0100
+            130311 0311   FMSC 1301/07183/0100                #2100,#       C
+                               201303117984
+                               1301/07183/0100
+            130311 0311   FMSC 1301/07188/0100                #2423,#       C
+                               201303117984
+                               1301/07188/0100
+            130311 0311   FMSC 35731 EG                     #584502,01#     D
+                               201303117986000
+                               35731 EG
+            130311 0311   FMSC 35719 EG                     #140902,23#     D
+                               201303117986000
+                               35719 EG
+            130311 0311   FMSC 35731/FEE EG                   #7560,#       D
+                               201303117986000
+                               35731/FEE EG
+            130311 0311   FMSC 35719/FEE EG                    #175,#       D
+                               201303117986000
+                               35719/FEE EG
+            130311 0307   S103 NONREF                      #8088000,#       C
+                               3022558303
+                               3022558303
+            130311 0311   FMSC 662013                         #4192,30#     C
+                               201303110238072
+                               PAYMENT FOR: POBNSKBAXXX OUR REFER
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : CZK (CZECH KORUNA)
+            Amount         :               #7699797,26#
+        64: Closing Avail Bal (Avail Funds)
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : CZK (CZECH KORUNA)
+            Amount         :               #7699797,26#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:938B88CE72FA}
+       {DLM:}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0651 130312POBNSKBAAXXX5253886720
+       Correspondent Input Reference     : 0446 130312BREDFRPPAXXX6932177403
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 940 Customer Statement Message
+       Sender   : BREDFRPPXXX 
+                  BRED BANQUE POPULAIRE
+                  (HEAD OFFICE)
+                  PARIS FR
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : E20012          
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            550958159009220 
+        25: Account Identification
+            550958159                          
+       28C: Statement Number/Sequence Number
+            009/001
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 08 March 2013
+            Currency       : EUR (EURO)
+            Amount         :                 #48540,07#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130311        NMSC 3001801                         #191,01#     D
+        86: Information to Account Owner
+            LIBELLE VARIABLE
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130311        NMSC 3001802                         #214,45#     D
+        86: Information to Account Owner
+            LIBELLE VARIABLE
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130312        NTRF 1851882                          #13,98#     C
+                               B/O MSA LOIRE ATLANTIQUE VENDEE 
+        86: Information to Account Owner
+            REGLEMENT ETRANGER
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130312        NTRF 1851882                          #23,08#     C
+                               B/O MSA LOIRE ATLANTIQUE VENDEE 
+        86: Information to Account Owner
+            REGLEMENT ETRANGER
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130312        NTRF 1851914                          #31,07#     C
+                               B/O MSA DE TOURAINE
+        86: Information to Account Owner
+            REGLEMENT ETRANGER
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130312        NTRF 1851914                         #199,66#     C
+                               B/O MSA DE TOURAINE
+        86: Information to Account Owner
+            REGLEMENT ETRANGER
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130312        NTRF 1851914                          #33,26#     C
+                               B/O MSA DE TOURAINE
+        86: Information to Account Owner
+            REGLEMENT ETRANGER
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130312        NTRF 1851914                         #157,29#     C
+                               B/O MSA DE TOURAINE
+        86: Information to Account Owner
+            REGLEMENT ETRANGER
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130312        NTRF 1851914                         #166,55#     C
+                               B/O MSA DE TOURAINE
+        86: Information to Account Owner
+            REGLEMENT ETRANGER
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130312        NTRF 1851914                          #18,65#     C
+                               B/O MSA DE TOURAINE
+        86: Information to Account Owner
+            REGLEMENT ETRANGER
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :                 #48778,15#
+        64: Closing Avail Bal (Avail Funds)
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : EUR (EURO)
+            Amount         :                 #48134,61#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:F5F1EA4CA3FC}
+       {DLM:}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0652 130312POBNSKBAAXXX5253886721
+       Correspondent Input Reference     : 2348 130311BKTRUS33CXXX3836575853
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : BKTRUS33XXX 
+                  DEUTSCHE BANK TRUST COMPANY AMERICAS
+                  NEW YORK,NY US
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : ST04414171112700
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            ST04414171112700
+        25: Account Identification
+            04414171
+       28C: Statement Number/Sequence Number
+            00047/00001
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : USD (US DOLLAR)
+            Amount         :                 #87596,18#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130311        NTRF CAP OF 13/03/11                 #300,00#     C
+                               S366064ICP031113
+                               ORG 0001203918 OGB D106861110 ORG
+            130311        NTRF NONE                           #1284,68#     C
+                               S397250ICP031113
+                               ORG 63149298 OGB E TRADE CLEARING,
+            130311        NTRF D0230700035801                #42240,00#     C
+                               M103851IFD031113
+                               ORG 38857974 CYTEC INDUSTRIES, INC
+            130311        S202 MM - DEAL                   #1100017,42#     C
+                               C566392BBK031113
+                               SLOVENSKA SPORITELNA AS
+            130311        NTRF 1303/0120/24146                 #784,54#     D
+                               C478916RBK031113
+                               ECOLED ENERGY CO.,LIMITED
+            130311        NTRF 1303/0120/24123                 #970,00#     D
+                               S184262OCP031113
+                               HOGG ROBINSON PLC
+            130311        NTRF 1303/0120/24124                #3174,20#     D
+                               S184281OCP031113
+                               KEMPINSKI HOTELS SA
+            130311        NTRF 1303/0120/24187                #6759,20#     D
+                               S184285OCP031113
+                               1/F, BIDG 2ND, YOU KING INDUSTRIA
+            130311        S202 DEPO 30163/2                #1100000,00#     D
+                               C658362BBK031113
+                               SLOVENSKA SPORITELNA AS
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : USD (US DOLLAR)
+            Amount         :                #119750,34#
+        64: Closing Avail Bal (Avail Funds)
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : USD (US DOLLAR)
+            Amount         :                #116363,70#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:5BA95EFEE0A6}
+       {DLM:}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0652 130312POBNSKBAAXXX5253886725
+       Correspondent Input Reference     : 0508 130312INGBPLPWAXXX6817568912
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : INGBPLPWXXX 
+                  ING BANK SLASKI SA
+                  KATOWICE PL
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : IRM1400250973911
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            11Mar13
+        25: Account Identification
+            PL93105000861000002341857114
+       28C: Statement Number/Sequence Number
+            49/1
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 08 March 2013
+            Currency       : PLN (ZLOTY)
+            Amount         :                 #23666,27#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130311 0311   NTRF 2909411                      #600000,#       D
+                               1020141
+            130311 0311   NTRF 2903138                      #600141,81#     C
+                               1018155
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : PLN (ZLOTY)
+            Amount         :                 #23808,08#
+        64: Closing Avail Bal (Avail Funds)
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : PLN (ZLOTY)
+            Amount         :                 #23808,08#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:386405168581}
+       {DLM:}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0652 130312POBNSKBAAXXX5253886732
+       Correspondent Input Reference     : 0608 130312OTPVHUHBAXXX7410451864
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : OTPVHUHBXXX 
+                  OTP BANK PLC.
+                  BUDAPEST HU
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            ST130311CYC/0128
+        25: Account Identification
+            11782007-81186257
+       28C: Statement Number/Sequence Number
+            00045/00001
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : HUF (FORINT)
+            Amount         :               #3317764,#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130311 0311 F NCOM 130307HU                       #1300,#       D
+                               BASV016939
+                               /OTPREF/BASV016939 B/O POBNSKBA
+            130311 0311 F S202 KH1303111C000107             #100000,#       C
+                               BAVL017126
+                               /OTPREF/BAVL017126 B/O OKHBHUHB
+            130311 0311 F S202 KH1303071C001581             #265270,#       C
+                               BAVL017104
+                               /OTPREF/BAVL017104 B/O OKHBHUHB
+            130311 0311 F S202 130307HU                     #311833,#       D
+                               BASV016939
+                               /OTPREF/BASV016939 B/O POBNSKBA
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : HUF (FORINT)
+            Amount         :               #3369901,#
+        64: Closing Avail Bal (Avail Funds)
+            Debit/Credit   : Credit
+            Date           : 11 March 2013
+            Currency       : HUF (FORINT)
+            Amount         :               #3369901,#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:8B0FD930EE34}

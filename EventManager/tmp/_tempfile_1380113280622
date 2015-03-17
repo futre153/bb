@@ -1,0 +1,50 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0649 130923POBNSKBAAXXX5389936987
+       Correspondent Input Reference     : 2341 130920BKTRUS33AXXX1378592706
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : BKTRUS33XXX 
+                  DEUTSCHE BANK TRUST COMPANY AMERICAS
+                  NEW YORK,NY US
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : ST04414171202327
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            ST04414171202327
+        25: Account Identification
+            04414171
+       28C: Statement Number/Sequence Number
+            00183/00001
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 20 September 2013
+            Currency       : USD (US DOLLAR)
+            Amount         :                #239955,71#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130920        S202 MM - DEAL                   #2400008,00#     C
+                               C469116BBK092013
+                               SLOVENSKA SPORITELNA AS
+            130920        S202 1309/0120/37846B            #1290000,00#     D
+                               S171729OCP092013
+                               COMMERZBANK AG
+            130920        S202 DEPO 30654/2                #1300000,00#     D
+                               C556363BBK092013
+                               SLOVENSKA SPORITELNA AS
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 20 September 2013
+            Currency       : USD (US DOLLAR)
+            Amount         :                 #49963,71#
+        64: Closing Avail Bal (Avail Funds)
+            Debit/Credit   : Credit
+            Date           : 20 September 2013
+            Currency       : USD (US DOLLAR)
+            Amount         :                 #49963,71#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:D3EECFD06927}
+       {DLM:}

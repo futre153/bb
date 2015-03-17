@@ -1,0 +1,1191 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 1834 130301POBNSKBAAXXX5246884503
+       Correspondent Input Reference     : 1834 130301JTBPCZPPAXXX4170122075
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : JTBPCZPPXXX 
+                  J AND T BANKA A.S.
+                  PRAGUE CZ
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 0301173411005   
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            2013030117341100
+        25: Account Identification
+            0001000010/5800 CZK
+       28C: Statement Number/Sequence Number
+            14/1
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 28 February 2013
+            Currency       : CZK (CZECH KORUNA)
+            Amount         :                #506403,79#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130301 0301   NTRF NONREF                          #100,13#     C
+                               LOA interest settlement with clien
+            130301 0301   FTRF NONREF                          #200,00#     D
+                               030016
+                               MT950 UNOR 02/13 4x50
+            130301 0301   FTRF NONREF                          #125,00#     D
+                               030018
+                               A/C MAITENANCE 02/13
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 01 March 2013
+            Currency       : CZK (CZECH KORUNA)
+            Amount         :                #506178,92#
+        64: Closing Avail Bal (Avail Funds)
+            Debit/Credit   : Credit
+            Date           : 01 March 2013
+            Currency       : CZK (CZECH KORUNA)
+            Amount         :                #506178,92#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:5C5F15F4A33F}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 1857 130301POBNSKBAAXXX5246884504
+       Correspondent Input Reference     : 1857 130301TRGTXE3MFXXX1418898520
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : TRGTXE3MXXX 
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 01185056953680  
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            0118505695368000
+        25: Account Identification
+            SK44919
+       28C: Statement Number/Sequence Number
+            00043/00001
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 01 March 2013
+            Currency       : EUR (EURO)
+            Amount         :             #139140905,99#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130301 0301   S103 3311343529                        #1,22#     C
+                               0000000438786319
+                               CITIGB2LXXX/072822/CITIIE2XXXX
+            130301 0301   S103 3311343518                        #4,8#      C
+                               0000000438786039
+                               CITIGB2LXXX/072757/CITIIE2XXXX
+            130301 0301   S103 2013022800002252                  #5,#       C
+                               0000000438860782
+                               GEBABEBB36A/090140
+            130301 0301   S103 3311343481                        #6,74#     C
+                               0000000438786122
+                               CITIGB2LXXX/072759/CITIIE2XXXX
+            130301 0301   S103 3311343301                       #11,06#     C
+                               0000000438786197
+                               CITIGB2LXXX/072817/CITIIE2XXXX
+            130301 0301   S103 3311343182                       #12,28#     C
+                               0000000438785819
+                               CITIGB2LXXX/072750/CITIIE2XXXX
+            130301 0301   S103 3311343060                       #13,96#     C
+                               0000000438786232
+                               CITIGB2LXXX/072817/CITIIE2XXXX
+            130301 0301   S103 1302/0120/23449                  #14,#       D
+                               0000000438423950
+                               POBNSKBAXXX/070449
+            130301 0301   S103 GBA010338Z5II475                 #14,2#      C
+                               0000000438827723
+                               MIDLGB22XXX/080541/MIDLGB22XXX
+            130301 0301   S103 2013022800000199                 #15,33#     C
+                               0000000438653270
+                               BAWAATWWXXX/070939
+            130301 0301   S103 3311342857                       #15,67#     C
+                               0000000438786489
+                               CITIGB2LXXX/072825/CITIIE2XXXX
+            130301 0301   S103 3311342785                       #17,03#     C
+                               0000000438786656
+                               CITIGB2LXXX/072835/CITIIE2XXXX
+            130301 0301   S103 3311342797                       #17,12#     C
+                               0000000438786828
+                               CITIGB2LXXX/072842/CITIIE2XXXX
+            130301 0301   S103 3311342746                       #17,19#     C
+                               0000000438786655
+                               CITIGB2LXXX/072835/CITIIE2XXXX
+            130301 0301   S103 3311342733                       #17,46#     C
+                               0000000438786943
+                               CITIGB2LXXX/072845/CITIIE2XXXX
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 01 March 2013
+            Currency       : EUR (EURO)
+            Amount         :             #139141061,05#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:619FA532924A}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 1857 130301POBNSKBAAXXX5246884505
+       Correspondent Input Reference     : 1857 130301TRGTXE3MFXXX1418898521
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : TRGTXE3MXXX 
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 01185056953680  
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            0118505695368000
+        25: Account Identification
+            SK44919
+       28C: Statement Number/Sequence Number
+            00043/00010
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 01 March 2013
+            Currency       : EUR (EURO)
+            Amount         :             #139154725,54#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130301 0301   S103 3311289934                      #376,37#     C
+                               0000000438817597
+                               CITIGB2LXXX/075046/CITIIE2XXXX
+            130301 0301   S103 ASW72671/010313                 #384,17#     C
+                               0000000438800803
+                               RZBAATWWXXX/074134/POPUESMMXXX
+            130301 0301   S103 3311289694                      #392,86#     C
+                               0000000438784997
+                               CITIGB2LXXX/072720/CITIIE2XXXX
+            130301 0301   S103 1302/0120/23659                 #400,#       D
+                               0000000438456435
+                               POBNSKBAXXX/070536
+            130301 0301   S103 3311289424                      #403,44#     C
+                               0000000438817237
+                               CITIGB2LXXX/075035/CITIIE2XXXX
+            130301 0301   S103 3311289048                      #429,8#      C
+                               0000000438784558
+                               CITIGB2LXXX/072657/CITIIE2XXXX
+            130301 0301   S103 3311288976                      #434,76#     C
+                               0000000438784379
+                               CITIGB2LXXX/072653/CITIIE2XXXX
+            130301 0301   S103 3311288650                      #459,17#     C
+                               0000000438817846
+                               CITIGB2LXXX/075054/CITIIE2XXXX
+            130301 0301   S103 3311288343                      #486,49#     C
+                               0000000438784215
+                               CITIGB2LXXX/072646/CITIIE2XXXX
+            130301 0301   S103 3311288155                      #495,83#     C
+                               0000000438783180
+                               CITIGB2LXXX/072619/CITIIE2XXXX
+            130301 0301   S103 3311287776                      #527,29#     C
+                               0000000438782355
+                               CITIGB2LXXX/072601/CITIIE2XXXX
+            130301 0301   S103 ASW72658/010313                 #527,5#      C
+                               0000000438800824
+                               RZBAATWWXXX/074134/POPUESMMXXX
+            130301 0301   S103 2013022800000205                #529,17#     C
+                               0000000438686341
+                               BAWAATWWXXX/071024
+            130301 0301   S103 3311287708                      #531,05#     C
+                               0000000438782311
+                               CITIGB2LXXX/072600/CITIIE2XXXX
+            130301 0301   S103 3311287690                      #537,64#     C
+                               0000000438782495
+                               CITIGB2LXXX/072604/CITIIE2XXXX
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 01 March 2013
+            Currency       : EUR (EURO)
+            Amount         :             #139160841,08#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:ED5697184C85}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 1858 130301POBNSKBAAXXX5246884506
+       Correspondent Input Reference     : 1858 130301TRGTXE3MBXXX1430505453
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : TRGTXE3MXXX 
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 01185056953680  
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            0118505695368000
+        25: Account Identification
+            SK44919
+       28C: Statement Number/Sequence Number
+            00043/00009
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 01 March 2013
+            Currency       : EUR (EURO)
+            Amount         :             #139150293,67#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130301 0301   S103 FT137955697271                  #258,8#      C
+                               0000000438910135
+                               LOYDGB2LXXX/102752/LOYDGB2LXXX
+            130301 0301   S103 3311292869                      #260,11#     C
+                               0000000438812345
+                               CITIGB2LXXX/074742/CITIIE2XXXX
+            130301 0301   S103 3311292864                      #260,78#     C
+                               0000000438785438
+                               CITIGB2LXXX/072738/CITIIE2XXXX
+            130301 0301   S103 3311292836                      #261,45#     C
+                               0000000438785825
+                               CITIGB2LXXX/072753/CITIIE2XXXX
+            130301 0301   S103 FT137962145271                  #269,#       C
+                               0000000438947422
+                               LOYDGB2LXXX/114048/LOYDGB2LXXX
+            130301 0301   S103 3311292330                      #278,12#     C
+                               0000000438784869
+                               CITIGB2LXXX/072716/CITIIE2XXXX
+            130301 0301   S103 3311292061                      #292,59#     C
+                               0000000438813594
+                               CITIGB2LXXX/074830/CITIIE2XXXX
+            130301 0301   S103 BR13059135000021                #300,#       C
+                               0000000438403726
+                               BREXPLPWXXX/070433/BREXPLPWMBK
+            130301 0301   S103 3311291771                      #301,74#     C
+                               0000000438784836
+                               CITIGB2LXXX/072715/CITIIE2XXXX
+            130301 0301   S103 3311291604                      #306,54#     C
+                               0000000438785345
+                               CITIGB2LXXX/072736/CITIIE2XXXX
+            130301 0301   S103 3311291460                      #310,8#      C
+                               0000000438784804
+                               CITIGB2LXXX/072714/CITIIE2XXXX
+            130301 0301   S103 3311291297                      #318,55#     C
+                               0000000438784550
+                               CITIGB2LXXX/072657/CITIIE2XXXX
+            130301 0301   S103 3311291122                      #325,08#     C
+                               0000000438785477
+                               CITIGB2LXXX/072738/CITIIE2XXXX
+            130301 0301   S103 3311290777                      #337,08#     C
+                               0000000438784923
+                               CITIGB2LXXX/072718/CITIIE2XXXX
+            130301 0301   S103 3311290501                      #351,23#     C
+                               0000000438815284
+                               CITIGB2LXXX/074931/CITIIE2XXXX
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 01 March 2013
+            Currency       : EUR (EURO)
+            Amount         :             #139154725,54#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:B89E12ABACEF}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 1858 130301POBNSKBAAXXX5246884507
+       Correspondent Input Reference     : 1858 130301TRGTXE3MAXXX1439381146
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : TRGTXE3MXXX 
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 01185056953680  
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            0118505695368000
+        25: Account Identification
+            SK44919
+       28C: Statement Number/Sequence Number
+            00043/00013
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 01 March 2013
+            Currency       : EUR (EURO)
+            Amount         :             #139191242,48#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130301 0301   S103 3311279468                     #2127,97#     C
+                               0000000438773615
+                               CITIGB2LXXX/072231/CITIIE2XXXX
+            130301 0301   S204 CDCP1630200048                 #2325,98#     C
+                               0000000438867250
+                               CSDSSKBAXXX/090934
+            130301 0301   S103 3311279388                     #2439,54#     C
+                               0000000438772026
+                               CITIGB2LXXX/072147/CITIIE2XXXX
+            130301 0301   S103 ASW79669/010313                #3000,#       C
+                               0000000438902092
+                               RZBAATWWXXX/101320/PJCBBY2XXXX
+            130301 0301   S103 T1302/0120/23689               #3079,33#     D
+                               0000000438606563
+                               POBNSKBAXXX/070847
+            130301 0301   S103 1302/0120/23711                #3494,#       D
+                               0000000438611827
+                               POBNSKBAXXX/070856
+            130301 0301   S103 130301OSW000703                #3500,#       C
+                               0000000438910729
+                               ALBPPLPWXXX/102902/ALBPPLPWXXX
+            130301 0301   S103 2013022800010823               #7489,8#      C
+                               0000000438861060
+                               GEBABEBB36A/090152/GEBAATWWXXX
+            130301 0301   S204 1303010016500000               #8879,32#     D
+                               0000000438925441
+                               FDXXSKBAXXX/110200
+            130301 0301   S103 1302/0120/23718                #8914,02#     D
+                               0000000438611898
+                               POBNSKBAXXX/070856
+            130301 0301   S103 GBA01033925GH30G              #13012,07#     C
+                               0000000438739063
+                               MIDLGB22XXX/071917/MIDLGB22XXX
+            130301 0301   S202 SPOT 6981/2                   #22000,#       D
+                               0000000438081832
+                               POBNSKBAXXX/100003
+            130301 0301   S103 130301029445                  #35786,5#      C
+                               0000000439017597
+                               SCBLDEFXXXX/135553/ISBKTRISINT
+            130301 0301   S103 0137BGX0766747G0              #36241,1#      C
+                               0000000438886559
+                               BLOPIT22XXX/094509/BEPOIT21XXX
+            130301 0301   S202 SPOT 6982/2                   #40000,#       D
+                               0000000438227176
+                               POBNSKBAXXX/100003
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 01 March 2013
+            Currency       : EUR (EURO)
+            Amount         :             #139210798,77#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:126FCF904174}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 1859 130301POBNSKBAAXXX5246884508
+       Correspondent Input Reference     : 1859 130301TRGTXE3MHXXX1426458607
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : TRGTXE3MXXX 
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 01185056953680  
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            0118505695368000
+        25: Account Identification
+            SK44919
+       28C: Statement Number/Sequence Number
+            00043/00002
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 01 March 2013
+            Currency       : EUR (EURO)
+            Amount         :             #139141061,05#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130301 0301   S103 3311342590                       #18,56#     C
+                               0000000438786765
+                               CITIGB2LXXX/072840/CITIIE2XXXX
+            130301 0301   S103 3311342513                       #18,9#      C
+                               0000000438786779
+                               CITIGB2LXXX/072840/CITIIE2XXXX
+            130301 0301   S103 3311342554                       #19,14#     C
+                               0000000438786695
+                               CITIGB2LXXX/072836/CITIIE2XXXX
+            130301 0301   S103 3311342528                       #19,4#      C
+                               0000000438786696
+                               CITIGB2LXXX/072836/CITIIE2XXXX
+            130301 0301   S103 3311342398                       #19,58#     C
+                               0000000438786881
+                               CITIGB2LXXX/072844/CITIIE2XXXX
+            130301 0301   S103 3311342176                       #21,61#     C
+                               0000000438787470
+                               CITIGB2LXXX/072907/CITIIE2XXXX
+            130301 0301   S103 3311342120                       #22,01#     C
+                               0000000438787356
+                               CITIGB2LXXX/072906/CITIIE2XXXX
+            130301 0301   S103 3311341958                       #22,82#     C
+                               0000000438787538
+                               CITIGB2LXXX/072909/CITIIE2XXXX
+            130301 0301   S103 3311341903                       #23,21#     C
+                               0000000438787444
+                               CITIGB2LXXX/072907/CITIIE2XXXX
+            130301 0301   S103 3311341823                       #23,5#      C
+                               0000000438787658
+                               CITIGB2LXXX/072924/CITIIE2XXXX
+            130301 0301   S103 3311341530                       #24,81#     C
+                               0000000438787222
+                               CITIGB2LXXX/072902/CITIIE2XXXX
+            130301 0301   S103 3311341486                       #25,14#     C
+                               0000000438791933
+                               CITIGB2LXXX/073534/CITIIE2XXXX
+            130301 0301   S103 3311341462                       #25,35#     C
+                               0000000438793037
+                               CITIGB2LXXX/073618/CITIIE2XXXX
+            130301 0301   S103 3311341176                       #25,64#     C
+                               0000000438791926
+                               CITIGB2LXXX/073534/CITIIE2XXXX
+            130301 0301   S103 3311341242                       #25,66#     C
+                               0000000438791783
+                               CITIGB2LXXX/073531/CITIIE2XXXX
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 01 March 2013
+            Currency       : EUR (EURO)
+            Amount         :             #139141396,38#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:4CA1E48C94AB}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 1859 130301POBNSKBAAXXX5246884509
+       Correspondent Input Reference     : 1859 130301TRGTXE3MHXXX1426458608
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : TRGTXE3MXXX 
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 01185056953680  
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            0118505695368000
+        25: Account Identification
+            SK44919
+       28C: Statement Number/Sequence Number
+            00043/00004
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 01 March 2013
+            Currency       : EUR (EURO)
+            Amount         :             #139141895,02#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130301 0301   S103 3311335771                       #42,92#     C
+                               0000000438795114
+                               CITIGB2LXXX/073745/CITIIE2XXXX
+            130301 0301   S103 3311335675                       #44,04#     C
+                               0000000438795101
+                               CITIGB2LXXX/073744/CITIIE2XXXX
+            130301 0301   S103 3311335608                       #44,3#      C
+                               0000000438795497
+                               CITIGB2LXXX/073807/CITIIE2XXXX
+            130301 0301   S103 03MT130301342068                 #45,#       C
+                               0000000439044108
+                               DEUTDEFFXXX/145007/CRESCHZZ80A
+            130301 0301   S103 3311335495                       #46,15#     C
+                               0000000438795753
+                               CITIGB2LXXX/073822/CITIIE2XXXX
+            130301 0301   S103 3311335310                       #47,06#     C
+                               0000000438795708
+                               CITIGB2LXXX/073822/CITIIE2XXXX
+            130301 0301   S103 3311335143                       #48,08#     C
+                               0000000438795748
+                               CITIGB2LXXX/073822/CITIIE2XXXX
+            130301 0301   S103 3311334981                       #50,41#     C
+                               0000000438796106
+                               CITIGB2LXXX/073828/CITIIE2XXXX
+            130301 0301   S103 3311334877                       #51,5#      C
+                               0000000438796332
+                               CITIGB2LXXX/073844/CITIIE2XXXX
+            130301 0301   S103 3311334785                       #52,11#     C
+                               0000000438796349
+                               CITIGB2LXXX/073845/CITIIE2XXXX
+            130301 0301   S103 3311334529                       #54,15#     C
+                               0000000438797553
+                               CITIGB2LXXX/073917/CITIIE2XXXX
+            130301 0301   S103 3311334426                       #54,57#     C
+                               0000000438796944
+                               CITIGB2LXXX/073906/CITIIE2XXXX
+            130301 0301   S103 3311334318                       #56,01#     C
+                               0000000438797370
+                               CITIGB2LXXX/073915/CITIIE2XXXX
+            130301 0301   S103 FT137964915271                   #60,#       C
+                               0000000438969464
+                               LOYDGB2LXXX/122123/LOYDGB2LXXX
+            130301 0301   S103 3311333774                       #61,73#     C
+                               0000000438798097
+                               CITIGB2LXXX/073947/CITIIE2XXXX
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 01 March 2013
+            Currency       : EUR (EURO)
+            Amount         :             #139142653,05#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:596B3882C482}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 1859 130301POBNSKBAAXXX5246884510
+       Correspondent Input Reference     : 1859 130301TRGTXE3MEXXX1417132361
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : TRGTXE3MXXX 
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 01185056953680  
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            0118505695368000
+        25: Account Identification
+            SK44919
+       28C: Statement Number/Sequence Number
+            00043/00014
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 01 March 2013
+            Currency       : EUR (EURO)
+            Amount         :             #139210798,77#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130301 0301   S103 H01303016183366               #45940,04#     C
+                               0000000439007594
+                               BBRUBEBB010/133721/MOSWRUM1KHA
+            130301 0301   S103 130301OSW001567               #49000,#       C
+                               0000000438996570
+                               ALBPPLPWXXX/131451/ALBPPLPWXXX
+            130301 0301   S103 1302/0120/23662               #95055,75#     D
+                               0000000438456434
+                               POBNSKBAXXX/070536
+            130301 0301   S103 1302/0120/23661              #101590,99#     D
+                               0000000438456433
+                               POBNSKBAXXX/070536
+            130301 0301   S202 A130301004107468             #310000,#       C
+                               0000000439068852
+                               NBSBSKBXXXX/153642
+            130301 0301   S202 SPOT 6980/2                  #330000,#       D
+                               0000000438081838
+                               POBNSKBAXXX/100002
+            130301 0301   S202 0301FX00778600AA             #424000,#       C
+                               0000000438856109
+                               INGBSKBXXXX/085203/INGBSKBXXXX
+            130301 0301   S202 2802201341                   #510000,#       D
+                               0000000438519095
+                               POBNSKBAXXX/070049
+            130301 0301   S103 1303/0120/23814              #724550,6#      D
+                               0000000439072271
+                               POBNSKBAXXX/154238
+            130301 0301   S103 T1303/3900/23803            #1888866,26#     D
+                               0000000439060574
+                               POBNSKBAXXX/152227
+            130301 0301   S103 VG13030103232               #2500000,#       C
+                               0000000439017084
+                               TATRSKBXXXX/135431/TATRSKBXXXX
+            130301 0301   S204 20130301-002-012            #3494439,87#     D
+                               0000000438990086
+                               NBSBSKBXSIP/130226
+            130301 0301   S103 T1303/3900/23822            #3962377,32#     D
+                               0000000439066250
+                               POBNSKBAXXX/153355
+            130301 0301   S204 20130301-001-012           #19824733,23#     C
+                               0000000438861408
+                               NBSBSKBXSIP/093252
+            130301 0301   S204 CDCP1630200049             #25405207,65#     D
+                               0000000438864109
+                               CSDSSKBAXXX/090539
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 01 March 2013
+            Currency       : EUR (EURO)
+            Amount         :             #125852383,6#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:FE354F8E81C7}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 1859 130301POBNSKBAAXXX5246884511
+       Correspondent Input Reference     : 1859 130301TRGTXE3MEXXX1417132373
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : TRGTXE3MXXX 
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 01185056953680  
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            0118505695368000
+        25: Account Identification
+            SK44919
+       28C: Statement Number/Sequence Number
+            00043/00005
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 01 March 2013
+            Currency       : EUR (EURO)
+            Amount         :             #139142653,05#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130301 0301   S103 3311333381                       #64,57#     C
+                               0000000438798043
+                               CITIGB2LXXX/073946/CITIIE2XXXX
+            130301 0301   S103 3311333116                       #67,79#     C
+                               0000000438798621
+                               CITIGB2LXXX/074014/CITIIE2XXXX
+            130301 0301   S103 3311333096                       #68,62#     C
+                               0000000438798791
+                               CITIGB2LXXX/074017/CITIIE2XXXX
+            130301 0301   S103 NWBDM2I30940900                  #70,#       C
+                               0000000439008537
+                               NWBKGB2LXXX/133844/ULSBGB2BXXX
+            130301 0301   S103 3311332885                       #70,35#     C
+                               0000000438798669
+                               CITIGB2LXXX/074015/CITIIE2XXXX
+            130301 0301   S103 3311332740                       #71,98#     C
+                               0000000438799179
+                               CITIGB2LXXX/074036/CITIIE2XXXX
+            130301 0301   S103 007068636226                     #72,9#      C
+                               0000000438869542
+                               SUBASKBXXXX/110002/SUBASKBXXXX
+            130301 0301   S103 3311332292                       #77,15#     C
+                               0000000438800029
+                               CITIGB2LXXX/074113/CITIIE2XXXX
+            130301 0301   S103 3311331843                       #82,58#     C
+                               0000000438799554
+                               CITIGB2LXXX/074051/CITIIE2XXXX
+            130301 0301   S103 3311331659                       #84,43#     C
+                               0000000438800536
+                               CITIGB2LXXX/074126/CITIIE2XXXX
+            130301 0301   S103 3311331488                       #86,17#     C
+                               0000000438800815
+                               CITIGB2LXXX/074134/CITIIE2XXXX
+            130301 0301   S103 3311339498                       #87,65#     C
+                               0000000438800733
+                               CITIGB2LXXX/074130/CITIIE2XXXX
+            130301 0301   S103 3311331243                       #89,01#     C
+                               0000000438800318
+                               CITIGB2LXXX/074118/CITIIE2XXXX
+            130301 0301   S103 3311331228                       #89,52#     C
+                               0000000438800700
+                               CITIGB2LXXX/074129/CITIIE2XXXX
+            130301 0301   S103 3311330858                       #94,32#     C
+                               0000000438801655
+                               CITIGB2LXXX/074156/CITIIE2XXXX
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 01 March 2013
+            Currency       : EUR (EURO)
+            Amount         :             #139143830,09#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:CFEC8391567A}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 1859 130301POBNSKBAAXXX5246884512
+       Correspondent Input Reference     : 1859 130301TRGTXE3MDXXX1430616031
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : TRGTXE3MXXX 
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 01185056953680  
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            0118505695368000
+        25: Account Identification
+            SK44919
+       28C: Statement Number/Sequence Number
+            00043/00006
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 01 March 2013
+            Currency       : EUR (EURO)
+            Amount         :             #139143830,09#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130301 0301   S103 3311330869                       #94,51#     C
+                               0000000438802128
+                               CITIGB2LXXX/074208/CITIIE2XXXX
+            130301 0301   S103 3311330827                       #94,55#     C
+                               0000000438801951
+                               CITIGB2LXXX/074205/CITIIE2XXXX
+            130301 0301   S103 3311330745                       #95,67#     C
+                               0000000438802348
+                               CITIGB2LXXX/074216/CITIIE2XXXX
+            130301 0301   S103 3311330697                       #96,15#     C
+                               0000000438801844
+                               CITIGB2LXXX/074159/CITIIE2XXXX
+            130301 0301   S103 007068636020                     #97,2#      C
+                               0000000438865430
+                               SUBASKBXXXX/110002/SUBASKBXXXX
+            130301 0301   S103 3311330614                       #97,53#     C
+                               0000000438802744
+                               CITIGB2LXXX/074225/CITIIE2XXXX
+            130301 0301   S103 3311330523                       #98,27#     C
+                               0000000438802321
+                               CITIGB2LXXX/074215/CITIIE2XXXX
+            130301 0301   S103 3311330172                      #104,07#     C
+                               0000000438802900
+                               CITIGB2LXXX/074227/CITIIE2XXXX
+            130301 0301   S103 3311330142                      #104,58#     C
+                               0000000438802414
+                               CITIGB2LXXX/074217/CITIIE2XXXX
+            130301 0301   S103 3311330107                      #104,64#     C
+                               0000000438802071
+                               CITIGB2LXXX/074207/CITIIE2XXXX
+            130301 0301   S103 3311330125                      #104,78#     C
+                               0000000438802031
+                               CITIGB2LXXX/074206/CITIIE2XXXX
+            130301 0301   S103 3311329986                      #107,94#     C
+                               0000000438802710
+                               CITIGB2LXXX/074224/CITIIE2XXXX
+            130301 0301   S103 3311329929                      #109,1#      C
+                               0000000438802206
+                               CITIGB2LXXX/074210/CITIIE2XXXX
+            130301 0301   S103 3311333085                      #109,1#      C
+                               0000000438803084
+                               CITIGB2LXXX/074238/CITIIE2XXXX
+            130301 0301   S103 FT137956758271                  #111,72#     C
+                               0000000438915313
+                               LOYDGB2LXXX/103640/LOYDGB2LXXX
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 01 March 2013
+            Currency       : EUR (EURO)
+            Amount         :             #139145359,9#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:CBD841F6114B}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 1859 130301POBNSKBAAXXX5246884513
+       Correspondent Input Reference     : 1859 130301TRGTXE3MEXXX1417132463
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : TRGTXE3MXXX 
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 01185056953680  
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            0118505695368000
+        25: Account Identification
+            SK44919
+       28C: Statement Number/Sequence Number
+            00043/00007
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 01 March 2013
+            Currency       : EUR (EURO)
+            Amount         :             #139145359,9#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130301 0301   S103 3311329661                      #112,14#     C
+                               0000000438803741
+                               CITIGB2LXXX/074305/CITIIE2XXXX
+            130301 0301   S103 3311329203                      #121,48#     C
+                               0000000438804561
+                               CITIGB2LXXX/074332/CITIIE2XXXX
+            130301 0301   S103 3311328654                      #130,69#     C
+                               0000000438805377
+                               CITIGB2LXXX/074352/CITIIE2XXXX
+            130301 0301   S103 3311328336                      #137,4#      C
+                               0000000438786068
+                               CITIGB2LXXX/072758/CITIIE2XXXX
+            130301 0301   S103 3311328065                      #143,04#     C
+                               0000000438806187
+                               CITIGB2LXXX/074418/CITIIE2XXXX
+            130301 0301   S103 3311328063                      #143,49#     C
+                               0000000438805958
+                               CITIGB2LXXX/074413/CITIIE2XXXX
+            130301 0301   S103 007068636315                    #145,8#      C
+                               0000000438871710
+                               SUBASKBXXXX/110002/SUBASKBXXXX
+            130301 0301   S103 4210ZVP8162195                  #150,#       C
+                               0000000438865365
+                               BYLADEMMXXX/090707/BYLADEM1NMA
+            130301 0301   S103 3311325804                      #150,76#     C
+                               0000000438806970
+                               CITIGB2LXXX/074441/CITIIE2XXXX
+            130301 0301   S103 3311325626                      #154,14#     C
+                               0000000438785322
+                               CITIGB2LXXX/072735/CITIIE2XXXX
+            130301 0301   S103 3311325554                      #157,83#     C
+                               0000000438807499
+                               CITIGB2LXXX/074504/CITIIE2XXXX
+            130301 0301   S103 3311325509                      #158,15#     C
+                               0000000438785773
+                               CITIGB2LXXX/072749/CITIIE2XXXX
+            130301 0301   S103 3311325390                      #159,28#     C
+                               0000000438807493
+                               CITIGB2LXXX/074503/CITIIE2XXXX
+            130301 0301   S103 3311325225                      #161,12#     C
+                               0000000438808166
+                               CITIGB2LXXX/074531/CITIIE2XXXX
+            130301 0301   S103 3311325071                      #163,53#     C
+                               0000000438807785
+                               CITIGB2LXXX/074518/CITIIE2XXXX
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 01 March 2013
+            Currency       : EUR (EURO)
+            Amount         :             #139147548,75#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:509D29305B6C}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 1859 130301POBNSKBAAXXX5246884514
+       Correspondent Input Reference     : 1859 130301TRGTXE3MCXXX1422455253
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : TRGTXE3MXXX 
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 01185056953680  
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            0118505695368000
+        25: Account Identification
+            SK44919
+       28C: Statement Number/Sequence Number
+            00043/00008
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 01 March 2013
+            Currency       : EUR (EURO)
+            Amount         :             #139147548,75#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130301 0301   S103 FT137956321271                  #180,#       C
+                               0000000438913029
+                               LOYDGB2LXXX/103244/LOYDGB2LXXX
+            130301 0301   S103 3311324383                      #183,29#     C
+                               0000000438785979
+                               CITIGB2LXXX/072756/CITIIE2XXXX
+            130301 0301   S103 3311324330                      #183,92#     C
+                               0000000438809132
+                               CITIGB2LXXX/074555/CITIIE2XXXX
+            130301 0301   S103 3311324347                      #184,16#     C
+                               0000000438808654
+                               CITIGB2LXXX/074541/CITIIE2XXXX
+            130301 0301   S103 3311324232                      #187,11#     C
+                               0000000438785936
+                               CITIGB2LXXX/072755/CITIIE2XXXX
+            130301 0301   S103 3311345583                      #192,96#     C
+                               0000000438809344
+                               CITIGB2LXXX/074610/CITIIE2XXXX
+            130301 0301   S103 3311298482                      #195,06#     C
+                               0000000438809380
+                               CITIGB2LXXX/074613/CITIIE2XXXX
+            130301 0301   S103 1302/0120/23675                 #198,#       D
+                               0000000438456499
+                               POBNSKBAXXX/070536
+            130301 0301   S103 3311294398                      #209,73#     C
+                               0000000438810249
+                               CITIGB2LXXX/074646/CITIIE2XXXX
+            130301 0301   S103 3311294430                      #210,26#     C
+                               0000000438810628
+                               CITIGB2LXXX/074659/CITIIE2XXXX
+            130301 0301   S103 3311294167                      #217,45#     C
+                               0000000438810979
+                               CITIGB2LXXX/074708/CITIIE2XXXX
+            130301 0301   S103 3311293321                      #245,82#     C
+                               0000000438812715
+                               CITIGB2LXXX/074753/CITIIE2XXXX
+            130301 0301   S103 3311293186                      #248,08#     C
+                               0000000438785255
+                               CITIGB2LXXX/072734/CITIIE2XXXX
+            130301 0301   S103 3311294408                      #248,08#     C
+                               0000000438785336
+                               CITIGB2LXXX/072736/CITIIE2XXXX
+            130301 0301   S103 FT137955696271                  #257,#       C
+                               0000000438910200
+                               LOYDGB2LXXX/102757/LOYDGB2LXXX
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 01 March 2013
+            Currency       : EUR (EURO)
+            Amount         :             #139150293,67#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:5BEED389B409}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 1859 130301POBNSKBAAXXX5246884515
+       Correspondent Input Reference     : 1859 130301TRGTXE3MHXXX1426458819
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : TRGTXE3MXXX 
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 01185056953680  
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            0118505695368000
+        25: Account Identification
+            SK44919
+       28C: Statement Number/Sequence Number
+            00043/00012
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 01 March 2013
+            Currency       : EUR (EURO)
+            Amount         :             #139171326,95#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130301 0301   S103 3311289660                      #894,09#     C
+                               0000000438778354
+                               CITIGB2LXXX/072430/CITIIE2XXXX
+            130301 0301   S103 3311283841                      #926,96#     C
+                               0000000438777070
+                               CITIGB2LXXX/072403/CITIIE2XXXX
+            130301 0301   S103 3313447398                      #969,27#     C
+                               0000000439047695
+                               CITIGB2LXXX/145727/CITIFRPPXXX
+            130301 0301   S103 3311283622                      #970,06#     C
+                               0000000438776616
+                               CITIGB2LXXX/072352/CITIIE2XXXX
+            130301 0301   S103 3311287793                     #1027,32#     C
+                               0000000438777155
+                               CITIGB2LXXX/072405/CITIIE2XXXX
+            130301 0301   S103 3311283236                     #1053,47#     C
+                               0000000438775711
+                               CITIGB2LXXX/072332/CITIIE2XXXX
+            130301 0301   S103 3311283095                     #1086,16#     C
+                               0000000438775727
+                               CITIGB2LXXX/072333/CITIIE2XXXX
+            130301 0301   S103 3311281972                     #1120,87#     C
+                               0000000438776114
+                               CITIGB2LXXX/072343/CITIIE2XXXX
+            130301 0301   S202 3312860551                     #1420,39#     C
+                               0000000438773915
+                               CITIGB2LXXX/072238/CITIPLPXXXX
+            130301 0301   S103 3311283777                     #1487,18#     C
+                               0000000438773529
+                               CITIGB2LXXX/072227/CITIIE2XXXX
+            130301 0301   S202 06990060E31538                 #1520,#       C
+                               0000000438949351
+                               SOGEFRPPXXX/114423/CIBCCATTXXX
+            130301 0301   S103 3311279846                     #1680,92#     C
+                               0000000438774014
+                               CITIGB2LXXX/072241/CITIIE2XXXX
+            130301 0301   S103 3311279801                     #1736,84#     C
+                               0000000438773590
+                               CITIGB2LXXX/072230/CITIIE2XXXX
+            130301 0301   S103 GBA01033925II35S               #2000,#       C
+                               0000000438827647
+                               MIDLGB22XXX/080526/MIDLGB22XXX
+            130301 0301   S103 TTO240/2044300                 #2022,#       C
+                               0000000438344305
+                               HEBACY2NXXX/070352
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 01 March 2013
+            Currency       : EUR (EURO)
+            Amount         :             #139191242,48#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:11705A6BB872}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 1900 130301POBNSKBAAXXX5246884516
+       Correspondent Input Reference     : 1900 130301TRGTXE3MGXXX1415891866
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : TRGTXE3MXXX 
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 01185056953680  
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            0118505695368000
+        25: Account Identification
+            SK44919
+       28C: Statement Number/Sequence Number
+            00043/00003
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 01 March 2013
+            Currency       : EUR (EURO)
+            Amount         :             #139141396,38#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130301 0301   S103 3311340925                       #26,81#     C
+                               0000000438791902
+                               CITIGB2LXXX/073534/CITIIE2XXXX
+            130301 0301   S103 3311339052                       #28,25#     C
+                               0000000438791974
+                               CITIGB2LXXX/073535/CITIIE2XXXX
+            130301 0301   S103 3311338375                       #29,03#     C
+                               0000000438792503
+                               CITIGB2LXXX/073557/CITIIE2XXXX
+            130301 0301   S103 3311338005                       #30,44#     C
+                               0000000438792471
+                               CITIGB2LXXX/073556/CITIIE2XXXX
+            130301 0301   S103 3311337997                       #30,49#     C
+                               0000000438792779
+                               CITIGB2LXXX/073602/CITIIE2XXXX
+            130301 0301   S103 3311337618                       #32,07#     C
+                               0000000438792312
+                               CITIGB2LXXX/073553/CITIIE2XXXX
+            130301 0301   S103 3311337422                       #32,59#     C
+                               0000000438792424
+                               CITIGB2LXXX/073555/CITIIE2XXXX
+            130301 0301   S103 3311342729                       #33,28#     C
+                               0000000438792183
+                               CITIGB2LXXX/073551/CITIIE2XXXX
+            130301 0301   S103 3311337354                       #33,38#     C
+                               0000000438792500
+                               CITIGB2LXXX/073557/CITIIE2XXXX
+            130301 0301   S103 3311337329                       #33,6#      C
+                               0000000438792264
+                               CITIGB2LXXX/073553/CITIIE2XXXX
+            130301 0301   S103 3311337228                       #34,08#     C
+                               0000000438791742
+                               CITIGB2LXXX/073529/CITIIE2XXXX
+            130301 0301   S103 3311337119                       #35,13#     C
+                               0000000438792496
+                               CITIGB2LXXX/073557/CITIIE2XXXX
+            130301 0301   S103 3311336722                       #37,08#     C
+                               0000000438793835
+                               CITIGB2LXXX/073644/CITIIE2XXXX
+            130301 0301   S103 3311336126                       #40,32#     C
+                               0000000438793133
+                               CITIGB2LXXX/073620/CITIIE2XXXX
+            130301 0301   S103 3311335915                       #42,09#     C
+                               0000000438795005
+                               CITIGB2LXXX/073743/CITIIE2XXXX
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 01 March 2013
+            Currency       : EUR (EURO)
+            Amount         :             #139141895,02#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:FD51D4D7CA55}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 1900 130301POBNSKBAAXXX5246884517
+       Correspondent Input Reference     : 1900 130301TRGTXE3MGXXX1415891867
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : TRGTXE3MXXX 
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 01185056953680  
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            0118505695368000
+        25: Account Identification
+            SK44919
+       28C: Statement Number/Sequence Number
+            00043/00011
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 01 March 2013
+            Currency       : EUR (EURO)
+            Amount         :             #139160841,08#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130301 0301   S103 ASW72648/010313                 #570,11#     C
+                               0000000438800292
+                               RZBAATWWXXX/074118/POPUESMMXXX
+            130301 0301   S103 3311287278                      #572,23#     C
+                               0000000438782954
+                               CITIGB2LXXX/072614/CITIIE2XXXX
+            130301 0301   S103 3311287022                      #598,91#     C
+                               0000000438781524
+                               CITIGB2LXXX/072545/CITIIE2XXXX
+            130301 0301   S103 3311286922                      #617,13#     C
+                               0000000438781506
+                               CITIGB2LXXX/072544/CITIIE2XXXX
+            130301 0301   S103 ASW72656/010313                 #639,23#     C
+                               0000000438800311
+                               RZBAATWWXXX/074118/POPUESMMXXX
+            130301 0301   S103 3311286517                      #655,07#     C
+                               0000000438780114
+                               CITIGB2LXXX/072515/CITIIE2XXXX
+            130301 0301   S103 H01303016181008                 #666,08#     C
+                               0000000438933625
+                               BBRUBEBB010/111412/SPAVNOBBXXX
+            130301 0301   S103 3311286346                      #671,35#     C
+                               0000000438780121
+                               CITIGB2LXXX/072515/CITIIE2XXXX
+            130301 0301   S103 3311286109                      #706,4#      C
+                               0000000438778581
+                               CITIGB2LXXX/072435/CITIIE2XXXX
+            130301 0301   S103 3311285992                      #723,59#     C
+                               0000000438778782
+                               CITIGB2LXXX/072439/CITIIE2XXXX
+            130301 0301   S103 3311285859                      #740,61#     C
+                               0000000438778307
+                               CITIGB2LXXX/072429/CITIIE2XXXX
+            130301 0301   S103 3311285646                      #772,51#     C
+                               0000000438778818
+                               CITIGB2LXXX/072439/CITIIE2XXXX
+            130301 0301   S103 3311285466                      #802,04#     C
+                               0000000438778590
+                               CITIGB2LXXX/072435/CITIIE2XXXX
+            130301 0301   S103 3311285125                      #859,14#     C
+                               0000000438777789
+                               CITIGB2LXXX/072419/CITIIE2XXXX
+            130301 0301   S103 3311285031                      #891,47#     C
+                               0000000438778440
+                               CITIGB2LXXX/072432/CITIIE2XXXX
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 01 March 2013
+            Currency       : EUR (EURO)
+            Amount         :             #139171326,95#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:37EBEEA2BC0E}
+	
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 1900 130301POBNSKBAAXXX5246884518
+       Correspondent Input Reference     : 1900 130301TRGTXE3MCXXX1422455396
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : TRGTXE3MXXX 
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 01185056953680  
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            0118505695368000
+        25: Account Identification
+            SK44919
+       28C: Statement Number/Sequence Number
+            00043/00015
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 01 March 2013
+            Currency       : EUR (EURO)
+            Amount         :             #125852383,6#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130301 0301   S204 CDCP1630200050             #49751369,48#     D
+                               0000000438864108
+                               CSDSSKBAXXX/090536
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 01 March 2013
+            Currency       : EUR (EURO)
+            Amount         :              #76101014,12#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:1053A2BFC953}

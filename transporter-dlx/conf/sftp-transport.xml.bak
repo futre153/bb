@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+<comment>Properties for eurogiro-sftp</comment>
+<entry key="archive">D:\TEMP\transporter\ELS\ELS_HOME\envelope\im\xtic\archive</entry>
+<entry key="interval">6000</entry>
+<entry key="logHistory">60</entry>
+<entry key="local">D:\TEMP\transporter\ELS\ELS_HOME\envelope\ex\xtic</entry>
+<entry key="logDirectory">logs</entry>
+<entry key="logbackPattern">%date %level [%thread] %logger{10} [%file:%line] %msg%n</entry>
+<entry key="checkFilenameDuplicity">true</entry>
+<entry key="remote">/s1/progress/work/toeuro</entry>
+<entry key="username">euroftp</entry>
+<entry key="mask">e\d{6}</entry>
+<entry key="sequence">000001</entry>
+<entry key="direction">get</entry>
+<entry key="sequence">-1</entry>
+<entry key="port">22</entry>
+<entry key="logExtension">.log</entry>
+<entry key="hostname">10.1.1.6</entry>
+<entry key="passphrase">1z50JO2XLpgPoA==</entry>
+<entry key="knownHosts">conf\known_hosts</entry>
+<entry key="privateKey">conf\euroftp_2048</entry>
+<entry key="name">eurogiro-sftp</entry>
+</properties>

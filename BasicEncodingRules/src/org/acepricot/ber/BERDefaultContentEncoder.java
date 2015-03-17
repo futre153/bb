@@ -150,6 +150,8 @@ final class BERDefaultContentEncoder implements BERContentDecoder,	BERContentEnc
 		switch (ber.getIDOctets().getClassType()) {
 		default:
 			switch(ber.getIDOctets().getTagNumber()) {
+			case BERConst.EOC_TAG_NUMBER:
+				return "EOC";
 			case BERConst.OCTETSTRING_TAG_NUMBER:
 				return decodeOctetStringValue(ber);
 			case BERConst.OBJECTIDENTIFIER_TAG_NUMBER:

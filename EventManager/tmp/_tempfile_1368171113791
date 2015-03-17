@@ -1,0 +1,41 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0855 130325POBNSKBAAXXX5262889943
+       Correspondent Input Reference     : 1155 130325TRRYRUMMAXXX2016007280
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : TRRYRUMMXXX 
+                  J AND T BANK, ZAO
+                  MOSCOW RU
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            003220313
+        25: Account Identification
+            30111810900000000003
+       28C: Statement Number/Sequence Number
+            00002
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 26 June 2012
+            Currency       : RUB (RUSSIAN RUBLE)
+            Amount         :               #1850901,66#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130322        S103 1303/4600/25015             #2660000,#       D
+            130322        S210 SPOT 7021/3                 #2672630,#       C
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 22 March 2013
+            Currency       : RUB (RUSSIAN RUBLE)
+            Amount         :               #1863531,66#
+        64: Closing Avail Bal (Avail Funds)
+            Debit/Credit   : Credit
+            Date           : 22 March 2013
+            Currency       : RUB (RUSSIAN RUBLE)
+            Amount         :               #1863531,66#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:D566B6322B71}

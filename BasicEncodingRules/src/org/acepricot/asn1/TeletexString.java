@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.acepricot.ber.BER;
 import org.acepricot.ber.BERConst;
 
-public class TeletexString extends ASN1NodeImpl {
+abstract class TeletexString extends ASN1NodeImpl {
 	public TeletexString (int implicit, int optional, String name) {
 		super (
 				BERConst.T61STRING_TAG_NUMBER,

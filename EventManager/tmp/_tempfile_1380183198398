@@ -1,0 +1,38 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 1832 130918POBNSKBAAXXX5386936195
+       Correspondent Input Reference     : 1832 130918CEDELULLKXXX1868972867
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : CEDELULLXXX 
+                  CLEARSTREAM BANKING S.A., LUXEMBOURG
+                  LUXEMBOURG LU
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 000000KKE33JIL1Y
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            0918I1930DELT/01
+        25: Account Identification
+            82821-USD
+       28C: Statement Number/Sequence Number
+            00030/00001
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 17 September 2013
+            Currency       : USD (US DOLLAR)
+            Amount         :                     #0,#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130918 0918   FCPN NONREF-INTRCRED              #210000,#       C
+                               0000000200317970
+                               XS0606382413 QTY 6.000.000
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 18 September 2013
+            Currency       : USD (US DOLLAR)
+            Amount         :                #210000,#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:FA7810677048}

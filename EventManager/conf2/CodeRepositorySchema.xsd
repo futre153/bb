@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schema xmlns="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/CodeRepositorySchema" xmlns:tns="http://www.example.org/CodeRepositorySchema" elementFormDefault="qualified">
+
+    <element name="code-list" type="tns:CodeListType"></element>
+    
+    <complexType name="CodeListType">
+    	<sequence minOccurs="0" maxOccurs="unbounded">
+    		<element name="code" type="tns:CodeType"></element>
+    	</sequence>
+    </complexType>
+
+    <complexType name="CodeType">
+    	<sequence minOccurs="1">
+    		<element name="code-number" type="string"></element>
+    		<element name="code-description" type="string"></element>
+    	</sequence>
+    </complexType>
+</schema>

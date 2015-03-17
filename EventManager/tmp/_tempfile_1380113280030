@@ -1,0 +1,90 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0648 130920POBNSKBAAXXX5388936586
+       Correspondent Input Reference     : 2115 130919DEUTDEFFCXXX0433458657
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : DEUTDEFFXXX 
+                  DEUTSCHE BANK AG
+                  FRANKFURT AM MAIN DE
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 34TLDT00005O01S2
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            1009494450018418
+        25: Account Identification
+            100 9494451 0000
+       28C: Statement Number/Sequence Number
+            00184/018
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Credit
+            Date           : 19 September 2013
+            Currency       : EUR (EURO)
+            Amount         :               #3934839,55#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130919        NTRF 1305/4600/04733C                 #49,79#     C
+                               03MT130917174415
+                               M CA O/CITIPLPX              9696
+            130919        NTRF 1326200432286575                 #40,00#     C
+                               1326200432286575
+                               INCOMING SEPA CT OUR REF 132 9075
+            130919        NTRF 1326200431811890                 #40,00#     C
+                               1326200431811890
+                               INCOMING SEPA CT OUR REF 132 9075
+            130919        NTRF 1326200431811900                 #39,40#     C
+                               1326200431811900
+                               INCOMING SEPA CT OUR REF 132 9075
+            130919        NTRF 1326200431928647                 #39,00#     C
+                               1326200431928647
+                               INCOMING SEPA CT OUR REF 132 9075
+            130919        NTRF 1326200431811939                 #38,00#     C
+                               1326200431811939
+                               INCOMING SEPA CT OUR REF 132 9075
+            130919        NTRF 1326200431811918                 #33,00#     C
+                               1326200431811918
+                               INCOMING SEPA CT OUR REF 132 9075
+            130919        NTRF 1326200431811859                 #22,14#     C
+                               1326200431811859
+                               INCOMING SEPA CT OUR REF 132 9075
+            130919        NTRF 1326200431811871                 #21,00#     C
+                               1326200431811871
+                               INCOMING SEPA CT OUR REF 132 9075
+            130919        NTRF 1326200431811963                 #20,00#     C
+                               1326200431811963
+                               INCOMING SEPA CT OUR REF 132 9075
+            130919        NTRF 1326200431811962                 #20,00#     C
+                               1326200431811962
+                               INCOMING SEPA CT OUR REF 132 9075
+            130919        NTRF 1326200431811886                 #20,00#     C
+                               1326200431811886
+                               INCOMING SEPA CT OUR REF 132 9075
+            130919        NTRF 1326200432004865                 #20,00#     C
+                               1326200432004865
+                               INCOMING SEPA CT OUR REF 132 9075
+            130919        NTRF 1326200432004863                 #20,00#     C
+                               1326200432004863
+                               INCOMING SEPA CT OUR REF 132 9075
+            130919        NTRF 1326200431811861                 #17,60#     C
+                               1326200431811861
+                               INCOMING SEPA CT OUR REF 132 9075
+            130919        NTRF 1326200431811912                 #12,66#     C
+                               1326200431811912
+                               INCOMING SEPA CT OUR REF 132 9075
+            130919        NTRF 1308/1000/01952C                 #10,51#     C
+                               03MT130919129864
+                               M CA O/RCBWPLPW              9696
+            130919        NTRF 1326200432164086                  #4,16#     C
+                               1326200432164086
+                               INCOMING SEPA CT OUR REF 132 9075
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 19 September 2013
+            Currency       : EUR (EURO)
+            Amount         :               #3935306,81#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:B4713677692E}
+       {DLM:}

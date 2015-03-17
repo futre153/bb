@@ -1,0 +1,72 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0648 130924POBNSKBAAXXX5390937259
+       Correspondent Input Reference     : 2151 130923PBNKDEFFAXXX7768730594
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : PBNKDEFFXXX 
+                  DEUTSCHE POSTBANK AG
+                  (FRANKFURT BRANCH)
+                  FRANKFURT AM MAIN DE
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : ESSP266213700833
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            0923135659960002
+        25: Account Identification
+            0755739609
+       28C: Statement Number/Sequence Number
+            00184/00001
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 20 September 2013
+            Currency       : EUR (EURO)
+            Amount         :                #232102,3#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130923 0923   NTRF CPG-130920216148               #3040,#       C
+                               01041392012032
+                               CRED ESSP
+            130923 0923   NTRF ELSE047386130920                  #7,55#     D
+                               00473862012022
+                               DEB ESSP
+            130923 0923   NTRF ELSE047383130920                 #26,#       D
+                               00473832012023
+                               DEB ESSP
+            130923 0923   NTRF ELSE047387130920               #1400,#       D
+                               00473872012030
+                               DEB ESSP
+            130923 0923   NTRF ELSE047382130920                 #10,#       D
+                               00473822012027
+                               DEB ESSP
+            130923 0923   NTRF ELSE047380130920                #143,55#     D
+                               00473802012029
+                               DEB ESSP
+            130923 0923   NTRF 130920JPN-212092               #5041,#       C
+                               02221412011521
+                               CRED ESSP
+            130923 0923   NTRF ELSE047385130920               #1000,#       D
+                               00473852012034
+                               DEB ESSP
+            130923 0923   NTRF ELSE047381130920               #1752,03#     D
+                               00473812012033
+                               DEB ESSP
+            130923 0923   NTRF 1309201745147200              #14376,21#     C
+                               02595072012148
+                               CRED ESSP
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 23 September 2013
+            Currency       : EUR (EURO)
+            Amount         :                #250220,38#
+        64: Closing Avail Bal (Avail Funds)
+            Debit/Credit   : Credit
+            Date           : 23 September 2013
+            Currency       : EUR (EURO)
+            Amount         :                #250220,38#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:CBDA95DC7DF9}
+       {DLM:}

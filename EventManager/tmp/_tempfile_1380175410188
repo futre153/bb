@@ -1,0 +1,77 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0648 130925POBNSKBAAXXX5391937599
+       Correspondent Input Reference     : 2116 130924DEUTDEFFCXXX0438503944
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : DEUTDEFFXXX 
+                  DEUTSCHE BANK AG
+                  FRANKFURT AM MAIN DE
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : 34TLDT00005R00FI
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            1009494450018704
+        25: Account Identification
+            100 9494451 0000
+       28C: Statement Number/Sequence Number
+            00187/004
+       60M: Intermediate Opening Balance
+            Debit/Credit   : Debit
+            Date           : 24 September 2013
+            Currency       : EUR (EURO)
+            Amount         :               #1720915,92#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130924        NTRF 1309/0120/38144                 #205,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130924        NTRF 1309/06148/0100                 #200,00#     D
+                               03MT130923314853
+                               DR.MATTHIAS STEPHAN KIEFER 1 9696
+            130924        NTRF 1309/06139/0100                 #200,00#     D
+                               03MT130923314848
+                               WORTMAN KG INTERN. 1/LENKA P 9696
+            130924        NTRF 1309/0120/38131                 #184,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130924        NTRF 1309/0120/38142                 #180,88#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130924        NTRF 1309/0120/38107                 #167,80#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130924        NTRF 1309/06311/0100                 #149,00#     D
+                               03MT130923341104
+                               FINANZANT PASSAU 1/MIROSLAV  9696
+            130924        NTRF 1309/0120/38164                 #135,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130924        NTRF 1309/2100/38099                 #133,20#     D
+                               03MT130923153355
+                               FSV WAIBLINGEN WAIBLINGEN SK 9696
+            130924        NTRF 1309/0120/38081                 #133,01#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130924        NTRF 1309/0120/38095                 #117,80#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130924        NTRF 1309/1100/38135                 #110,45#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130924        NTRF 1309/0120/38014                 #109,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130924        NTRF 1309/0120/38112                 #100,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130924        NTRF 1309/0120/38147                 #100,00#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130924        NTRF 1309/06158/0100                  #92,05#     D
+                               03MT130923314852
+                               STAATSANWALTSCHAFT 48149 MU  9696
+            130924        NTRF 1309/0120/38129                  #89,98#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+            130924        NTRF 1309/0120/38113                  #88,80#     D
+                               OUTG. ACCELERATED SEPA CT    9075
+       62M: Closing Balance (Booked Funds)
+            Debit/Credit   : Debit
+            Date           : 24 September 2013
+            Currency       : EUR (EURO)
+            Amount         :               #1723411,89#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:640A3D1B8A33}
+       {DLM:}

@@ -1,0 +1,61 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0649 130925POBNSKBAAXXX5391937669
+       Correspondent Input Reference     : 2351 130924BKTRUS33DXXX9566672525
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 950 Statement Message
+       Sender   : BKTRUS33XXX 
+                  DEUTSCHE BANK TRUST COMPANY AMERICAS
+                  NEW YORK,NY US
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : ST04414171242554
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            ST04414171242554
+        25: Account Identification
+            04414171
+       28C: Statement Number/Sequence Number
+            00185/00001
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 24 September 2013
+            Currency       : USD (US DOLLAR)
+            Amount         :                 #55565,71#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130924        NTRF SWF OF 13/09/20                 #108,91#     C
+                               S044112ICP092413
+                               ORG 319400 OGB ERSTE BANK HUNGARY
+            130924        NTRF 2013092400060633               #1900,00#     C
+                               M202777IFD092413
+                               ORG 700022718 MONIKA COOPER 184 IN
+            130924        NTRF G0832670038401                 #9000,00#     C
+                               S380651ICP092413
+                               ORG 37923861 INS ARTHUR LUXENBERG
+            130924        S202 MM - DEAL                   #1300003,61#     C
+                               C673016BBK092413
+                               SLOVENSKA SPORITELNA AS
+            130924        NTRF 1309/1000/38018                #1975,00#     D
+                               S217542OCP092413
+                               CORNELIUS IVANOVICI, ANNA IVANOVIC
+            130924        S202 SPOT 7376/2                   #47355,00#     D
+                               S182776OCP092413
+                               ING BANK N.V., POBOCKAZAHR, BANKY
+            130924        S202 DEPO 30662/2                #1200000,00#     D
+                               C759993BBK092413
+                               SLOVENSKA SPORITELNA AS
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 24 September 2013
+            Currency       : USD (US DOLLAR)
+            Amount         :                #117248,23#
+        64: Closing Avail Bal (Avail Funds)
+            Debit/Credit   : Credit
+            Date           : 24 September 2013
+            Currency       : USD (US DOLLAR)
+            Amount         :                #117248,23#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:450E3B2782F8}

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE services[]>
+<service name="notification">
+    <operation name="forward">
+    	<actionMapping>\"\"</actionMapping>
+        <messageReceiver class="org.fds.prepaid.notification.InOut"/>	
+    </operation>
+</service>
+

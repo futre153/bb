@@ -5,7 +5,7 @@ import java.io.IOException;
 import org.acepricot.ber.BER;
 import org.acepricot.ber.BERConst;
 
-public class PrintableString extends ASN1NodeImpl {
+abstract class PrintableString extends ASN1NodeImpl {
 	public PrintableString (int implicit, int optional, String name) {
 		super (
 				BERConst.PRINTABLESTRING_TAG_NUMBER,

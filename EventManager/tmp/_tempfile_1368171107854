@@ -1,0 +1,93 @@
+	---------------------  Instance Type and Transmission --------------	
+       Copy received from SWIFT
+       Priority          : Normal
+       Message Output Reference  : 0816 130212POBNSKBAAXXX5233879797
+       Correspondent Input Reference     : 0816 130212BREDFRPPAXXX6912097524
+	--------------------------- Message Header -------------------------	
+       Swift Output                  : FIN 940 Customer Statement Message
+       Sender   : BREDFRPPXXX 
+                  BRED BANQUE POPULAIRE
+                  (HEAD OFFICE)
+                  PARIS FR
+       Receiver : POBNSKBAXXX 
+                  POSTOVA BANKA A.S.
+                  BRATISLAVA SK
+       MUR : E55561          
+	--------------------------- Message Text ---------------------------	
+        20: Transaction Reference Number
+            550958159547233 
+        25: Account Identification
+            550958159                          
+       28C: Statement Number/Sequence Number
+            547/001
+       60F: First Opening Balance
+            Debit/Credit   : Credit
+            Date           : 08 February 2013
+            Currency       : EUR (EURO)
+            Amount         :                 #37560,02#
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130212        NTRF 1846837                          #31,07#     C
+                               B/O MSA DE TOURAINE
+        86: Information to Account Owner
+            REGLEMENT ETRANGER
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130212        NTRF 1846837                         #199,66#     C
+                               B/O MSA DE TOURAINE
+        86: Information to Account Owner
+            REGLEMENT ETRANGER
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130212        NTRF 1846837                          #33,26#     C
+                               B/O MSA DE TOURAINE
+        86: Information to Account Owner
+            REGLEMENT ETRANGER
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130212        NTRF 1846837                         #157,29#     C
+                               B/O MSA DE TOURAINE
+        86: Information to Account Owner
+            REGLEMENT ETRANGER
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130212        NTRF 1846837                         #166,55#     C
+                               B/O MSA DE TOURAINE
+        86: Information to Account Owner
+            REGLEMENT ETRANGER
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130212        NTRF 1846837                          #18,65#     C
+                               B/O MSA DE TOURAINE
+        86: Information to Account Owner
+            REGLEMENT ETRANGER
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130212        NTRF 1846868                          #13,98#     C
+                               B/O MSA LOIRE ATLANTIQUE VENDEE 
+        86: Information to Account Owner
+            REGLEMENT ETRANGER
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130212        NTRF 1846868                          #23,08#     C
+                               B/O MSA LOIRE ATLANTIQUE VENDEE 
+        86: Information to Account Owner
+            REGLEMENT ETRANGER
+        61: Statement Line
+            Value  Entr F Code Reference                      Amount        Ma
+            130212        NTRF 1846903                         #118,03#     C
+                               B/O MUTUALITE SOCIALE AGRICOLE MID
+        86: Information to Account Owner
+            REGLEMENT ETRANGER
+       62F: Closing Balance (Booked Funds)
+            Debit/Credit   : Credit
+            Date           : 11 February 2013
+            Currency       : EUR (EURO)
+            Amount         :                 #38321,59#
+        64: Closing Avail Bal (Avail Funds)
+            Debit/Credit   : Credit
+            Date           : 11 February 2013
+            Currency       : EUR (EURO)
+            Amount         :                 #37560,02#
+	--------------------------- Message Trailer ------------------------	
+       {CHK:C67ECD13F53C}
