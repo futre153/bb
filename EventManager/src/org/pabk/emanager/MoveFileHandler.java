@@ -8,8 +8,10 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.Arrays;
+import java.util.Date;
 
 import org.pabk.emanager.util.SimpleFileFilter;
+import org.pabk.emanager.util.Sys;
 
 public class MoveFileHandler extends HandlerImpl {
 	
@@ -27,6 +29,8 @@ public class MoveFileHandler extends HandlerImpl {
 	private static final String SOURCE_SERVER_KEY = "move.sourceServer";
 	private static final String OPERATION_KEY = "move.operation";
 	private static final String OPERATION_MOVE = "move";
+	private static final String OPERATION_COPY = "copy";
+	private static final String OPERATION_DELETE = "delete";
 	private static final String OPERATION_CONVERT_STMT_MOVE = "convertStmtAndMove";
 	private static final String DEFAULT_OPERATION = OPERATION_MOVE;
 	private static final String Q_OPERATION_KEY = "move.queue.%s.operation";
@@ -41,8 +45,10 @@ public class MoveFileHandler extends HandlerImpl {
 	private static final String Q_DESTINATION_KEY = "move.queue.%s.destination";
 	private static final String Q_SOURCE_FILENAME_MASK_KEY = "move.queue.%s.sourceFileMask";
 	private static final String Q_RENAME_FILENAME_KEY = "move.queue.%s.renameFile";
-	private static final String PRINTER_POOL_INTERVAL_KEY = "move.poolInterval";
-	private static final String DEFAULT_PRINTER_POOL_INTERVAL = "11";
+	private static final String Q_OPERATION_DELAY = "move.queue.%s.operationDelay";
+	private static final String DEFAULT_OPERATION_DELAY = "0";
+	private static final String MOVE_POOL_INTERVAL_KEY = "move.poolInterval";
+	private static final String DEFAULT_MOVE_POOL_INTERVAL = "11";
 	private static final String STMT_MASK_KEY = "move.stmt.originalSeq";
 	private static final String STMT_REPLACEMENT_SEQUENCE_KEY = "move.stmt.replacementSeq";
 	private static final String DEFAULT_STMT_MASK = "\\x09\\x09";
@@ -92,8 +98,8 @@ public class MoveFileHandler extends HandlerImpl {
 	private static final String START_MOVE = "Start moving files on queue %s";
 	private static final String SRC_DIR_EXISTS = "Found source directory %s for queue %s";
 	private static final String DST_DIR_EXISTS = "Found destination directory %s for queue %s";
-	private static final String END_MOVE_OK = "Successfully ends moving files on queue %s";
-	private static final String END_MOVE_ERROR = "Moving files on queue %s ends with following error: %s";
+	private static final String END_OPERATION_OK = "Successfully ends %s files on queue %s";
+	private static final String END_OPERATION_ERROR = "%s files on queue %s ends with following error: %s";
 	private static final String SRC_DIR_NOT_EXISTS = "Source directory %s does not exist on queue %s";
 	private static final String DST_DIR_NOT_EXISTS = "Destination directory %s does not exist on queue %s";
 	private static final String MASK_USED = "Used filename pattern %s for input files on queue %s";
@@ -103,14 +109,18 @@ public class MoveFileHandler extends HandlerImpl {
 	private static final String FS = System.getProperty("file.separator");
 	private static final String FAILED_TO_RENAME = "Failed to rename filename %s for substring %s, renaming is skipped, original filename is used";
 	private static final String FILE_FOUND = "File %s found on queue %s";
-	private static final String FILE_ALLREADY_EXISTS = "File %s is allready exists on destination directory for queue %s. Moving of this file is skipped";
+	private static final String FILE_ALLREADY_EXISTS = "File %s is allready exists on destination directory for queue %s. The %s is skipped";
 	private static final String UNKNOWN_NOVING_ERROR = "Failed to rename file from %s to %s on queue %s. Reason is unknown";
-	private static final String FILE_MOVED = "File %s is successfully moved to %s no queue %s";
+	private static final String UNKNOWN_DELETE_ERROR = "Failed to delete file from %s to %s on queue %s. Reason is unknown";
+	private static final String OPERATION_PROCESSED = "File %s is successfully %s to %s no queue %s";
 	private static final String OPERATION_NOT_DEFINED = "Operation %s is not defined for module %s";
 	private static final int MAX_READED_BYTES = 4096;
 	private static final String FAILED_DELETE = "Failed to delete file %s on queue %s";
 	private static final String FAILED_CREATE = "Failed to create file %s on queue %s";
 	private static final String STMT_CONVERT = "File %s was successfully stmt converted on queue %s";
+	private static final String PREPARE_TMP_FILE = "Temporary file %s was successfully prepared for copying of file %s on queue %s";
+	private static final String FAILED_TMP_FILE = "Failed to prepare temporary file for copying of file %s on queue %s. Operation was aborted";
+	private static final String OPERATION_SKIPPED = "File %s is not %s on queue %s. File is not older than %d day(s)";
 	
 	private void execute(Object[] objs) {
 		String name =  (String) objs[0];
@@ -171,47 +181,95 @@ public class MoveFileHandler extends HandlerImpl {
 				}
 				File newFile = new File(dstDir.getAbsolutePath() + FS + newName.toString());
 				if(newFile.exists()) {
-					log.severe(String.format(FILE_ALLREADY_EXISTS, newFile.getAbsolutePath(), name));
+					log.severe(String.format(FILE_ALLREADY_EXISTS, newFile.getAbsolutePath(), name, operation));
 					continue;
 				}
-				try {
-					//main nove operations
-					//move
-					if(operation.equalsIgnoreCase(OPERATION_MOVE))  {
-						moveOperation(list[i], newFile, name);
-					}
-					//convert statements and move
-					else if(operation.equalsIgnoreCase(MoveFileHandler.OPERATION_CONVERT_STMT_MOVE)) {
-						try {
-							convertStmt(list[i], name);
+				if(((((int) objs[8]) * 24 * 60 * 60 * 1000) < (new Date().getTime() - list[i].lastModified())) || (((int) objs[8]) <= 0)) {
+					try {
+						//main nove operations
+						//move
+						if(operation.equalsIgnoreCase(OPERATION_MOVE))  {
 							moveOperation(list[i], newFile, name);
 						}
-						catch(Exception e) {
-							throw new IOException (e);
+						//convert statements and move
+						else if(operation.equalsIgnoreCase(MoveFileHandler.OPERATION_CONVERT_STMT_MOVE)) {
+							try {
+								convertStmt(list[i], name);
+								moveOperation(list[i], newFile, name);
+							}
+							catch(Exception e) {
+								throw new IOException (e);
+							}
+						}
+						//copy
+						else if (operation.equalsIgnoreCase(MoveFileHandler.OPERATION_COPY)) {
+							try {
+								File tmp = prepareCopy(list[i], name);
+								moveOperation(tmp, newFile, name);
+							}
+							catch(Exception e) {
+								throw new IOException (e);
+							}
+						}
+						else if (operation.equalsIgnoreCase(MoveFileHandler.OPERATION_DELETE)) {
+							deleteOperation(list[i], name);
+						}
+						else {
+							log.warning(String.format(OPERATION_NOT_DEFINED, operation, this.getClass().getSimpleName()));
 						}
 					}
-					else {
-						log.warning(String.format(OPERATION_NOT_DEFINED, operation, this.getClass().getSimpleName()));
+					catch(Exception e) {
+						log.severe(e.getMessage());
+						continue;
 					}
+					log.info(String.format(OPERATION_PROCESSED, list[i].getAbsolutePath(), operation, newFile.getAbsoluteFile(), name));
 				}
-				catch(Exception e) {
-					log.severe(e.getMessage());
-					continue;
+				else {
+					log.info(String.format(OPERATION_SKIPPED, list[i], operation, name, objs[8]));
 				}
-				log.info(String.format(FILE_MOVED, list[i].getAbsolutePath(), newFile.getAbsoluteFile(), name));
 			}
 		}
 		catch (Exception e) {
 			error = e.getMessage();
 		}
 		if(error == null) {
-			this.log.info(String.format(END_MOVE_OK, objs[0]));
+			this.log.info(String.format(END_OPERATION_OK, operation, objs[0]));
 		}
 		else {
-			this.log.warning(String.format(END_MOVE_ERROR, objs[0], error));
+			this.log.warning(String.format(END_OPERATION_ERROR, operation, objs[0], error));
 		}
 	}
 	
+	private void deleteOperation(File file, String name) throws IOException {
+		boolean b = !file.delete();
+		if(!b) {
+			throw new IOException(String.format(UNKNOWN_DELETE_ERROR, file.getAbsolutePath(), name));
+		}
+	}
+
+	private File prepareCopy(File file, String name) throws IOException {
+		FileInputStream in = null;
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		byte[] b = new byte[MAX_READED_BYTES];
+		try {
+			in = new FileInputStream(file);
+			int i;
+			while ((i = in.read(b)) >= 0) {
+				out.write(b, 0, i);
+			}
+			File f = new File(Sys.getPathOfTmpFile(Sys.createTmpFile(out.toByteArray())));
+			log.warning(String.format(PREPARE_TMP_FILE, f.getAbsolutePath(), file.getAbsolutePath(), name));
+			return f;
+		}
+		catch(Exception e) {
+			log.warning(String.format(FAILED_TMP_FILE, file.getAbsolutePath(), name));
+			throw new IOException(e);
+		}
+		finally {
+			try {in.close();} catch (Exception e) {}
+		}
+	}
+
 	private void convertStmt(File file, String name) throws IOException {
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		byte[] b = new byte[MAX_READED_BYTES];
@@ -282,10 +340,10 @@ public class MoveFileHandler extends HandlerImpl {
 		rename = (int[]) getProperty(this, RENAME_KEY, null, false, int.class, separator);
 		rename = sourceFilenameMask == null ? null : rename;
 		String[] tmp = ((String) getProperty(this, QUEUES_KEY, null, true, String.class, separator)).split(separator);
-		moveQueues = new Object[tmp.length][8];
 		operation = (String) getProperty(this, OPERATION_KEY, DEFAULT_OPERATION, true, String.class, separator);
 		stmtMask = (String) getProperty(this, STMT_MASK_KEY, DEFAULT_STMT_MASK, true, String.class, separator);
 		stmtReplSeq = (byte[]) getProperty(this, STMT_REPLACEMENT_SEQUENCE_KEY, DEFAULT_STMT_REPLACEMENT_SEQUENCE, true, byte.class, separator);
+		moveQueues = new Object[tmp.length][9];
 		for (int i = 0; i < moveQueues.length; i ++) {
 			//meno radu
 			moveQueues[i][0] = tmp[i];
@@ -304,8 +362,9 @@ public class MoveFileHandler extends HandlerImpl {
 			moveQueues[i][6] = moveQueues[i][6] == null ? rename : moveQueues[i][6]; 
 			moveQueues[i][6] = moveQueues[i][5] == null ? null : moveQueues[i][6];
 			moveQueues[i][7] = getProperty(this, String.format(Q_OPERATION_KEY, tmp[i]), operation, true, String.class, separator);
+			moveQueues[i][8] = getProperty(this, String.format(Q_OPERATION_DELAY, tmp[i]), DEFAULT_OPERATION_DELAY, false, int.class, separator);
 		}
-		poolInterval = ((long) getProperty(this, PRINTER_POOL_INTERVAL_KEY, DEFAULT_PRINTER_POOL_INTERVAL, true, long.class, separator)) * 60 * 1000;
+		poolInterval = ((long) getProperty(this, MOVE_POOL_INTERVAL_KEY, DEFAULT_MOVE_POOL_INTERVAL, true, long.class, separator)) * 60 * 1000;
 	}
 	
 	

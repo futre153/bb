@@ -2,7 +2,7 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
     <entry key="move.separator">,</entry>
-    <entry key="move.queues">Broadcast,Broadcast_cz,OKB_DT,OKB_DT_CZ,prijate_spravy,prijate_spravy_cz,system,system_cz,Target,Vypisy_DF</entry>
+    <entry key="move.queues">Broadcast,Broadcast_cz,OKB_DT,OKB_DT_CZ,prijate_spravy,prijate_spravy_cz,system,system_cz,Target,Vypisy_DF,test</entry>
     <entry key="move.sourceServer">p3600x006</entry>
     <entry key="move.destinationServer">p3600x006</entry>
     <entry key="move.queue.Broadcast.source">C$\AMT\amt_pobn\amt\queues\Broadcast\in</entry>
@@ -26,6 +26,11 @@
     <entry key="move.queue.Target.destination">C$\ARCHIVE\BATCH\Target</entry>
     <entry key="move.queue.Vypisy_DF.destination">C$\ARCHIVE\BATCH\Vypisy_DF</entry>
     <entry key="move.queue.Vypisy_DF.operation">convertStmtAndMove</entry>
+    <entry key="move.queue.test.source">C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz</entry>
+    <entry key="move.queue.test.destination">C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\Archiv</entry>
+    <entry key="move.queue.test.operationDelay">0</entry>
+    <entry key="move.queue.test.operation">delete</entry>
+    <entry key="move.queue.test.sourceFileMask">e\d{7}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t]</entry>
     <entry key="move.sourceFileMask">\d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t]</entry>
     <entry key="move.renameFile">0,8,23,27</entry>
     <!-- <entry key="move.queue.Broadcast.sourceServer"></entry>
