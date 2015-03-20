@@ -1,644 +1,228 @@
-mar 18, 2015 2:03:05 PM org.pabk.emanager.HandlerImpl init
+mar 20, 2015 7:06:45 AM org.pabk.emanager.HandlerImpl init
 INFO: movefilehandler: logger movefilehandler is successfully initailized!
-mar 18, 2015 2:03:05 PM org.pabk.emanager.HandlerImpl run
+mar 20, 2015 7:06:45 AM org.pabk.emanager.HandlerImpl run
 INFO: Module org.pabk.emanager.MoveFileHandler is started!
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:45 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Loaded value , for property move.separator from properties.
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:45 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Loaded value p3600x006 for property move.sourceServer from properties.
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:45 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Loaded value p3600x006 for property move.destinationServer from properties.
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:45 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Loaded value \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for property move.sourceFileMask from properties.
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:45 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Loaded value 0,8,23,27 for property move.renameFile from properties.
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
-INFO: Loaded value Broadcast,Broadcast_cz,OKB_DT,OKB_DT_CZ,prijate_spravy,prijate_spravy_cz,system,system_cz,Target,Vypisy_DF,test for property move.queues from properties.
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:45 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value Broadcast,Broadcast_cz,OKB_DT,OKB_DT_CZ,prijate_spravy,prijate_spravy_cz,system,system_cz,Target,Vypisy_DF,sys_sk,sys_cz,ps_arch_sk,ps_arch_cz,ps_del_sk,ps_del_cz,stmt_arch,stmt_del,okb_arch_sk,okb_del_sk,okb_arch_cz,okb_del_cz,brd_arch_sk,brd_del_sk,brd_arch_cz,brd_del_cz for property move.queues from properties.
+mar 20, 2015 7:06:45 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value move for property move.operation
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:45 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value \x09\x09 for property move.stmt.originalSeq
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:45 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value 9,12 for property move.stmt.replacementSeq
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:45 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value p3600x006 for property move.queue.Broadcast.sourceServer
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:45 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value p3600x006 for property move.queue.Broadcast.destinationServer
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:45 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Loaded value C$\AMT\amt_pobn\amt\queues\Broadcast\in for property move.queue.Broadcast.source from properties.
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:45 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Loaded value C$\ARCHIVE\BATCH\Broadcast for property move.queue.Broadcast.destination from properties.
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:45 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for property move.queue.Broadcast.sourceFileMask
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:45 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value null for property move.queue.Broadcast.renameFile
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:45 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value move for property move.queue.Broadcast.operation
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:48 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value 0 for property move.queue.Broadcast.operationDelay
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:48 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value p3600x006 for property move.queue.Broadcast_cz.sourceServer
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:48 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value p3600x006 for property move.queue.Broadcast_cz.destinationServer
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:48 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Loaded value C$\AMT\amt_pobn\amt\queues\Broadcast_cz\in for property move.queue.Broadcast_cz.source from properties.
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:48 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Loaded value C$\ARCHIVE\BATCH\Broadcast_cz for property move.queue.Broadcast_cz.destination from properties.
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:48 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for property move.queue.Broadcast_cz.sourceFileMask
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:48 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value null for property move.queue.Broadcast_cz.renameFile
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:48 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value move for property move.queue.Broadcast_cz.operation
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:49 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value 0 for property move.queue.Broadcast_cz.operationDelay
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:49 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value p3600x006 for property move.queue.OKB_DT.sourceServer
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:49 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value p3600x006 for property move.queue.OKB_DT.destinationServer
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:49 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Loaded value C$\AMT\amt_pobn\amt\queues\OKB_DT\in for property move.queue.OKB_DT.source from properties.
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:49 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Loaded value C$\ARCHIVE\BATCH\OKB_DT for property move.queue.OKB_DT.destination from properties.
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:49 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for property move.queue.OKB_DT.sourceFileMask
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:49 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value null for property move.queue.OKB_DT.renameFile
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:49 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value move for property move.queue.OKB_DT.operation
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:49 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value 0 for property move.queue.OKB_DT.operationDelay
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:49 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value p3600x006 for property move.queue.OKB_DT_CZ.sourceServer
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:49 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value p3600x006 for property move.queue.OKB_DT_CZ.destinationServer
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:49 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Loaded value C$\AMT\amt_pobn\amt\queues\OKB_DT_CZ\in for property move.queue.OKB_DT_CZ.source from properties.
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:49 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Loaded value C$\ARCHIVE\BATCH\OKB_DT_CZ for property move.queue.OKB_DT_CZ.destination from properties.
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:49 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for property move.queue.OKB_DT_CZ.sourceFileMask
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:49 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value null for property move.queue.OKB_DT_CZ.renameFile
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:49 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value move for property move.queue.OKB_DT_CZ.operation
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:49 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value 0 for property move.queue.OKB_DT_CZ.operationDelay
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:49 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value p3600x006 for property move.queue.prijate_spravy.sourceServer
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:49 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value p3600x006 for property move.queue.prijate_spravy.destinationServer
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:49 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Loaded value C$\AMT\amt_pobn\amt\queues\prijate_spravy\in for property move.queue.prijate_spravy.source from properties.
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:49 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Loaded value C$\ARCHIVE\BATCH\Administration\prijate_spravy for property move.queue.prijate_spravy.destination from properties.
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:49 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for property move.queue.prijate_spravy.sourceFileMask
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:49 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value null for property move.queue.prijate_spravy.renameFile
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:49 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value move for property move.queue.prijate_spravy.operation
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:49 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value 0 for property move.queue.prijate_spravy.operationDelay
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:49 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value p3600x006 for property move.queue.prijate_spravy_cz.sourceServer
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:49 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value p3600x006 for property move.queue.prijate_spravy_cz.destinationServer
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:49 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Loaded value C$\AMT\amt_pobn\amt\queues\prijate_spravy_cz\in for property move.queue.prijate_spravy_cz.source from properties.
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:49 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Loaded value C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz for property move.queue.prijate_spravy_cz.destination from properties.
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:49 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for property move.queue.prijate_spravy_cz.sourceFileMask
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:49 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value null for property move.queue.prijate_spravy_cz.renameFile
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:49 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value move for property move.queue.prijate_spravy_cz.operation
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:50 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value 0 for property move.queue.prijate_spravy_cz.operationDelay
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:50 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value p3600x006 for property move.queue.system.sourceServer
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:50 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value p3600x006 for property move.queue.system.destinationServer
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:50 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Loaded value C$\AMT\amt_pobn\amt\queues\system\in for property move.queue.system.source from properties.
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:50 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Loaded value C$\ARCHIVE\BATCH\Administration\system for property move.queue.system.destination from properties.
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:50 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for property move.queue.system.sourceFileMask
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:50 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value null for property move.queue.system.renameFile
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:50 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value move for property move.queue.system.operation
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:50 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value 0 for property move.queue.system.operationDelay
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:50 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value p3600x006 for property move.queue.system_cz.sourceServer
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:50 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value p3600x006 for property move.queue.system_cz.destinationServer
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:50 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Loaded value C$\AMT\amt_pobn\amt\queues\system_cz\in for property move.queue.system_cz.source from properties.
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:50 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Loaded value C$\ARCHIVE\BATCH\Administration\system_cz for property move.queue.system_cz.destination from properties.
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:50 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for property move.queue.system_cz.sourceFileMask
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:50 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value null for property move.queue.system_cz.renameFile
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:50 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value move for property move.queue.system_cz.operation
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:50 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value 0 for property move.queue.system_cz.operationDelay
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:50 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value p3600x006 for property move.queue.Target.sourceServer
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:50 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value p3600x006 for property move.queue.Target.destinationServer
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:50 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Loaded value C$\AMT\amt_pobn\amt\queues\Target\in for property move.queue.Target.source from properties.
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:50 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Loaded value C$\ARCHIVE\BATCH\Target for property move.queue.Target.destination from properties.
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:50 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for property move.queue.Target.sourceFileMask
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:50 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value null for property move.queue.Target.renameFile
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:50 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value move for property move.queue.Target.operation
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:51 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value 0 for property move.queue.Target.operationDelay
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:51 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value p3600x006 for property move.queue.Vypisy_DF.sourceServer
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:51 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value p3600x006 for property move.queue.Vypisy_DF.destinationServer
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:51 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Loaded value C$\AMT\amt_pobn\amt\queues\Vypisy_DF\in for property move.queue.Vypisy_DF.source from properties.
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:51 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Loaded value C$\ARCHIVE\BATCH\Vypisy_DF for property move.queue.Vypisy_DF.destination from properties.
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:51 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for property move.queue.Vypisy_DF.sourceFileMask
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:51 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value null for property move.queue.Vypisy_DF.renameFile
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:51 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Loaded value convertStmtAndMove for property move.queue.Vypisy_DF.operation from properties.
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
+mar 20, 2015 7:06:52 AM org.pabk.emanager.MoveFileHandler getProperty
 INFO: Set default value 0 for property move.queue.Vypisy_DF.operationDelay
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
-INFO: Set default value p3600x006 for property move.queue.test.sourceServer
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
-INFO: Set default value p3600x006 for property move.queue.test.destinationServer
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
-INFO: Loaded value C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz for property move.queue.test.source from properties.
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
-INFO: Loaded value C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\Archiv for property move.queue.test.destination from properties.
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
-INFO: Loaded value e\d{7}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for property move.queue.test.sourceFileMask from properties.
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
-INFO: Set default value null for property move.queue.test.renameFile
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
-INFO: Loaded value copy for property move.queue.test.operation from properties.
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
-INFO: Loaded value 2 for property move.queue.test.operationDelay from properties.
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler getProperty
-INFO: Set default value 11 for property move.poolInterval
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler businessLogic
-INFO: MoveFileHandler is working
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Start moving files on queue Broadcast
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Found source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\Broadcast\in for queue Broadcast
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Found destination directory \\p3600x006\C$\ARCHIVE\BATCH\Broadcast for queue Broadcast
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for input files on queue Broadcast
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Rename output files [0, 8, 23, 27] applies on queue Broadcast
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: 0 files found on source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\Broadcast\in that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] on queue Broadcast
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Successfully ends move files on queue Broadcast
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Start moving files on queue Broadcast_cz
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Found source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\Broadcast_cz\in for queue Broadcast_cz
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Found destination directory \\p3600x006\C$\ARCHIVE\BATCH\Broadcast_cz for queue Broadcast_cz
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for input files on queue Broadcast_cz
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Rename output files [0, 8, 23, 27] applies on queue Broadcast_cz
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: 0 files found on source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\Broadcast_cz\in that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] on queue Broadcast_cz
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Successfully ends move files on queue Broadcast_cz
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Start moving files on queue OKB_DT
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Found source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\OKB_DT\in for queue OKB_DT
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Found destination directory \\p3600x006\C$\ARCHIVE\BATCH\OKB_DT for queue OKB_DT
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for input files on queue OKB_DT
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Rename output files [0, 8, 23, 27] applies on queue OKB_DT
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: 0 files found on source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\OKB_DT\in that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] on queue OKB_DT
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Successfully ends move files on queue OKB_DT
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Start moving files on queue OKB_DT_CZ
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Found source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\OKB_DT_CZ\in for queue OKB_DT_CZ
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Found destination directory \\p3600x006\C$\ARCHIVE\BATCH\OKB_DT_CZ for queue OKB_DT_CZ
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for input files on queue OKB_DT_CZ
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Rename output files [0, 8, 23, 27] applies on queue OKB_DT_CZ
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: 0 files found on source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\OKB_DT_CZ\in that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] on queue OKB_DT_CZ
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Successfully ends move files on queue OKB_DT_CZ
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Start moving files on queue prijate_spravy
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Found source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\prijate_spravy\in for queue prijate_spravy
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Found destination directory \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy for queue prijate_spravy
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for input files on queue prijate_spravy
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Rename output files [0, 8, 23, 27] applies on queue prijate_spravy
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: 0 files found on source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\prijate_spravy\in that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] on queue prijate_spravy
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Successfully ends move files on queue prijate_spravy
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Start moving files on queue prijate_spravy_cz
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Found source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\prijate_spravy_cz\in for queue prijate_spravy_cz
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Found destination directory \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz for queue prijate_spravy_cz
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for input files on queue prijate_spravy_cz
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Rename output files [0, 8, 23, 27] applies on queue prijate_spravy_cz
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: 0 files found on source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\prijate_spravy_cz\in that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] on queue prijate_spravy_cz
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Successfully ends move files on queue prijate_spravy_cz
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Start moving files on queue system
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Found source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\system\in for queue system
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Found destination directory \\p3600x006\C$\ARCHIVE\BATCH\Administration\system for queue system
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for input files on queue system
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Rename output files [0, 8, 23, 27] applies on queue system
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: 0 files found on source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\system\in that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] on queue system
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Successfully ends move files on queue system
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Start moving files on queue system_cz
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Found source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\system_cz\in for queue system_cz
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Found destination directory \\p3600x006\C$\ARCHIVE\BATCH\Administration\system_cz for queue system_cz
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for input files on queue system_cz
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Rename output files [0, 8, 23, 27] applies on queue system_cz
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: 0 files found on source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\system_cz\in that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] on queue system_cz
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Successfully ends move files on queue system_cz
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Start moving files on queue Target
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Found source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\Target\in for queue Target
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Found destination directory \\p3600x006\C$\ARCHIVE\BATCH\Target for queue Target
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for input files on queue Target
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Rename output files [0, 8, 23, 27] applies on queue Target
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: 0 files found on source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\Target\in that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] on queue Target
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Successfully ends move files on queue Target
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Start moving files on queue Vypisy_DF
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Found source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\Vypisy_DF\in for queue Vypisy_DF
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Found destination directory \\p3600x006\C$\ARCHIVE\BATCH\Vypisy_DF for queue Vypisy_DF
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for input files on queue Vypisy_DF
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Rename output files [0, 8, 23, 27] applies on queue Vypisy_DF
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: 0 files found on source directory \\p3600x006\C$\AMT\amt_pobn\amt\queues\Vypisy_DF\in that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] on queue Vypisy_DF
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Successfully ends convertStmtAndMove files on queue Vypisy_DF
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Start moving files on queue test
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Found source directory \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz for queue test
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Found destination directory \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\Archiv for queue test
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Used filename pattern e\d{7}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for input files on queue test
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Rename output files [0, 8, 23, 27] applies on queue test
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: 65 files found on source directory \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz that matching filter e\d{7}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] on queue test
-mar 18, 2015 2:03:05 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031324_20150313205020.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler prepareCopy
-WARNING: Temporary file D:\Dokumenty\git\bb\EventManager\tmp\_tempfile_1426683785984 was successfully prepared for copying of file \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031324_20150313205020.txt on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031324_20150313205020.txt is successfully copy to \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\Archiv\e5031324.txt no queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031325_20150313220418.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler prepareCopy
-WARNING: Temporary file D:\Dokumenty\git\bb\EventManager\tmp\_tempfile_1426683786047 was successfully prepared for copying of file \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031325_20150313220418.txt on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031325_20150313220418.txt is successfully copy to \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\Archiv\e5031325.txt no queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031326_20150313220433.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler prepareCopy
-WARNING: Temporary file D:\Dokumenty\git\bb\EventManager\tmp\_tempfile_1426683786062 was successfully prepared for copying of file \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031326_20150313220433.txt on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031326_20150313220433.txt is successfully copy to \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\Archiv\e5031326.txt no queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031401_20150316071635.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler prepareCopy
-WARNING: Temporary file D:\Dokumenty\git\bb\EventManager\tmp\_tempfile_1426683786078 was successfully prepared for copying of file \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031401_20150316071635.txt on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031401_20150316071635.txt is successfully copy to \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\Archiv\e5031401.txt no queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031501_20150316071652.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler prepareCopy
-WARNING: Temporary file D:\Dokumenty\git\bb\EventManager\tmp\_tempfile_1426683786109 was successfully prepared for copying of file \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031501_20150316071652.txt on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031501_20150316071652.txt is successfully copy to \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\Archiv\e5031501.txt no queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031502_20150316071708.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler prepareCopy
-WARNING: Temporary file D:\Dokumenty\git\bb\EventManager\tmp\_tempfile_1426683786125 was successfully prepared for copying of file \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031502_20150316071708.txt on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031502_20150316071708.txt is successfully copy to \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\Archiv\e5031502.txt no queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031601_20150316083505.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler prepareCopy
-WARNING: Temporary file D:\Dokumenty\git\bb\EventManager\tmp\_tempfile_1426683786125 was successfully prepared for copying of file \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031601_20150316083505.txt on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031601_20150316083505.txt is successfully copy to \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\Archiv\e5031601.txt no queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031602_20150316101504.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler prepareCopy
-WARNING: Temporary file D:\Dokumenty\git\bb\EventManager\tmp\_tempfile_1426683786140 was successfully prepared for copying of file \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031602_20150316101504.txt on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031602_20150316101504.txt is successfully copy to \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\Archiv\e5031602.txt no queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031603_20150316101520.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler prepareCopy
-WARNING: Temporary file D:\Dokumenty\git\bb\EventManager\tmp\_tempfile_1426683786171 was successfully prepared for copying of file \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031603_20150316101520.txt on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031603_20150316101520.txt is successfully copy to \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\Archiv\e5031603.txt no queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031604_20150316105505.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler prepareCopy
-WARNING: Temporary file D:\Dokumenty\git\bb\EventManager\tmp\_tempfile_1426683786171 was successfully prepared for copying of file \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031604_20150316105505.txt on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031604_20150316105505.txt is successfully copy to \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\Archiv\e5031604.txt no queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031605_20150316115504.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler prepareCopy
-WARNING: Temporary file D:\Dokumenty\git\bb\EventManager\tmp\_tempfile_1426683786187 was successfully prepared for copying of file \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031605_20150316115504.txt on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031605_20150316115504.txt is successfully copy to \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\Archiv\e5031605.txt no queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031606_20150316133504.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler prepareCopy
-WARNING: Temporary file D:\Dokumenty\git\bb\EventManager\tmp\_tempfile_1426683786203 was successfully prepared for copying of file \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031606_20150316133504.txt on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031606_20150316133504.txt is successfully copy to \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\Archiv\e5031606.txt no queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031607_20150316133517.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler prepareCopy
-WARNING: Temporary file D:\Dokumenty\git\bb\EventManager\tmp\_tempfile_1426683786203 was successfully prepared for copying of file \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031607_20150316133517.txt on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031607_20150316133517.txt is successfully copy to \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\Archiv\e5031607.txt no queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031608_20150316140504.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031608_20150316140504.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031609_20150316142505.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031609_20150316142505.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031610_20150316151504.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031610_20150316151504.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031611_20150316152504.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031611_20150316152504.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031612_20150316152520.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031612_20150316152520.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031613_20150316153505.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031613_20150316153505.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031614_20150316153521.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031614_20150316153521.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031615_20150316154504.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031615_20150316154504.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031616_20150316154520.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031616_20150316154520.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031617_20150316162505.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031617_20150316162505.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031618_20150316162521.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031618_20150316162521.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031619_20150316163504.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031619_20150316163504.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031620_20150316163520.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031620_20150316163520.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031621_20150316165505.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031621_20150316165505.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031622_20150316223505.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031622_20150316223505.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031701_20150317083505.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031701_20150317083505.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031702_20150317085505.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031702_20150317085505.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031703_20150317100505.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031703_20150317100505.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031704_20150317104505.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031704_20150317104505.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031705_20150317104522.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031705_20150317104522.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031706_20150317105505.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031706_20150317105505.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031707_20150317105520.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031707_20150317105520.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031708_20150317110505.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031708_20150317110505.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031709_20150317110521.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031709_20150317110521.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031710_20150317114505.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031710_20150317114505.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031711_20150317140505.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031711_20150317140505.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031712_20150317142504.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031712_20150317142504.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031713_20150317143505.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031713_20150317143505.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031714_20150317145504.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031714_20150317145504.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031715_20150317150505.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031715_20150317150505.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031716_20150317150521.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031716_20150317150521.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031717_20150317152505.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031717_20150317152505.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031718_20150317152520.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031718_20150317152520.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031719_20150317153505.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031719_20150317153505.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031720_20150317160505.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031720_20150317160505.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031721_20150317161505.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031721_20150317161505.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031722_20150317163505.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031722_20150317163505.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031723_20150317170505.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031723_20150317170505.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031724_20150317222504.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031724_20150317222504.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031725_20150317223505.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031725_20150317223505.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031801_20150318084505.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031801_20150318084505.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031802_20150318085505.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031802_20150318085505.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031803_20150318090505.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031803_20150318090505.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031804_20150318094505.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031804_20150318094505.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031805_20150318095505.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031805_20150318095505.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031806_20150318100504.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031806_20150318100504.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031807_20150318101506.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031807_20150318101506.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031808_20150318105506.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031808_20150318105506.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031809_20150318111504.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031809_20150318111504.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031810_20150318113506.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031810_20150318113506.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031811_20150318113522.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031811_20150318113522.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031812_20150318115505.txt found on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: File \\p3600x006\C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\e5031812_20150318115505.txt is not copy on queue test. File is not older than 2 day(s)
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler execute
-INFO: Successfully ends copy files on queue test
-mar 18, 2015 2:03:06 PM org.pabk.emanager.MoveFileHandler businessLogic
-INFO: MoveFileHandler is SLEEPING
+mar 20, 2015 7:06:52 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value p3600x006 for property move.queue.sys_sk.sourceServer
+mar 20, 2015 7:06:52 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value p3600x006 for property move.queue.sys_sk.destinationServer
+mar 20, 2015 7:06:52 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value C$\ARCHIVE\BATCH\Administration\System for property move.queue.sys_sk.source from properties.
+mar 20, 2015 7:06:52 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value C$\ARCHIVE\BATCH\Administration for property move.queue.sys_sk.destination from properties.
+mar 20, 2015 7:06:52 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value \d{8}\.[pt][rx][t] for property move.queue.sys_sk.sourceFileMask from properties.
+mar 20, 2015 7:06:52 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value null for property move.queue.sys_sk.renameFile
+mar 20, 2015 7:06:52 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value delete for property move.queue.sys_sk.operation from properties.
+mar 20, 2015 7:06:56 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value 14 for property move.queue.sys_sk.operationDelay from properties.
+mar 20, 2015 7:07:03 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value p3600x006 for property move.queue.sys_cz.sourceServer
+mar 20, 2015 7:07:03 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value p3600x006 for property move.queue.sys_cz.destinationServer
+mar 20, 2015 7:07:03 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value C$\ARCHIVE\BATCH\Administration\System_cz for property move.queue.sys_cz.source from properties.
+mar 20, 2015 7:07:03 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value C$\ARCHIVE\BATCH\Administration for property move.queue.sys_cz.destination from properties.
+mar 20, 2015 7:07:03 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value \d{8}\.[pt][rx][t] for property move.queue.sys_cz.sourceFileMask from properties.
+mar 20, 2015 7:07:03 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value null for property move.queue.sys_cz.renameFile
+mar 20, 2015 7:07:03 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value delete for property move.queue.sys_cz.operation from properties.
+mar 20, 2015 7:07:06 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value 14 for property move.queue.sys_cz.operationDelay from properties.
+mar 20, 2015 7:07:11 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value p3600x006 for property move.queue.ps_arch_sk.sourceServer
+mar 20, 2015 7:07:11 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value p3600x006 for property move.queue.ps_arch_sk.destinationServer
+mar 20, 2015 7:07:11 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value C$\ARCHIVE\BATCH\Administration\prijate_spravy for property move.queue.ps_arch_sk.source from properties.
+mar 20, 2015 7:07:11 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value C$\ARCHIVE\BATCH\Administration\prijate_spravy\Archiv for property move.queue.ps_arch_sk.destination from properties.
+mar 20, 2015 7:07:11 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value \d{8}\.[pt][rx][t] for property move.queue.ps_arch_sk.sourceFileMask from properties.
+mar 20, 2015 7:07:11 AM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value  for property move.queue.ps_arch_sk.renameFile from properties.
+mar 20, 2015 7:07:11 AM org.pabk.emanager.MoveFileHandler getProperty
+SEVERE: Failed to create an instance of int for property move.queue.ps_arch_sk.renameFile from value  in handler MoveFileHandler

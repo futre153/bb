@@ -1,16 +1,12 @@
 package org;
 
-import java.util.Properties;
+import java.io.File;
+import java.util.Arrays;
 
-import javax.mail.Message;
 import javax.mail.MessagingException;
-import javax.mail.Session;
-import javax.mail.Transport;
 import javax.mail.internet.AddressException;
-import javax.mail.internet.InternetAddress;
-import javax.mail.internet.MimeBodyPart;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
+
+import org.pabk.emanager.util.SimpleFileFilter;
 
 public class Tester {
 
@@ -20,6 +16,12 @@ public class Tester {
 	 * @throws AddressException 
 	 */
 	public static void main(String[] args) throws AddressException, MessagingException {
+		File f = new File("C:\\ARCHIVE\\BATCH\\Broadcast_cz");
+		SimpleFileFilter filter = new SimpleFileFilter("\\d{8}\\.[pt][rx][t]", 90);
+		File[] list = f.listFiles(filter);
+		System.out.println(list.length);
+		System.out.println(Arrays.toString(list));
+		/*
 		Properties pro=new Properties();
 		pro.put("mail.smtp.host", "10.1.1.59");
 		pro.put("mail.smtp.port", "25");
@@ -33,6 +35,7 @@ public class Tester {
 		mp.addBodyPart(mbp);
 		email.setContent(mp);
 		Transport.send(email);
+		*/
 	}
 
 }

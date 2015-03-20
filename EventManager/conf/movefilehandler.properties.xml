@@ -2,7 +2,7 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
     <entry key="move.separator">,</entry>
-    <entry key="move.queues">Broadcast,Broadcast_cz,OKB_DT,OKB_DT_CZ,prijate_spravy,prijate_spravy_cz,system,system_cz,Target,Vypisy_DF,test</entry>
+    <entry key="move.queues">Broadcast,Broadcast_cz,OKB_DT,OKB_DT_CZ,prijate_spravy,prijate_spravy_cz,system,system_cz,Target,Vypisy_DF,sys_sk,sys_cz,ps_arch_sk,ps_arch_cz,ps_del_sk,ps_del_cz,stmt_arch,stmt_del,okb_arch_sk,okb_del_sk,okb_arch_cz,okb_del_cz,brd_arch_sk,brd_del_sk,brd_arch_cz,brd_del_cz</entry>
     <entry key="move.sourceServer">p3600x006</entry>
     <entry key="move.destinationServer">p3600x006</entry>
     <entry key="move.queue.Broadcast.source">C$\AMT\amt_pobn\amt\queues\Broadcast\in</entry>
@@ -28,11 +28,114 @@
     <entry key="move.queue.Vypisy_DF.operation">convertStmtAndMove</entry>
     <entry key="move.queue.test.source">C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz</entry>
     <entry key="move.queue.test.destination">C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\Archiv</entry>
-    <entry key="move.queue.test.operationDelay">0</entry>
+    <entry key="move.queue.test.operationDelay">1</entry>
     <entry key="move.queue.test.operation">delete</entry>
     <entry key="move.queue.test.sourceFileMask">e\d{7}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t]</entry>
     <entry key="move.sourceFileMask">\d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t]</entry>
     <entry key="move.renameFile">0,8,23,27</entry>
+        <!-- slovak system messages -->
+    <entry key="move.queue.sys_sk.source">C$\ARCHIVE\BATCH\Administration\System</entry>
+    <entry key="move.queue.sys_sk.destination">C$\ARCHIVE\BATCH\Administration</entry>
+    <entry key="move.queue.sys_sk.operation">delete</entry>
+    <entry key="move.queue.sys_sk.operationDelay">14</entry>
+    <entry key="move.queue.sys_sk.sourceFileMask">\d{8}\.[pt][rx][t]</entry>
+    <!-- czech system messages -->
+    <entry key="move.queue.sys_cz.source">C$\ARCHIVE\BATCH\Administration\System_cz</entry>
+    <entry key="move.queue.sys_cz.destination">C$\ARCHIVE\BATCH\Administration</entry>
+    <entry key="move.queue.sys_cz.operation">delete</entry>
+    <entry key="move.queue.sys_cz.operationDelay">14</entry>
+    <entry key="move.queue.sys_cz.sourceFileMask">\d{8}\.[pt][rx][t]</entry>
+    <!-- slovak received messages archive -->
+    <entry key="move.queue.ps_arch_sk.source">C$\ARCHIVE\BATCH\Administration\prijate_spravy</entry>
+    <entry key="move.queue.ps_arch_sk.destination">C$\ARCHIVE\BATCH\Administration\prijate_spravy\Archiv</entry>
+    <entry key="move.queue.ps_arch_sk.operation">move</entry>
+    <entry key="move.queue.ps_arch_sk.operationDelay">3</entry>
+    <entry key="move.queue.ps_arch_sk.sourceFileMask">\d{8}\.[pt][rx][t]</entry>
+    <entry key="move.queue.ps_arch_sk.renameFile"></entry>
+    <!-- czech received messages archive -->
+    <entry key="move.queue.ps_arch_cz.source">C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz</entry>
+    <entry key="move.queue.ps_arch_cz.destination">C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\Archiv</entry>
+    <entry key="move.queue.ps_arch_cz.operation">move</entry>
+    <entry key="move.queue.ps_arch_cz.operationDelay">3</entry>
+    <entry key="move.queue.ps_arch_cz.sourceFileMask">\d{8}\.[pt][rx][t]</entry>
+    <entry key="move.queue.ps_arch_cz.renameFile"></entry>
+    <!-- slovak received messages deletion -->
+    <entry key="move.queue.ps_del_sk.source">C$\ARCHIVE\BATCH\Administration\prijate_spravy\Archiv</entry>
+    <entry key="move.queue.ps_del_sk.destination">C$\ARCHIVE\BATCH\Administration</entry>
+    <entry key="move.queue.ps_del_sk.operation">delete</entry>
+    <entry key="move.queue.ps_del_sk.operationDelay">90</entry>
+    <entry key="move.queue.ps_del_sk.sourceFileMask">\d{8}\.[pt][rx][t]</entry>
+    <!-- czech received messages deletion -->
+    <entry key="move.queue.ps_del_cz.source">C$\ARCHIVE\BATCH\Administration\prijate_spravy_cz\Archiv</entry>
+    <entry key="move.queue.ps_del_cz.destination">C$\ARCHIVE\BATCH\Administration</entry>
+    <entry key="move.queue.ps_del_cz.operation">delete</entry>
+    <entry key="move.queue.ps_del_cz.operationDelay">90</entry>
+    <entry key="move.queue.ps_del_cz.sourceFileMask">\d{8}\.[pt][rx][t]</entry>
+    <!-- received statements archive -->
+    <entry key="move.queue.stmt_arch.source">C$\ARCHIVE\BATCH\Vypisy_DF</entry>
+    <entry key="move.queue.stmt_arch.destination">C$\ARCHIVE\BATCH\Vypisy_DF\Archiv</entry>
+    <entry key="move.queue.stmt_arch.operation">move</entry>
+    <entry key="move.queue.stmt_arch.operationDelay">7</entry>
+    <entry key="move.queue.stmt_arch.sourceFileMask">\d{8}\.[pt][rx][t]</entry>
+    <entry key="move.queue.stmt_arch.renameFile"></entry>
+    <!-- received statements deletion -->
+    <entry key="move.queue.stmt_del.source">C$\ARCHIVE\BATCH\Vypisy_DF\Archiv</entry>
+    <entry key="move.queue.stmt_del.destination">C$\ARCHIVE\BATCH\Administration</entry>
+    <entry key="move.queue.stmt_del.operation">delete</entry>
+    <entry key="move.queue.stmt_del.operationDelay">90</entry>
+    <entry key="move.queue.stmt_del.sourceFileMask">\d{8}\.[pt][rx][t]</entry>
+    <!-- sent slovak okb message archive -->
+    <entry key="move.queue.okb_arch_sk.source">C$\ARCHIVE\BATCH\OKB_DT</entry>
+    <entry key="move.queue.okb_arch_sk.destination">C$\ARCHIVE\BATCH\OKB_DT\Archiv</entry>
+    <entry key="move.queue.okb_arch_sk.operation">move</entry>
+    <entry key="move.queue.okb_arch_sk.operationDelay">30</entry>
+    <entry key="move.queue.okb_arch_sk.sourceFileMask">\d{8}\.[pt][rx][t]</entry>
+    <entry key="move.queue.okb_arch_sk.renameFile"></entry>
+    <!-- sent slovak okb message deletion -->
+    <entry key="move.queue.okb_del_sk.source">C$\ARCHIVE\BATCH\OKB_DT\Archiv</entry>
+    <entry key="move.queue.okb_del_sk.destination">C$\ARCHIVE\BATCH\Administration</entry>
+    <entry key="move.queue.okb_del_sk.operation">delete</entry>
+    <entry key="move.queue.okb_del_sk.operationDelay">90</entry>
+    <entry key="move.queue.okb_del_sk.sourceFileMask">\d{8}\.[pt][rx][t]</entry>
+    <!-- sent czech okb message archive -->
+    <entry key="move.queue.okb_arch_cz.source">C$\ARCHIVE\BATCH\OKB_DT_CZ</entry>
+    <entry key="move.queue.okb_arch_cz.destination">C$\ARCHIVE\BATCH\OKB_DT_CZ\Archiv</entry>
+    <entry key="move.queue.okb_arch_cz.operation">move</entry>
+    <entry key="move.queue.okb_arch_cz.operationDelay">30</entry>
+    <entry key="move.queue.okb_arch_cz.sourceFileMask">\d{8}\.[pt][rx][t]</entry>
+    <entry key="move.queue.okb_arch_cz.renameFile"></entry>
+    <!-- sent czech okb message deletion -->
+    <entry key="move.queue.okb_del_cz.source">C$\ARCHIVE\BATCH\OKB_DT_CZ\Archiv</entry>
+    <entry key="move.queue.okb_del_cz.destination">C$\ARCHIVE\BATCH\Administration</entry>
+    <entry key="move.queue.okb_del_cz.operation">delete</entry>
+    <entry key="move.queue.okb_del_cz.operationDelay">90</entry>
+    <entry key="move.queue.okb_del_cz.sourceFileMask">\d{8}\.[pt][rx][t]</entry>
+    <!-- received slovak broadcats archive -->
+    <entry key="move.queue.brd_arch_sk.source">C$\ARCHIVE\BATCH\Broadcast</entry>
+    <entry key="move.queue.brd_arch_sk.destination">C$\ARCHIVE\BATCH\Broadcast\Archiv</entry>
+    <entry key="move.queue.brd_arch_sk.operation">move</entry>
+    <entry key="move.queue.brd_arch_sk.operationDelay">30</entry>
+    <entry key="move.queue.brd_arch_sk.sourceFileMask">\d{8}\.[pt][rx][t]</entry>
+    <entry key="move.queue.brd_arch_sk.renameFile"></entry>
+    <!-- received slovak broadcats deletion -->
+    <entry key="move.queue.brd_del_sk.source">C$\ARCHIVE\BATCH\Broadcast\Archiv</entry>
+    <entry key="move.queue.brd_del_sk.destination">C$\ARCHIVE\BATCH\Administration</entry>
+    <entry key="move.queue.brd_del_sk.operation">delete</entry>
+    <entry key="move.queue.brd_del_sk.operationDelay">90</entry>
+    <entry key="move.queue.brd_del_sk.sourceFileMask">\d{8}\.[pt][rx][t]</entry>
+    <!-- received czech broadcats archive -->
+    <entry key="move.queue.brd_arch_cz.source">C$\ARCHIVE\BATCH\Broadcast_cz</entry>
+    <entry key="move.queue.brd_arch_cz.destination">C$\ARCHIVE\BATCH\Broadcast_cz\Archiv</entry>
+    <entry key="move.queue.brd_arch_cz.operation">move</entry>
+    <entry key="move.queue.brd_arch_cz.operationDelay">30</entry>
+    <entry key="move.queue.brd_arch_cz.sourceFileMask">\d{8}\.[pt][rx][t]</entry>
+    <entry key="move.queue.brd_arch_cz.renameFile"></entry>
+    <!-- received czech broadcats deletion -->
+    <entry key="move.queue.brd_del_cz.source">C$\ARCHIVE\BATCH\Broadcast_cz\Archiv</entry>
+    <entry key="move.queue.brd_del_cz.destination">C$\ARCHIVE\BATCH\Administration</entry>
+    <entry key="move.queue.brd_del_cz.operation">delete</entry>
+    <entry key="move.queue.brd_del_cz.operationDelay">90</entry>
+    <entry key="move.queue.brd_del_cz.sourceFileMask">\d{8}\.[pt][rx][t]</entry>
     <!-- <entry key="move.queue.Broadcast.sourceServer"></entry>
     <entry key="move.queue.Broadcast.destinationServer"></entry>
     <entry key="move.queue.Broadcast.sourceFileMask"></entry>

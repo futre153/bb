@@ -8,7 +8,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Array;
 import java.util.Arrays;
-import java.util.Date;
 
 import org.pabk.emanager.util.SimpleFileFilter;
 import org.pabk.emanager.util.Sys;
@@ -95,7 +94,7 @@ public class MoveFileHandler extends HandlerImpl {
 
 	}
 	
-	private static final String START_MOVE = "Start moving files on queue %s";
+	private static final String START_MOVE = "Start %s files on queue %s";
 	private static final String SRC_DIR_EXISTS = "Found source directory %s for queue %s";
 	private static final String DST_DIR_EXISTS = "Found destination directory %s for queue %s";
 	private static final String END_OPERATION_OK = "Successfully ends %s files on queue %s";
@@ -111,8 +110,9 @@ public class MoveFileHandler extends HandlerImpl {
 	private static final String FILE_FOUND = "File %s found on queue %s";
 	private static final String FILE_ALLREADY_EXISTS = "File %s is allready exists on destination directory for queue %s. The %s is skipped";
 	private static final String UNKNOWN_NOVING_ERROR = "Failed to rename file from %s to %s on queue %s. Reason is unknown";
-	private static final String UNKNOWN_DELETE_ERROR = "Failed to delete file from %s to %s on queue %s. Reason is unknown";
-	private static final String OPERATION_PROCESSED = "File %s is successfully %s to %s no queue %s";
+	private static final String UNKNOWN_DELETE_ERROR = "Failed to delete file from %s on queue %s. Reason is unknown";
+	private static final String OPERATION_PROCESSED = "File %s is successfully %s no queue %s";
+	private static final String NO_DELETE_OPERATION = "%s to %s";
 	private static final String OPERATION_NOT_DEFINED = "Operation %s is not defined for module %s";
 	private static final int MAX_READED_BYTES = 4096;
 	private static final String FAILED_DELETE = "Failed to delete file %s on queue %s";
@@ -120,16 +120,14 @@ public class MoveFileHandler extends HandlerImpl {
 	private static final String STMT_CONVERT = "File %s was successfully stmt converted on queue %s";
 	private static final String PREPARE_TMP_FILE = "Temporary file %s was successfully prepared for copying of file %s on queue %s";
 	private static final String FAILED_TMP_FILE = "Failed to prepare temporary file for copying of file %s on queue %s. Operation was aborted";
-	private static final String OPERATION_SKIPPED = "File %s is not %s on queue %s. File is not older than %d day(s)";
-	
 	private void execute(Object[] objs) {
+		String operation = (String) objs[7];
 		String name =  (String) objs[0];
-		this.log.info(String.format(START_MOVE, name));
+		this.log.info(String.format(START_MOVE, operation, name));
 		String error = null;
 		File srcDir, dstDir;
 		FileFilter filter;
 		int[] rename = null;
-		String operation = (String) objs[7];
 		try {
 			if(objs[1] instanceof String) {
 				objs[1] = new File(FS + FS + objs[1] + FS + objs[3]);
@@ -148,7 +146,7 @@ public class MoveFileHandler extends HandlerImpl {
 			}
 			this.log.info(String.format(DST_DIR_EXISTS, dstDir.getAbsolutePath(), name));
 			if(objs[5] instanceof String) {
-				objs[5] = new SimpleFileFilter((String) objs[5]);
+				objs[5] = new SimpleFileFilter((String) objs[5], (int) objs[8]);
 			}
 			filter = (FileFilter) objs[5];
 			this.log.info(String.format(MASK_USED, filter.toString(), name));
@@ -165,7 +163,7 @@ public class MoveFileHandler extends HandlerImpl {
 				log.info(String.format(FILE_FOUND, list[i].getAbsoluteFile(), name));
 				String filename = list[i].getName();
 				StringBuffer newName = new StringBuffer(list[i].getName().length());
-				if(rename != null) {
+				if(rename != null && rename.length > 0) {
 					try {
 						for(int j = 0; j < rename.length; j += 2) {
 							newName.append(filename, rename[j], rename[j + 1]);
@@ -184,49 +182,44 @@ public class MoveFileHandler extends HandlerImpl {
 					log.severe(String.format(FILE_ALLREADY_EXISTS, newFile.getAbsolutePath(), name, operation));
 					continue;
 				}
-				if(((((int) objs[8]) * 24 * 60 * 60 * 1000) < (new Date().getTime() - list[i].lastModified())) || (((int) objs[8]) <= 0)) {
-					try {
-						//main nove operations
-						//move
-						if(operation.equalsIgnoreCase(OPERATION_MOVE))  {
+				try {
+					//main nove operations
+					//move
+					if(operation.equalsIgnoreCase(OPERATION_MOVE))  {
+						moveOperation(list[i], newFile, name);
+					}
+					//convert statements and move
+					else if(operation.equalsIgnoreCase(MoveFileHandler.OPERATION_CONVERT_STMT_MOVE)) {
+						try {
+							convertStmt(list[i], name);
 							moveOperation(list[i], newFile, name);
 						}
-						//convert statements and move
-						else if(operation.equalsIgnoreCase(MoveFileHandler.OPERATION_CONVERT_STMT_MOVE)) {
-							try {
-								convertStmt(list[i], name);
-								moveOperation(list[i], newFile, name);
-							}
-							catch(Exception e) {
-								throw new IOException (e);
-							}
-						}
-						//copy
-						else if (operation.equalsIgnoreCase(MoveFileHandler.OPERATION_COPY)) {
-							try {
-								File tmp = prepareCopy(list[i], name);
-								moveOperation(tmp, newFile, name);
-							}
-							catch(Exception e) {
-								throw new IOException (e);
-							}
-						}
-						else if (operation.equalsIgnoreCase(MoveFileHandler.OPERATION_DELETE)) {
-							deleteOperation(list[i], name);
-						}
-						else {
-							log.warning(String.format(OPERATION_NOT_DEFINED, operation, this.getClass().getSimpleName()));
+						catch(Exception e) {
+							throw new IOException (e);
 						}
 					}
-					catch(Exception e) {
-						log.severe(e.getMessage());
-						continue;
+					//copy
+					else if (operation.equalsIgnoreCase(MoveFileHandler.OPERATION_COPY)) {
+						try {
+							File tmp = prepareCopy(list[i], name);
+							moveOperation(tmp, newFile, name);
+						}
+						catch(Exception e) {
+							throw new IOException (e);
+						}
 					}
-					log.info(String.format(OPERATION_PROCESSED, list[i].getAbsolutePath(), operation, newFile.getAbsoluteFile(), name));
+					else if (operation.equalsIgnoreCase(MoveFileHandler.OPERATION_DELETE)) {
+						deleteOperation(list[i], name);
+					}
+					else {
+						log.warning(String.format(OPERATION_NOT_DEFINED, operation, this.getClass().getSimpleName()));
+					}
 				}
-				else {
-					log.info(String.format(OPERATION_SKIPPED, list[i], operation, name, objs[8]));
+				catch(Exception e) {
+					log.severe(e.getMessage());
+					continue;
 				}
+				log.info(String.format(OPERATION_PROCESSED, list[i].getAbsolutePath(), operation.equalsIgnoreCase(OPERATION_DELETE) ? operation : String.format(NO_DELETE_OPERATION, operation, newFile.getAbsoluteFile()), name));
 			}
 		}
 		catch (Exception e) {
@@ -241,8 +234,7 @@ public class MoveFileHandler extends HandlerImpl {
 	}
 	
 	private void deleteOperation(File file, String name) throws IOException {
-		boolean b = !file.delete();
-		if(!b) {
+		if(!file.delete()) {
 			throw new IOException(String.format(UNKNOWN_DELETE_ERROR, file.getAbsolutePath(), name));
 		}
 	}
@@ -324,8 +316,7 @@ public class MoveFileHandler extends HandlerImpl {
 	}
 
 	private void moveOperation(File oldFile, File newFile, String name) throws IOException {
-		boolean b = oldFile.renameTo(newFile);
-		if(!b) {
+		if(!oldFile.renameTo(newFile)) {
 			throw new IOException(String.format(UNKNOWN_NOVING_ERROR, oldFile.getAbsolutePath(), newFile.getAbsoluteFile(), name));
 		}
 	}
@@ -438,6 +429,9 @@ public class MoveFileHandler extends HandlerImpl {
 				} catch (Exception e1) {
 					try {
 						String[] array = value.split(separator);
+						if(array.length == 1 && array[0].length() == 0) {
+							return Array.newInstance(_class, 0);
+						}
 						Object obj = Array.newInstance(_class, array.length);
 						for(int i = 0; i < array.length; i ++) {
 							Array.set(obj, i, parse(_class, array[i], key, handler.getClass().getSimpleName()));
