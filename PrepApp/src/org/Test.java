@@ -12,7 +12,7 @@ public class Test {
 		//in.close();
 		
 		System.out.println(Huffman.decode("8zu1w0iiEwH0AA==", null));
-		System.out.println(Huffman.encode("Nikoleta-3", null));
+		System.out.println(Huffman.encode("Nikoleta-6", null));
 	}
 
 }
