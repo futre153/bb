@@ -10,19 +10,19 @@ abstract class BlockImpl extends ArrayList<BlockImpl> implements Block {
 	 */
 	private static final long serialVersionUID = 1L;
 	private static final String BLOCK_IS_NOT_DEFINED = "Block is not defined";
-	private static final String BLOCK_BEGINNING = "\\{";
+	static final String BLOCK_BEGINNING = "\\{";
 	private static final int MAX_BLOCK_ID_LENGTH = 3;
 	static final char END_OF_BLOCK_ID = ':';
 	private static final int MIN_BLOCK_LENGTH = 0;
 	protected static final String BLOCK_ID_PATTERN = "[0-9A-Za-z]{1,3}";
 	private static final String CHARACTER_NOT_MATCH = "Character '%c' does not match to pattern \"%s\"";
-	private static final String SEQUENCE_IS_SHORT = "Sequence of character \"%s\" is shorter than %d";
 	private static final String SEQUENCE_IS_WORNG = "Sequence of character \"%s\" does not match pattern \"%s\" or is longer than %d";
 	static final String END_OF_STREAM = "End of stream reached";
 	private static final String END_AND_PATTERN_NULL = "Pattern and end character cannot be null both";
-	private static final String BLOCK_END_INDICATOR = "\\}";
+	protected static final String BLOCK_END_INDICATOR = "\\}";
 	private static final String BLOCK_ID_ERROR = "Block idenfifier cannot have \"%s\" value";
 	private static final String FAILED_BI = "Failed to read block identifier";
+	private static final String LINE_FEED_PATTERN = "\\n";
 	public static String  BASIC_HEADER			= "1";
 	public static String  APPLICATION_HEADER	= "2";
 	public static String  USER_HEADER			= "3";
@@ -59,26 +59,18 @@ abstract class BlockImpl extends ArrayList<BlockImpl> implements Block {
 			throw new IOException(END_AND_PATTERN_NULL);
 		}
 		StringBuffer buf = new StringBuffer(max);
-		max = max < 0 ?	Integer.MAX_VALUE : max;
+		max = (max < 0 || end != 0) ? Integer.MAX_VALUE : max;
 		while(buf.length() < max) {
-			if(min >= 0 && buf.length() >= min) {
-				if(end == 0 && buf.toString().matches(pattern)) {
-					break;
-				}
-			}
 			char c = BlockImpl.readCharacter(in, null);
 			if(end > 0 && end == c) {
 				break;
 			}
 			buf.append(c);
-			if(end == 0 && buf.toString().matches(pattern)) {
+			if(end == 0 && buf.length() >= min && buf.toString().matches(pattern)) {
 				break;
 			}
 		}
-		if(min >=0 && buf.length() < min) {
-			throw new IOException(String.format(SEQUENCE_IS_SHORT, buf.toString(), min));
-		}
-		if(!buf.toString().matches(pattern)) {
+		if(pattern != null && (!buf.toString().matches(pattern))) {
 			throw new IOException(String.format(SEQUENCE_IS_WORNG, buf.toString(), pattern, max));
 		}
 		return buf.toString();
@@ -102,5 +94,15 @@ abstract class BlockImpl extends ArrayList<BlockImpl> implements Block {
 		catch(Exception e) {
 			throw new IOException(FAILED_BI);
 		}
+	}
+
+	public static String readLine(InputStreamReader in) throws IOException {
+		char c = 0;
+		StringBuffer sb = new StringBuffer();
+		while ((c = BlockImpl.readCharacter(in, null)) != '\r') {
+			sb.append(c);
+		}
+		BlockImpl.readCharacter(in, LINE_FEED_PATTERN);
+		return sb.toString();
 	}
 }

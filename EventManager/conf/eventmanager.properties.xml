@@ -2,18 +2,21 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 	<entry key="modules">
-	   <!--  org.pabk.emanager.DBConnector,
-	    org.pabk.emanager.SNMPServer,
+	   org.pabk.emanager.DBConnector,
+	   org.pabk.emanager.SAATrapHandler,
+	   org.pabk.emanager.TrapCollector,
+	   org.pabk.emanager.MailHandler
+	    <!-- org.pabk.emanager.SNMPServer,
 		org.pabk.emanager.DatagramCollector,
-		org.pabk.emanager.PseudoSNMPServer -->
-	org.pabk.emanager.MoveFileHandler
+		org.pabk.emanager.PseudoSNMPServer
+	org.pabk.emanager.MoveFileHandler -->
 	     
 	<!--     org.pabk.emanager.PrintHandler
 	org.pabk.emanager.Interpreter,
 	org.pabk.emanager.Listener,
 	
 	org.pabk.emanager.SAATrapHandler,
-	org.pabk.emanager.MailHandler,
+	,
 	org.pabk.emanager.MessageCollector,
 	org.pabk.emanager.MessageHandler,
 	org.pabk.emanager.Cleaner -->

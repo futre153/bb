@@ -13,7 +13,7 @@ public class BasicHeader extends BlockImpl {
 	private static final String BASIC_HEADER_EXPECTED = "Basic header is expected";
 	private static final String APPLICATION_ID_PATTERN = ".";
 	private static final String SERVICE_ID_PATTERN = "([0][12356])|([1][4])|([2][12356])|([4][23])";
-	static final String LOGICAL_TERMINAL_PATTERN = "[A-Z]{6}[0-9A-Z]{2}[A-Z][0-9]{3}";
+	static final String LOGICAL_TERMINAL_PATTERN = "[A-Z]{6}[0-9A-Z]{2}[A-Z0-9]{4}";
 	static final char BLOCK_END_INDICATOR = '}';
 	private static final String SESSION_AND_SEQUENCE_PATTERN = "\\d{10}";
 	private static final String SESSION_PATTERN = "\\d{6}";
@@ -57,7 +57,7 @@ public class BasicHeader extends BlockImpl {
 		return false;
 	}
 
-	protected final String getApplicationId() {
+	public final String getApplicationId() {
 		return applicationId;
 	}
 
@@ -65,7 +65,7 @@ public class BasicHeader extends BlockImpl {
 		this.applicationId = applicationId;
 	}
 
-	protected final String getServiceId() {
+	public final String getServiceId() {
 		return serviceId;
 	}
 

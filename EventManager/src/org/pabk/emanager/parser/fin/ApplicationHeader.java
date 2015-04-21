@@ -28,13 +28,13 @@ public class ApplicationHeader extends BlockImpl implements ApplicationHeaderBlo
 
 	private static final String TIME_PATTERN = "[0-2][0-9][0-5][0-9]";
 
-	private static final String MIR_PATTERN = "[0-9]{2}[01][0-9][0-3][0-9][A-Z]{6}[0-9A-Z]{2}[A-Z][0-9]{3}[0-9]{10}";
+	private static final String MIR_PATTERN = "[0-9]{2}[01][0-9][0-3][0-9][A-Z]{6}[0-9A-Z]{2}[A-Z0-9]{4}[0-9]{10}";
 
 	private static final String DATE_PATTERN = "[0-9]{2}[01][0-9][0-3][0-9]";
 
 	private static final String MT_PATTERN = "\\d{3}";
 
-	private static final String OUTPUT_MESSAGE_PRIORITY_PATTERN = "[\\}S]";
+	private static final String OUTPUT_MESSAGE_PRIORITY_PATTERN = "[\\}SNU]";
 
 	private String GMTTime = null;
 	private char IOIdentifier;
@@ -75,6 +75,7 @@ public class ApplicationHeader extends BlockImpl implements ApplicationHeaderBlo
 		char mp = BlockImpl.readCharacter(in, OUTPUT_MESSAGE_PRIORITY_PATTERN);
 		if(mp != BasicHeader.BLOCK_END_INDICATOR) {
 			setMessagePriority(mp);
+			BlockImpl.readCharacter(in, BlockImpl.BLOCK_END_INDICATOR);
 		}
 	}
 
@@ -100,6 +101,7 @@ public class ApplicationHeader extends BlockImpl implements ApplicationHeaderBlo
 			else if (op.length() != 0) {
 				throw new IOException (String.format(OBSOLENCE_PERIOD_FALSE, op));
 			}
+			BlockImpl.readCharacter(in, BlockImpl.BLOCK_END_INDICATOR);
 		}
 	}
 

@@ -1,8 +1,8 @@
 package org.pabk.emanager.parser.fin;
 
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 public class Text extends CommonBlock implements TextBlock {
 
@@ -14,6 +14,7 @@ public class Text extends CommonBlock implements TextBlock {
 	private static final char END_U2U_TEXT_BLOC_INDICATOR = '-';
 	private static final String FIELD_IS_EXPECTED = "Field is expected";
 	
+	private ArrayList<Field> fields = new ArrayList<Field>();
 	private boolean u2u = false;
 	@SuppressWarnings("unused")
 	private String messageType;
@@ -39,8 +40,7 @@ public class Text extends CommonBlock implements TextBlock {
 	}
 
 	private void parseU2UTextBlockContent(InputStreamReader in) throws IOException {
-		BufferedReader reader = new BufferedReader(in);
-		String line = reader.readLine();
+		String line = BlockImpl.readLine(in);
 		if(line.length() != 0) {
 			throw new IOException(ERROR_U2U_TEXT);
 		}
@@ -66,13 +66,25 @@ public class Text extends CommonBlock implements TextBlock {
 						n = null;
 					}
 					if(n != null) {
+						this.fields.add(f);
 						f = n;
 						c = 0;
 					}
 				}
 			}
-			line = (c == 0 ? "" : new String(new char[] {c})) + reader.readLine();
+			line = (c == 0 ? "" : new String(new char[] {c})) + BlockImpl.readLine(in);
 			f.add(line);
+		}
+		this.fields.add(f);
+		BlockImpl.readCharacter(in, BlockImpl.BLOCK_END_INDICATOR);
+	}
+	
+	public Object getBlockContent() {
+		if(u2u) {
+			return this.fields;
+		}
+		else {
+			return this.iterator();
 		}
 	}
 	

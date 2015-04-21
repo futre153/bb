@@ -21,10 +21,9 @@ public class Tester {
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws AddressException, MessagingException, IOException {
-		File f = new File("D:\\TEMP\\01410001.txt");
+		File f = new File("D:\\TEMP\\01561531_20150420090805.txt.ARCH");
 		FileInputStream in = new FileInputStream(f);
-		SAARJEParser.parse(in, null);
-		
+		new SAARJEParser().parse(in, null);
 		in.close();
 		/*File f = new File("C:\\ARCHIVE\\BATCH\\Broadcast_cz");
 		SimpleFileFilter filter = new SimpleFileFilter("\\d{8}\\.[pt][rx][t]", 90);

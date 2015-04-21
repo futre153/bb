@@ -1,16 +1,64 @@
-mar 06, 2015 9:59:08 AM org.pabk.emanager.HandlerImpl init
+apr 21, 2015 7:27:34 AM org.pabk.emanager.HandlerImpl init
 INFO: dbconnector: logger dbconnector is successfully initailized!
-mar 06, 2015 9:59:08 AM org.pabk.emanager.HandlerImpl run
+apr 21, 2015 7:27:34 AM org.pabk.emanager.HandlerImpl run
 INFO: Module org.pabk.emanager.DBConnector is started!
-mar 06, 2015 9:59:08 AM org.pabk.emanager.DBConnector businessLogic
+apr 21, 2015 7:27:34 AM org.pabk.emanager.DBConnector businessLogic
 INFO: Defined table batch format server: conf/table_%s.sql
-mar 06, 2015 9:59:08 AM org.pabk.emanager.DBConnector businessLogic
+apr 21, 2015 7:27:34 AM org.pabk.emanager.DBConnector businessLogic
 INFO: Load tables: fin_msgs,saa_traps,mail_msgs
-mar 06, 2015 9:59:08 AM org.pabk.emanager.DBConnector businessLogic
+apr 21, 2015 7:27:35 AM org.pabk.emanager.DBConnector getDb
+INFO: Thread[Thread-3,5,main] LOCK the access to Thread[Thread-2,5,main]
+apr 21, 2015 7:27:35 AM org.pabk.emanager.DBConnector select
+INFO: SELECT * FROM SAA_TRAPS where SAA_IP_ADDRESS = '10.1.129.251' and STATUS ='0'
+apr 21, 2015 7:27:35 AM org.pabk.emanager.DBConnector businessLogic
 INFO: table fin_msgs already exixts and will not be loaded
-mar 06, 2015 9:59:08 AM org.pabk.emanager.DBConnector businessLogic
+apr 21, 2015 7:27:35 AM org.pabk.emanager.DBConnector close
+INFO: Thread[Thread-3,5,main] UNLOCK the access to Thread[Thread-2,5,main]
+apr 21, 2015 7:27:35 AM org.pabk.emanager.DBConnector businessLogic
 INFO: table saa_traps already exixts and will not be loaded
-mar 06, 2015 9:59:08 AM org.pabk.emanager.DBConnector businessLogic
+apr 21, 2015 7:27:35 AM org.pabk.emanager.DBConnector businessLogic
 INFO: table mail_msgs already exixts and will not be loaded
-mar 06, 2015 9:59:08 AM org.pabk.emanager.DBConnector businessLogic
+apr 21, 2015 7:27:35 AM org.pabk.emanager.DBConnector businessLogic
 INFO: Module org.pabk.emanager.DBConnector goes to SLEEP
+apr 21, 2015 7:27:45 AM org.pabk.emanager.DBConnector getDb
+INFO: Thread[Thread-3,5,main] LOCK the access to Thread[Thread-2,5,main]
+apr 21, 2015 7:27:45 AM org.pabk.emanager.DBConnector select
+INFO: SELECT * FROM SAA_TRAPS where SAA_IP_ADDRESS = '10.1.129.251' and STATUS ='0'
+apr 21, 2015 7:27:45 AM org.pabk.emanager.DBConnector close
+INFO: Thread[Thread-3,5,main] UNLOCK the access to Thread[Thread-2,5,main]
+apr 21, 2015 7:27:55 AM org.pabk.emanager.DBConnector getDb
+INFO: Thread[Thread-3,5,main] LOCK the access to Thread[Thread-2,5,main]
+apr 21, 2015 7:27:55 AM org.pabk.emanager.DBConnector select
+INFO: SELECT * FROM SAA_TRAPS where SAA_IP_ADDRESS = '10.1.129.251' and STATUS ='0'
+apr 21, 2015 7:27:55 AM org.pabk.emanager.DBConnector close
+INFO: Thread[Thread-3,5,main] UNLOCK the access to Thread[Thread-2,5,main]
+apr 21, 2015 7:28:05 AM org.pabk.emanager.DBConnector getDb
+INFO: Thread[Thread-3,5,main] LOCK the access to Thread[Thread-2,5,main]
+apr 21, 2015 7:28:05 AM org.pabk.emanager.DBConnector select
+INFO: SELECT * FROM SAA_TRAPS where SAA_IP_ADDRESS = '10.1.129.251' and STATUS ='0'
+apr 21, 2015 7:28:05 AM org.pabk.emanager.DBConnector close
+INFO: Thread[Thread-3,5,main] UNLOCK the access to Thread[Thread-2,5,main]
+apr 21, 2015 7:28:15 AM org.pabk.emanager.DBConnector getDb
+INFO: Thread[Thread-3,5,main] LOCK the access to Thread[Thread-2,5,main]
+apr 21, 2015 7:28:15 AM org.pabk.emanager.DBConnector select
+INFO: SELECT * FROM SAA_TRAPS where SAA_IP_ADDRESS = '10.1.129.251' and STATUS ='0'
+apr 21, 2015 7:28:15 AM org.pabk.emanager.DBConnector close
+INFO: Thread[Thread-3,5,main] UNLOCK the access to Thread[Thread-2,5,main]
+apr 21, 2015 7:28:25 AM org.pabk.emanager.DBConnector getDb
+INFO: Thread[Thread-3,5,main] LOCK the access to Thread[Thread-2,5,main]
+apr 21, 2015 7:28:25 AM org.pabk.emanager.DBConnector select
+INFO: SELECT * FROM SAA_TRAPS where SAA_IP_ADDRESS = '10.1.129.251' and STATUS ='0'
+apr 21, 2015 7:28:25 AM org.pabk.emanager.DBConnector close
+INFO: Thread[Thread-3,5,main] UNLOCK the access to Thread[Thread-2,5,main]
+apr 21, 2015 7:28:35 AM org.pabk.emanager.DBConnector getDb
+INFO: Thread[Thread-3,5,main] LOCK the access to Thread[Thread-2,5,main]
+apr 21, 2015 7:28:35 AM org.pabk.emanager.DBConnector select
+INFO: SELECT * FROM SAA_TRAPS where SAA_IP_ADDRESS = '10.1.129.251' and STATUS ='0'
+apr 21, 2015 7:28:35 AM org.pabk.emanager.DBConnector close
+INFO: Thread[Thread-3,5,main] UNLOCK the access to Thread[Thread-2,5,main]
+apr 21, 2015 7:28:45 AM org.pabk.emanager.DBConnector getDb
+INFO: Thread[Thread-3,5,main] LOCK the access to Thread[Thread-2,5,main]
+apr 21, 2015 7:28:45 AM org.pabk.emanager.DBConnector select
+INFO: SELECT * FROM SAA_TRAPS where SAA_IP_ADDRESS = '10.1.129.251' and STATUS ='0'
+apr 21, 2015 7:28:45 AM org.pabk.emanager.DBConnector close
+INFO: Thread[Thread-3,5,main] UNLOCK the access to Thread[Thread-2,5,main]

@@ -44,30 +44,52 @@ public class RJEFinMessage implements Message {
 	public void parse(InputStreamReader in) throws IOException {
 		basicHeader = new BasicHeader();
 		basicHeader.setBlockIdentifier(BlockImpl.BASIC_HEADER);
-		basicHeader.parseBlockContent(in);
+		basicHeader.parse(in);
+		parseContent(in);		
+	}
+
+	@Override
+	public void parseContent(InputStreamReader in) throws IOException {
 		while (true) {
-			String bi = BlockImpl.readBlockId(in);
+			char c = BlockImpl.readCharacter(in, null);
+			String bi;
+			if(c == SAARJEParser.RJE_MESSAGE_SEPARATOR) {
+				break;
+			}
+			else if (c == SAARJEParser.BLOCK_ID_START_INDICATOR) {
+				bi = BlockImpl.readTo(in, BlockImpl.END_OF_BLOCK_ID,SAARJEParser.MIN_BLOCK_ID_LENGTH, SAARJEParser.MAX_BLOCK_ID_LENGTH, BlockImpl.BLOCK_ID_PATTERN);
+			}
+			else if (c == '\r' || c == '\n') {
+				throw new IOException(BlockImpl.END_OF_STREAM);
+			}
+			else {
+				throw new IOException(SAARJEParser.FAILED_ID);
+			}
 			if(bi.equals(BlockImpl.BASIC_HEADER) && message == null) {
 				message = new RJEFinMessage();
-				message.parse(in);
+				message.basicHeader = new BasicHeader();
+				message.basicHeader.setBlockIdentifier(bi);
+				message.basicHeader.parseBlockContent(in);
+				message.parseContent(in);
+				break;
 			}
-			if(bi.equals(BlockImpl.APPLICATION_HEADER) && applicationHeader == null) {
+			else if(bi.equals(BlockImpl.APPLICATION_HEADER) && applicationHeader == null) {
 				applicationHeader = new ApplicationHeader();
-				applicationHeader.parse(in);
+				applicationHeader.parseBlockContent(in);
 			}
-			if(bi.equals(BlockImpl.USER_HEADER) && userHeader == null) {
+			else if(bi.equals(BlockImpl.USER_HEADER) && userHeader == null) {
 				userHeader = new UserHeader(bi);
 				userHeader.parseBlockContent(in);
 			}
-			if(bi.equals(BlockImpl.TEXT) && text == null) {
+			else if(bi.equals(BlockImpl.TEXT) && text == null) {
 				text = new Text(bi, getAppHeader());
 				text.parseBlockContent(in);
 			}
-			if(bi.equals(BlockImpl.TRAILERS) && trailers == null) {
+			else if(bi.equals(BlockImpl.TRAILERS) && trailers == null) {
 				trailers = new Trailers(bi);
 				trailers.parseBlockContent(in);
 			}
-			if(bi.equals(BATCH_TRAILERS) && batchTrailers == null) {
+			else if(bi.equals(BATCH_TRAILERS) && batchTrailers == null) {
 				batchTrailers = new CommonBlock(bi);
 				batchTrailers.parseBlockContent(in);
 			}
@@ -76,7 +98,7 @@ public class RJEFinMessage implements Message {
 			}
 		}
 		
-		
 	}
+
 
 }

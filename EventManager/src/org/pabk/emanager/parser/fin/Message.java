@@ -10,4 +10,5 @@ public interface Message {
 	public TextBlock getText();
 	public TrailersBlock getTrailer();
 	void parse(InputStreamReader in) throws IOException;
+	void parseContent(InputStreamReader in) throws IOException;
 }

@@ -19,7 +19,7 @@ public class Field extends ArrayList<String> implements Block {
 
 	public static final int MAX_ID_LENGTH = 3;
 
-	public static final String FIELD_ID_PATTERN = "\\d{2}[A-Z]";
+	public static final String FIELD_ID_PATTERN = "\\d{2}[A-Z]?";
 	
 	private String blockIdentifier;
 	

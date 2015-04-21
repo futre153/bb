@@ -1,16 +1,70 @@
-mar 06, 2015 9:40:32 AM org.pabk.emanager.HandlerImpl init
+apr 20, 2015 2:52:22 PM org.pabk.emanager.HandlerImpl init
 INFO: dbconnector: logger dbconnector is successfully initailized!
-mar 06, 2015 9:40:32 AM org.pabk.emanager.HandlerImpl run
+apr 20, 2015 2:52:22 PM org.pabk.emanager.HandlerImpl run
 INFO: Module org.pabk.emanager.DBConnector is started!
-mar 06, 2015 9:40:32 AM org.pabk.emanager.DBConnector businessLogic
+apr 20, 2015 2:52:22 PM org.pabk.emanager.DBConnector businessLogic
 INFO: Defined table batch format server: conf/table_%s.sql
-mar 06, 2015 9:40:32 AM org.pabk.emanager.DBConnector businessLogic
+apr 20, 2015 2:52:22 PM org.pabk.emanager.DBConnector businessLogic
 INFO: Load tables: fin_msgs,saa_traps,mail_msgs
-mar 06, 2015 9:40:32 AM org.pabk.emanager.DBConnector businessLogic
+apr 20, 2015 2:52:22 PM org.pabk.emanager.DBConnector getDb
+INFO: Thread[Thread-3,5,main] LOCK the access to Thread[Thread-2,5,main]
+apr 20, 2015 2:52:22 PM org.pabk.emanager.DBConnector select
+INFO: SELECT * FROM SAA_TRAPS where SAA_IP_ADDRESS = '10.1.129.251' and STATUS ='0'
+apr 20, 2015 2:52:22 PM org.pabk.emanager.DBConnector businessLogic
 INFO: table fin_msgs already exixts and will not be loaded
-mar 06, 2015 9:40:32 AM org.pabk.emanager.DBConnector businessLogic
+apr 20, 2015 2:52:22 PM org.pabk.emanager.DBConnector close
+INFO: Thread[Thread-3,5,main] UNLOCK the access to Thread[Thread-2,5,main]
+apr 20, 2015 2:52:22 PM org.pabk.emanager.DBConnector businessLogic
 INFO: table saa_traps already exixts and will not be loaded
-mar 06, 2015 9:40:32 AM org.pabk.emanager.DBConnector businessLogic
+apr 20, 2015 2:52:22 PM org.pabk.emanager.DBConnector businessLogic
 INFO: table mail_msgs already exixts and will not be loaded
-mar 06, 2015 9:40:32 AM org.pabk.emanager.DBConnector businessLogic
+apr 20, 2015 2:52:22 PM org.pabk.emanager.DBConnector businessLogic
 INFO: Module org.pabk.emanager.DBConnector goes to SLEEP
+apr 20, 2015 2:52:32 PM org.pabk.emanager.DBConnector getDb
+INFO: Thread[Thread-3,5,main] LOCK the access to Thread[Thread-2,5,main]
+apr 20, 2015 2:52:32 PM org.pabk.emanager.DBConnector select
+INFO: SELECT * FROM SAA_TRAPS where SAA_IP_ADDRESS = '10.1.129.251' and STATUS ='0'
+apr 20, 2015 2:52:32 PM org.pabk.emanager.DBConnector close
+INFO: Thread[Thread-3,5,main] UNLOCK the access to Thread[Thread-2,5,main]
+apr 20, 2015 2:52:42 PM org.pabk.emanager.DBConnector getDb
+INFO: Thread[Thread-3,5,main] LOCK the access to Thread[Thread-2,5,main]
+apr 20, 2015 2:52:42 PM org.pabk.emanager.DBConnector select
+INFO: SELECT * FROM SAA_TRAPS where SAA_IP_ADDRESS = '10.1.129.251' and STATUS ='0'
+apr 20, 2015 2:52:42 PM org.pabk.emanager.DBConnector close
+INFO: Thread[Thread-3,5,main] UNLOCK the access to Thread[Thread-2,5,main]
+apr 20, 2015 2:52:52 PM org.pabk.emanager.DBConnector getDb
+INFO: Thread[Thread-3,5,main] LOCK the access to Thread[Thread-2,5,main]
+apr 20, 2015 2:52:52 PM org.pabk.emanager.DBConnector select
+INFO: SELECT * FROM SAA_TRAPS where SAA_IP_ADDRESS = '10.1.129.251' and STATUS ='0'
+apr 20, 2015 2:52:52 PM org.pabk.emanager.DBConnector close
+INFO: Thread[Thread-3,5,main] UNLOCK the access to Thread[Thread-2,5,main]
+apr 20, 2015 2:53:02 PM org.pabk.emanager.DBConnector getDb
+INFO: Thread[Thread-3,5,main] LOCK the access to Thread[Thread-2,5,main]
+apr 20, 2015 2:53:02 PM org.pabk.emanager.DBConnector select
+INFO: SELECT * FROM SAA_TRAPS where SAA_IP_ADDRESS = '10.1.129.251' and STATUS ='0'
+apr 20, 2015 2:53:02 PM org.pabk.emanager.DBConnector close
+INFO: Thread[Thread-3,5,main] UNLOCK the access to Thread[Thread-2,5,main]
+apr 20, 2015 2:53:12 PM org.pabk.emanager.DBConnector getDb
+INFO: Thread[Thread-3,5,main] LOCK the access to Thread[Thread-2,5,main]
+apr 20, 2015 2:53:13 PM org.pabk.emanager.DBConnector select
+INFO: SELECT * FROM SAA_TRAPS where SAA_IP_ADDRESS = '10.1.129.251' and STATUS ='0'
+apr 20, 2015 2:53:13 PM org.pabk.emanager.DBConnector close
+INFO: Thread[Thread-3,5,main] UNLOCK the access to Thread[Thread-2,5,main]
+apr 20, 2015 2:53:23 PM org.pabk.emanager.DBConnector getDb
+INFO: Thread[Thread-3,5,main] LOCK the access to Thread[Thread-2,5,main]
+apr 20, 2015 2:53:23 PM org.pabk.emanager.DBConnector select
+INFO: SELECT * FROM SAA_TRAPS where SAA_IP_ADDRESS = '10.1.129.251' and STATUS ='0'
+apr 20, 2015 2:53:23 PM org.pabk.emanager.DBConnector close
+INFO: Thread[Thread-3,5,main] UNLOCK the access to Thread[Thread-2,5,main]
+apr 20, 2015 2:53:25 PM org.pabk.emanager.DBConnector insert
+INFO: INSERT INTO SAA_TRAPS (SAA_IP_ADDRESS,STATUS,SAA_INSTANCE,SAA_DATE,SAA_TIME,SAA_PLUGIN,SAA_EVENT_NUMBER,SAA_EVENT_SEVERITY,SAA_EVENT_CLASS,SAA_EVENT_NAME,SAA_EVENT_DESCRIPTION,FIELD1,FIELD2,FIELD3,FIELD4,FIELD5,FIELD6,FIELD7,FIELD8) VALUES ('10.1.129.251','0','access','2015-03-20','12:27:08','MXS','10117','Warning','Alarm Event','VmFsaWRhdGlvbiBlcnJvciAoZnJvbSk=','TWVzc2FnZSBQYXJ0bmVyIEMxMjNGaWxlSW5DWiwgU2Vzc2lvbiA1IC0gVGV4dA0KdmFsaWRhdGlvbiBlcnJvciAoRnJvbSkNCiAgICBTZXF1ZW5jZSBudW1iZXIgICAgICA6IDENCiAgICBVVU1JRCAgICAgICAgICAgICAgICA6DQpJUE9CTlNLQjBYWFg5OTlURVNUNGtkZGZrZGpmZGpmDQogICAgU3VmZml4ICAgICAgICAgICAgICAgOiAxNTAzMjANCiAgICBUYXJnZXQgcm91dGluZyBwb2ludCA6ICBNUCBtb2QgdGV4dA0KICAgIE9mZnNldCBpbiBtZXNzYWdlICAgIDogMjINCiAgICBNZXNzYWdlIGluZm8gICAgICAgICA6DQplaWZrSU9JT0lPSWowODI0ODkyNDgyOTg0OTI4NDkyOA0KIDIxOlRFU1Q0DQogNzk6VEVTVDQ=','C123FileInCZ','5','','','',' MP mod text','22','ZWlma0lPSU9JT0lqMDgyNDg5MjQ4Mjk4NDkyODQ5MjgNCiAyMTpURVNUNA0KIDc5OlRFU1Q0')
+apr 20, 2015 2:53:33 PM org.pabk.emanager.DBConnector getDb
+INFO: Thread[Thread-3,5,main] LOCK the access to Thread[Thread-2,5,main]
+apr 20, 2015 2:53:33 PM org.pabk.emanager.DBConnector select
+INFO: SELECT * FROM SAA_TRAPS where SAA_IP_ADDRESS = '10.1.129.251' and STATUS ='0'
+apr 20, 2015 2:53:33 PM org.pabk.emanager.DBConnector close
+INFO: Thread[Thread-3,5,main] UNLOCK the access to Thread[Thread-2,5,main]
+apr 20, 2015 2:53:33 PM org.pabk.emanager.DBConnector insert
+INFO: INSERT INTO MAIL_MSGS (STATUS,RECIPIENTS,SUBJECT,BODY,ATTACHMENT1,TIME_STAMP,ENCODING) VALUES ('0','bmluYS5wb2xvbmNvdmFAcGFiay5zayx6dXphbmEuc3Rldmxpa292YUBwYWJrLnNrLGFuZHJlYS50b3Rob3ZhQHBhYmsuc2ssZXZhLmtsZWlub3ZhQHBhYmsuc2ssa2F0YXJpbmEucG9sYWtvdmljb3ZhQHBhYmsuc2ssbHVjaWEuZ29tYmlrb3ZhQHBhYmsuc2ssYnJhbmlzbGF2LmJyYW5keXNAcGFiay5zayxkYXJpbmEudmFsZW50b3ZhQHBhYmsuc2ssYmxhbmthLmphdm9yc2thQHBhYmsuc2sscmFka2Eua2FsbmFzc3lvdmFAcGFiay5zayxtaXJvc2xhdmEuZHJ6a292YUBwYWJrLnNrLG1hcnRpbmEudmxhZG92YUBwYWJrLnNrLG1pbGVuYS5taWt5dG92YUBwYWJrLnNrLHRpYm9yLmtvdmFjc0BwYWJrLnNrLGx1Y2lhLnRlamdpb3ZhQHBhYmsuc2ssbWFydGluYS5ob3J2YXRob3ZhQHBhYmsuc2ssYnJhbmlzbGF2LmJhbGF6QHBhYmsuc2s=','Q2h5YmEgZm9ybcOhdG92YW5pYSBzcHLDoXZ5','TVQgZG8gLCByZWZlcmVuY2lhOiANCk7DoXpvdiBjaHlieToJVmFsaWRhdGlvbiBlcnJvciAoZnJvbSkNClBvcGlzIGNoeWJ5Oglmb3Jtw6F0IHRleHR1IHNwcsOhdnkgamUgcHJlIHRlbnRvIHR5cCBzcHLDoXZ5IG5lc3Byw6F2bnkuDQoNCkNoeWJhIHNhIHByYXZkZXBvZG9ibmUgbmFjaMOhZHphIG5hIHRvbXRvIG1pZXN0ZSBzcHLDoXZ5IGFsZWJvIHRlc25lIG5hZCBuw61tOg0KZWlma0lPSU9JT0lqMDgyNDg5MjQ4Mjk4NDkyODQ5MjgNCiAyMTpURVNUNA0KIDc5OlRFU1Q0DQoNClRleHQgcMO0dm9kbsOpaG8gY2h5Ym92w6lobyBobMOhc2FuaWEgamUgdiBwcmlsb8W+ZW5vbSBzw7pib3JlLg0KDQpBayBzYSB0w6F0byBzcHLDoXZhIG5ldnrFpWFodWplIG5hIFbDoXMsIHByb3PDrW0gcG92YcW+dWp0ZSBqdSB6YSBiZXpwcmVkbWV0bsO6Lg0KDQpWIHByw61wYWRlIGFrw71jaGtvxL52ZWsgbmVqYXNub3N0w60ga29udGFrdHVqdGU6IGJyYW5pc2xhdi5icmFuZHlzQHBhYmsuc2s=','Y2h5Ym92ZV9obGFzZW5pZS50eHQsX3RlbXBmaWxlXzE0Mjk1MzQ0MTMwOTU=','2015-04-20 14:53:33.127','utf-8')
+apr 20, 2015 2:53:33 PM org.pabk.emanager.DBConnector update
+INFO: UPDATE SAA_TRAPS SET STATUS='1' WHERE ID = '33'

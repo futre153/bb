@@ -12,7 +12,7 @@ import org.pabk.emanager.snmp.SAATrap;
 public class DatagramCollector extends HandlerImpl {
 
 	private static DatagramCollector collector;
-	private static String[] saaServers=null;
+	private static String[] saaServers={"10.1.129.251"};
 	private static final SAATrap trap=new SAATrap("saatrap");
 	private static final String SAA_TRAP_TABLE_NAME = "SAA_TRAPS";
 		

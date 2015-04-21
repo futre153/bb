@@ -5,19 +5,20 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
-public class SAARJEParser {
+public class SAARJEParser extends ArrayList<RJEFinMessage> {
 	
-	private static final String BLOCK_NOT_EXPECTED = "Block %s is not expected";
-	private static final String RJE_MESSAGE_START_PATTERN = "[\\$\\{]";
-	private static final char BLOCK_ID_START_INDICATOR = '{';
-	private static final int MIN_BLOCK_ID_LENGTH = 1;
-	private static final int MAX_BLOCK_ID_LENGTH = 3;
-	private static final String FAILED_ID = "Failed to read Block Identifier";
-	private static final char RJE_MESSAGE_SEPARATOR = '$';
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	static final char BLOCK_ID_START_INDICATOR = '{';
+	static final int MIN_BLOCK_ID_LENGTH = 1;
+	static final int MAX_BLOCK_ID_LENGTH = 3;
+	static final String FAILED_ID = "Failed to read Block Identifier";
+	static final char RJE_MESSAGE_SEPARATOR = '$';
 	private static boolean started = false;
-	private static ArrayList<RJEFinMessage> messages = new ArrayList<RJEFinMessage>();
-	
-	public static synchronized void parse (InputStream is, String encoding) {
+		
+	public synchronized void parse (InputStream is, String encoding) {
 		if(!started) {
 			started = true;
 			InputStreamReader in = null;
@@ -29,32 +30,25 @@ public class SAARJEParser {
 					in = new InputStreamReader(is, encoding);
 				}
 				while (true) {
-					String id = null;
-					char c;
+					RJEFinMessage message = null;
 					try {
-						c = BlockImpl.readCharacter(in, RJE_MESSAGE_START_PATTERN);
+						message = new RJEFinMessage();
+						message.parse(in);
 					}
 					catch(Exception e) {
-						if (!(e instanceof IOException && e.getMessage().equals(BlockImpl.END_OF_STREAM))) {
-							throw new IOException(e);
+						/*System.out.println(e.getMessage());
+						System.out.println(e.getMessage().equals(BlockImpl.END_OF_STREAM));
+						System.out.println(e.getClass());
+						System.out.println((e instanceof IOException) && e.getMessage().equals(BlockImpl.END_OF_STREAM));*/
+						if ((e instanceof IOException) && e.getMessage().equals(BlockImpl.END_OF_STREAM)) {
+							System.out.println(message.getBasicHeader().getSequenceNumber());
+							this.add(message);
+							break;
 						}
-						break;
+						throw new IOException(e);
 					}
-					if(c == BLOCK_ID_START_INDICATOR) {
-						id = BlockImpl.readTo(in, BlockImpl.END_OF_BLOCK_ID, MIN_BLOCK_ID_LENGTH, MAX_BLOCK_ID_LENGTH, BlockImpl.BLOCK_ID_PATTERN);
-					}
-					else if (c == RJE_MESSAGE_SEPARATOR) {
-						id = BlockImpl.readBlockId(in);
-					}
-					else {
-						throw new IOException(FAILED_ID);
-					}
-					if(id.equals(BlockImpl.BASIC_HEADER)) {
-						messages.add(parse(in));
-					}
-					else {
-						throw new IOException(String.format(BLOCK_NOT_EXPECTED, id));
-					}
+					System.out.println(message.getBasicHeader().getSequenceNumber());
+					this.add(message);
 				}
 			}
 			catch (Exception e) {
@@ -68,18 +62,6 @@ public class SAARJEParser {
 				}
 				started = false;
 			}
-		}
-	}
-
-	private static RJEFinMessage parse(InputStreamReader in) throws IOException {
-		RJEFinMessage message = null;
-		try {
-			message = new RJEFinMessage();
-			message.parse(in);;
-			return message;
-		}
-		catch(Exception e) {
-			throw new IOException(e);
 		}
 	}
 }
