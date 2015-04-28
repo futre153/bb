@@ -59,6 +59,8 @@ public class TrapCollector extends HandlerImpl {
 					execute(trapQueues[i]);
 				}
 				log.info(this.getClass().getSimpleName() + " is SLEEPING");
+				/*SAATrapHandler handler=SAATrapHandler.getInstance();
+				if(handler!=null)handler.wakeUp();*/
 				sleep.sleep (poolInterval);
 				if(shutdown) {
 					break;
@@ -100,10 +102,10 @@ public class TrapCollector extends HandlerImpl {
 		File srcDir;
 		FileFilter filter;
 		try {
-			if(objs[1] instanceof String) {
-				objs[1] = new File(FS + FS + objs[1] + FS + objs[2]);
+			if(objs[2] instanceof String) {
+				objs[2] = new File(FS + FS + objs[1] + FS + objs[2]);
 			}
-			srcDir = (File) objs[1];
+			srcDir = (File) objs[2];
 			if((!srcDir.exists()) || (!srcDir.isDirectory())) {
 				throw new IOException(String.format(SRC_DIR_NOT_EXISTS, srcDir.getAbsoluteFile(), name));
 			}

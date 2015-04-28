@@ -185,14 +185,14 @@ public class SAAEventParser2 {
 	 */
 	
 	private static final String[][] FIELD_DEFINITION_10117= {
-		new String[] {"1",	"Message Partner ",		",",	null,		SAAEventParser.MP},
-		new String[] {"1",	"Session ",				" ",	"\\d{1,4}",	SAAEventParser.SE},
-		new String[] {"3",	": ",					null,	"\\d+",		SAAEventParser.SN},
-		new String[] {"5",	null,					null,	"[IO][A-Z0-9]{11}[0-9]{3}.{1,30}", SAAEventParser.UU},
-		new String[] {"6",	": ",					null,	"\\d{6}\\d{0,5}",	SAAEventParser.SU},
-		new String[] {"7",	": ",					null,	null,		SAAEventParser.TR},
-		new String[] {"8",	": ",					null,	null,		SAAEventParser.OM},
-		new String[] {null,	"Message info         :",null,	null,		SAAEventParser.CODER_PREFIX + SAAEventParser.MI},
+		new String[] {null,	"Message Partner ",		",",	null,		SAAEventParser.MP, "Y", "N"},
+		new String[] {null,	"Session ",				"-",	"\\d{1,4}",	SAAEventParser.SE, "Y", "N"},
+		new String[] {null,	": ",					"UUMID",	"\\d+",		SAAEventParser.SN, "Y", "N"},
+		new String[] {null,	"UUMID                :",	"Suffix",	null, SAAEventParser.UU, "Y", "Y"},
+		new String[] {null,	"Suffix               :",	"Target",	"\\d{6}\\d{0,5}",	SAAEventParser.SU, "Y", "N"},
+		new String[] {null,	"Target routing point :",	"Offset",	null,		SAAEventParser.TR, "Y", "N"},
+		new String[] {null,	"Offset in message    : ",	"Message",	null,		SAAEventParser.OM, "Y", "N"},
+		new String[] {null,	"Message info         :",null,	null,		SAAEventParser.CODER_PREFIX + SAAEventParser.MI, "N", "N"},
 	};
 	
 	/*
@@ -314,6 +314,13 @@ public class SAAEventParser2 {
 				int e=SAAEventParser.findEnd(def[i][2],s,b);
 				if(e<0) continue;
 				String tmp=new String(b,s,e-s);
+				if(def[i][5].equals("Y")) {
+					tmp = tmp.trim();
+				}
+				if(def[i][6].equals("Y")) {
+					tmp = tmp.replace("\n", " ");
+					tmp = tmp.replace("\r", " ");
+				}
 				if(def[i][3]!=null)if(!tmp.matches(def[i][3]))continue;
 				value[i]=def[i][4].charAt(0)=='@'?Base64Coder.encodeString(tmp):tmp;
 			}
