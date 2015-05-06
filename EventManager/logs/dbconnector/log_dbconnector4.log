@@ -1,22 +1,18 @@
-apr 28, 2015 2:40:27 PM org.pabk.emanager.HandlerImpl init
+apr 29, 2015 9:45:17 AM org.pabk.emanager.HandlerImpl init
 INFO: dbconnector: logger dbconnector is successfully initailized!
-apr 28, 2015 2:40:27 PM org.pabk.emanager.HandlerImpl run
+apr 29, 2015 9:45:17 AM org.pabk.emanager.HandlerImpl run
 INFO: Module org.pabk.emanager.DBConnector is started!
-apr 28, 2015 2:40:27 PM org.pabk.emanager.DBConnector businessLogic
+apr 29, 2015 9:45:17 AM org.pabk.emanager.DBConnector businessLogic
 INFO: Defined table batch format server: conf/table_%s.sql
-apr 28, 2015 2:40:27 PM org.pabk.emanager.DBConnector businessLogic
+apr 29, 2015 9:45:17 AM org.pabk.emanager.DBConnector businessLogic
 INFO: Load tables: fin_msgs,saa_traps,mail_msgs
-apr 28, 2015 2:40:27 PM org.pabk.emanager.DBConnector businessLogic
+apr 29, 2015 9:45:17 AM org.pabk.emanager.DBConnector businessLogic
 INFO: table fin_msgs already exixts and will not be loaded
-apr 28, 2015 2:40:27 PM org.pabk.emanager.DBConnector businessLogic
+apr 29, 2015 9:45:17 AM org.pabk.emanager.DBConnector insert
+INFO: INSERT INTO SAA_TRAPS (SAA_IP_ADDRESS,STATUS,SAA_INSTANCE,SAA_DATE,SAA_TIME,SAA_PLUGIN,SAA_EVENT_NUMBER,SAA_EVENT_SEVERITY,SAA_EVENT_CLASS,SAA_EVENT_NAME,SAA_EVENT_DESCRIPTION,FIELD1,FIELD2,FIELD3,FIELD4,FIELD5,FIELD6,FIELD7) VALUES ('10.1.129.251','0','access','2015-04-29','09:11:49','MXS','10050','Warning','Alarm Event','RGlzcG9zZSBFcnJvciAoZnJvbSk=','TWVzc2FnZSBQYXJ0bmVyIEMxMjNGaWxlSW5UZXN0LCBTZXNzaW9uIDQ0IC0KRGlzcG9zZSBlcnJvciAoRnJvbSkKICAgIFNlcXVlbmNlIG51bWJlciAgICAgIDogMQogICAgVVVNSUQgICAgICAgICAgICAgICAgOgpJQUdSRUdFMjJYWFgxOTlDRURFTFUyNTAzMTVPUFMKICAgIFN1ZmZpeCAgICAgICAgICAgICAgIDogMTUwNDI5CiAgICBSZWFzb24gICAgICAgICAgICAgICA6IE5vIHByZWZlcnJlZCBuZXR3b3JrCmRlZmluZWQgZm9yIGNvcnJlc3BvbmRlbnQKICAgIFRhcmdldCByb3V0aW5nIHBvaW50IDogIE1QIG1vZCB0cmFuc21pcw==','C123FileInTest','44','1','IAGREGE22XXX199CEDELU250315OPS','150429','MP mod transmis','No preferred network defined for correspondent')
+apr 29, 2015 9:45:17 AM org.pabk.emanager.DBConnector businessLogic
 INFO: table saa_traps already exixts and will not be loaded
-apr 28, 2015 2:40:27 PM org.pabk.emanager.DBConnector businessLogic
+apr 29, 2015 9:45:17 AM org.pabk.emanager.DBConnector businessLogic
 INFO: table mail_msgs already exixts and will not be loaded
-apr 28, 2015 2:40:27 PM org.pabk.emanager.DBConnector businessLogic
+apr 29, 2015 9:45:17 AM org.pabk.emanager.DBConnector businessLogic
 INFO: Module org.pabk.emanager.DBConnector goes to SLEEP
-apr 28, 2015 2:40:27 PM org.pabk.emanager.DBConnector insert
-INFO: INSERT INTO SAA_TRAPS (SAA_IP_ADDRESS,STATUS,SAA_INSTANCE,SAA_DATE,SAA_TIME,SAA_PLUGIN,SAA_EVENT_NUMBER,SAA_EVENT_SEVERITY,SAA_EVENT_CLASS,SAA_EVENT_NAME,SAA_EVENT_DESCRIPTION) VALUES ('10.1.129.251','0','access','2015-04-28','12:39:44','SIS','8005','Warning','Alarm Event','TWVzc2FnZSBOQUsnZA==','TWVzc2FnZSBVTUlEIElKVEJQU0tCMFhYWDEwMzE1MDIvMDEyMC8yNTczM0EsClN1ZmZpeCAxNTA0Mjg6IG5hY2tlZCBieSBTV0lGVC4gU2Vzc2lvbiAyMDIxLCBJU04KMzAzNSwgUmVhc29uIGNvZGUgVDI4MDEwCk5hY2sgcmVjZWl2ZWQ6CiAxOkYyMVBPQk5TS0IwQVhYWDIwMjEwMDMwMzUgIDQ6IDE3NzoxNTA0MjgxMjM5ICA0CjUxOjEgIDQwNTpUMjgwMTAgIDEwODoxNTAyLzAxMjAvMjU3MzNBICA=')
-apr 28, 2015 2:40:27 PM org.pabk.emanager.DBConnector insert
-INFO: INSERT INTO SAA_TRAPS (SAA_IP_ADDRESS,STATUS,SAA_INSTANCE,SAA_DATE,SAA_TIME,SAA_PLUGIN,SAA_EVENT_NUMBER,SAA_EVENT_SEVERITY,SAA_EVENT_CLASS,SAA_EVENT_NAME,SAA_EVENT_DESCRIPTION) VALUES ('10.1.129.251','0','access','2015-04-28','12:58:38','SIS','8005','Warning','Alarm Event','TWVzc2FnZSBOQUsnZA==','TWVzc2FnZSBVTUlEIElKVEJQU0syMFhYWDEwMzE1MDIvMDEyMC8yNTczM0IsClN1ZmZpeCAxNTA0Mjg6IG5hY2tlZCBieSBTV0lGVC4gU2Vzc2lvbiAyMDIxLCBJU04KMzAzNiwgUmVhc29uIGNvZGUgSDUwCk5hY2sgcmVjZWl2ZWQ6CiAxOkYyMVBPQk5TS0IwQVhYWDIwMjEwMDMwMzYgIDQ6IDE3NzoxNTA0MjgxMjU4ICA0CjUxOjEgIDQwNTpINTAgIDEwODoxNTAyLzAxMjAvMjU3MzNCICA=')
-apr 28, 2015 2:40:27 PM org.pabk.emanager.DBConnector insert
-INFO: INSERT INTO SAA_TRAPS (SAA_IP_ADDRESS,STATUS,SAA_INSTANCE,SAA_DATE,SAA_TIME,SAA_PLUGIN,SAA_EVENT_NUMBER,SAA_EVENT_SEVERITY,SAA_EVENT_CLASS,SAA_EVENT_NAME,SAA_EVENT_DESCRIPTION) VALUES ('10.1.129.251','0','access','2015-04-28','13:06:28','SIS','8005','Warning','Alarm Event','TWVzc2FnZSBOQUsnZA==','TWVzc2FnZSBVTUlEIElKVEJQU0tCMFhYWDEwMzE1MDIvMDEyMC8yNTczM0EsClN1ZmZpeCAxNTA0MjgzNDI3MDI2OiBuYWNrZWQgYnkgU1dJRlQuIFNlc3Npb24KMjAyMSwgSVNOIDMwMzcsIFJlYXNvbiBjb2RlIFQyODAxMApOYWNrIHJlY2VpdmVkOgogMTpGMjFQT0JOU0tCMEFYWFgyMDIxMDAzMDM3ICA0OiAxNzc6MTUwNDI4MTMwNiAgNAo1MToxICA0MDU6VDI4MDEwICAxMDg6MTUwMi8wMTIwLzI1NzMzQSAg')

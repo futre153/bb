@@ -59,7 +59,8 @@ public class TrapCollector extends HandlerImpl {
 					execute(trapQueues[i]);
 				}
 				log.info(this.getClass().getSimpleName() + " is SLEEPING");
-				/*SAATrapHandler handler=SAATrapHandler.getInstance();
+				/*delete for production
+				SAATrapHandler handler=SAATrapHandler.getInstance();
 				if(handler!=null)handler.wakeUp();*/
 				sleep.sleep (poolInterval);
 				if(shutdown) {
@@ -135,9 +136,9 @@ public class TrapCollector extends HandlerImpl {
 			while (parser.size() > 0) {
 				try {
 					RJEFinMessage msg = parser.remove(0);
-					System.out.println(msg.getBasicHeader().getServiceId());
-					System.out.println(msg.getAppHeader().getMessageType());
-					System.out.println();
+					//System.out.println(msg.getBasicHeader().getServiceId());
+					//System.out.println(msg.getAppHeader().getMessageType());
+					//System.out.println();
 					if (msg.getBasicHeader().getServiceId().equals(ALLOWED_APP_ID) && msg.getAppHeader().getMessageType().equals(ALLOWED_MT)) {
 						execute(msg.getText().getBlockContent(), name, server, instance);
 					}

@@ -60,16 +60,18 @@ public class SAAEventParser2 {
 	 * 7 - Size
 	 */
 	
-	@SuppressWarnings("unused")
 	private static final String[][] FIELD_DEFINITION_28116 = {
-		new String[] {"1",	"Queue ",				",",	null,		SAAEventParser.QU},
-		new String[] {"4",	"Service: ",			null,	null,		SAAEventParser.SV},
-		new String[] {"5",	"Requestor DN: ",		null,	null,		SAAEventParser.CODER_PREFIX + SAAEventParser.RD},
-		new String[] {"6",	"Responder DN: ",		null,	null,		SAAEventParser.CODER_PREFIX + SAAEventParser.OD},
-		new String[] {"9",	"UUMID: ",				null,	"[IO][A-Z0-9]{11}[0-9]{3}.{1,30}",SAAEventParser.UU},
-		new String[] {"10",	"Suffix: ",				null,	"\\d{6}\\d{0,5}",	SAAEventParser.SU},
-		new String[] {"11",	"Logical Name: ",		null,	null,		SAAEventParser.LN},
-		new String[] {"12", "Size: ",				null,	"\\d+",		SAAEventParser.SZ}
+		/*
+		 * 			  line	startSequence	  endSequ 	   reqExpPatt variableName		 							   trim replace 
+		 */
+		new String[] {"1",	"Queue ",		  ",",		   null,	  SAAEventParser.QU,							   "N", "\\s+", "_"},
+		new String[] {null,	"Service:",		  "Requestor", null,	  SAAEventParser.SV,							   "Y", "\\s+", "!"},
+		new String[] {null,	"Requestor DN: ", "Responder", null,	  SAAEventParser.CODER_PREFIX + SAAEventParser.RD, "Y", "\\s+",  "="},
+		new String[] {null,	"Responder DN: ", "Transfer" , null,	  SAAEventParser.CODER_PREFIX + SAAEventParser.OD, "Y", "\\s+",  "="},
+		new String[] {null,	"UUMID:",		  "Suffix",	   null,	  SAAEventParser.UU,							   "Y", "\\s+",  " "},
+		new String[] {null,	"Suffix:",		  "Logical",   "\\d{6,}", SAAEventParser.SU,							   "Y", "\\s+",  " "},
+		new String[] {null,	"Logical Name:",  "Size",	   null,	  SAAEventParser.LN,							   "Y", null,	null},
+		new String[] {null, "Size:",		  null,		   "\\d+",	  SAAEventParser.SZ,							   "Y",	null,	null}
 	};
 	
 	
@@ -124,13 +126,15 @@ public class SAAEventParser2 {
 	 * 4 - Nack
 	 */
 	
-	@SuppressWarnings("unused")
 	private static final String[][] FIELD_DEFINITION_8005= {
-		new String[] {"1",	"UMID ",				",",	null,SAAEventParser.UM},
-		new String[] {"1",	"Suffix ",				":",	"\\d{6}\\d{0,5}",	SAAEventParser.SU},
-		new String[] {"1",	"Session ",				",",	"\\d{1,4}",	SAAEventParser.SE},
-		new String[] {"1",	"Reason code ",			null,	null,		SAAEventParser.RC},
-		new String[] {null,	"Nack received: ",		null,	null,		SAAEventParser.NA}
+		/*
+		 * 			  line	startSequence	  endSequ reqExpPatte variableName		 trim replace 
+		 */
+		new String[] {null,	"UMID",			  ",",	  null,		  SAAEventParser.UM, "Y", "\\s+", " "},
+		new String[] {null,	"Suffix",		  ":",	  "\\d{6,}",  SAAEventParser.SU, "Y", null,	  null},
+		new String[] {null,	"Session",		  ",",	  "\\d{1,4}", SAAEventParser.SE, "Y", null,	  null},
+		new String[] {null,	"Reason code",	  "Nack", null,		  SAAEventParser.RC, "Y", null,	  null},
+		new String[] {null,	"Nack received:", null,	  null,		  SAAEventParser.NA, "N", null,	  null}
 	};
 	
 	/*
@@ -185,14 +189,17 @@ public class SAAEventParser2 {
 	 */
 	
 	private static final String[][] FIELD_DEFINITION_10117= {
-		new String[] {null,	"Message Partner ",		",",	null,		SAAEventParser.MP, "Y", "N"},
-		new String[] {null,	"Session ",				"-",	"\\d{1,4}",	SAAEventParser.SE, "Y", "N"},
-		new String[] {null,	": ",					"UUMID",	"\\d+",		SAAEventParser.SN, "Y", "N"},
-		new String[] {null,	"UUMID                :",	"Suffix",	null, SAAEventParser.UU, "Y", "Y"},
-		new String[] {null,	"Suffix               :",	"Target",	"\\d{6}\\d{0,5}",	SAAEventParser.SU, "Y", "N"},
-		new String[] {null,	"Target routing point :",	"Offset",	null,		SAAEventParser.TR, "Y", "N"},
-		new String[] {null,	"Offset in message    : ",	"Message",	null,		SAAEventParser.OM, "Y", "N"},
-		new String[] {null,	"Message info         :",null,	null,		SAAEventParser.CODER_PREFIX + SAAEventParser.MI, "N", "N"},
+		/*
+		 * 			  line	startSequence	  		  endSequenc reqExpPatte variableName									trim   replace 
+		 */
+		new String[] {null,	"Message Partner ",		  ",",		 null,		 SAAEventParser.MP,								  "Y", null,   null},
+		new String[] {null,	"Session ",				  "-",		 "\\d{1,4}", SAAEventParser.SE,								  "Y", null,   null},
+		new String[] {null,	"Sequence number      :", "UUMID",	 "\\d+",     SAAEventParser.SN,								  "Y", null,   null},
+		new String[] {null,	"UUMID                :", "Suffix",	 null,	     SAAEventParser.UU,								  "Y", "\\s+", " "},
+		new String[] {null,	"Suffix               :", "Target",	 "\\d{6,}",	 SAAEventParser.SU,								  "Y", null,   null},
+		new String[] {null,	"Target routing point :", "Offset",	 null,	     SAAEventParser.TR,								  "Y", null,   null},
+		new String[] {null,	"Offset in message    :", "Message", null,	     SAAEventParser.OM,								  "Y", null,   null},
+		new String[] {null,	"Message info         :", null,		 null,	     SAAEventParser.CODER_PREFIX + SAAEventParser.MI, "N", null,   null},
 	};
 	
 	/*
@@ -215,15 +222,17 @@ public class SAAEventParser2 {
 	 * 
 	 */
 	
-	@SuppressWarnings("unused")
 	private static final String[][] FIELD_DEFINITION_10050= {
-		new String[] {"1",	"Message Partner ",		",",	null,		SAAEventParser.MP},
-		new String[] {"1",	"Session ",				" ",	"\\d{1,4}",	SAAEventParser.SE},
-		new String[] {"2",	": ",					null,	"\\d+",		SAAEventParser.SN},
-		new String[] {"3",	": ",					null,	"[IO][A-Z0-9]{11}[0-9]{3}.{1,30}",SAAEventParser.UU},
-		new String[] {"4",	": ",					null,	"\\d{6}\\d{0,5}",	SAAEventParser.SU},
-		new String[] {"5",	": ",					null,	null,		SAAEventParser.TR},
-		new String[] {"6",	": ",					null,	null,		SAAEventParser.RE},
+		/*
+		 * 			  line	startSequence	  		  endSequen reqExpPatte variableName	   trim replace 
+		 */
+		new String[] {null,	"Message Partner",		  ",",		null,		SAAEventParser.MP, "Y", null,	null},
+		new String[] {null,	"Session",				  "-",		"\\d{1,4}",	SAAEventParser.SE, "Y", null,	null},
+		new String[] {null,	"Sequence number      :", "UUMID",	"\\d+",		SAAEventParser.SN, "Y", null, 	null},
+		new String[] {null,	"UUMID                :", "Suffix",	null,		SAAEventParser.UU, "Y", "\\s+", " "},
+		new String[] {null,	"Suffix               :", "Reason",	"\\d{6,}",	SAAEventParser.SU, "Y", null,	null},
+		new String[] {null,	"Target routing point :", null,		null,		SAAEventParser.TR, "Y", null,	null},
+		new String[] {null,	"Reason               :", "Target", null,		SAAEventParser.RE, "Y", "\\s+", " "},
 	};
 	
 	/*
@@ -290,15 +299,15 @@ public class SAAEventParser2 {
 	private static String[] parse(int nr, String text) throws IOException {
 		switch (nr) {
 		//case 2010:return parseAdditionalFields(FIELD_DEFINITION_2010, text);
-		//case 8005:return parseAdditionalFields(FIELD_DEFINITION_8005, text);
+		case 8005:return parseAdditionalFields(FIELD_DEFINITION_8005, text);
 		//case 8026:return parseAdditionalFields(FIELD_DEFINITION_8026, text);
 		//case 8135:return parseAdditionalFields(FIELD_DEFINITION_8135, text);
 		//case 10018:return parseAdditionalFields(FIELD_DEFINITION_10018, text);
 		//case 10023:return parseAdditionalFields(FIELD_DEFINITION_10023, text);
-		//case 10050:return parseAdditionalFields(FIELD_DEFINITION_10050, text);
+		case 10050:return parseAdditionalFields(FIELD_DEFINITION_10050, text);
 		//case 10098:return parseAdditionalFields(FIELD_DEFINITION_10098, text);
 		case 10117:return parseAdditionalFields(FIELD_DEFINITION_10117, text);
-		//case 28116:return parseAdditionalFields(FIELD_DEFINITION_28116, text);
+		case 28116:return parseAdditionalFields(FIELD_DEFINITION_28116, text);
 		default: return new String[]{}; 
 		}
 	}
@@ -317,9 +326,8 @@ public class SAAEventParser2 {
 				if(def[i][5].equals("Y")) {
 					tmp = tmp.trim();
 				}
-				if(def[i][6].equals("Y")) {
-					tmp = tmp.replace("\n", " ");
-					tmp = tmp.replace("\r", " ");
+				if(def[i][6] != null) {
+					tmp = tmp.replaceAll(def[i][6], def[i][7]);
 				}
 				if(def[i][3]!=null)if(!tmp.matches(def[i][3]))continue;
 				value[i]=def[i][4].charAt(0)=='@'?Base64Coder.encodeString(tmp):tmp;

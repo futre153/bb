@@ -21,6 +21,9 @@ public class Tester {
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws AddressException, MessagingException, IOException {
+		String x = "pobnskba generic p";
+		System.out.println(x.replaceAll("\\s+", "!"));
+		System.exit(1);
 		File f = new File("D:\\TEMP\\01561531_20150420090805.txt.ARCH");
 		FileInputStream in = new FileInputStream(f);
 		new SAARJEParser().parse(in, null);

@@ -41,13 +41,13 @@ public class SAARJEParser extends ArrayList<RJEFinMessage> {
 						System.out.println(e.getClass());
 						System.out.println((e instanceof IOException) && e.getMessage().equals(BlockImpl.END_OF_STREAM));*/
 						if ((e instanceof IOException) && e.getMessage().equals(BlockImpl.END_OF_STREAM)) {
-							System.out.println(message.getBasicHeader().getSequenceNumber());
+							//System.out.println(message.getBasicHeader().getSequenceNumber());
 							this.add(message);
 							break;
 						}
 						throw new IOException(e);
 					}
-					System.out.println(message.getBasicHeader().getSequenceNumber());
+					//System.out.println(message.getBasicHeader().getSequenceNumber());
 					this.add(message);
 				}
 			}
