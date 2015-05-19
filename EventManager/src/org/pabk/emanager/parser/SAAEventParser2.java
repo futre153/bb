@@ -66,8 +66,8 @@ public class SAAEventParser2 {
 		 */
 		new String[] {"1",	"Queue ",		  ",",		   null,	  SAAEventParser.QU,							   "N", "\\s+", "_"},
 		new String[] {null,	"Service:",		  "Requestor", null,	  SAAEventParser.SV,							   "Y", "\\s+", "!"},
-		new String[] {null,	"Requestor DN: ", "Responder", null,	  SAAEventParser.CODER_PREFIX + SAAEventParser.RD, "Y", "\\s+",  "="},
-		new String[] {null,	"Responder DN: ", "Transfer" , null,	  SAAEventParser.CODER_PREFIX + SAAEventParser.OD, "Y", "\\s+",  "="},
+		new String[] {null,	"Requestor DN:",  "Responder", null,	  SAAEventParser.CODER_PREFIX + SAAEventParser.RD, "Y", "\\s+",  "="},
+		new String[] {null,	"Responder DN:",  "Transfer" , null,	  SAAEventParser.CODER_PREFIX + SAAEventParser.OD, "Y", "\\s+",  "="},
 		new String[] {null,	"UUMID:",		  "Suffix",	   null,	  SAAEventParser.UU,							   "Y", "\\s+",  " "},
 		new String[] {null,	"Suffix:",		  "Logical",   "\\d{6,}", SAAEventParser.SU,							   "Y", "\\s+",  " "},
 		new String[] {null,	"Logical Name:",  "Size",	   null,	  SAAEventParser.LN,							   "Y", null,	null},

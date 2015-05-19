@@ -1,84 +1,40 @@
-apr 29, 2015 7:11:44 AM org.pabk.emanager.HandlerImpl init
+apr 29, 2015 9:45:17 AM org.pabk.emanager.HandlerImpl init
 INFO: trapcollector: logger trapcollector is successfully initailized!
-apr 29, 2015 7:11:44 AM org.pabk.emanager.HandlerImpl run
+apr 29, 2015 9:45:17 AM org.pabk.emanager.HandlerImpl run
 INFO: Module org.pabk.emanager.TrapCollector is started!
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector getProperty
+apr 29, 2015 9:45:17 AM org.pabk.emanager.TrapCollector getProperty
 INFO: Set default value , for property trapCollector.separator
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector getProperty
+apr 29, 2015 9:45:17 AM org.pabk.emanager.TrapCollector getProperty
 INFO: Loaded value 10.1.129.251 for property trapCollector.sourceServer from properties.
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector getProperty
+apr 29, 2015 9:45:17 AM org.pabk.emanager.TrapCollector getProperty
 INFO: Loaded value \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for property trapCollector.sourceFileMask from properties.
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector getProperty
+apr 29, 2015 9:45:17 AM org.pabk.emanager.TrapCollector getProperty
 INFO: Loaded value vyvoj for property trapCollector.queus from properties.
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector getProperty
+apr 29, 2015 9:45:17 AM org.pabk.emanager.TrapCollector getProperty
 INFO: Set default value 10.1.129.251 for property trapCollector.queue.vyvoj.sourceServer
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector getProperty
+apr 29, 2015 9:45:17 AM org.pabk.emanager.TrapCollector getProperty
 INFO: Loaded value D$\TEMP\test for property trapCollector.queue.vyvoj.source from properties.
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector getProperty
+apr 29, 2015 9:45:17 AM org.pabk.emanager.TrapCollector getProperty
 INFO: Set default value \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for property trapCollector.queue.vyvoj.sourceFileMask
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector getProperty
+apr 29, 2015 9:45:17 AM org.pabk.emanager.TrapCollector getProperty
 INFO: Loaded value access for property trapCollector.queue.vyvoj.instance from properties.
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector getProperty
+apr 29, 2015 9:45:17 AM org.pabk.emanager.TrapCollector getProperty
 INFO: Set default value 5 for property trapCollector.poolInterval
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector businessLogic
+apr 29, 2015 9:45:17 AM org.pabk.emanager.TrapCollector businessLogic
 INFO: TrapCollector is working
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector execute
+apr 29, 2015 9:45:17 AM org.pabk.emanager.TrapCollector execute
 INFO: Start collection of traps on queue vyvoj
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector execute
+apr 29, 2015 9:45:17 AM org.pabk.emanager.TrapCollector execute
 INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector execute
+apr 29, 2015 9:45:17 AM org.pabk.emanager.TrapCollector execute
 INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector execute
-INFO: 8 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector execute
-INFO: File \\10.1.129.251\D$\TEMP\test\01660001_20150428102947.txt found on queue vyvoj
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector execute
-INFO: File \\10.1.129.251\D$\TEMP\test\01660002_20150428121416.txt found on queue vyvoj
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector execute
-INFO: File \\10.1.129.251\D$\TEMP\test\01660003_20150428123416.txt found on queue vyvoj
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector execute
-INFO: File \\10.1.129.251\D$\TEMP\test\01660004_20150428124416.txt found on queue vyvoj
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector execute
-INFO: File \\10.1.129.251\D$\TEMP\test\01660005_20150428125916.txt found on queue vyvoj
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector execute
-INFO: File \\10.1.129.251\D$\TEMP\test\01660006_20150428130416.txt found on queue vyvoj
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector execute
-INFO: File \\10.1.129.251\D$\TEMP\test\01660007_20150428130916.txt found on queue vyvoj
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector execute
-INFO: File \\10.1.129.251\D$\TEMP\test\01660008_20150428131416.txt found on queue vyvoj
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector execute
+apr 29, 2015 9:45:17 AM org.pabk.emanager.TrapCollector execute
+INFO: 1 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+apr 29, 2015 9:45:17 AM org.pabk.emanager.TrapCollector execute
+INFO: File \\10.1.129.251\D$\TEMP\test\01660009_20150429093612.txt found on queue vyvoj
+apr 29, 2015 9:45:17 AM org.pabk.emanager.TrapCollector execute
 INFO: Trap found and saved to database
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector execute
-INFO: Trap found and saved to database
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector execute
-INFO: Trap found and saved to database
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector execute
-INFO: Trap found and saved to database
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector execute
-INFO: Trap found and saved to database
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector execute
-INFO: Trap found and saved to database
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector execute
-INFO: Trap found and saved to database
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector execute
-INFO: Trap found and saved to database
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector execute
-INFO: Trap found and saved to database
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector execute
-INFO: Trap found and saved to database
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector execute
-INFO: Trap found and saved to database
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector execute
-INFO: Trap found and saved to database
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector execute
-INFO: Trap found and saved to database
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector execute
-INFO: Trap found and saved to database
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector execute
-INFO: Trap found and saved to database
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector execute
-INFO: Trap found and saved to database
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector execute
+apr 29, 2015 9:45:17 AM org.pabk.emanager.TrapCollector execute
 INFO: Successfully ends trap capturing on queue vyvoj
-apr 29, 2015 7:11:44 AM org.pabk.emanager.TrapCollector businessLogic
+apr 29, 2015 9:45:17 AM org.pabk.emanager.TrapCollector businessLogic
 INFO: TrapCollector is SLEEPING

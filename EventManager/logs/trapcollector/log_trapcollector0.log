@@ -1,92 +1,852 @@
-máj 04, 2015 8:58:43 AM org.pabk.emanager.HandlerImpl init
+máj 15, 2015 10:03:49 AM org.pabk.emanager.HandlerImpl init
 INFO: trapcollector: logger trapcollector is successfully initailized!
-máj 04, 2015 8:58:43 AM org.pabk.emanager.HandlerImpl run
+máj 15, 2015 10:03:49 AM org.pabk.emanager.HandlerImpl run
 INFO: Module org.pabk.emanager.TrapCollector is started!
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector getProperty
+máj 15, 2015 10:03:49 AM org.pabk.emanager.TrapCollector getProperty
 INFO: Set default value , for property trapCollector.separator
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector getProperty
+máj 15, 2015 10:03:49 AM org.pabk.emanager.TrapCollector getProperty
 INFO: Loaded value 10.1.129.251 for property trapCollector.sourceServer from properties.
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector getProperty
+máj 15, 2015 10:03:49 AM org.pabk.emanager.TrapCollector getProperty
 INFO: Loaded value \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for property trapCollector.sourceFileMask from properties.
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector getProperty
+máj 15, 2015 10:03:49 AM org.pabk.emanager.TrapCollector getProperty
 INFO: Loaded value vyvoj for property trapCollector.queus from properties.
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector getProperty
+máj 15, 2015 10:03:49 AM org.pabk.emanager.TrapCollector getProperty
 INFO: Set default value 10.1.129.251 for property trapCollector.queue.vyvoj.sourceServer
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector getProperty
+máj 15, 2015 10:03:49 AM org.pabk.emanager.TrapCollector getProperty
 INFO: Loaded value D$\TEMP\test for property trapCollector.queue.vyvoj.source from properties.
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector getProperty
+máj 15, 2015 10:03:49 AM org.pabk.emanager.TrapCollector getProperty
 INFO: Set default value \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for property trapCollector.queue.vyvoj.sourceFileMask
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector getProperty
+máj 15, 2015 10:03:49 AM org.pabk.emanager.TrapCollector getProperty
 INFO: Loaded value access for property trapCollector.queue.vyvoj.instance from properties.
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector getProperty
+máj 15, 2015 10:03:49 AM org.pabk.emanager.TrapCollector getProperty
 INFO: Set default value 5 for property trapCollector.poolInterval
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector businessLogic
+máj 15, 2015 10:03:49 AM org.pabk.emanager.TrapCollector businessLogic
 INFO: TrapCollector is working
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector execute
+máj 15, 2015 10:03:49 AM org.pabk.emanager.TrapCollector execute
 INFO: Start collection of traps on queue vyvoj
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector execute
+máj 15, 2015 10:03:49 AM org.pabk.emanager.TrapCollector execute
 INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector execute
+máj 15, 2015 10:03:49 AM org.pabk.emanager.TrapCollector execute
 INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector execute
-INFO: 10 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector execute
-INFO: File \\10.1.129.251\D$\TEMP\test\01660001_20150428102947.txt found on queue vyvoj
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector execute
-INFO: File \\10.1.129.251\D$\TEMP\test\01660002_20150428121416.txt found on queue vyvoj
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector execute
-INFO: File \\10.1.129.251\D$\TEMP\test\01660003_20150428123416.txt found on queue vyvoj
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector execute
-INFO: File \\10.1.129.251\D$\TEMP\test\01660004_20150428124416.txt found on queue vyvoj
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector execute
-INFO: File \\10.1.129.251\D$\TEMP\test\01660005_20150428125916.txt found on queue vyvoj
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector execute
-INFO: File \\10.1.129.251\D$\TEMP\test\01660006_20150428130416.txt found on queue vyvoj
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector execute
-INFO: File \\10.1.129.251\D$\TEMP\test\01660007_20150428130916.txt found on queue vyvoj
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector execute
-INFO: File \\10.1.129.251\D$\TEMP\test\01660008_20150428131416.txt found on queue vyvoj
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector execute
-INFO: File \\10.1.129.251\D$\TEMP\test\01660009_20150429093612.txt found on queue vyvoj
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector execute
-INFO: File \\10.1.129.251\D$\TEMP\test\01660011_20150429172006.txt found on queue vyvoj
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector execute
+máj 15, 2015 10:03:49 AM org.pabk.emanager.TrapCollector execute
+INFO: 1 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 10:03:49 AM org.pabk.emanager.TrapCollector execute
+INFO: File \\10.1.129.251\D$\TEMP\test\01660001_20150515081607.txt found on queue vyvoj
+máj 15, 2015 10:03:49 AM org.pabk.emanager.TrapCollector execute
 INFO: Trap found and saved to database
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector execute
-INFO: Trap found and saved to database
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector execute
-INFO: Trap found and saved to database
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector execute
-INFO: Trap found and saved to database
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector execute
-INFO: Trap found and saved to database
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector execute
-INFO: Trap found and saved to database
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector execute
-INFO: Trap found and saved to database
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector execute
-INFO: Trap found and saved to database
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector execute
-INFO: Trap found and saved to database
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector execute
-INFO: Trap found and saved to database
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector execute
-INFO: Trap found and saved to database
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector execute
-INFO: Trap found and saved to database
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector execute
-INFO: Trap found and saved to database
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector execute
-INFO: Trap found and saved to database
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector execute
-INFO: Trap found and saved to database
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector execute
-INFO: Trap found and saved to database
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector execute
-INFO: Trap found and saved to database
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector execute
-INFO: Trap found and saved to database
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector execute
+máj 15, 2015 10:03:49 AM org.pabk.emanager.TrapCollector execute
 INFO: Successfully ends trap capturing on queue vyvoj
-máj 04, 2015 8:58:43 AM org.pabk.emanager.TrapCollector businessLogic
+máj 15, 2015 10:03:49 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 10:08:49 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 10:08:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 10:08:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 10:08:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 10:08:49 AM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 10:08:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 10:08:49 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 10:13:49 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 10:13:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 10:13:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 10:13:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 10:13:49 AM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 10:13:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 10:13:49 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 10:18:49 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 10:18:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 10:18:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 10:18:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 10:18:49 AM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 10:18:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 10:18:49 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 10:23:49 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 10:23:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 10:23:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 10:23:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 10:23:49 AM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 10:23:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 10:23:49 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 10:28:49 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 10:28:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 10:28:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 10:28:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 10:28:49 AM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 10:28:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 10:28:49 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 10:33:49 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 10:33:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 10:33:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 10:33:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 10:33:49 AM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 10:33:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 10:33:49 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 10:38:49 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 10:38:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 10:38:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 10:38:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 10:38:49 AM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 10:38:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 10:38:49 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 10:43:49 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 10:43:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 10:43:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 10:43:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 10:43:49 AM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 10:43:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 10:43:49 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 10:48:49 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 10:48:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 10:48:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 10:48:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 10:48:49 AM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 10:48:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 10:48:49 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 10:53:49 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 10:53:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 10:53:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 10:53:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 10:53:49 AM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 10:53:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 10:53:49 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 10:58:49 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 10:58:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 10:58:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 10:58:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 10:58:49 AM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 10:58:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 10:58:49 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 11:03:49 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 11:03:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 11:03:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 11:03:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 11:03:49 AM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 11:03:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 11:03:49 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 11:08:49 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 11:08:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 11:08:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 11:08:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 11:08:49 AM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 11:08:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 11:08:49 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 11:13:49 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 11:13:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 11:13:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 11:13:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 11:13:49 AM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 11:13:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 11:13:49 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 11:18:49 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 11:18:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 11:18:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 11:18:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 11:18:50 AM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 11:18:50 AM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 11:18:50 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 11:23:49 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 11:23:49 AM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 11:23:50 AM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 11:23:50 AM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 11:23:50 AM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 11:23:50 AM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 11:23:50 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 11:28:50 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 11:28:50 AM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 11:28:50 AM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 11:28:50 AM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 11:28:50 AM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 11:28:50 AM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 11:28:50 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 11:33:50 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 11:33:50 AM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 11:33:50 AM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 11:33:50 AM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 11:33:50 AM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 11:33:50 AM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 11:33:50 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 11:38:50 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 11:38:50 AM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 11:38:50 AM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 11:38:50 AM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 11:38:50 AM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 11:38:50 AM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 11:38:50 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 11:43:50 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 11:43:50 AM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 11:43:50 AM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 11:43:50 AM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 11:43:50 AM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 11:43:50 AM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 11:43:50 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 11:48:50 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 11:48:50 AM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 11:48:50 AM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 11:48:50 AM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 11:48:50 AM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 11:48:50 AM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 11:48:50 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 11:53:50 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 11:53:50 AM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 11:53:50 AM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 11:53:50 AM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 11:53:50 AM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 11:53:50 AM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 11:53:50 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 11:58:50 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 11:58:50 AM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 11:58:50 AM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 11:58:50 AM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 11:58:50 AM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 11:58:50 AM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 11:58:50 AM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 12:03:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 12:03:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 12:03:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 12:03:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 12:03:50 PM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 12:03:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 12:03:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 12:08:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 12:08:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 12:08:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 12:08:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 12:08:50 PM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 12:08:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 12:08:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 12:13:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 12:13:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 12:13:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 12:13:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 12:13:50 PM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 12:13:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 12:13:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 12:18:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 12:18:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 12:18:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 12:18:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 12:18:50 PM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 12:18:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 12:18:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 12:23:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 12:23:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 12:23:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 12:23:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 12:23:50 PM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 12:23:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 12:23:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 12:28:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 12:28:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 12:28:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 12:28:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 12:28:50 PM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 12:28:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 12:28:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 12:33:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 12:33:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 12:33:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 12:33:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 12:33:50 PM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 12:33:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 12:33:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 12:38:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 12:38:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 12:38:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 12:38:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 12:38:50 PM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 12:38:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 12:38:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 12:43:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 12:43:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 12:43:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 12:43:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 12:43:50 PM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 12:43:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 12:43:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 12:48:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 12:48:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 12:48:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 12:48:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 12:48:50 PM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 12:48:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 12:48:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 12:53:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 12:53:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 12:53:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 12:53:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 12:53:50 PM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 12:53:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 12:53:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 12:58:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 12:58:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 12:58:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 12:58:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 12:58:50 PM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 12:58:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 12:58:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 1:03:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 1:03:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 1:03:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 1:03:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 1:03:50 PM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 1:03:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 1:03:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 1:08:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 1:08:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 1:08:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 1:08:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 1:08:50 PM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 1:08:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 1:08:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 1:13:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 1:13:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 1:13:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 1:13:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 1:13:50 PM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 1:13:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 1:13:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 1:18:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 1:18:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 1:18:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 1:18:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 1:18:50 PM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 1:18:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 1:18:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 1:23:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 1:23:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 1:23:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 1:23:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 1:23:50 PM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 1:23:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 1:23:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 1:28:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 1:28:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 1:28:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 1:28:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 1:28:50 PM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 1:28:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 1:28:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 1:33:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 1:33:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 1:33:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 1:33:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 1:33:50 PM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 1:33:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 1:33:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 1:38:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 1:38:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 1:38:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 1:38:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 1:38:50 PM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 1:38:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 1:38:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 1:43:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 1:43:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 1:43:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 1:43:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 1:43:50 PM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 1:43:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 1:43:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 1:48:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 1:48:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 1:48:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 1:48:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 1:48:50 PM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 1:48:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 1:48:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 1:53:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 1:53:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 1:53:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 1:53:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 1:53:50 PM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 1:53:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 1:53:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 1:58:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 1:58:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 1:58:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 1:58:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 1:58:50 PM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 1:58:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 1:58:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 2:03:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 2:03:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 2:03:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 2:03:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 2:03:50 PM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 2:03:50 PM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 2:03:50 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 2:08:51 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 2:08:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 2:08:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 2:08:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 2:08:51 PM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 2:08:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 2:08:51 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 2:13:51 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 2:13:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 2:13:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 2:13:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 2:13:51 PM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 2:13:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 2:13:51 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 2:18:51 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 2:18:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 2:18:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 2:18:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 2:18:51 PM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 2:18:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 2:18:51 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 2:23:51 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 2:23:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 2:23:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 2:23:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 2:23:51 PM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 2:23:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 2:23:51 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 2:28:51 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 2:28:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 2:28:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 2:28:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 2:28:51 PM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 2:28:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 2:28:51 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 2:33:51 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 2:33:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 2:33:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 2:33:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 2:33:51 PM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 2:33:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 2:33:51 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 2:38:51 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 2:38:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 2:38:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 2:38:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 2:38:51 PM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 2:38:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 2:38:51 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 2:43:51 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 2:43:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 2:43:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 2:43:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 2:43:51 PM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 2:43:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 2:43:51 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 2:48:51 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 2:48:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 2:48:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 2:48:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 2:48:51 PM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 2:48:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 2:48:51 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is SLEEPING
+máj 15, 2015 2:53:51 PM org.pabk.emanager.TrapCollector businessLogic
+INFO: TrapCollector is working
+máj 15, 2015 2:53:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Start collection of traps on queue vyvoj
+máj 15, 2015 2:53:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Found source directory \\10.1.129.251\D$\TEMP\test for queue vyvoj
+máj 15, 2015 2:53:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Used filename pattern \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 for input files on queue vyvoj
+máj 15, 2015 2:53:51 PM org.pabk.emanager.TrapCollector execute
+INFO: 0 files found on source directory \\10.1.129.251\D$\TEMP\test that matching filter \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] and keep days = 0 on queue vyvoj
+máj 15, 2015 2:53:51 PM org.pabk.emanager.TrapCollector execute
+INFO: Successfully ends trap capturing on queue vyvoj
+máj 15, 2015 2:53:51 PM org.pabk.emanager.TrapCollector businessLogic
 INFO: TrapCollector is SLEEPING
