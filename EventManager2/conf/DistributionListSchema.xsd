@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema
+	targetNamespace="http://www.example.org/DistributionListSchema"
+	elementFormDefault="qualified"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:dls="http://www.example.org/DistributionListSchema"
+	xmlns:cnl="http://www.example.org/ConditionsList"
+	xmlns:msg="http://www.example.org/MessagesList"
+	xmlns:rec="http://www.example.org/Recipients" xmlns:rgr="http://www.example.org/RecipientsGroup">
+	<xsd:import schemaLocation="ConditionsList.xsd"
+		namespace="http://www.example.org/ConditionsList">
+	</xsd:import>
+	<xsd:import schemaLocation="MessagesList.xsd"
+		namespace="http://www.example.org/MessagesList">
+	</xsd:import>
+
+	<xsd:import schemaLocation="Recipients.xsd"
+		namespace="http://www.example.org/Recipients">
+	</xsd:import>
+	<xsd:import schemaLocation="RecipientsGroup.xsd" namespace="http://www.example.org/RecipientsGroup"></xsd:import>
+	<xsd:complexType name="DistributionType">
+		<xsd:sequence minOccurs="1" maxOccurs="1">
+			<xsd:element name="address-list" type="rec:RecipientsListType" minOccurs="1" maxOccurs="1"></xsd:element>
+			<xsd:element name="address-group-list"
+				type="rgr:RecipientsGroupListType" minOccurs="1" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="condition-list"
+				type="cnl:ConditionsListType" minOccurs="1" maxOccurs="1">
+			</xsd:element>
+			<xsd:element name="msg-list" type="msg:MessagesListType"
+				minOccurs="1" maxOccurs="1">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:element name="distribution-list" type="dls:DistributionType"></xsd:element>
+</xsd:schema>

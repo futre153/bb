@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.example.org/ConditionsList" elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:cnl="http://www.example.org/ConditionsList" xmlns:rgr="http://www.example.org/RecipientsGroup">
+
+	<xsd:import schemaLocation="RecipientsGroup.xsd" namespace="http://www.example.org/RecipientsGroup"></xsd:import>
+	<xsd:complexType name="ConditionsListType">
+		<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+			<xsd:element name="condition" type="cnl:ConditionType" minOccurs="1" maxOccurs="unbounded"></xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:attributeGroup name="CondAtts">
+		<xsd:attribute ref="rgr:name" use="required"></xsd:attribute>
+		<xsd:attribute ref="cnl:priority" use="required"></xsd:attribute>
+	</xsd:attributeGroup>
+
+	<xsd:complexType name="ConditionType">
+		<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+			<xsd:element name="condition-item" type="cnl:ConditionItemType" minOccurs="1" maxOccurs="1"></xsd:element>
+		</xsd:sequence>
+		<xsd:attributeGroup ref="cnl:CondAtts"></xsd:attributeGroup>
+	</xsd:complexType>
+
+	<xsd:complexType name="ConditionItemType">
+		<xsd:sequence minOccurs="1" maxOccurs="1">
+			<xsd:element name="group" type="xsd:string" minOccurs="1" maxOccurs="unbounded"></xsd:element>
+		</xsd:sequence>
+		<xsd:attributeGroup ref="cnl:CondItemAtts"></xsd:attributeGroup>
+	</xsd:complexType>
+
+	<xsd:attribute name="regExp" type="xsd:string"></xsd:attribute>
+	<xsd:attribute name="priority" type="xsd:integer"></xsd:attribute>
+
+    <xsd:attributeGroup name="CondItemAtts">
+    	<xsd:attribute ref="cnl:regExp" use="required"></xsd:attribute>
+    </xsd:attributeGroup>
+</xsd:schema>

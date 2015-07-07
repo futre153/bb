@@ -1,18 +1,34 @@
 package org.pabk.emanager.util;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintStream;
 import java.lang.reflect.Array;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Calendar;
 import java.util.Properties;
 
-import org.pabk.emanager.Loader;
 import org.pabk.emanager.Sleeper;
+import org.slf4j.LoggerFactory;
+import org.slf4j.Marker;
+import org.slf4j.MarkerFactory;
 
 import ch.qos.logback.classic.Logger;
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
+import ch.qos.logback.classic.spi.ILoggingEvent;
+import ch.qos.logback.core.rolling.RollingFileAppender;
+import ch.qos.logback.core.rolling.TimeBasedRollingPolicy;
+import ch.qos.logback.core.util.StatusPrinter;
 
 public class Sys {
+	
+	private static final Marker FATAL_MARKER = MarkerFactory.getMarker(Const.FATAL_TEXT);
+	private static Logger logger;
+	
 	private static final Object parse(Class<?> _class, String value, String key, String handlerName) throws IOException {
 		try {
 			if(_class.equals(String.class)) {
@@ -51,109 +67,195 @@ public class Sys {
 		}
 	}
 	
+	/*
+	 * 
+	 */
 	
-	public static final Object getProperty(Object object, String key, String _default, boolean notNull, Class<?> _class, String separator) throws IOException {
-		Properties p = null;
-		Logger log = null;
-		String msg;
-		String className = Loader.class.getSimpleName();
-		String sep = separator == null ? Const.DEFAULT_PROPERTY_SEPARATOR : separator;
-		//log = (Logger) object.getClass().getDeclaredField(Const.LOGGER_FIELD_NAME).get(object);
-		//p = (Properties) object.getClass().getDeclaredField(Const.PROPERTIES_FIELD_NAME).get(object);
-		try {
-			if(object == null) {
-				throw new IOException(String.format(Const.NULL_PROPERTIES_ERROR, className)); 
-			}
-			if(object instanceof Properties) {
-				p = (Properties) object;
-			}
-			else {
-				className = null;
-				Class<?> clazz = object instanceof Class ? (Class<?>) object : object.getClass();
-				className = clazz.getSimpleName();
-				if(object instanceof Class) {
-					
-					Class<?> clazz = (Class<?>) object;
-					className = clazz.getSimpleName();
-					p = (Properties) clazz.getDeclaredField(Const.PROPERTIES_FIELD_NAME).get(object);
-					try {
-						log = (Logger) clazz.getDeclaredField(Const.LOGGER_FIELD_NAME).get(object);
-					}
-					catch (Exception e) {}
-				}
-				else {
-					className = object.getClass().getSimpleName();
-					p = (Properties) object.getClass().getDeclaredField(Const.PROPERTIES_FIELD_NAME).get(object);
-					try {
-						log = (Logger) object.getClass().getDeclaredField(Const.LOGGER_FIELD_NAME).get(object);
-					}
-					catch (Exception e) {}
-				}
-			}
-			if(p == null) {
-				throw new IOException(String.format(Const.NULL_PROPERTIES_ERROR, className));
-			}
-			if(key == null) {
-				throw new IOException(String.format(Const.KEY_PROPERTY_ERROR));
-			}
-			String value = p.getProperty(key);
-			if(value == null) {
-				if(_default == null && notNull) {
-					throw new IOException (String.format(Const.PROPERTY_NULL_ERROR, key));
-				}
-				value = _default;
-				msg = String.format(Const.DEFAULT_PROPERTY_SET, value, key);
-				if(log == null) {
-					System.out.println(msg);
-				}
-				else {
-					log.info(msg);
-				}
-				if(value == null) {
-					return value;
-				}
-			}
-			else {
-				msg = String.format(Const.PROPERTY_SET, value, key);
-				if(log == null) {
-					System.out.println(msg);
-				}
-				else {
-					log.info(String.format(Const.PROPERTY_SET, value, key));
-				}
-			}
+	public static final Object getProperty (Object ... objs) throws IOException {
+		Object obj = objs.length > 0 ? objs[0] : null;
+		Properties p = getProperties(obj);
+		Logger log = Sys.getLogger(p, obj);
+		String className = (objs != null && objs.length > 0 && (!(objs [0] instanceof Properties))) ? ((objs[0] instanceof Class<?>) ? objs[0].toString() : objs[0].getClass().getSimpleName()) : null;
+		String key = (String) (objs != null && objs.length > 1 && (objs[1] instanceof String) ? objs[1] : null);
+		String _default = (String) (objs != null && objs.length > 2/*  && (objs[2] instanceof String)*/ ? objs[2].toString() : null);
+		boolean notNull = (boolean) (objs != null && objs.length > 3  && (objs[3] instanceof Boolean) ? objs[3] : false);
+		Class<?> _class = (Class<?>) (objs != null && objs.length > 4  && (objs[4] instanceof Class<?>) ? objs[4] : String.class);
+		String separator = (String) (objs != null && objs.length > 5  && (objs[5] instanceof String) ? objs[5] : Const.DEFAULT_PROPERTY_SEPARATOR);
+		String value = null;
+		if(p == null) {
+			Sys.log(log, null, Const.WARN, Const.PROPERTY_NULL_ERROR_2);
+		}
+		else {
 			try {
-				return parse(_class, value, key, className);
+				value = p.getProperty(key);
 			}
-			catch (IOException e) {
-				try {
-					return _class.getDeclaredConstructor(String.class).newInstance(value);
-				} catch (Exception e1) {
-					try {
-						String[] array = value.split(sep);
-						Object obj = Array.newInstance(_class, array.length);
-						for(int i = 0; i < array.length; i ++) {
-							Array.set(obj, i, parse(_class, array[i], key, className));
-						}
-						return obj;
-					}
-					catch (Exception e2) {
-						throw new IOException(String.format(Const.PROPERTY_CAST_ERROR, _class.getSimpleName(), key, value, className));
-					}
-				}
+			catch (Exception e) {}
+		}
+		if(value == null) {
+			value = _default;
+			Sys.log(log, null, Const.INFO, Const.PROPERTY_NULL_ERROR_3, key, value);
+		}
+		else {
+			Sys.log(log, null, Const.INFO, Const.PROPERTY_VALUE, value, key);
+		}
+		if(value == null) {
+			if(notNull) {
+				Sys.log(log, null, Const.FATAL, Const.PROPERTY_NULL_ERROR, key);
+				throw new IOException (String.format(Const.PROPERTY_NULL_ERROR, key));
+			}
+			else {
+				return null;
 			}
 		}
-		catch (Exception e) {
-			msg = e.getMessage();
-			if(log == null) {
-				System.out.println(msg);
+		try {
+			return parse(_class, value, key, className);
+		}
+		catch (IOException e) {
+			try {
+				return _class.getDeclaredConstructor(String.class).newInstance(value);
+			} catch (Exception e1) {
+				try {
+					String[] array = value.split(separator);
+					obj = Array.newInstance(_class, array.length);
+					for(int i = 0; i < array.length; i ++) {
+						Array.set(obj, i, parse(_class, array[i], key, className));
+					}
+					Sys.log(log, null, Const.INFO, Const.PROPERTY_PARSED_TO_ARRAY, key, obj);
+					return obj;
+				}
+				catch (Exception e2) {
+					throw new IOException(String.format(Const.PROPERTY_CAST_ERROR, _class.getSimpleName(), key, value, className));
+				}
 			}
-			else {
-				log.error(msg);
-			}
-			throw new IOException(e);
 		}
 	}
+	
+	public static void log(Logger log, PrintStream ps, int severity, String message, Object ... args) {
+		String fMsg = String.format(message, args);
+		if(log != null) {
+			switch(severity) {
+			case Const.ALL:
+			case Const.TRACE:
+				log.trace(fMsg);
+				break;
+			case Const.DEBUG:
+				log.debug(fMsg);
+				break;
+			case Const.INFO:
+				log.info(fMsg);
+				break;
+			case Const.WARN:
+				log.warn(fMsg);
+				break;
+			case Const.ERROR:
+				log.error(fMsg);
+				break;
+			case Const.FATAL:
+				log.error(FATAL_MARKER, fMsg);
+			case Const.OFF:
+			default:
+				break;
+			}
+		}
+		else {
+			(ps == null ? System.out : ps).println(fMsg);
+		}
+	}
+	
+	private static Properties getProperties(Object obj) {
+		try {
+			return (Properties) ((obj != null && (obj instanceof Properties)) ? obj : Sys.invoke(obj, Const.GET_FUNCTION_NAME + Properties.class.getSimpleName(), null, null)); 
+		}
+		catch (Exception e) {
+			return null;
+		}
+	}
+	
+	
+	
+	private static Logger getLogger(Properties prop, Object obj) {
+		Logger log = null;
+		if(prop != null) {
+			LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
+			String loggerName = prop.getProperty(Const.LOG_NAME);
+			log = loggerName != null ? log = lc.exists(loggerName) : null;
+		}
+		if(log == null) {
+			try {
+				log = (Logger) Sys.invoke(obj, Const.GET_FUNCTION_NAME + Logger.class.getSimpleName(), null, null);
+				log = (log == null) ? Sys.logger : log;
+			}
+			catch (Exception e) {
+				log = Sys.logger;
+			}
+		}
+		return log;
+	}
+
+	private static Object invoke(Object object, String methodName, Class<?>[] args, Object[] params) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+		return ((object instanceof Class<?>) ? (Class<?>) object : object.getClass()).getDeclaredMethod(methodName, args).invoke((object instanceof Class) ? null : object, params);
+	}
+	
+	public static Logger initLogger (Object obj) throws IOException {
+		
+		obj = obj == null ? Const.MAIN_CLASS : obj;
+		String name 			= obj instanceof Class<?> ? ((Class<?>) obj).getName() : obj.getClass().getName();
+		String pattern 			= Const.LOG_PATTERN_DEFAULT_VALUE;
+		String filename 		= (obj instanceof Class<?> ? ((Class<?>) obj).getSimpleName() : obj.getClass().getSimpleName()).toLowerCase();
+		String directory 		= Const.LOG_DIRECTORY_DEFAULT_VALUE + Const.FS + filename;
+		String extension 		= Const.LOG_EXTENSION_DEFAULT_VALUE;
+		String dateFormat 		= Const.LOG_DATE_FORMAT_IN_ARCHIVE_FILENAME_DEFAULT_VALUE;
+		String archiveExtension = Const.LOG_ARCHIVE_FILENAME_EXTENSION_DEFAULT_VALUE;
+		String historyDef 		= Const.LOG_HISTORY_DEFAULT_VALUE;
+		
+		name 				= (String) Sys.getProperty(obj, Const.LOG_NAME, 							name,				true, String.class, null);
+		pattern 			= (String) Sys.getProperty(obj, Const.LOG_PATTERN,							pattern,			true, String.class, null);
+		directory 			= (String) Sys.getProperty(obj, Const.LOG_DIRECTORY,						directory,			true, String.class, null);
+		extension 			= (String) Sys.getProperty(obj, Const.LOG_EXTENSION,						extension,			true, String.class, null);
+		dateFormat 			= (String) Sys.getProperty(obj, Const.LOG_DATE_FORMAT_IN_ARCHIVE_FILENAME,	dateFormat,			true, String.class, null);
+		archiveExtension 	= (String) Sys.getProperty(obj, Const.LOG_ARCHIVE_FILENAME_EXTENSION,		archiveExtension,	true, String.class, null);
+		int history 		= (int)    Sys.getProperty(obj, Const.LOG_HISTORY,							historyDef,			true, int.class,	null);
+		
+		Sys.createDirectory(directory);
+				
+		LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
+		Logger log = lc.exists(name);
+		if(log == null) {
+		
+			PatternLayoutEncoder ple = new PatternLayoutEncoder();
+			ple.setPattern(pattern);
+			ple.setContext(lc);
+			ple.start();
+			
+			RollingFileAppender<ILoggingEvent> fileApp = new RollingFileAppender<ILoggingEvent> ();
+			fileApp.setFile(directory + Const.FS + filename + extension);
+			fileApp.setContext(lc);
+					
+			TimeBasedRollingPolicy<ILoggingEvent> tbrp = new TimeBasedRollingPolicy<ILoggingEvent>();
+			tbrp.setParent(fileApp);
+			tbrp.setFileNamePattern(directory + Const.FS + filename + dateFormat + extension + archiveExtension);
+			tbrp.setCleanHistoryOnStart(false);
+			tbrp.setContext(lc);
+			tbrp.setMaxHistory(history);
+			tbrp.start();
+			
+			fileApp.setRollingPolicy(tbrp);
+			fileApp.setEncoder(ple);
+			fileApp.start();
+			
+			log = lc.getLogger(name);
+			log.addAppender(fileApp);
+			
+			StatusPrinter.print(lc);
+			
+			log.info(String.format(Const.LOGGER_STARTED, name));
+		}
+		else {
+			log.info(String.format(Const.LOGGER_ASING, name));
+		}
+		return log;
+	}
+	
 	
 	public static final String concatenate(Object[] array, Character delimiter) {
 		if(array==null)return null;
@@ -182,4 +284,62 @@ public class Sys {
 		out.close();
 		return f.getName();
 	}
+
+	public static void createDirectory(String directory) throws IOException {
+		File dir = new File(directory);
+		if (dir.exists()) {
+			if(!dir.isDirectory()) {
+				throw new IOException (String.format(Const.FAILED_CREATE_DIRECTORY, directory, dir.getAbsolutePath()));
+			}
+		}
+		else {
+			try {
+				dir.mkdirs();
+			}
+			catch (Exception e) {
+				throw new IOException (e);
+			}
+		}
+	}
+
+	public static void setDefaultLogger(Logger log) {
+		Sys.logger = log;		
+	}
+
+	public static Properties loadProperties(String path, Properties def) {
+		if(path == null) {
+			return null;
+		}
+		File f = new File (path);
+		Properties props;
+		if(def == null) {
+			props = new Properties();
+		}
+		else {
+			props = new Properties(def);
+		}
+		InputStream in = null;
+		if(f.exists() && f.isFile()) {
+			try {
+				in = new FileInputStream (f);
+				props.loadFromXML(in);
+				in.close();
+			}
+			catch (Exception e) {
+				props = null;
+			}
+		}
+		else {
+			try {
+				in = Sys.class.getResourceAsStream(path);
+				props.loadFromXML(in);
+				in.close();
+			}
+			catch (Exception e) {
+				props = null;
+			}
+		}
+		return props;
+	}
+	
 }

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.example.org/MessagesList" elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msg="http://www.example.org/MessagesList">
+
+    <xsd:complexType name="MessagesListType">
+    	<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+    		<xsd:element name="message-template" type="msg:MessageTemplateType" minOccurs="1" maxOccurs="1"></xsd:element>
+    	</xsd:sequence>
+    	<xsd:attributeGroup ref="msg:MsgsListAtts"></xsd:attributeGroup>
+    </xsd:complexType>
+
+    <xsd:attribute name="encoding">
+    	<xsd:simpleType>
+    		<xsd:restriction base="xsd:string">
+    			<xsd:enumeration value="utf-8"></xsd:enumeration>
+    		</xsd:restriction>
+    	</xsd:simpleType>
+    </xsd:attribute>
+
+    <xsd:attributeGroup name="MsgsListAtts">
+    	<xsd:attribute ref="msg:encoding" use="required"></xsd:attribute>
+    </xsd:attributeGroup>
+
+
+    <xsd:complexType name="MessageTemplateType">
+    	<xsd:sequence minOccurs="1" maxOccurs="1">
+    		<xsd:element name="recipients" type="msg:RecipientsType"
+    			minOccurs="1" maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="subject" type="xsd:string" minOccurs="1"
+    			maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="body" type="msg:BodyType" minOccurs="1"
+    			maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="attachments" type="msg:AttachmentsType" minOccurs="1" maxOccurs="1"></xsd:element>
+    	</xsd:sequence>
+    	<xsd:attributeGroup ref="msg:MsgTmplAtts"></xsd:attributeGroup>
+    </xsd:complexType>
+    
+    <xsd:attribute name="class" type="xsd:string"></xsd:attribute>
+
+    <xsd:attribute name="condition" type="xsd:string"></xsd:attribute>
+
+    <xsd:attributeGroup name="MsgTmplAtts">
+        <xsd:attribute ref="msg:class" use="required"></xsd:attribute>
+        <xsd:attribute ref="msg:condition" use="optional"></xsd:attribute>
+        <xsd:attribute ref="msg:encoding" use="optional"></xsd:attribute>
+    </xsd:attributeGroup>
+
+    <xsd:complexType name="RecipientsType">
+    	<xsd:sequence minOccurs="1" maxOccurs="1">
+    		<xsd:element name="group" type="msg:GroupType" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+    	</xsd:sequence>
+    	<xsd:attributeGroup ref="msg:RecTypeAtts"></xsd:attributeGroup>
+    </xsd:complexType>
+    
+    <xsd:complexType name="BodyType">
+    	<xsd:sequence minOccurs="1" maxOccurs="1">
+    		<xsd:element name="line" type="msg:LineType" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="AttachmentsType">
+    	<xsd:sequence minOccurs="1" maxOccurs="1">
+    		<xsd:element name="attachment" type="xsd:string" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:attribute name="type">
+    	<xsd:simpleType>
+    		<xsd:restriction base="xsd:string">
+    			<xsd:enumeration value="and"></xsd:enumeration>
+    			<xsd:enumeration value="fixed"></xsd:enumeration>
+    		</xsd:restriction>
+    	</xsd:simpleType>
+    </xsd:attribute>
+    
+    <xsd:attributeGroup name="RecTypeAtts">
+    	<xsd:attribute ref="msg:type" use="required"></xsd:attribute>
+    </xsd:attributeGroup>
+
+    <xsd:complexType name="GroupType">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attributeGroup ref="msg:GrpTypeAtts"></xsd:attributeGroup>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+
+    <xsd:attributeGroup name="GrpTypeAtts">
+    	<xsd:attribute ref="msg:condition"></xsd:attribute>
+    </xsd:attributeGroup>
+
+    <xsd:complexType name="LineType">
+    	<xsd:simpleContent>
+    		<xsd:extension base="xsd:string">
+    			<xsd:attributeGroup ref="msg:LineTypeAtts"></xsd:attributeGroup>
+    		</xsd:extension>
+    	</xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:attributeGroup name="LineTypeAtts">
+    	<xsd:attribute ref="msg:condition" use="optional"></xsd:attribute>
+    </xsd:attributeGroup>
+</xsd:schema>

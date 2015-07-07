@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.example.org/RecipientsGroup"
+	elementFormDefault="qualified"
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:rgr="http://www.example.org/RecipientsGroup"
+	xmlns:rec="http://www.example.org/Recipients">
+
+	<xsd:import schemaLocation="Recipients.xsd" namespace="http://www.example.org/Recipients"></xsd:import>
+	<xsd:complexType name="RecipientsGroupListType">
+		<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+			<xsd:element name="address-group"
+				type="rgr:AddressGroupType" minOccurs="1" maxOccurs="1">
+			</xsd:element>
+		</xsd:sequence>
+	</xsd:complexType>
+
+	<xsd:complexType name="AddressGroupType">
+		<xsd:sequence minOccurs="1" maxOccurs="1">
+			<xsd:element name="id" type="rec:idType" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+		</xsd:sequence>
+		<xsd:attributeGroup ref="rgr:AttGroupAtts"></xsd:attributeGroup>
+	</xsd:complexType>
+
+
+
+	<xsd:attribute name="name">
+		<xsd:simpleType>
+			<xsd:restriction base="xsd:string">
+				<xsd:minLength value="1"></xsd:minLength>
+			</xsd:restriction>
+		</xsd:simpleType>
+	</xsd:attribute>
+
+	<xsd:attributeGroup name="AttGroupAtts">
+		<xsd:attribute ref="rgr:name" use="required"></xsd:attribute>
+	</xsd:attributeGroup>
+</xsd:schema>

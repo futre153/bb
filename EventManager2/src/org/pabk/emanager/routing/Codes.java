@@ -35,10 +35,10 @@ class Codes extends ArrayList<CodeItem>{
 			Node node=nodes.item(i);
 			if(node.getNodeType()==Node.ELEMENT_NODE) {
 				if(((Element)node).getTagName().equals(Codes.CODE_NUMBER_NODE_NAME)) {
-					c.setCodeNumber(Recipients.getNoteTextValue(node));
+					c.setCodeNumber(node.getTextContent().trim());
 				}
 				else if(((Element)node).getTagName().equals(Codes.CODE_DESCRIPTION_NODE_NAME)) {
-					c.setDescription(Recipients.getNoteTextValue(node));
+					c.setDescription(node.getTextContent().trim());
 				}
 			}
 		}

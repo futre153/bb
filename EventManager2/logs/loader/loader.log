@@ -1,12 +1,26 @@
-2015-03-12 14:01:48,668 INFO [main] o.p.e.Loader [Loader.java:97] Logger for org.pabk.emanager.Loader was successfully started
-2015-03-12 14:03:33,843 INFO [main] o.p.e.Loader [Loader.java:97] Logger for org.pabk.emanager.Loader was successfully started
-2015-03-12 14:10:18,906 INFO [main] o.p.e.Loader [Loader.java:99] Logger for org.pabk.emanager.Loader was successfully started
-2015-03-12 14:10:39,358 INFO [main] o.p.e.Loader [Loader.java:99] Logger for org.pabk.emanager.Loader was successfully started
-2015-03-12 14:29:44,601 INFO [main] o.p.e.Loader [Loader.java:100] Logger for org.pabk.emanager.Loader was successfully started
-2015-03-12 14:30:11,979 INFO [main] o.p.e.Loader [Loader.java:100] Logger for org.pabk.emanager.Loader was successfully started
-2015-03-12 14:30:12,057 INFO [main] o.p.e.Loader [Loader.java:45] Distribution was successfully loaded
-2015-03-12 14:31:56,296 INFO [main] o.p.e.Loader [Loader.java:100] Logger for org.pabk.emanager.Loader was successfully started
-2015-03-12 14:36:22,869 INFO [main] o.p.e.Loader [Loader.java:100] Logger for org.pabk.emanager.Loader was successfully started
-2015-03-12 14:37:30,994 INFO [main] o.p.e.Loader [Loader.java:100] Logger for org.pabk.emanager.Loader was successfully started
-2015-03-12 14:37:31,010 INFO [main] o.p.e.Loader [Sys.java:107] Set default value conf/distribution_list.xml for property org.pabk.emanager.Loader.distributionList
-2015-03-12 14:37:31,088 INFO [main] o.p.e.Loader [Loader.java:45] Distribution was successfully loaded
+2015-07-07 09:58:39,165 INFO [main] o.p.e.Loader [Sys.java:251] Logger for org.pabk.emanager.Loader was successfully started
+2015-07-07 09:58:39,175 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-07-07 09:58:39,175 INFO [main] o.p.e.Loader [Sys.java:145] Property org.pabk.emanager.Loader.distributionList have a null value, default value conf/distribution_list.xml is used instead
+2015-07-07 09:58:39,175 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-07-07 09:58:39,175 INFO [main] o.p.e.Loader [Sys.java:145] Property org.pabk.emanager.Loader.codeRepositoryList have a null value, default value conf/code_repository.xml is used instead
+2015-07-07 09:58:39,695 INFO [main] o.p.e.Loader [Loader.java:38] Distribution was successfully loaded
+2015-07-07 09:58:39,746 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-07-07 09:58:39,746 INFO [main] o.p.e.Loader [Sys.java:145] Property org.pabk.emanager.Manager.properties have a null value, default value null is used instead
+2015-07-07 09:58:39,746 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-07-07 09:58:39,746 INFO [main] o.p.e.Loader [Sys.java:145] Property logName have a null value, default value org.pabk.emanager.Manager is used instead
+2015-07-07 09:58:39,746 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-07-07 09:58:39,746 INFO [main] o.p.e.Loader [Sys.java:145] Property logPattern have a null value, default value %date %level [%thread] %logger{10} [%file:%line] %msg%n is used instead
+2015-07-07 09:58:39,756 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-07-07 09:58:39,756 INFO [main] o.p.e.Loader [Sys.java:145] Property logDirectory have a null value, default value logs\manager is used instead
+2015-07-07 09:58:39,756 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-07-07 09:58:39,756 INFO [main] o.p.e.Loader [Sys.java:145] Property logExtension have a null value, default value .log is used instead
+2015-07-07 09:58:39,756 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-07-07 09:58:39,756 INFO [main] o.p.e.Loader [Sys.java:145] Property logDateFormatInArchiveFilename have a null value, default value .%d{yyyy-MM-dd} is used instead
+2015-07-07 09:58:39,756 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-07-07 09:58:39,756 INFO [main] o.p.e.Loader [Sys.java:145] Property logArchiveFileNameExtension have a null value, default value .zip is used instead
+2015-07-07 09:58:39,756 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-07-07 09:58:39,756 INFO [main] o.p.e.Loader [Sys.java:145] Property logHistory have a null value, default value 60 is used instead
+2015-07-07 09:58:39,766 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-07-07 09:58:39,766 INFO [main] o.p.e.Loader [Sys.java:145] Property org.pabk.emanager.Loader.neededModulesCheckMaxLoop have a null value, default value 10 is used instead
+2015-07-07 09:58:39,766 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-07-07 09:58:39,766 INFO [main] o.p.e.Loader [Sys.java:145] Property org.pabk.emanager.Loader.neededModulesWaitInterval have a null value, default value 10 is used instead

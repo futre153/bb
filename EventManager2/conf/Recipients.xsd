@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema targetNamespace="http://www.example.org/Recipients" elementFormDefault="qualified" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:rec="http://www.example.org/Recipients">
+
+    <xsd:complexType name="RecipientsListType">
+    	<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+    		<xsd:element name="recipient" type="rec:RecipientType" minOccurs="1" maxOccurs="1"></xsd:element>
+    	</xsd:sequence>
+        <xsd:attributeGroup ref="rec:RecsListAtts"></xsd:attributeGroup>
+    </xsd:complexType>
+
+
+
+    <xsd:attribute name="main" type="xsd:int"></xsd:attribute>
+
+    <xsd:attributeGroup name="RecsListAtts">
+    	<xsd:attribute ref="rec:main" use="required"></xsd:attribute>
+    </xsd:attributeGroup>
+
+    <xsd:complexType name="RecipientType">
+    	<xsd:sequence minOccurs="1" maxOccurs="1">
+    		<xsd:element name="id" type="rec:idType" minOccurs="1"
+    			maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="name" type="rec:nameType" minOccurs="1"
+    			maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="enabled" type="xsd:boolean" minOccurs="1"
+    			maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="e-mail" minOccurs="1" maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:pattern
+    						value="[^ ]+\@+((pabk\.sk)|(pbit\.sk))">
+    					</xsd:pattern>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:simpleType name="nameType">
+    	<xsd:restriction base="xsd:string">
+    		<xsd:pattern value="([^ ]+)|([^ ]+ [^ ]+)"></xsd:pattern>
+    	</xsd:restriction>
+    </xsd:simpleType>
+
+
+
+
+    <xsd:simpleType name="idType">
+    	<xsd:restriction base="xsd:int">
+    		<xsd:minInclusive value="0"></xsd:minInclusive>
+    	</xsd:restriction>
+    </xsd:simpleType>
+</xsd:schema>

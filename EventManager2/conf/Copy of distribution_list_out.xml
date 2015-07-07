@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><dls:distribution-list xmlns:dls="http://www.example.org/DistributionListSchema" xmlns:cnl="http://www.example.org/ConditionsList" xmlns:msg="http://www.example.org/MessagesList" xmlns:rec="http://www.example.org/Recipients" xmlns:rgr="http://www.example.org/RecipientsGroup" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.example.org/DistributionListSchema DistributionListSchema.xsd ">
+  <dls:address-list rec:main="3">
+	<rec:recipient>
+		<rec:id>0</rec:id>
+		<rec:name>Daniela Štefanovičová</rec:name>
+		<rec:enabled>false</rec:enabled>
+		<rec:e-mail>daniela.stefanovicova@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>1</rec:id>
+		<rec:name>Dana Urbánková</rec:name>
+		<rec:enabled>false</rec:enabled>
+		<rec:e-mail>dana.urbankova@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>2</rec:id>
+		<rec:name>Nina Poloncová</rec:name>
+		<rec:enabled>true</rec:enabled>
+		<rec:e-mail>nina.poloncova@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>3</rec:id>
+		<rec:name>Branislav Brandys</rec:name>
+		<rec:enabled>true</rec:enabled>
+		<rec:e-mail>branislav.brandys@pbit.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>4</rec:id>
+		<rec:name>Stanislav Kudláč</rec:name>
+		<rec:enabled>false</rec:enabled>
+		<rec:e-mail>stanislav.kudlac@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>5</rec:id>
+		<rec:name>Jana Lačná</rec:name>
+		<rec:enabled>false</rec:enabled>
+		<rec:e-mail>jana.lacna@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>6</rec:id>
+		<rec:name>Jana Löbbová</rec:name>
+		<rec:enabled>true</rec:enabled>
+		<rec:e-mail>jana.lobbova@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>7</rec:id>
+		<rec:name>Martina Glittová</rec:name>
+		<rec:enabled>true</rec:enabled>
+		<rec:e-mail>martina.glittova@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>8</rec:id>
+		<rec:name>Zuzana Števliková</rec:name>
+		<rec:enabled>true</rec:enabled>
+		<rec:e-mail>zuzana.stevlikova@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>9</rec:id>
+		<rec:name>Darina Valentová</rec:name>
+		<rec:enabled>true</rec:enabled>
+		<rec:e-mail>darina.valentova@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>10</rec:id>
+		<rec:name>Viera Zemancová</rec:name>
+		<rec:enabled>false</rec:enabled>
+		<rec:e-mail>viera.zemancova@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>11</rec:id>
+		<rec:name>Michaela Soboličová</rec:name>
+		<rec:enabled>false</rec:enabled>
+		<rec:e-mail>michaela.sobolicova@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>12</rec:id>
+		<rec:name>Tomáš Krehel</rec:name>
+		<rec:enabled>false</rec:enabled>
+		<rec:e-mail>tomas.krehel@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>13</rec:id>
+		<rec:name>Andrea Tóthová</rec:name>
+		<rec:enabled>true</rec:enabled>
+		<rec:e-mail>andrea.tothova@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>14</rec:id>
+		<rec:name>Denisa Bartalošová</rec:name>
+		<rec:enabled>false</rec:enabled>
+		<rec:e-mail>denisa.bartalosova@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>15</rec:id>
+		<rec:name>Blanka Javorská</rec:name>
+		<rec:enabled>true</rec:enabled>
+		<rec:e-mail>blanka.javorska@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>16</rec:id>
+		<rec:name>Lucia Tejgiová</rec:name>
+		<rec:enabled>true</rec:enabled>
+		<rec:e-mail>lucia.tejgiova@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>17</rec:id>
+		<rec:name>Martina Horváthová</rec:name>
+		<rec:enabled>true</rec:enabled>
+		<rec:e-mail>martina.horvathova@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>18</rec:id>
+		<rec:name>Branislav Baláž</rec:name>
+		<rec:enabled>true</rec:enabled>
+		<rec:e-mail>branislav.balaz@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>19</rec:id>
+		<rec:name>Zoltán Allo</rec:name>
+		<rec:enabled>false</rec:enabled>
+		<rec:e-mail>zoltan.allo@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>20</rec:id>
+		<rec:name>Bohuslav Ukropec</rec:name>
+		<rec:enabled>false</rec:enabled>
+		<rec:e-mail>bohuslav.ukropec@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>21</rec:id>
+		<rec:name>Daniel Hajdiak</rec:name>
+		<rec:enabled>true</rec:enabled>
+		<rec:e-mail>daniel.hajdiak@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>22</rec:id>
+		<rec:name>Matej Darovec</rec:name>
+		<rec:enabled>false</rec:enabled>
+		<rec:e-mail>matej.darovec@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>23</rec:id>
+		<rec:name>Branislav Fašung</rec:name>
+		<rec:enabled>true</rec:enabled>
+		<rec:e-mail>branislav.fasung@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>24</rec:id>
+		<rec:name>Martin Novák</rec:name>
+		<rec:enabled>false</rec:enabled>
+		<rec:e-mail>martin.novak@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>25</rec:id>
+		<rec:name>Alzbeta Záhumenská</rec:name>
+		<rec:enabled>true</rec:enabled>
+		<rec:e-mail>alzbeta.zahumenska@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>26</rec:id>
+		<rec:name>Peter Šuba</rec:name>
+		<rec:enabled>true</rec:enabled>
+		<rec:e-mail>peter.suba@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>27</rec:id>
+		<rec:name>Marian Pallay</rec:name>
+		<rec:enabled>false</rec:enabled>
+		<rec:e-mail>marian.pallay@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>28</rec:id>
+		<rec:name>Stanislav Raček</rec:name>
+		<rec:enabled>true</rec:enabled>
+		<rec:e-mail>stanislav.racek@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>29</rec:id>
+		<rec:name>Peter Glasa</rec:name>
+		<rec:enabled>true</rec:enabled>
+		<rec:e-mail>peter.glasa@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>30</rec:id>
+		<rec:name>Zuzana Bartalová</rec:name>
+		<rec:enabled>true</rec:enabled>
+		<rec:e-mail>zuzana.bartalova@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>31</rec:id>
+		<rec:name>Juraj Macko</rec:name>
+		<rec:enabled>true</rec:enabled>
+		<rec:e-mail>juraj.macko@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>32</rec:id>
+		<rec:name>Alena Purdeková</rec:name>
+		<rec:enabled>true</rec:enabled>
+		<rec:e-mail>alena.purdekova@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>33</rec:id>
+		<rec:name>Eva Košiková</rec:name>
+		<rec:enabled>false</rec:enabled>
+		<rec:e-mail>eva.kosikova@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>34</rec:id>
+		<rec:name>Radka Kalnassyová</rec:name>
+		<rec:enabled>true</rec:enabled>
+		<rec:e-mail>radka.kalnassyova@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>35</rec:id>
+		<rec:name>Miroslava Držková</rec:name>
+		<rec:enabled>true</rec:enabled>
+		<rec:e-mail>miroslava.drzkova@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>36</rec:id>
+		<rec:name>Martin Jelenčiak</rec:name>
+		<rec:enabled>true</rec:enabled>
+		<rec:e-mail>martin.jelenciak@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>37</rec:id>
+		<rec:name>Tibor Kovács</rec:name>
+		<rec:enabled>true</rec:enabled>
+		<rec:e-mail>tibor.kovacs@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>38</rec:id>
+		<rec:name>Eva Kleinová</rec:name>
+		<rec:enabled>true</rec:enabled>
+		<rec:e-mail>eva.kleinova@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>39</rec:id>
+		<rec:name>Katarina Šilhanová</rec:name>
+		<rec:enabled>false</rec:enabled>
+		<rec:e-mail>katarina.silhanova@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>40</rec:id>
+		<rec:name>Stanislav Mihalovič</rec:name>
+		<rec:enabled>false</rec:enabled>
+		<rec:e-mail>stanislav.mihalovic@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>41</rec:id>
+		<rec:name>Julia Boháčová</rec:name>
+		<rec:enabled>true</rec:enabled>
+		<rec:e-mail>julia.bohacova@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>42</rec:id>
+		<rec:name>Lucia Gombiková</rec:name>
+		<rec:enabled>true</rec:enabled>
+		<rec:e-mail>lucia.gombikova@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>43</rec:id>
+		<rec:name>Zuzana Holeščáková</rec:name>
+		<rec:enabled>true</rec:enabled>
+		<rec:e-mail>zuzana.holescakova@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>44</rec:id>
+		<rec:name>Katarína Polakovičová</rec:name>
+		<rec:enabled>true</rec:enabled>
+		<rec:e-mail>katarina.polakovicova@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>45</rec:id>
+		<rec:name>Silvia Váleková</rec:name>
+		<rec:enabled>true</rec:enabled>
+		<rec:e-mail>silvia.valekova@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>46</rec:id>
+		<rec:name>Oľga Haasová</rec:name>
+		<rec:enabled>false</rec:enabled>
+		<rec:e-mail>olga.haasova@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>47</rec:id>
+		<rec:name>Martina Vladová</rec:name>
+		<rec:enabled>true</rec:enabled>
+		<rec:e-mail>martina.vladova@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>48</rec:id>
+		<rec:name>Milena Mikytová</rec:name>
+		<rec:enabled>true</rec:enabled>
+		<rec:e-mail>milena.mikytova@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>49</rec:id>
+		<rec:name>Zuzana Bartalová</rec:name>
+		<rec:enabled>true</rec:enabled>
+		<rec:e-mail>zuzana.bartalova@pabk.sk</rec:e-mail>
+	</rec:recipient>
+	<rec:recipient>
+		<rec:id>50</rec:id>
+		<rec:name>Renáta Tomašovičová</rec:name>
+		<rec:enabled>true</rec:enabled>
+		<rec:e-mail>renata.tomasovicova@pabk.sk</rec:e-mail>
+	</rec:recipient>
+  </dls:address-list>
+  <dls:address-group-list>
+	<rgr:address-group rgr:name="zps">
+		<rgr:id>2</rgr:id>
+		<rgr:id>8</rgr:id>
+		<rgr:id>13</rgr:id>
+		<rgr:id>38</rgr:id>
+		<rgr:id>44</rgr:id>
+		<rgr:id>42</rgr:id>
+		<rgr:id>3</rgr:id>
+	</rgr:address-group>
+	<rgr:address-group rgr:name="mt7XX">
+		<rgr:id>2</rgr:id>
+		<rgr:id>13</rgr:id>
+		<rgr:id>3</rgr:id>
+	</rgr:address-group>
+	<rgr:address-group rgr:name="dealing">
+		<rgr:id>43</rgr:id>
+		<rgr:id>25</rgr:id>
+		<rgr:id>26</rgr:id>
+		<rgr:id>3</rgr:id>
+	</rgr:address-group>
+	<rgr:address-group rgr:name="middleOffice">
+		<rgr:id>9</rgr:id>
+		<rgr:id>15</rgr:id>
+		<rgr:id>34</rgr:id>
+		<rgr:id>35</rgr:id>
+		<rgr:id>3</rgr:id>
+	</rgr:address-group>
+	<rgr:address-group rgr:name="backOffice">
+		<rgr:id>47</rgr:id>
+		<rgr:id>15</rgr:id>
+		<rgr:id>48</rgr:id>
+		<rgr:id>37</rgr:id>
+		<rgr:id>3</rgr:id>
+	</rgr:address-group>
+	<rgr:address-group rgr:name="mt5XX">
+		<rgr:id>21</rgr:id>
+		<rgr:id>28</rgr:id>
+		<rgr:id>29</rgr:id>
+		<rgr:id>31</rgr:id>
+		<rgr:id>32</rgr:id>
+		<rgr:id>30</rgr:id>
+		<rgr:id>3</rgr:id>
+	</rgr:address-group>
+	<rgr:address-group rgr:name="boSecurities">
+		<rgr:id>15</rgr:id>
+		<rgr:id>16</rgr:id>
+		<rgr:id>17</rgr:id>
+		<rgr:id>18</rgr:id>
+		<rgr:id>3</rgr:id>
+	</rgr:address-group>
+	<rgr:address-group rgr:name="compliance">
+		<rgr:id>13</rgr:id>
+		<rgr:id>41</rgr:id>
+		<rgr:id>3</rgr:id>
+	</rgr:address-group>
+	<rgr:address-group rgr:name="dt">
+		<rgr:id>45</rgr:id>
+		<rgr:id>46</rgr:id>
+		<rgr:id>3</rgr:id>
+	</rgr:address-group>
+	<rgr:address-group rgr:name="dit">
+		<rgr:id>3</rgr:id>
+	</rgr:address-group>
+	<rgr:address-group rgr:name="pdm">
+		<rgr:id>2</rgr:id>
+		<rgr:id>38</rgr:id>
+		<rgr:id>8</rgr:id>
+		<rgr:id>44</rgr:id>
+	</rgr:address-group>
+	<rgr:address-group rgr:name="df">
+		<rgr:id>50</rgr:id>
+	</rgr:address-group>
+  </dls:address-group-list>
+  <dls:condition-list>
+      <cnl:condition rgr:name="trn" cnl:priority="4">
+        <cnl:condition-item cnl:regExp="NT.*">
+            <cnl:group>middleOffice</cnl:group>
+        </cnl:condition-item>
+        <cnl:condition-item cnl:regExp="N?[DFLNPS][BEOPRW][AOPW][DNOPT].*">
+            <cnl:group>backOffice</cnl:group>
+        </cnl:condition-item>
+        <cnl:condition-item cnl:regExp="\d{4}/\d{4}/\d{5}[BCc]?">
+            <cnl:group>zps</cnl:group>
+        </cnl:condition-item>
+        <cnl:condition-item cnl:regExp="\d{4}/\d{5}/\d{4}[BCc]?">
+            <cnl:group>zps</cnl:group>
+        </cnl:condition-item>
+        <cnl:condition-item cnl:regExp="[a-zA-Z]{4}/\d{4}">
+            <cnl:group>zps</cnl:group>
+        </cnl:condition-item>
+    </cnl:condition>
+    <cnl:condition rgr:name="fin" cnl:priority="1">
+        <cnl:condition-item cnl:regExp="7\d\d">
+            <cnl:group>mt7XX</cnl:group>
+        </cnl:condition-item>
+        <cnl:condition-item cnl:regExp="10\d">
+            <cnl:group>zps</cnl:group>
+            <cnl:group>middleOffice</cnl:group>
+        </cnl:condition-item>
+        <cnl:condition-item cnl:regExp="199">
+            <cnl:group>zps</cnl:group>
+        </cnl:condition-item>
+        <cnl:condition-item cnl:regExp="999">
+            <cnl:group>zps</cnl:group>
+            <cnl:group>backOffice</cnl:group>
+            <cnl:group>middleOffice</cnl:group>
+        </cnl:condition-item>
+        <cnl:condition-item cnl:regExp="2\d\d">
+            <cnl:group>middleOffice</cnl:group>
+            <cnl:group>backOffice</cnl:group>
+            <cnl:group>zps</cnl:group>
+        </cnl:condition-item>
+        <cnl:condition-item cnl:regExp="9[0145]0">
+            <cnl:group>middleOffice</cnl:group>
+        </cnl:condition-item>
+        <cnl:condition-item cnl:regExp="3\d\d">
+            <cnl:group>backOffice</cnl:group>
+        </cnl:condition-item>
+        <cnl:condition-item cnl:regExp="[19]9[1256]">
+            <cnl:group>zps</cnl:group>
+        </cnl:condition-item>
+        <cnl:condition-item cnl:regExp="5\d\d">
+            <cnl:group>mt5XX</cnl:group>
+            <cnl:group>dealing</cnl:group>
+            <cnl:group>boSecurities</cnl:group>
+        </cnl:condition-item>
+    </cnl:condition>
+    <cnl:condition rgr:name="event-number" cnl:priority="3">
+        <cnl:condition-item cnl:regExp="8[01][23][56]">
+            <cnl:group>zps</cnl:group>
+        </cnl:condition-item>
+    </cnl:condition>
+    <cnl:condition rgr:name="queue" cnl:priority="4">
+        <cnl:condition-item cnl:regExp="[M][o][n][e][y][L][a][u][n][d][e][r][i][n][g][IO][nu][t]?">
+            <cnl:group>compliance</cnl:group>
+        </cnl:condition-item>
+        <cnl:condition-item cnl:regExp=".+">
+            <cnl:group>dit</cnl:group>
+        </cnl:condition-item>
+    </cnl:condition>
+    <cnl:condition rgr:name="event" cnl:priority="5">
+        <cnl:condition-item cnl:regExp="trap">
+            <cnl:group>zps</cnl:group>
+            <cnl:group>middleOffice</cnl:group>
+            <cnl:group>backOffice</cnl:group>
+            <cnl:group>mt7XX</cnl:group>
+            <cnl:group>boSecurities</cnl:group>
+            <cnl:group>dit</cnl:group>
+            <cnl:group>pdm</cnl:group>
+        </cnl:condition-item>
+    </cnl:condition>
+    <cnl:condition rgr:name="snf-file" cnl:priority="6">
+        <cnl:condition-item cnl:regExp="ou=sepa,o=deutdeff,o=swift">
+            <cnl:group>zps</cnl:group>
+        </cnl:condition-item>
+        <cnl:condition-item cnl:regExp=".+trgt.+">
+            <cnl:group>dt</cnl:group>
+        </cnl:condition-item>
+        <cnl:condition-item cnl:regExp=".+">
+            <cnl:group>dit</cnl:group>
+        </cnl:condition-item>
+    </cnl:condition>
+  </dls:condition-list>
+  <dls:msg-list msg:encoding="utf-8"/>
+</dls:distribution-list>
