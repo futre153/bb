@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/CurrencyCodes" xmlns:cur="http://www.example.org/CurrencyCodes" elementFormDefault="qualified">
+
+    <xsd:complexType name="CurrListType">
+    	<xsd:sequence minOccurs="1" maxOccurs="1">
+    		<xsd:element name="item" type="cur:CurrItemType" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+
+    
+    <xsd:complexType name="CurrItemType">
+    	<xsd:sequence minOccurs="0" maxOccurs="unbounded">
+    		<xsd:element name="iso" minOccurs="1" maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:pattern value="[A-Z]{3}"></xsd:pattern>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="code" minOccurs="1" maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:pattern value="(\d{3})|(Nil)"></xsd:pattern>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="digits" minOccurs="1"
+    			maxOccurs="1">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:pattern value="\d|\."></xsd:pattern>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="name" type="xsd:string" minOccurs="1"
+    			maxOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="countries" type="cur:CtrsType" minOccurs="1" maxOccurs="1"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="CtrsType">
+    	<xsd:sequence minOccurs="1" maxOccurs="1">
+    		<xsd:element name="country" type="xsd:string" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+
+    <xsd:element name="list" type="cur:CurrListType"></xsd:element>
+</xsd:schema>

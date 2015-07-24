@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <xs:schema elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/Pabk.Ngw.Svc.Domain" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://schemas.datacontract.org/2004/07/Pabk.Ngw.Svc.Domain">
+        <xs:import schemaLocation="xsd3.xsd" namespace="http://schemas.datacontract.org/2004/07/Pabk.Core.Communication.Domain"/>
+        <xs:complexType name="CSvcMessage">
+            <xs:sequence>
+                <xs:element minOccurs="0" name="Attachments" nillable="true" type="tns:ArrayOfCSvcAttachment"/>
+                <xs:element minOccurs="0" name="BatchData" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="BatchType" type="q1:EBatchType" xmlns:q1="http://schemas.datacontract.org/2004/07/Pabk.Core.Communication.Domain"/>
+                <xs:element minOccurs="0" name="CreatedOn" type="xs:dateTime"/>
+                <xs:element minOccurs="0" name="ExternalId" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="MessageType" type="q2:EMessageType" xmlns:q2="http://schemas.datacontract.org/2004/07/Pabk.Core.Communication.Domain"/>
+                <xs:element minOccurs="0" name="Recipient" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="SendOn" type="xs:dateTime"/>
+                <xs:element minOccurs="0" name="Sender" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="SourceKey" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="Text" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="Title" nillable="true" type="xs:string"/>
+                <xs:element minOccurs="0" name="ValidTo" type="xs:dateTime"/>
+            </xs:sequence>
+        </xs:complexType>
+        <xs:element name="CSvcMessage" nillable="true" type="tns:CSvcMessage"/>
+        <xs:complexType name="ArrayOfCSvcAttachment">
+            <xs:sequence>
+                <xs:element minOccurs="0" maxOccurs="unbounded" name="CSvcAttachment" nillable="true" type="tns:CSvcAttachment"/>
+            </xs:sequence>
+        </xs:complexType>
+        <xs:element name="ArrayOfCSvcAttachment" nillable="true" type="tns:ArrayOfCSvcAttachment"/>
+            <xs:complexType name="CSvcAttachment">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Data" nillable="true" type="xs:base64Binary"/>
+                    <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string"/>
+                </xs:sequence>
+            </xs:complexType>
+        <xs:element name="CSvcAttachment" nillable="true" type="tns:CSvcAttachment"/>
+    </xs:schema>

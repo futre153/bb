@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<sms:items xmlns:sms="http://www.example.org/SMSTextDefinition" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.example.org/SMSTextDefinition SMSTextDefinition.xsd ">
+    <sms:ExternalId>
+        <sms:line sms:msg="0">
+            <sms:function sms:arg="TxnId">get</sms:function>
+        </sms:line>
+        <sms:line sms:msg="6">
+            <sms:function sms:arg="Timestamp">get</sms:function>
+        </sms:line>
+    </sms:ExternalId>
+    <sms:MessageType>
+        <sms:line sms:msg="0">
+            <sms:function sms:arg="NotificationType">getMessageType</sms:function>
+        </sms:line>
+        <sms:line sms:msg="6">
+            <sms:function sms:arg="NotificationType">getMessageType</sms:function>
+        </sms:line>
+    </sms:MessageType>
+    <sms:Recipient>
+        <sms:line sms:msg="0">
+            <sms:function sms:arg="Contact">get</sms:function>
+        </sms:line>
+        <sms:line sms:msg="6">
+            <sms:function sms:arg="Contact">get</sms:function>
+        </sms:line>
+    </sms:Recipient>
+    <sms:SendOn>
+        <sms:line sms:msg="0">
+            <sms:function sms:arg="null,0D,yyyy-MM-dd&apos;T&apos;HH:mm:ssZ,SK">getTimestamp</sms:function>
+        </sms:line>
+        <sms:line sms:msg="6">
+            <sms:function sms:arg="Timestamp,0D,yyyy-MM-dd&apos;T&apos;HH:mm:ssZ,SK">getTimestamp</sms:function>
+        </sms:line>
+    </sms:SendOn>
+    <sms:SourceKey>
+        <sms:line sms:msg="0">
+            <sms:function sms:arg="">getSourceKey</sms:function>
+        </sms:line>
+        <sms:line sms:msg="6">
+            <sms:function sms:arg="">getSourceKey</sms:function>
+        </sms:line>
+    </sms:SourceKey>
+    <sms:Text>
+        <sms:line sms:msg="0">
+            <sms:const>PB</sms:const>
+        </sms:line>
+        <sms:line sms:msg="0">
+            <sms:function sms:arg="TransactionDateTime,0D,dd.MM.yyyy HH:mm:ss,SK">getTimestamp</sms:function>
+        </sms:line>
+        <sms:line sms:msg="0">
+            <sms:const>BMK</sms:const>
+            <sms:function sms:arg="CardNumber,4">right</sms:function>
+        </sms:line>
+        <sms:line sms:msg="0">
+            <sms:function sms:arg="TransactionAmount &lt; 0 and TransactionSource == 1 and TransactionType == 10,Storno vyberu z ATM">expression</sms:function>
+            <sms:function sms:arg="TransactionAmount &lt; 0 and TransactionSource == 2 and TransactionType == 10,Storno platby POS">expression</sms:function>
+            <sms:function sms:arg="TransactionAmount &lt; 0 and TransactionSource == 2 and TransactionType == 13,Storno MO/TO transakcie">expression</sms:function>
+            <sms:function sms:arg="TransactionAmount &gt; 0 and TransactionSource == 2 and TransactionType == 14,Storno vratenia tovaru">expression</sms:function>
+            <sms:function sms:arg="TransactionAmount &lt; 0 and TransactionSource == 2 and TransactionType == 15,Storno Cash advance">expression</sms:function>
+            <sms:function sms:arg="TransactionAmount &gt; 0 and TransactionSource == 1 and TransactionType == 10,Vyber z ATM">expression</sms:function>
+            <sms:function sms:arg="TransactionAmount &gt; 0 and TransactionSource == 2 and TransactionType == 10,Platba POS">expression</sms:function>
+            <sms:function sms:arg="TransactionAmount &gt; 0 and TransactionSource == 2 and TransactionType == 13,MO/TO transakcia">expression</sms:function>
+            <sms:function sms:arg="TransactionAmount &lt; 0 and TransactionSource == 2 and TransactionType == 14,Vratenie tovaru">expression</sms:function>
+            <sms:function sms:arg="TransactionAmount &gt; 0 and TransactionSource == 2 and TransactionType == 15,Cash advance">expression</sms:function>
+        </sms:line>
+        <sms:line sms:msg="0">
+            <sms:function sms:arg="TransactionAmount,SK,true,#,##0.00">normalizeAmount</sms:function>
+            <sms:const> </sms:const>
+            <sms:function sms:arg="TransactionCurrency">getCurrency</sms:function>
+        </sms:line>
+        <sms:line sms:msg="0">
+            <sms:function sms:arg="MerchantName">get</sms:function>
+        </sms:line>
+        <sms:line sms:msg="0">
+            <sms:function sms:arg="TerminalOwnerName">get</sms:function>
+        </sms:line>
+        <sms:line sms:msg="0">
+            <sms:function sms:arg="MerchantCity">get</sms:function>
+        </sms:line>
+        <sms:line sms:msg="0">
+            <sms:const>Zostatok=</sms:const>
+            <sms:function sms:arg="AvailableBalance,SK,false,#,##0.00">normalizeAmount</sms:function>
+            <sms:const> </sms:const>
+            <sms:function sms:arg="AccountCurrency">getCurrency</sms:function>
+        </sms:line>
+        <sms:line sms:msg="0">
+            <sms:const>POSTOVA BANKA, A.S.</sms:const>
+        </sms:line>
+        <sms:line sms:msg="6">
+            <sms:const>PB</sms:const>
+        </sms:line>
+        <sms:line sms:msg="6">
+            <sms:function sms:arg="Timestamp,0D,dd.MM.yyyy,SK">getTimestamp</sms:function>
+        </sms:line>
+        <sms:line sms:msg="6">
+            <sms:function sms:arg="Timestamp,0D,HH:mm:ss,SK">getTimestamp</sms:function>
+        </sms:line>
+        <sms:line sms:msg="6">
+            <sms:const>BMK</sms:const>
+            <sms:function sms:arg="PaymentIndicator">get</sms:function>
+        </sms:line>
+        <sms:line sms:msg="6">
+            <sms:const>Pripisanie platby</sms:const>
+        </sms:line>
+        <sms:line sms:msg="6">
+            <sms:function sms:arg="PaymentAmt,SK,true,#,##0.00">normalizeAmount</sms:function>
+            <sms:const> </sms:const>
+            <sms:function sms:arg="PaymentCCY">getCurrency</sms:function>
+        </sms:line>
+        <sms:line sms:msg="6">
+            <sms:const>Zostatok=</sms:const>
+            <sms:function sms:arg="AvailableBalance,SK,false,#,##0.00">normalizeAmount</sms:function>
+        </sms:line>
+        <sms:line sms:msg="6">
+            <sms:const>POSTOVA BANKA, A.S.</sms:const>
+        </sms:line>
+    </sms:Text>
+    <sms:ValidTo>
+        <sms:line sms:msg="0">
+            <sms:function sms:arg="null,1D,yyyy-MM-dd&apos;T&apos;HH:mm:ssZ,SK">getTimestamp</sms:function>
+        </sms:line>
+        <sms:line sms:msg="6">
+            <sms:function sms:arg="Timestamp,1D,yyyy-MM-dd&apos;T&apos;HH:mm:ssZ,SK">getTimestamp</sms:function>
+        </sms:line>
+    </sms:ValidTo>
+</sms:items>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/SMSTextDefinition" xmlns:sms="http://www.example.org/SMSTextDefinition" elementFormDefault="qualified">
+
+    <xsd:complexType name="SMSTextType">
+    	<xsd:sequence minOccurs="1"  maxOccurs="1">
+    		<xsd:element name="ExternalId" type="sms:itemType" minOccurs="1" maxOccurs="1"></xsd:element>
+    		<xsd:element name="MessageType" type="sms:itemType" minOccurs="1" maxOccurs="1"></xsd:element>
+    		<xsd:element name="Recipient" type="sms:itemType" minOccurs="1" maxOccurs="1"></xsd:element>
+    		<xsd:element name="SendOn" type="sms:itemType" minOccurs="1" maxOccurs="1"></xsd:element>
+    		<xsd:element name="SourceKey" type="sms:itemType" minOccurs="1" maxOccurs="1"></xsd:element>
+    		<xsd:element name="Text" type="sms:itemType" minOccurs="1" maxOccurs="1"></xsd:element>
+    		<xsd:element name="ValidTo" type="sms:itemType" minOccurs="1" maxOccurs="1"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+    
+    <xsd:complexType name="itemType">
+        <xsd:sequence minOccurs="1" maxOccurs="unbounded">
+            <xsd:element name="line" type="sms:lineType"></xsd:element>
+        </xsd:sequence>
+    </xsd:complexType>
+        
+    <xsd:complexType name="lineType">
+        <xsd:choice minOccurs="0" maxOccurs="unbounded">
+            <xsd:element name="const" type="xsd:string"></xsd:element>
+            <xsd:element name="function" type="sms:functionType"></xsd:element>
+        </xsd:choice>
+        <xsd:attributeGroup ref="sms:lineArgs"></xsd:attributeGroup>
+    </xsd:complexType>
+    
+    <xsd:complexType name="functionType">
+        <xsd:simpleContent>
+            <xsd:extension base="xsd:string">
+                <xsd:attributeGroup ref="sms:functionArgs"></xsd:attributeGroup>
+            </xsd:extension>
+        </xsd:simpleContent>
+    </xsd:complexType>
+    
+    <xsd:attribute name="arg" type="xsd:string"></xsd:attribute>
+    <xsd:attribute name="msg" type="sms:msgType"></xsd:attribute>
+    
+    <xsd:simpleType name="msgType">
+        <xsd:restriction base="xsd:decimal">
+            <xsd:enumeration value="0"></xsd:enumeration>
+            <xsd:enumeration value="6"></xsd:enumeration>
+        </xsd:restriction>
+    </xsd:simpleType>
+    
+    <xsd:attributeGroup name="lineArgs">
+        <xsd:attribute ref="sms:msg" use="required"></xsd:attribute>
+    </xsd:attributeGroup>
+    
+    <xsd:attributeGroup name="functionArgs">
+    	<xsd:attribute ref="sms:arg" use="required"></xsd:attribute>
+    </xsd:attributeGroup>
+
+
+    <xsd:element name="items" type="sms:SMSTextType"></xsd:element>
+</xsd:schema>

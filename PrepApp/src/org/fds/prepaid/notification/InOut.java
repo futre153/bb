@@ -41,8 +41,7 @@ public class InOut extends AbstractInOutMessageReceiver {
 
 	private static Schema FDS_SCHEMA = null;
 	private static Schema FDS_SCHEMA_DOBI = null;
-	
-	
+		
 	public void invokeBusinessLogic(MessageContext req, MessageContext res) throws AxisFault {
 		Exception fault = null;
 		try {

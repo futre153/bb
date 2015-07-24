@@ -27,6 +27,7 @@ import javax.security.auth.callback.NameCallback;
 import javax.security.auth.callback.PasswordCallback;
 import javax.security.auth.login.Configuration;
 
+import org.pabk.net.http.DefaultContent;
 import org.pabk.net.http.HttpClientConst;
 import org.pabk.net.http.SimpleClient;
 import org.pabk.net.http.WSContent;
@@ -109,8 +110,8 @@ public final class Test {
     		"</env:Body></env:Envelope>";
     			
     		*/	
+    		
     			
-    			/*
     			String body=
     				"<env:Envelope" +nl+
     				"xmlns:env=\"http://schemas.xmlsoap.org/soap/envelope/\""+nl+
@@ -120,14 +121,14 @@ public final class Test {
     				"<MsgType>0</MsgType>"+nl+
     				"<InstitutionId xmlns=\"\">0000</InstitutionId>"+nl+
     				"<CardNumber xmlns=\"\">6762414010000030</CardNumber>"+nl+
-    				"<NotificationType>2</NotificationType>"+nl+
+    				"<NotificationType>1</NotificationType>"+nl+
     				"<Contact xmlns=\"\">+421903245465</Contact>"+nl+
     				"<TransactionSource xmlns=\"\">1</TransactionSource>"+nl+
     				"<TransactionType xmlns=\"\">10</TransactionType>"+nl+
     				"<TransactionAmount xmlns=\"\">+00000000010.00</TransactionAmount>"+nl+
     				"<TransactionCurrency xmlns=\"\">001</TransactionCurrency>"+nl+
     				"<AvailableBalance xmlns=\"\">+00000000045.00</AvailableBalance>"+nl+
-    				"<AccountCurrency xmlns=\"\">001</AccountCurrency>"+nl+
+    				"<AccountCurrency xmlns=\"\">784</AccountCurrency>"+nl+
     				"<TransactionDateTime xmlns=\"\">20110714095524</TransactionDateTime>"+nl+
     				"<MerchantName xmlns=\"\">BRATISLAVA,STUROVA 5</MerchantName>"+nl+
     				"<TerminalOwnerName xmlns=\"\">OTP</TerminalOwnerName>"+nl+
@@ -139,10 +140,10 @@ public final class Test {
     				//"<TerminalId xmlns=\"\">0000000000000001</TerminalId>"+nl+
     			    "</env:Body>"+nl+
     			    "</env:Envelope>"+nl;
-    			*/
-    	
-    			//String body= "<?xml version='1.0' encoding='utf-8'?><env:Envelope xmlns:env=\"http://schemas.xmlsoap.org/soap/envelope/\"><env:Body><MsgType>0</MsgType><InstitutionId>6500</InstitutionId><CardNumber>6762414010016622</CardNumber><NotificationType>1</NotificationType><Contact>0903245465</Contact><TransactionSource>2</TransactionSource><TransactionType>10</TransactionType><TransactionAmount>+00000000000.40</TransactionAmount><TransactionCurrency>EUR</TransactionCurrency><AvailableBalance>+00000000007.65</AvailableBalance><AccountCurrency>EUR</AccountCurrency><TransactionDateTime>20141124121640</TransactionDateTime><MerchantName>Junacka ul. 6</MerchantName><TerminalOwnerName>Junacka ul. 6</TerminalOwnerName><MerchantCity>Bratislava</MerchantCity><MerchantState>SK</MerchantState><TxnId>4100000000000000001551477626</TxnId></env:Body></env:Envelope>";
-    			/*		String body = "<?xml version='1.0' encoding='utf-8'?>"
+    			
+    	//String body = "<?xml version='1.0' encoding='utf-8'?><env:Envelope xmlns:env=\"http://schemas.xmlsoap.org/soap/envelope/\"><env:Body><MsgType>0</MsgType><InstitutionId>6500</InstitutionId><CardNumber>6762414010017265</CardNumber><NotificationType>1</NotificationType><Contact>0903245465</Contact><TransactionSource>1</TransactionSource><TransactionType>10</TransactionType><TransactionAmount>+00000000030.00</TransactionAmount><TransactionCurrency>EUR</TransactionCurrency><AvailableBalance>+00000000009.81</AvailableBalance><AccountCurrency>EUR</AccountCurrency><TransactionDateTime>20121224152156</TransactionDateTime><MerchantName>BRATISLAVA,CACHTICKA 25</MerchantName><TerminalOwnerName>POB</TerminalOwnerName><MerchantCity>BRATISLAVA</MerchantCity><MerchantState>SK</MerchantState><TxnId>4200000000000000000253541268</TxnId></env:Body></env:Envelope>";
+    			/*String body= "<?xml version='1.0' encoding='utf-8'?><env:Envelope xmlns:env=\"http://schemas.xmlsoap.org/soap/envelope/\"><env:Body><MsgType>0</MsgType><InstitutionId>6500</InstitutionId><CardNumber>6762414010016622</CardNumber><NotificationType>1</NotificationType><Contact>0903245465</Contact><TransactionSource>2</TransactionSource><TransactionType>10</TransactionType><TransactionAmount>+00000000000.40</TransactionAmount><TransactionCurrency>EUR</TransactionCurrency><AvailableBalance>+00000000007.65</AvailableBalance><AccountCurrency>EUR</AccountCurrency><TransactionDateTime>20141124121640</TransactionDateTime><MerchantName>Junacka ul. 6</MerchantName><TerminalOwnerName>Junacka ul. 6</TerminalOwnerName><MerchantCity>Bratislava</MerchantCity><MerchantState>SK</MerchantState><TxnId>4100000000000000001551477626</TxnId></env:Body></env:Envelope>";
+    					String body = "<?xml version='1.0' encoding='utf-8'?>"
     					+ "<env:Envelope xmlns:env=\"http://schemas.xmlsoap.org/soap/envelope/\">"
     					+ 	"<env:Body>"
     					+ 		"<MsgType>6</MsgType>"
@@ -151,7 +152,7 @@ public final class Test {
     					+ 		"<Contact>+421903245465</Contact>"
     					+ 		"<ProcessDate>14.11.2014</ProcessDate>"
     					+ 		"<CardType />"
-    					+ 		"<PaymentAmt>-00000000030.00</PaymentAmt>"
+    					+ 		"<PaymentAmt>-00000100030.00</PaymentAmt>"
     					+ 		"<PaymentCCY>EUR</PaymentCCY>"
     					+ 		"<PaymentIndicator>5169</PaymentIndicator>"
     					+ 		"<AvailableBalance>+00000000053.07</AvailableBalance>"
@@ -161,7 +162,7 @@ public final class Test {
     					+ 	"</env:Body>"
     					+ "</env:Envelope>";
     			*/
-    				/*	
+    			/*	
     			String body=""+
     				"<env:Envelope xmlns:env=\"http://schemas.xmlsoap.org/soap/envelope/\">"+
     				"<env:Body>"+
@@ -181,6 +182,7 @@ public final class Test {
     			  "</env:Body>"+
     			"</env:Envelope>";
     		*/
+    	/*
     	String body = "<?xml version=\"1.0\" encoding=\"utf-8\"?>" + 
     					"<soap:Envelope xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" xmlns:soap=\"http://schemas.xmlsoap.org/soap/envelope/\">" +
     					"<soap:Body>" +
@@ -189,18 +191,19 @@ public final class Test {
     					"<Token>Test over http://195.168.11.134/ib_sms_server.asmx</Token>" +
     					"</SendSMS>" +
     					"</soap:Body>" +
-    					"</soap:Envelope>";
+    					"</soap:Envelope>";*/
     	//SimpleClient mes = new SimpleClient("http://www.google.sk/", true);
     	//SimpleClient mes = new SimpleClient("http://hubert.os.sk/fds_notification.asmx", true);
-    	//SimpleClient mes = new SimpleClient(" http://sprep02ba/ws/services/notification/forward", false);
-    	SimpleClient mes = new SimpleClient("http://195.168.11.134/ib_sms_server.asmx", true);
-    	mes.setAuthentication(HttpClientConst.NEGOTIATE_AUTHENTICATION);
+    	SimpleClient mes = new SimpleClient("http://P3600X006:8080/PrepApp/services/notification/forward", false);
+    	//SimpleClient mes = new SimpleClient("http://p3600x006:8080/PrepApp/ngw_conf/dobi-sms-text.xml", false);
+    	//SimpleClient mes = new SimpleClient("http://195.168.11.134/ib_sms_server.asmx", true);
+    	//mes.setAuthentication(HttpClientConst.NEGOTIATE_AUTHENTICATION);
 		//DefaultContent con=new DefaultContent();
-    	WSContent ws = new WSContent(body, "https://hubert.os.sk/SendSMS");
+    	WSContent ws = new WSContent(body, "http://172.27.48.250/Notification");
     	//ws.setAction("http://172.27.48.250/Notification");
-    	//ws.setContent(body);
+    	ws.setContent(body);
 		InputStream in = mes.execute(ws);
-    			    			
+    		    			
     			/*
     			String soap_body=
     				"<SOAPBody " +nl+

@@ -1,6 +1,7 @@
 package org.pabk.util;
 
 import java.io.IOException;
+import java.util.Hashtable;
 import java.util.InvalidPropertiesFormatException;
 import java.util.Properties;
 
@@ -37,6 +38,8 @@ public class Const {
 	
 	public static final String CHK1_ELEMENT = "Confirmation";
 	public static final String CHK1_TEXT = "OK";
+	public static final String CHK2_ELEMENT = "SubmitMessageResult";
+	public static final String CHK2_TEXT_MASK = "\\d+";
 	public static final String CHECK_UNSUCCESSFUL_TEXT = "Response not found";
 	public static final String FAULTSTRING_ELEMENT = "faultstring";
 	public static final String UNKNOWN_ERROR_NOTATION = "Unknown Error";
@@ -80,6 +83,43 @@ public class Const {
 	
 	public static final String DEBUG_KEY = "org.pabk.debug";
 	
+	public static final String MESSAGE_SERVICE_REQUEST_ROOT = "SubmitMessage";
+	public static final String MESSAGE_SERVICE_REQUEST_MESSAGE = "message";
+	public static final String LINE_ELEMENT_NAME = "line";
+	public static final String EMPTY_STRING = "";
+	public static final String LINE_ITEM_ARGUMENTS = "arg";
+	public static final String LINE_ARGUMENTS = "msg";
+	public static final String LINE_ITEM_ARGUMENTS_SEPARATOR = ",";
+	public static final String LINE_ITEM_FUNCTION = "function";
+	public static final String TEMPURI_NAMESPACE = "http://tempuri.org/";
+	public static final String PABK_NAMESPACE = "http://schemas.datacontract.org/2004/07/Pabk.Ngw.Svc.Domain";
+	public static final String TEMPURI_PREFIX = "tem";
+	public static final String PABK_PREFIX = "pabk";
+	public static final String MESSAGE_EXTERNAL_ID = "ExternalId";
+	public static final String MESSAGE_MESSAGE_TYPE = "MessageType";
+	public static final String MESSAGE_RECIPIENT = "Recipient";
+	public static final String MESSAGE_SEND_ON = "SendOn";
+	public static final String MESSAGE_SOURCE_KEY = "SourceKey";
+	public static final String MESSAGE_TEXT = "Text";
+	public static final String MESSAGE_VALID_TO = "ValidTo";
+	private static final String DEFAULT_MESSAGE_TYPE = AUTHORIZATION_NOTS;
+	public static final String MESSAGE_TYPE = "MsgType";
+	public static final String SMS_MESSAGE = "Sms";
+	public static final String EMAIL_MESSAGE = "Email";
+	public static final String MESSAGE_TIMESTAMP_FORMAT = "yyyy-MM-dd'T'HH:mm:ssZ";
+	public static final String MESSAGE_SOURCE_KEY_DEFUALT_VALUE = "PrepaidSMS";
+	public static final int MAX_SUPPORTTED_ARGUMENTS = 4;
+	public static final int MAX_SMS_CHARACTER = 160;
+	public static final Object MESSAGE_NOTIFICATION_TYPE = "NotificationType";
+	/*public static final int TRANSACTION_SOURCE_AMT = 1;
+	public static final int TRANSACTION_SOURCE_POS = 2;
+	public static final int TRANSACTION_TYPE_WITHDRAWAL = 10;
+	public static final int TRANSACTION_TYPE_PREPURCH = 11;
+	public static final int TRANSACTION_TYPE_PREPURCH_COMPL = 12;
+	public static final int TRANSACTION_TYPE_ORDER = 13;
+	public static final int TRANSACTION_TYPE_MERCH_RET = 14;
+	public static final int TRANSACTION_TYPE_CASH_ADV = 15;
+	*/
 	/*
 	public static final String URL="http://www.sme.sk";
 	public static final String PROXY_HOST="proxy.pabk.sk";
@@ -87,6 +127,15 @@ public class Const {
 	public final static String KRB5_CONF = "C:\\PrepApp\\conf\\krb5.conf";
     public final static String LOGIN_CONF = "C:\\PrepApp\\conf\\login.conf";
 	*/
+	public static final String STORNO_VYBERU_AMT = "Storno vyberu z ATM";
+	public static final String NULL_STRING = "NULL";
+	public static final String CURRENCY_LIST_FILE = "http://localhost:8080/PrepApp/ngw_conf/currency-list.xml";
+	public static final String ISO_CURRENCY_MASK = "[A-Z]{3}";
+	public static final String NUMERIC_CURRENCY_MASK = "[0-9]{3}";
+	public static final String CURRENCY_ITEM_NAME = "item";
+	public static final String CURRENCY_LIST_NAME = "list";
+	public static final String CURRENCY_ISO_NAME = "iso";
+	public static final String CURRENCY_CODE_NAME = "code";
 	
 	private Const(){}
 	
@@ -121,5 +170,26 @@ public class Const {
 	private static Properties loadDefaultProperties() {
 		Properties pro=new Properties();
 		return pro;
+	}
+	public static String get2(String key) {
+		try {
+			if(user==null) {
+				try {
+					Const.loadProperties();
+				}
+				catch (Exception e) {
+					throw e;
+				}
+			}
+			return user.getProperty(key);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	public static void setRequestDefaultValues(Hashtable<String, String> data) {
+		data.put(Const.MESSAGE_TYPE, Const.DEFAULT_MESSAGE_TYPE);	
 	}
 }
