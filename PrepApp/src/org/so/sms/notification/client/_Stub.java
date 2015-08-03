@@ -41,11 +41,11 @@ import org.xml.sax.SAXException;
 		private static Definition _def = loadWSDL(Const.get2(Const.NOTS_WSDL_URI_KEY), Boolean.parseBoolean(Const.get2(Const.USE_PROXY_KEY)));;
 		//private static Definition _def_dobi;
 		private static DocumentBuilder db = loadDocumentBuilder();
-		private static OMElement docx = loadXMLFileOM("http://localhost:8080/PrepApp/ngw_conf/dobi-sms-text.xml", false);
+		private static OMElement docx = loadXMLFileOM(Const.get2(Const.SMS_TEXT_KEY), false);
 		private boolean check = true;
 
 		public _Stub() throws Exception {
-			check=Boolean.parseBoolean(Const.get(Const.CHECK_RESPONSE_KEY));
+			check = Boolean.parseBoolean(Const.get(Const.CHECK_RESPONSE_KEY));
 			if (_def == null) throw new AxisFault(Const.WSDL_PARSER_ERROR);
 			//if (_def_dobi == null) loadWSDLDobi();
 			//if (_def_dobi == null) throw new AxisFault(WSDL_PARSER_ERROR);
@@ -63,11 +63,12 @@ import org.xml.sax.SAXException;
 			}
 		}
 
-		public void requestNotification(MessageContext msg) throws Exception  {
+		public Object requestNotification(MessageContext msg) throws Exception  {
+			Object result = null;
 			//SOAPEnvelope env = NotificationRequest.createEnvelope1(msg, Stub.getFactory(Const.SOAP_VERSION_URI), _def);
 			SOAPEnvelope env = NotificationRequest.createEnvelope2(msg, Stub.getFactory(Const.SOAP_VERSION_URI), docx);
 			System.out.println(env);
-			/*SimpleClient sc=new SimpleClient(Const.get(Const.OS_ENDPOINT_KEY),Boolean.parseBoolean(Const.get(Const.USE_PROXY_KEY)));
+			SimpleClient sc=new SimpleClient(Const.get(Const.OS_ENDPOINT_KEY),Boolean.parseBoolean(Const.get(Const.USE_PROXY_KEY)));
 			WSContent con = new WSContent(env.toString(), Const.get(Const.NOTIFICATION_ACTION_KEY));
 			//WSContent con = new WSContent();
 			//con.setContent(env.toString());
@@ -77,11 +78,12 @@ import org.xml.sax.SAXException;
 			case HttpURLConnection.HTTP_OK:
 				Document doc = db.parse(sc.getInputStream());
 				sc.close();
-				check1(doc.getDocumentElement());
+				result = check2(doc.getDocumentElement());
 				if (this.check) throw new AxisFault(Const.CHECK_UNSUCCESSFUL_TEXT);
 				break;
 			default:throw new AxisFault(retreiveError(sc.getErrorStream())); 
-			}*/
+			}
+			return result;
 		}
 
 		private String retreiveError(InputStream errorStream) throws AxisFault {
@@ -103,6 +105,7 @@ import org.xml.sax.SAXException;
 			}
 			return Const.UNKNOWN_ERROR_NOTATION; }
 
+		@SuppressWarnings("unused")
 		private void check1(Element elem) {
 			if (!(this.check)) return;
 			NodeList nl = elem.getElementsByTagName(Const.CHK1_ELEMENT);
@@ -114,15 +117,21 @@ import org.xml.sax.SAXException;
 			}
 		}
 		
-		private void check2(Element elem) {
-			if (!(this.check)) return;
-			NodeList nl = elem.getElementsByTagName(Const.CHK2_ELEMENT);
-			for (int i = 0; i < nl.getLength(); ++i) {
-				Node node = nl.item(i);
-				if(node.getNodeType()==Node.ELEMENT_NODE) {
-					if(node.getTextContent().matches(Const.CHK2_TEXT_MASK)) {check=false;return;}
+		private String check2(Element elem) {
+			if(check) {
+				NodeList nl = elem.getElementsByTagName(Const.CHK2_ELEMENT);
+				for (int i = 0; i < nl.getLength(); ++i) {
+					Node node = nl.item(i);
+					if(node.getNodeType()==Node.ELEMENT_NODE) {
+						String result = node.getTextContent();
+						if(result.matches(Const.CHK2_TEXT_MASK)) {
+							check=false;
+							return result;
+						}
+					}
 				}
 			}
+			return null;
 		}
 		
   		public static Definition loadWSDL(String uri, boolean proxy) {

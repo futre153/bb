@@ -85,7 +85,12 @@ public class SimpleClient {
 	  				Huffman.decode(HttpClientConst.get(HttpClientConst.USER_PASSWORD_KEY), null));
 			Authenticator.setDefault(auth);
 		}
-		BBAuthenticator.setSpnego(((BBAuthenticator)auth).getCallbackHandler());
+		try {
+			BBAuthenticator.setSpnego(((BBAuthenticator)auth).getCallbackHandler());
+		}
+		catch(Exception e) {
+			//e.printStackTrace();
+		}
 		return (BBAuthenticator) auth;
 	}
 	

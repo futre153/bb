@@ -26,10 +26,10 @@
     </sms:Recipient>
     <sms:SendOn>
         <sms:line sms:msg="0">
-            <sms:function sms:arg="null,0D,yyyy-MM-dd&apos;T&apos;HH:mm:ssZ,SK">getTimestamp</sms:function>
+            <sms:function sms:arg="null,0D,yyyy-MM-dd&apos;T&apos;HH:mm:ssXXX,SK">getTimestamp</sms:function>
         </sms:line>
         <sms:line sms:msg="6">
-            <sms:function sms:arg="Timestamp,0D,yyyy-MM-dd&apos;T&apos;HH:mm:ssZ,SK">getTimestamp</sms:function>
+            <sms:function sms:arg="Timestamp,0D,yyyy-MM-dd&apos;T&apos;HH:mm:ssXXX,SK">getTimestamp</sms:function>
         </sms:line>
     </sms:SendOn>
     <sms:SourceKey>
@@ -117,10 +117,10 @@
     </sms:Text>
     <sms:ValidTo>
         <sms:line sms:msg="0">
-            <sms:function sms:arg="null,1D,yyyy-MM-dd&apos;T&apos;HH:mm:ssZ,SK">getTimestamp</sms:function>
+            <sms:function sms:arg="null,1D,yyyy-MM-dd&apos;T&apos;HH:mm:ssXXX,SK">getTimestamp</sms:function>
         </sms:line>
         <sms:line sms:msg="6">
-            <sms:function sms:arg="Timestamp,1D,yyyy-MM-dd&apos;T&apos;HH:mm:ssZ,SK">getTimestamp</sms:function>
+            <sms:function sms:arg="Timestamp,1D,yyyy-MM-dd&apos;T&apos;HH:mm:ssXXX,SK">getTimestamp</sms:function>
         </sms:line>
     </sms:ValidTo>
 </sms:items>

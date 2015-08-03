@@ -9,18 +9,31 @@ public class BusinessLogic {
   
 	
 
-	public static void process(SOAPEnvelope env, Exception fault) {
+	public static void process(SOAPEnvelope env, Exception fault, Object result) {
 		try {
 			File f;
 			StringBuffer sb = new StringBuffer();
+			//request
 			sb.append(Const.REQUEST);
 			sb.append(Const.LS);
 			sb.append(Base64Coder.encodeString(env.toString()));
 			sb.append(Const.LS);
+			//time stamp
 			sb.append(Const.EXECUTION_TIME);
 			sb.append(Const.LS);
 			sb.append(Calendar.getInstance().getTimeInMillis());
 			sb.append(Const.LS);
+			//internal identification number
+			sb.append(Const.INTERNAL_ID);
+			sb.append(Const.LS);
+			if(result == null) {
+				sb.append(Const.NULL_INTERNAL_ID);
+			}
+			else {
+				sb.append(result.toString());
+			}
+			sb.append(Const.LS);
+			//possible fault
 			sb.append(Const.FAULT);
 			sb.append(Const.LS);
 			if (fault != null) {

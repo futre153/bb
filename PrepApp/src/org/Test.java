@@ -1,28 +1,13 @@
 package org;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.InputStreamReader;
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
-import java.util.Locale;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.OutputKeys;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
+import java.util.Date;
 
 import org.pabk.util.Base64Coder;
 import org.pabk.util.Huffman;
-import org.so.sms.notification.client._Stub;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
+
 
 public class Test {
 
@@ -32,6 +17,9 @@ public class Test {
 		//Properties pro = new Properties();
 		//pro.loadFromXML(in);
 		//in.close();
+		Date date = new Date();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX");
+		System.out.println(format.format(date));
 		
 		System.out.println(Huffman.decode("8zu1w0iiEwH0AA==", null));
 		System.out.println(Huffman.encode("Nikoleta-8", null));

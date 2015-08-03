@@ -18,11 +18,13 @@
 	<entry key="org.fds.XMLCheck">true</entry>
 	<entry key="org.fds.AuthSchemaLocation">http://p3600x006:8080/PrepApp/fds_conf/fds_soap.xsd</entry>
 	<entry key="org.fds.DobiSchemaLocation">http://p3600x006:8080/PrepApp/fds_conf/fds_soap_dobi.xsd</entry>
-	<entry key="org.os.notification.endpoint">http://hubert.os.sk/fds_notification.asmx</entry>
+	<entry key="org.os.notification.endpoint">http://idiot.sk/fds_notification.asmx</entry>
 	<entry key="org.os.notification.action">http://172.27.48.250/Notification</entry>
 	<entry key="org.pabk.net.http.useProxy">true</entry>
 	<entry key="org.os.notification.wsdlURI">http://hubert.os.sk/fds_notification.asmx?wsdl</entry>
 	<entry key="org.os.checkRespons">true</entry>
 	<entry key="org.pabk.util.msgStore">C:/Program Files/PrepApp/scrap</entry>
+	<entry key="org.pabk.smsTest">http://localhost:8080/PrepApp/ngw_conf/dobi-sms-text.xml</entry>
+	<entry key="org.pabk.currencyList">http://localhost:8080/PrepApp/ngw_conf/currency-list.xml</entry>
 	<entry key="org.pabk.debug">true</entry>
 </properties>

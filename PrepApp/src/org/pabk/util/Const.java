@@ -72,15 +72,18 @@ public class Const {
 	
 	public static final String PS = System.getProperty("file.separator");
 	public static final String LS = System.getProperty("line.separator");
+	public static final String SMS_LS = "\n";
 	public static final String SCRAP_PATH_KEY = "org.pabk.util.msgStore";
 	public static final String SCRAP_FILENAME = "scrap";
 	public static final String SEPARATOR = "_";
 	public static final String EXTENTION = ".txt";
 	public static final String FAULT = "FAULT";
 	public static final String NULL_FAULT_CODE = "OK";
+	public static final String INTERNAL_ID = "INTERNAL_ID";
 	public static final String REQUEST = "REQUEST";
 	public static final String EXECUTION_TIME = "EXECUTIONTIME";
-	
+	public static final String SMS_TEXT_KEY = "org.pabk.smsTest";
+		
 	public static final String DEBUG_KEY = "org.pabk.debug";
 	
 	public static final String MESSAGE_SERVICE_REQUEST_ROOT = "SubmitMessage";
@@ -127,15 +130,15 @@ public class Const {
 	public final static String KRB5_CONF = "C:\\PrepApp\\conf\\krb5.conf";
     public final static String LOGIN_CONF = "C:\\PrepApp\\conf\\login.conf";
 	*/
-	public static final String STORNO_VYBERU_AMT = "Storno vyberu z ATM";
 	public static final String NULL_STRING = "NULL";
-	public static final String CURRENCY_LIST_FILE = "http://localhost:8080/PrepApp/ngw_conf/currency-list.xml";
 	public static final String ISO_CURRENCY_MASK = "[A-Z]{3}";
 	public static final String NUMERIC_CURRENCY_MASK = "[0-9]{3}";
 	public static final String CURRENCY_ITEM_NAME = "item";
 	public static final String CURRENCY_LIST_NAME = "list";
 	public static final String CURRENCY_ISO_NAME = "iso";
 	public static final String CURRENCY_CODE_NAME = "code";
+	public static final String CURRENCY_LIST_FILE_KEY = "org.pabk.currencyList";
+	public static final String NULL_INTERNAL_ID = Const.EMPTY_STRING;
 	
 	private Const(){}
 	

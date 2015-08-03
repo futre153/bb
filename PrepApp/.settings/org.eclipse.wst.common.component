@@ -2,6 +2,12 @@
     <wb-module deploy-name="PrepApp">
         <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <dependent-module archiveName="HttpClient.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/HttpClient/HttpClient">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
+        <dependent-module archiveName="Utilities.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/Utilities/Utilities">
+            <dependency-type>uses</dependency-type>
+        </dependent-module>
         <property name="context-root" value="PrepApp"/>
         <property name="java-output-path" value="/PrepApp/build/classes"/>
     </wb-module>

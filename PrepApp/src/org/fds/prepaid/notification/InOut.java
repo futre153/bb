@@ -44,6 +44,7 @@ public class InOut extends AbstractInOutMessageReceiver {
 		
 	public void invokeBusinessLogic(MessageContext req, MessageContext res) throws AxisFault {
 		Exception fault = null;
+		Object result = null;
 		try {
 			int i;
 			SOAPFactory fac = getSOAPFactory(req);
@@ -93,13 +94,12 @@ public class InOut extends AbstractInOutMessageReceiver {
 					throw new AxisFault("MsgType is invalid");
 				}
 			}
-
 			try {
 				if (msgType.equals(Const.AUTHORIZATION_NOTS)) {
-					new SMSNotification().notify(req);
+					result = new SMSNotification().notify(req);
 				}
 				else if (msgType.equals(Const.DOBI_NOTS)) {
-					new SMSNotification().notify(req);
+					result = new SMSNotification().notify(req);
 				}
 				else {
 					throw new AxisFault("MsgType is invalid");
@@ -121,7 +121,7 @@ public class InOut extends AbstractInOutMessageReceiver {
 			fault = e;
 		}
 
-		BusinessLogic.process(req.getEnvelope(), fault);
+		BusinessLogic.process(req.getEnvelope(), fault, result);
 
 		if (fault != null) {
 			throw new AxisFault(fault.getMessage());

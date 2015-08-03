@@ -1,7 +1,7 @@
 package org.so.sms.notification.client;
 
 import java.text.DecimalFormat;
-import java.text.DecimalFormatSymbols;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -19,6 +19,7 @@ import org.apache.axiom.om.OMNamespace;
 import org.apache.axiom.soap.SOAPBody;
 import org.apache.axiom.soap.SOAPEnvelope;
 import org.apache.axiom.soap.SOAPFactory;
+import org.apache.axiom.soap.SOAPHeader;
 import org.apache.axis2.context.MessageContext;
 import org.pabk.util.Const;
 
@@ -48,10 +49,12 @@ class NotificationRequest {
 	}
 	
 	public static SOAPEnvelope createEnvelope2 (MessageContext msg, SOAPFactory fac, OMElement docx) {
-		System.out.println(docx);
+		//System.out.println(docx);
 		SOAPEnvelope env = msg.getEnvelope();
 		SOAPBody body = env.getBody();
 		SOAPEnvelope req = fac.createSOAPEnvelope(env.getNamespace());
+		SOAPHeader hea = fac.createSOAPHeader(req);
+		req.addChild(hea);
 		SOAPBody reqBody = fac.createSOAPBody(req);
 		OMNamespace tem = fac.createOMNamespace(Const.TEMPURI_NAMESPACE, Const.TEMPURI_PREFIX);
 		OMNamespace pabk = fac.createOMNamespace(Const.PABK_NAMESPACE, Const.PABK_PREFIX);
@@ -99,7 +102,7 @@ class NotificationRequest {
 		message.addChild(OMVT);		
 		root.addChild(message);
 		reqBody.addChild(root);
-		System.out.println(OMTE.getText());
+		//System.out.println(OMTE.getText());
 		return req;
 	}
 	
@@ -111,7 +114,7 @@ class NotificationRequest {
 			String append = NotificationRequest.parseLine(data, (OMElement) nodes.next()).trim();
 			if(append.length() > 0) {
 				if(notFirst) {
-					sb.append(Const.LS);
+					sb.append(Const.SMS_LS);
 				}
 				notFirst = true;
 				sb.append(append);
@@ -231,8 +234,10 @@ class NotificationRequest {
 		Locale locale = findLocale(loc);
 		try {
 			double value = Double.parseDouble(number);
+			DecimalFormat df = (DecimalFormat) NumberFormat.getInstance(locale);
+			 df.applyPattern(format);
 			value = Boolean.parseBoolean(inverse) ? 0 - value: value;
-			return new DecimalFormat(format, DecimalFormatSymbols.getInstance(locale)).format(value);
+			return df.format(value);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -652,7 +657,7 @@ class NotificationRequest {
 		}
 		else if (value.matches(Const.NUMERIC_CURRENCY_MASK)) {
 			if(curx == null) {
-				curx = _Stub.loadXMLFileOM(Const.CURRENCY_LIST_FILE, false);
+				curx = _Stub.loadXMLFileOM(Const.get2(Const.CURRENCY_LIST_FILE_KEY), false);
 			}
 			if(curx != null) {
 				return getCurrency(value);
