@@ -71,63 +71,64 @@ public class Sys {
 	 * 
 	 */
 	
-	public static final Object getProperty (Object ... objs) throws IOException {
-		Object obj = objs.length > 0 ? objs[0] : null;
-		Properties p = getProperties(obj);
-		Logger log = Sys.getLogger(p, obj);
-		String className = (objs != null && objs.length > 0 && (!(objs [0] instanceof Properties))) ? ((objs[0] instanceof Class<?>) ? objs[0].toString() : objs[0].getClass().getSimpleName()) : null;
-		String key = (String) (objs != null && objs.length > 1 && (objs[1] instanceof String) ? objs[1] : null);
-		String _default = (String) (objs != null && objs.length > 2/*  && (objs[2] instanceof String)*/ ? objs[2].toString() : null);
-		boolean notNull = (boolean) (objs != null && objs.length > 3  && (objs[3] instanceof Boolean) ? objs[3] : false);
-		Class<?> _class = (Class<?>) (objs != null && objs.length > 4  && (objs[4] instanceof Class<?>) ? objs[4] : String.class);
-		String separator = (String) (objs != null && objs.length > 5  && (objs[5] instanceof String) ? objs[5] : Const.DEFAULT_PROPERTY_SEPARATOR);
-		String value = null;
-		if(p == null) {
-			Sys.log(log, null, Const.WARN, Const.PROPERTY_NULL_ERROR_2);
-		}
-		else {
-			try {
-				value = p.getProperty(key);
-			}
-			catch (Exception e) {}
-		}
-		if(value == null) {
-			value = _default;
-			Sys.log(log, null, Const.INFO, Const.PROPERTY_NULL_ERROR_3, key, value);
-		}
-		else {
-			Sys.log(log, null, Const.INFO, Const.PROPERTY_VALUE, value, key);
-		}
-		if(value == null) {
+	private static final Object getProperty2 (Object obj, Logger log, Properties props, String key, String def, boolean notNull, Class<?> clazz, String separator) throws IOException {
+		Object val = (props != null && key != null) ? props.getProperty(key, def) : def;
+		if(val == null) {
 			if(notNull) {
-				Sys.log(log, null, Const.FATAL, Const.PROPERTY_NULL_ERROR, key);
-				throw new IOException (String.format(Const.PROPERTY_NULL_ERROR, key));
-			}
-			else {
-				return null;
+				Sys.log(log, null, Const.FATAL, Const.PROPERTY_NULL_ERROR, key, obj.getClass().getSimpleName());
+				throw new IOException (String.format(Const.PROPERTY_NULL_ERROR, key, obj.getClass().getSimpleName()));
 			}
 		}
-		try {
-			return parse(_class, value, key, className);
-		}
-		catch (IOException e) {
+		else {
 			try {
-				return _class.getDeclaredConstructor(String.class).newInstance(value);
-			} catch (Exception e1) {
+				val = parse(clazz, (String) val, key, obj != null ? obj.getClass().getSimpleName() : null);
+			}
+			catch (Exception e) {
 				try {
-					String[] array = value.split(separator);
-					obj = Array.newInstance(_class, array.length);
-					for(int i = 0; i < array.length; i ++) {
-						Array.set(obj, i, parse(_class, array[i], key, className));
+					val = clazz.getDeclaredConstructor(String.class).newInstance(val);
+				} catch (Exception e1) {
+					try {
+						String[] array = ((String) val).split(separator);
+						obj = Array.newInstance(clazz, array.length);
+						for(int i = 0; i < array.length; i ++) {
+							Array.set(obj, i, parse(clazz, array[i], key, obj != null ? obj.getClass().getSimpleName() : null));
+						}
+						Sys.log(log, null, Const.INFO, Const.PROPERTY_PARSED_TO_ARRAY, key, obj);
+						val = obj;
 					}
-					Sys.log(log, null, Const.INFO, Const.PROPERTY_PARSED_TO_ARRAY, key, obj);
-					return obj;
-				}
-				catch (Exception e2) {
-					throw new IOException(String.format(Const.PROPERTY_CAST_ERROR, _class.getSimpleName(), key, value, className));
+					catch (Exception e2) {
+						throw new IOException(String.format(Const.PROPERTY_CAST_ERROR, clazz.getSimpleName(), key, val, obj.getClass().getSimpleName()));
+					}
 				}
 			}
+			
 		}
+		Sys.log(log, null, Const.INFO, Const.PROPERTY_VALUE, val, key, obj.getClass().getSimpleName());
+		return val;
+		
+		
+	}
+	
+	
+	
+	/*
+	 * 0 - object
+	 * 1 - key
+	 * 2 - default value
+	 * 3 - not null
+	 * 4 - 
+	 */
+	public static final Object getProperty (Object ... objs) throws IOException {
+		Properties props = getProperties(objs[0]);
+		return getProperty2 (
+				objs[0],
+				Sys.getLogger(props, objs[0]),
+				props,
+				(String) (objs != null && objs.length > 1 && (objs[1] instanceof String) ? objs[1] : null),
+				(String) (objs != null && objs.length > 2 ? objs[2].toString() : null),
+				(boolean) (objs != null && objs.length > 3  && (objs[3] instanceof Boolean) ? objs[3] : false),
+				(Class<?>) (objs != null && objs.length > 4  && (objs[4] instanceof Class<?>) ? objs[4] : String.class),
+				(String) (objs != null && objs.length > 5  && (objs[5] instanceof String) ? objs[5] : Const.DEFAULT_PROPERTY_SEPARATOR));
 	}
 	
 	public static void log(Logger log, PrintStream ps, int severity, String message, Object ... args) {

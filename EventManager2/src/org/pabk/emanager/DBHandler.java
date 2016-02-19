@@ -2,14 +2,9 @@ package org.pabk.emanager;
 
 public class DBHandler extends AModule {
 
+	
 	@Override
-	public boolean shutdown() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public void doBusinessLogic() {
+	protected void doWork() {
 		// TODO Auto-generated method stub
 		
 	}

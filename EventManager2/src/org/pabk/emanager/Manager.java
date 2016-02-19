@@ -6,12 +6,7 @@ public class Manager extends AModule {
 	
 	private static final Hashtable<String, AModule> modules = new Hashtable<String, AModule>(); 
 		
-	@Override
-	public boolean shutdown() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
+	
 	@Override
 	public void doBusinessLogic() {
 		// TODO Auto-generated method stub
@@ -39,6 +34,12 @@ public class Manager extends AModule {
 	}
 
 	public static void loadModule(String string) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	protected void doWork() {
 		// TODO Auto-generated method stub
 		
 	}

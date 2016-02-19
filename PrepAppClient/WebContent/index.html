@@ -3,8 +3,488 @@
 <head>
 <meta charset="UTF-8">
 <title>PREPAID Card SMS Notification viewer</title>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js">
-</script>
-<script src="http://localhost:8080/PrepAppClient/scripts/login.js">
-</script>
-</head><body></body></html>
+<link rel="stylesheet" type="text/css" href="index.css">
+</head>
+    <body>
+        <div id="main-container">
+                       
+            <div id="header">
+                <div class="app-name">Prehliadač SMS notifikácií pre Prepaid karty</div>        
+                <div id="menu">
+                    <div>
+                        <form action="?display=archive"><input type="submit" value="zobraz archív" title="zmení zobrazenie na archivované položky"></form><form action=""><input type="hidden" name="display" value="user-management"><input type="submit" value="správa prístupov"></form>
+                    </div>
+                    <hr>
+                </div>
+                
+                <div id="user-details">
+                    <span title="DN aktuálne prihláseného používateľa">CN=branislav&nbsp;brandys,&nbsp;OU=PBIT,&nbsp;O="Poštová&nbsp;banka,&nbsp;a.s.",&nbsp;L=Bratislava&nbsp;4,&nbsp;ST=Bratislava,&nbsp;C=SK&nbsp;&nbsp;</span><form action="?display_user_details"><input type="image" alt="user-icon" src="images/user.png" title="zobraz podrobnosti o používateľovi"></form>
+                    <hr>                    
+                </div>
+            </div>
+
+            <div id="content">
+                <div class="data-container">
+                    <div class="table-frame">
+                    <table>
+                        <colgroup>
+                            <col class="checkbox_col">
+                            <col class="id-col">
+                            <col class="request-col">
+                            <col class="exec-time-col">
+                            <col class="result-col">
+                            <col class="deliv-time-col">
+                            <col class="tasks-col">
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th class="first">&nbsp;</th>
+                                <th class="common" title="Interné identifikačné číslo">ID</th>
+                                <th class="common" title="Zakódovaný text požiadavky z FDS">Text</th>
+                                <th class="common" title="Čas spracovania a odoslanie SMS z PB">Odoslané</th>
+                                <th class="common" title="Výsledok spracovania žiadosti o odoslanie SMS">Výsledok</th>
+                                <th class="common" title="Čas prijatia SMS klientom">Prijaté</th>
+                                <th class="last" title="Povolené úlohy, ktoré môžete vykonávať so záznamom">Úlohy</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="odd">
+                                <td class="first" title="vyberte pre hromadné spracovanie záznamov"><div class="checkbox"><input type="checkbox" name="scrapid1" value="filename1" form="mass-form"></div></td>
+                                <td class="common" title="ID nebolo vrátené z dôvodu chyby"><div class="id">&nbsp;</div></td>
+                                <td class="common" title="PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0ndXRmLTgnPz48ZW52OkVudmVsb3BlIHhtbG5zOmVudj0iaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvc29hcC9lbnZlbG9wZS8iPjxlbnY6Qm9keT48TXNnVHlwZT42PC9Nc2dUeXBlPjxJbnN0aXR1dGlvbklkPjY1MDA8L0luc3RpdHV0aW9uSWQ+PE5vdGlmaWNhdGlvblR5cGU+MTwvTm90aWZpY2F0aW9uVHlwZT48Q29udGFjdD4rNDIxOTAzMjQ1NDY1PC9Db250YWN0PjxQcm9jZXNzRGF0ZT4xNC4xMS4yMDE0PC9Qcm9jZXNzRGF0ZT48Q2FyZFR5cGUgLz48UGF5bWVudEFtdD4tMDAwMDAwMDAwMzAuMDA8L1BheW1lbnRBbXQ+PFBheW1lbnRDQ1k+RVVSPC9QYXltZW50Q0NZPjxQYXltZW50SW5kaWNhdG9yPjUxNjk8L1BheW1lbnRJbmRpY2F0b3I+PEF2YWlsYWJsZUJhbGFuY2U+KzAwMDAwMTAwMDUzLjA3PC9BdmFpbGFibGVCYWxhbmNlPjxBY2NvdW50SWQ+MDAwMDI0NDUwMDAwMjU0NDwvQWNjb3VudElkPjxUcmFjZUlEIC8+PFRpbWVzdGFtcD4yMDE1MDkzMDEzMDAwMDwvVGltZXN0YW1wPjwvZW52OkJvZHk+PC9lbnY6RW52ZWxvcGU+"><div class="request">PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0ndXRmLTgnPz48ZW52OkVudmVsb3BlIHhtbG5zOmVudj0iaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvc29hcC9lbnZlbG9wZS8iPjxlbnY6Qm9keT48TXNnVHlwZT42PC9Nc2dUeXBlPjxJbnN0aXR1dGlvbklkPjY1MDA8L0luc3RpdHV0aW9uSWQ+PE5vdGlmaWNhdGlvblR5cGU+MTwvTm90aWZpY2F0aW9uVHlwZT48Q29udGFjdD4rNDIxOTAzMjQ1NDY1PC9Db250YWN0PjxQcm9jZXNzRGF0ZT4xNC4xMS4yMDE0PC9Qcm9jZXNzRGF0ZT48Q2FyZFR5cGUgLz48UGF5bWVudEFtdD4tMDAwMDAwMDAwMzAuMDA8L1BheW1lbnRBbXQ+PFBheW1lbnRDQ1k+RVVSPC9QYXltZW50Q0NZPjxQYXltZW50SW5kaWNhdG9yPjUxNjk8L1BheW1lbnRJbmRpY2F0b3I+PEF2YWlsYWJsZUJhbGFuY2U+KzAwMDAwMTAwMDUzLjA3PC9BdmFpbGFibGVCYWxhbmNlPjxBY2NvdW50SWQ+MDAwMDI0NDUwMDAwMjU0NDwvQWNjb3VudElkPjxUcmFjZUlEIC8+PFRpbWVzdGFtcD4yMDE1MDkzMDEzMDAwMDwvVGltZXN0YW1wPjwvZW52OkJvZHk+PC9lbnY6RW52ZWxvcGU+</div></td>
+                                <td class="common"><div class="exec-time">Thu&nbsp;Oct&nbsp;01&nbsp;2015&nbsp;08:35:58</div></td>
+                                <td class="common" title="VGhlIHNlcnZlciB3YXMgdW5hYmxlIHRvIHByb2Nlc3MgdGhlIHJlcXVlc3QgZHVlIHRvIGFuIGludGVybmFsIGVycm9yLiAgRm9yIG1vcmUgaW5mb3JtYXRpb24gYWJvdXQgdGhlIGVycm9yLCBlaXRoZXIgdHVybiBvbiBJbmNsdWRlRXhjZXB0aW9uRGV0YWlsSW5GYXVsdHMgKGVpdGhlciBmcm9tIFNlcnZpY2VCZWhhdmlvckF0dHJpYnV0ZSBvciBmcm9tIHRoZSA8c2VydmljZURlYnVnPiBjb25maWd1cmF0aW9uIGJlaGF2aW9yKSBvbiB0aGUgc2VydmVyIGluIG9yZGVyIHRvIHNlbmQgdGhlIGV4Y2VwdGlvbiBpbmZvcm1hdGlvbiBiYWNrIHRvIHRoZSBjbGllbnQsIG9yIHR1cm4gb24gdHJhY2luZyBhcyBwZXIgdGhlIE1pY3Jvc29mdCAuTkVUIEZyYW1ld29yayBTREsgZG9jdW1lbnRhdGlvbiBhbmQgaW5zcGVjdCB0aGUgc2VydmVyIHRyYWNlIGxvZ3Mu"><div class="result">ERROR</div></td>
+                                <td class="common" title="Pre získanie času doručenia je nutné použiť akciu z povolených úloh, ak je to možné"><div class="deliv-time">neznámy</div></td>
+                                <td class="last"><div class="tasks"><form><input name="scrap1" value="file1" type="image" alt="zobraz záznam" title="zobraz záznam" src="images/open.png"></form>&nbsp;<form action="?open-error=xxx"><input type="image" title="zobraz chybu" alt="zobraz chybu" src="images/error.png"></form>&nbsp;<form action="?archive=xxx"><input type="image" alt="archivuj záznam" title="archivuj záznam" src="images/archive.png"></form>&nbsp;<form action="?delete=xxx"><input type="image" title="zmaž záznam" alt="zmaž záznam" src="images/delete.png"></form></div></td>
+                            </tr>
+                            <tr class="even">
+                                <td class="first" title="vyberte pre hromadné spracovanie záznamov"><div class="checkbox"><input type="checkbox" name="scrapid2" value="filename2" form="mass-form"></div></td>
+                                <td class="common"><div class="id">915966</div></td>
+                                <td class="common" title="PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0ndXRmLTgnPz48ZW52OkVudmVsb3BlIHhtbG5zOmVudj0iaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvc29hcC9lbnZlbG9wZS8iPjxlbnY6Qm9keT48TXNnVHlwZT42PC9Nc2dUeXBlPjxJbnN0aXR1dGlvbklkPjY1MDA8L0luc3RpdHV0aW9uSWQ+PE5vdGlmaWNhdGlvblR5cGU+MTwvTm90aWZpY2F0aW9uVHlwZT48Q29udGFjdD4rNDIxOTAzMjQ1NDY1PC9Db250YWN0PjxQcm9jZXNzRGF0ZT4xNC4xMS4yMDE0PC9Qcm9jZXNzRGF0ZT48Q2FyZFR5cGUgLz48UGF5bWVudEFtdD4tMDAwMDAwMDAwMzAuMDA8L1BheW1lbnRBbXQ+PFBheW1lbnRDQ1k+RVVSPC9QYXltZW50Q0NZPjxQYXltZW50SW5kaWNhdG9yPjUxNjk8L1BheW1lbnRJbmRpY2F0b3I+PEF2YWlsYWJsZUJhbGFuY2U+KzAwMDAwMTAwMDUzLjA3PC9BdmFpbGFibGVCYWxhbmNlPjxBY2NvdW50SWQ+MDAwMDI0NDUwMDAwMjU0NDwvQWNjb3VudElkPjxUcmFjZUlEIC8+PFRpbWVzdGFtcD4yMDE1MDkzMDEzMDAwMDwvVGltZXN0YW1wPjwvZW52OkJvZHk+PC9lbnY6RW52ZWxvcGU+"><div class="request">PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0ndXRmLTgnPz48ZW52OkVudmVsb3BlIHhtbG5zOmVudj0iaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvc29hcC9lbnZlbG9wZS8iPjxlbnY6Qm9keT48TXNnVHlwZT42PC9Nc2dUeXBlPjxJbnN0aXR1dGlvbklkPjY1MDA8L0luc3RpdHV0aW9uSWQ+PE5vdGlmaWNhdGlvblR5cGU+MTwvTm90aWZpY2F0aW9uVHlwZT48Q29udGFjdD4rNDIxOTAzMjQ1NDY1PC9Db250YWN0PjxQcm9jZXNzRGF0ZT4xNC4xMS4yMDE0PC9Qcm9jZXNzRGF0ZT48Q2FyZFR5cGUgLz48UGF5bWVudEFtdD4tMDAwMDAwMDAwMzAuMDA8L1BheW1lbnRBbXQ+PFBheW1lbnRDQ1k+RVVSPC9QYXltZW50Q0NZPjxQYXltZW50SW5kaWNhdG9yPjUxNjk8L1BheW1lbnRJbmRpY2F0b3I+PEF2YWlsYWJsZUJhbGFuY2U+KzAwMDAwMTAwMDUzLjA3PC9BdmFpbGFibGVCYWxhbmNlPjxBY2NvdW50SWQ+MDAwMDI0NDUwMDAwMjU0NDwvQWNjb3VudElkPjxUcmFjZUlEIC8+PFRpbWVzdGFtcD4yMDE1MDkzMDEzMDAwMDwvVGltZXN0YW1wPjwvZW52OkJvZHk+PC9lbnY6RW52ZWxvcGU+</div></td>
+                                <td class="common"><div class="exec-time">Thu&nbsp;Oct&nbsp;01&nbsp;2015&nbsp;10:39:41</div></td>
+                                <td class="common"><div class="result">OK</div></td>
+                                <td class="common" title="Pre získanie času doručenia je nutné použiť akciu z povolených úloh, ak je to možné"><div class="deliv-time">neznámy</div></td>
+                                <td class="last"><div class="tasks"><form action="?open=xxx"><input type="image" alt="zobraz záznam" title="zobraz záznam" src="images/open.png"></form>&nbsp;<form action="?delivery=xxx"><input type="image" title="získaj čas doručenia" alt="získaj čas doručenia" src="images/delivery.png"></form>&nbsp;<form action="?archive=xxx"><input type="image" alt="archivuj záznam" title="archivuj záznam" src="images/archive.png"></form>&nbsp;<form action="?delete=xxx"><input type="image" title="zmaž záznam" alt="zmaž záznam" src="images/delete.png"></form></div></td>
+                            </tr>
+                            <tr class="odd">
+                                <td class="first" title="vyberte pre hromadné spracovanie záznamov"><div class="checkbox"><input type="checkbox" name="scrapid" value="filename"></div></td>
+                                <td class="common"><div class="id">923788</div></td>
+                                <td class="common" title="PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0ndXRmLTgnPz48ZW52OkVudmVsb3BlIHhtbG5zOmVudj0iaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvc29hcC9lbnZlbG9wZS8iPjxlbnY6Qm9keT48TXNnVHlwZT42PC9Nc2dUeXBlPjxJbnN0aXR1dGlvbklkPjY1MDA8L0luc3RpdHV0aW9uSWQ+PE5vdGlmaWNhdGlvblR5cGU+MTwvTm90aWZpY2F0aW9uVHlwZT48Q29udGFjdD4rNDIxOTAzMjQ1NDY1PC9Db250YWN0PjxQcm9jZXNzRGF0ZT4xNC4xMS4yMDE0PC9Qcm9jZXNzRGF0ZT48Q2FyZFR5cGUgLz48UGF5bWVudEFtdD4tMDAwMDAwMDAwMzAuMDA8L1BheW1lbnRBbXQ+PFBheW1lbnRDQ1k+RVVSPC9QYXltZW50Q0NZPjxQYXltZW50SW5kaWNhdG9yPjUxNjk8L1BheW1lbnRJbmRpY2F0b3I+PEF2YWlsYWJsZUJhbGFuY2U+KzAwMDAwMTAwMDUzLjA3PC9BdmFpbGFibGVCYWxhbmNlPjxBY2NvdW50SWQ+MDAwMDI0NDUwMDAwMjU0NDwvQWNjb3VudElkPjxUcmFjZUlEIC8+PFRpbWVzdGFtcD4yMDE1MDkzMDA4MDAwMDwvVGltZXN0YW1wPjwvZW52OkJvZHk+PC9lbnY6RW52ZWxvcGU+"><div class="request">PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0ndXRmLTgnPz48ZW52OkVudmVsb3BlIHhtbG5zOmVudj0iaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvc29hcC9lbnZlbG9wZS8iPjxlbnY6Qm9keT48TXNnVHlwZT42PC9Nc2dUeXBlPjxJbnN0aXR1dGlvbklkPjY1MDA8L0luc3RpdHV0aW9uSWQ+PE5vdGlmaWNhdGlvblR5cGU+MTwvTm90aWZpY2F0aW9uVHlwZT48Q29udGFjdD4rNDIxOTAzMjQ1NDY1PC9Db250YWN0PjxQcm9jZXNzRGF0ZT4xNC4xMS4yMDE0PC9Qcm9jZXNzRGF0ZT48Q2FyZFR5cGUgLz48UGF5bWVudEFtdD4tMDAwMDAwMDAwMzAuMDA8L1BheW1lbnRBbXQ+PFBheW1lbnRDQ1k+RVVSPC9QYXltZW50Q0NZPjxQYXltZW50SW5kaWNhdG9yPjUxNjk8L1BheW1lbnRJbmRpY2F0b3I+PEF2YWlsYWJsZUJhbGFuY2U+KzAwMDAwMTAwMDUzLjA3PC9BdmFpbGFibGVCYWxhbmNlPjxBY2NvdW50SWQ+MDAwMDI0NDUwMDAwMjU0NDwvQWNjb3VudElkPjxUcmFjZUlEIC8+PFRpbWVzdGFtcD4yMDE1MDkzMDA4MDAwMDwvVGltZXN0YW1wPjwvZW52OkJvZHk+PC9lbnY6RW52ZWxvcGU+</div></td>
+                                <td class="common"><div class="exec-time">Thu&nbsp;Oct&nbsp;01&nbsp;2015&nbsp;12:46:03</div></td>
+                                <td class="common"><div class="result">OK</div></td>
+                                <td class="common" title="Pre získanie času doručenia je nutné použiť akciu z povolených úloh, ak je to možné"><div class="deliv-time">neznámy</div></td>
+                                <td class="last"><div class="tasks"><form action="?open=xxx"><input type="image" alt="zobraz záznam" title="zobraz záznam" src="images/open.png"></form>&nbsp;<form action="?delivery=xxx"><input type="image" title="získaj čas doručenia" alt="získaj čas doručenia" src="images/delivery.png"></form>&nbsp;<form action="?archive=xxx"><input type="image" alt="archivuj záznam" title="archivuj záznam" src="images/archive.png"></form>&nbsp;<form action="?delete=xxx"><input type="image" title="zmaž záznam" alt="zmaž záznam" src="images/delete.png"></form></div></td>
+                            </tr>
+                            <tr class="even">
+                                <td class="first" title="vyberte pre hromadné spracovanie záznamov"><div class="checkbox"><input type="checkbox" name="scrapid" value="filename"></div></td>
+                                <td class="common"><div class="id">923893</div></td>
+                                <td class="common" title="PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0ndXRmLTgnPz48ZW52OkVudmVsb3BlIHhtbG5zOmVudj0iaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvc29hcC9lbnZlbG9wZS8iPjxlbnY6Qm9keT48TXNnVHlwZT42PC9Nc2dUeXBlPjxJbnN0aXR1dGlvbklkPjY1MDA8L0luc3RpdHV0aW9uSWQ+PE5vdGlmaWNhdGlvblR5cGU+MTwvTm90aWZpY2F0aW9uVHlwZT48Q29udGFjdD4rNDIxOTAzMjQ1NDY1PC9Db250YWN0PjxQcm9jZXNzRGF0ZT4xNC4xMS4yMDE0PC9Qcm9jZXNzRGF0ZT48Q2FyZFR5cGUgLz48UGF5bWVudEFtdD4tMDAwMDAwMDAwMzAuMDA8L1BheW1lbnRBbXQ+PFBheW1lbnRDQ1k+RVVSPC9QYXltZW50Q0NZPjxQYXltZW50SW5kaWNhdG9yPjUxNjk8L1BheW1lbnRJbmRpY2F0b3I+PEF2YWlsYWJsZUJhbGFuY2U+KzAwMDAwMTAwMDUzLjA3PC9BdmFpbGFibGVCYWxhbmNlPjxBY2NvdW50SWQ+MDAwMDI0NDUwMDAwMjU0NDwvQWNjb3VudElkPjxUcmFjZUlEIC8+PFRpbWVzdGFtcD4yMDE1MDkzMDEzMDAwMDwvVGltZXN0YW1wPjwvZW52OkJvZHk+PC9lbnY6RW52ZWxvcGU+"><div class="request">PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0ndXRmLTgnPz48ZW52OkVudmVsb3BlIHhtbG5zOmVudj0iaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvc29hcC9lbnZlbG9wZS8iPjxlbnY6Qm9keT48TXNnVHlwZT42PC9Nc2dUeXBlPjxJbnN0aXR1dGlvbklkPjY1MDA8L0luc3RpdHV0aW9uSWQ+PE5vdGlmaWNhdGlvblR5cGU+MTwvTm90aWZpY2F0aW9uVHlwZT48Q29udGFjdD4rNDIxOTAzMjQ1NDY1PC9Db250YWN0PjxQcm9jZXNzRGF0ZT4xNC4xMS4yMDE0PC9Qcm9jZXNzRGF0ZT48Q2FyZFR5cGUgLz48UGF5bWVudEFtdD4tMDAwMDAwMDAwMzAuMDA8L1BheW1lbnRBbXQ+PFBheW1lbnRDQ1k+RVVSPC9QYXltZW50Q0NZPjxQYXltZW50SW5kaWNhdG9yPjUxNjk8L1BheW1lbnRJbmRpY2F0b3I+PEF2YWlsYWJsZUJhbGFuY2U+KzAwMDAwMTAwMDUzLjA3PC9BdmFpbGFibGVCYWxhbmNlPjxBY2NvdW50SWQ+MDAwMDI0NDUwMDAwMjU0NDwvQWNjb3VudElkPjxUcmFjZUlEIC8+PFRpbWVzdGFtcD4yMDE1MDkzMDEzMDAwMDwvVGltZXN0YW1wPjwvZW52OkJvZHk+PC9lbnY6RW52ZWxvcGU+</div></td>
+                                <td class="common"><div class="exec-time">Thu&nbsp;Oct&nbsp;01&nbsp;2015&nbsp;10:39:41</div></td>
+                                <td class="common"><div class="result">OK</div></td>
+                                <td class="common" title="Pre získanie času doručenia je nutné použiť akciu z povolených úloh, ak je to možné"><div class="deliv-time">neznámy</div></td>
+                                <td class="last"><div class="tasks"><form action="?open=xxx"><input type="image" alt="zobraz záznam" title="zobraz záznam" src="images/open.png"></form>&nbsp;<form action="?delivery=xxx"><input type="image" title="získaj čas doručenia" alt="získaj čas doručenia" src="images/delivery.png"></form>&nbsp;<form action="?archive=xxx"><input type="image" alt="archivuj záznam" title="archivuj záznam" src="images/archive.png"></form>&nbsp;<form action="?delete=xxx"><input type="image" title="zmaž záznam" alt="zmaž záznam" src="images/delete.png"></form></div></td>
+                            </tr>
+                            <tr class="odd">
+                                <td class="first" title="vyberte pre hromadné spracovanie záznamov"><div class="checkbox"><input type="checkbox" name="scrapid" value="filename"></div></td>
+                                <td class="common"><div class="id">924034</div></td>
+                                <td class="common" title="PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0ndXRmLTgnPz48ZW52OkVudmVsb3BlIHhtbG5zOmVudj0iaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvc29hcC9lbnZlbG9wZS8iPjxlbnY6Qm9keT48TXNnVHlwZT42PC9Nc2dUeXBlPjxJbnN0aXR1dGlvbklkPjY1MDA8L0luc3RpdHV0aW9uSWQ+PE5vdGlmaWNhdGlvblR5cGU+MTwvTm90aWZpY2F0aW9uVHlwZT48Q29udGFjdD4rNDIxOTAzMjQ1NDY1PC9Db250YWN0PjxQcm9jZXNzRGF0ZT4xNC4xMS4yMDE0PC9Qcm9jZXNzRGF0ZT48Q2FyZFR5cGUgLz48UGF5bWVudEFtdD4tMDAwMDAwMDAwMzAuMDA8L1BheW1lbnRBbXQ+PFBheW1lbnRDQ1k+RVVSPC9QYXltZW50Q0NZPjxQYXltZW50SW5kaWNhdG9yPjUxNjk8L1BheW1lbnRJbmRpY2F0b3I+PEF2YWlsYWJsZUJhbGFuY2U+KzAwMDAwMTAwMDUzLjA3PC9BdmFpbGFibGVCYWxhbmNlPjxBY2NvdW50SWQ+MDAwMDI0NDUwMDAwMjU0NDwvQWNjb3VudElkPjxUcmFjZUlEIC8+PFRpbWVzdGFtcD4yMDE1MDkzMDEzMDAwMDwvVGltZXN0YW1wPjwvZW52OkJvZHk+PC9lbnY6RW52ZWxvcGU+"><div class="request">PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0ndXRmLTgnPz48ZW52OkVudmVsb3BlIHhtbG5zOmVudj0iaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvc29hcC9lbnZlbG9wZS8iPjxlbnY6Qm9keT48TXNnVHlwZT42PC9Nc2dUeXBlPjxJbnN0aXR1dGlvbklkPjY1MDA8L0luc3RpdHV0aW9uSWQ+PE5vdGlmaWNhdGlvblR5cGU+MTwvTm90aWZpY2F0aW9uVHlwZT48Q29udGFjdD4rNDIxOTAzMjQ1NDY1PC9Db250YWN0PjxQcm9jZXNzRGF0ZT4xNC4xMS4yMDE0PC9Qcm9jZXNzRGF0ZT48Q2FyZFR5cGUgLz48UGF5bWVudEFtdD4tMDAwMDAwMDAwMzAuMDA8L1BheW1lbnRBbXQ+PFBheW1lbnRDQ1k+RVVSPC9QYXltZW50Q0NZPjxQYXltZW50SW5kaWNhdG9yPjUxNjk8L1BheW1lbnRJbmRpY2F0b3I+PEF2YWlsYWJsZUJhbGFuY2U+KzAwMDAwMTAwMDUzLjA3PC9BdmFpbGFibGVCYWxhbmNlPjxBY2NvdW50SWQ+MDAwMDI0NDUwMDAwMjU0NDwvQWNjb3VudElkPjxUcmFjZUlEIC8+PFRpbWVzdGFtcD4yMDE1MDkzMDEzMDAwMDwvVGltZXN0YW1wPjwvZW52OkJvZHk+PC9lbnY6RW52ZWxvcGU+</div></td>
+                                <td class="common"><div class="exec-time">Thu&nbsp;Oct&nbsp;01&nbsp;2015&nbsp;10:39:41</div></td>
+                                <td class="common"><div class="result">OK</div></td>
+                                <td class="common" title="Pre získanie času doručenia je nutné použiť akciu z povolených úloh, ak je to možné"><div class="deliv-time">neznámy</div></td>
+                                <td class="last"><div class="tasks"><form action="?open=xxx"><input type="image" alt="zobraz záznam" title="zobraz záznam" src="images/open.png"></form>&nbsp;<form action="?delivery=xxx"><input type="image" title="získaj čas doručenia" alt="získaj čas doručenia" src="images/delivery.png"></form>&nbsp;<form action="?archive=xxx"><input type="image" alt="archivuj záznam" title="archivuj záznam" src="images/archive.png"></form>&nbsp;<form action="?delete=xxx"><input type="image" title="zmaž záznam" alt="zmaž záznam" src="images/delete.png"></form></div></td>
+                            </tr>
+                            <tr class="even">
+                                <td class="first" title="vyberte pre hromadné spracovanie záznamov"><div class="checkbox"><input type="checkbox" name="scrapid" value="filename"></div></td>
+                                <td class="common"><div class="id">924053</div></td>
+                                <td class="common" title="PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0ndXRmLTgnPz48ZW52OkVudmVsb3BlIHhtbG5zOmVudj0iaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvc29hcC9lbnZlbG9wZS8iPjxlbnY6Qm9keT48TXNnVHlwZT42PC9Nc2dUeXBlPjxJbnN0aXR1dGlvbklkPjY1MDA8L0luc3RpdHV0aW9uSWQ+PE5vdGlmaWNhdGlvblR5cGU+MTwvTm90aWZpY2F0aW9uVHlwZT48Q29udGFjdD4rNDIxOTAzMjQ1NDY1PC9Db250YWN0PjxQcm9jZXNzRGF0ZT4xNC4xMS4yMDE0PC9Qcm9jZXNzRGF0ZT48Q2FyZFR5cGUgLz48UGF5bWVudEFtdD4tMDAwMDAwMDAwMzAuMDA8L1BheW1lbnRBbXQ+PFBheW1lbnRDQ1k+RVVSPC9QYXltZW50Q0NZPjxQYXltZW50SW5kaWNhdG9yPjUxNjk8L1BheW1lbnRJbmRpY2F0b3I+PEF2YWlsYWJsZUJhbGFuY2U+KzAwMDAwMTAwMDUzLjA3PC9BdmFpbGFibGVCYWxhbmNlPjxBY2NvdW50SWQ+MDAwMDI0NDUwMDAwMjU0NDwvQWNjb3VudElkPjxUcmFjZUlEIC8+PFRpbWVzdGFtcD4yMDE1MDkzMDEzMDAwMDwvVGltZXN0YW1wPjwvZW52OkJvZHk+PC9lbnY6RW52ZWxvcGU+"><div class="request">PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0ndXRmLTgnPz48ZW52OkVudmVsb3BlIHhtbG5zOmVudj0iaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvc29hcC9lbnZlbG9wZS8iPjxlbnY6Qm9keT48TXNnVHlwZT42PC9Nc2dUeXBlPjxJbnN0aXR1dGlvbklkPjY1MDA8L0luc3RpdHV0aW9uSWQ+PE5vdGlmaWNhdGlvblR5cGU+MTwvTm90aWZpY2F0aW9uVHlwZT48Q29udGFjdD4rNDIxOTAzMjQ1NDY1PC9Db250YWN0PjxQcm9jZXNzRGF0ZT4xNC4xMS4yMDE0PC9Qcm9jZXNzRGF0ZT48Q2FyZFR5cGUgLz48UGF5bWVudEFtdD4tMDAwMDAwMDAwMzAuMDA8L1BheW1lbnRBbXQ+PFBheW1lbnRDQ1k+RVVSPC9QYXltZW50Q0NZPjxQYXltZW50SW5kaWNhdG9yPjUxNjk8L1BheW1lbnRJbmRpY2F0b3I+PEF2YWlsYWJsZUJhbGFuY2U+KzAwMDAwMTAwMDUzLjA3PC9BdmFpbGFibGVCYWxhbmNlPjxBY2NvdW50SWQ+MDAwMDI0NDUwMDAwMjU0NDwvQWNjb3VudElkPjxUcmFjZUlEIC8+PFRpbWVzdGFtcD4yMDE1MDkzMDEzMDAwMDwvVGltZXN0YW1wPjwvZW52OkJvZHk+PC9lbnY6RW52ZWxvcGU+</div></td>
+                                <td class="common"><div class="exec-time">Thu&nbsp;Oct&nbsp;01&nbsp;2015&nbsp;10:39:41</div></td>
+                                <td class="common"><div class="result">OK</div></td>
+                                <td class="common" title="Pre získanie času doručenia je nutné použiť akciu z povolených úloh, ak je to možné"><div class="deliv-time">neznámy</div></td>
+                                <td class="last"><div class="tasks"><form action="?open=xxx"><input type="image" alt="zobraz záznam" title="zobraz záznam" src="images/open.png"></form>&nbsp;<form action="?delivery=xxx"><input type="image" title="získaj čas doručenia" alt="získaj čas doručenia" src="images/delivery.png"></form>&nbsp;<form action="?archive=xxx"><input type="image" alt="archivuj záznam" title="archivuj záznam" src="images/archive.png"></form>&nbsp;<form action="?delete=xxx"><input type="image" title="zmaž záznam" alt="zmaž záznam" src="images/delete.png"></form></div></td>
+                            </tr>
+                            <tr class="odd">
+                                <td class="first" title="vyberte pre hromadné spracovanie záznamov"><div class="checkbox"><input type="checkbox" name="scrapid" value="filename"></div></td>
+                                <td class="common"><div class="id">924133</div></td>
+                                <td class="common" title="PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0ndXRmLTgnPz48ZW52OkVudmVsb3BlIHhtbG5zOmVudj0iaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvc29hcC9lbnZlbG9wZS8iPjxlbnY6Qm9keT48TXNnVHlwZT42PC9Nc2dUeXBlPjxJbnN0aXR1dGlvbklkPjY1MDA8L0luc3RpdHV0aW9uSWQ+PE5vdGlmaWNhdGlvblR5cGU+MTwvTm90aWZpY2F0aW9uVHlwZT48Q29udGFjdD4rNDIxOTAzMjQ1NDY1PC9Db250YWN0PjxQcm9jZXNzRGF0ZT4xNC4xMS4yMDE0PC9Qcm9jZXNzRGF0ZT48Q2FyZFR5cGUgLz48UGF5bWVudEFtdD4tMDAwMDAwMDAwMzAuMDA8L1BheW1lbnRBbXQ+PFBheW1lbnRDQ1k+RVVSPC9QYXltZW50Q0NZPjxQYXltZW50SW5kaWNhdG9yPjUxNjk8L1BheW1lbnRJbmRpY2F0b3I+PEF2YWlsYWJsZUJhbGFuY2U+KzAwMDAwMTAwMDUzLjA3PC9BdmFpbGFibGVCYWxhbmNlPjxBY2NvdW50SWQ+MDAwMDI0NDUwMDAwMjU0NDwvQWNjb3VudElkPjxUcmFjZUlEIC8+PFRpbWVzdGFtcD4yMDE1MDkzMDEzMDAwMDwvVGltZXN0YW1wPjwvZW52OkJvZHk+PC9lbnY6RW52ZWxvcGU+"><div class="request">PD94bWwgdmVyc2lvbj0nMS4wJyBlbmNvZGluZz0ndXRmLTgnPz48ZW52OkVudmVsb3BlIHhtbG5zOmVudj0iaHR0cDovL3NjaGVtYXMueG1sc29hcC5vcmcvc29hcC9lbnZlbG9wZS8iPjxlbnY6Qm9keT48TXNnVHlwZT42PC9Nc2dUeXBlPjxJbnN0aXR1dGlvbklkPjY1MDA8L0luc3RpdHV0aW9uSWQ+PE5vdGlmaWNhdGlvblR5cGU+MTwvTm90aWZpY2F0aW9uVHlwZT48Q29udGFjdD4rNDIxOTAzMjQ1NDY1PC9Db250YWN0PjxQcm9jZXNzRGF0ZT4xNC4xMS4yMDE0PC9Qcm9jZXNzRGF0ZT48Q2FyZFR5cGUgLz48UGF5bWVudEFtdD4tMDAwMDAwMDAwMzAuMDA8L1BheW1lbnRBbXQ+PFBheW1lbnRDQ1k+RVVSPC9QYXltZW50Q0NZPjxQYXltZW50SW5kaWNhdG9yPjUxNjk8L1BheW1lbnRJbmRpY2F0b3I+PEF2YWlsYWJsZUJhbGFuY2U+KzAwMDAwMTAwMDUzLjA3PC9BdmFpbGFibGVCYWxhbmNlPjxBY2NvdW50SWQ+MDAwMDI0NDUwMDAwMjU0NDwvQWNjb3VudElkPjxUcmFjZUlEIC8+PFRpbWVzdGFtcD4yMDE1MDkzMDEzMDAwMDwvVGltZXN0YW1wPjwvZW52OkJvZHk+PC9lbnY6RW52ZWxvcGU+</div></td>
+                                <td class="common"><div class="exec-time">Thu&nbsp;Oct&nbsp;01&nbsp;2015&nbsp;10:39:41</div></td>
+                                <td class="common"><div class="result">OK</div></td>
+                                <td class="common" title="Pre získanie času doručenia je nutné použiť akciu z povolených úloh, ak je to možné"><div class="deliv-time">neznámy</div></td>
+                                <td class="last"><div class="tasks"><form action="?open=xxx"><input type="image" alt="zobraz záznam" title="zobraz záznam" src="images/open.png"></form>&nbsp;<form action="?delivery=xxx"><input type="image" title="získaj čas doručenia" alt="získaj čas doručenia" src="images/delivery.png"></form>&nbsp;<form action="?archive=xxx"><input type="image" alt="archivuj záznam" title="archivuj záznam" src="images/archive.png"></form>&nbsp;<form action="?delete=xxx"><input type="image" title="zmaž záznam" alt="zmaž záznam" src="images/delete.png"></form></div></td>
+                            </tr>
+                            <tr class="even">
+                                <td class="first" title="vyberte pre hromadné spracovanie záznamov"><div class="checkbox"><input type="checkbox" name="scrapid" value="filename"></div></td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="last">&nbsp;</td>
+                            </tr>
+                            <tr class="odd">
+                                <td class="first" title="vyberte pre hromadné spracovanie záznamov"><div class="checkbox"><input type="checkbox" name="scrapid" value="filename"></div></td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="last">&nbsp;</td>
+                            </tr>
+                            <tr class="even">
+                                <td class="first" title="vyberte pre hromadné spracovanie záznamov"><div class="checkbox"><input type="checkbox" name="scrapid" value="filename"></div></td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="last">&nbsp;</td>
+                            </tr>
+                            <tr class="odd">
+                                <td class="first" title="vyberte pre hromadné spracovanie záznamov"><div class="checkbox"><input type="checkbox" name="scrapid" value="filename"></div></td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="last">&nbsp;</td>
+                            </tr>
+                            <tr class="even">
+                                <td class="first" title="vyberte pre hromadné spracovanie záznamov"><div class="checkbox"><input type="checkbox" name="scrapid" value="filename"></div></td>
+                                <td class="first">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="last">&nbsp;</td>
+                            </tr>
+                            <tr class="odd">
+                                <td class="first" title="vyberte pre hromadné spracovanie záznamov"><div class="checkbox"><input type="checkbox" name="scrapid" value="filename"></div></td>
+                                <td class="first">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="last">&nbsp;</td>
+                            </tr>
+                            <tr class="even">
+                                <td class="first" title="vyberte pre hromadné spracovanie záznamov"><div class="checkbox"><input type="checkbox" name="scrapid" value="filename"></div></td>
+                                <td class="first">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="last">&nbsp;</td>
+                            </tr>
+                            <tr class="odd">
+                                <td class="first" title="vyberte pre hromadné spracovanie záznamov"><div class="checkbox"><input type="checkbox" name="scrapid" value="filename"></div></td>
+                                <td class="first">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="last">&nbsp;</td>
+                            </tr>
+                            <tr class="even">
+                                <td class="first" title="vyberte pre hromadné spracovanie záznamov"><div class="checkbox"><input type="checkbox" name="scrapid" value="filename"></div></td>
+                                <td class="first">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="last">&nbsp;</td>
+                            </tr>
+                            <tr class="odd">
+                                <td class="first" title="vyberte pre hromadné spracovanie záznamov"><div class="checkbox"><input type="checkbox" name="scrapid" value="filename"></div></td>
+                                <td class="first">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="last">&nbsp;</td>
+                            </tr>
+                            <tr class="even">
+                                <td class="first" title="vyberte pre hromadné spracovanie záznamov"><div class="checkbox"><input type="checkbox" name="scrapid" value="filename"></div></td>
+                                <td class="first">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="last">&nbsp;</td>
+                            </tr>
+                            <tr class="odd">
+                                <td class="first" title="vyberte pre hromadné spracovanie záznamov"><div class="checkbox"><input type="checkbox" name="scrapid" value="filename"></div></td>
+                                <td class="first">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="last">&nbsp;</td>
+                            </tr>
+                            <tr class="even">
+                                <td class="first" title="vyberte pre hromadné spracovanie záznamov"><div class="checkbox"><input type="checkbox" name="scrapid" value="filename"></div></td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="last">&nbsp;</td>
+                            </tr>
+                            <tr class="odd">
+                                <td class="first" title="vyberte pre hromadné spracovanie záznamov"><div class="checkbox"><input type="checkbox" name="scrapid" value="filename"></div></td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="last">&nbsp;</td>
+                            </tr>
+                            <tr class="even">
+                                <td class="first" title="vyberte pre hromadné spracovanie záznamov"><div class="checkbox"><input type="checkbox" name="scrapid" value="filename"></div></td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="last">&nbsp;</td>
+                            </tr>
+                            <tr class="odd">
+                                <td class="first" title="vyberte pre hromadné spracovanie záznamov"><div class="checkbox"><input type="checkbox" name="scrapid" value="filename"></div></td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="last">&nbsp;</td>
+                            </tr>
+                            <tr class="even">
+                                <td class="first" title="vyberte pre hromadné spracovanie záznamov"><div class="checkbox"><input type="checkbox" name="scrapid" value="filename"></div></td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="last">&nbsp;</td>
+                            </tr>
+                            <tr class="odd">
+                                <td class="first" title="vyberte pre hromadné spracovanie záznamov"><div class="checkbox"><input type="checkbox" name="scrapid" value="filename"></div></td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="last">&nbsp;</td>
+                            </tr>
+                            <tr class="even">
+                                <td class="first" title="vyberte pre hromadné spracovanie záznamov"><div class="checkbox"><input type="checkbox" name="scrapid" value="filename"></div></td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="last">&nbsp;</td>
+                            </tr>
+                            <tr class="odd">
+                                <td class="first" title="vyberte pre hromadné spracovanie záznamov"><div class="checkbox"><input type="checkbox" name="scrapid" value="filename"></div></td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="last">&nbsp;</td>
+                            </tr>
+                            <tr class="even">
+                                <td class="first" title="vyberte pre hromadné spracovanie záznamov"><div class="checkbox"><input type="checkbox" name="scrapid" value="filename"></div></td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="last">&nbsp;</td>
+                            </tr>
+                            <tr class="odd">
+                                <td class="first" title="vyberte pre hromadné spracovanie záznamov"><div class="checkbox"><input type="checkbox" name="scrapid" value="filename"></div></td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="last">&nbsp;</td>
+                            </tr>
+                             <tr class="even">
+                                <td class="first" title="vyberte pre hromadné spracovanie záznamov"><div class="checkbox"><input type="checkbox" name="scrapid" value="filename"></div></td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="last">&nbsp;</td>
+                            </tr>
+                            <tr class="odd">
+                                <td class="first" title="vyberte pre hromadné spracovanie záznamov"><div class="checkbox"><input type="checkbox" name="scrapid" value="filename"></div></td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="last">&nbsp;</td>
+                            </tr>
+                            <tr class="even">
+                                <td class="first" title="vyberte pre hromadné spracovanie záznamov"><div class="checkbox"><input type="checkbox" name="scrapid" value="filename"></div></td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="last">&nbsp;</td>
+                            </tr>
+                            <tr class="odd">
+                                <td class="first" title="vyberte pre hromadné spracovanie záznamov"><div class="checkbox"><input type="checkbox" name="scrapid" value="filename"></div></td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="common">&nbsp;</td>
+                                <td class="last">&nbsp;</td>
+                            </tr>
+                            <tr class="even">
+                                <td class="first-bottom" title="vyberte pre hromadné spracovanie záznamov"><div class="checkbox"><input type="checkbox" name="scrapid" value="filename"></div></td>
+                                <td class="common-bottom">&nbsp;</td>
+                                <td class="common-bottom">&nbsp;</td>
+                                <td class="common-bottom">&nbsp;</td>
+                                <td class="common-bottom">&nbsp;</td>
+                                <td class="common-bottom">&nbsp;</td>
+                                <td class="last-bottom">&nbsp;</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    
+                    </div>
+                </div>
+            </div>
+            
+            <div id="left-banner">
+                <div class="search-filter">
+                    <div class="search-filter-container">
+                        <table class="search-filter-table">
+                            <colgroup>
+                                <col class="caption-col">
+                                <col class="image-col">
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th>Filter pre vyhľadávanie</th>
+                                    <th><a href="?action=colapse-filter"><img alt="minus" title="skry vyhľadávacie detaily" src="images/minus.png"></a></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="2"><hr></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <div class="date-filter-container">
+	                                        <table class="date-filter-table">
+	                                            <colgroup>
+	                                                <col class="caption-col">
+	                                                <col class="image-col">
+	                                            </colgroup>
+	                                            <thead>
+	                                                <tr>
+	                                                    <th>Vyhľadávanie podľa dátumu</th>
+	                                                    <th><a href="?action=colapse-time-filter"><img alt="minus" title="skry vyhľadávanie podľa času" src="images/minus.png"></a></th>
+	                                                </tr>
+	                                            </thead>
+	                                            <tbody>
+                                                    <tr>
+	                                                   <td colspan="2">bez obmedzenia</td>
+	                                                </tr>
+	                                                <tr>
+	                                                   <td class="button" colspan="2"><form action="?action=change-date-filter&current=none"><input type="submit" value="zmeniť" title="stlačte pre zmenu dátumového filtra"></form></td>
+	                                                </tr>
+	                                            </tbody>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><hr></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <div class="mobilno-filter-container">
+                                            <table class="mobilno-filter-table">
+                                                <colgroup>
+                                                    <col class="caption-col">
+                                                    <col class="image-col">
+                                                </colgroup>
+                                                <thead>
+                                                    <tr>
+                                                        <th>Vyhľadávanie podľa čísla</th>
+                                                        <th><a href="?action=colapse-mobilno-filter"><img alt="minus" title="skry vyhľadávanie podľa mobilného čísla" src="images/minus.png"></a></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                       <td colspan="2">bez obmedzenia</td>
+                                                    </tr>
+                                                    <tr>
+                                                       <td class="button" colspan="2"><form action="?action=change-mobilno-filter&current=none"><input type="submit" value="zmeniť" title="stlačte pre zmenu mobilného čísla"></form></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><hr></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">
+                                        <div class="amount-filter-container">
+                                            <table class="amount-filter-table">
+                                                <colgroup>
+                                                    <col class="caption-col">
+                                                    <col class="image-col">
+                                                </colgroup>
+                                                <thead>
+                                                    <tr>
+                                                        <th>Vyhľadávanie podľa čiastky</th>
+                                                        <th><a href="?action=colapse-amount-filter"><img alt="minus" title="skry vyhľadávanie podľa čiastky a meny" src="images/minus.png"></a></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                       <td colspan="2">bez obmedzenia</td>
+                                                    </tr>
+                                                    <tr>
+                                                       <td class="button" colspan="2"><form action="?action=change-amount-filter&current=none"><input type="submit" value="zmeniť" title="stlačte pre zmenu čiastky a meny"></form></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2"><hr></td>
+                                </tr>
+                                <tr>
+                                    <td class="search-button" colspan="2"><form action="?action=search&date=none&no=none&amount=no&currency=no&archive=no&lines=50&section=1"><input type="submit" value="vyhľadať" title="stlačte pre vyhľadanie SMS"></form></td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="rigth-banner"></div>
+            
+            <div id="footer">
+                <form method = "post"><input type="checkbox" name="jano1" value="1"><input type="checkbox" name="jano2" value="2"><input type="checkbox" name="jano3" value="3">
+                <input type="submit" value="tlac1" name="xy1"><input type="submit" value="tlac2" name="xy2"><input type="submit" value="tlac3" name="xy3"><input type="submit" value="tlac4" name="xy4"></form>    
+            </div>
+            
+        </div>
+    </body>
+</html>

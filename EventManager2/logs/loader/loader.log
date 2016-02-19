@@ -1,26 +1,284 @@
-2015-07-07 09:58:39,165 INFO [main] o.p.e.Loader [Sys.java:251] Logger for org.pabk.emanager.Loader was successfully started
-2015-07-07 09:58:39,175 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
-2015-07-07 09:58:39,175 INFO [main] o.p.e.Loader [Sys.java:145] Property org.pabk.emanager.Loader.distributionList have a null value, default value conf/distribution_list.xml is used instead
-2015-07-07 09:58:39,175 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
-2015-07-07 09:58:39,175 INFO [main] o.p.e.Loader [Sys.java:145] Property org.pabk.emanager.Loader.codeRepositoryList have a null value, default value conf/code_repository.xml is used instead
-2015-07-07 09:58:39,695 INFO [main] o.p.e.Loader [Loader.java:38] Distribution was successfully loaded
-2015-07-07 09:58:39,746 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
-2015-07-07 09:58:39,746 INFO [main] o.p.e.Loader [Sys.java:145] Property org.pabk.emanager.Manager.properties have a null value, default value null is used instead
-2015-07-07 09:58:39,746 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
-2015-07-07 09:58:39,746 INFO [main] o.p.e.Loader [Sys.java:145] Property logName have a null value, default value org.pabk.emanager.Manager is used instead
-2015-07-07 09:58:39,746 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
-2015-07-07 09:58:39,746 INFO [main] o.p.e.Loader [Sys.java:145] Property logPattern have a null value, default value %date %level [%thread] %logger{10} [%file:%line] %msg%n is used instead
-2015-07-07 09:58:39,756 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
-2015-07-07 09:58:39,756 INFO [main] o.p.e.Loader [Sys.java:145] Property logDirectory have a null value, default value logs\manager is used instead
-2015-07-07 09:58:39,756 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
-2015-07-07 09:58:39,756 INFO [main] o.p.e.Loader [Sys.java:145] Property logExtension have a null value, default value .log is used instead
-2015-07-07 09:58:39,756 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
-2015-07-07 09:58:39,756 INFO [main] o.p.e.Loader [Sys.java:145] Property logDateFormatInArchiveFilename have a null value, default value .%d{yyyy-MM-dd} is used instead
-2015-07-07 09:58:39,756 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
-2015-07-07 09:58:39,756 INFO [main] o.p.e.Loader [Sys.java:145] Property logArchiveFileNameExtension have a null value, default value .zip is used instead
-2015-07-07 09:58:39,756 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
-2015-07-07 09:58:39,756 INFO [main] o.p.e.Loader [Sys.java:145] Property logHistory have a null value, default value 60 is used instead
-2015-07-07 09:58:39,766 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
-2015-07-07 09:58:39,766 INFO [main] o.p.e.Loader [Sys.java:145] Property org.pabk.emanager.Loader.neededModulesCheckMaxLoop have a null value, default value 10 is used instead
-2015-07-07 09:58:39,766 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
-2015-07-07 09:58:39,766 INFO [main] o.p.e.Loader [Sys.java:145] Property org.pabk.emanager.Loader.neededModulesWaitInterval have a null value, default value 10 is used instead
+2015-12-22 10:59:10,853 INFO [main] o.p.e.Loader [Sys.java:251] Logger for org.pabk.emanager.Loader was successfully started
+2015-12-22 10:59:10,885 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 10:59:10,885 INFO [main] o.p.e.Loader [Sys.java:145] Property org.pabk.emanager.Loader.distributionList have a null value, default value conf/distribution_list.xml is used instead
+2015-12-22 10:59:10,885 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 10:59:10,885 INFO [main] o.p.e.Loader [Sys.java:145] Property org.pabk.emanager.Loader.codeRepositoryList have a null value, default value conf/code_repository.xml is used instead
+2015-12-22 10:59:11,540 INFO [main] o.p.e.Loader [Loader.java:38] Distribution was successfully loaded
+2015-12-22 10:59:11,572 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 10:59:11,572 INFO [main] o.p.e.Loader [Sys.java:145] Property org.pabk.emanager.Manager.properties have a null value, default value null is used instead
+2015-12-22 10:59:11,572 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 10:59:11,572 INFO [main] o.p.e.Loader [Sys.java:145] Property logName have a null value, default value org.pabk.emanager.Manager is used instead
+2015-12-22 10:59:11,572 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 10:59:11,572 INFO [main] o.p.e.Loader [Sys.java:145] Property logPattern have a null value, default value %date %level [%thread] %logger{10} [%file:%line] %msg%n is used instead
+2015-12-22 10:59:11,588 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 10:59:11,588 INFO [main] o.p.e.Loader [Sys.java:145] Property logDirectory have a null value, default value logs\manager is used instead
+2015-12-22 10:59:11,588 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 10:59:11,588 INFO [main] o.p.e.Loader [Sys.java:145] Property logExtension have a null value, default value .log is used instead
+2015-12-22 10:59:11,588 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 10:59:11,588 INFO [main] o.p.e.Loader [Sys.java:145] Property logDateFormatInArchiveFilename have a null value, default value .%d{yyyy-MM-dd} is used instead
+2015-12-22 10:59:11,588 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 10:59:11,588 INFO [main] o.p.e.Loader [Sys.java:145] Property logArchiveFileNameExtension have a null value, default value .zip is used instead
+2015-12-22 10:59:11,588 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 10:59:11,588 INFO [main] o.p.e.Loader [Sys.java:145] Property logHistory have a null value, default value 60 is used instead
+2015-12-22 10:59:11,603 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 10:59:11,603 INFO [main] o.p.e.Loader [Sys.java:145] Property org.pabk.emanager.Loader.neededModulesCheckMaxLoop have a null value, default value 10 is used instead
+2015-12-22 10:59:11,603 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 10:59:11,603 INFO [main] o.p.e.Loader [Sys.java:145] Property org.pabk.emanager.Loader.neededModulesWaitInterval have a null value, default value 10 is used instead
+2015-12-22 11:08:35,227 INFO [main] o.p.e.Loader [Sys.java:251] Logger for org.pabk.emanager.Loader was successfully started
+2015-12-22 11:08:35,242 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 11:08:35,242 INFO [main] o.p.e.Loader [Sys.java:145] Property org.pabk.emanager.Loader.distributionList have a null value, default value conf/distribution_list.xml is used instead
+2015-12-22 11:08:35,242 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 11:08:35,242 INFO [main] o.p.e.Loader [Sys.java:145] Property org.pabk.emanager.Loader.codeRepositoryList have a null value, default value conf/code_repository.xml is used instead
+2015-12-22 11:08:35,289 INFO [main] o.p.e.Loader [Loader.java:38] Distribution was successfully loaded
+2015-12-22 11:09:11,794 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 11:09:11,809 INFO [main] o.p.e.Loader [Sys.java:145] Property org.pabk.emanager.Manager.properties have a null value, default value null is used instead
+2015-12-22 11:09:21,108 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 11:09:21,108 INFO [main] o.p.e.Loader [Sys.java:145] Property logName have a null value, default value org.pabk.emanager.Manager is used instead
+2015-12-22 11:09:21,108 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 11:09:21,108 INFO [main] o.p.e.Loader [Sys.java:145] Property logPattern have a null value, default value %date %level [%thread] %logger{10} [%file:%line] %msg%n is used instead
+2015-12-22 11:09:21,109 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 11:09:21,109 INFO [main] o.p.e.Loader [Sys.java:145] Property logDirectory have a null value, default value logs\manager is used instead
+2015-12-22 11:09:21,109 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 11:09:21,109 INFO [main] o.p.e.Loader [Sys.java:145] Property logExtension have a null value, default value .log is used instead
+2015-12-22 11:09:21,109 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 11:09:21,109 INFO [main] o.p.e.Loader [Sys.java:145] Property logDateFormatInArchiveFilename have a null value, default value .%d{yyyy-MM-dd} is used instead
+2015-12-22 11:09:21,109 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 11:09:21,109 INFO [main] o.p.e.Loader [Sys.java:145] Property logArchiveFileNameExtension have a null value, default value .zip is used instead
+2015-12-22 11:09:21,109 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 11:09:21,125 INFO [main] o.p.e.Loader [Sys.java:145] Property logHistory have a null value, default value 60 is used instead
+2015-12-22 11:09:36,679 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 11:09:36,695 INFO [main] o.p.e.Loader [Sys.java:145] Property org.pabk.emanager.Loader.neededModulesCheckMaxLoop have a null value, default value 10 is used instead
+2015-12-22 11:09:39,020 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 11:09:39,020 INFO [main] o.p.e.Loader [Sys.java:145] Property org.pabk.emanager.Loader.neededModulesWaitInterval have a null value, default value 10 is used instead
+2015-12-22 11:14:04,932 INFO [main] o.p.e.Loader [Sys.java:251] Logger for org.pabk.emanager.Loader was successfully started
+2015-12-22 11:14:04,932 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 11:14:04,932 INFO [main] o.p.e.Loader [Sys.java:145] Property org.pabk.emanager.Loader.distributionList have a null value, default value conf/distribution_list.xml is used instead
+2015-12-22 11:14:04,932 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 11:14:04,932 INFO [main] o.p.e.Loader [Sys.java:145] Property org.pabk.emanager.Loader.codeRepositoryList have a null value, default value conf/code_repository.xml is used instead
+2015-12-22 11:14:04,979 INFO [main] o.p.e.Loader [Loader.java:38] Distribution was successfully loaded
+2015-12-22 11:29:10,607 INFO [main] o.p.e.Loader [Sys.java:251] Logger for org.pabk.emanager.Loader was successfully started
+2015-12-22 11:29:22,136 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 11:29:22,136 INFO [main] o.p.e.Loader [Sys.java:145] Property org.pabk.emanager.Loader.distributionList have a null value, default value conf/distribution_list.xml is used instead
+2015-12-22 11:29:25,865 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 11:29:25,865 INFO [main] o.p.e.Loader [Sys.java:145] Property org.pabk.emanager.Loader.codeRepositoryList have a null value, default value conf/code_repository.xml is used instead
+2015-12-22 11:29:26,007 INFO [main] o.p.e.Loader [Loader.java:38] Distribution was successfully loaded
+2015-12-22 11:29:53,323 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 11:29:56,896 INFO [main] o.p.e.Loader [Sys.java:145] Property org.pabk.emanager.Manager.properties have a null value, default value null is used instead
+2015-12-22 11:31:08,518 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 11:31:13,620 INFO [main] o.p.e.Loader [Sys.java:145] Property logName have a null value, default value org.pabk.emanager.Manager is used instead
+2015-12-22 11:31:21,312 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 11:31:26,929 INFO [main] o.p.e.Loader [Sys.java:145] Property logPattern have a null value, default value %date %level [%thread] %logger{10} [%file:%line] %msg%n is used instead
+2015-12-22 11:31:30,658 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 11:31:30,674 INFO [main] o.p.e.Loader [Sys.java:145] Property logDirectory have a null value, default value logs\manager is used instead
+2015-12-22 11:31:32,375 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 11:31:32,375 INFO [main] o.p.e.Loader [Sys.java:145] Property logExtension have a null value, default value .log is used instead
+2015-12-22 11:31:32,953 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 11:31:32,953 INFO [main] o.p.e.Loader [Sys.java:145] Property logDateFormatInArchiveFilename have a null value, default value .%d{yyyy-MM-dd} is used instead
+2015-12-22 11:31:33,468 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 11:31:33,468 INFO [main] o.p.e.Loader [Sys.java:145] Property logArchiveFileNameExtension have a null value, default value .zip is used instead
+2015-12-22 11:31:34,031 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 11:31:34,031 INFO [main] o.p.e.Loader [Sys.java:145] Property logHistory have a null value, default value 60 is used instead
+2015-12-22 11:31:37,479 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 11:31:37,479 INFO [main] o.p.e.Loader [Sys.java:145] Property org.pabk.emanager.Loader.neededModulesCheckMaxLoop have a null value, default value 10 is used instead
+2015-12-22 11:36:11,457 INFO [main] o.p.e.Loader [Sys.java:251] Logger for org.pabk.emanager.Loader was successfully started
+2015-12-22 11:36:11,925 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 11:36:11,941 INFO [main] o.p.e.Loader [Sys.java:145] Property org.pabk.emanager.Loader.distributionList have a null value, default value conf/distribution_list.xml is used instead
+2015-12-22 11:36:12,378 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 11:36:12,378 INFO [main] o.p.e.Loader [Sys.java:145] Property org.pabk.emanager.Loader.codeRepositoryList have a null value, default value conf/code_repository.xml is used instead
+2015-12-22 11:36:12,457 INFO [main] o.p.e.Loader [Loader.java:38] Distribution was successfully loaded
+2015-12-22 11:36:58,758 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 11:37:02,534 INFO [main] o.p.e.Loader [Sys.java:145] Property org.pabk.emanager.Manager.properties have a null value, default value null is used instead
+2015-12-22 11:44:07,036 INFO [main] o.p.e.Loader [Sys.java:251] Logger for org.pabk.emanager.Loader was successfully started
+2015-12-22 11:44:07,051 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 11:44:07,051 INFO [main] o.p.e.Loader [Sys.java:145] Property org.pabk.emanager.Loader.distributionList have a null value, default value conf/distribution_list.xml is used instead
+2015-12-22 11:44:07,051 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 11:44:07,051 INFO [main] o.p.e.Loader [Sys.java:145] Property org.pabk.emanager.Loader.codeRepositoryList have a null value, default value conf/code_repository.xml is used instead
+2015-12-22 11:44:07,098 INFO [main] o.p.e.Loader [Loader.java:38] Distribution was successfully loaded
+2015-12-22 11:44:23,634 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 11:44:23,634 INFO [main] o.p.e.Loader [Sys.java:145] Property org.pabk.emanager.Manager.properties have a null value, default value null is used instead
+2015-12-22 11:44:28,662 INFO [main] o.p.e.Loader [Sys.java:251] Logger for org.pabk.emanager.Loader was successfully started
+2015-12-22 11:44:28,662 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 11:44:28,662 INFO [main] o.p.e.Loader [Sys.java:145] Property org.pabk.emanager.Loader.distributionList have a null value, default value conf/distribution_list.xml is used instead
+2015-12-22 11:44:28,662 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 11:44:28,662 INFO [main] o.p.e.Loader [Sys.java:145] Property org.pabk.emanager.Loader.codeRepositoryList have a null value, default value conf/code_repository.xml is used instead
+2015-12-22 11:44:28,724 INFO [main] o.p.e.Loader [Loader.java:38] Distribution was successfully loaded
+2015-12-22 11:46:44,411 WARN [main] o.p.e.Loader [Sys.java:148] Property have a null value
+2015-12-22 11:46:47,485 INFO [main] o.p.e.Loader [Sys.java:145] Property org.pabk.emanager.Manager.properties have a null value, default value null is used instead
+2015-12-22 13:37:01,336 INFO [main] o.p.e.Loader [Sys.java:252] Logger for org.pabk.emanager.Loader was successfully started
+2015-12-22 13:37:01,352 INFO [main] o.p.e.Loader [Sys.java:146] Load property value conf\distribution_list.xml for property org.pabk.emanager.Loader.distributionList for object Class
+2015-12-22 13:37:01,352 INFO [main] o.p.e.Loader [Sys.java:146] Load property value conf\code_repository.xml for property org.pabk.emanager.Loader.codeRepositoryList for object Class
+2015-12-22 13:37:01,398 INFO [main] o.p.e.Loader [Loader.java:38] Distribution was successfully loaded
+2015-12-22 13:37:01,398 INFO [main] o.p.e.Loader [Sys.java:146] Load property value null for property org.pabk.emanager.Manager.properties for object Class
+2015-12-22 13:37:01,398 INFO [main] o.p.e.Loader [Sys.java:146] Load property value org.pabk.emanager.Manager for property logName for object Manager
+2015-12-22 13:37:01,398 INFO [main] o.p.e.Loader [Sys.java:146] Load property value %date %level [%thread] %logger{10} [%file:%line] %msg%n for property logPattern for object Manager
+2015-12-22 13:37:01,398 INFO [main] o.p.e.Loader [Sys.java:146] Load property value logs\manager for property logDirectory for object Manager
+2015-12-22 13:37:01,398 INFO [main] o.p.e.Loader [Sys.java:146] Load property value .log for property logExtension for object Manager
+2015-12-22 13:37:01,398 INFO [main] o.p.e.Loader [Sys.java:146] Load property value .%d{yyyy-MM-dd} for property logDateFormatInArchiveFilename for object Manager
+2015-12-22 13:37:01,398 INFO [main] o.p.e.Loader [Sys.java:146] Load property value .zip for property logArchiveFileNameExtension for object Manager
+2015-12-22 13:37:01,398 INFO [main] o.p.e.Loader [Sys.java:146] Load property value 60 for property logHistory for object Manager
+2015-12-22 13:37:01,398 INFO [main] o.p.e.Loader [Sys.java:146] Load property value 10 for property org.pabk.emanager.Loader.neededModulesCheckMaxLoop for object Class
+2015-12-22 13:37:01,398 INFO [main] o.p.e.Loader [Sys.java:146] Load property value 10 for property org.pabk.emanager.Loader.neededModulesWaitInterval for object Class
+2015-12-22 13:43:29,330 INFO [main] o.p.e.Loader [Sys.java:252] Logger for org.pabk.emanager.Loader was successfully started
+2015-12-22 13:43:29,330 INFO [main] o.p.e.Loader [Sys.java:146] Load property value conf\distribution_list.xml for property org.pabk.emanager.Loader.distributionList for object Class
+2015-12-22 13:43:29,330 INFO [main] o.p.e.Loader [Sys.java:146] Load property value conf\code_repository.xml for property org.pabk.emanager.Loader.codeRepositoryList for object Class
+2015-12-22 13:43:29,392 INFO [main] o.p.e.Loader [Loader.java:38] Distribution was successfully loaded
+2015-12-22 13:45:16,975 INFO [main] o.p.e.Loader [Sys.java:252] Logger for org.pabk.emanager.Loader was successfully started
+2015-12-22 13:45:16,975 INFO [main] o.p.e.Loader [Sys.java:146] Load property value conf\distribution_list.xml for property org.pabk.emanager.Loader.distributionList for object Class
+2015-12-22 13:45:16,975 INFO [main] o.p.e.Loader [Sys.java:146] Load property value conf\code_repository.xml for property org.pabk.emanager.Loader.codeRepositoryList for object Class
+2015-12-22 13:45:17,038 INFO [main] o.p.e.Loader [Loader.java:38] Distribution was successfully loaded
+2015-12-22 13:46:44,383 INFO [main] o.p.e.Loader [Sys.java:146] Load property value null for property org.pabk.emanager.Manager.properties for object Class
+2015-12-22 13:47:08,596 INFO [main] o.p.e.Loader [Sys.java:146] Load property value org.pabk.emanager.Manager for property logName for object Manager
+2015-12-22 13:47:08,596 INFO [main] o.p.e.Loader [Sys.java:146] Load property value %date %level [%thread] %logger{10} [%file:%line] %msg%n for property logPattern for object Manager
+2015-12-22 13:47:08,596 INFO [main] o.p.e.Loader [Sys.java:146] Load property value logs\manager for property logDirectory for object Manager
+2015-12-22 13:47:08,596 INFO [main] o.p.e.Loader [Sys.java:146] Load property value .log for property logExtension for object Manager
+2015-12-22 13:47:08,596 INFO [main] o.p.e.Loader [Sys.java:146] Load property value .%d{yyyy-MM-dd} for property logDateFormatInArchiveFilename for object Manager
+2015-12-22 13:47:08,596 INFO [main] o.p.e.Loader [Sys.java:146] Load property value .zip for property logArchiveFileNameExtension for object Manager
+2015-12-22 13:47:08,596 INFO [main] o.p.e.Loader [Sys.java:146] Load property value 60 for property logHistory for object Manager
+2015-12-22 13:47:08,597 INFO [main] o.p.e.Loader [Sys.java:146] Load property value 10 for property org.pabk.emanager.Loader.neededModulesCheckMaxLoop for object Class
+2015-12-22 13:47:08,597 INFO [main] o.p.e.Loader [Sys.java:146] Load property value 10 for property org.pabk.emanager.Loader.neededModulesWaitInterval for object Class
+2015-12-22 13:47:12,298 INFO [main] o.p.e.Loader [Sys.java:252] Logger for org.pabk.emanager.Loader was successfully started
+2015-12-22 13:47:12,298 INFO [main] o.p.e.Loader [Sys.java:146] Load property value conf\distribution_list.xml for property org.pabk.emanager.Loader.distributionList for object Class
+2015-12-22 13:47:12,298 INFO [main] o.p.e.Loader [Sys.java:146] Load property value conf\code_repository.xml for property org.pabk.emanager.Loader.codeRepositoryList for object Class
+2015-12-22 13:47:12,345 INFO [main] o.p.e.Loader [Loader.java:38] Distribution was successfully loaded
+2015-12-22 13:47:13,078 INFO [main] o.p.e.Loader [Sys.java:146] Load property value null for property org.pabk.emanager.Manager.properties for object Class
+2015-12-22 13:47:38,683 INFO [main] o.p.e.Loader [Sys.java:252] Logger for org.pabk.emanager.Loader was successfully started
+2015-12-22 13:47:38,699 INFO [main] o.p.e.Loader [Sys.java:146] Load property value conf\distribution_list.xml for property org.pabk.emanager.Loader.distributionList for object Class
+2015-12-22 13:47:38,699 INFO [main] o.p.e.Loader [Sys.java:146] Load property value conf\code_repository.xml for property org.pabk.emanager.Loader.codeRepositoryList for object Class
+2015-12-22 13:47:38,745 INFO [main] o.p.e.Loader [Loader.java:38] Distribution was successfully loaded
+2015-12-22 13:47:42,131 INFO [main] o.p.e.Loader [Sys.java:146] Load property value null for property org.pabk.emanager.Manager.properties for object Class
+2015-12-22 13:47:43,817 INFO [main] o.p.e.Loader [Sys.java:146] Load property value org.pabk.emanager.Manager for property logName for object Manager
+2015-12-22 13:47:43,817 INFO [main] o.p.e.Loader [Sys.java:146] Load property value %date %level [%thread] %logger{10} [%file:%line] %msg%n for property logPattern for object Manager
+2015-12-22 13:47:43,817 INFO [main] o.p.e.Loader [Sys.java:146] Load property value logs\manager for property logDirectory for object Manager
+2015-12-22 13:47:43,817 INFO [main] o.p.e.Loader [Sys.java:146] Load property value .log for property logExtension for object Manager
+2015-12-22 13:47:43,817 INFO [main] o.p.e.Loader [Sys.java:146] Load property value .%d{yyyy-MM-dd} for property logDateFormatInArchiveFilename for object Manager
+2015-12-22 13:47:43,817 INFO [main] o.p.e.Loader [Sys.java:146] Load property value .zip for property logArchiveFileNameExtension for object Manager
+2015-12-22 13:47:43,817 INFO [main] o.p.e.Loader [Sys.java:146] Load property value 60 for property logHistory for object Manager
+2015-12-22 13:47:43,818 INFO [main] o.p.e.Loader [Sys.java:146] Load property value 10 for property org.pabk.emanager.Loader.neededModulesCheckMaxLoop for object Class
+2015-12-22 13:47:43,818 INFO [main] o.p.e.Loader [Sys.java:146] Load property value 10 for property org.pabk.emanager.Loader.neededModulesWaitInterval for object Class
+2015-12-22 13:47:47,285 INFO [main] o.p.e.Loader [Sys.java:252] Logger for org.pabk.emanager.Loader was successfully started
+2015-12-22 13:47:47,285 INFO [main] o.p.e.Loader [Sys.java:146] Load property value conf\distribution_list.xml for property org.pabk.emanager.Loader.distributionList for object Class
+2015-12-22 13:47:47,285 INFO [main] o.p.e.Loader [Sys.java:146] Load property value conf\code_repository.xml for property org.pabk.emanager.Loader.codeRepositoryList for object Class
+2015-12-22 13:47:47,347 INFO [main] o.p.e.Loader [Loader.java:38] Distribution was successfully loaded
+2015-12-22 13:53:33,945 INFO [main] o.p.e.Loader [Sys.java:252] Logger for org.pabk.emanager.Loader was successfully started
+2015-12-22 13:53:33,945 INFO [main] o.p.e.Loader [Sys.java:146] Load property value conf\distribution_list.xml for property org.pabk.emanager.Loader.distributionList for object Class
+2015-12-22 13:53:33,945 INFO [main] o.p.e.Loader [Sys.java:146] Load property value conf\code_repository.xml for property org.pabk.emanager.Loader.codeRepositoryList for object Class
+2015-12-22 13:53:34,008 INFO [main] o.p.e.Loader [Loader.java:38] Distribution was successfully loaded
+2015-12-22 13:53:34,008 INFO [main] o.p.e.Loader [Sys.java:146] Load property value org.pabk.emanager.properties.xml for property org.pabk.emanager.Manager.properties for object Class
+2015-12-22 14:12:56,722 INFO [main] o.p.e.Loader [Sys.java:252] Logger for org.pabk.emanager.Loader was successfully started
+2015-12-22 14:12:56,722 INFO [main] o.p.e.Loader [Sys.java:146] Load property value conf\distribution_list.xml for property org.pabk.emanager.Loader.distributionList for object Class
+2015-12-22 14:12:56,722 INFO [main] o.p.e.Loader [Sys.java:146] Load property value conf\code_repository.xml for property org.pabk.emanager.Loader.codeRepositoryList for object Class
+2015-12-22 14:12:56,784 INFO [main] o.p.e.Loader [Loader.java:38] Distribution was successfully loaded
+2015-12-22 14:12:56,784 INFO [main] o.p.e.Loader [Sys.java:146] Load property value org.pabk.emanager.properties.xml for property org.pabk.emanager.Manager.properties for object Class
+2015-12-22 14:13:07,319 INFO [main] o.p.e.Loader [Sys.java:252] Logger for org.pabk.emanager.Loader was successfully started
+2015-12-22 14:13:07,319 INFO [main] o.p.e.Loader [Sys.java:146] Load property value conf\distribution_list.xml for property org.pabk.emanager.Loader.distributionList for object Class
+2015-12-22 14:13:07,319 INFO [main] o.p.e.Loader [Sys.java:146] Load property value conf\code_repository.xml for property org.pabk.emanager.Loader.codeRepositoryList for object Class
+2015-12-22 14:13:07,365 INFO [main] o.p.e.Loader [Loader.java:38] Distribution was successfully loaded
+2015-12-22 14:13:07,365 INFO [main] o.p.e.Loader [Sys.java:146] Load property value org/pabk/emanager/Manager.properties.xml for property org.pabk.emanager.Manager.properties for object Class
+2015-12-22 14:13:07,365 INFO [main] o.p.e.Loader [Sys.java:146] Load property value org.pabk.emanager.Manager for property logName for object Manager
+2015-12-22 14:13:07,365 INFO [main] o.p.e.Loader [Sys.java:146] Load property value %date %level [%thread] %logger{10} [%file:%line] %msg%n for property logPattern for object Manager
+2015-12-22 14:13:07,365 INFO [main] o.p.e.Loader [Sys.java:146] Load property value logs\manager for property logDirectory for object Manager
+2015-12-22 14:13:07,365 INFO [main] o.p.e.Loader [Sys.java:146] Load property value .log for property logExtension for object Manager
+2015-12-22 14:13:07,365 INFO [main] o.p.e.Loader [Sys.java:146] Load property value .%d{yyyy-MM-dd} for property logDateFormatInArchiveFilename for object Manager
+2015-12-22 14:13:07,365 INFO [main] o.p.e.Loader [Sys.java:146] Load property value .zip for property logArchiveFileNameExtension for object Manager
+2015-12-22 14:13:07,365 INFO [main] o.p.e.Loader [Sys.java:146] Load property value 60 for property logHistory for object Manager
+2015-12-22 14:13:07,381 INFO [main] o.p.e.Loader [Sys.java:146] Load property value 10 for property org.pabk.emanager.Loader.neededModulesCheckMaxLoop for object Class
+2015-12-22 14:13:07,381 INFO [main] o.p.e.Loader [Sys.java:146] Load property value 10 for property org.pabk.emanager.Loader.neededModulesWaitInterval for object Class
+2015-12-22 14:13:09,381 INFO [main] o.p.e.Loader [Sys.java:252] Logger for org.pabk.emanager.Loader was successfully started
+2015-12-22 14:13:09,381 INFO [main] o.p.e.Loader [Sys.java:146] Load property value conf\distribution_list.xml for property org.pabk.emanager.Loader.distributionList for object Class
+2015-12-22 14:13:09,381 INFO [main] o.p.e.Loader [Sys.java:146] Load property value conf\code_repository.xml for property org.pabk.emanager.Loader.codeRepositoryList for object Class
+2015-12-22 14:13:09,428 INFO [main] o.p.e.Loader [Loader.java:38] Distribution was successfully loaded
+2015-12-22 14:13:09,428 INFO [main] o.p.e.Loader [Sys.java:146] Load property value org/pabk/emanager/Manager.properties.xml for property org.pabk.emanager.Manager.properties for object Class
+2015-12-22 14:14:10,304 INFO [main] o.p.e.Loader [Sys.java:252] Logger for org.pabk.emanager.Loader was successfully started
+2015-12-22 14:14:10,304 INFO [main] o.p.e.Loader [Sys.java:146] Load property value conf\distribution_list.xml for property org.pabk.emanager.Loader.distributionList for object Class
+2015-12-22 14:14:10,304 INFO [main] o.p.e.Loader [Sys.java:146] Load property value conf\code_repository.xml for property org.pabk.emanager.Loader.codeRepositoryList for object Class
+2015-12-22 14:14:10,366 INFO [main] o.p.e.Loader [Loader.java:38] Distribution was successfully loaded
+2015-12-22 14:14:10,366 INFO [main] o.p.e.Loader [Sys.java:146] Load property value /org/pabk/emanager/manager.properties.xml for property org.pabk.emanager.Manager.properties for object Class
+2015-12-22 14:16:06,607 INFO [main] o.p.e.Loader [Sys.java:252] Logger for org.pabk.emanager.Loader was successfully started
+2015-12-22 14:16:06,607 INFO [main] o.p.e.Loader [Sys.java:146] Load property value conf\distribution_list.xml for property org.pabk.emanager.Loader.distributionList for object Class
+2015-12-22 14:16:06,607 INFO [main] o.p.e.Loader [Sys.java:146] Load property value conf\code_repository.xml for property org.pabk.emanager.Loader.codeRepositoryList for object Class
+2015-12-22 14:16:06,669 INFO [main] o.p.e.Loader [Loader.java:38] Distribution was successfully loaded
+2015-12-22 14:16:06,669 INFO [main] o.p.e.Loader [Sys.java:146] Load property value /org/pabk/emanager/resources/manager.properties.xml for property org.pabk.emanager.Manager.properties for object Class
+2015-12-22 14:22:11,392 INFO [main] o.p.e.Loader [Sys.java:252] Logger for org.pabk.emanager.Loader was successfully started
+2015-12-22 14:22:11,392 INFO [main] o.p.e.Loader [Sys.java:146] Load property value conf\distribution_list.xml for property org.pabk.emanager.Loader.distributionList for object Class
+2015-12-22 14:22:11,392 INFO [main] o.p.e.Loader [Sys.java:146] Load property value conf\code_repository.xml for property org.pabk.emanager.Loader.codeRepositoryList for object Class
+2015-12-22 14:22:11,438 INFO [main] o.p.e.Loader [Loader.java:38] Distribution was successfully loaded
+2015-12-22 14:22:11,438 INFO [main] o.p.e.Loader [Sys.java:146] Load property value /org/pabk/emanager/resources/manager.properties.xml for property org.pabk.emanager.Manager.properties for object Class
+2015-12-22 14:22:11,657 INFO [main] o.p.e.Loader [Sys.java:146] Load property value org.pabk.emanager.Manager for property logName for object Manager
+2015-12-22 14:22:11,657 INFO [main] o.p.e.Loader [Sys.java:146] Load property value %date %level [%thread] %logger{10} [%file:%line] %msg%n for property logPattern for object Manager
+2015-12-22 14:22:11,657 INFO [main] o.p.e.Loader [Sys.java:146] Load property value logs\manager for property logDirectory for object Manager
+2015-12-22 14:22:11,657 INFO [main] o.p.e.Loader [Sys.java:146] Load property value .log for property logExtension for object Manager
+2015-12-22 14:22:11,657 INFO [main] o.p.e.Loader [Sys.java:146] Load property value .%d{yyyy-MM-dd} for property logDateFormatInArchiveFilename for object Manager
+2015-12-22 14:22:11,657 INFO [main] o.p.e.Loader [Sys.java:146] Load property value .zip for property logArchiveFileNameExtension for object Manager
+2015-12-22 14:22:11,657 INFO [main] o.p.e.Loader [Sys.java:146] Load property value 60 for property logHistory for object Manager
+2015-12-22 14:22:11,657 INFO [main] o.p.e.Loader [Sys.java:146] Load property value 10 for property org.pabk.emanager.Loader.neededModulesCheckMaxLoop for object Class
+2015-12-22 14:22:11,657 INFO [main] o.p.e.Loader [Sys.java:146] Load property value 10 for property org.pabk.emanager.Loader.neededModulesWaitInterval for object Class
+2015-12-22 14:23:45,355 INFO [main] o.p.e.Loader [Sys.java:252] Logger for org.pabk.emanager.Loader was successfully started
+2015-12-22 14:23:45,355 INFO [main] o.p.e.Loader [Sys.java:146] Load property value conf\distribution_list.xml for property org.pabk.emanager.Loader.distributionList for object Class
+2015-12-22 14:23:45,355 INFO [main] o.p.e.Loader [Sys.java:146] Load property value conf\code_repository.xml for property org.pabk.emanager.Loader.codeRepositoryList for object Class
+2015-12-22 14:23:45,417 INFO [main] o.p.e.Loader [Loader.java:38] Distribution was successfully loaded
+2015-12-22 14:23:45,417 INFO [main] o.p.e.Loader [Sys.java:146] Load property value /org/pabk/emanager/resources/manager.properties.xml for property org.pabk.emanager.Manager.properties for object Class
+2015-12-22 14:23:45,433 INFO [main] o.p.e.Loader [Sys.java:146] Load property value org.pabk.emanager.Manager for property logName for object Manager
+2015-12-22 14:23:45,433 INFO [main] o.p.e.Loader [Sys.java:146] Load property value %date %level [%thread] %logger{10} [%file:%line] %msg%n for property logPattern for object Manager
+2015-12-22 14:23:45,433 INFO [main] o.p.e.Loader [Sys.java:146] Load property value logs\manager for property logDirectory for object Manager
+2015-12-22 14:23:45,433 INFO [main] o.p.e.Loader [Sys.java:146] Load property value .log for property logExtension for object Manager
+2015-12-22 14:23:45,433 INFO [main] o.p.e.Loader [Sys.java:146] Load property value .%d{yyyy-MM-dd} for property logDateFormatInArchiveFilename for object Manager
+2015-12-22 14:23:45,433 INFO [main] o.p.e.Loader [Sys.java:146] Load property value .zip for property logArchiveFileNameExtension for object Manager
+2015-12-22 14:23:45,433 INFO [main] o.p.e.Loader [Sys.java:146] Load property value 60 for property logHistory for object Manager
+2015-12-22 14:23:45,433 INFO [main] o.p.e.Loader [Sys.java:146] Load property value 10 for property org.pabk.emanager.Loader.neededModulesCheckMaxLoop for object Class
+2015-12-22 14:23:52,468 INFO [main] o.p.e.Loader [Sys.java:146] Load property value 10 for property org.pabk.emanager.Loader.neededModulesWaitInterval for object Class
+2015-12-22 14:32:27,115 INFO [main] o.p.e.Loader [Sys.java:252] Logger for org.pabk.emanager.Loader was successfully started
+2015-12-22 14:32:27,115 INFO [main] o.p.e.Loader [Sys.java:146] Load property value conf\distribution_list.xml for property org.pabk.emanager.Loader.distributionList for object Class
+2015-12-22 14:32:27,115 INFO [main] o.p.e.Loader [Sys.java:146] Load property value conf\code_repository.xml for property org.pabk.emanager.Loader.codeRepositoryList for object Class
+2015-12-22 14:32:27,177 INFO [main] o.p.e.Loader [Loader.java:38] Distribution was successfully loaded
+2015-12-22 14:32:27,193 INFO [main] o.p.e.Loader [Sys.java:146] Load property value /org/pabk/emanager/resources/manager.properties.xml for property org.pabk.emanager.Manager.properties for object Class
+2015-12-22 14:32:27,193 INFO [main] o.p.e.Loader [Sys.java:146] Load property value org.pabk.emanager.Manager for property logName for object Manager
+2015-12-22 14:32:27,193 INFO [main] o.p.e.Loader [Sys.java:146] Load property value %date %level [%thread] %logger{10} [%file:%line] %msg%n for property logPattern for object Manager
+2015-12-22 14:32:27,193 INFO [main] o.p.e.Loader [Sys.java:146] Load property value logs\manager for property logDirectory for object Manager
+2015-12-22 14:32:27,193 INFO [main] o.p.e.Loader [Sys.java:146] Load property value .log for property logExtension for object Manager
+2015-12-22 14:32:27,193 INFO [main] o.p.e.Loader [Sys.java:146] Load property value .%d{yyyy-MM-dd} for property logDateFormatInArchiveFilename for object Manager
+2015-12-22 14:32:27,193 INFO [main] o.p.e.Loader [Sys.java:146] Load property value .zip for property logArchiveFileNameExtension for object Manager
+2015-12-22 14:32:27,193 INFO [main] o.p.e.Loader [Sys.java:146] Load property value 60 for property logHistory for object Manager
+2015-12-22 14:32:27,193 INFO [main] o.p.e.Loader [Sys.java:146] Load property value 10 for property org.pabk.emanager.Loader.neededModulesCheckMaxLoop for object Class
+2015-12-22 14:32:32,357 INFO [main] o.p.e.Loader [Sys.java:146] Load property value 10 for property org.pabk.emanager.Loader.neededModulesWaitInterval for object Class
+2015-12-22 14:34:47,506 INFO [main] o.p.e.Loader [Sys.java:252] Logger for org.pabk.emanager.Loader was successfully started
+2015-12-22 14:34:47,522 INFO [main] o.p.e.Loader [Sys.java:146] Load property value conf\distribution_list.xml for property org.pabk.emanager.Loader.distributionList for object Class
+2015-12-22 14:34:47,522 INFO [main] o.p.e.Loader [Sys.java:146] Load property value conf\code_repository.xml for property org.pabk.emanager.Loader.codeRepositoryList for object Class
+2015-12-22 14:34:47,569 INFO [main] o.p.e.Loader [Loader.java:38] Distribution was successfully loaded
+2015-12-22 14:34:47,569 INFO [main] o.p.e.Loader [Sys.java:146] Load property value /org/pabk/emanager/resources/manager.properties.xml for property org.pabk.emanager.Manager.properties for object Class
+2015-12-22 14:34:47,569 INFO [main] o.p.e.Loader [Sys.java:146] Load property value org.pabk.emanager.Manager for property logName for object Manager
+2015-12-22 14:34:47,569 INFO [main] o.p.e.Loader [Sys.java:146] Load property value %date %level [%thread] %logger{10} [%file:%line] %msg%n for property logPattern for object Manager
+2015-12-22 14:34:47,569 INFO [main] o.p.e.Loader [Sys.java:146] Load property value logs\manager for property logDirectory for object Manager
+2015-12-22 14:34:47,569 INFO [main] o.p.e.Loader [Sys.java:146] Load property value .log for property logExtension for object Manager
+2015-12-22 14:34:47,569 INFO [main] o.p.e.Loader [Sys.java:146] Load property value .%d{yyyy-MM-dd} for property logDateFormatInArchiveFilename for object Manager
+2015-12-22 14:34:47,569 INFO [main] o.p.e.Loader [Sys.java:146] Load property value .zip for property logArchiveFileNameExtension for object Manager
+2015-12-22 14:34:47,569 INFO [main] o.p.e.Loader [Sys.java:146] Load property value 60 for property logHistory for object Manager
+2015-12-22 14:34:47,584 INFO [main] o.p.e.Loader [Sys.java:146] Load property value 10 for property org.pabk.emanager.Loader.neededModulesCheckMaxLoop for object Class
+2015-12-22 14:34:47,584 INFO [main] o.p.e.Loader [Sys.java:146] Load property value 10 for property org.pabk.emanager.Loader.neededModulesWaitInterval for object Class
+2015-12-22 14:39:14,599 INFO [main] o.p.e.Loader [Sys.java:252] Logger for org.pabk.emanager.Loader was successfully started
+2015-12-22 14:39:14,599 INFO [main] o.p.e.Loader [Sys.java:146] Load property value conf\distribution_list.xml for property org.pabk.emanager.Loader.distributionList for object Class
+2015-12-22 14:39:14,599 INFO [main] o.p.e.Loader [Sys.java:146] Load property value conf\code_repository.xml for property org.pabk.emanager.Loader.codeRepositoryList for object Class
+2015-12-22 14:39:14,646 INFO [main] o.p.e.Loader [Loader.java:38] Distribution was successfully loaded
+2015-12-22 14:39:14,646 INFO [main] o.p.e.Loader [Sys.java:146] Load property value /org/pabk/emanager/resources/manager.properties.xml for property org.pabk.emanager.Manager.properties for object Class
+2015-12-22 14:39:14,662 INFO [main] o.p.e.Loader [Sys.java:146] Load property value org.pabk.emanager.Manager for property logName for object Manager
+2015-12-22 14:39:14,662 INFO [main] o.p.e.Loader [Sys.java:146] Load property value %date %level [%thread] %logger{10} [%file:%line] %msg%n for property logPattern for object Manager
+2015-12-22 14:39:14,662 INFO [main] o.p.e.Loader [Sys.java:146] Load property value logs\manager for property logDirectory for object Manager
+2015-12-22 14:39:14,662 INFO [main] o.p.e.Loader [Sys.java:146] Load property value .log for property logExtension for object Manager
+2015-12-22 14:39:14,662 INFO [main] o.p.e.Loader [Sys.java:146] Load property value .%d{yyyy-MM-dd} for property logDateFormatInArchiveFilename for object Manager
+2015-12-22 14:39:14,662 INFO [main] o.p.e.Loader [Sys.java:146] Load property value .zip for property logArchiveFileNameExtension for object Manager
+2015-12-22 14:39:14,662 INFO [main] o.p.e.Loader [Sys.java:146] Load property value 60 for property logHistory for object Manager
+2015-12-22 14:39:14,662 INFO [main] o.p.e.Loader [Sys.java:146] Load property value 10 for property org.pabk.emanager.Loader.neededModulesCheckMaxLoop for object Class
+2015-12-22 14:39:14,662 INFO [main] o.p.e.Loader [Sys.java:146] Load property value 10 for property org.pabk.emanager.Loader.neededModulesWaitInterval for object Class
+2015-12-22 14:58:18,845 INFO [main] o.p.e.Loader [Sys.java:252] Logger for org.pabk.emanager.Loader was successfully started
+2015-12-22 14:58:18,845 INFO [main] o.p.e.Loader [Sys.java:146] Load property value conf\distribution_list.xml for property org.pabk.emanager.Loader.distributionList for object Class
+2015-12-22 14:58:18,845 INFO [main] o.p.e.Loader [Sys.java:146] Load property value conf\code_repository.xml for property org.pabk.emanager.Loader.codeRepositoryList for object Class
+2015-12-22 14:58:18,892 INFO [main] o.p.e.Loader [Loader.java:38] Distribution was successfully loaded
+2015-12-22 14:58:18,892 INFO [main] o.p.e.Loader [Sys.java:146] Load property value /org/pabk/emanager/resources/manager.properties.xml for property org.pabk.emanager.Manager.properties for object Class
+2015-12-22 14:58:18,907 INFO [main] o.p.e.Loader [Sys.java:146] Load property value org.pabk.emanager.Manager for property logName for object Manager
+2015-12-22 14:58:18,907 INFO [main] o.p.e.Loader [Sys.java:146] Load property value %date %level [%thread] %logger{10} [%file:%line] %msg%n for property logPattern for object Manager
+2015-12-22 14:58:18,907 INFO [main] o.p.e.Loader [Sys.java:146] Load property value logs\manager for property logDirectory for object Manager
+2015-12-22 14:58:18,907 INFO [main] o.p.e.Loader [Sys.java:146] Load property value .log for property logExtension for object Manager
+2015-12-22 14:58:18,907 INFO [main] o.p.e.Loader [Sys.java:146] Load property value .%d{yyyy-MM-dd} for property logDateFormatInArchiveFilename for object Manager
+2015-12-22 14:58:18,907 INFO [main] o.p.e.Loader [Sys.java:146] Load property value .zip for property logArchiveFileNameExtension for object Manager
+2015-12-22 14:58:18,907 INFO [main] o.p.e.Loader [Sys.java:146] Load property value 60 for property logHistory for object Manager
+2015-12-22 14:58:18,907 INFO [main] o.p.e.Loader [Sys.java:146] Load property value 10 for property org.pabk.emanager.Loader.neededModulesCheckMaxLoop for object Class
+2015-12-22 14:58:18,907 INFO [main] o.p.e.Loader [Sys.java:146] Load property value 10 for property org.pabk.emanager.Loader.neededModulesWaitInterval for object Class

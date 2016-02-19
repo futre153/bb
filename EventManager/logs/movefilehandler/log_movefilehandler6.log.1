@@ -1,0 +1,122 @@
+jan 21, 2016 1:18:03 PM org.pabk.emanager.HandlerImpl init
+INFO: movefilehandler: logger movefilehandler is successfully initailized!
+jan 21, 2016 1:18:03 PM org.pabk.emanager.HandlerImpl run
+INFO: Module org.pabk.emanager.MoveFileHandler is started!
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value , for property move.separator from properties.
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value p3600x006 for property move.sourceServer from properties.
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value p3600x006 for property move.destinationServer from properties.
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value \d{8}\_20[0-9]{2}[01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9]\.[pt][rx][t] for property move.sourceFileMask from properties.
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value 0,8,23,27 for property move.renameFile from properties.
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value zip for property move.queues from properties.
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value move for property move.operation
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value \x09\x09 for property move.stmt.originalSeq
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value 9,12 for property move.stmt.replacementSeq
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value p3600x006 for property move.queue.zip.sourceServer
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value p3600x006 for property move.queue.zip.destinationServer
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value D$\TEMP for property move.queue.zip.source from properties.
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value D$ for property move.queue.zip.destination from properties.
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value .*\.[Zz][Ii][Pp] for property move.queue.zip.sourceFileMask from properties.
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value  for property move.queue.zip.renameFile from properties.
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value unzip for property move.queue.zip.operation from properties.
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Loaded value 0 for property move.queue.zip.operationDelay from properties.
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value 11 for property move.poolInterval
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler getProperty
+INFO: Set default value Cp437 for property move.zipCharset
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler businessLogic
+INFO: MoveFileHandler is working
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler execute
+INFO: Start unzip files on queue zip
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler execute
+INFO: Found source directory \\p3600x006\D$\TEMP for queue zip
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler execute
+INFO: Found destination directory \\p3600x006\D$ for queue zip
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler execute
+INFO: Used filename pattern .*\.[Zz][Ii][Pp] and keep days = 0 for input files on queue zip
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler execute
+INFO: Rename output files [] applies on queue zip
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler execute
+INFO: 1 files found on source directory \\p3600x006\D$\TEMP that matching filter .*\.[Zz][Ii][Pp] and keep days = 0 on queue zip
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler execute
+INFO: File \\p3600x006\D$\TEMP\TEMP.zip found on queue zip
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler deleteFile
+INFO: File D:\Dokumenty\git\bb\EventManager\tmp\TEMP.zip not exists and there was not deleted
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler renameToFile
+INFO: File \\p3600x006\D$\TEMP\TEMP.zip was successfully renamed to D:\Dokumenty\git\bb\EventManager\tmp\TEMP.zip
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler unzip
+INFO: Zip entry \\p3600x006\D$\TEMP\access_rights.xml was successfully unzipped as temporary file D:\Dokumenty\git\bb\EventManager\tmp\access_rights.xml.tmp
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler unzip
+INFO: Zip entry \\p3600x006\D$\TEMP\brandys.cer was successfully unzipped as temporary file D:\Dokumenty\git\bb\EventManager\tmp\brandys.cer.tmp
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler unzip
+INFO: Zip entry \\p3600x006\D$\TEMP\brandys.key was successfully unzipped as temporary file D:\Dokumenty\git\bb\EventManager\tmp\brandys.key.tmp
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler unzip
+INFO: Zip entry \\p3600x006\D$\TEMP\brandys.pfx was successfully unzipped as temporary file D:\Dokumenty\git\bb\EventManager\tmp\brandys.pfx.tmp
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler unzip
+INFO: Zip entry \\p3600x006\D$\TEMP\brandys.req was successfully unzipped as temporary file D:\Dokumenty\git\bb\EventManager\tmp\brandys.req.tmp
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler unzip
+INFO: Zip entry \\p3600x006\D$\TEMP\brandys2.pfx was successfully unzipped as temporary file D:\Dokumenty\git\bb\EventManager\tmp\brandys2.pfx.tmp
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler unzip
+INFO: Zip entry \\p3600x006\D$\TEMP\distribution_list2.xml was successfully unzipped as temporary file D:\Dokumenty\git\bb\EventManager\tmp\distribution_list2.xml.tmp
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler unzip
+INFO: Zip entry \\p3600x006\D$\TEMP\krb5.conf was successfully unzipped as temporary file D:\Dokumenty\git\bb\EventManager\tmp\krb5.conf.tmp
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler unzip
+INFO: Zip entry \\p3600x006\D$\TEMP\login.conf was successfully unzipped as temporary file D:\Dokumenty\git\bb\EventManager\tmp\login.conf.tmp
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler unzip
+INFO: Zip entry \\p3600x006\D$\TEMP\Lukjan?nko-eBook.rar was successfully unzipped as temporary file D:\Dokumenty\git\bb\EventManager\tmp\Lukjan?nko-eBook.rar.tmp
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler unzip
+INFO: Zip entry \\p3600x006\D$\TEMP\nots_v1_4_test.aar was successfully unzipped as temporary file D:\Dokumenty\git\bb\EventManager\tmp\nots_v1_4_test.aar.tmp
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler unzip
+INFO: Zip entry \\p3600x006\D$\TEMP\P3600X006.key was successfully unzipped as temporary file D:\Dokumenty\git\bb\EventManager\tmp\P3600X006.key.tmp
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler unzip
+INFO: Zip entry \\p3600x006\D$\TEMP\root.cer was successfully unzipped as temporary file D:\Dokumenty\git\bb\EventManager\tmp\root.cer.tmp
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler renameToFile
+INFO: File D:\Dokumenty\git\bb\EventManager\tmp\login.conf.tmp was successfully renamed to \\p3600x006\D$\TEMP\login.conf
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler renameToFile
+INFO: File D:\Dokumenty\git\bb\EventManager\tmp\access_rights.xml.tmp was successfully renamed to \\p3600x006\D$\TEMP\access_rights.xml
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler renameToFile
+INFO: File D:\Dokumenty\git\bb\EventManager\tmp\P3600X006.key.tmp was successfully renamed to \\p3600x006\D$\TEMP\P3600X006.key
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler renameToFile
+INFO: File D:\Dokumenty\git\bb\EventManager\tmp\brandys.cer.tmp was successfully renamed to \\p3600x006\D$\TEMP\brandys.cer
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler renameToFile
+INFO: File D:\Dokumenty\git\bb\EventManager\tmp\krb5.conf.tmp was successfully renamed to \\p3600x006\D$\TEMP\krb5.conf
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler renameToFile
+INFO: File D:\Dokumenty\git\bb\EventManager\tmp\root.cer.tmp was successfully renamed to \\p3600x006\D$\TEMP\root.cer
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler renameToFile
+INFO: File D:\Dokumenty\git\bb\EventManager\tmp\brandys.pfx.tmp was successfully renamed to \\p3600x006\D$\TEMP\brandys.pfx
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler renameToFile
+INFO: File D:\Dokumenty\git\bb\EventManager\tmp\brandys.req.tmp was successfully renamed to \\p3600x006\D$\TEMP\brandys.req
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler renameToFile
+INFO: File D:\Dokumenty\git\bb\EventManager\tmp\distribution_list2.xml.tmp was successfully renamed to \\p3600x006\D$\TEMP\distribution_list2.xml
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler renameToFile
+INFO: File D:\Dokumenty\git\bb\EventManager\tmp\Lukjan?nko-eBook.rar.tmp was successfully renamed to \\p3600x006\D$\TEMP\Lukjan?nko-eBook.rar
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler renameToFile
+INFO: File D:\Dokumenty\git\bb\EventManager\tmp\brandys.key.tmp was successfully renamed to \\p3600x006\D$\TEMP\brandys.key
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler renameToFile
+INFO: File D:\Dokumenty\git\bb\EventManager\tmp\nots_v1_4_test.aar.tmp was successfully renamed to \\p3600x006\D$\TEMP\nots_v1_4_test.aar
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler renameToFile
+INFO: File D:\Dokumenty\git\bb\EventManager\tmp\brandys2.pfx.tmp was successfully renamed to \\p3600x006\D$\TEMP\brandys2.pfx
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler deleteFile
+INFO: File D:\Dokumenty\git\bb\EventManager\tmp\TEMP.zip was successfully deleted
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler execute
+INFO: File \\p3600x006\D$\TEMP\TEMP.zip is successfully unzip to \\p3600x006\D$\TEMP.zip no queue zip
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler execute
+INFO: Successfully ends unzip files on queue zip
+jan 21, 2016 1:18:03 PM org.pabk.emanager.MoveFileHandler businessLogic
+INFO: MoveFileHandler is SLEEPING

@@ -111,5 +111,10 @@ public class Table extends HtmlTag implements TableTag {
 		return true;
 	}
 
+	@Override
+	public void setColgroup(String... classes) {
+		this.appendChildAtStart(Colgroup.getInstance(classes));		
+	}
+
 
 }

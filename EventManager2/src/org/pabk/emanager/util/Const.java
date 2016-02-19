@@ -61,10 +61,10 @@ public class Const {
 	//error messages
 	public static final String NULL_PROPERTIES_ERROR = "Properties are null. %s will be interrupted";
 	public static final String KEY_PROPERTY_ERROR = "Key of property cannot be null";
-	public static final String PROPERTY_NULL_ERROR  = "Property %s cannot have null value";
+	public static final String PROPERTY_NULL_ERROR  = "Property %s for object %s cannot have a null value";
 	public static final String PROPERTY_NULL_ERROR_2 = "Property have a null value";
 	public static final String PROPERTY_NULL_ERROR_3 = "Property %s have a null value, default value %s is used instead";
-	public static final String PROPERTY_VALUE = "Load property value %s for property %s";
+	public static final String PROPERTY_VALUE = "Load property value %s for property %s for object %s";
 	public static final String PROPERTY_CAST_ERROR = "Failed to create an instance of %s for property %s from value %s in handler %s";
 	public static final String PROPERTY_PARSE_INTEGER_ERROR = "Failed to parse integer for property %s from value %s in handler %s";
 	public static final String PROPERTY_PARSE_LONG_ERROR = "Failed to parse long integer for property %s from value %s in handler %s";
@@ -95,6 +95,9 @@ public class Const {
 	public static final String GET_FUNCTION_NAME = "get";
 	public static final String FATAL_TEXT = "FATAL";
 	public static final Object MAIN_CLASS = Loader.class;
+	public static final String PROPERTIES_EXTENSION = ".properties.xml";
+	public static final String RESOURCES_DIR_NAME = "resources";
+	public static final String MUDULE_SHUTDOWN = "Module %s is under shutdown";
 	
 	
 	

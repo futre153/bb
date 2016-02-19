@@ -2,6 +2,7 @@ package org.pabk.html;
 
 interface TableTag {
 	void setCaption(String caption);
+	void setColgroup(String ...classes);
 	Caption removeCaption();
 	Caption getCaption();
 	void setHeader(String[] header);

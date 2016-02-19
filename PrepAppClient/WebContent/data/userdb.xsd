@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/userdb" xmlns:tns="http://www.example.org/userdb" elementFormDefault="qualified">
+    
+
+    <xsd:simpleType name="UserEtryType">
+    	<xsd:restriction base="xsd:string"></xsd:restriction>
+    </xsd:simpleType>
+
+
+    <xsd:complexType name="UserDBType">
+    	<xsd:sequence>
+    		<xsd:element name="entry" type="tns:UserEtryType" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:element name="entries" type="tns:UserDBType"></xsd:element>
+</xsd:schema>

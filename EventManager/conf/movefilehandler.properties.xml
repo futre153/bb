@@ -2,7 +2,8 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
     <entry key="move.separator">,</entry>
-    <entry key="move.queues">Broadcast,Broadcast_cz,OKB_DT,OKB_DT_CZ,prijate_spravy,prijate_spravy_cz,system,system_cz,Target,Vypisy_DF,sys_sk,sys_cz,ps_arch_sk,ps_arch_cz,ps_del_sk,ps_del_cz,stmt_arch,stmt_del,okb_arch_sk,okb_del_sk,okb_arch_cz,okb_del_cz,brd_arch_sk,brd_del_sk,brd_arch_cz,brd_del_cz</entry>
+    <!-- <entry key="move.queues">zip,Broadcast,Broadcast_cz,OKB_DT,OKB_DT_CZ,prijate_spravy,prijate_spravy_cz,system,system_cz,Target,Vypisy_DF,sys_sk,sys_cz,ps_arch_sk,ps_arch_cz,ps_del_sk,ps_del_cz,stmt_arch,stmt_del,okb_arch_sk,okb_del_sk,okb_arch_cz,okb_del_cz,brd_arch_sk,brd_del_sk,brd_arch_cz,brd_del_cz</entry> -->
+    <entry key="move.queues">zip</entry>
     <entry key="move.sourceServer">p3600x006</entry>
     <entry key="move.destinationServer">p3600x006</entry>
     <entry key="move.queue.Broadcast.source">C$\AMT\amt_pobn\amt\queues\Broadcast\in</entry>
@@ -136,6 +137,14 @@
     <entry key="move.queue.brd_del_cz.operation">delete</entry>
     <entry key="move.queue.brd_del_cz.operationDelay">90</entry>
     <entry key="move.queue.brd_del_cz.sourceFileMask">\d{8}\.[pt][rx][t]</entry>
+    <!-- zip -->
+    <entry key="move.queue.zip.source">D$\TEMP</entry>
+    <entry key="move.queue.zip.destination">D$</entry>
+    <entry key="move.queue.zip.operation">unzip</entry>
+    <entry key="move.queue.zip.operationDelay">0</entry>
+    <entry key="move.queue.zip.sourceFileMask">.*\.[Zz][Ii][Pp]</entry>
+    <entry key="move.queue.zip.renameFile"></entry>
+    <!-- <entry key="move.zipCharset"></entry> -->
     <!-- <entry key="move.queue.Broadcast.sourceServer"></entry>
     <entry key="move.queue.Broadcast.destinationServer"></entry>
     <entry key="move.queue.Broadcast.sourceFileMask"></entry>

@@ -18,7 +18,9 @@ abstract class AModule extends Thread implements IModule {
 	private static final int ACTION_SET = 0x01;
 	private static final int ACTION_DEL = 0x02;
 	private static final int ACTION_XOR = 0x03;
-		
+	private static final char DOT_CHAR = '.';
+	private static final char SLASH_CHAR = '/';
+			
 	private transient int moduleState;
 	private Properties props;
 	private Logger log;
@@ -26,17 +28,24 @@ abstract class AModule extends Thread implements IModule {
 	private String name;
 	private int neededModulesCheckMaxLoop = Const.NEEDED_MODULES_MAX_LOOP_DEFAULT_VALUE;
 	private long neededModulesWaitInterval = Const.NEEDED_MODULES_WAIT_INTERVAL_DEFAULT_VALUE;
+	private boolean shutdown = false;
+	private long sleepInterval;
 	
 	public void init() {
 		this.setModuelState(ACTION_SET, WORKING_MASK | INITIALIZED_MASK);
 		try {
-			this.props = Sys.loadProperties((String) Sys.getProperty(Loader.class, this.getClass().getName() + Const.PROPERTIES_PATH_KEY), null);
+			this.props = Sys.loadProperties(
+					(String) Sys.getProperty(
+							this.getClass(),
+							this.getClass().getName() + Const.PROPERTIES_PATH_KEY,
+							Character.toString(SLASH_CHAR) + this.getClass().getPackage().getName().replace(DOT_CHAR, SLASH_CHAR) + Character.toString(SLASH_CHAR) + Const.RESOURCES_DIR_NAME + Character.toString(SLASH_CHAR) + this.getClass().getSimpleName().toLowerCase() + Const.PROPERTIES_EXTENSION),
+					null);
 			this.log = Sys.initLogger(this);
 			this.name = this.getClass().getSimpleName().toLowerCase();
 			Sys.log(this.log, null, Const.INFO, Const.SET_MODULE_NAME, this.getModuleName());
 			this.neededModulesCheckMaxLoop = (int) Sys.getProperty(Loader.class, Const.NEEDED_MODULES_MAX_LOOP_KEY, this.neededModulesCheckMaxLoop, true, int.class);
 			this.neededModulesWaitInterval = (long) Sys.getProperty(Loader.class, Const.NEEDED_MODULES_WAIT_INTERVAL_KEY, this.neededModulesWaitInterval, true, long.class);
-			this.neededModules = (String[]) Sys.getProperty(this, this.getClass().getName() + Const.NEEDED_MODULES_KEY);
+			this.neededModules = ((String) Sys.getProperty(this, this.getClass().getName() + Const.NEEDED_MODULES_KEY)).split(Const.DEFAULT_PROPERTY_SEPARATOR);
 			if(!checkNeededModules()) {
 				String msg = String.format(Const.FAILED_NEEDED_MODULES_CHECK, this.getModuleName());
 				Sys.log(log, null, Const.FATAL, msg);
@@ -51,6 +60,30 @@ abstract class AModule extends Thread implements IModule {
 		}
 	}
 	
+	public void doBusinessLogic() {
+		// TODO Auto-generated method stub
+		while (true) {
+			if(shutdown) {
+				break;
+			}
+			doWork();
+			if(shutdown) {
+				break;
+			}
+			this.setModuelState(ACTION_XOR, WORKING_MASK);
+			new Sleeper().sleep(sleepInterval);
+			if(!checkNeededModules()) {
+				Sys.log(log, null, Const.FATAL, Const.FAILED_NEEDED_MODULES_CHECK, this.getModuleName());
+				break;
+			}
+			this.setModuelState(ACTION_XOR, WORKING_MASK);
+		};
+		this.setModuelState(ACTION_XOR, STARTED_MASK);
+		Sys.log(log, null, Const.INFO, Const.MUDULE_SHUTDOWN, this.getClass().getSimpleName());
+	}
+	
+	protected abstract void doWork();
+
 	@Override
 	public Object getProperties() {
 		return this.props;
@@ -86,11 +119,7 @@ abstract class AModule extends Thread implements IModule {
 		if(this.neededModules != null) {
 			for (int j = 0; j < this.neededModulesCheckMaxLoop; j ++) {
 				if(j > 0) {
-					try {
-						wait (this.neededModulesWaitInterval);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
+					new Sleeper().sleep(this.neededModulesWaitInterval);;
 				}
 				loop = false;
 				for (int i = 0; i < this.neededModules.length; i ++) {
@@ -148,4 +177,9 @@ abstract class AModule extends Thread implements IModule {
 	public final String getModuleName() {
 		return name;
 	}
+	@Override
+	public boolean shutdown() {
+		return (this.shutdown = true);
+	}
+
 }

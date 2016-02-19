@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<language xmlns="http://www.example.org/lamguage" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.example.org/lamguage lamguage.xsd ">
+    <commands>
+       <command>
+           <name>shutdown</name>
+           <description>
+               Príkaz zastaví beh aplikácie
+           </description>
+           <aliases>
+               <alias>exit</alias>
+               <alias>quit</alias>
+           </aliases>
+           <arguments>
+               <argument>
+                   <name>module</name>
+                   <optional>true</optional>
+               </argument>
+           </arguments>
+           <class>org.pabk.emanager</class>
+       </command>
+    </commands>
+    <arguments></arguments>
+</language>

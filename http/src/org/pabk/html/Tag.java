@@ -23,4 +23,6 @@ public interface Tag {
 	void appendText(String text);
 	ArrayList<Tag> getChildren();
 	Tag getParent();
+	boolean isInline();
+	void setInline(boolean inline);
 }

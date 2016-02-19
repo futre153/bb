@@ -13,17 +13,27 @@ public class HtmlTag implements Tag {
 	private static final CharSequence LEFT_UNIT_TAB = "  ";
 	private static final String CLASS_NAME = "class";
 	private static final String IDENTIFICATION = "id";
+	public static final String EMPTY_ATT_VALUE = "___EMPTY";
+	private static final String EMPTY = "";
 	protected boolean isShort=false;
 	protected boolean hasEndTag=true;
 	protected final Hashtable<String, String> atts=new Hashtable<String, String>();
 	protected final ArrayList<Tag> children=new ArrayList<Tag>();
 	protected Tag parent;
+	protected boolean inline = false;
+	
+	public boolean isInline() {return inline;}
+	public void setInline(boolean inline) {
+		this.inline = inline;
+	}
 	
 	@Override
 	public void doFinal(PrintWriter out, int c) throws IOException {
 		boolean is=isShort&(children.size()==0);
-		out.append(System.getProperty("line.separator"));
-		HtmlTag.setLeftTabs(out, c);
+		if(! isInline()) {
+			out.append(System.getProperty("line.separator"));
+			HtmlTag.setLeftTabs(out, c);
+		}
 		out.append('<');
 		out.append(this.getTagName());
 		Iterator<String> keys=atts.keySet().iterator();
@@ -35,7 +45,9 @@ public class HtmlTag implements Tag {
 			if(value.length()>0) {
 				out.append('=');
 				out.append('\'');
-				out.append(atts.get(key));
+				String val = atts.get(key);
+				val = val.equals(EMPTY_ATT_VALUE) ? EMPTY : val; 
+				out.append(val);
 				out.append('\'');
 			}
 		}
@@ -52,8 +64,10 @@ public class HtmlTag implements Tag {
 		c--;
 		if(children.size()!=0) {
 			if(!lastChild().isTextTag()) {
-				out.append(System.getProperty("line.separator"));
-				HtmlTag.setLeftTabs(out, c);
+				if(! isInline()) {
+					out.append(System.getProperty("line.separator"));
+					HtmlTag.setLeftTabs(out, c);
+				}
 			}
 		}
 		out.append('<');

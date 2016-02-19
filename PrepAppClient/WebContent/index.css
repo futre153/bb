@@ -1,0 +1,589 @@
+@CHARSET "UTF-8";
+
+body, input {
+	font-size: 100%;
+	color: windows;
+}
+body {
+	font-family: Arial, Helvetica, sans-serif;
+	background-color: window;
+	width:100%;
+	heigth:100%;
+	margin: 1em 0em;
+	border: 0em;
+	overflow: hidden;
+}
+#main-container {
+	width: 64em;
+	height:48em;
+	margin: 0em auto;
+	position: relative;
+	background-color: black;
+}
+
+#entry-info {
+	width:48em;
+	height: 32em;
+	top:8em;
+	left:8em;
+	position: relative;
+	background-color: lightyellow;
+}
+
+#entry-info-header {
+	height: 3em;
+	background-color: activecaption;
+	overflow: hidden;
+	padding: 0em 0.5em;
+}
+
+#entry-info-header table {
+	font-size: 120%;
+    font-weight: bolder;
+    border-bottom: 1px solid inactiveborder;
+}
+
+
+#entry-info-left-banner {
+	height:29em;
+	width: 16em;
+	background-color: inactivecaption;
+	overflow: hidden;
+}
+
+#entry-info-left-banner div {
+	padding: 0.25em 0.5em;
+	
+}
+
+#entry-info-left-banner table {
+	width: 100%;
+	font-size: smaller;
+	border-bottom: 1px solid inactiveborder;
+}
+
+#entry-info-left-banner caption {
+	font-weight: bolder;
+	text-align: left;
+	padding: 0.5em 0ex 0ex 1em;
+}
+
+#entry-info-left-banner .buttons form {
+	display: inline-block;
+}
+
+#entry-info-left-banner .result input, #entry-info-left-banner .reception-time input {
+	width: 11em;   
+}
+
+#entry-info-left-banner .buttons input {
+    width: 7em;   
+}
+
+#entry-info-content {
+	height:29em;
+	width: 32em;
+	background-color: inactivecaption;
+	position: absolute;
+	top: 3em;
+	left: 16em;
+	overflow: hidden;
+}
+
+#entry-info-content .entry-info-content-caption {
+	height: 2em;
+}
+
+#entry-info-content .entry-info-content-caption td {
+	font-weight: bolder;
+	padding: 0em 0.5em;
+}
+
+#entry-info-content .entry-info-content-bookmark {
+	
+	padding: 0em 0.5em 0.5em 0em;
+    height: 26.5em;
+}
+#entry-info-content .entry-info-content-frame {
+	border: 1px solid activeborder;
+	height: 25.5em;
+	padding: 0.5em;
+}
+
+#entry-info-content table {
+	border-spacing: 0em;
+}
+
+#entry-info-content .first-col, #entry-info-content .last-col, #entry-info-content td.common-rpc, #entry-info-content td.common-xml, #entry-info-content td.common-sms {
+    width: 0.25em;
+}
+ 
+#entry-info-content col.empty-col {
+    width:100%;
+}
+
+#entry-info-content tr.empty-row td {
+    font-size: 0.1em;
+    height: 2.5em;
+}
+
+
+#entry-info-content td.common-rpc label, #entry-info-content td.common-xml label, #entry-info-content td.common-sms label {
+    padding: 0em 0.25em;
+    cursor: pointer;
+}
+
+#entry-info-content table.rpc-active td.common-rpc, #entry-info-content table.xml-active td.common-xml, #entry-info-content table.sms-active td.common-sms {
+    background-color: activecaption;
+    font-weight: bolder;
+}
+
+#entry-info-content td.first-center, #entry-info-content td.last-center, #entry-info-content tr.empty-row td {
+    background-color: activecaption;
+}
+
+#entry-info-content table.rpc-active td.common-rpc, #entry-info-content table.xml-active td.common-xml, #entry-info-content table.sms-active td.common-sms {
+    border-top: 1px outset activeborder;
+    border-right: 1px outset activeborder;
+    border-left: 1px outset activeborder;
+}
+#entry-info-content table.rpc-active td.common-xml, #entry-info-content table.rpc-active td.common-sms {
+    border-top: 1px outset inactiveborder;
+    border-right: 1px outset inactiveborder;
+}
+#entry-info-content table.xml-active td.common-rpc, #entry-info-content table.xml-active td.common-sms {
+    border-top: 1px outset inactiveborder;
+}
+#entry-info-content table.xml-active td.common-rpc {
+    border-left: 1px outset inactiveborder;
+}
+#entry-info-content table.xml-active td.common-sms {
+    border-right: 1px outset inactiveborder;
+}
+#entry-info-content table.sms-active td.common-rpc, #entry-info-content table.sms-active td.common-xml {
+    border-top: 1px outset inactiveborder;
+    border-left: 1px outset inactiveborder;
+}
+
+#entry-info-content table.rpc-active td.common-xml-top, #entry-info-content table.rpc-active td.common-sms-top {
+    border-top: 1px outset activeborder;
+}
+#entry-info-content table.xml-active td.common-rpc-top, #entry-info-content table.xml-active td.common-sms-top {
+    border-top: 1px outset activeborder;
+}
+ 
+#entry-info-content table.sms-active td.common-rpc-top, #entry-info-content table.sms-active td.common-xml-top {
+    border-top: 1px outset activeborder;
+}
+
+#entry-info-content td.common-top, #entry-info-content td.last-top, #entry-info-content td.first-top {
+    border-top: 1px outset activeborder;
+}
+#entry-info-content td.last-center, #entry-info-content td.last-bottom, #entry-info-content td.last-top {
+    border-right: 1px outset activeborder;
+}
+#entry-info-content td.first-bottom, #entry-info-content td.common-bottom, #entry-info-content td.last-bottom {
+    border-bottom: 1px outset activeborder;
+}
+#entry-info-content td.first-top, #entry-info-content td.first-center, #entry-info-content td.first-bottom {
+    border-left: 1px outset activeborder;   
+}
+
+#entry-info-content .entry-request-content {
+    
+    padding: 0em 0.5em;
+    background-color: menu;
+    border: 2px inset activeborder;
+}
+#entry-info-content .entry-request-content div {
+    width:28em;
+    height: 22.5em;
+    overflow: auto;
+}
+
+#entry-info table {
+	width: 100%;
+	height: 100%;
+}
+
+
+
+#error-message {
+    width: 40em;
+    height: 28em;
+    top: 9em;
+    left: 10em;
+    position: relative;
+    background-color: ActiveCaption;
+    border-top: 1ex solid ActiveCaption;
+    border-left: 2em solid ActiveCaption;
+    border-right: 2em solid ActiveCaption;
+    border-bottom: 1em solid ActiveCaption;
+}
+
+#error-message .error-caption {
+	font-size: 150%;
+	font-weight: bolder;
+	width:100%;
+	height: 2em;
+	margin: 0em auto;
+}
+
+#error-message table {
+	width:100%;
+	height: 100%;
+	text-align: center;
+}
+#error-message .error-content {
+	background-color: menu;
+	height: 22em;
+    border: 2px inset inactiveborder;
+    overflow: auto;
+    padding: 0.25em 0.5em;
+}
+
+#error-message .error-button {
+	height: 3em;
+}
+
+
+#refresh-block {
+	width: 40em;
+	height: 28em;
+	top: 8em;
+	left: 10em;
+	position: relative;
+	background-color: ActiveCaption;
+	border: 2em solid ActiveCaption;
+}
+
+#refresh-block div.table-frame {
+	width: 39em;
+    height: 27em;
+	border: 0.5em double inactivecaption;
+}
+
+#refresh-block div.table-content {
+	width: 37em;
+    height: 25em;
+    border: 1em double activecaption;
+    eeeoverflow: hidden;
+}
+
+#refresh-block table {
+	width:100%;
+	border-spacing: 0em;
+	font-size: 50%;
+}
+#refresh-block table caption {
+    font-size: 250%;
+    font-weight: bolder;
+    padding: 1em;
+}
+
+#refresh-block .task td {
+    
+    font-size: 200%;
+}
+
+#refresh-block .slider td {
+    background: window;
+    height: 2em;
+    border-top: 1px solid menutext;
+    padding-top: 0.5em;
+    border-bottom: 1px solid menutext;
+    padding-bottom: 0.5em
+}
+#refresh-block .slider td.first, #refresh-block .slider td.firsthighlight {
+    border-left: 1px solid menutext;
+}
+#refresh-block .slider td.last, #refresh-block .slider td.lasthighlight {
+    border-right: 1px solid menutext;
+}
+
+#refresh-block .slider td.highlight, #refresh-block .slider td.firsthighlight,#refresh-block .slider td.lasthighlight {
+    background-color: inactivecaption;
+}
+
+#header {
+	position: absolute;
+	width:64em;
+	height:5em;
+	top: 0em;
+	left: 0em;
+	background-color: InactiveCaption;
+}
+
+
+div.app-name {
+	padding: 0.5em 1em 0em 1em;
+	background-color: ActiveCaption;
+	position: absolute;
+	top: 0em;
+	left: 0em;
+	font-weight: bolder;
+}
+#menu {
+    background-color: ActiveCaption;
+    text-align: right;
+    padding: 0.05em 0.5em 0em 0.5em;
+}
+#menu div {
+	background-color: ActiveBorder;
+	display: inline-block;
+	padding-right: 0.1em;
+}
+#menu form {
+	display: inline-block;
+	padding-left: 0.1em;
+}
+#menu input[type=submit] {
+	font-size: smaller;
+	background-color: menu;
+	border: 0em;
+	width: 10em;
+	height:1.75em;
+	cursor: pointer;
+	color: MenuText;
+}
+#user-details {
+	background-color: InactiveCaption;
+	font-size: smaller;
+	color: InactiveCaptionText;
+	text-align: right;
+	padding: 0.05em 0.5em 0em 0.5em;
+}
+
+#user-details form {
+    display: inline-block;
+}
+#user-details input[type=image] {
+	width: 1.5em;
+	heigth: 1.5em;
+	border: none;
+	vertical-align: text-bottom;
+	
+}
+
+#left-banner {
+	position: absolute;
+    width:16em;
+    height:43em;
+    top: 5em;
+    left: 0em;
+    background-color: inactivecaption;
+}
+
+#rigth-banner {
+	position: absolute;
+    width:1em;
+    height:43em;
+    top: 5em;
+    right: 0em;
+    background-color: navy;
+    display: none;
+}
+
+#content {
+	position: absolute;
+	width: 48em;
+	height: 39em;
+	top: 5em;
+	left: 16em;
+	background: inactivecaption;
+	overflow: visible;
+}
+
+#footer {
+    position: absolute;
+    width: 48em;
+    height: 4em;
+    top: 44em;
+    left: 16em;
+    background: inactivecaption;
+}
+
+#content div.data-container {
+	
+	overflow: auto;
+	width:100%;
+	height:100%;
+}
+
+#content div.table-frame {
+	padding-right: 0.5em;
+}
+
+#content table {
+    
+    border-spacing: 0em;
+    width:100%;
+    border: 0.15em inset ActiveBorder;
+}
+
+#content input[type=image] {
+	width: 1em;
+	height: 1em;
+	vertical-align: text-bottom;
+	border: 0em;
+}
+
+/*#content form {
+	display: inline-block;
+}*/
+
+#content th, #content td {
+	padding: 0.1em 0.25em;
+}
+#content th {
+	background-color: ActiveCaption;
+}
+#content .first,#content .common, #content .last {
+	border-bottom: 0.08em outset ActiveBorder;
+}
+
+#content .common, #content .last, #content .common-bottom, #content .last-bottom {
+	border-left: 0.08em outset ActiveBorder;
+}
+
+#content tr.odd {
+	background-color: menu;
+}
+#content tr.even {
+    background-color: scrollbar;
+}
+#content .tasks-col {
+	width: 100%;
+}
+
+#content td {
+    font-size: smaller;
+}
+#content .id {
+    width: 4em;
+    overflow: hidden;
+}
+#content .request {
+	width: 11em;
+	overflow: hidden;
+}
+#content .exec-time {
+    width: 12em;
+    overflow: hidden;
+}
+#content .result {
+    width: 5em;
+    overflow: hidden;
+}
+#content .deliv-time {
+    width: 12em;
+    overflow: hidden;
+}
+#content .tasks {
+    width: 6em;
+    overflow: hidden;
+}
+
+#left-banner div.search-filter {
+	background-color: inactivecaption;
+	padding: 0em 0.5em;
+}
+#left-banner div.search-filter-container, #left-banner div.date-filter-container, #left-banner div.mobilno-filter-container, #left-banner div.amount-filter-container  {
+	border: 0.08em outset activeborder; 
+}
+
+#left-banner table {
+	border-spacing: 0em;
+}
+
+#left-banner table.search-filter-table td {
+    background-color: scrollbar;
+}
+
+#left-banner th, #left-banner td {
+    text-align: left;
+    padding: 0.05em 0.25em 0em 0.25em;
+}
+#left-banner .caption-col {
+	width: 100%;
+}
+
+#left-banner th {
+	background-color: activecaption;
+	border-bottom: 0.08em outset activeborder;
+}
+
+#left-banner img {
+	width: 1em;
+    height: 1em;
+    border: 0em;
+    vertical-align: text-top;
+}
+#left-banner table.date-filter-table, #left-banner table.mobilno-filter-table, #left-banner table.amount-filter-table {
+	font-size: smaller;
+}
+
+#left-banner table.date-filter-table td, #left-banner table.mobilno-filter-table td, #left-banner table.amount-filter-table td  {
+	padding: 0.4em 1em 0.1em 1em;
+	background-color: menu;
+}
+
+#left-banner td.search-button input {
+	font-size: smaller;
+	height: 2em;
+}
+
+#left-banner input {
+	width: 6em;
+	font-size: 100%;
+}
+#left-banner td.button, #left-banner td.search-button {
+	text-align: right;
+	padding-bottom: 0.5em;
+}
+#left-banner td.search-button {
+	padding-right: 1.2em;
+}
+
+#main-form {
+	width:100%;
+}
+
+.hidden, #select-all-form, #deselect-all-form {
+	display: none;
+}
+#footer div.mass-buttons {
+	padding: 0.5ex 1ex 0em 1ex;
+}
+
+#footer .mass-buttons div {
+	display: inline-block;
+	background-color: buttonface;
+	overflow: hidden;
+	text-align: center;
+}
+
+#footer .mass-buttons label {
+	display: block;
+	cursor: pointer;
+	padding: 3px 1em;
+	width: 9em;
+	font-size: smaller;
+	border: 1px outset inactiveborder;
+}
+#footer div.copyright-info {
+	padding: 0em 1ex 0em 0em;
+	text-align: right;
+	font-size: 70%;
+	color: InactiveCaptionText;
+}
+
+#entry-info-xml-id {
+	font-family: "courier new";
+	font-size: 80%;
+	white-space: nowrap;
+}
+#entry-info-xml-id span {
+	font-weight: bolder;
+	color: green;
+}

@@ -1,14 +1,24 @@
 package org.pabk.emanager;
 
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileFilter;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Array;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Enumeration;
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.logging.Logger;
 
+import org.apache.commons.compress.archivers.zip.ZipArchiveEntry;
+import org.apache.commons.compress.archivers.zip.ZipFile;
 import org.pabk.emanager.util.SimpleFileFilter;
 import org.pabk.emanager.util.Sys;
 
@@ -30,6 +40,7 @@ public class MoveFileHandler extends HandlerImpl {
 	private static final String OPERATION_MOVE = "move";
 	private static final String OPERATION_COPY = "copy";
 	private static final String OPERATION_DELETE = "delete";
+	private static final String OPERATION_UNZIP = "unzip";
 	private static final String OPERATION_CONVERT_STMT_MOVE = "convertStmtAndMove";
 	private static final String DEFAULT_OPERATION = OPERATION_MOVE;
 	private static final String Q_OPERATION_KEY = "move.queue.%s.operation";
@@ -63,6 +74,7 @@ public class MoveFileHandler extends HandlerImpl {
 	private String operation;
 	private String stmtMask;
 	private byte[] stmtReplSeq;
+	private String zipCharset;
 		
 	@Override
 	public void businessLogic() {
@@ -120,6 +132,16 @@ public class MoveFileHandler extends HandlerImpl {
 	private static final String STMT_CONVERT = "File %s was successfully stmt converted on queue %s";
 	private static final String PREPARE_TMP_FILE = "Temporary file %s was successfully prepared for copying of file %s on queue %s";
 	private static final String FAILED_TMP_FILE = "Failed to prepare temporary file for copying of file %s on queue %s. Operation was aborted";
+	private static final String FILE_DELETED = "File %s was successfully deleted";
+	private static final String FILE_NOT_DELETED = "Failed to delete file %s. An IOException will be thrown";
+	private static final String FILE_RENAMED = "File %s was successfully renamed to %s";
+	private static final String FILE_NOT_RENAMED = "Failed to rename file %s to %s. An IOException will be thrown";
+	private static final String FILE_NOT_DELETED_MISSING = "File %s not exists and there was not deleted";
+	private static final String UNZIPPED_ALLREADEY_EXISTS = "Unzipped file %s allready exists in directory %s";
+	private static final String FAILED_ZIP_ENTRY = "Failed to create zip entry %s";
+	private static final String ENTRY_UNZIPPED = "Zip entry %s was successfully unzipped as temporary file %s";
+	private static final String ZIP_CHARSET_KEY = "move.zipCharset";
+	private static final String DEFAULT_ZIP_CHARSET = null;
 	private void execute(Object[] objs) {
 		String operation = (String) objs[7];
 		String name =  (String) objs[0];
@@ -208,8 +230,13 @@ public class MoveFileHandler extends HandlerImpl {
 							throw new IOException (e);
 						}
 					}
+					//delete
 					else if (operation.equalsIgnoreCase(MoveFileHandler.OPERATION_DELETE)) {
 						deleteOperation(list[i], name);
+					}
+					//unzip
+					else if (operation.equalsIgnoreCase(MoveFileHandler.OPERATION_UNZIP)) {
+						unzip (list[i], zipCharset, name, log);
 					}
 					else {
 						log.warning(String.format(OPERATION_NOT_DEFINED, operation, this.getClass().getSimpleName()));
@@ -261,7 +288,152 @@ public class MoveFileHandler extends HandlerImpl {
 			try {in.close();} catch (Exception e) {}
 		}
 	}
-
+	
+	
+	private static void unzip (File f, String charset, String name, Logger log) throws IOException {
+		File f2 = new File (Sys.getPathOfTmpFile(f.getName()));
+		String path = f.getAbsolutePath();
+		String fs = System.getProperty("file.separator");
+		int i = path.lastIndexOf(fs);
+		String dir = path.substring(0, i) + fs;
+		try {
+			deleteFile (f2, log);
+			renameToFile(f, f2, log);
+			Hashtable<String, File> files = new Hashtable<String, File>();
+			ArrayList<String> dirs = new ArrayList<String>();
+			try {
+				unzip (dirs, files, f2, charset, dir, log);
+				Iterator <String> iterator = files.keySet().iterator();
+				while (iterator.hasNext()) {
+					String output = iterator.next();
+					File out = new File(output);
+					File tmp = files.get(output);
+					renameToFile (tmp, out, log);
+				}
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+				Iterator <String> iterator = files.keySet().iterator();
+				while (iterator.hasNext()) {
+					String output = iterator.next();
+					File out = new File(output);
+					File tmp = files.get(output);
+					try {deleteFile(out, log);}	catch (Exception e2) {e2.printStackTrace();}
+					try {deleteFile(tmp, log);}	catch (Exception e2) {e2.printStackTrace();}
+				}
+				renameToFile(f2, f, log);
+				throw new IOException (e);
+			}
+			finally {
+				deleteFile(f2, log);
+				for(i = 0; i < dirs.size(); i ++) {
+					new File(Sys.getPathOfTmpFile(dirs.get(i))).delete();
+				}
+			}
+		}
+		catch (Exception e) {
+			throw new IOException (e);
+		}
+	}
+	
+	private static void unzip (ArrayList<String> dirs, Hashtable<String, File> files, File zip, String charset, String dir, Logger log) throws IOException {
+		ZipFile zFile = null;
+		//ZipInputStream zin = null;
+		try {
+			zFile = charset == null ? new ZipFile(zip) : new ZipFile (zip, charset);
+			//zin = charset == null ? new ZipInputStream(new BufferedInputStream(new FileInputStream(zip))) : new ZipInputStream(new BufferedInputStream(new FileInputStream(zip)), charset);
+			Enumeration<ZipArchiveEntry> entries = zFile.getEntries();
+			ZipArchiveEntry entry = null;
+			byte[] b = new byte[MAX_READED_BYTES];
+			while (entries.hasMoreElements()) {
+				entry = entries.nextElement();
+				System.out.println(entry.getName());
+				File output = new File (dir + entry.getName());
+				if(entry.isDirectory()) {
+					//System.out.println(entry.getName());
+					output.mkdirs();
+					new File(Sys.getPathOfTmpFile(entry.getName())).mkdirs();
+					dirs.add(0, entry.getName());
+					continue;
+				}
+				File tmp = new File(Sys.getPathOfTmpFile(entry.getName()) + ".tmp");
+				if(tmp.exists()) {
+					deleteFile(tmp, log);
+				}
+				if(output.exists()) {
+					throw new IOException(String.format(UNZIPPED_ALLREADEY_EXISTS, output.getAbsolutePath(), dir));
+				}
+				BufferedOutputStream bout = null;
+				InputStream in = zFile.getInputStream(entry);
+				try {
+					bout = new BufferedOutputStream(new FileOutputStream (tmp), MAX_READED_BYTES);
+					int i = -1;
+					while ((i = in.read(b)) >= 0) {
+						bout.write(b, 0, i);
+					}
+					bout.flush();
+				}
+				catch (Exception e) {
+					if(tmp.exists()) {
+						tmp.delete();
+					}
+					throw new IOException (String.format(FAILED_ZIP_ENTRY, tmp.getAbsolutePath()));
+				}
+				finally {
+					try {bout.close();} catch (IOException e) {e.printStackTrace();}
+					try {in.close();} catch (IOException e) {e.printStackTrace();}
+				}
+				files.put(output.getAbsolutePath(), tmp);
+				log.info(String.format(ENTRY_UNZIPPED, output.getAbsolutePath(), tmp.getAbsolutePath()));
+			}
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new IOException (e);
+		}
+		finally {
+			//try {zin.close();} catch (IOException e) {e.printStackTrace();}
+			try {zFile.close();} catch (IOException e) {e.printStackTrace();}
+		}
+	}
+	
+	
+	private static void deleteFile(File file, Logger log) throws IOException {
+		try {
+			String path = file.getAbsolutePath();
+			if(file.exists()) {
+				if(file.delete()) {
+					log.info(String.format(FILE_DELETED, path));
+				}
+				else {
+					throw new IOException (String.format(FILE_NOT_DELETED, path));
+				}
+			}
+			else {
+				log.info(String.format(FILE_NOT_DELETED_MISSING, path));
+			}
+		}
+		catch (Exception e) {
+			throw new IOException (e);
+		}
+	}
+	
+	private static void renameToFile(File src, File dst, Logger log) throws IOException {
+		try {
+			String srcPath = src.getAbsolutePath();
+			String dstPath = dst.getAbsolutePath();
+			if(src.renameTo(dst)) {
+				log.info(String.format(FILE_RENAMED, srcPath, dstPath));
+			}
+			else {
+				throw new IOException (String.format(FILE_NOT_RENAMED, srcPath, dstPath));
+			}
+		}
+		catch (Exception e) {
+			throw new IOException (e);
+		}
+	}
+	
 	private void convertStmt(File file, String name) throws IOException {
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		byte[] b = new byte[MAX_READED_BYTES];
@@ -356,6 +528,13 @@ public class MoveFileHandler extends HandlerImpl {
 			moveQueues[i][8] = getProperty(this, String.format(Q_OPERATION_DELAY, tmp[i]), DEFAULT_OPERATION_DELAY, false, int.class, separator);
 		}
 		poolInterval = ((long) getProperty(this, MOVE_POOL_INTERVAL_KEY, DEFAULT_MOVE_POOL_INTERVAL, true, long.class, separator)) * 60 * 1000;
+		String zipCharset = (String) getProperty(this, ZIP_CHARSET_KEY, DEFAULT_ZIP_CHARSET, false, String.class, separator);
+		try {
+			Charset.forName(zipCharset);
+		}
+		catch (Exception e) {
+			zipCharset = null;
+		}
 	}
 	
 	
@@ -451,3 +630,4 @@ public class MoveFileHandler extends HandlerImpl {
 	}
 
 }
+

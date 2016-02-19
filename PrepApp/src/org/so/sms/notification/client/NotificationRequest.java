@@ -227,7 +227,7 @@ class NotificationRequest {
 	}
 	
 	public static final String getSourceKey(Hashtable<String, String> data, String _null) {
-		return Const.MESSAGE_SOURCE_KEY_DEFUALT_VALUE;
+		return Const.get2(Const.MESSAGE_SOURCE_KEY);
 	}
 	
 	public static final String normalizeAmount (Hashtable<String, String> data, String number, String loc, String inverse, String format) {

@@ -110,8 +110,8 @@ public final class Test {
     		"</env:Body></env:Envelope>";
     			
     		*/	
-    		
-    			/*
+    		/*
+    			
     			String body=
     				"<env:Envelope" +nl+
     				"xmlns:env=\"http://schemas.xmlsoap.org/soap/envelope/\""+nl+
@@ -122,14 +122,14 @@ public final class Test {
     				"<InstitutionId xmlns=\"\">0000</InstitutionId>"+nl+
     				"<CardNumber xmlns=\"\">6762414010000030</CardNumber>"+nl+
     				"<NotificationType>1</NotificationType>"+nl+
-    				"<Contact xmlns=\"\">+421903245465</Contact>"+nl+
+    				"<Contact xmlns=\"\">+421907735794</Contact>"+nl+
     				"<TransactionSource xmlns=\"\">1</TransactionSource>"+nl+
     				"<TransactionType xmlns=\"\">10</TransactionType>"+nl+
     				"<TransactionAmount xmlns=\"\">+00000000010.00</TransactionAmount>"+nl+
     				"<TransactionCurrency xmlns=\"\">001</TransactionCurrency>"+nl+
-    				"<AvailableBalance xmlns=\"\">+00000010045.00</AvailableBalance>"+nl+
+    				"<AvailableBalance xmlns=\"\">+00000000045.00</AvailableBalance>"+nl+
     				"<AccountCurrency xmlns=\"\">784</AccountCurrency>"+nl+
-    				"<TransactionDateTime xmlns=\"\">20110714095524</TransactionDateTime>"+nl+
+    				"<TransactionDateTime xmlns=\"\">20151201105024</TransactionDateTime>"+nl+
     				"<MerchantName xmlns=\"\">BRATISLAVA,STUROVA 5</MerchantName>"+nl+
     				"<TerminalOwnerName xmlns=\"\">OTP</TerminalOwnerName>"+nl+
     				"<MerchantCity xmlns=\"\">BRATISLAVA</MerchantCity>"+nl+
@@ -149,16 +149,16 @@ public final class Test {
     					+ 		"<MsgType>6</MsgType>"
     					+ 		"<InstitutionId>6500</InstitutionId>"
     					+ 		"<NotificationType>1</NotificationType>"
-    					+ 		"<Contact>+421903245465</Contact>"
-    					+ 		"<ProcessDate>14.11.2014</ProcessDate>"
+    					+ 		"<Contact>+421907735794</Contact>"
+    					+ 		"<ProcessDate>28.01.2016</ProcessDate>"
     					+ 		"<CardType />"
     					+ 		"<PaymentAmt>-00000000030.00</PaymentAmt>"
     					+ 		"<PaymentCCY>EUR</PaymentCCY>"
     					+ 		"<PaymentIndicator>5169</PaymentIndicator>"
-    					+ 		"<AvailableBalance>+00000100053.07</AvailableBalance>"
+    					+ 		"<AvailableBalance>+00000000053.07</AvailableBalance>"
     					+ 		"<AccountId>0000244500002544</AccountId>"
     					+ 		"<TraceID />"
-    					+ 		"<Timestamp>20150803080000</Timestamp>"
+    					+ 		"<Timestamp>20160128101000</Timestamp>"
     					+ 	"</env:Body>"
     					+ "</env:Envelope>";
     			
@@ -205,7 +205,7 @@ public final class Test {
     	//ws.setAction("http://172.27.48.250/Notification");
     	ws.setContent(body);
 		InputStream in = mes.execute(ws);
-    		    			
+    		    
     			/*
     			String soap_body=
     				"<SOAPBody " +nl+
