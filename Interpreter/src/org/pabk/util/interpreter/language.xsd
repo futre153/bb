@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.example.org/lamguage" xmlns:tns="http://www.example.org/lamguage" elementFormDefault="qualified">
+
+    <xsd:include schemaLocation=""></xsd:include>
+    <xsd:complexType name="CmdListType">
+    	<xsd:sequence maxOccurs="1" minOccurs="1">
+    		<xsd:element name="command" type="tns:CmdType"
+    			maxOccurs="unbounded" minOccurs="0">
+    		</xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="CmdType">
+    	<xsd:sequence maxOccurs="1" minOccurs="1">
+    		<xsd:element name="name" maxOccurs="1" minOccurs="1"
+    			type="tns:CmdPatternType">
+    		</xsd:element>
+    		<xsd:element name="description" type="xsd:string"
+    			maxOccurs="1" minOccurs="0">
+    		</xsd:element>
+    		<xsd:element name="aliases" type="tns:AliasesListType"
+    			maxOccurs="1" minOccurs="0">
+    		</xsd:element>
+    		<xsd:element name="arguments" type="tns:CmdArgListType"
+    			maxOccurs="1" minOccurs="0">
+    		</xsd:element>
+    		<xsd:element name="class" type="xsd:string" maxOccurs="1" minOccurs="1"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+
+    <xsd:simpleType name="CmdPatternType">
+    	<xsd:restriction base="xsd:string">
+    		<xsd:pattern value="[a-z]{1,8}"></xsd:pattern>
+    	</xsd:restriction>
+    </xsd:simpleType>
+
+    <xsd:complexType name="AliasesListType">
+    	<xsd:sequence maxOccurs="1" minOccurs="1">
+    		<xsd:element name="alias" type="tns:CmdPatternType" maxOccurs="unbounded" minOccurs="0"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+
+
+    <xsd:element name="language" type="tns:LangType"></xsd:element>
+    
+    <xsd:complexType name="LangType">
+    	<xsd:sequence maxOccurs="1" minOccurs="1">
+    		<xsd:element name="argument-pfx" maxOccurs="1"
+    			minOccurs="0">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:length value="1"></xsd:length>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="parameter-separator" maxOccurs="1"
+    			minOccurs="0">
+    			<xsd:simpleType>
+    				<xsd:restriction base="xsd:string">
+    					<xsd:length value="1"></xsd:length>
+    				</xsd:restriction>
+    			</xsd:simpleType>
+    		</xsd:element>
+    		<xsd:element name="parameter-quotes" type="xsd:string"
+    			maxOccurs="1" minOccurs="0">
+    		</xsd:element>
+    		<xsd:element name="parameter-escape-chars" type="xsd:string"
+    			maxOccurs="1" minOccurs="0">
+    		</xsd:element>
+    		<xsd:element name="not-break-chars" type="xsd:string" maxOccurs="1" minOccurs="0"></xsd:element>
+    		<xsd:element name="commands" type="tns:CmdListType"
+    			maxOccurs="1" minOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="arguments" type="tns:ArgsListType"
+    			maxOccurs="1" minOccurs="1">
+    		</xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="ArgsListType">
+    	<xsd:sequence maxOccurs="1" minOccurs="0">
+    		<xsd:element name="argument" type="tns:ArgType"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="CmdArgListType">
+    	<xsd:sequence maxOccurs="1" minOccurs="0">
+    		<xsd:element name="argument" type="tns:CmdArgType"
+    			maxOccurs="1" minOccurs="1">
+    		</xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+
+
+
+    <xsd:complexType name="CmdArgType">
+    	<xsd:sequence maxOccurs="1" minOccurs="1">
+    		<xsd:element name="name" type="xsd:string" maxOccurs="1" minOccurs="1"></xsd:element>
+    		<xsd:element name="optional" type="xsd:string" maxOccurs="1" minOccurs="0"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+    <xsd:complexType name="ArgType">
+    	<xsd:sequence maxOccurs="1" minOccurs="1">
+    		<xsd:element name="name" type="tns:CmdPatternType"
+    			maxOccurs="1" minOccurs="1">
+    		</xsd:element>
+    		<xsd:element name="description" type="xsd:string"
+    			maxOccurs="1" minOccurs="0">
+    		</xsd:element>
+    		<xsd:element name="aliases" type="tns:AliasesListType"
+    			maxOccurs="1" minOccurs="0">
+    		</xsd:element>
+    		<xsd:element name="parameters" type="xsd:boolean"
+    			maxOccurs="1" minOccurs="0">
+    		</xsd:element>
+    		<xsd:element name="class" type="xsd:string" maxOccurs="1" minOccurs="0"></xsd:element>
+    	</xsd:sequence>
+    </xsd:complexType>
+
+</xsd:schema>
+    
+
