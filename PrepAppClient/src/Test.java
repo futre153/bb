@@ -158,7 +158,7 @@ public final class Test {
     					+ 		"<AvailableBalance>+00000000053.07</AvailableBalance>"
     					+ 		"<AccountId>0000244500002544</AccountId>"
     					+ 		"<TraceID />"
-    					+ 		"<Timestamp>20160128101000</Timestamp>"
+    					+ 		"<Timestamp>20160621140500</Timestamp>"
     					+ 	"</env:Body>"
     					+ "</env:Envelope>";
     			

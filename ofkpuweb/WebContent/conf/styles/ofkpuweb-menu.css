@@ -1,0 +1,52 @@
+@CHARSET "UTF-8";
+div.ofk-menu-content {
+	
+}
+div.ofk-menu {
+	position: absolute;
+	background: white;
+	display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: ;
+    font-family: flex-start;
+    border-radius: 7px;
+}
+div.ofk-menu-caption {
+	width: 200px;
+	background-image: url("../images/ofk.png");
+	
+}
+div.ofk-menu-items {
+	display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: flex-start;
+    font-family: flex-start;
+    background-image: url("../images/menu.png");
+}
+div.ofk-menu-group {
+	display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: flex-start;
+    font-family: flex-start;
+}
+div.ofk-menu-container {
+	padding: 20px 0;
+}
+div.ofk-menu-item-item {
+	display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: flex-start;
+    font-family: flex-start;
+}

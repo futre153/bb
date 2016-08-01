@@ -113,7 +113,9 @@ echo "`cas` IMPORT START" >> $LOG_MAIN
 echo "`cas` IMPORT Prenos suborov zo SWIFT ALLIANCE terminalu" >> $LOG_MAIN
 #Zmenené pre potreby IBAN Directory Plus, zmena mena call skriptu a parametrického súboru (Brandys, 20.01.2016)
 #Pôvodná hodnota:swiftimp.sh `cat paramimp.txt`
+swift_iban_imp_str.sh `cat param_iban_imp_str.txt`
 swift_iban_imp.sh `cat param_iban_imp.txt`
+swift_iban_imp_exc.sh `cat param_iban_imp_exc.txt`
 #swift_imp.sh ./imp~log.txt 172.16.51.163~c:/swift/imp
 if [ "$?" -ne "0" ]
   then

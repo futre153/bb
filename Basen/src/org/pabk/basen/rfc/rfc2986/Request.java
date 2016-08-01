@@ -1,5 +1,6 @@
 package org.pabk.basen.rfc.rfc2986;
 
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -11,12 +12,16 @@ import java.security.NoSuchAlgorithmException;
 import java.security.Signature;
 import java.security.SignatureException;
 import java.security.cert.CertificateException;
+import java.util.Arrays;
+
+import javax.xml.bind.DatatypeConverter;
 
 import org.pabk.basen.asn1.ASN1Impl;
 import org.pabk.basen.asn1.BitString;
 import org.pabk.basen.asn1.Sequence;
 import org.pabk.basen.ber.BERImpl;
 import org.pabk.basen.rfc.AlgorithmIdentifier;
+import org.pabk.basen.rfc.rfc5280.Certificate;
 import org.pabk.basen.rfc.rfc5280.TBSCertificate;
 import org.pabk.util.Base64Coder;
 
@@ -65,6 +70,13 @@ public class Request extends Sequence {
 		BERImpl tbs = TBSRequest.createTBSRequest(pair, issuer, extensions);
 		BERImpl sig = AlgorithmIdentifier.createAlgorithmId(DEFAULT_SIGNATURE);
 		BERImpl siv = new BERImpl (BERImpl.BITSTRING_TAG, BERImpl.PRIMITIVE_ENCODING);
+		System.out.println(pair.getPublic());
+		System.out.println(Arrays.toString(pair.getPublic().getEncoded()));
+		System.out.println(DatatypeConverter.printHexBinary(pair.getPublic().getEncoded()));
+		System.out.println(pair.getPublic().getFormat());
+		
+		
+		
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		tbs.encode(out);
 		Signature sign = Signature.getInstance(DEFAULT_SIGNATURE);

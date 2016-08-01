@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE XML>
+<Context docBase="ofkpu" path="/ofkpu" reloadable="true">
+	<Resource
+    	name="jdbc/ofkpu"
+    	type="javax.sql.DataSource"
+    	auth="Container"
+    	driverClassName="com.mysql.jdbc.Driver"
+    	maxTotal="100"
+    	maxWaitMillis="10000"
+    	maxIdle="30"
+    	password="-Agro_Nitra153+06"
+    	logAbandoned="true"
+    	username="ofkpu"
+    	removeAbandonedOnBorrow="true"
+    	removeAbandonedTimeout="60"
+    	url="jdbc:mysql://localhost:3306/"
+	/>
+	<Realm className="org.apache.catalina.realm.LockOutRealm" >
+		<Realm className="org.apache.catalina.realm.CombinedRealm" >
+			<!-- <Realm className="org.apache.catalina.realm.UserDatabaseRealm" resourceName="UserDatabase" >
+			</Realm> -->
+			<Realm className="org.apache.catalina.realm.DataSourceRealm"
+				localDataSource="true"
+				dataSourceName="jdbc/ofkpu"
+				userTable="users" userNameCol="username" userCredCol="user_pass" 
+				userRoleTable="user_roles_affinity" roleNameCol="role_name"
+				digest="SHA" digestEncoding="UTF-8" >
+			</Realm>
+		</Realm>
+	</Realm>
+</Context>

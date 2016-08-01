@@ -1,0 +1,94 @@
+@CHARSET "UTF-8";
+@IMPORT url("ofkpuweb-commons.css");
+div.frame {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;"
+}
+div.frame1 {
+	position: absolute;
+	overflow: hidden;
+	left: 0px;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+}
+div.frame2 {
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+} 
+div.frame3 {
+	height: 100%;
+	width: 100%;
+}
+div.frame4 {
+	display:table;
+	height:100%;
+	width:100%;
+}
+div.frame5 {
+	display:table-cell;
+	vertical-align:middle;
+	text-align:center;
+}
+div.frame6 {
+	text-align:left;
+	display:inline-block;
+}
+div.page-content-error {
+	max-width: 30em;
+	border-radius: 3em;
+	background-color: white;
+	padding: 1em;
+}
+
+div.error-message-outer-frame {
+	
+	background-color: #7f0000;
+	border-radius: 2em;
+	padding: 2em;
+}
+div.error-message-inner-frame {
+	
+}
+div.error-message-text-frame {
+	font-size: 120%;
+	font-family: helvetica;
+	font-weight: bold;
+	color: lightyellow;
+	text-align: center;
+	display: -webkit-flex;
+    display: flex;
+	-webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    padding: 0 0 2em;
+}
+div.error-message-button-frame {
+	display: -webkit-flex;
+    display: flex;
+	-webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+div.error-message-button-frame button {
+	background-color: lightyellow;
+	border: 2px outset lightyellow;
+	border-radius: 1ex;
+	font-size: 120%;
+	padding: 2px 1em 3px;
+}
+div.error-message-button-frame button:hover {
+	background-color: yellow;
+	border: 2px inset lightyelow;
+	cursor: pointer;
+}

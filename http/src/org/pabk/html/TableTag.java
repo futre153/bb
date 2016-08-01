@@ -1,16 +1,30 @@
 package org.pabk.html;
 
 interface TableTag {
+	
 	void setCaption(String caption);
-	void setColgroup(String ...classes);
-	Caption removeCaption();
 	Caption getCaption();
-	void setHeader(String[] header);
-	Thead removeHeader();
+	Caption removeCaption();
+	
+	void setColgroup(String ...classes);
+	Colgroup getColgroup();
+	Colgroup removeColgroup();
+	
+	void setHeader(String... headerValue);
+	void setHeader(Object... headerValue);
 	Thead getHeader();
-	void setFooter(String[] footerValue);
-	Tfoot removeFooter();
+	Thead removeHeader();
+	
+	void setBody(String... bodyValue);
+	void setBody(Object... bodyValue);
+	Tbody getBody();
+	Tbody removeBody();
+	
+	void setFooter(String... footerValue);
+	void setFooter(Object... footerValue);
 	Tfoot getFooter();
+	Tfoot removeFooter();
+	
 	void setEmptyTableBody(int width,int height);
 	void clearTableBody();
 	void setTableBody(Tbody tbody);

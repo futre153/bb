@@ -1,11 +1,12 @@
 package org.pabk.html;
 
-public class Td extends HtmlTag implements TableCell {
+public class Td extends TableCell {
 	
-	private Td(String text) {
-		TextTag tt=TextTag.NBSP;
-		if(text!=null)tt=TextTag.getInstance(text);
-		this.appendChild(tt);
+	private Td () {}
+	
+	protected static Td getInstance(Object cell) {
+		Td td = new Td();
+		td.setContent(cell);
+		return td;
 	}
-	protected static Td getInstance(String cell) {return new Td(cell);}
 }

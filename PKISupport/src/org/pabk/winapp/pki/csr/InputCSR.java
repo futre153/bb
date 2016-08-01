@@ -489,6 +489,11 @@ public class InputCSR extends JPanel {
 		details.put(SUBJECT_KEY, InputCSR.getDN(pro));
 		details.put(KEY_KEY, KeyUtils.obtainKey(details, (KeyStore) details.get(KEY_STORE_KEY), details.get(ALIAS_KEY), InputCSR.getKeyAlgorithm(pro.getProperty(KEY_TYPE_KEY)), InputCSR.getKeySize(pro.getProperty(KEY_SIZE_KEY)), details.get(SUBJECT_KEY)));
 		details.put(EXTENSIONS_KEY, getExtensions(pro));
+		
+		System.out.println(((KeyPair) details.get(KEY_KEY)).getPublic());
+		
+		System.out.println(Arrays.toString(((KeyPair) details.get(KEY_KEY)).getPublic().getEncoded()));
+		
 		BERImpl csr = Request.createRequest((KeyPair) details.get(KEY_KEY), (String[]) details.get(SUBJECT_KEY), (Object[]) details.get(EXTENSIONS_KEY));
 		Request.exportToFile(csr, "C:\\Temp\\request.req", Request.PEM_FORMAT);
 		KeyUtils.saveKeyStore(InputCSR.getKeyStoreType(pro.getProperty(STORE_TYPE_KEY)), pro.getProperty(STORE_LOCATION_KEY), details.get(KEY_STORE_KEY), details.get(KeyUtils.STORE_PASS_KEY));

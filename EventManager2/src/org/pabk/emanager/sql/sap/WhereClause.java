@@ -22,23 +22,32 @@ public class WhereClause extends SQLSyntaxImpl {
 		this.searchCon = addCondition(objs);
 	}
 	
+	
 	private static SearchCon addCondition(Object ...objs) throws SQLException {
 		SearchCon se = null; 
 		if(objs.length > 0) {
-			int s = WhereClause.firstIndexOf("(", objs);
-			int e = WhereClause.lastIndexOf(")", objs);
-			if((s < 0 && e >= 0) || (s >= 0 && e < 0) || (e < s)) {
-				throw new SQLException("Where clause bracket error");
-			}
-			if(s >= 0) {
-				Object[] a = new Object[e - s - 1];
-				System.arraycopy(objs, s + 1, a, 0, a.length);
-				Object obj = addCondition(a);
-				a = new Object[s - e + objs.length - (obj == null ? 1 : 0)];
-				System.arraycopy(objs, 0, a, 0, s);
-				System.arraycopy(objs, e + 1, a, s + (obj == null ? 0 : 1), objs.length - e -1);
-				a[s] = obj;
-				objs = a;
+			while (true) {
+				int[] x = findBrackets(0, objs);
+				int s = x[0];
+				int e = x[1];
+				if(s < 0 && e < 0) {
+					break;
+				}
+				//int s = WhereClause.firstIndexOf("(", objs);
+				//int e = WhereClause.lastIndexOf(")", objs);
+				if((s < 0 && e >= 0) || (s >= 0 && e < 0) || (e < s)) {
+					throw new SQLException("Where clause bracket error");
+				}
+				if(s >= 0) {
+					Object[] a = new Object[e - s - 1];
+					System.arraycopy(objs, s + 1, a, 0, a.length);
+					Object obj = addCondition(a);
+					a = new Object[s - e + objs.length - (obj == null ? 1 : 0)];
+					System.arraycopy(objs, 0, a, 0, s);
+					System.arraycopy(objs, e + 1, a, s + (obj == null ? 0 : 1), objs.length - e -1);
+					a[s] = obj;
+					objs = a;
+				}
 			}
 			int index = 0;
 			while(index < objs.length) {
@@ -106,10 +115,42 @@ public class WhereClause extends SQLSyntaxImpl {
 		return se;
 	}
 	
+	public static int[] findBrackets(int from, Object[] objs) {
+		int s = indexOf (WhereClause.LEFT_BRACKET, objs, from);
+		if(s < 0) {
+			return new int[]{s, indexOf(WhereClause.RIGHT_BRACKET, objs, from)};
+		}
+		else {
+			int e = indexOf (WhereClause.RIGHT_BRACKET, objs, from);
+			if(e > 0 && s < e) {
+				int x = indexOf (WhereClause.LEFT_BRACKET, objs, s + 1);
+				e = indexOf (WhereClause.RIGHT_BRACKET, objs, s + 1);
+				return x >= 0 && e >= 0 && x < e ? findBrackets(x, objs) : new int[]{s, e};
+			}
+			else {
+				return new int[]{s, e};
+			}
+		}
+	}
+	
+	private static int indexOf (String key, Object[] objs, int from) {
+		int index = -1;
+		for(int i = from; i < objs.length; i ++) {
+			if(objs[i].equals(key)) {
+				index = i;
+				break;
+			}
+		}
+		return index;
+	}
+	
+	
+	@SuppressWarnings("unused")
 	private static int lastIndexOf(String key, Object[] objs) {
 		return WhereClause.indexOf(key, objs, false);
 	}
 
+	@SuppressWarnings("unused")
 	private static int firstIndexOf(String key, Object[] objs) {
 		return WhereClause.indexOf(key, objs, true);
 	}

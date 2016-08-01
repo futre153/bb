@@ -1,0 +1,108 @@
+@CHARSET "UTF-8";
+div.ofk-hdr {
+	width:100%;
+	background-image: url("../images/menu_bg.png");
+	background-repeat: repeat-x;
+	background-position: bottom;
+	display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+    font-family: verdana;
+}
+div.ofk-main-logo {
+	position: absolute;
+}
+div.ofk-hdr-info, div.ofk-menus {
+	display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: flex-end;
+    justify-content: flex-end;
+    padding: 0 0 3px;
+}
+div.ofk-menu-frame {
+	padding: 0 2px 0 0;
+}
+div.ofk-menu-item {
+	width: 102px;
+	height: 40px;
+	font-size: 14px;
+	font-weight: bold;
+	display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+	color: whitesmoke;
+	background-color: maroon;
+	border-radius: 7px;
+	cursor: pointer;
+}
+div.ofk-menu-item:hover {
+	background-color: firebrick;
+}
+	
+div.ofk-logos {
+	display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: flex-end;
+    justify-content: flex-end;
+    padding: 5px 0;
+}
+div.ofk-unions-logos {
+	display: -webkit-flex;
+    display: flex;
+}
+div.ofk-unions-logos img {
+	height: 48px;
+}
+div.ofk-unions-logos img:hover {
+	height: 50px;
+}
+div.ofk-unions-logos div {
+	width: 64px;
+	display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: center;
+    justify-content: center;
+}
+div.ofk-main-logo img {
+	height: 144px;
+}
+div.ofk-main-logo {
+	padding: 10px 0 0;
+}
+div.ofk-empty-logo {
+	width: 380px;
+}
+div.ofk-caption-1 {
+	font-size: 20px;
+	font-weight: bold;
+	color: darkred;
+}
+div.ofk-caption-2 {
+	font-size: 24px;
+	font-weight: bold;
+	color: maroon;
+}
+div.ofk-hdr-info a:link, div.ofk-hdr-info a:visited, a:active {
+	font-size: 12px;
+	font-weight: bold;
+	text-decoration: none;
+	color: maroon;
+}
+div.ofk-hdr-info a:hover {
+	font-size: 12px;
+	font-weight: bold;
+	text-decoration: none;
+	color: red;
+}

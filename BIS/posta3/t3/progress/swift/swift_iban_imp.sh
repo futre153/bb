@@ -50,10 +50,10 @@ U_PBBIS="padmt3"
 S_DEBUG="$3"
 
 #Maska importovanych suborov
-#Zmena oproti swiftimp.sh, maska upravená pre potreby IBAN Directory Plus (Brandys, 20.01.2016)
+#Zmena oproti swiftimp.sh, maska upravená pre potreby IBAN Directory Plus (Brandys, 19.04.2016)
 #Pôvodná hodnota:MASKA="[Ii0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9][_][2][0][0-9][0-9][01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9].[TtOo][XxUu][Tt]"
 #Maske pre IBAN Directory Plus daily delta XML file
-MASKA="[I][B][A][N][P][L][U][S][_][V][0-9][_][D][A][I][L][Y]_[D][E][L][T][A][_][2][0][0-9][0-9][01][0-9][0-3][0-9][_][2][0][0-9][0-9][01][0-9][0-3][0-9][0-2][0-9][0-5][0-9][0-5][0-9].[Xx][Mm][Ll]"
+MASKA="[I][B][A][N][P][L][U][S][_][V][0-9][_][D][A][I][L][Y]_[D][E][L][T][A][_][2][0][0-9][0-9][01][0-9][0-3][0-9].[Xx][Mm][Ll]"
 
 #meno spustaneho skriptu
 SCRIPT_NAME=`basename $0`
@@ -75,10 +75,15 @@ TMP=${L_ADR}/tmp/tran_iban_imp_tmp.$$
 #Pôvodná hodnota:SUM_LOG=${L_ADR}/log/tran_imp.log
 SUM_LOG=${L_ADR}/log/tran_iban_imp.log
 
+#pridane Branislav Brandys, premenne pre flag subor
+FLAG_FILE=${L_ADR}/../work/uzav/bis_in/ibanplus_sts.txt
+#FLAG_FILE=${L_ADR}/ibanplus_sts.txt
+
 LOG_SUB=${L_ADR}/${LOG_SUB}
 #Zmena oproti swiftimp.h, cie¾ový adresár bude upravené pre potreby IBAN Directory Plus (Brandys, 20.01.2016)
 #Pôvodná hodnota:L_ADR=${L_ADR}/fromswift
-L_ADR=${L_ADR}/ibanplus
+L_ADR=${L_ADR}/../work/uzav/bis_in/ibanplus/davky
+#L_ADR=${L_ADR}/ibanplus
 
 
 ##############################################################################
@@ -119,7 +124,7 @@ check_error()
         3)
          echo "`cas` IMPORT WARNING File $2 already exist on local side" ;;
         4)
-         echo "`cas` IMPORT INFO File $2 has been transfered corecctly" ;;
+         echo "`cas` IMPORT INFO File $2 has been transfered correctly" ;;
         5)
          echo "`cas` IMPORT INFO No file is suitable for transfer" ;;
 
@@ -153,6 +158,17 @@ check_error()
           echo "`cas` IMPORT ERROR LINK DOWN ssh process has been killed"
           [ $R_CODE -eq 0 ] && R_CODE=12
           ;;
+######Kontrola iban chyb
+	 13)
+	   echo "`cas` IBAN IMPORT ERROR FILE $FLAG_FILE does not exists or is not writable"
+	   R_CODE=13 ;;
+	 14)
+	   echo "`cas` IBAN IMPORT WARNING: import ibanplus allready activated"
+	   R_CODE=14 ;;
+	 15)
+	   echo "`cas` IBAN IMPORT ERROR: unknown flag value ($1)"
+	   R_CODE=15 ;;
+
         *)
          echo "`cas` IMPORT ERROR Undefined error"
          R_CODE=20 ;;
@@ -250,6 +266,24 @@ if [ $POM -gt 1 ]
   then check_error 11;exit $R_CODE
 fi
 
+#pridane Branislav Brandys, kontrola flag suboru
+if [ -f ${FLAG_FILE} ] && [ -w ${FLAG_FILE} ]
+then
+	IBAN_FLAG=`cat ${FLAG_FILE}`
+	case ${IBAN_FLAG} in
+		0)
+		;;
+		1)
+		check_error 14;exit $R_CODE ;;
+		*)
+		check_error 15;exit $R_CODE ;;
+	esac
+else
+	check_error 13;exit $R_CODE
+fi
+
+
+
 #check input parameters 
 if [ "$S_DEBUG" = "DEBUG" ]
 then
@@ -341,5 +375,10 @@ rm_tmp
 #[ -f ${L_ADR}/*.TMP ] && rm -f ${L_ADR}/*.TMP 
 
 log_rotation
+#pridane Branislav Brandys
+if [ "${R_CODE}" == "0" ]
+then
+	echo "1" > ${FLAG_FILE}
+fi
 
 return $R_CODE

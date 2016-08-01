@@ -56,6 +56,7 @@ public class MoveFileHandler extends HandlerImpl {
 	private static final String Q_SOURCE_FILENAME_MASK_KEY = "move.queue.%s.sourceFileMask";
 	private static final String Q_RENAME_FILENAME_KEY = "move.queue.%s.renameFile";
 	private static final String Q_OPERATION_DELAY = "move.queue.%s.operationDelay";
+	private static final String Q_FORMAT_KEY = "move.queue.%s.format";
 	private static final String DEFAULT_OPERATION_DELAY = "0";
 	private static final String MOVE_POOL_INTERVAL_KEY = "move.poolInterval";
 	private static final String DEFAULT_MOVE_POOL_INTERVAL = "11";
@@ -115,10 +116,13 @@ public class MoveFileHandler extends HandlerImpl {
 	private static final String DST_DIR_NOT_EXISTS = "Destination directory %s does not exist on queue %s";
 	private static final String MASK_USED = "Used filename pattern %s for input files on queue %s";
 	private static final String NO_RENAME = "Output files will not be renamed on queue %s";
+	private static final String NO_FORMAT = "The name of output files will not be formated on queue %s";
 	private static final String APPLY_RENAME = "Rename output files %s applies on queue %s";
+	private static final String APPLY_FORMAT = "Format the filename of output files [%s] will be applied on queue %s";
 	private static final String FILES_FOUND = "%d files found on source directory %s that matching filter %s on queue %s";
 	private static final String FS = System.getProperty("file.separator");
 	private static final String FAILED_TO_RENAME = "Failed to rename filename %s for substring %s, renaming is skipped, original filename is used";
+	private static final String FAILED_TO_FORMAT = "Failed to format filename %s for expression %s, renaming is skipped, original filename is used";
 	private static final String FILE_FOUND = "File %s found on queue %s";
 	private static final String FILE_ALLREADY_EXISTS = "File %s is allready exists on destination directory for queue %s. The %s is skipped";
 	private static final String UNKNOWN_NOVING_ERROR = "Failed to rename file from %s to %s on queue %s. Reason is unknown";
@@ -142,6 +146,7 @@ public class MoveFileHandler extends HandlerImpl {
 	private static final String ENTRY_UNZIPPED = "Zip entry %s was successfully unzipped as temporary file %s";
 	private static final String ZIP_CHARSET_KEY = "move.zipCharset";
 	private static final String DEFAULT_ZIP_CHARSET = null;
+	
 	private void execute(Object[] objs) {
 		String operation = (String) objs[7];
 		String name =  (String) objs[0];
@@ -150,6 +155,7 @@ public class MoveFileHandler extends HandlerImpl {
 		File srcDir, dstDir;
 		FileFilter filter;
 		int[] rename = null;
+		String[] format = null;
 		try {
 			if(objs[1] instanceof String) {
 				objs[1] = new File(FS + FS + objs[1] + FS + objs[3]);
@@ -179,6 +185,13 @@ public class MoveFileHandler extends HandlerImpl {
 				rename = (int[]) objs[6];
 				this.log.info(String.format(APPLY_RENAME, Arrays.toString(rename), name));
 			}
+			if(objs[9] == null) {
+				this.log.info(String.format(NO_FORMAT, name));
+			}
+			else {
+				format = (String[]) objs[9];
+				this.log.info(String.format(APPLY_FORMAT, Arrays.toString(format), name));
+			}
 			File[] list = srcDir.listFiles(filter);
 			log.info(String.format(FILES_FOUND, list.length, srcDir.getAbsolutePath(), filter.toString(), name));
 			for (int i = 0; i < list.length; i ++) {
@@ -193,11 +206,15 @@ public class MoveFileHandler extends HandlerImpl {
 					}
 					catch(Exception e) {
 						log.severe(String.format(FAILED_TO_RENAME, filename, Arrays.toString(rename)));
+						newName = new StringBuffer(list[i].getName().length());
 						newName.append(list[i].getName());
 					}
 				}
 				else {
 					newName.append(list[i].getName());
+				}
+				if(format != null && format.length > 0) {
+					newName = MoveFileHandler.format(newName, format, log);
 				}
 				File newFile = new File(dstDir.getAbsolutePath() + FS + newName.toString());
 				if(newFile.exists()) {
@@ -260,6 +277,22 @@ public class MoveFileHandler extends HandlerImpl {
 		}
 	}
 	
+	private static StringBuffer format(StringBuffer newName, String[] format, Logger log) {
+		String tmp = newName.toString();
+		try {
+			for(int i = 0; i < format.length; i ++) {
+				tmp = String.format(format[i], tmp);
+			}
+			StringBuffer _new = new StringBuffer(tmp.length());
+			_new.append(tmp);
+			newName = _new;
+		}
+		catch (Exception e) {
+			log.severe(String.format(FAILED_TO_FORMAT, newName.toString(), Arrays.toString(rename)));
+		}
+		return newName;
+	}
+
 	private void deleteOperation(File file, String name) throws IOException {
 		if(!file.delete()) {
 			throw new IOException(String.format(UNKNOWN_DELETE_ERROR, file.getAbsolutePath(), name));
@@ -506,7 +539,7 @@ public class MoveFileHandler extends HandlerImpl {
 		operation = (String) getProperty(this, OPERATION_KEY, DEFAULT_OPERATION, true, String.class, separator);
 		stmtMask = (String) getProperty(this, STMT_MASK_KEY, DEFAULT_STMT_MASK, true, String.class, separator);
 		stmtReplSeq = (byte[]) getProperty(this, STMT_REPLACEMENT_SEQUENCE_KEY, DEFAULT_STMT_REPLACEMENT_SEQUENCE, true, byte.class, separator);
-		moveQueues = new Object[tmp.length][9];
+		moveQueues = new Object[tmp.length][10];
 		for (int i = 0; i < moveQueues.length; i ++) {
 			//meno radu
 			moveQueues[i][0] = tmp[i];
@@ -524,8 +557,15 @@ public class MoveFileHandler extends HandlerImpl {
 			moveQueues[i][6] = getProperty(this, String.format(Q_RENAME_FILENAME_KEY, tmp[i]), null, false, int.class, separator);
 			moveQueues[i][6] = moveQueues[i][6] == null ? rename : moveQueues[i][6]; 
 			moveQueues[i][6] = moveQueues[i][5] == null ? null : moveQueues[i][6];
+			//typ operacie
 			moveQueues[i][7] = getProperty(this, String.format(Q_OPERATION_KEY, tmp[i]), operation, true, String.class, separator);
+			//pozdrzanie operacie
 			moveQueues[i][8] = getProperty(this, String.format(Q_OPERATION_DELAY, tmp[i]), DEFAULT_OPERATION_DELAY, false, int.class, separator);
+			//zmena mena súboru pomocou format
+			moveQueues[i][9] = MoveFileHandler.getProperty(this, String.format(Q_FORMAT_KEY, tmp[i]), null, false, String.class, separator);
+			if(moveQueues[i][9] instanceof String) {
+				moveQueues[i][9] = new String[]{(String) moveQueues[i][9]};
+			}
 		}
 		poolInterval = ((long) getProperty(this, MOVE_POOL_INTERVAL_KEY, DEFAULT_MOVE_POOL_INTERVAL, true, long.class, separator)) * 60 * 1000;
 		String zipCharset = (String) getProperty(this, ZIP_CHARSET_KEY, DEFAULT_ZIP_CHARSET, false, String.class, separator);
@@ -545,7 +585,7 @@ public class MoveFileHandler extends HandlerImpl {
 			}
 			else if(_class.equals(int.class)) {
 				try {
-					return Integer.parseInt(value);
+					return Integer.parseInt(value.trim());
 				}
 				catch(Exception e) {
 					throw new IOException(String.format(PROPERTY_PARSE_INTEGER_ERROR, key, value, handlerName));

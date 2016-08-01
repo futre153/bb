@@ -18,6 +18,9 @@ import org.pabk.emanager.routing.Distribution;
 import org.pabk.emanager.routing.Groups;
 import org.pabk.emanager.routing.XRecipient;
 import org.pabk.emanager.routing.XRecipients;
+import org.pabk.emanager.sql.sap.CompPred;
+import org.pabk.emanager.sql.sap.Identifier;
+import org.pabk.emanager.sql.sap.WhereClause;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -28,6 +31,13 @@ import org.w3c.dom.NodeList;
 public class Start {
 
 	public static void main(String[] args) throws Exception {
+		
+		CompPred c = new CompPred(new Object[]{new Identifier("brano")}, new Object[]{"brandys"}, CompPred.EQUAL);
+		Object[] objs = {c, WhereClause.AND, WhereClause.LEFT_BRACKET, c, WhereClause.OR, c, WhereClause.OR, c, WhereClause.RIGHT_BRACKET, WhereClause.AND, WhereClause.LEFT_BRACKET, c, WhereClause.RIGHT_BRACKET};
+		int[] x = WhereClause.findBrackets(0, objs);
+		WhereClause where = new WhereClause(objs);
+		System.exit(0);
+		
 		// TODO Auto-generated method stub
 		/*
 		String filename = "conf\\distribution_list.xml";
