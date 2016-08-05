@@ -8,8 +8,12 @@ public class LimitClause extends SQLSyntaxImpl {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	private RowCount rowCount;
-	private Offset offset;
+	protected RowCount rowCount;
+	protected Offset offset;
+	
+	public LimitClause (SQLSyntaxImpl ...impls) {
+		super(impls);
+	}
 	
 	@Override
 	public String toSQLString(PreparedBuffer psb) throws SQLException {
