@@ -14,6 +14,7 @@ div.ofk-hdr {
 }
 div.ofk-main-logo {
 	position: absolute;
+	z-index: 400;
 }
 div.ofk-hdr-info, div.ofk-menus {
 	display: -webkit-flex;
@@ -22,7 +23,7 @@ div.ofk-hdr-info, div.ofk-menus {
     align-items: center;
     -webkit-justify-content: flex-end;
     justify-content: flex-end;
-    padding: 0 0 3px;
+    epadding: 0 0 3px;
 }
 div.ofk-menu-frame {
 	padding: 0 2px 0 0;
@@ -30,8 +31,8 @@ div.ofk-menu-frame {
 div.ofk-menu-item {
 	width: 102px;
 	height: 40px;
-	font-size: 14px;
-	font-weight: bold;
+	font-size: 9px;
+	font-weight: 900;
 	display: -webkit-flex;
     display: flex;
     -webkit-align-items: center;
@@ -40,8 +41,15 @@ div.ofk-menu-item {
     justify-content: center;
 	color: whitesmoke;
 	background-color: maroon;
-	border-radius: 7px;
+	border-radius: 5px;
 	cursor: pointer;
+	background-image: url("../images/menu_bd.png");
+}
+div.ofk-menu-item div {
+	transform: scale(1, 2);
+	-webkit-transform:scale(1, 2);  /* Chrome, Safari, Opera */
+    -moz-transform: scale(1, 2);    /* Mozilla Firefox */
+    -ms-transform: scale(1, 2);     /* IE 9 */
 }
 div.ofk-menu-item:hover {
 	background-color: firebrick;
@@ -94,15 +102,18 @@ div.ofk-caption-2 {
 	font-weight: bold;
 	color: maroon;
 }
-div.ofk-hdr-info a:link, div.ofk-hdr-info a:visited, a:active {
+
+div.ofk-hdr-info a {
 	font-size: 12px;
 	font-weight: bold;
 	text-decoration: none;
+}
+div.ofk-hdr-info a:link, div.ofk-hdr-info a:visited, iv.ofk-hdr-info a:active {
 	color: maroon;
 }
 div.ofk-hdr-info a:hover {
-	font-size: 12px;
-	font-weight: bold;
-	text-decoration: none;
 	color: red;
+}
+div.ofk-menu-exit {
+	height: 2px;
 }

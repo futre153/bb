@@ -7,5 +7,104 @@ div.ofk-cnt {
     align-items: center;
     -webkit-justify-content: center;
     justify-content: center;
+    -webkit-flex-direction: column;
+    flex-direction: column;
     font-family: verdana;
+}
+div.ofk-cnt-frame {
+	background-image: url("../images/m1.png");
+	
+	
+}
+
+div.ofk-top, div.ofk-top2, div.ofk-top3 {
+	width: 1000px;
+	height: 360px;
+	border-radius: 10px; 
+}
+
+div.ofk-top {
+	background: lightblue;
+	background-image: url("http://localhost:8080/ofkpuweb/image?idi=1");
+	background-repeat: no-repeat;
+	background-position: left top;
+	background-size: 700px auto;	
+}
+
+div.ofk-top2 {
+	background-image: url("../images/m.png");
+	background-repeat: no-repeat;
+	background-position: right top;
+	background-size: auto 360px;
+}
+
+div.ofk-top3 {
+	background-image: url("../images/m1.png");
+	background-repeat: no-repeat;
+	background-position: right bottom;	
+}
+
+div.ofk-top4 {
+	padding-left: 700px;
+}
+
+div.ofk-top4-info {
+	height: 240px;
+	padding-top: 50px;
+}
+
+div.ofk-top4-caption {
+	padding: 0 20px 20px 0;
+	font-size: 24px;
+	font-weigth: bold;
+	color: whitesmoke;
+}
+div.ofk-top4-first {
+	padding: 0 20px 10px 0;
+	font-size: 20px;
+	color: whitesmoke;
+}
+div.ofk-top4-btns div {
+	display: inline-block;
+	padding: 2px;
+	margin: 4px;
+	background: whitesmoke;
+	border-radius: 4px;
+}
+button.ofk-top4-btn {
+	background-color: maroon;
+	border: 0;
+	border: 2px maroon outset;
+	color: whitesmoke;
+	margin: 0;
+	padding: 0;
+}
+
+div.ofk-top4-btns button {
+	width: 24px;
+	height: 24px;
+	font-size: 12px;
+	font-weight: bold;
+	border-radius: 3px;
+}
+
+button.ofk-top4-btn:hover {
+	color: white;
+	background-color: red;
+	cursor: pointer;
+}
+
+button.ofk-top4-ina {
+	color: gray;
+	background-color: darkgray;
+	border: 2px darkgray outset;
+	pointer: default;
+	margin: 0;
+	padding: 0;
+}
+
+button.ofk-top4-act {
+	color: white;
+	background-color: red;
+	border: 2px red inset;
 }

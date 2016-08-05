@@ -1,6 +1,8 @@
 package com.bb.ofkpuweb;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.Properties;
 
 import javax.servlet.ServletException;
@@ -12,6 +14,10 @@ import org.pabk.html.HtmlTag;
 import org.pabk.html.Img;
 import org.pabk.html.Tag;
 import org.pabk.html.TextTag;
+import org.pabk.web.db.DBConnector;
+import org.pabk.web.db.Rows;
+
+import com.bb.commons.Article;
 
 public class Ofkpuweb extends Core {
 
@@ -48,8 +54,8 @@ public class Ofkpuweb extends Core {
 	private static final String MENU_ITEM_KEY = "ofkpuweb.menu.item.%d";
 	private static final String OFK_MENU_FRAME_CLASS = "ofk-menu-frame";
 	private static final String OFK_MENU_ITEM_CLASS = "ofk-menu-item";
-	private static final String MENU_ITEM_ONMOUSEOVER_KEY = "ofkpuweb.menu.item.%d.onmouseover";
-	private static final String MENU_ITEM_ONMOUSEOUT_KEY = "ofkpuweb.menu.item.%d.onmouseout";
+	private static final String MENU_ITEM_ONMOUSEOVER_KEY = "ofkpuweb.menu.item.onmouseover";
+	private static final String MENU_ITEM_ONMOUSEOUT_KEY = "ofkpuweb.menu.item.onmouseout";
 	private static final String MENU_ITEM_ONCLICK_KEY = "ofkpuweb.menu.item.%d.onclick";
 	private static final String MENU_ITEM_URL_KEY = "ofkpuweb.menu.item.%d.url";
 	private static final String MENU_ITEM_ITEM_KEY = "ofkpuweb.menu.item.%d.%d";
@@ -58,6 +64,7 @@ public class Ofkpuweb extends Core {
 	private static final String OFK_MENU_CLASS = "ofk-menu";
 	private static final String OFK_MENU_INVISIBLE_CLASS = "ofk-menu-invisible";
 	private static final String MASK_MENU_ID = "ofk-menu-%d";
+	private static final String MASK_MENU_EXIT_ID = "ofk-menu-exit-%d";
 	private static final String OFK_MENU_CAPTION_CLASS = "ofk-menu-caption";
 	private static final String OFK_MENU_ITEMS_CLASS = "ofk-menu-items";
 	private static final String OFK_MENU_GROUP_CLASS = "ofk-menu-group";
@@ -67,6 +74,17 @@ public class Ofkpuweb extends Core {
 	private static final String OFK_MENU_ITEM_ITEM_PFX_CLASS = "ofk-menu-item-item-pfx";
 	private static final String MENU_ITEM_ITEM_PFX_KEY = "ofkpuweb.menu.item.pfx";
 	private static final String OFK_MENU_ITEM_ITEM_LINK_CLASS = "ofk-menu-item-item-link";
+	private static final String OFK_MENU_EMPTY_CLASS = "ofk-menu-empty";
+	private static final String SCRIPT_SOURCE_KEY = "ofkpuweb.jscript.source";
+	private static final String OFK_MENU_VISIBLE_CLASS = "ofk-menu-visible";
+	private static final String OFK_MENU_EXIT_CLASS = "ofk-menu-exit";
+	private static final String MENU_EXIT_BGIMAGE_KEY = "ofkpuweb.menu.exit.bgImage";
+	private static final String MOUSE_ITEMS_ONMOUSEOVER_KEY = "ofkpuweb.menu.items.onmouseover";
+	private static final String MOUSE_ITEMS_ONMOUSEOUT_KEY = "ofkpuweb.menu.items.onmouseout";
+	private static final String OFK_CNT_FRAME_CLASS = "ofk-cnt-frame";
+	private static final String PAGE_ENCODING_KEY = "ofkpuweb.page.encoding";
+	private static final String TOP_LIMIT_KEY = "ofkpuweb.top.limit";
+	private static final String TOP_DAYS_AGE_KEY = "ofkpuweb.top.daysAgo";
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
@@ -75,12 +93,35 @@ public class Ofkpuweb extends Core {
 		body.appendChild(getContent(props));
 		request.setAttribute(Core.PAGE_CONTENT_ATT_NAME, body);
 		request.setAttribute(Core.PAGE_STYLE_ATT_NAME, props.getProperty(STYLE_URL_KEY));
+		request.setAttribute(Core.PAGE_SCRIPT_SOURCE_ATT_NAME, props.getProperty(SCRIPT_SOURCE_KEY));
 		super.doGet(request, response);
 	}
 
-	private static Tag getContent(Properties props) {
-		Tag hdr = Core.getDiv(OFK_CNT_CLASS, getContentOfMenu(props));
-		return hdr;
+	private static Tag getContent(Properties props) throws IOException {
+		Connection con = null;
+		try {
+			con = DBConnector.lookup(props.getProperty(Core.DSN_KEY));
+			Tag cnt = Core.getDiv(OFK_CNT_CLASS, getContentOfMenu(props));
+			Tag frame = Core.getDiv(OFK_CNT_FRAME_CLASS + Core.SPACE_CHAR + OFK_MAX_WIDTH_CLASS, getFrameContent(props, con));
+			cnt.appendChild(frame);
+			return cnt;
+		}
+		catch (Exception e) {
+			throw new IOException (e);
+		}
+		finally {
+			try {con.close();} catch (SQLException e) {}
+		}
+	}
+
+	private static Tag getFrameContent(Properties props, Connection con) throws SQLException, IOException {
+		Rows rows = Utils.getActualArticles (props, con, Integer.parseInt(props.getProperty(TOP_LIMIT_KEY)), Integer.parseInt(props.getProperty(TOP_LIMIT_KEY)), Integer.parseInt(props.getProperty(TOP_DAYS_AGE_KEY)));
+		System.out.println(rows.size());
+		
+		Article a = Utils.getArticle(props, con, 2, props.getProperty(PAGE_ENCODING_KEY)); 
+		Tag div = Core.getDiv(null, Core.getDiv("caption", TextTag.getInstance(a.getCaption())));
+		div.appendChild(Core.getDiv("content", TextTag.getInstance(a.getContent())));
+		return div;
 	}
 
 	private static Tag getContentOfMenu(Properties props) {
@@ -93,9 +134,12 @@ public class Ofkpuweb extends Core {
 	}
 
 	private static Tag getMenu(Properties props, int index, String item) {
-		Tag menu = Core.getDiv(OFK_MENU_CLASS + Core.SPACE_CHAR + OFK_MENU_INVISIBLE_CLASS + Core.SPACE_CHAR + OFK_MAX_WIDTH_CLASS, Core.getDiv(OFK_MENU_CAPTION_CLASS, Core.getLink(props.getProperty(String.format(MENU_ITEM_URL_KEY, index)), null, TextTag.getInstance(item))));
+		Tag menu = Core.getDiv(OFK_MENU_CLASS + Core.SPACE_CHAR + OFK_MENU_INVISIBLE_CLASS + Core.SPACE_CHAR + OFK_MAX_WIDTH_CLASS, Core.getDiv(OFK_MENU_EMPTY_CLASS, null));
+		menu.appendChild(Core.getDiv(OFK_MENU_CAPTION_CLASS, Core.getLink(props.getProperty(String.format(MENU_ITEM_URL_KEY, index)), null, TextTag.getInstance(item))));
 		menu.setAttribute(ID_ATT_NAME, String.format(MASK_MENU_ID, index));
-		Tag content = Core.getDiv(OFK_MENU_ITEMS_CLASS + Core.SPACE_CHAR + OFK_MAX_WIDTH_CLASS , null);
+		menu.setAttribute(ONMOUSEOVER_ATT_NAME, String.format(props.getProperty(MOUSE_ITEMS_ONMOUSEOVER_KEY), String.format(MASK_MENU_ID, index), OFK_MENU_CLASS + Core.SPACE_CHAR + OFK_MENU_VISIBLE_CLASS + Core.SPACE_CHAR + OFK_MAX_WIDTH_CLASS));
+		menu.setAttribute(ONMOUSEOUT_ATT_NAME, String.format(props.getProperty(MOUSE_ITEMS_ONMOUSEOUT_KEY), String.format(MASK_MENU_ID, index), OFK_MENU_CLASS + Core.SPACE_CHAR + OFK_MENU_INVISIBLE_CLASS + Core.SPACE_CHAR + OFK_MAX_WIDTH_CLASS));
+		Tag content = Core.getDiv(OFK_MENU_ITEMS_CLASS , null);
 		boolean first = true;
 		boolean _continue = true;
 		int idx = 1;
@@ -108,15 +152,16 @@ public class Ofkpuweb extends Core {
 			int len = idx + 4;
 			for(; idx < len; idx ++) {
 				item = props.getProperty(String.format(MENU_ITEM_ITEM_KEY, index, idx));
+				Tag menuItem = null;
 				if(item != null) {
-					Tag menuItem = Core.getDiv(OFK_MENU_ITEM_ITEM_CLASS, Core.getDiv(OFK_MENU_ITEM_ITEM_PFX_CLASS, TextTag.getInstance(props.getProperty(MENU_ITEM_ITEM_PFX_KEY))));
+					menuItem = Core.getDiv(OFK_MENU_ITEM_ITEM_CLASS, Core.getDiv(OFK_MENU_ITEM_ITEM_PFX_CLASS, TextTag.getInstance(props.getProperty(MENU_ITEM_ITEM_PFX_KEY))));
 					menuItem.appendChild(Core.getDiv(OFK_MENU_ITEM_ITEM_LINK_CLASS, Core.getLink(props.getProperty(String.format(MENU_ITEM_ITEM_URL_KEY, index, idx)), null, TextTag.getInstance(item))));
-					container.appendChild(menuItem);
 				}
 				else {
+					menuItem = Core.getDiv(OFK_MENU_ITEM_ITEM_CLASS, null);
 					_continue = false;
-					break;
 				}
+				container.appendChild(menuItem);
 			}
 			group.appendChild(container);
 			first = false;
@@ -167,24 +212,28 @@ public class Ofkpuweb extends Core {
 
 	private static Tag getHeaderMenus(Properties props) {
 		Tag menus = Core.getDiv(OFK_MENUS_CLASS, null);
+		String over = props.getProperty(MENU_ITEM_ONMOUSEOVER_KEY);
+		String out = props.getProperty(MENU_ITEM_ONMOUSEOUT_KEY);
 		String item = null;
 		for (int i = 1; (item = props.getProperty(String.format(MENU_ITEM_KEY, i))) != null; i ++) {
-			System.out.println(String.format(MENU_ITEM_KEY, i));
 			Tag menuFrame = Core.getDiv(OFK_MENU_FRAME_CLASS, null);
-			Tag menuItem = Core.getDiv(OFK_MENU_ITEM_CLASS, TextTag.getInstance(item));
-			String over = props.getProperty(String.format(MENU_ITEM_ONMOUSEOVER_KEY, i));
+			Tag menuItem = Core.getDiv(OFK_MENU_ITEM_CLASS, Core.getDiv(null, TextTag.getInstance(item)));
+			
+			String exitId = String.format(MASK_MENU_EXIT_ID, i);
 			if(over != null) {
-				menuItem.setAttribute(ONMOUSEOVER_ATT_NAME, over);
+				menuFrame.setAttribute(ONMOUSEOVER_ATT_NAME, String.format(over, String.format(MASK_MENU_ID, i), OFK_MENU_CLASS + Core.SPACE_CHAR + OFK_MENU_VISIBLE_CLASS + Core.SPACE_CHAR + OFK_MAX_WIDTH_CLASS, exitId, props.getProperty(MENU_EXIT_BGIMAGE_KEY)));
 			}
-			String out = props.getProperty(String.format(MENU_ITEM_ONMOUSEOUT_KEY, i));
 			if(out != null) {
-				menuItem.setAttribute(ONMOUSEOUT_ATT_NAME, out);
+				menuFrame.setAttribute(ONMOUSEOUT_ATT_NAME, String.format(out, String.format(MASK_MENU_ID, i), OFK_MENU_CLASS + Core.SPACE_CHAR + OFK_MENU_INVISIBLE_CLASS + Core.SPACE_CHAR + OFK_MAX_WIDTH_CLASS, exitId, Core.EMPTY));
 			}
 			String click = props.getProperty(String.format(MENU_ITEM_ONCLICK_KEY, i));
 			if(click != null) {
 				menuItem.setAttribute(ONCLICK_ATT_NAME, click);
 			}
 			menuFrame.appendChild(menuItem);
+			Tag exit = Core.getDiv(OFK_MENU_EXIT_CLASS, null);
+			exit.setAttribute(ID_ATT_NAME, exitId);
+			menuFrame.appendChild(exit);
 			menus.appendChild(menuFrame);
 		}
 		return menus;

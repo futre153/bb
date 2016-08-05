@@ -85,3 +85,33 @@ CREATE TABLE IF NOT EXISTS `ofkpudb`.`profiles_affinity` (
     REFERENCES `ofkpudb`.`user_roles` (`id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE);
+CREATE TABLE IF NOT EXISTS `ofkpudb`.`articles` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `caption` VARCHAR(128) NOT NULL,
+  `content` MEDIUMTEXT NOT NULL,
+  `modified` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`));
+CREATE TABLE IF NOT EXISTS `ofkpudb`.`photo_galleries` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(128) NOT NULL,
+  PRIMARY KEY (`id`));
+CREATE TABLE IF NOT EXISTS `ofkpudb`.`photos` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `article_id` INT UNSIGNED NOT NULL DEFAULT 1,
+  `gallery_id` INT UNSIGNED NOT NULL DEFAULT 1,
+  `photo` LONGBLOB NULL,
+  `description` VARCHAR(512) NULL,
+  `mime` VARCHAR(45) NOT NULL DEFAULT 'image/png',
+  PRIMARY KEY (`id`),
+  INDEX `FK_photos_article_id_idx` (`article_id` ASC),
+  INDEX `FK_photos_gallery_id_idx` (`gallery_id` ASC),
+  CONSTRAINT `FK_photos_article_id`
+    FOREIGN KEY (`article_id`)
+    REFERENCES `ofkpudb`.`articles` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `FK_photos_gallery_id`
+    FOREIGN KEY (`gallery_id`)
+    REFERENCES `ofkpudb`.`photo_galleries` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE);
