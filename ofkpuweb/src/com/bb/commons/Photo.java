@@ -12,10 +12,10 @@ public class Photo {
 	private Object data;
 	private String description;
 	private String mime;
-	public Photo(int id) {
-		setId(id);
+	public Photo(long l) {
+		setId(l);
 	}
-	long getId() {
+	public long getId() {
 		return id;
 	}
 	void setId(long id) {

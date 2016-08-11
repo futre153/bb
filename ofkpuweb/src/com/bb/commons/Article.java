@@ -7,8 +7,8 @@ public class Article {
 	private Photo[] photos;
 	private long modified;
 	
-	public Article(int index) {
-		setIndex(index);
+	public Article(long l) {
+		setIndex(l);
 	}
 	public long getIndex() {
 		return index;
@@ -28,13 +28,13 @@ public class Article {
 	public void setCaption(String caption) {
 		this.caption = caption;
 	}
-	Photo [] getPhotos() {
+	public Photo [] getPhotos() {
 		return photos;
 	}
 	public void setPhotos(Photo[] photos) {
 		this.photos = photos;
 	}
-	long getModified() {
+	public long getModified() {
 		return modified;
 	}
 	public void setModified (long modified) {

@@ -7,6 +7,7 @@
 	<entry key="core.mask.location">location="%s";</entry>
 	<entry key="core.pageContent.errorNessage.buttonText">Návrat na hlavnú stránku</entry>
 	<entry key="core.pageContent.errorMessage.styleUrl">conf/styles/error.css</entry>
+	<entry key="core.page.encoding">UTF-8</entry>
 	
 	<entry key="core.ofkpudb">ofkpudb</entry>
 	<entry key="core.ofkpudb.articles">articles</entry>
@@ -14,8 +15,8 @@
 	<entry key="core.ofkpudb.articles.caption">caption</entry>
 	<entry key="core.ofkpudb.articles.content">content</entry>
 	<entry key="core.ofkpudb.articles.modified">modified</entry>
-	<entry key="core.page.encoding">UTF-8</entry>
-	
+	<entry key="core.ofkpudb.articles.categoryId">category_id</entry>
+		
 	<entry key="core.ofkpudb.photos">photos</entry>
 	<entry key="core.ofkpudb.photos.id">id</entry>
 	<entry key="core.ofkpudb.photos.articleId">article_id</entry>
@@ -23,5 +24,9 @@
 	<entry key="core.ofkpudb.photos.photo">photo</entry>
 	<entry key="core.ofkpudb.photos.description">description</entry>
 	<entry key="core.ofkpudb.photos.mime">mime</entry>
+	
+	<entry key="core.ofkpudb.categories">categories</entry>
+	<entry key="core.ofkpudb.categories.id">id</entry>
+	<entry key="core.ofkpudb.categories.name">name</entry>
 	
 </properties>

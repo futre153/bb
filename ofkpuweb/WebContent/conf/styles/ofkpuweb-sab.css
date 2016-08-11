@@ -1,0 +1,81 @@
+@CHARSET "UTF-8";
+
+div.ofk-sab {
+	width: 325px;
+	height: 355px;
+	overflow: hidden;
+	cursor: default;
+	font-family: Arial, Helvetica, sans-serif;
+}
+div.ofk-sab-hr {
+	margin: 8px 0;
+	border-top: 1px solid lightpink;
+	border-bottom: 1px solid lightyellow;
+}
+div.ofk-sab table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+div.ofk-sab-art-hdr {
+	font-size: 13px;
+	font-weight: bold;
+	color: darkblue;
+	height: 20px;
+	padding: 0 0 2px;
+} 
+div.ofk-sab-art-hdr table {
+	width: 100%;
+}
+.ofk-sab-art-lnk {
+	text-align: right;
+}
+.ofk-sab-art-lnk button {
+	padding: 1px 5px;
+	background: none;
+	border: none;
+	color: maroon;
+	font-weight: bold;
+	
+}
+.ofk-sab-art-lnk button:hover {
+	cursor: pointer;
+	color: red;
+}
+.ofk-sab-art-lnk button:disabled {
+	color: white;
+	cursor: default;
+}
+div.ofk-sab-art-bdy {
+	padding: 5px 0 0;
+	height: 80px;
+	overflow: hidden;
+	font-size: 11px;
+}
+.ofk-sab-art-pho {
+	width: 130px;
+	height: 80px;
+	background-image: url("../images/192941.png"), url("../images/menu_bd2.png");
+	background-repeat: no-repeat, no-repeat;
+	background-position: center 15px, left top;
+	background-size: 50px 50px, 130px 80px;
+}
+.ofk-sab-art-dte {
+	font-weight: bold;
+}
+.ofk-sab-art-lnk-2 {
+	text-align: right;
+}
+.ofk-sab-art-lnk-2 a {
+	text-decoration: none;
+	font-weight: bold;
+	color: blue;
+}
+.ofk-sab-art-lnk-2 a:hover {
+	color: lightblue;
+}
+.ofk-sab-art-lnk-2 span {
+	font-size: 9px;
+}
+.ofk-sab-art-bdy-ina {
+	display: none;
+}

@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.Statement;
+import java.util.Locale;
 import java.util.Properties;
 
 import javax.servlet.Servlet;
@@ -57,6 +58,7 @@ abstract class Core extends HttpServlet {
 	protected static final char UPPER_N_CHAR = 'N';
 	protected static final char LEFT_BRACKET_CHAR = '(';
 	protected static final char RIGHT_BRACKET_CHAR = ')';
+	protected static final char DASH_CHAR = '-';
 
 	private static final String PROPERTIES_CONST = ".properties.xml";
 	private static final String CONFIG_PATH = "conf";
@@ -72,6 +74,7 @@ abstract class Core extends HttpServlet {
 	protected static final String DB_ARTICLES_CAPTION_KEY = "core.ofkpudb.articles.caption";
 	protected static final String DB_ARTICLES_CONTENT_KEY = "core.ofkpudb.articles.content";
 	protected static final String DB_ARTICLES_MODIFIED_KEY = "core.ofkpudb.articles.modified";
+	protected static final String DB_ARTICLES_CATEGORY_ID_KEY = "core.ofkpudb.articles.categoryId";
 	
 	protected static final String DB_PHOTOS_KEY = "core.ofkpudb.photos";
 	protected static final String DB_PHOTOS_ID_KEY = "core.ofkpudb.photos.id";
@@ -80,6 +83,11 @@ abstract class Core extends HttpServlet {
 	protected static final String DB_PHOTOS_PHOTO_KEY = "core.ofkpudb.photos.photo";
 	protected static final String DB_PHOTOS_DESCRIPTION_KEY = "core.ofkpudb.photos.description";
 	protected static final String DB_PHOTOS_MIME_KEY = "core.ofkpudb.photos.mime";
+
+	protected static final String DB_CATEGORIES_KEY = "core.ofkpudb.categories";
+	protected static final String DB_CATEGORIES_ID_KEY = "core.ofkpudb.categories.id";
+	protected static final String DB_CATEGORIES_NAME_KEY = "core.ofkpudb.categories.name";
+	private static Locale locale;
 	
 	private Properties props = null;
     
@@ -205,10 +213,11 @@ abstract class Core extends HttpServlet {
 	}
 	
 	protected static final String CLASS_ATT_NAME = "class";
-	private static final String DEFAULT_PAGE_TITLE = "ProsÌm zadajte titulok str·nky";
+	private static final String DEFAULT_PAGE_TITLE = "Pros√≠m zadajte titulok str√°nky";
 	private static final String PAGE_TITLE_ATT_NAME = "core.pageTitle.att.name";
 	private static final String PAGE_ENCODING_ATT_NAME = "core.pageEncoding.att.name";
 	protected static final String PAGE_CONTENT_ATT_NAME = "core.pageContent.att.name";
+	protected static final String PAGE_ONLOAD_ATT_NAME = "core.pageOnload.att.name";
 
 	private static final String PAGE_CONTENT_ERROR_CLASS = "page-content-error";
 
@@ -232,6 +241,8 @@ abstract class Core extends HttpServlet {
 	protected static final String ONMOUSEOUT_ATT_NAME = "onmouseout";
 	private static final String DISABLED_ATT_NAME = "disabled";
 	protected static final String EMPTY = "";
+	private static final String ONLOAD_ATT_NAME = "onload";
+	protected static final String STYLE_ATT_NAME = "style";
 
 	private static final String ERROR_MESSAGE_BUTTON_FRAME_CLASS = "error-message-button-frame";
 	private static final String TYPE_BUTTON = "button";
@@ -252,7 +263,7 @@ abstract class Core extends HttpServlet {
 	private static final String FRAME5_CLASS = "frame5";
 	private static final String FRAME6_CLASS = "frame6";
 
-	private static final String DEFAULT_LANGUAGE = "sk";
+	protected static final String DEFAULT_LANGUAGE = "sk";
 
 	private static final String LANG_ATT_NAME = "lang";
 
@@ -261,9 +272,36 @@ abstract class Core extends HttpServlet {
 	protected static final String TRANSFER_ENCODING_HDR = "Transfer-Encoding";
 
 	protected static final String CHUNKED_ENCODING = "chunked";
+
+	protected static final String HIDDEN_TYPE = "hidden";
+
+	public static final String NBSP = "&#160;";
+	public static final String GT = "&#062;";
+
+	public static final String ROWSPAN_ATT_NAME = "rowspan";
+
+	
+
 	
 	
 	
+	protected static void setLocale(String country) {
+		if(locale == null) {
+		    locale = Locale.getDefault();
+		    try {
+		        Locale[] locales = Locale.getAvailableLocales();
+		    	for (int i = 0; i < locales.length; i ++) {
+		    		if (locales[i].getLanguage().equalsIgnoreCase(country)) {
+		    			locale = locales[i];
+		    			break;
+		    		}
+		    	}
+		    }
+		    catch (Exception e) {
+		    	e.printStackTrace();
+		    }
+		}
+	}
 	
 	
 	/**
@@ -278,18 +316,22 @@ abstract class Core extends HttpServlet {
 		Object tag = request.getAttribute(PAGE_CONTENT_ATT_NAME);
 		Object styleUrl = request.getAttribute(PAGE_STYLE_ATT_NAME);
 		Object scriptSrc = request.getAttribute(PAGE_SCRIPT_SOURCE_ATT_NAME);
+		Object onload = request.getAttribute(PAGE_ONLOAD_ATT_NAME);
 		
 		int errorMessgeRefreshRate = DEFAULT_ERROR_MESSAGE_REFRESH_RATE;
 		try {errorMessgeRefreshRate = Integer.parseInt(props.getProperty(ERROR_MESSAGE_REFERESH_RATE_KEY));}catch (Exception e) {}
 		
 		Html page = Html.getInstance(title != null && title instanceof String ? ((String) title) : DEFAULT_PAGE_TITLE);
 		page.setDoctype(Doctype.HTML_5);
+		// page encoding settings
+		String encoding = pageEncoding != null && pageEncoding instanceof String ? (String) pageEncoding : DEFAULT_PAGE_ENCODING;
+		response.setCharacterEncoding(encoding);
 		//page style settings
 		if (styleUrl != null && styleUrl instanceof String) page.addLink(Link.STYLEHEET, new String[] {STYLESHEET_RELATION, TYPE_TEXT_CSS, request.getServletContext().getContextPath() + Core.SLASH_CHAR + styleUrl});
 		//page script
-		if(scriptSrc != null && scriptSrc instanceof String) page.addScript(Core.TYPE_JSCRIPT, scriptSrc); 
-		// page encoding settings
-		response.setCharacterEncoding(pageEncoding != null && pageEncoding instanceof String ? (String) pageEncoding : DEFAULT_PAGE_ENCODING);
+		if(scriptSrc != null && scriptSrc instanceof String) page.addScript(Core.TYPE_JSCRIPT, scriptSrc, encoding); 
+		//onload function
+		if(onload != null && onload instanceof String) page.getBody().setAttribute(ONLOAD_ATT_NAME, (String) onload);
 		page.addMetadata(null, null, null, null, pageEncoding != null && pageEncoding instanceof String ? (String) pageEncoding : DEFAULT_PAGE_ENCODING);
 		page.setAttribute(LANG_ATT_NAME, DEFAULT_LANGUAGE);
 		PrintWriter out = response.getWriter();
@@ -315,7 +357,7 @@ abstract class Core extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	private static Button getInstance(String name, String value, String type, String text, String onclick, boolean disabled) {
+	protected static Button getInstance(String name, String value, String type, String text, String onclick, boolean disabled) {
 		Button button = Button.getInstance(text);
 		if(name != null) {
 			button.setAttribute(Core.NAME_ATT_NAME, name);
@@ -373,6 +415,12 @@ abstract class Core extends HttpServlet {
 			div.appendChild(child);
 		}
 		return div;
+	}
+
+
+
+	public static Locale getLocale() {
+		return locale;
 	}
 
 }

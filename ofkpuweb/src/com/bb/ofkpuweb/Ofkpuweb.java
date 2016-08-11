@@ -1,19 +1,39 @@
 package com.bb.ofkpuweb;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.URLEncoder;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Base64;
+import java.util.Date;
 import java.util.Properties;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.pabk.emanager.sql.sap.CompPred;
+import org.pabk.emanager.sql.sap.Identifier;
+import org.pabk.emanager.sql.sap.SchemaName;
+import org.pabk.emanager.sql.sap.TableName;
+import org.pabk.emanager.sql.sap.WhereClause;
+import org.pabk.html.Div;
+import org.pabk.html.Hr;
 import org.pabk.html.HtmlTag;
 import org.pabk.html.Img;
+import org.pabk.html.Input;
+import org.pabk.html.Table;
 import org.pabk.html.Tag;
+import org.pabk.html.Td;
 import org.pabk.html.TextTag;
+import org.pabk.util.Base64Coder;
 import org.pabk.web.db.DBConnector;
 import org.pabk.web.db.Rows;
 
@@ -37,7 +57,7 @@ public class Ofkpuweb extends Core {
 	private static final String OFK_LOGOS_CLASS = "ofk-logos";
 	private static final String OFK_MENUS_CLASS = "ofk-menus";
 	private static final String OFK_MAIN_LOGO_CLASS = "ofk-main-logo";
-	private static final String MAIN_LOGO_URL_KEY = "ofkpuweb.mailLogo.url";
+	private static final String MAIN_LOGO_URL_KEY = "ofkpuweb.mainLogo.url";
 	private static final String OFK_UNIONS_LOGOS_CLASS = "ofk-unions-logos";
 	private static final String SFZ_PAGE_KEY = "ofkpuweb.sfz.link";
 	private static final String SFZ_LOGO_URL_KEY = "ofkpuweb.sfzLogo.url";
@@ -85,7 +105,31 @@ public class Ofkpuweb extends Core {
 	private static final String PAGE_ENCODING_KEY = "ofkpuweb.page.encoding";
 	private static final String TOP_LIMIT_KEY = "ofkpuweb.top.limit";
 	private static final String TOP_DAYS_AGE_KEY = "ofkpuweb.top.daysAgo";
-
+	private static final String DEFAULT_ARTICLE_KEY = "ofkpuweb.fefault.article";
+	private static final String WINDOW_ONLOAD_KEY = "ofkpuweb.window.onload";
+	private static final String TOP_INTERVAL_VALUE_KEY = "ofkpuweb.top.interval.value";
+	private static final int MAIN_PAGE = 0;
+	private static final String OFK_HLN_CLASS = "ofk-hln";
+	private static final String OFK_CNT_WIDTH_CLASS = "ofk-cnt-width";
+	private static final String OFK_CNT_2_CLASS = "ofk-cnt-2";
+	private static final String OFK_HLN_ID = OFK_HLN_CLASS;
+	private static final String OFK_HLN_NAME = OFK_HLN_CLASS;
+	private static final String LANGUAGE_KEY = "ofkpuweb.language";
+	private static final String TOP_DATEFORMAT_KEY = "ofkpuweb.top.dateformat";
+	private static final String SAB_DATEFORMAT_KEY = "ofkpuweb.sab.dateformat";
+	private static final String SAB_ONE_ID_KEY = "ofkpuweb.sab.1.id";
+	private static final String SAB_ONE_CATEGORY_ID_KEY = "ofkpuweb.sab.1.categoryId";
+	
+	private static SimpleDateFormat topDateFormat;
+	private static SimpleDateFormat sabDateFormat;
+	
+	public void init(ServletConfig config) throws ServletException {
+		super.init(config);
+		Core.setLocale(super.getProperties().getProperty(LANGUAGE_KEY, DEFAULT_LANGUAGE));
+		topDateFormat = new SimpleDateFormat(super.getProperties().getProperty(TOP_DATEFORMAT_KEY), Core.getLocale());
+		sabDateFormat = new SimpleDateFormat(super.getProperties().getProperty(SAB_DATEFORMAT_KEY), Core.getLocale());
+	}
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		Properties props = getProperties();
@@ -94,6 +138,7 @@ public class Ofkpuweb extends Core {
 		request.setAttribute(Core.PAGE_CONTENT_ATT_NAME, body);
 		request.setAttribute(Core.PAGE_STYLE_ATT_NAME, props.getProperty(STYLE_URL_KEY));
 		request.setAttribute(Core.PAGE_SCRIPT_SOURCE_ATT_NAME, props.getProperty(SCRIPT_SOURCE_KEY));
+		request.setAttribute(Core.PAGE_ONLOAD_ATT_NAME, String.format(props.getProperty(Ofkpuweb.WINDOW_ONLOAD_KEY), OFK_HLN_ID, Long.parseLong(props.getProperty(TOP_INTERVAL_VALUE_KEY))));
 		super.doGet(request, response);
 	}
 
@@ -102,8 +147,11 @@ public class Ofkpuweb extends Core {
 		try {
 			con = DBConnector.lookup(props.getProperty(Core.DSN_KEY));
 			Tag cnt = Core.getDiv(OFK_CNT_CLASS, getContentOfMenu(props));
-			Tag frame = Core.getDiv(OFK_CNT_FRAME_CLASS + Core.SPACE_CHAR + OFK_MAX_WIDTH_CLASS, getFrameContent(props, con));
-			cnt.appendChild(frame);
+			Tag cnt2 = Core.getDiv(OFK_CNT_2_CLASS, null);
+			Tag frame = Core.getDiv(OFK_CNT_FRAME_CLASS + Core.SPACE_CHAR + OFK_MAX_WIDTH_CLASS, null);
+			getFrameContent(frame, props, con);
+			cnt.appendChild(cnt2);
+			cnt2.appendChild(frame);
 			return cnt;
 		}
 		catch (Exception e) {
@@ -114,14 +162,163 @@ public class Ofkpuweb extends Core {
 		}
 	}
 
-	private static Tag getFrameContent(Properties props, Connection con) throws SQLException, IOException {
-		Rows rows = Utils.getActualArticles (props, con, Integer.parseInt(props.getProperty(TOP_LIMIT_KEY)), Integer.parseInt(props.getProperty(TOP_LIMIT_KEY)), Integer.parseInt(props.getProperty(TOP_DAYS_AGE_KEY)));
-		System.out.println(rows.size());
+	private static void getFrameContent(Tag frame, Properties props, Connection con, long...acts) throws IOException {
 		
-		Article a = Utils.getArticle(props, con, 2, props.getProperty(PAGE_ENCODING_KEY)); 
-		Tag div = Core.getDiv(null, Core.getDiv("caption", TextTag.getInstance(a.getCaption())));
-		div.appendChild(Core.getDiv("content", TextTag.getInstance(a.getContent())));
+		
+		switch (acts.length == 0 ? MAIN_PAGE : (int) acts[0]) {
+		default:
+			getMainPage(frame, props, con);
+		}
+	}
+	
+	private static void getMainPage (Tag frame, Properties props, Connection con) throws IOException {
+		
+		frame.appendChild(getHeadlines(props, con));
+		frame.appendChild(smallArticlesBox(con, props, Integer.parseInt(props.getProperty(SAB_ONE_CATEGORY_ID_KEY)), props.getProperty(SAB_ONE_ID_KEY)));
+	}
+	
+	private static final String OFK_SAB_CLASS = "ofk-sab";
+	private static final String SMALL_ARTICLE_BOX_LIMIT_KEY = "ofkpuweb.smallArticleBox.limit";
+	private static final String OFK_SAB_ART_CLASS = "ofk-sab-art";
+	private static final String OFK_SAB_ART_HDR_CLASS = "ofk-sab-art-hdr";
+	private static final String OFK_SAB_ART_LNK_CLASS = "ofk-sab-art-lnk";
+	private static final String OFK_SAB_ART_BDY_CLASS = "ofk-sab-art-bdy";
+	private static final String SMALL_ARTICLE_BOX_LINK_TEXT_KEY = "ofkpuweb.smallArticleBox.text";
+	private static final String SAB_URL_TEXT_KEY = "ofkpuweb.smallArticleBox.urlText";
+	private static final String SMALL_ARTICLE_BOX_MAX_ACTIVE_ARTICLES_KEY = "ofkpuweb.smallAticleBox.maxActiveArticles";
+	private static final String OFK_SAB_HR_CLASS = "ofk-sab-hr";
+	
+	private static Tag smallArticlesBox (Connection con, Properties props, long category, String sabId) throws IOException {
+		Article[] articles = null;
+		try {
+			TableName tableName = new TableName(new SchemaName(new Identifier(props.getProperty(Core.DB_KEY))), new Identifier(props.getProperty(Core.DB_CATEGORIES_KEY)));
+			CompPred pred = new CompPred(new Object[]{new Identifier(props.getProperty(Core.DB_CATEGORIES_ID_KEY))}, new Object[]{category}, CompPred.EQUAL);
+			String categoryName = (String) DBConnector.select(con, DBConnector.createSelect().addFromClause(tableName).addTableSpec(new WhereClause(pred))).get(0).get(props.getProperty(Core.DB_CATEGORIES_NAME_KEY));
+			Tag small = Core.getDiv(OFK_SAB_CLASS, null);
+			small.setAttribute(ID_ATT_NAME, sabId);
+			int limit = Integer.parseInt(props.getProperty(SMALL_ARTICLE_BOX_LIMIT_KEY));
+			int maxActive = Integer.parseInt(props.getProperty(SMALL_ARTICLE_BOX_MAX_ACTIVE_ARTICLES_KEY));
+			articles = Utils.loadArticlesFromRows (con, Utils.getArticlesForCategory (props, con, limit, Long.parseLong(props.getProperty(DEFAULT_ARTICLE_KEY)), category), props, props.getProperty(Ofkpuweb.PAGE_ENCODING_KEY));
+			for(int i = 0; i < articles.length; i ++) {
+				if(i > 0) {
+					small.appendChild(Core.getDiv(OFK_SAB_HR_CLASS, null));
+				}
+				small.appendChild(getSmallBoxArticle(props, articles[i], i < maxActive, sabId, i));
+			}
+			return getWindow(categoryName, String.format(props.getProperty(WIN_LOGO_KEY), props.getProperty(MAIN_LOGO_URL_KEY)), Core.EMPTY, props.getProperty(SAB_URL_TEXT_KEY), small);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			throw new IOException (e);
+		}
+		finally {
+			if(articles != null) {try {Utils.freePhotos(articles);} catch(SQLException e) {e.printStackTrace();}}
+		}
+		
+	}
+	
+	private static final String SAB_MAX_CAPTION_LENGTH_KEY = "ofkpuweb.smallArticleBox.caption.maxLength";
+	private static final String SAB_MAX_CONTENT_LENGTH_KEY = "ofkpuweb.smallArticleBox.content.maxLength";
+	private static final String OFK_SAB_ART_PHO_CLASS = "ofk-sab-art-pho";
+	private static final String SAB_PHOTO_KEY = "ofkpuweb.smallArticleBox.photo";
+	private static final String OFK_SAB_ART_DTE_CLASS = "ofk-sab-art-dte";
+	private static final String OFK_SAB_ART_LNK_2_CLASS = "ofk-sab-art-lnk-2";
+	private static final String OFK_SAB_ART_BDY_INA_CLASS = "ofk-sab-art-bdy-ina";
+	private static final String SAB_BUTTON_ONCLICK_KEY = "ofkpuweb.sab.buttonOnclick";
+	
+	private static Tag getSmallBoxArticle(Properties props, Article article, boolean active, String sabId, int index) {
+		Table tableHdr = Table.getInstance(null, 2, 1, null);
+		Integer mcl = Integer.parseInt(props.getProperty(SAB_MAX_CAPTION_LENGTH_KEY));
+		String caption = article.getCaption().length() > mcl ? (article.getCaption().substring(0, article.getCaption().substring(0, mcl).lastIndexOf(Core.SPACE_CHAR)) + Core.SPACE_CHAR + Core.DOT_CHAR + Core.DOT_CHAR + Core.DOT_CHAR) : article.getCaption();
+		tableHdr.setBody(new Object[]{TextTag.getInstance(caption), Core.getInstance(null, null, null, new String(new char[]{Core.PLUS_CHAR}), String.format(props.getProperty(SAB_BUTTON_ONCLICK_KEY), sabId, index, OFK_SAB_ART_CLASS, OFK_SAB_ART_BDY_CLASS, OFK_SAB_ART_BDY_INA_CLASS), active)});
+		tableHdr.getRows()[0].getCells()[1].setAttribute(CLASS_ATT_NAME, OFK_SAB_ART_LNK_CLASS);
+		Tag div = Core.getDiv(OFK_SAB_ART_CLASS, Core.getDiv(OFK_SAB_ART_HDR_CLASS, tableHdr));
+		Table tableBdy = Table.getInstance(null, 2, 1, null);
+		tableBdy.setBody(TextTag.NBSP, TextTag.getInstance(sabDateFormat.format(new Date(article.getModified()))));
+		tableBdy.getRows()[0].getCells()[0].setAttribute(Core.ROWSPAN_ATT_NAME, "4");
+		tableBdy.getRows()[0].getCells()[1].setAttribute(Core.CLASS_ATT_NAME, OFK_SAB_ART_DTE_CLASS);
+		if(article.getPhotos().length > 0) {
+			tableBdy.getRows()[0].getCells()[0].setAttribute(STYLE_ATT_NAME, String.format(props.getProperty(SAB_PHOTO_KEY), article.getPhotos()[0].getId()));
+		}
+		tableBdy.getRows()[0].getCells()[0].setAttribute(CLASS_ATT_NAME, OFK_SAB_ART_PHO_CLASS);
+		mcl = Integer.parseInt(props.getProperty(SAB_MAX_CONTENT_LENGTH_KEY));
+		String content = article.getContent().length() > mcl ? (article.getContent().substring(0, article.getContent().substring(0, mcl).lastIndexOf(Core.SPACE_CHAR)) + Core.SPACE_CHAR + Core.DOT_CHAR + Core.DOT_CHAR + Core.DOT_CHAR) : article.getContent();
+		tableBdy.addRow(new Tag[]{TextTag.getInstance(content)});
+		tableBdy.addRow(new Tag[]{Core.getLink(Core.EMPTY, null, TextTag.getInstance(props.getProperty(SMALL_ARTICLE_BOX_LINK_TEXT_KEY) + TOP_URL_TEXT))});
+		tableBdy.addRow(new Tag[]{TextTag.NBSP});
+		tableBdy.getRows()[2].getCells()[0].setClassName(OFK_SAB_ART_LNK_2_CLASS);
+		div.appendChild(Core.getDiv(OFK_SAB_ART_BDY_CLASS + (!active ? (Core.SPACE_CHAR + OFK_SAB_ART_BDY_INA_CLASS) : Core.EMPTY), tableBdy));
 		return div;
+	}
+
+	private static Tag getHeadlines (Properties props, Connection con) throws IOException {
+	
+		Article[] articles = null;
+		try {
+			Tag headlines = Core.getDiv(OFK_HLN_CLASS + Core.SPACE_CHAR + OFK_CNT_WIDTH_CLASS, null);
+			headlines.setAttribute(ID_ATT_NAME, OFK_HLN_ID);
+			int limit = Integer.parseInt(props.getProperty(TOP_LIMIT_KEY));
+			articles = Utils.loadArticlesFromRows (con, Utils.getActualArticles (props, con, limit, Long.parseLong(props.getProperty(DEFAULT_ARTICLE_KEY)), Integer.parseInt(props.getProperty(TOP_DAYS_AGE_KEY))), props, props.getProperty(Ofkpuweb.PAGE_ENCODING_KEY));
+			System.out.println("Articles size = " + articles.length);
+			for(int i = 0; i < articles.length; i ++) {
+				headlines.appendChild(Input.getInstance(OFK_HLN_NAME + Core.DASH_CHAR + i, Core.HIDDEN_TYPE, getHeadlinesContent(articles[i], props, limit, i, articles.length)));
+			}
+			return headlines;
+		}
+		catch (Exception e) {
+			throw new IOException (e);
+		}
+		finally {
+			if(articles != null) {try {Utils.freePhotos(articles);} catch(SQLException e) {e.printStackTrace();}}
+		}
+	}
+	
+	private static final String OFK_TOP4_INFO_CLASS = "ofk-top4-info";
+	private static final String OKF_TOP4_DATE = "ofk-top4-date";
+	private static final String OFK_TOP4_CAPTION_CLASS = "ofk-top4-caption";
+	private static final int TOP_MAX_INDEX = 150;
+	private static final String TOP_CONTENT_NOT_AVAILABLE_KEY = "ofkpuweb.top.contentNotAvailable";
+	private static final String OFK_TOP4_FIRST_CLASS = "ofk-top4-first";
+	private static final String TOP_CONTENT_URL_TEXT_KEY = "ofkpuweb.top.contentUrlText";
+	private static final String OFK_TOP4_LINK_CLASS = "ofk-top4-link";
+	private static final String TOP_URL_TEXT = "<span>" + Core.NBSP + Core.GT + "</span>";
+	private static final String OFK_TOP4_CLASS = "ofk-top4";
+	private static final String OFK_TOP4_BTNS_CLASS = "ofk-top4-btns";
+	private static final String OFK_TOP_CLASS = "ofk-top";
+	private static final String OFK_TOP2_CLASS = "ofk-top2";
+	private static final String OFK_TOP3_CLASS = "ofk-top3";
+	private static final String TOP_BUTTON_ONCLICK_KEY = "ofkpuweb.top.buttonOnclick";
+	private static final String OFK_TOP4_INA_CLASS = "ofk-top4-ina";
+	private static final String OFK_TOP4_BTN_CLASS = "ofk-top4-btn";
+	private static final String OFK_TOP4_ACT_CLASS = "ofk-top4-act";
+	private static final String	TOP_PHOTO_KEY = "ofkpuweb.top.photo";
+	private static final String	TOP_MOTIV_KEY = "ofkpuweb.top.motiv";
+		
+	private static String getHeadlinesContent(Article article, Properties props, int limit, int id, int length) throws IOException {
+		Tag top4info = Core.getDiv(OFK_TOP4_INFO_CLASS, Core.getDiv(OKF_TOP4_DATE, TextTag.getInstance(topDateFormat.format(new Date(article.getModified())))));
+		top4info.appendChild(Core.getDiv(OFK_TOP4_CAPTION_CLASS, TextTag.getInstance(article.getCaption())));
+		int index = article.getContent() == null ? 0 : (article.getContent().length() > TOP_MAX_INDEX ? TOP_MAX_INDEX : article.getContent().length());
+		top4info.appendChild(Core.getDiv(OFK_TOP4_FIRST_CLASS, TextTag.getInstance(index == 0 ? props.getProperty (TOP_CONTENT_NOT_AVAILABLE_KEY) : (article.getContent().substring(0, index) + Core.SPACE_CHAR + Core.DOT_CHAR + Core.DOT_CHAR + Core.DOT_CHAR))));
+		top4info.appendChild(Core.getDiv(OFK_TOP4_LINK_CLASS, Core.getLink(Core.EMPTY, null, props.getProperty(TOP_CONTENT_URL_TEXT_KEY) + TOP_URL_TEXT)));/* TODO url create */
+		Tag top4 = Core.getDiv(OFK_TOP4_CLASS, top4info);
+		Tag top4btns = Core.getDiv(OFK_TOP4_BTNS_CLASS, null);
+		top4.appendChild(top4btns);
+		Tag top3 = Core.getDiv(OFK_TOP3_CLASS, top4);
+		top3.setAttribute(STYLE_ATT_NAME, String.format(props.getProperty(TOP_MOTIV_KEY), id + 1));
+		Tag top = Core.getDiv(OFK_TOP_CLASS, Core.getDiv(OFK_TOP2_CLASS, top3));
+		if(article.getPhotos().length > 0) {
+			top.setAttribute(STYLE_ATT_NAME, String.format(props.getProperty(TOP_PHOTO_KEY), article.getPhotos()[0].getId()));
+		}
+		for(int i = 0; i < limit; i ++) {
+			String className = i >= length ? OFK_TOP4_INA_CLASS : (OFK_TOP4_BTN_CLASS + (i == id ? (Core.SPACE_CHAR + OFK_TOP4_ACT_CLASS) : Core.EMPTY));
+			top4btns.appendChild(Core.getDiv(className, Core.getInstance(null, null, null, Integer.toString (i + 1), String.format(props.getProperty(TOP_BUTTON_ONCLICK_KEY), i), i >= length)));
+		}
+		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		PrintWriter writer = new PrintWriter(new OutputStreamWriter(out, props.getProperty(Ofkpuweb.PAGE_ENCODING_KEY)));
+		top.doFinal(writer, 5);
+		writer.flush();
+		writer.close();
+		return Base64.getEncoder().encodeToString(out.toByteArray());
 	}
 
 	private static Tag getContentOfMenu(Properties props) {
@@ -238,7 +435,26 @@ public class Ofkpuweb extends Core {
 		}
 		return menus;
 	}
-
+	private static final String OFK_WIN_CLASS = "ofk-win";
+	private static final String OFK_WIN_HDR_CLASS = "ofk-win-hdr";
+	private static final String OFK_WIN_LGO_CLASS = "ofk-win-lgo";
+	private static final String WIN_LOGO_KEY = "ofkpuweb.win.logo";
+	private static final String OFK_WIN_CAP_CLASS = "ofk-win-cap";
+	private static final String OFK_WIN_LNK_CLASS = "ofk-win-lnk";
+	private static final String OFK_WIN_CNT_CLASS = "ofk-win-cnt";
+	
+	private static Tag getWindow (String caption, String logoUrl, String linkUrl, String linkText, Tag content) {
+		Table table = Table.getInstance(null, 3, 1, null);
+		table.setBody(new Object[]{TextTag.NBSP, TextTag.getInstance(caption), Core.getLink(linkUrl, null, TextTag.getInstance(linkText + TOP_URL_TEXT))});
+		Td[] cells = table.getRows()[0].getCells();
+		cells[0].setAttribute(CLASS_ATT_NAME, OFK_WIN_LGO_CLASS);
+		cells[0].setAttribute(STYLE_ATT_NAME, logoUrl);
+		cells[1].setAttribute(CLASS_ATT_NAME, OFK_WIN_CAP_CLASS);
+		cells[2].setAttribute(CLASS_ATT_NAME, OFK_WIN_LNK_CLASS);
+		Tag win = Core.getDiv(OFK_WIN_CLASS, Core.getDiv(OFK_WIN_HDR_CLASS, table));
+		win.appendChild(Core.getDiv(OFK_WIN_CNT_CLASS, content));
+		return win;
+	}
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */

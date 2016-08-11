@@ -52,9 +52,10 @@ public class ImageDownload extends Core {
 			int index = Integer.parseInt(id);
 			con = DBConnector.lookup(props.getProperty(DSN_KEY));
 			photo = Utils.getPhotoFromDb (props, con, index);
-			in = new ChunkedInputStream(photo.getInputStream());
+			//in = new ChunkedInputStream(photo.getInputStream());
+			in = photo.getInputStream();
 			response.setContentType(photo.getMime());
-			response.addHeader(Core.TRANSFER_ENCODING_HDR, Core.CHUNKED_ENCODING);
+			//response.addHeader(Core.TRANSFER_ENCODING_HDR, Core.CHUNKED_ENCODING);
 			Utils.write(in, response.getOutputStream());
 			//response.setStatus(HTTP_OK);
 		}

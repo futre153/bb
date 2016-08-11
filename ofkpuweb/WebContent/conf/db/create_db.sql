@@ -85,12 +85,23 @@ CREATE TABLE IF NOT EXISTS `ofkpudb`.`profiles_affinity` (
     REFERENCES `ofkpudb`.`user_roles` (`id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE);
+CREATE TABLE IF NOT EXISTS `ofkpudb`.`categories` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC));
 CREATE TABLE IF NOT EXISTS `ofkpudb`.`articles` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `caption` VARCHAR(128) NOT NULL,
   `content` MEDIUMTEXT NOT NULL,
   `modified` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`));
+  `category_id` INT UNSIGNED NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id`),
+  CONSTRAINT `FK_articles_category_id`
+  FOREIGN KEY (`category_id`)
+  REFERENCES `ofkpudb`.`categories` (`id`)
+  ON DELETE CASCADE
+  ON UPDATE CASCADE);
 CREATE TABLE IF NOT EXISTS `ofkpudb`.`photo_galleries` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(128) NOT NULL,

@@ -15,14 +15,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Properties;
 
-import javax.servlet.ServletOutputStream;
-
 import org.pabk.emanager.sql.sap.CompPred;
 import org.pabk.emanager.sql.sap.FixedPointLiteral;
 import org.pabk.emanager.sql.sap.Identifier;
 import org.pabk.emanager.sql.sap.LimitClause;
 import org.pabk.emanager.sql.sap.OrderClause;
-import org.pabk.emanager.sql.sap.Query;
 import org.pabk.emanager.sql.sap.RowCount;
 import org.pabk.emanager.sql.sap.SchemaName;
 import org.pabk.emanager.sql.sap.SortSpec;
@@ -48,16 +45,16 @@ final class Utils {
 	}
 	
 	private static Article loadArticleFromRow (Row row, Properties props, String charset, Connection con) throws IOException, SQLException {
-		Article article = new Article((int) row.get(props.getProperty(Core.DB_ARTICLES_ID_KEY)));
+		Article article = new Article((long) row.get(props.getProperty(Core.DB_ARTICLES_ID_KEY)));
 		article.setCaption((String) row.get(props.getProperty(Core.DB_ARTICLES_CAPTION_KEY)));
 		article.setContent(Utils.readCharsToHtml(getClobReader(row, props.getProperty(Core.DB_ARTICLES_CONTENT_KEY), charset)));
 		article.setModified(((Timestamp) row.get(props.getProperty(Core.DB_ARTICLES_MODIFIED_KEY))).getTime());
 		article.setPhotos(loadPhotosFromRows(getPhotosForAtricle(con, props, (int) article.getIndex()), props));
-		Utils.freeXlob (row, props.getProperty(Core.DB_ARTICLES_CONTENT_KEY));
+		Utils.freeXlob (row.get(props.getProperty(Core.DB_ARTICLES_CONTENT_KEY)));
 		return article;
 	}
 	
-	private static Rows getPhotosForAtricle(Connection con, Properties props, int index) throws SQLException {
+	private static Rows getPhotosForAtricle(Connection con, Properties props, long index) throws SQLException {
 		String schema = props.getProperty(Core.DB_KEY);
 		String table = props.getProperty(Core.DB_PHOTOS_KEY);
 		WhereClause where = new WhereClause(new CompPred(new Object[]{new Identifier(props.getProperty(Core.DB_PHOTOS_ARTICLE_ID_KEY))}, new Object[]{index}, CompPred.EQUAL));
@@ -73,21 +70,34 @@ final class Utils {
 		return photos;
 	}
 	
+	public static void freePhotos (Article[] articles) throws SQLException {
+		for (int i = 0; i < articles.length; i ++) {
+			Article article = articles[i];
+			int l = article.getPhotos().length;
+			for (int j = 0; j < l; j ++) {
+				Utils.freeXlob(article.getPhotos()[j]);
+			}
+		}
+	}
 	
 	private static Photo loadPhotoFromRow(Row row, Properties props) {
-		// TODO Auto-generated method stub
-		return null;
+		Photo photo = new Photo((long) row.get(props.getProperty(Core.DB_PHOTOS_ID_KEY)));
+		photo.setArticleId((long) row.get(props.getProperty(Core.DB_PHOTOS_ARTICLE_ID_KEY)));
+		photo.setGalleryId((long) row.get(props.getProperty(Core.DB_PHOTOS_GALLERY_ID_KEY)));
+		photo.setData(row.get(props.getProperty(Core.DB_PHOTOS_PHOTO_KEY)));
+		photo.setDescription ((String) row.get(props.getProperty(Core.DB_PHOTOS_DESCRIPTION_KEY)));
+		photo.setMime ((String) row.get(props.getProperty(Core.DB_PHOTOS_MIME_KEY)));
+		return photo;
 	}
 
-	public static Article getArticle(Properties props, Connection con, int index, String charset) throws SQLException, IOException {
+	public static Article getArticle(Properties props, Connection con, long index, String charset) throws SQLException, IOException {
 		String schema = props.getProperty(Core.DB_KEY);
 		String table = props.getProperty(Core.DB_ARTICLES_KEY);
 		WhereClause where = new WhereClause(new CompPred(new Object[]{new Identifier(props.getProperty(Core.DB_ARTICLES_ID_KEY))}, new Object[]{index}, CompPred.EQUAL));
 		return loadArticleFromRow (Utils.getRows(con, schema, table, where).get(0), props, charset, con);
 	}
 
-	private static void freeXlob(Row row, String column) throws SQLException {
-		Object obj = row.get(column);
+	private static void freeXlob(Object obj) throws SQLException {
 		if(obj instanceof Clob) {
 			((Clob) obj).free();
 		}
@@ -130,18 +140,11 @@ final class Utils {
 		return sb.toString();
 	}
 
-	public static Photo getPhotoFromDb (Properties props, Connection con, int id) throws SQLException {
-		Photo photo = new Photo(id);
+	public static Photo getPhotoFromDb (Properties props, Connection con, long id) throws SQLException {
 		String schema = props.getProperty(Core.DB_KEY);
 		String table = props.getProperty(Core.DB_PHOTOS_KEY);
 		WhereClause where = new WhereClause(new CompPred(new Object[]{new Identifier(props.getProperty(Core.DB_PHOTOS_ID_KEY))}, new Object[]{id}, CompPred.EQUAL));
-		Row row = loadPhotoFromRow (Utils.getRows(con, schema, table, where), props)[0];
-		photo.setArticleId((long) row.get(props.getProperty(Core.DB_PHOTOS_ARTICLE_ID_KEY)));
-		photo.setGalleryId((long) row.get(props.getProperty(Core.DB_PHOTOS_GALLERY_ID_KEY)));
-		photo.setData(row.get(props.getProperty(Core.DB_PHOTOS_PHOTO_KEY)));
-		photo.setDescription ((String) row.get(props.getProperty(Core.DB_PHOTOS_DESCRIPTION_KEY)));
-		photo.setMime ((String) row.get(props.getProperty(Core.DB_PHOTOS_MIME_KEY)));
-		return photo;
+		return loadPhotoFromRow (Utils.getRows(con, schema, table, where).get(0), props);
 	}
 
 	public static void write(InputStream in, OutputStream out) throws IOException {
@@ -152,18 +155,18 @@ final class Utils {
 		}
 	}
 	
-	public static Article[] loadArticlesFromRows (Rows rows, Properties props, String charset) throws IOException, SQLException {
+	public static Article[] loadArticlesFromRows (Connection con, Rows rows, Properties props, String charset) throws IOException, SQLException {
 		rows = rows == null ? new Rows() : rows;
 		Article[] articles = new Article[rows.size()];
 		for (int i = 0; i < articles.length; i ++) {
-			articles[i] = loadArticleFromRow (rows.get(i), props, charset);
+			articles[i] = loadArticleFromRow (rows.get(i), props, charset, con);
 		}
 		return articles;
 	}
 	
 	//private static Rows = 
 	
-	public static Rows getActualArticles(Properties props, Connection con, int limit, int defaultArticle, int daysAgo) throws SQLException {
+	public static Rows getActualArticles(Properties props, Connection con, int limit, long defaultArticle, int daysAgo) throws SQLException {
 		String schema = props.getProperty(Core.DB_KEY);
 		String table = props.getProperty(Core.DB_ARTICLES_KEY);
 		WhereClause where = new WhereClause (
@@ -174,7 +177,19 @@ final class Utils {
 		LimitClause limitClause = new LimitClause(new RowCount (new UnsInt(new FixedPointLiteral(limit))));
 		return DBConnector.select(con, DBConnector.createSelect().addFromClause(new TableName(new SchemaName(new Identifier(schema)), new Identifier (table))).addTableSpec(where).addSelectSpec(order).addSelectSpec(limitClause));
 	}
-
+	
+	public static Rows getArticlesForCategory (Properties props, Connection con, int limit, long defaultArticle, long category) throws SQLException {
+		String schema = props.getProperty(Core.DB_KEY);
+		String table = props.getProperty(Core.DB_ARTICLES_KEY);
+		WhereClause where = new WhereClause (
+			new CompPred(new Object[]{new Identifier(props.getProperty(Core.DB_ARTICLES_CATEGORY_ID_KEY))}, new Object[]{category}, CompPred.EQUAL),
+			WhereClause.AND,
+			new CompPred(new Object[]{new Identifier(props.getProperty(Core.DB_ARTICLES_ID_KEY))}, new Object[]{defaultArticle}, CompPred.NOT_EQUAL));
+		OrderClause order = new OrderClause(new SortSpec(false, new Identifier(props.getProperty(Core.DB_ARTICLES_MODIFIED_KEY))));
+		LimitClause limitClause = new LimitClause(new RowCount (new UnsInt(new FixedPointLiteral(limit))));
+		return DBConnector.select(con, DBConnector.createSelect().addFromClause(new TableName(new SchemaName(new Identifier(schema)), new Identifier (table))).addTableSpec(where).addSelectSpec(order).addSelectSpec(limitClause));
+	}
+	
 	private static String getTimestamp(int daysAgo, boolean back, int type) {
 		long l = 1;
 		switch (type) {

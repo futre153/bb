@@ -5,7 +5,7 @@
 	<entry key="ofkpuweb.styleUrl">conf/styles/ofkpuweb.css</entry>
 	<entry key="ofkpuweb.text.loggedIn">Prihlásený:</entry>
 	<entry key="ofkpuweb.text.login">Prihlásenie</entry>
-	<entry key="ofkpuweb.mailLogo.url">conf/images/192941.png</entry>
+	<entry key="ofkpuweb.mainLogo.url">conf/images/192941.png</entry>
 	<entry key="ofkpuweb.sfz.link">http://www.futbalsfz.sk/sfz.html</entry>
 	<entry key="ofkpuweb.sfzLogo.url">conf/images/New_logo_SFZ.png</entry>
 	<entry key="ofkpuweb.zsfz.link">http://www.zsfz.sk/</entry>
@@ -59,8 +59,30 @@
 	<entry key="ofkpuweb.menu.items.onmouseout">setClassById ("%s", "%s");</entry>
 	
 	
-	<entry key="ofkpuweb.top.limit">1</entry>
-	<entry key="ofkpuweb.top.daysAgo">2</entry>
+	<entry key="ofkpuweb.top.limit">5</entry>
+	<entry key="ofkpuweb.top.daysAgo">10</entry>
+	<entry key="ofkpuweb.fefault.article">1</entry>
+	<entry key="ofkpuweb.language">sk</entry>
+	<entry key="ofkpuweb.top.dateformat">dd. MMMM YYYY</entry>
+	<entry key="ofkpuweb.sab.dateformat">dd.mm.YYYY</entry>
+	<entry key="ofkpuweb.top.contentNotAvailable">Obsah článku nie je k dispozícii, prosím kontantujte webadministrátora.</entry>
+	<entry key="ofkpuweb.top.contentUrlText">viac</entry>
+	<entry key="ofkpuweb.top.buttonOnclick">topButtonOnclick(%d);</entry>
+	<entry key="ofkpuweb.sab.buttonOnclick">sabButtonOnclick("%s", %d, "%s", "%s", "%s");</entry>
+	<entry key="ofkpuweb.window.onload">window_onload("%s", %d);</entry>
+	<entry key="ofkpuweb.top.interval.value">5000</entry>
+	<entry key="ofkpuweb.top.photo">background-image: none, url("http://localhost:8080/ofkpuweb/image?idi=%d");</entry>
+	<entry key="ofkpuweb.top.motiv">background-image: url("conf/images/m%d.png");</entry>
+	<entry key="ofkpuweb.win.logo">background-image: url("%s");</entry>
+	<entry key="ofkpuweb.smallArticleBox.limit">5</entry>
+	<entry key="ofkpuweb.smallArticleBox.text">viac</entry>
+	<entry key="ofkpuweb.smallArticleBox.urlText">všetky články</entry>
+	<entry key="ofkpuweb.smallArticleBox.caption.maxLength">40</entry>
+	<entry key="ofkpuweb.smallArticleBox.content.maxLength">88</entry>
+	<entry key="ofkpuweb.smallAticleBox.maxActiveArticles">2</entry>
+	<entry key="ofkpuweb.smallArticleBox.photo">background-image: none, url("http://localhost:8080/ofkpuweb/image?idi=%d");</entry>
+	<entry key="ofkpuweb.sab.1.id">ofk-sab-1</entry>
+	<entry key="ofkpuweb.sab.1.categoryId">2</entry>
 	
 	<!-- <entry key="ofkpuweb.menu.exit.bgImage">url(\"http://localhost:8080/ofkpuweb/conf/images/menu2.png\")</entry> -->
 </properties>
