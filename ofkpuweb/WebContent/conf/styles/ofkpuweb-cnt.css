@@ -1,8 +1,10 @@
 @CHARSET "UTF-8";
 @IMPORT url("ofkpuweb-cnt-hln.css");
 @IMPORT url("ofkpuweb-sab.css");
+@IMPORT url("ofkpuweb-btm.css");
+@IMPORT url("ofkpuweb-smb.css");
 
-div.ofk-cnt {
+div.ofk-cnt, div.ofk-cnt-2 {
 	width:100%;
 	display: -webkit-flex;
     display: flex;
@@ -14,9 +16,11 @@ div.ofk-cnt {
     flex-direction: column;
     font-family: verdana;
 }
-div.ofk-cnt-2 {
+
+div.ofk-cnt-pad {
 	padding: 25px 0 0;
 }
+
 div.ofk-cnt-frame {
 	background-color: whitesmoke;
 	border-radius: 10px;
@@ -34,4 +38,43 @@ div.ofk-cnt-frame {
 
 .ofk-cnt-width {
 	width: 990px;
+}
+
+div.ofk-ban, div.ofk-cnt-2-bans {
+	display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
+}
+
+div.ofk-lban, div.ofk-cnt-2-lban {
+	width:660px;
+}
+div.ofk-rban, div.ofk-cnt-2-rban {
+	width:330px;
+}
+div.ofk-lbox, div.ofk-sbox {
+	width: 100%;
+	display: -webkit-flex;
+    display: flex;
+    -webkit-align-items: center;
+    align-items: center;
+    -webkit-justify-content: flex-start;
+    justify-content: flex-start;
+    overflow: hidden;
+    padding: 5px 0 0;
+}
+div.ofk-lban-lbox {
+	width: 660px;
+	padding: 0 5px 0 0;
+}
+div.ofk-rban-sbox {
+	width: 330px;
+	padding: 0;
+}
+div.ofk-lban-sbox-1, div.ofk-lban-sbox-2 {
+	width: 330px;
+	padding: 0 5px 0 0;
 }

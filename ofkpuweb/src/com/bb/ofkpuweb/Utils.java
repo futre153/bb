@@ -31,7 +31,9 @@ import org.pabk.web.db.Row;
 import org.pabk.web.db.Rows;
 
 import com.bb.commons.Article;
+import com.bb.commons.Partner;
 import com.bb.commons.Photo;
+import com.bb.commons.ShortMessage;
 
 final class Utils {
 	
@@ -97,7 +99,7 @@ final class Utils {
 		return loadArticleFromRow (Utils.getRows(con, schema, table, where).get(0), props, charset, con);
 	}
 
-	private static void freeXlob(Object obj) throws SQLException {
+	static void freeXlob(Object obj) throws SQLException {
 		if(obj instanceof Clob) {
 			((Clob) obj).free();
 		}
@@ -164,8 +166,24 @@ final class Utils {
 		return articles;
 	}
 	
-	//private static Rows = 
+	public static ShortMessage[] loadShortMessagesFromRows (Properties props, Rows rows) {
+		rows = rows == null ? new Rows() : rows;
+		ShortMessage[] msgs = new ShortMessage[rows.size()];
+		for(int i = 0; i < msgs.length; i ++) {
+			msgs[i] = loadShortMessageFromRow(props, rows.get(i));
+		}
+		return msgs;
+	}
 	
+	private static ShortMessage loadShortMessageFromRow(Properties props, Row row) {
+		ShortMessage msg = new ShortMessage();
+		msg.setId((long) row.get(props.getProperty(Core.DB_SHORT_MESSAGES_ID_KEY)));
+		msg.setInserted(((Timestamp) row.get(props.getProperty(Core.DB_SHORT_MESSAGES_INSERTED_KEY))).getTime());
+		msg.setCaption((String) row.get(props.getProperty(Core.DB_SHORT_MESSAGES_CAPTION_KEY)));
+		msg.setText((String) row.get(props.getProperty(Core.DB_SHORT_MESSAGES_TEXT_KEY)));
+		return msg;
+	}
+
 	public static Rows getActualArticles(Properties props, Connection con, int limit, long defaultArticle, int daysAgo) throws SQLException {
 		String schema = props.getProperty(Core.DB_KEY);
 		String table = props.getProperty(Core.DB_ARTICLES_KEY);
@@ -190,6 +208,19 @@ final class Utils {
 		return DBConnector.select(con, DBConnector.createSelect().addFromClause(new TableName(new SchemaName(new Identifier(schema)), new Identifier (table))).addTableSpec(where).addSelectSpec(order).addSelectSpec(limitClause));
 	}
 	
+	public static Rows getActualShortMessages (Properties props, Connection con, int limit, int daysAgo) throws SQLException {
+		String schema = props.getProperty(Core.DB_KEY);
+		String table = props.getProperty(Core.DB_SHORT_MESSAGES_KEY);
+		WhereClause where = new WhereClause (new CompPred(new Object[]{new Identifier(props.getProperty(Core.DB_SHORT_MESSAGES_INSERTED_KEY))}, new Object[]{Utils.getTimestamp(daysAgo, true, Calendar.DAY_OF_YEAR)}, CompPred.GREATHER));
+		OrderClause order = new OrderClause(new SortSpec(false, new Identifier(props.getProperty(Core.DB_SHORT_MESSAGES_INSERTED_KEY))));
+		LimitClause limitClause = new LimitClause(new RowCount (new UnsInt(new FixedPointLiteral(limit))));
+		return DBConnector.select(con, DBConnector.createSelect().addFromClause(new TableName(new SchemaName(new Identifier(schema)), new Identifier (table))).addTableSpec(where).addSelectSpec(order).addSelectSpec(limitClause));
+	}
+	
+	public static Rows getAllRows (Properties props, String table, Connection con) throws SQLException {
+		return DBConnector.select(con, DBConnector.createSelect().addFromClause(new TableName(new SchemaName(new Identifier(props.getProperty(Core.DB_KEY))), new Identifier(table))));
+	}
+	
 	private static String getTimestamp(int daysAgo, boolean back, int type) {
 		long l = 1;
 		switch (type) {
@@ -201,6 +232,25 @@ final class Utils {
 		l = new Date().getTime() - daysAgo * l * (back ? 1 : -1);
 		Timestamp  timestamp = new Timestamp (l);
 		return timestamp.toString() ;
+	}
+
+	public static Partner[] getPartners(Connection con, Properties props) throws SQLException {
+		String schema = props.getProperty(Core.DB_KEY);
+		String table = props.getProperty(Core.DB_PARTNERS_KEY);
+		Rows rows = DBConnector.select(con, DBConnector.createSelect().addFromClause(new TableName(new SchemaName(new Identifier(schema)), new Identifier(table))));
+		Partner[] partners = new Partner[rows.size()];
+		table = props.getProperty(Core.DB_PARTNER_TYPES_KEY);
+		TableName tableName = new TableName (new SchemaName(new Identifier(schema)), new Identifier(table));
+		for(int i = 0; i < rows.size(); i ++) {
+			Row row = rows.get(i);
+			partners[i] = new Partner();
+			partners[i].setId((long) row.get(props.getProperty(Core.DB_PARTNERS_ID_KEY)));
+			partners[i].setPhoto_id((long) row.get(props.getProperty(Core.DB_PARTNERS_PHOTO_ID_KEY)));
+			partners[i].setName((String) row.get(props.getProperty(Core.DB_PARTNERS_NAME_KEY)));
+			partners[i].setUrl((String) row.get(props.getProperty(Core.DB_PARTNERS_URL_KEY)));
+			partners[i].setType((String) DBConnector.select(con, DBConnector.createSelect().addFromClause(tableName).addTableSpec(new WhereClause(new CompPred(new Object[]{new Identifier(props.getProperty(Core.DB_PARTNER_TYPES_ID_KEY))}, new Object[]{((long) row.get(props.getProperty(Core.DB_PARTNERS_TYPE_ID_KEY)))}, CompPred.EQUAL)))).get(0).get(props.getProperty(Core.DB_PARTNER_TYPES_NAME_KEY)));
+		}
+		return partners;
 	}
 	
 }

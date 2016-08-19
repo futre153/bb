@@ -126,3 +126,33 @@ CREATE TABLE IF NOT EXISTS `ofkpudb`.`photos` (
     REFERENCES `ofkpudb`.`photo_galleries` (`id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE);
+CREATE TABLE IF NOT EXISTS `ofkpudb`.`partner_types` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(32) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE INDEX `name_UNIQUE` (`name` ASC));
+CREATE TABLE IF NOT EXISTS `ofkpudb`.`partners` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `type_id` INT UNSIGNED NOT NULL DEFAULT 1,
+  `name` VARCHAR(64) NULL,
+  `photo_id` INT UNSIGNED NOT NULL,
+  `url` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `FK_partners_type_id_idx` (`type_id` ASC),
+  INDEX `FK_partners_photo_id_idx` (`photo_id` ASC),
+  CONSTRAINT `FK_partners_type_id`
+    FOREIGN KEY (`type_id`)
+    REFERENCES `ofkpudb`.`partner_types` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `FK_partners_photo_id`
+    FOREIGN KEY (`photo_id`)
+    REFERENCES `ofkpudb`.`photos` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE);
+CREATE TABLE IF NOT EXISTS `ofkpudb`.`short_messages` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `inserted` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `caption` VARCHAR(64) NOT NULL,
+  `text` VARCHAR(256) NOT NULL,
+  PRIMARY KEY (`id`));

@@ -59,6 +59,7 @@ abstract class Core extends HttpServlet {
 	protected static final char LEFT_BRACKET_CHAR = '(';
 	protected static final char RIGHT_BRACKET_CHAR = ')';
 	protected static final char DASH_CHAR = '-';
+	protected static final char VERTICAL_BAR_CHAR = '|';
 
 	private static final String PROPERTIES_CONST = ".properties.xml";
 	private static final String CONFIG_PATH = "conf";
@@ -87,6 +88,28 @@ abstract class Core extends HttpServlet {
 	protected static final String DB_CATEGORIES_KEY = "core.ofkpudb.categories";
 	protected static final String DB_CATEGORIES_ID_KEY = "core.ofkpudb.categories.id";
 	protected static final String DB_CATEGORIES_NAME_KEY = "core.ofkpudb.categories.name";
+	
+	protected static final String DB_PHOTO_GALLERIES_KEY = "core.ofkpudb.photoGalleries";
+	protected static final String DB_PHOTO_GALLERIES_ID_KEY = "core.ofkpudb.photoGalleries.id";
+	protected static final String DB_PHOTO_GALLERIES_NAME_KEY = "core.ofkpudb.photoGalleries.name";
+	
+	protected static final String DB_PARTNERS_KEY = "core.ofkpudb.partners";
+	protected static final String DB_PARTNERS_ID_KEY = "core.ofkpudb.partners.id";
+	protected static final String DB_PARTNERS_TYPE_ID_KEY = "core.ofkpudb.partners.typeId";
+	protected static final String DB_PARTNERS_PHOTO_ID_KEY = "core.ofkpudb.partners.photoId";
+	protected static final String DB_PARTNERS_NAME_KEY = "core.ofkpudb.partners.name";
+	protected static final String DB_PARTNERS_URL_KEY = "core.ofkpudb.partners.url";
+	
+	protected static final String DB_PARTNER_TYPES_KEY = "core.ofkpudb.partnerTypes";
+	protected static final String DB_PARTNER_TYPES_ID_KEY = "core.ofkpudb.partnerTypes.id";
+	protected static final String DB_PARTNER_TYPES_NAME_KEY = "core.ofkpudb.partnerTypes.name";
+	
+	protected static final String DB_SHORT_MESSAGES_KEY = "core.ofkpudb.shortMessages";
+	protected static final String DB_SHORT_MESSAGES_ID_KEY = "core.ofkpudb.shortMessages.id";
+	protected static final String DB_SHORT_MESSAGES_INSERTED_KEY = "core.ofkpudb.shortMessages.inserted";
+	protected static final String DB_SHORT_MESSAGES_CAPTION_KEY = "core.ofkpudb.shortMessages.caption";
+	protected static final String DB_SHORT_MESSAGES_TEXT_KEY = "core.ofkpudb.shortMessages.text";
+	
 	private static Locale locale;
 	
 	private Properties props = null;
@@ -245,7 +268,7 @@ abstract class Core extends HttpServlet {
 	protected static final String STYLE_ATT_NAME = "style";
 
 	private static final String ERROR_MESSAGE_BUTTON_FRAME_CLASS = "error-message-button-frame";
-	private static final String TYPE_BUTTON = "button";
+	protected static final String TYPE_BUTTON = "button";
 	private static final String MASK_LOCATION = "core.mask.location";
 	private static final int DEFAULT_ERROR_MESSAGE_REFRESH_RATE = 30;
 	private static final String ERROR_MESSAGE_REFERESH_RATE_KEY = "core.pageContent.errorMessage.refereshRate";

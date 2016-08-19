@@ -5,6 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -38,6 +39,8 @@ import org.pabk.web.db.DBConnector;
 import org.pabk.web.db.Rows;
 
 import com.bb.commons.Article;
+import com.bb.commons.Partner;
+import com.bb.commons.ShortMessage;
 
 public class Ofkpuweb extends Core {
 
@@ -119,15 +122,31 @@ public class Ofkpuweb extends Core {
 	private static final String SAB_DATEFORMAT_KEY = "ofkpuweb.sab.dateformat";
 	private static final String SAB_ONE_ID_KEY = "ofkpuweb.sab.1.id";
 	private static final String SAB_ONE_CATEGORY_ID_KEY = "ofkpuweb.sab.1.categoryId";
+	private static final String OFK_BANS_CLASS = "ofk-bans";
+	private static final String OFK_LBAN_CLASS = "ofk-lban";
+	private static final String OFK_RBAN_CLASS = "ofk-rban";
+	private static final String OFK_BTM_CLASS = "ofk-btm";
+	private static final String PARTNERS_INTERVAL_VALUE_KEY = "ofkpuweb.partners.interval.value";
+	private static final String OFK_BAN_CLASS = "ofk-ban";
+	private static final String OKF_CNT_2_TOP_CLASS = "ofk-cnt-2-top";
+	private static final String OFK_CNT_2_BANS_CLASS = "ofk-cnt-2-bans";
+	private static final String OFK_CNT_2_RBAN_CLASS = "ofk-cnt-2-rban";
+	private static final String OFK_CNT_2_LBAN_CLASS = "ofk-cnt-2-lban";
+	private static final String MSG_DATEFORMAT_KEY = "ofkpuweb.msg.dateformat";
+	private static final String OFK_CNT_PAD_CLASS = "ofk-cnt-pad";
+	private static final String OFK_LBAN_SBOX_CLASS_PFX = "ofk-lban-sbox-";
+	private static final String OFK_LBAN_LBOX_CLASS = "ofk-lban-lbox";
 	
 	private static SimpleDateFormat topDateFormat;
 	private static SimpleDateFormat sabDateFormat;
+	private static SimpleDateFormat msgDateFormat;
 	
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
 		Core.setLocale(super.getProperties().getProperty(LANGUAGE_KEY, DEFAULT_LANGUAGE));
 		topDateFormat = new SimpleDateFormat(super.getProperties().getProperty(TOP_DATEFORMAT_KEY), Core.getLocale());
 		sabDateFormat = new SimpleDateFormat(super.getProperties().getProperty(SAB_DATEFORMAT_KEY), Core.getLocale());
+		msgDateFormat = new SimpleDateFormat(super.getProperties().getProperty(MSG_DATEFORMAT_KEY), Core.getLocale());
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -138,7 +157,7 @@ public class Ofkpuweb extends Core {
 		request.setAttribute(Core.PAGE_CONTENT_ATT_NAME, body);
 		request.setAttribute(Core.PAGE_STYLE_ATT_NAME, props.getProperty(STYLE_URL_KEY));
 		request.setAttribute(Core.PAGE_SCRIPT_SOURCE_ATT_NAME, props.getProperty(SCRIPT_SOURCE_KEY));
-		request.setAttribute(Core.PAGE_ONLOAD_ATT_NAME, String.format(props.getProperty(Ofkpuweb.WINDOW_ONLOAD_KEY), OFK_HLN_ID, Long.parseLong(props.getProperty(TOP_INTERVAL_VALUE_KEY))));
+		request.setAttribute(Core.PAGE_ONLOAD_ATT_NAME, String.format(props.getProperty(Ofkpuweb.WINDOW_ONLOAD_KEY), OFK_HLN_ID, Long.parseLong(props.getProperty(TOP_INTERVAL_VALUE_KEY)), OFK_PRRS_CLASS, OFK_ITM_ID, Long.parseLong(props.getProperty(PARTNERS_INTERVAL_VALUE_KEY))));
 		super.doGet(request, response);
 	}
 
@@ -147,11 +166,23 @@ public class Ofkpuweb extends Core {
 		try {
 			con = DBConnector.lookup(props.getProperty(Core.DSN_KEY));
 			Tag cnt = Core.getDiv(OFK_CNT_CLASS, getContentOfMenu(props));
-			Tag cnt2 = Core.getDiv(OFK_CNT_2_CLASS, null);
 			Tag frame = Core.getDiv(OFK_CNT_FRAME_CLASS + Core.SPACE_CHAR + OFK_MAX_WIDTH_CLASS, null);
-			getFrameContent(frame, props, con);
-			cnt.appendChild(cnt2);
-			cnt2.appendChild(frame);
+			Tag margin = Core.getDiv(OFK_CNT_PAD_CLASS, frame);
+			Tag top = Core.getDiv(OKF_CNT_2_TOP_CLASS + Core.SPACE_CHAR + OFK_CNT_WIDTH_CLASS, null);
+			Tag cnt2 = Core.getDiv(OFK_CNT_2_CLASS, top);
+			Tag rban = Core.getDiv(OFK_CNT_2_RBAN_CLASS, null);
+			Tag lban = Core.getDiv(OFK_CNT_2_LBAN_CLASS, null);
+			Tag bans = Core.getDiv(OFK_CNT_2_BANS_CLASS + Core.SPACE_CHAR + OFK_CNT_WIDTH_CLASS, lban);
+			bans.appendChild(rban);
+			cnt2.appendChild(bans);
+			Tag lBan = Core.getDiv(OFK_LBAN_CLASS, null);
+			Tag rBan = Core.getDiv(OFK_RBAN_CLASS, null);
+			bans = Core.getDiv(OFK_BANS_CLASS, lBan);
+			bans.appendChild(rBan);
+			getPageContent(top, lban, rban, props, con);
+			frame.appendChild(cnt2);
+			frame.appendChild(getBottomContent(props, con));
+			cnt.appendChild(margin);
 			return cnt;
 		}
 		catch (Exception e) {
@@ -162,21 +193,209 @@ public class Ofkpuweb extends Core {
 		}
 	}
 
-	private static void getFrameContent(Tag frame, Properties props, Connection con, long...acts) throws IOException {
+	private static Tag getBottomContent(Properties props, Connection con) throws SQLException, IOException {
+		Tag lBan = Core.getDiv(OFK_LBAN_CLASS, getLongBox(getPartners(props, con)));
+		Tag fb = getFacebookLink(props, 
+				props.getProperty(FB_URL_KEY),
+				props.getProperty(FB_DATA_TABS_KEY),
+				props.getProperty(FB_DATA_HEIGHT_KEY),
+				props.getProperty(FB_DATA_WIDTH_KEY),
+				props.getProperty(FB_DATA_SMALL_HEADER_KEY),
+				props.getProperty(FB_DATA_ADAPT_CONTAINER_WIDTH_KEY),
+				props.getProperty(FB_DATA_HIDE_COVER_KEY),
+				props.getProperty(FB_DATA_SHOW_FACEPILE_KEY));
+		Tag rBan = Core.getDiv(OFK_RBAN_CLASS, getSmallBox(Ofkpuweb.getWindow(props.getProperty(FB_CAPTION_KEY), String.format(props.getProperty(WIN_LOGO_KEY), props.getProperty(MAIN_LOGO_URL_KEY)), null, null, Core.getDiv(OFK_FB_PAGE_CLASS, fb))));
+		Tag bottom = Core.getDiv(OFK_BTM_CLASS + Core.SPACE_CHAR + OFK_BAN_CLASS + Core.SPACE_CHAR + Ofkpuweb.OFK_CNT_WIDTH_CLASS, lBan);
+		bottom.appendChild(rBan);
+		return bottom;
+	}
+	
+	private static final String FB_PAGE_CLASS = "fb-page";
+	private static final String FB_DATA_HREF_ATT_NAME = "data-href";
+	private static final String FB_URL_KEY = "ofkpuweb.fb.url";
+	private static final String FB_DATA_TABS_ATT_NAME = "data-tabs";
+	private static final String FB_DATA_TABS_KEY = "ofkpuweb.fb.tabs";
+	private static final String FB_DATA_HEIGHT_ATT_NAME = "data-height";
+	private static final String FB_DATA_HEIGHT_KEY = "ofkpuweb.fb.height";
+	private static final String FB_DATA_SMALL_HEADER_ATT_NAME = "data-small-header";
+	private static final String FB_DATA_SMALL_HEADER_KEY = "ofkpuweb.fb.smallHeader";
+	private static final String FB_DATA_ADAPT_CONTAINER_WIDTH_ATT_NAME = "data-adapt-container-width";
+	private static final String FB_DATA_ADAPT_CONTAINER_WIDTH_KEY = "ofkpuweb.fb.url.adaptContainerWidth";
+	private static final String FB_DATA_HIDE_COVER_ATT_NAME = "data-hide-cover";
+	private static final String FB_DATA_HIDE_COVER_KEY = "ofkpuweb.fb.url.hideCover";
+	private static final String FB_DATA_SHOW_FACEPILE_ATT_NAME = "data-show-facepile";
+	private static final String FB_DATA_SHOW_FACEPILE_KEY = "ofkpuweb.fb.url.showFacepile";
+	private static final String FB_CAPTION_KEY = "ofkpuweb.fb.caption";
+	private static final String OFK_FB_PAGE_CLASS = "ofk-fb-page";
+	private static final String FB_DATA_WIDTH_ATT_NAME = "data-width";
+	private static final String FB_DATA_WIDTH_KEY = "ofkpuweb.fb.width";
+	private static final String[] FB_ATTS = {
+			FB_DATA_HREF_ATT_NAME,
+			FB_DATA_TABS_ATT_NAME,
+			FB_DATA_HEIGHT_ATT_NAME,
+			FB_DATA_WIDTH_ATT_NAME,
+			FB_DATA_SMALL_HEADER_ATT_NAME,
+			FB_DATA_ADAPT_CONTAINER_WIDTH_ATT_NAME,
+			FB_DATA_HIDE_COVER_ATT_NAME,
+			FB_DATA_SHOW_FACEPILE_ATT_NAME
+	};
+	
+	private static Tag getFacebookLink(Properties props, String ...values) {
+		Tag fb = Core.getDiv(FB_PAGE_CLASS, null);
+		for(int i = 0; i < FB_ATTS.length; i ++) {
+			if(i <values.length && values[i] != null) {
+				fb.setAttribute(FB_ATTS[i], values[i]);
+			}
+		}
+		/*
+		fb.setAttribute(FB_DATA_HREF_ATT_NAME, props.getProperty(FB_URL_KEY));
+		fb.setAttribute(FB_DATA_TABS_ATT_NAME, props.getProperty(FB_DATA_TABS_KEY));
+		fb.setAttribute(FB_DATA_HEIGHT_ATT_NAME, props.getProperty(FB_DATA_HEIGHT_KEY));
+		fb.setAttribute(FB_DATA_WIDTH_ATT_NAME, props.getProperty(FB_DATA_WIDTH_KEY));
+		fb.setAttribute(FB_DATA_SMALL_HEADER_ATT_NAME, props.getProperty(FB_DATA_SMALL_HEADER_KEY));
+		fb.setAttribute(FB_DATA_ADAPT_CONTAINER_WIDTH_ATT_NAME, props.getProperty(FB_DATA_ADAPT_CONTAINER_WIDTH_KEY));
+		fb.setAttribute(FB_DATA_HIDE_COVER_ATT_NAME, props.getProperty(FB_DATA_HIDE_COVER_KEY));
+		fb.setAttribute(FB_DATA_SHOW_FACEPILE_ATT_NAME, props.getProperty(FB_DATA_SHOW_FACEPILE_KEY));*/
+		return fb;
+	}
+
+	private static final String PARTNERS_CAPTION_KEY = "ofkpuweb.partners.caption";
+	private static final String OFK_PRRS_CLASS = "ofk-prrs";
+	private static final String OKF_PRRS_TOP_CLASS = "ofk-prrs-top";
+	private static final String OKF_PRRS_BOT_CLASS = "ofk-prrs-bot";
+	private static final String OFK_PRRS_TOP_ITM_CLASS = "ofk-prrs-top-itm";
+	private static final String OFK_PRRS_BOT_ITM_CLASS = "ofk-prrs-bot-itm";
+	private static final String OFK_ITM_ID = "ofk-itm-";
+	private static final String OFK_ITM_1_ID = "ofk-itm-1";
+	private static final String OFK_ITM_2_ID = "ofk-itm-2";
+	private static final String OFK_ITM_3_ID = "ofk-itm-3";
+	private static final String OFK_ITM_4_ID = "ofk-itm-4";
+	private static final String OFK_ITM_5_ID = "ofk-itm-5";
+	private static final String OFK_ITM_NAME = "ofk-itm-";
+	private static final String OFK_PRR_TYPE_CLASS = "ofk-prr-type";
+	private static final String OFK_PRR_CLASS = "ofk-prr";
+	private static final String OFK_PRR_LOGO_CLASS = "ofk-prr-logo";
+	private static final String OFK_PRR_NAME_CLASS = "ofk-prr-name";
+	
+	
+	private static Tag getPartners(Properties props, Connection con) throws SQLException, IOException {
+		Partner[] partners = Utils.getPartners(con, props);
+		Tag top1 = Core.getDiv(OFK_PRRS_TOP_ITM_CLASS, getPartnerContent());
+		top1.setAttribute(ID_ATT_NAME, OFK_ITM_1_ID);
+		Tag top2 = Core.getDiv(OFK_PRRS_TOP_ITM_CLASS, getPartnerContent());
+		top2.setAttribute(ID_ATT_NAME, OFK_ITM_2_ID);
+		Tag top = Core.getDiv(OKF_PRRS_TOP_CLASS, top1);
+		top.appendChild(top2);
+		Tag bot1 = Core.getDiv(OFK_PRRS_BOT_ITM_CLASS, getPartnerContent());
+		bot1.setAttribute(ID_ATT_NAME, OFK_ITM_3_ID);
+		Tag bot2 = Core.getDiv(OFK_PRRS_BOT_ITM_CLASS, getPartnerContent());
+		bot2.setAttribute(ID_ATT_NAME, OFK_ITM_4_ID);
+		Tag bot3 = Core.getDiv(OFK_PRRS_BOT_ITM_CLASS, getPartnerContent());
+		bot3.setAttribute(ID_ATT_NAME, OFK_ITM_5_ID);
+		Tag bot = Core.getDiv(OKF_PRRS_BOT_CLASS, bot1);
+		bot.appendChild(bot2);
+		bot.appendChild(bot3);
+		Tag cnt = Core.getDiv(OFK_PRRS_CLASS, top);
+		cnt.appendChild(bot);
+		for(int i = 0; i < partners.length; i ++) {
+			cnt.appendChild(Input.getInstance(OFK_ITM_NAME + (i + 1), Core.HIDDEN_TYPE, getPartner(partners[i], props.getProperty(Ofkpuweb.PAGE_ENCODING_KEY))));
+		}
+		return Ofkpuweb.getWindow(props.getProperty(PARTNERS_CAPTION_KEY), String.format(props.getProperty(WIN_LOGO_KEY), props.getProperty(MAIN_LOGO_URL_KEY)), null, null, cnt);
+	}
+
+	private static String getPartner(Partner partner, String encoding) throws IOException {
+		String s = partner.getName() + Core.VERTICAL_BAR_CHAR + partner.getType() + Core.VERTICAL_BAR_CHAR + partner.getPhoto_id() + Core.VERTICAL_BAR_CHAR + partner.getId() + Core.VERTICAL_BAR_CHAR + partner.getUrl();
+		return Base64.getEncoder().encodeToString(s.getBytes(encoding));
+	}
+
+	private static Tag getPartnerContent() {
+		Tag p = Core.getDiv(OFK_PRR_CLASS, Core.getDiv(OFK_PRR_TYPE_CLASS, null));
+		p.appendChild(Core.getLink(Core.EMPTY, null, Core.getDiv(OFK_PRR_LOGO_CLASS, null)));
+		p.appendChild(Core.getDiv(OFK_PRR_NAME_CLASS, null));
+		return p;
+	}
+
+	private static void getPageContent(Tag top, Tag lban, Tag rban, Properties props, Connection con, long...acts) throws IOException, SQLException {
 		
 		
 		switch (acts.length == 0 ? MAIN_PAGE : (int) acts[0]) {
 		default:
-			getMainPage(frame, props, con);
+			getMainPage(top, lban, rban, props, con);
 		}
 	}
 	
-	private static void getMainPage (Tag frame, Properties props, Connection con) throws IOException {
-		
-		frame.appendChild(getHeadlines(props, con));
-		frame.appendChild(smallArticlesBox(con, props, Integer.parseInt(props.getProperty(SAB_ONE_CATEGORY_ID_KEY)), props.getProperty(SAB_ONE_ID_KEY)));
+	private static final String OFK_LBOX_CLASS = "ofk-lbox";
+	private static final String SHORT_MESSAGES_CAPTION_KEY = "ofkpuweb.shortMessages.caption";
+	private static final String SHORT_MESSAGES_FB_CAPTION_KEY = "ofkpuweb.shortMessages.fbCaption";
+	private static final String SHORT_MESSAGES_LIMIT_KEY = "ofkpuweb.shortMessages.limit";
+	private static final String SHORT_MESSAGES_DAYS_AGO_KEY = "ofkpuweb.shortMessages.daysAgo";
+	private static final String OKF_SMBS_CLASS = "ofk-smbs";
+	private static final String OFK_SMB_CLASS = "ofk-smb";
+	private static final String OKF_SMB_DTE_CLASS = "ofk-smb-dte";
+	private static final String OFK_SMB_CAP_CLASS = "ofk-smb-cap";
+	private static final String OFK_SMB_TXT_CLASS = "ofk-smb-txt";
+	private static final String OFK_SMB_HRU_CLASS = "ofk-smb-hru";
+	private static final String SM_FB_URL_KEY = "ofkpuweb.shortMessages.fb.url";
+	private static final String SM_FB_DATA_TABS_KEY = "ofkpuweb.shortMessages.fb.tabs";
+	private static final String SM_FB_DATA_HEIGHT_KEY = "ofkpuweb.shortMessages.fb.height";
+	private static final String SM_FB_DATA_SMALL_HEADER_KEY = "ofkpuweb.shortMessages.fb.smallHeader";
+	private static final String SM_FB_DATA_ADAPT_CONTAINER_WIDTH_KEY = "ofkpuweb.shortMessages.fb.url.adaptContainerWidth";
+	private static final String SM_FB_DATA_HIDE_COVER_KEY = "ofkpuweb.shortMessages.fb.url.hideCover";
+	private static final String SM_FB_DATA_SHOW_FACEPILE_KEY = "ofkpuweb.shortMessages.fb.url.showFacepile";
+	private static final String SM_FB_DATA_WIDTH_KEY = "ofkpuweb.shortMessages.fb.width";
+	private static final String OFK_SMB_FB_CLASS = "ofk-smb-fb";
+	private static final String OFK_LBAN_SBOX_1_CLASS = "ofk-lban-sbox-1";
+	private static final String OFK_LBAN_SBOX_2_CLASS = "ofk-lban-sbox-2";
+	
+	
+	private static void getMainPage (Tag top, Tag lban, Tag rban, Properties props, Connection con) throws IOException, SQLException {
+		top.appendChild(getHeadlines(props, con));
+		Tag lbox1_1 = Core.getDiv(OFK_LBAN_SBOX_1_CLASS, smallArticlesBox(con, props, Integer.parseInt(props.getProperty(SAB_ONE_CATEGORY_ID_KEY)), props.getProperty(SAB_ONE_ID_KEY)));
+		Tag lbox1_2 = Core.getDiv(OFK_LBAN_SBOX_2_CLASS, smallShortMessageBox(props, con));
+		Tag lbox1 = Core.getDiv(OFK_LBOX_CLASS, lbox1_1);
+		lbox1.appendChild(lbox1_2);
+		lban.appendChild(lbox1);
 	}
 	
+	
+	private static Tag smallShortMessageBox(Properties props, Connection con) throws SQLException {
+		String[] caption = {props.getProperty(SHORT_MESSAGES_CAPTION_KEY), props.getProperty(SHORT_MESSAGES_FB_CAPTION_KEY)};
+		int limit = Integer.parseInt(props.getProperty(SHORT_MESSAGES_LIMIT_KEY));
+		int daysAgo = Integer.parseInt(props.getProperty(SHORT_MESSAGES_DAYS_AGO_KEY));
+		Tag[] content = {getSmallMessagesBox(Utils.loadShortMessagesFromRows(props, Utils.getActualShortMessages(props, con, limit, daysAgo))), getFacebookBox(props)};
+		return Ofkpuweb.getBookmarkWindow(caption, content);
+	}
+
+	private static Tag getFacebookBox(Properties props) {
+		return Core.getDiv(OFK_SMB_FB_CLASS + Core.SPACE_CHAR + OFK_SBOX_HEIGHT_CLASS, getFacebookLink(props, 
+				props.getProperty(SM_FB_URL_KEY),
+				props.getProperty(SM_FB_DATA_TABS_KEY),
+				props.getProperty(SM_FB_DATA_HEIGHT_KEY),
+				props.getProperty(SM_FB_DATA_WIDTH_KEY),
+				props.getProperty(SM_FB_DATA_SMALL_HEADER_KEY),
+				props.getProperty(SM_FB_DATA_ADAPT_CONTAINER_WIDTH_KEY),
+				props.getProperty(SM_FB_DATA_HIDE_COVER_KEY),
+				props.getProperty(SM_FB_DATA_SHOW_FACEPILE_KEY)));
+	}
+
+	private static Tag getSmallMessagesBox(ShortMessage[] msgs) {
+		Tag box = Core.getDiv(OKF_SMBS_CLASS + Core.SPACE_CHAR + OFK_SBOX_HEIGHT_CLASS, null);
+		for(int i = 0; i < msgs.length; i ++) {
+			if(i > 0) {
+				box.appendChild(Core.getDiv(OFK_SMB_HRU_CLASS, null));
+			}
+			box.appendChild(getSmallMessageBox(msgs[i]));
+		}
+		return box;
+	}
+
+	private static Tag getSmallMessageBox(ShortMessage msg) {
+		Tag box = Core.getDiv(OFK_SMB_CLASS, Core.getDiv(OKF_SMB_DTE_CLASS, TextTag.getInstance(msgDateFormat.format(new Date(msg.getInserted())))));
+		box.appendChild(Core.getDiv(OFK_SMB_CAP_CLASS, TextTag.getInstance(msg.getCaption())));
+		box.appendChild(Core.getDiv(OFK_SMB_TXT_CLASS, TextTag.getInstance(msg.getText())));
+		return box;
+	}
+
 	private static final String OFK_SAB_CLASS = "ofk-sab";
 	private static final String SMALL_ARTICLE_BOX_LIMIT_KEY = "ofkpuweb.smallArticleBox.limit";
 	private static final String OFK_SAB_ART_CLASS = "ofk-sab-art";
@@ -187,6 +406,7 @@ public class Ofkpuweb extends Core {
 	private static final String SAB_URL_TEXT_KEY = "ofkpuweb.smallArticleBox.urlText";
 	private static final String SMALL_ARTICLE_BOX_MAX_ACTIVE_ARTICLES_KEY = "ofkpuweb.smallAticleBox.maxActiveArticles";
 	private static final String OFK_SAB_HR_CLASS = "ofk-sab-hr";
+	private static final String OFK_SBOX_HEIGHT_CLASS = "ofk-sbox-height";
 	
 	private static Tag smallArticlesBox (Connection con, Properties props, long category, String sabId) throws IOException {
 		Article[] articles = null;
@@ -194,7 +414,7 @@ public class Ofkpuweb extends Core {
 			TableName tableName = new TableName(new SchemaName(new Identifier(props.getProperty(Core.DB_KEY))), new Identifier(props.getProperty(Core.DB_CATEGORIES_KEY)));
 			CompPred pred = new CompPred(new Object[]{new Identifier(props.getProperty(Core.DB_CATEGORIES_ID_KEY))}, new Object[]{category}, CompPred.EQUAL);
 			String categoryName = (String) DBConnector.select(con, DBConnector.createSelect().addFromClause(tableName).addTableSpec(new WhereClause(pred))).get(0).get(props.getProperty(Core.DB_CATEGORIES_NAME_KEY));
-			Tag small = Core.getDiv(OFK_SAB_CLASS, null);
+			Tag small = Core.getDiv(OFK_SAB_CLASS + Core.SPACE_CHAR + OFK_SBOX_HEIGHT_CLASS, null);
 			small.setAttribute(ID_ATT_NAME, sabId);
 			int limit = Integer.parseInt(props.getProperty(SMALL_ARTICLE_BOX_LIMIT_KEY));
 			int maxActive = Integer.parseInt(props.getProperty(SMALL_ARTICLE_BOX_MAX_ACTIVE_ARTICLES_KEY));
@@ -225,6 +445,7 @@ public class Ofkpuweb extends Core {
 	private static final String OFK_SAB_ART_LNK_2_CLASS = "ofk-sab-art-lnk-2";
 	private static final String OFK_SAB_ART_BDY_INA_CLASS = "ofk-sab-art-bdy-ina";
 	private static final String SAB_BUTTON_ONCLICK_KEY = "ofkpuweb.sab.buttonOnclick";
+	private static final String OFK_HLN_FRM_CLASS = "ofk-hln-frm";
 	
 	private static Tag getSmallBoxArticle(Properties props, Article article, boolean active, String sabId, int index) {
 		Table tableHdr = Table.getInstance(null, 2, 1, null);
@@ -255,7 +476,8 @@ public class Ofkpuweb extends Core {
 	
 		Article[] articles = null;
 		try {
-			Tag headlines = Core.getDiv(OFK_HLN_CLASS + Core.SPACE_CHAR + OFK_CNT_WIDTH_CLASS, null);
+			Tag headlines = Core.getDiv(OFK_HLN_CLASS, null);
+			Tag frame = Core.getDiv(OFK_HLN_FRM_CLASS + Core.SPACE_CHAR + OFK_CNT_WIDTH_CLASS, headlines);
 			headlines.setAttribute(ID_ATT_NAME, OFK_HLN_ID);
 			int limit = Integer.parseInt(props.getProperty(TOP_LIMIT_KEY));
 			articles = Utils.loadArticlesFromRows (con, Utils.getActualArticles (props, con, limit, Long.parseLong(props.getProperty(DEFAULT_ARTICLE_KEY)), Integer.parseInt(props.getProperty(TOP_DAYS_AGE_KEY))), props, props.getProperty(Ofkpuweb.PAGE_ENCODING_KEY));
@@ -263,7 +485,7 @@ public class Ofkpuweb extends Core {
 			for(int i = 0; i < articles.length; i ++) {
 				headlines.appendChild(Input.getInstance(OFK_HLN_NAME + Core.DASH_CHAR + i, Core.HIDDEN_TYPE, getHeadlinesContent(articles[i], props, limit, i, articles.length)));
 			}
-			return headlines;
+			return frame;
 		}
 		catch (Exception e) {
 			throw new IOException (e);
@@ -436,16 +658,68 @@ public class Ofkpuweb extends Core {
 		return menus;
 	}
 	private static final String OFK_WIN_CLASS = "ofk-win";
+	private static final String OFK_WIN2_CLASS = "ofk-win2";
 	private static final String OFK_WIN_HDR_CLASS = "ofk-win-hdr";
+	private static final String OFK_WIN2_HDR_CLASS = "ofk-win2-hdr";
 	private static final String OFK_WIN_LGO_CLASS = "ofk-win-lgo";
 	private static final String WIN_LOGO_KEY = "ofkpuweb.win.logo";
 	private static final String OFK_WIN_CAP_CLASS = "ofk-win-cap";
 	private static final String OFK_WIN_LNK_CLASS = "ofk-win-lnk";
 	private static final String OFK_WIN_CNT_CLASS = "ofk-win-cnt";
+	private static final String OFK_WIN2_CNT_CLASS = "ofk-win2-cnt";
+	private static final String OFK_WIN2_BMH_CLASS = "ofk-win2-bmh";
+	private static final String OFK_WIN2_BMK_ACT_CLASS = "ofk-win2-bmh-act";
+	private static final String OFK_BMH_ID = "ofk-bmh-";
+	private static final String OFK_BMT_ID = "ofk-bmt-";
+	private static final String BHM_ONCLICK = "activateBookmark(%d, \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\");";
+	private static final String OFK_WIN2_BMH_EMP_CLASS = "ofk-win2-bhm-emp";
+	private static final String OFK_WIN2_BMT_CLASS = "ofk-win2-bmt";
+	private static final String OFK_WIN2_BMT_INA_CLASS = "ofk-win2-bmt-ina";
+	private static final String OFK_SBOX_CLASS = "ofk-sbox";
+	private static final String OFK_RBAN_SBOX_CLASS = "ofk-rban-sbox";
+	
+	private static Tag getSmallBox(Tag child) {
+		return Core.getDiv(OFK_SBOX_CLASS, Core.getDiv(OFK_RBAN_SBOX_CLASS, child));
+	}
+	
+	private static Tag getLongBox (Tag ...children) {
+		Tag longBox = Core.getDiv(OFK_LBOX_CLASS, null);
+		for(int i = 0; i < children.length; i ++) {
+			switch (children.length) {
+			case 1:
+				longBox.appendChild(Core.getDiv(OFK_LBAN_LBOX_CLASS, children[i]));
+				break;
+			case 2:
+				longBox.appendChild(Core.getDiv(OFK_LBAN_SBOX_CLASS_PFX + (i + 1), children[i]));
+				break;
+			default:
+				longBox.appendChild(Core.getDiv(OFK_LBAN_SBOX_CLASS_PFX + children.length + Core.DOT_CHAR + (i + 1), children[i]));
+			}
+		}
+		return longBox;
+	}
+	
+	private static Tag getBookmarkWindow (String[] caption, Tag[] content) {
+		Table table = Table.getInstance(null, caption.length + 1, 1, null);
+		Tag cnt = Core.getDiv(OFK_WIN2_CNT_CLASS, null);
+		for(int i = 0; i < caption.length; i ++) {
+			Tag bmh = Core.getDiv(OFK_WIN2_BMH_CLASS + (i == 0 ? (Core.SPACE_CHAR + OFK_WIN2_BMK_ACT_CLASS) : Core.EMPTY), Core.getDiv(null, TextTag.getInstance(caption[i])));
+			bmh.setAttribute(ID_ATT_NAME, OFK_BMH_ID + (i + 1));
+			bmh.setAttribute(ONCLICK_ATT_NAME, String.format(BHM_ONCLICK, i + 1, OFK_BMH_ID, OFK_BMT_ID, OFK_WIN2_BMH_CLASS, OFK_WIN2_BMK_ACT_CLASS, OFK_WIN2_BMT_CLASS, OFK_WIN2_BMT_INA_CLASS));
+			Tag bht = Core.getDiv(OFK_WIN2_BMT_CLASS + (i != 0 ? (Core.SPACE_CHAR + OFK_WIN2_BMT_INA_CLASS) : Core.EMPTY), content[i]);
+			bht.setAttribute(ID_ATT_NAME, OFK_BMT_ID + (i + 1));
+			cnt.appendChild(bht);
+			table.setContent(bmh, i, 0);
+		}
+		table.getRows()[0].getCells()[content.length].setClassName(OFK_WIN2_BMH_EMP_CLASS);
+		Tag win = Core.getDiv(OFK_WIN2_CLASS, Core.getDiv(OFK_WIN2_HDR_CLASS, table));
+		win.appendChild(cnt);
+		return win;
+	}
 	
 	private static Tag getWindow (String caption, String logoUrl, String linkUrl, String linkText, Tag content) {
 		Table table = Table.getInstance(null, 3, 1, null);
-		table.setBody(new Object[]{TextTag.NBSP, TextTag.getInstance(caption), Core.getLink(linkUrl, null, TextTag.getInstance(linkText + TOP_URL_TEXT))});
+		table.setBody(new Object[]{TextTag.NBSP, TextTag.getInstance(caption), linkUrl == null ? TextTag.NBSP : Core.getLink(linkUrl, null, TextTag.getInstance(linkText + TOP_URL_TEXT))});
 		Td[] cells = table.getRows()[0].getCells();
 		cells[0].setAttribute(CLASS_ATT_NAME, OFK_WIN_LGO_CLASS);
 		cells[0].setAttribute(STYLE_ATT_NAME, logoUrl);

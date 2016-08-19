@@ -1,0 +1,27 @@
+@CHARSET "UTF-8";
+
+div.ofk-smbs, div.ofk-smb-fb {
+	overflow: auto;
+	cursor: default;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+div.ofk-smb {
+	font-size: 11px;
+	padding: 5px 0 0;
+}
+div.ofk-smb-dte {
+	font-weight: bold;
+	padding: 0 0 5px;
+}
+div.ofk-smb-cap {
+	font-size: 13px;
+	font-weight: bold;
+	color: blue;
+}
+div.ofk-smb-hru {
+	height: 5px;
+}
+div.ofk-smb-txt {
+	font-size: 12px;
+}

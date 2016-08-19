@@ -57,7 +57,25 @@
 	<entry key="ofkpuweb.menu.exit.bgImage">url(\"conf/images/menu2.png\")</entry>
 	<entry key="ofkpuweb.menu.items.onmouseover">setClassById ("%s", "%s");</entry>
 	<entry key="ofkpuweb.menu.items.onmouseout">setClassById ("%s", "%s");</entry>
+	<!-- <entry key="ofkpuweb.fb.url">https://www.facebook.com/groups/1202386523121274/</entry> -->
+	<entry key="ofkpuweb.fb.url">https://www.facebook.com/facebook/</entry>
+	<entry key="ofkpuweb.fb.tabs">timeline</entry>
+	<entry key="ofkpuweb.fb.height">278</entry>
+	<entry key="ofkpuweb.fb.width">311</entry>
+	<entry key="ofkpuweb.fb.smallHeader">false</entry>
+	<entry key="ofkpuweb.fb.url.adaptContainerWidth">true</entry>
+	<entry key="ofkpuweb.fb.url.hideCover">false</entry>
+	<entry key="ofkpuweb.fb.url.showFacepile">true</entry>
+	<entry key="ofkpuweb.fb.caption">OFK Pusté Úľany "A" na facebooku</entry>
 	
+	<entry key="ofkpuweb.shortMessages.fb.url">https://www.facebook.com/facebook/</entry>
+	<entry key="ofkpuweb.shortMessages.fb.tabs">timeline</entry>
+	<entry key="ofkpuweb.shortMessages.fb.height">352</entry>
+	<entry key="ofkpuweb.shortMessages.fb.width">311</entry>
+	<entry key="ofkpuweb.shortMessages.fb.smallHeader">false</entry>
+	<entry key="ofkpuweb.shortMessages.fb.url.adaptContainerWidth">true</entry>
+	<entry key="ofkpuweb.shortMessages.fb.url.hideCover">false</entry>
+	<entry key="ofkpuweb.shortMessages.fb.url.showFacepile">true</entry>
 	
 	<entry key="ofkpuweb.top.limit">5</entry>
 	<entry key="ofkpuweb.top.daysAgo">10</entry>
@@ -65,12 +83,14 @@
 	<entry key="ofkpuweb.language">sk</entry>
 	<entry key="ofkpuweb.top.dateformat">dd. MMMM YYYY</entry>
 	<entry key="ofkpuweb.sab.dateformat">dd.mm.YYYY</entry>
+	<entry key="ofkpuweb.msg.dateformat">dd.mm.YYYY</entry>
 	<entry key="ofkpuweb.top.contentNotAvailable">Obsah článku nie je k dispozícii, prosím kontantujte webadministrátora.</entry>
 	<entry key="ofkpuweb.top.contentUrlText">viac</entry>
 	<entry key="ofkpuweb.top.buttonOnclick">topButtonOnclick(%d);</entry>
 	<entry key="ofkpuweb.sab.buttonOnclick">sabButtonOnclick("%s", %d, "%s", "%s", "%s");</entry>
-	<entry key="ofkpuweb.window.onload">window_onload("%s", %d);</entry>
+	<entry key="ofkpuweb.window.onload">window_onload("%s", %d, "%s", "%s", %d);</entry>
 	<entry key="ofkpuweb.top.interval.value">5000</entry>
+	<entry key="ofkpuweb.partners.interval.value">10000</entry>
 	<entry key="ofkpuweb.top.photo">background-image: none, url("http://localhost:8080/ofkpuweb/image?idi=%d");</entry>
 	<entry key="ofkpuweb.top.motiv">background-image: url("conf/images/m%d.png");</entry>
 	<entry key="ofkpuweb.win.logo">background-image: url("%s");</entry>
@@ -83,6 +103,11 @@
 	<entry key="ofkpuweb.smallArticleBox.photo">background-image: none, url("http://localhost:8080/ofkpuweb/image?idi=%d");</entry>
 	<entry key="ofkpuweb.sab.1.id">ofk-sab-1</entry>
 	<entry key="ofkpuweb.sab.1.categoryId">2</entry>
+	<entry key="ofkpuweb.partners.caption">Partneri a spozori</entry>
+	<entry key="ofkpuweb.shortMessages.caption">Krátke správy</entry>
+	<entry key="ofkpuweb.shortMessages.fbCaption">Náš klub na facebooku</entry>
+	<entry key="ofkpuweb.shortMessages.limit">100</entry>
+	<entry key="ofkpuweb.shortMessages.daysAgo">30</entry>
 	
 	<!-- <entry key="ofkpuweb.menu.exit.bgImage">url(\"http://localhost:8080/ofkpuweb/conf/images/menu2.png\")</entry> -->
 </properties>

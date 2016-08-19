@@ -1,0 +1,98 @@
+
+<!DOCTYPE HTML>
+<html lang='sk'>
+  <head>
+    <meta charset='UTF-8'/>
+    <title>Prosím zadajte titulok stránky</title>
+    <link rel='stylesheet' href='/ofkpuweb/conf/styles/admin-imp.css' type='text/css'/>
+    <script type='text/jscript' src='conf/scripts/admin-imp.js' charset='UTF-8'></script>
+    <script>
+    	function previewPicture(fil, mim) {
+			var f = document.getElementsByName(fil);
+			f = f[0];
+			f = f.files;
+			f = f[0];
+			f = f.type;
+			var m = document.getElementsByName(mim)[0].value = f;
+			window.alert(f);
+    	}
+    </script>
+  </head>
+  <body>
+    <div class='ip'>
+      <table>
+        <caption>Import obrázku na server</caption>
+        <tbody>
+          <tr>
+            <td>
+              <form action='http://localhost:8080/ofkpuweb/import/pictures' method='get'>
+                <table>
+                  <tbody>
+                    <tr>
+                      <td>Súbor obrázku:</td>
+                      <td colspan="2">
+                        <input name='fil' type='file' onchange="previewPicture('fil', 'des');" value="D:\Users\brandys\Pictures\ofk.png">
+                      </td>
+                      <!-- <td>
+                        <button onclick='open_file();' type='button'>Otvoriť súbor ...</button>
+                      </td> -->
+                    </tr>
+                    <tr>
+                      <td colspan='3'>
+                        <img alt='' src='' id='ip-prv'/>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td>Identifikátor&#160;obrázku</td>
+                      <td>
+                        <input name='pid' type='text'>
+                      </td>
+                      <td>&#160;</td>
+                    </tr>
+                    <tr>
+                      <td>Identifikátor&#160;priradenej&#160;galérie</td>
+                      <td>
+                        <select name='gid' id='gid'>
+                          <option selected value='1'>default</option>
+                        </select>
+                      </td>
+                      <td>&#160;</td>
+                    </tr>
+                    <tr>
+                      <td>Identifikátor&#160;priradeného&#160;článku</td>
+                      <td>
+                        <select name='aid' id='aid'>
+                          <option selected value='1'>default</option>
+                          <option value='2'>Vediem si čierny zoznam ľudí,...</option>
+                          <option value='3'>Sochu Michelangelovho Dávida ...</option>
+                          <option value='4'>Sýrske vládne jednotky sa zmo...</option>
+                          <option value='6'>Kiskov prešľap na otvorení ol...</option>
+                          <option value='7'>Ľudstvo od pondelka 8. 8. 201...</option>
+                        </select>
+                      </td>
+                      <td>&#160;</td>
+                    </tr>
+                    <tr>
+                      <td>Popis&#160;obrázku</td>
+                      <td>
+                        <input name='fil' type='text'>
+                      </td>
+                      <td>&#160;</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <button name='act' type='submit' value='1'>Pridať obrázok</button>
+                      </td>
+                      <td>&#160;</td>
+                      <td>&#160;</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </form>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </body>
+</html>
