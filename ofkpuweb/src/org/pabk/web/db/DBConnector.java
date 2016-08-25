@@ -91,7 +91,9 @@ public class DBConnector {
 			if (ds == null) {
 				ds = (BasicDataSource) context.lookup(dsn);
 			}
-			return ds.getConnection();
+			Connection con = ds.getConnection();
+			con.setAutoCommit(false);
+			return con;
 		}
 		catch(Exception e) {
 			throw new SQLException (e);

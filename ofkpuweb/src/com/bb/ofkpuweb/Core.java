@@ -60,6 +60,8 @@ abstract class Core extends HttpServlet {
 	protected static final char RIGHT_BRACKET_CHAR = ')';
 	protected static final char DASH_CHAR = '-';
 	protected static final char VERTICAL_BAR_CHAR = '|';
+	protected static final char COLON_CHAR = ':';
+	protected static final char SEMICOLON_CHAR = ';';
 
 	private static final String PROPERTIES_CONST = ".properties.xml";
 	private static final String CONFIG_PATH = "conf";
@@ -262,7 +264,7 @@ abstract class Core extends HttpServlet {
 	protected static final String ONCLICK_ATT_NAME = "onclick";
 	protected static final String ONMOUSEOVER_ATT_NAME = "onmouseover";
 	protected static final String ONMOUSEOUT_ATT_NAME = "onmouseout";
-	private static final String DISABLED_ATT_NAME = "disabled";
+	protected static final String DISABLED_ATT_NAME = "disabled";
 	protected static final String EMPTY = "";
 	private static final String ONLOAD_ATT_NAME = "onload";
 	protected static final String STYLE_ATT_NAME = "style";

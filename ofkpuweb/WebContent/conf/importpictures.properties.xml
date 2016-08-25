@@ -14,6 +14,15 @@
 	<entry key="ip.galleryId.text">Identifikátor priradenej galérie</entry>
 	<entry key="ip.articleId.text">Identifikátor priradeného článku</entry>
 	<entry key="ip.description.text">Popis obrázku</entry>
-	<entry key="ip.sumbit.text">Pridať obrázok</entry>
+	<entry key="ip.sumbit.text">Nahrať obrázok</entry>
 	<entry key="ip.sourdeDirectory">Zdrojový adresár na lokálnej strane</entry>
+	<entry key="ip.submit.add">Pridať do DB</entry>
+	<entry key="ip.error.nullDescription">Popis obrázku nesmie byť prázdny</entry>
+	<entry key="ip.erro.nullPiscture">Musí byť  vybraný obrázok</entry>
+	<entry key="ip.error.noPicture">Vybraný súbor nie je obrázok, alebo nastala chyba pri jeno sťahovaní</entry>
+	<entry key="ip.error.OkMessage">Obrázok bol úspešne naimportovaný do databázy</entry>
+	<entry key="ip.sumbit.cancel.text">Zrušiť akciu</entry>
+	<entry key="ip.sumbit.ok.text">Ďalší obrázok</entry>
+	<entry key="ip.sumbit.return.text">Návrat na hlavnú stránku</entry>
+	<entry key="ip.submit.onclick">window.location.href = "%s";</entry>
 </properties>
