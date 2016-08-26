@@ -10,6 +10,11 @@
 		margin: 0;
 		padding 0;
 	}
+	.ia-fnt {
+		font-family: arial san-serif, helvetica;
+		font-size: 13px;
+		color: navy;
+	}
 	div.ia-frm {
 		background-color: azure;
 		padding: 20px;
@@ -24,20 +29,249 @@
 		background-color: lightgray;
 		border: 3px outset white;
 		border-radius: 10px;
+		padding: 10px;
+	}
+	div.ia-hdr-frm-2 {
+		max-width: 1000px;
+	}
+	div.ia-hdr-frm-2 table {
+		border-spacing: 0px;
+		padding: 5px;
+		width:100%;
+		height:100%;
+		border: 2px inset white;
+		background-color: whitesmoke;
+		border-radius: 5px;
+	}
+	div.ia-hdr-frm-2 img {
+		height: 2.0ex;
+		cursor: pointer;
+	}
+	div.ia-opa {
+		width:100%;
+		height:100%;
+		position: absolute;
+		background-color: white;
+		opacity: 0.75;
 		
 	}
+	div.ia-dia {
+		width:100%;
+		height:100%;
+		position: absolute;
+		display: -webkit-flex;
+    	display: flex;
+    	-webkit-align-items: center;
+    	align-items: center;
+    	-webkit-justify-content: center;
+    	justify-content: center;
+	}
+	div.ia-dia-2 {
+		background-color: maroon;
+		padding: 2px;
+		border-radius: 2px;
+	}
+	#ia-dia-cap {
+		font-size: 150%;
+		font-weight: bold;
+		color: whitesmoke;
+		text-align: left;
+		padding: 0.5ex 0 0.5ex 5ex;
+	}
+	.ia-non {
+		display: none;
+	}
+	.ia-hdr-col-2 {
+		width: 50ex;
+	}
+	
+	div.ia-hdr-frm-2 td {
+		padding: 0.5ex;
+	}
+	
+	div.ia-hdr-frm-2 tr.tab-ln td, div.ia-hdr-frm-2 tr.tab-fln td { 
+		border-bottom: 1px solid lightgray;
+	}	 
+	div.ia-hdr-frm-2 select {
+		min-width: 100%;
+		border: 0;
+		background-color: whitesmoke;
+		border-top: 1px solid lightblue;
+	}
+	div.ia-hdr-frm-2 caption {
+		padding: 0 0 0.5ex;
+		font-size: 250%;
+		font-weight: bold;
+	}
+	div.ia-dia-frm {
+		display: none;
+	}
+	.ia-dig-but {
+		text-align: center;
+	}
+	.ia-dig-but button {
+		min-width: 10ex;
+		font-weight: bold;
+	}
 </style>
+<script type="text/javascript">
+	var tael;
+	var dfoe;
+	var dfie;
+	var dfel;
+	var dfcp;
+	var inin;
+
+	function initDialogFrame(dialogFrameClass, dialogFrameCaptionId) {
+		dfel = document.getElementsByClassName(dialogFrameClass)[0];
+		dfcp = document.getElementById (dialogFrameCaptionId);
+	}
+	function init(dialogFrameClass, dialogFrameCaptionId, textareaId) {
+		initDialogFrame(dialogFrameClass, dialogFrameCaptionId)
+		initTextarea (textareaId);	
+	}
+	function initTextarea(textareaId) {
+		tael = document.getElementById(textareaId);
+	}
+	
+	function dialogTextarea(len) {
+		dfel.style.display = "block";
+		tael.textContent = dfie.textContent;
+		tael.maxLength = len;
+		dfoe = dfie;
+		dfie = tael;
+	}
+	function editAuthor (editedId, inputName, x, caption) {
+		editCaption (editedId, inputName, x, caption);
+	}
+	function editCaption (editedId, inputName, x, caption) {
+		dfcp.textContent = caption;
+		dfie = document.getElementById (editedId);
+		inin = document.getElementsByName(inputName)[0];
+		dialogTextarea(x);
+	}
+	function returnDialogValue() {
+		dfoe.textContent = dfie.textContent;
+		inin.value = dfie.textContent;
+		dfel.style.display = "";
+	}
+</script>
 </head>
-<body>
+<body class="ia-fnt" onload="init('ia-dia-frm', 'ia-dia-cap', 'ia-dia-val');">
+	
+	<div class="ia-dia-frm">
+		<div class = "ia-opa"></div>
+		<div class="ia-dia">
+			<div class="ia-dia-2">
+				<table>
+					<caption id = "ia-dia-cap">Zadaj názov článku</caption>
+					<tbody>
+						<tr>
+							<td><textarea rows="4" cols="50" id = "ia-dia-val" maxlength="128"></textarea></td>
+						</tr>
+						<tr>
+							<td class="ia-dig-but"><button type = "button" onclick = "returnDialogValue();" class="ia-fnt">OK</button></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- <div class = "ia-mai">
+			<div class = "ia-mai-2">
+				<table>
+					<caption>Editor článkov</caption>
+					<tbody>
+						
+							0 - main screen
+							1 - new article
+						
+						<tr>
+							<td>
+								<button type="submit" name="act" value="1">Nový článok</button>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<button type="submit" name="act" value="2">Nahraj uložený ...</button>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<button type="submit" name="act" value="3">Nahraj publikovaný ...</button>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<button type="submit" name="act" value="4">Návrat na hlavnú stránku</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		 -->
+	</div>
 	<div class="ia-frm">
+		
 		<div class="ia-frm-2">
 			<form enctype='multipart/form-data' action='http://localhost:8080/ofkpuweb/import/articles' method='POST'>
 				<div class="ia-hdr-frm">
+					<div class="ia-hdr-frm-2">
+						<table>
+							<colgroup>
+								<col class="ia-hdr-col-1">
+								<col class="ia-hdr-col-2">
+								<col class="ia-hdr-col-3">
+							</colgroup>
+							<caption>Editor článkov</caption>
+							<tbody>
+								<tr class="tab-fln tab-oln">
+									<td>Názov&#160;článku:</td>
+									<td id="ia-hdr-acp"></td>
+									<td><img src="conf/images/write.png" onclick="editCaption('ia-hdr-acp', 'acp', 128, 'Zadaj názov článku');"></img></td>
+								</tr>
+								<tr class="tab-ln tab-eln">
+									<td>Autor&#160;článku:</td>
+									<td id = "ia-hdr-aau"></td>
+									<td><img src="conf/images/write.png" onclick="editAuthor('ia-hdr-aau', 'aau', 32, 'Zadaj meno autora článku');"></td>
+								</tr>
+								<tr class="tab-ln tab-oln">
+									<td>Dátum&#160;vytvorenia:</td>
+									<td colspan="2"></td>
+								</tr>
+								<tr class="tab-ln tab-eln">
+									<td>Posledná&#160;zmena:</td>
+									<td colspan="2"></td>
+								</tr>
+								<tr class="tab-ln tab-oln">
+									<td>Kategória:</td>
+									<td colspan="2"><select class="ai-fnt" name = "aca">
+										<option selected>nezaradený</option>
+										<option>A - tím</option>
+										<option>mladší dorast</option>
+										<option>prípravka</option>
+										<option>výbor</option>
+									</select></td>
+								</tr>
+								<tr class="tab-lln tab-eln">
+									<td>Publikovaný:</td>
+									<td colspan="2">nebol</td>
+								</tr>
+							</tbody>
+						</table>
+						<input type = "hidden" name="acp">
+						<input type = "hidden" name="aau">
+						<input type = "hidden" name="adc">
+						<input type = "hidden" name="alm">
+						<input type = "hidden" name="apu">
+						<input type = "hidden" name="aid">
+					</div>
 				</div>
 				<div class="ia-cnt-frm">
 				</div>
 			</form>
 		</div>
 	</div>
+	
 </body>
 </html>
