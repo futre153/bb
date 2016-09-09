@@ -96,6 +96,7 @@ CREATE TABLE IF NOT EXISTS `ofkpudb`.`articles` (
   `content` MEDIUMTEXT NOT NULL,
   `modified` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `category_id` INT UNSIGNED NOT NULL DEFAULT 1,
+  `photo_ids` VARCHAR(256) NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `FK_articles_category_id`
   FOREIGN KEY (`category_id`)
@@ -156,3 +157,25 @@ CREATE TABLE IF NOT EXISTS `ofkpudb`.`short_messages` (
   `caption` VARCHAR(64) NOT NULL,
   `text` VARCHAR(256) NOT NULL,
   PRIMARY KEY (`id`));
+CREATE TABLE IF NOT EXISTS `ofkpudb`.`articles_tmp` (
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `article_id` INT UNSIGNED NULL DEFAULT 1,
+  `caption` VARCHAR(128) NOT NULL,
+  `content` MEDIUMTEXT NOT NULL,
+  `created` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `modified` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `category_id` INT UNSIGNED NULL DEFAULT 1,
+  `photo_ids` VARCHAR(256) NULL,
+  PRIMARY KEY (`id`),
+  INDEX `FK_articles_tmp_article_id_idx` (`article_id` ASC),
+  INDEX `FK_articles_tmp_category_id_idx` (`category_id` ASC),
+  CONSTRAINT `FK_articles_tmp_article_id`
+    FOREIGN KEY (`article_id`)
+    REFERENCES `ofkpudb`.`articles` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
+  CONSTRAINT `FK_articles_tmp_category_id`
+    FOREIGN KEY (`category_id`)
+    REFERENCES `ofkpudb`.`categories` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE);

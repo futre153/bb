@@ -24,6 +24,7 @@
     	align-items: center;
     	-webkit-justify-content: center;
     	justify-content: center;
+
 	}
 	div.ia-frm-2 {
 		background-color: lightgray;
@@ -65,6 +66,7 @@
     	align-items: center;
     	-webkit-justify-content: center;
     	justify-content: center;
+
 	}
 	div.ia-err-2 {
 		width: 500px;
@@ -132,7 +134,20 @@
 		padding: 2px;
 		border-radius: 2px;
 	}
-	#ia-dia-cap, div.ia-dia-txt-frm caption, div.ia-pic-frm caption, div.ia-pic-del-frm caption, div.ia-err-frm caption, div.ia-con-frm caption {
+	div.ia-dia-arp-1, div.ia-dia-art-1 {
+		padding: 2px;
+		border-radius: 2px;
+		background-color: maroon;
+	}
+	div.ia-dia-arp-2, div.ia-dia-art-2 {
+		max-height: 200px;
+		overflow: auto;
+	}
+	div.ia-arp-cap, div.ia-art-cap {
+		background-color: maroon;
+	}
+	
+	#ia-dia-cap, div.ia-dia-txt-frm caption, div.ia-pic-frm caption, div.ia-pic-del-frm caption, div.ia-err-frm caption, div.ia-con-frm caption, div.ia-arp-cap, div.ia-art-cap{
 		font-size: 150%;
 		font-weight: bold;
 		color: whitesmoke;
@@ -154,6 +169,33 @@
 		border: 2px solid maroon; 
 	}
 	
+	div.ia-arp-frm table, div.ia-art-frm table {
+		border-spacing: 0;
+		width: 100%;
+		background-color: whitesmoke;
+	}
+	div.ia-arp-frm td,div.ia-art-frm td {
+		
+		border-bottom: 1px solid lightgray;
+		border-right: 1px solid lightgray;
+		padding: 1px 0.5ex;
+	}
+	div.ia-arp-frm th,div.ia-art-frm th {
+		background-color: maroon;
+		color: whitesmoke;
+		padding: 2px 0.5ex;
+	}
+	div.ia-arp-frm button,div.ia-art-frm button {
+		width: 3ex;
+		height: 3ex;
+		padding:0;
+		font-size: 75%;
+		font-weight: bold;
+		cursor: pointer;
+	}
+	div.ia-dia-arp-1, div.ia-dia-art-1 {
+		width: 800px;
+	}
 	.ia-non {
 		display: none;
 	}
@@ -179,7 +221,7 @@
 		font-size: 250%;
 		font-weight: bold;
 	}
-	div.ia-dia-frm, div.ia-dia-txt-frm, div.ia-pic-frm, div.ia-pic-del-frm, div.ia-err-frm, div.ia-con-frm {
+	div.ia-dia-frm, div.ia-dia-txt-frm, div.ia-pic-frm, div.ia-pic-del-frm, div.ia-err-frm, div.ia-con-frm, div.ia-arp-frm {
 		display: none;
 	}
 	.ia-dig-but {
@@ -659,6 +701,212 @@
 			</div>
 		</div>
 	</div>
+	
+	<div class="ia-art-frm">
+		<div class = "ia-opa"></div>
+		<div class="ia-dia">
+			<div class = "ia-dia-art-1">
+				<div class = "ia-art-cap"><div>Kliknutím nahraj a uprav uložený článkok</div></div>
+				<div class="ia-dia-art-2">
+					<table>
+					
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Názov článku</th>
+								<th>Autor</th>
+								<th colspan="2">posledná zmena</th>
+							</tr>
+						</thead>
+						<tbody>
+							
+							<tr>
+								<td>2</td>
+								<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
+								<td>brandys</td>
+								<td>12.08.2016 15:00</td>
+								<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="ia-arp-frm">
+		<div class = "ia-opa"></div>
+		<div class="ia-dia">
+			<div class = "ia-dia-arp-1">
+				<div class = "ia-arp-cap"><div>Kliknutím nahraj už publikovaný článok a upravuj ho</div></div>
+				<div class="ia-dia-arp-2">
+					
+					<table>
+					<thead>
+						<tr>
+							<th>ID</th>
+							<th>Názov článku</th>
+							<th>Autor</th>
+							<th colspan="2">posledná zmena</th>
+						</tr>
+					</thead>
+					<tbody>
+						
+						<tr>
+							<td>2</td>
+							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
+							<td>brandys</td>
+							<td>12.08.2016 15:00</td>
+							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
+							<td>brandys</td>
+							<td>12.08.2016 15:00</td>
+							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
+							<td>brandys</td>
+							<td>12.08.2016 15:00</td>
+							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
+							<td>brandys</td>
+							<td>12.08.2016 15:00</td>
+							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
+							<td>brandys</td>
+							<td>12.08.2016 15:00</td>
+							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
+							<td>brandys</td>
+							<td>12.08.2016 15:00</td>
+							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
+							<td>brandys</td>
+							<td>12.08.2016 15:00</td>
+							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
+							<td>brandys</td>
+							<td>12.08.2016 15:00</td>
+							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
+							<td>brandys</td>
+							<td>12.08.2016 15:00</td>
+							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
+							<td>brandys</td>
+							<td>12.08.2016 15:00</td>
+							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
+							<td>brandys</td>
+							<td>12.08.2016 15:00</td>
+							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
+							<td>brandys</td>
+							<td>12.08.2016 15:00</td>
+							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
+							<td>brandys</td>
+							<td>12.08.2016 15:00</td>
+							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
+							<td>brandys</td>
+							<td>12.08.2016 15:00</td>
+							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
+							<td>brandys</td>
+							<td>12.08.2016 15:00</td>
+							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
+							<td>brandys</td>
+							<td>12.08.2016 15:00</td>
+							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
+							<td>brandys</td>
+							<td>12.08.2016 15:00</td>
+							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
+							<td>brandys</td>
+							<td>12.08.2016 15:00</td>
+							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
+							<td>brandys</td>
+							<td>12.08.2016 15:00</td>
+							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
+							<td>brandys</td>
+							<td>12.08.2016 15:00</td>
+							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
+						</tr>
+						<tr>
+							<td>2</td>
+							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
+							<td>brandys</td>
+							<td>12.08.2016 15:00</td>
+							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
+						</tr>
+					
+					</tbody>
+				</table>
+			</div>
+			</div>
+		</div>
+	</div>
+	
 	<div class="ia-pic-frm">
 		<div class = "ia-opa"></div>
 		<div class="ia-dia">
