@@ -66,23 +66,99 @@
     	-webkit-justify-content: center;
     	justify-content: center;
 	}
+	div.ia-err-2 {
+		width: 500px;
+		background-color: red;
+		padding: 2px;
+		border-radius: 4px;
+		border: 1px outset red;
+	}
+	div.ia-con-2 {
+		width: 500px;
+		background-color: green;
+		padding: 2px;
+		border-radius: 4px;
+		border: 1px outset green;
+	}
+	div.ia-err-frm table, div.ia-con-frm table {
+		width: 100%;
+		
+	}
+	div.ia-cnt-art-txt-fln {
+		font-weight: bold;
+	}
+	td.ai-con-msg {
+		background-color: whitesmoke;
+		padding: 1ex;
+		border-radius: 2px;
+		border: 1px inset green;
+	}
+	td.ai-err-msg {
+		background-color: whitesmoke;
+		padding: 1ex;
+		border-radius: 2px;
+		border: 1px inset red;
+	}
+	td.ai-err-msg div {
+		color: darkred;
+		font-weight: bold;
+		text-align: center;
+	}
+	td.ai-con-msg div {
+		color: darkgreen;
+		font-weight: bold;
+		text-align: center;
+	}
+	td.ia-con-but, td.ia-cnn-but {
+		vertical-align: center;
+		padding: 1ex 0;
+	}
+	td.ia-con-but button, td.ia-cnn-but button {
+		width: 20ex;
+	}
+	td.ia-con-but {
+		text-align: left;
+	}
+	td.ia-cnn-but {
+		text-align: right;
+	}
+	td.ia-err-but {
+		text-align: center;
+		vertical-align: center;
+		padding: 1ex;
+	}
 	div.ia-dia-2 {
 		background-color: maroon;
 		padding: 2px;
 		border-radius: 2px;
 	}
-	#ia-dia-cap {
+	#ia-dia-cap, div.ia-dia-txt-frm caption, div.ia-pic-frm caption, div.ia-pic-del-frm caption, div.ia-err-frm caption, div.ia-con-frm caption {
 		font-size: 150%;
 		font-weight: bold;
 		color: whitesmoke;
 		text-align: left;
 		padding: 0.5ex 0 0.5ex 5ex;
 	}
+	div.ia-pic-frm th, div.ia-pic-del-frm th {
+		font-size: 150%;
+		font-weight: bold;
+		color: whitesmoke;
+		background-color: maroon;
+	}
+	
+	div.ia-pic-frm table, div.ia-pic-del-frm table {
+		background-color: whitesmoke;
+	}
+	
+	div.ia-pic-frm th, div.ia-pic-frm td {
+		border: 2px solid maroon; 
+	}
+	
 	.ia-non {
 		display: none;
 	}
 	.ia-hdr-col-2 {
-		width: 50ex;
+		ewidth: 100ex;
 	}
 	
 	div.ia-hdr-frm-2 td {
@@ -103,7 +179,7 @@
 		font-size: 250%;
 		font-weight: bold;
 	}
-	div.ia-dia-frm {
+	div.ia-dia-frm, div.ia-dia-txt-frm, div.ia-pic-frm, div.ia-pic-del-frm, div.ia-err-frm, div.ia-con-frm {
 		display: none;
 	}
 	.ia-dig-but {
@@ -113,6 +189,71 @@
 		min-width: 10ex;
 		font-weight: bold;
 	}
+	div.ia-cnt-frm {
+		display: -webkit-flex;
+	    display: flex;
+    }
+	div.ia-cnt-lban {
+		width: 660px;
+		padding: 10px 0 0;
+	}
+	div.ia-cnt-art-frm {
+		min-height: 660px; 
+		background-color: whitesmoke;
+		border-radius: 5px;
+		border: 2px inset white;
+		padding: 1ex;
+	}
+	div.ia-cnt-art-frm img {
+		max-width: 100%;
+		cursor: pointer;
+	}
+	div.ia-cnt-rban {
+		padding: 0 0 0 10px;
+	}
+	div.ia-cnt-rban button {
+		width: 5em;
+		height: 5em;
+	}
+	div.ia-cnt-art-cap {
+		font-size: 150%;
+		color: maroon;
+		font-weight: bold;
+		text-align: justify;
+		padding: 0 0 1em;
+	}
+	div.ia-cnt-art-inf {
+		text-align: justify;
+		padding: 0 0 1em;
+	}
+	div.ia-cnt-art-txt div {
+		color: blue;
+		text-align: justify;
+		padding: 0 0 0.5ex 0;
+	}
+	div.ia-pic-frm td {
+		width: 64px;
+	}
+	div.ia-pic-del-frm td {
+		width: 160px;
+	}
+	div.ia-pic-frm img, div.ia-pic-del-frm img {
+		width: 100%;
+		cursor: pointer;
+	}
+	div.ia-pic-frm th div, div.ia-pic-frm th span, div.ia-pic-del-frm th div, div.ia-pic-del-frm th span {
+		cursor: pointer;
+	}
+	div.ia-cnt-rban div {
+		padding: 10px 0 0;
+	}
+	span.ai-pic-nga {
+		font-weight: normal;
+	}
+	span.ai-pic-aga {
+		color: yellow;
+	}
+	
 </style>
 <script type="text/javascript">
 	var tael;
@@ -121,17 +262,188 @@
 	var dfel;
 	var dfcp;
 	var inin;
-
+	var arcp;
+	var ardc;
+	var arau;
+	var artx;
+	var arfl;
+	var arln;
+	var iurl;
+	var incp;
+	var inau;
+	var indc;
+	var inlm;
+	var inpu;
+	var inid;
+	var inpi;
+	var inte;
+	var inac;
+	var form;
+	var dfte;
+	var tate;
+	var pide;
+	var pitb;
+	var pigs;
+	var piag;
+	var ping;
+	var gaid;
+	var mgid;
+	var pdtt;
+	var emel;
+	var emte;
+	var save;
+	var coel;
+	var cote;
+	var cobu;
+	var coac;
+	var acna;
+	
 	function initDialogFrame(dialogFrameClass, dialogFrameCaptionId) {
 		dfel = document.getElementsByClassName(dialogFrameClass)[0];
 		dfcp = document.getElementById (dialogFrameCaptionId);
 	}
-	function init(dialogFrameClass, dialogFrameCaptionId, textareaId) {
-		initDialogFrame(dialogFrameClass, dialogFrameCaptionId)
-		initTextarea (textareaId);	
+	function init(dialogFrameClass, dialogFrameCaptionId, textareaId, textDialogFrameClass, textTextareaId, articleCaptionClass, articleCreationClass, articleAuthorClass, articleTextClass, articleFirstLineClass, articleLineClass, articleImageUrl, inputCaptionName, inputAuthotName, inputCreationName, inputModifiedName, inputPublishedName, inputIdName, inputPicturesName, inputTextName, inputActionName, pictureDialogClass, pictureTBodyClass, pictureGalleriesSliderClass, pictureActiveGalleryClass, pictureNotActiveGalleryClass, pictureDeleteText, maxGalleries, errorMessageClass, errorMessageTextClass, errorMessage, confirmMessageClass, confirmMessageTextClass, confirmButtonClass, actionNewArticle) {
+		initDialogFrame(dialogFrameClass, dialogFrameCaptionId);
+		initTextarea (textareaId);
+		initTextDialog (textDialogFrameClass, textTextareaId);
+		initArticle(articleCaptionClass, articleCreationClass, articleAuthorClass, articleTextClass, articleFirstLineClass, articleLineClass, articleImageUrl);
+		initInputs(inputCaptionName, inputAuthotName, inputCreationName, inputModifiedName, inputPublishedName, inputIdName, inputPicturesName, inputTextName, inputActionName);
+		initPictureGallery(pictureDialogClass, pictureTBodyClass, pictureGalleriesSliderClass, pictureActiveGalleryClass, pictureNotActiveGalleryClass, maxGalleries);
+		reloadArticle();
+		returnHTML(getText());
+		initConfirmMessage(confirmMessageClass, confirmMessageTextClass, confirmButtonClass);
+		initErrorMessage(errorMessageClass, errorMessageTextClass, errorMessage);
+		initActions(actionNewArticle);
+		save = 1;
 	}
+	
+	function initActions(actionNewArticle) {
+		acna = actionNewArticle;
+	}
+	
+	function initConfirmMessage(confirmMessageClass, confirmMessageTextClass, confirmButtonClass) {
+		coel = document.getElementsByClassName(confirmMessageClass)[0];
+		cote = document.getElementsByClassName(confirmMessageTextClass)[0].getElementsByTagName("DIV")[0];
+		cobu = document.getElementsByClassName(confirmButtonClass)[0].getElementsByTagName("BUTTON")[0];
+	}
+	
+	function initErrorMessage(errorMessageClass, errorMessageTextClass, errorMessage) {
+		emel = document.getElementsByClassName(errorMessageClass)[0];
+		emte = document.getElementsByClassName(errorMessageTextClass)[0].getElementsByTagName("DIV")[0];
+		if(errorMessage != null && errorMessage.length > 0) {
+			dislayErrorMessage(errorMessage);
+		}
+	}
+	
+	function dislayErrorMessage(errorMessage) {
+		emte.textContent = errorMessage;
+		emel.style.display = "block";
+	}
+	
+	function returnError() {
+		emel.style.display = "";
+	}
+	
+	function initPictureGallery(pictureDialogClass, pictureTBodyClass, pictureGalleriesSliderClass, pictureActiveGalleryClass, pictureNotActiveGalleryClass, pictureDeleteText, maxGalleries) {
+		pide = document.getElementsByClassName(pictureDialogClass)[0];
+		pitb = document.getElementsByClassName(pictureTBodyClass)[0];
+		pigs = document.getElementsByClassName(pictureGalleriesSliderClass)[0];
+		piag = pictureActiveGalleryClass;
+		ping = pictureNotActiveGalleryClass;
+		gaid = 0;
+		mgid = maxGalleries;
+		pdtt = pictureDeleteText;
+	}
+	function initTextDialog (textDialogFrameClass, textTextareaId) {
+		dfte = document.getElementsByClassName(textDialogFrameClass)[0];
+		tate = document.getElementById (textTextareaId);
+	}
+	function initInputs(inputCaptionName, inputAuthotName, inputCreationName, inputModifiedName, inputPublishedName, inputIdName, inputPicturesName, inputTextName, inputActionName) {
+		incp = document.getElementsByName(inputCaptionName)[0];
+		inau = document.getElementsByName(inputAuthotName)[0];
+		indc = document.getElementsByName(inputCreationName)[0];
+		inlm = document.getElementsByName(inputModifiedName)[0];
+		inpu = document.getElementsByName(inputPublishedName)[0];
+		inid = document.getElementsByName(inputIdName)[0];
+		inpi = document.getElementsByName(inputPicturesName)[0];
+		inte = document.getElementsByName(inputTextName)[0];
+		inac = document.getElementsByName(inputActionName)[0];
+		form = document.getElementsByTagName("FORM")[0];
+	}
+	function initArticle(articleCaptionClass, articleCreationClass, articleAuthorClass, articleTextClass, articleFirstLineClass, articleLineClass, articleImageUrl) {
+		arcp = document.getElementsByClassName(articleCaptionClass)[0];
+		ardc = document.getElementsByClassName(articleCreationClass)[0];
+		arau = document.getElementsByClassName(articleAuthorClass)[0];
+		artx = document.getElementsByClassName(articleTextClass)[0];
+		arfl = articleFirstLineClass;
+		arln = articleLineClass;
+		iurl = articleImageUrl;
+	}
+	function reloadArticle() {
+		arcp.textContent = incp.value;
+		ardc.textContent = indc.value;
+		arau.textContent = inau.value;
+	}
+	
 	function initTextarea(textareaId) {
 		tael = document.getElementById(textareaId);
+	}
+	
+	function editText() {
+		dfte.style.display = "block";
+		tate.textContent = getText();
+		save = 0;
+	}
+	
+	function getText () {
+		var text = "";
+		var elems = artx.getElementsByTagName("DIV");
+		var i = 0;
+		for(;i < elems.length; i ++) {
+			if(i > 0) {
+				text += "\r\n";
+			}
+			text += elems[i].innerHTML;
+		}
+		return text;
+	}
+	
+	function returnTextDialogValue() {
+		return returnHTML(tate.textContent.trim());
+	}
+	
+	function returnHTML (text) {
+		var pics = inpi.value != null && inpi.value.length > 0 ? inpi.value.split(",") : [];	
+		var line;
+		var out = "";
+		var i = 0;
+		while (text.length != 0 || i < pics.length) {
+			line = "";
+			if(text.length != 0) {
+				var index = text.indexOf("\n");
+				if(index >= 0) {
+					line = text.substring(0, index).trim();
+					text = text.substring(index + 1, text.length).trim();
+				}
+				else {
+					line = text;
+					text = "";
+				}
+			}
+			if(line.length == 0 && text.length > 0) {
+				continue;
+			}
+			if(line.length > 0) {
+				out+="<div class=\"" + (i == 0 ? arfl : arln)  + "\">" + (i == 0 ? "&#160;&#160;&#160;&#160;" : "") + line + "</div>";
+			}
+			if(i < pics.length) {
+				out += "<img src=\"" + iurl + pics[i] + "\" title=\"" + pdtt + "\" onclick=\"removePicture(" + pics[i] + ")\">";
+				i ++;
+			}
+		}
+		//window.alert(out);
+		artx.innerHTML = out;
+		dfte.style.display = "";
 	}
 	
 	function dialogTextarea(len) {
@@ -143,22 +455,154 @@
 	}
 	function editAuthor (editedId, inputName, x, caption) {
 		editCaption (editedId, inputName, x, caption);
+		save = 0;
 	}
 	function editCaption (editedId, inputName, x, caption) {
 		dfcp.textContent = caption;
 		dfie = document.getElementById (editedId);
 		inin = document.getElementsByName(inputName)[0];
 		dialogTextarea(x);
+		save = 0;
 	}
 	function returnDialogValue() {
 		dfoe.textContent = dfie.textContent;
 		inin.value = dfie.textContent;
 		dfel.style.display = "";
+		reloadArticle();
+	}
+	function removePicture(id) {
+		var pics = inpi.value != null && inpi.value.length > 0 ? inpi.value.split(",") : [];
+		var val = "";
+		var i = 0;
+		var j = 0;
+		for (; i < pics.length; i ++) {
+			if(pics[i] != id) {
+				val += (id == 0 ? "" : ((j > 0 ? "," : "") + pics[i]));
+				j ++;
+			}
+		}
+		inpi.value = val;
+		returnHTML(getText());
+		save = 0;
+	}
+	
+	function addPicture(id) {
+		if(id == 0) {
+			pigs.innerHTML = getPictureSliderHTML(mgid, gaid, "setExactGallery");
+			pitb.innerHTML = getPictureTBodyHTML(gaid, 5, 10, "addPicture");
+			pide.style.display = "block";
+		}
+		else {
+			var pics = inpi.value != null && inpi.value.length > 0 ? inpi.value.split(",") : [];
+			var i = 0;
+			for(; i < pics.length; i ++) {
+				if(pics[i] == id) {
+					break;
+				}
+			}
+			if(i == pics.length) {
+				inpi.value = inpi.value == null || inpi.value.length == 0 ? id : (inpi.value + "," + id);
+				returnHTML(getText());
+				save = 0;
+			}
+			pide.style.display = "";
+		}
+	}
+	
+	function setExactGallery(id) {
+		gaid = id - 1;
+		pigs.innerHTML = getPictureSliderHTML(mgid, gaid, "setExactGallery");
+		pitb.innerHTML = getPictureTBodyHTML(gaid, 5, 10, "addPicture");
+	}
+	
+	function getPictureTBodyHTML(id, li, lj, fn) {
+		var html="";
+		var i = 0;
+		for(; i < li; i ++) {
+			html += "<tr>";
+			var j = 0;
+			for(; j < lj; j++) {
+				html += ("<td><div onclick=\"" + fn + "(" + (id * li * lj + ((i * lj) + (j + 1))) + ");\"><img src=\"" + iurl + (id * li * lj + (((i * lj) + (j + 1)))) + "\"></div></td>");
+			}
+			html += "</tr>";
+		}
+		//window.alert (html);
+		return html;
+	}
+	
+	function setLowGallery() {
+		if(gaid > 0) {
+			gaid --;
+			pigs.innerHTML = getPictureSliderHTML(mgid, gaid, "setExactGallery");
+			pitb.innerHTML = getPictureTBodyHTML(gaid, 5, 10, "addPicture");
+		} 
+	}
+	
+	function setHighGallery() {
+		if(gaid < mgid) {
+			gaid ++;
+			pigs.innerHTML = getPictureSliderHTML(mgid, gaid, "setExactGallery");
+			pitb.innerHTML = getPictureTBodyHTML(gaid, 5, 10, "addPicture");
+		} 
+	}
+	
+	function getPictureSliderHTML(l, id, fn) {
+		var html = "";
+		var i = 0;
+		for(; i < l; i ++) {
+			if(i > 0) {
+				html += "&#160;";
+			}
+			html += ("<span onclick =\"" + fn + "(" + (i + 1) + ");\"  class=\"" + (i == id ? (piag) : (ping)) + "\">" + (i + 1) + "</span>");
+		}
+		//window.alert (html);
+		return html;
+	}
+	function setConfirm(fn, buttonText, msg) {
+		if(save == 1) {
+			fn();
+		}
+		else {
+			coac = fn;
+			cobu.textContent = buttonText;
+			cote.textContent = msg;
+			coel.style.display = "block";
+		}
+	}
+	function returnNotConfirm() {
+		coel.style.display = "";
+	}
+	function returnConfirm() {
+		coel.style.display = "";
+		coac();
+	}
+	function newArticle() {
+		//window.alert("new Article is running");
+		inac.value = acna;
+		form.submit();
 	}
 </script>
 </head>
-<body class="ia-fnt" onload="init('ia-dia-frm', 'ia-dia-cap', 'ia-dia-val');">
+<body class="ia-fnt" onload="init('ia-dia-frm', 'ia-dia-cap', 'ia-dia-val', 'ia-dia-txt-frm', 'ia-dia-txt-val', 'ia-cnt-art-cap', 'ia-cnt-art-inf-dcr', 'ia-cnt-art-inf-aut', 'ia-cnt-art-txt', 'ia-cnt-art-txt-fln', 'ia-cnt-art-txt-lne', 'http://localhost:8080/ofkpuweb/image?idi=', 'acp' ,'aau', 'adc', 'alm', 'apu', 'aid', 'api', 'ate', 'aac', 'ia-pic-frm', 'ai-pic-bdy', 'ai-pic-gsl', 'ai-pic-aga', 'ai-pic-nga', 'Kliknutím obrázok odoberiete z textu článku', 2, 'ia-err-frm', 'ai-err-msg', null, 'ia-con-frm', 'ai-con-msg', 'ia-con-but', 'ana');">
 	
+	<div class="ia-dia-txt-frm">
+		<div class = "ia-opa"></div>
+		<div class="ia-dia">
+			<div class="ia-dia-2">
+				<table>
+					<caption>Vlož alebo napíš text článku</caption>
+					<tbody>
+						<tr>
+							<td><textarea rows="50" cols="80" id = "ia-dia-txt-val"></textarea></td>
+						</tr>
+						<tr>
+							<td class="ia-dig-but"><button type = "button" onclick = "returnTextDialogValue();" class="ia-fnt">OK</button></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
 	<div class="ia-dia-frm">
 		<div class = "ia-opa"></div>
 		<div class="ia-dia">
@@ -176,41 +620,151 @@
 				</table>
 			</div>
 		</div>
-		<!-- <div class = "ia-mai">
-			<div class = "ia-mai-2">
+		
+	</div> 
+	<div class="ia-err-frm">
+		<div class = "ia-opa"></div>
+		<div class="ia-dia">
+			<div class="ia-err-2">
 				<table>
-					<caption>Editor článkov</caption>
-					<tbody>
-						
-							0 - main screen
-							1 - new article
-						
+					<caption class = "ia-err-cap">Chybové hlásenie</caption>
+					<tbody class = "ai-err-bdy">
 						<tr>
-							<td>
-								<button type="submit" name="act" value="1">Nový článok</button>
-							</td>
+							<td class="ai-err-msg"><div></div></td>
 						</tr>
 						<tr>
-							<td>
-								<button type="submit" name="act" value="2">Nahraj uložený ...</button>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<button type="submit" name="act" value="3">Nahraj publikovaný ...</button>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<button type="submit" name="act" value="4">Návrat na hlavnú stránku</button>
-							</td>
+							<td class="ia-err-but"><button type = "button" onclick = "returnError();" class="ia-fnt">OK</button></td>
 						</tr>
 					</tbody>
 				</table>
 			</div>
 		</div>
-		 -->
 	</div>
+	<div class="ia-con-frm">
+		<div class = "ia-opa"></div>
+		<div class="ia-dia">
+			<div class="ia-con-2">
+				<table>
+					<caption class = "ia-con-cap">Varovanie</caption>
+					<tbody class = "ai-con-bdy">
+						<tr>
+							<td colspan = "2" class="ai-con-msg"><div></div></td>
+						</tr>
+						<tr>
+							<td class="ia-con-but"><button type = "button" onclick = "returnConfirm();" class="ia-fnt">Potvrdiť</button></td>
+							<td class="ia-cnn-but"><button type = "button" onclick = "returnNotConfirm();" class="ia-fnt">Zrušiť</button></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div class="ia-pic-frm">
+		<div class = "ia-opa"></div>
+		<div class="ia-dia">
+			<div class="ia-dia-2">
+				<table>
+					<caption id = "ia-pic">Kliknutím pridaj obrázok k článku</caption>
+					<thead>
+						<tr>
+							<th><div onclick="setLowGallery();">&lt;&lt;&lt;</div></th>
+							<th colspan="8" class="ai-pic-gsl"><span onclick="setExactGallery(1);" class="ai-pic-aga">1</span>&#160;<span onclick="setExactGallery(2);">2</span></th>
+							<th><div onclick="setHighGallery();">&gt;&gt;&gt;</div></th>
+						</tr>
+					</thead>
+					<tbody class = "ai-pic-bdy">
+						<tr>
+							<td><div onclick="addImage(1);"><img src="http://localhost:8080/ofkpuweb/image?idi=1"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=2"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=3"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=4"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=5"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=6"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=7"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=8"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=9"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=10"></div></td>
+						</tr>
+						<tr>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=11"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=12"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=13"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=14"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=15"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=16"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=17"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=18"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=19"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=20"></div></td>
+						</tr>
+						<tr>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=21"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=22"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=23"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=24"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=25"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=26"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=27"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=28"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=29"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=30"></div></td>
+						</tr>
+						<tr>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=41"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=42"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=43"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=44"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=45"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=46"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=47"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=48"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=49"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=50"></div></td>
+						</tr>
+						<tr>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=61"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=62"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=63"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=64"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=65"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=66"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=67"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=68"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=69"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=70"></div></td>
+						</tr>
+						<tr>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=81"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=82"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=83"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=84"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=85"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=86"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=87"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=88"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=89"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=90"></div></td>
+						</tr>
+						<tr>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=91"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=92"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=93"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=94"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=95"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=96"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=97"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=98"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=99"></div></td>
+							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=100"></div></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		
+	</div>
+	
+	
 	<div class="ia-frm">
 		
 		<div class="ia-frm-2">
@@ -227,21 +781,21 @@
 							<tbody>
 								<tr class="tab-fln tab-oln">
 									<td>Názov&#160;článku:</td>
-									<td id="ia-hdr-acp"></td>
-									<td><img src="conf/images/write.png" onclick="editCaption('ia-hdr-acp', 'acp', 128, 'Zadaj názov článku');"></img></td>
+									<td id="ia-hdr-acp">Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
+									<td><img src="conf/images/write.png" onclick="editCaption('ia-hdr-acp', 'acp', 128, 'Zadaj názov článku');"></td>
 								</tr>
 								<tr class="tab-ln tab-eln">
 									<td>Autor&#160;článku:</td>
-									<td id = "ia-hdr-aau"></td>
+									<td id = "ia-hdr-aau">brandys</td>
 									<td><img src="conf/images/write.png" onclick="editAuthor('ia-hdr-aau', 'aau', 32, 'Zadaj meno autora článku');"></td>
 								</tr>
 								<tr class="tab-ln tab-oln">
 									<td>Dátum&#160;vytvorenia:</td>
-									<td colspan="2"></td>
+									<td colspan="2">12.08.1972 23:00</td>
 								</tr>
 								<tr class="tab-ln tab-eln">
 									<td>Posledná&#160;zmena:</td>
-									<td colspan="2"></td>
+									<td colspan="2">12.08.1972 23:00</td>
 								</tr>
 								<tr class="tab-ln tab-oln">
 									<td>Kategória:</td>
@@ -259,15 +813,63 @@
 								</tr>
 							</tbody>
 						</table>
-						<input type = "hidden" name="acp">
-						<input type = "hidden" name="aau">
-						<input type = "hidden" name="adc">
-						<input type = "hidden" name="alm">
+						<input type = "hidden" name="acp" value="Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari">
+						<input type = "hidden" name="aau" value="brandys">
+						<input type = "hidden" name="adc" value="12.08.1972 23:00">
+						<input type = "hidden" name="alm" value="12.08.1972 23:00">
 						<input type = "hidden" name="apu">
 						<input type = "hidden" name="aid">
+						<input type = "hidden" name="api" value="1,2,3,4,7">
+						<input type = "hidden" name="ate">
+						<input type = "hidden" name="aac">
 					</div>
 				</div>
 				<div class="ia-cnt-frm">
+					<div class="ia-cnt-lban">
+						<div class="ia-cnt-art-frm">
+							<div class="ia-cnt-art-cap"></div>
+							<div class="ia-cnt-art-inf">
+								<span class="ia-cnt-art-inf-dcr">12.08.2016 15:12</span>&#160;|&#160;Autor:&#160;<span class="ia-cnt-art-inf-aut">brandys</span>
+							</div>
+							<div class="ia-cnt-art-txt">
+								<div class="ia-cnt-art-txt-fln">
+									Nový komplex bude stavať firma RV Development 3, ktorá patrí do skupiny Grafobal Group podnikateľa Ivana Kmotríka. Zámer pobúril bratislavských mestských poslancov, ktorí sa obávajú, že prostredie najstaršieho verejného parku v strednej Európe bude masívnou výstavbou znehodnotené.
+
+Stavebník ešte nemá územné ani stavebné povolenie, jeho projekt pod názvom Green park zatiaľ hodnotí ministerstvo životného prostredia. To podľa mestských poslancov otvára cestu k diskusii. Poslankyňa Lucia Štasselová (nezávislá), povolaním architektka, požiadala primátora Iva Nesrovnala, aby na výstavbu na bývalom pozemku Artmedie vypísal medzinárodnú architektonicko-urbanistickú súťaž. „Investičný zámer by mal plne rešpektovať vzácnu lokalitu, výborne viditeľnú a dostupnú zo Starého Mesta, v kontakte s riekou aj so Sadom Janka Kráľa," mieni.
+
+Štasselová pripúšťa, že pre benevolentný prístup minulých vedení mesta už výstavbu v tejto lokalite nemožno úplne zastaviť. „Po tom, čo sa zrušil štadión, požiadal majiteľ, aby sa územný plán mesta prekvalifikoval. Z územia pôvodne určeného na šport a rekreáciu je dnes stavebný pozemok," poznamenala. Podľa nej by sa mesto malo snažiť o reguláciu zástavby na tomto území. Súčasní radní, ako tvrdí, by nemali dovoliť, aby tu vyrástli budovy vyššie ako koruny stromov.
+
+O návrhu poslankyne na utorňajšom mimoriadnom zasadnutí mestského zastupiteľstva sa nakoniec nehlasovalo. Hoci s ním primátor súhlasil, upozornil na to, že vypísanie súťaže bude komplikované vzhľadom na to, že územie je v rukách súkromníka. „Nemôžeme prinútiť súkromnú osobu, aby zaplatila medzinárodnú súťaž na svojom súkromnom pozemku a ešte aby stavala podľa iného návrhu,“ dodal poslanec zastupiteľstva za Petržalku Oliver Kríž (nezávislý).
+Po búrlivej debate poslanci nakoniec prijali uznesenie, v ktorom žiadajú primátora, aby investorovi nevydal záväzné investičné stanovisko mesta, ktoré slúži ako usmernenie pre stavebný úrad. Poslanci chcú od Nesrovnala, aby počkal na stanovisko poslaneckej a odbornej komisie územného a strategického plánovania, životného prostredia a výstavby. Tá bude hodnotiť investorov zámer. „Videli sme návrh, ale musíme sa naň pozrieť bližšie, aby sme sa vedeli fundovane rozhodnúť,“ povedal poslanec Juraj Káčer (SDKÚ), ktorý je členom komisie. „Posúdime projekt a potom dáme primátorovi odporúčanie, v čom je dobrý, kde má nedostatky, poprípade navrhneme alternatívne riešenia,“ dodal poslanec. Odborníci budú preverovať výšku stavby, riešenie parkovania alebo občianskej vybavenosti. Podľa Káčera nakoniec odporučia primátorovi, ako upraviť projekt tak, aby do lokality zapadol.
+
+Komisia by mala zasadať najskôr o tri týždne, celé konanie o stavbe sa tak predĺži. Jej rozhodnutie má však odporúčací charakter a Nesrovnal uznesenie nemusí rešpektovať.
+
+Štatutár firmy RV Development 3 Dušan Repák k diskusii okolo ich zámeru hovorí, že projekt Green Park plní všetky legislatívne normy, vrátane súladu projektu s územným plánom hlavného mesta . „Preto dúfame, že stále žijeme v právnom štáte, kde osobné vlastníctvo niečo znamená,“ poznamenal Repák. Developerský projekt Green Park za 60 miliónov eur by podľa predloženého návrhu malo tvoriť viacero budov. Konkrétne štyri šesťpodlažné domy prevažne s bytmi, administratívna budova s 11 nadzemnými podlažiami a bytový vežiak s predpokladanou výškou 90 metrov. V komplexe má byť aj občianska vybavenosť a okolo 1 300 parkovacích miest. Na ploche vo veľkosti jedného futbalového stánku by tak podľa predstáv investora malo bývať vyše 1 700 a pracovať 2 300 ľudí. Začať s výstavbou plánuje v marci 2017 a ukončiť ju v decembri 2018.
+
+Za najväčší problém považuje Andrej Kovarik zo Štátnej ochrany prírody práve výškovú budovu. Stromy, ktoré rastú v najstaršom verejnom parku v strednej Európe, budú pre ňu v určitých hodinách vždy v tieni. „To je pre stromy, ktoré dlhodobo žijú rovnakých podmienkach, stresujúci faktor,“ pripomenul Kovarik. Následky stáleho tienenia sa podľa odborníka neprejavia hneď. „Z dlhodobého hľadiska môžu byť stromy náchylnejšie na choroby a celkovo to zhorší ich vitalitu,“ dodal Kovarik s tým, že hrozí zníženie kvality parku. Projekt je v súčasnosti podľa portálu ministerstva životného prostredia v procese EIA, čo je posudzovanie vplyvov na životné prostredie.
+								</div>
+								<!-- <img alt="" src="conf/images/160988jpg">
+								<div class="ia-cnt-art-txt-lne"></div> -->
+							</div>
+						</div>
+					</div>
+					<div class="ia-cnt-rban">
+						<div>
+							<button type="button" onclick="setConfirm (newArticle, 'Nový článok', 'Článok nie je uložený, všetky zmeny budú zahodené. Chcete napriek tomu pokračovať?');">Nový článok</button>
+						</div>
+						<div>
+							<button type="button" onclick="setConfirm (loadArticle, 'Nahraj článok', 'Článok nie je uložený, všetky zmeny budú zahodené. Chcete napriek tomu pokračovať?');">Nahrať článok</button>
+						</div>
+						<div>
+							<button type="button" onclick="editText();">Vlož Text</button>
+						</div>
+						<div>
+							<button type="button" onclick="addPicture(0);">Pridaj obrázok</button>
+						</div>
+						<div>
+							<button type="button" onclick="removePicture(0);">Zmaž obrázky</button>
+						</div>
+					</div>
 				</div>
 			</form>
 		</div>
