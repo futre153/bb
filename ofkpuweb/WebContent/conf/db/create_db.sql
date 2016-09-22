@@ -97,6 +97,7 @@ CREATE TABLE IF NOT EXISTS `ofkpudb`.`articles` (
   `modified` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `category_id` INT UNSIGNED NOT NULL DEFAULT 1,
   `photo_ids` VARCHAR(256) NULL,
+  `author` VARCHAR(128) NULL,
   PRIMARY KEY (`id`),
   CONSTRAINT `FK_articles_category_id`
   FOREIGN KEY (`category_id`)
@@ -166,14 +167,11 @@ CREATE TABLE IF NOT EXISTS `ofkpudb`.`articles_tmp` (
   `modified` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `category_id` INT UNSIGNED NULL DEFAULT 1,
   `photo_ids` VARCHAR(256) NULL,
+  `author` VARCHAR(128) NULL,
+  `locked` CHAR(1) NOT NULL DEFAULT 'N',
   PRIMARY KEY (`id`),
   INDEX `FK_articles_tmp_article_id_idx` (`article_id` ASC),
   INDEX `FK_articles_tmp_category_id_idx` (`category_id` ASC),
-  CONSTRAINT `FK_articles_tmp_article_id`
-    FOREIGN KEY (`article_id`)
-    REFERENCES `ofkpudb`.`articles` (`id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
   CONSTRAINT `FK_articles_tmp_category_id`
     FOREIGN KEY (`category_id`)
     REFERENCES `ofkpudb`.`categories` (`id`)

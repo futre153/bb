@@ -117,7 +117,6 @@ public class Ofkpuweb extends Core {
 	private static final String OFK_CNT_2_CLASS = "ofk-cnt-2";
 	private static final String OFK_HLN_ID = OFK_HLN_CLASS;
 	private static final String OFK_HLN_NAME = OFK_HLN_CLASS;
-	private static final String LANGUAGE_KEY = "ofkpuweb.language";
 	private static final String TOP_DATEFORMAT_KEY = "ofkpuweb.top.dateformat";
 	private static final String SAB_DATEFORMAT_KEY = "ofkpuweb.sab.dateformat";
 	private static final String SAB_ONE_ID_KEY = "ofkpuweb.sab.1.id";
@@ -143,7 +142,7 @@ public class Ofkpuweb extends Core {
 	
 	public void init(ServletConfig config) throws ServletException {
 		super.init(config);
-		Core.setLocale(super.getProperties().getProperty(LANGUAGE_KEY, DEFAULT_LANGUAGE));
+		//Core.setLocale(super.getProperties().getProperty(LANGUAGE_KEY, DEFAULT_LANGUAGE));
 		topDateFormat = new SimpleDateFormat(super.getProperties().getProperty(TOP_DATEFORMAT_KEY), Core.getLocale());
 		sabDateFormat = new SimpleDateFormat(super.getProperties().getProperty(SAB_DATEFORMAT_KEY), Core.getLocale());
 		msgDateFormat = new SimpleDateFormat(super.getProperties().getProperty(MSG_DATEFORMAT_KEY), Core.getLocale());

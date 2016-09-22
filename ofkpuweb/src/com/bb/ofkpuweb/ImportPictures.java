@@ -68,10 +68,9 @@ public class ImportPictures extends Core {
 	
 	private static final String SUBMIT_TEXT_KEY = "ip.sumbit.text";
 	private static final String TEXT_FILE = "file";
-	private static final String ENTYPE_ATT_NAME = "enctype";
 	private static final String METHOD_POST = "POST";
 	private static final String MULTIPART = "multipart/form-data";
-	private static final String CONTENT_DISPOSITION_HEADER = "Content-Disposition";
+	
 	private static final String FORM_ATT_NAME = "form-data";
 	private static final String SUBMIT_ADD_KEY = "ip.submit.add";
 	private static final String ERROR_NULL_DESCRIPTION_KEY = "ip.error.nullDescription";
@@ -224,7 +223,7 @@ public class ImportPictures extends Core {
 			Table table = Table.getInstance(props.getProperty(CAPTION_KEY), 1, 1, null);
 			Table work = Table.getInstance((p[0] != null ? p[0] : null), 3, 5, null);
 			Tag main = Form.getInstance(request.getRequestURL().toString(), METHOD_POST);
-			main.setAttribute(ENTYPE_ATT_NAME, MULTIPART);
+			main.setAttribute(ENCTYPE_ATT_NAME, MULTIPART);
 			table.setContent(main, 0, 0);
 			
 			Input fil = getInput(FIL_PARAM, TEXT_FILE, null, a != ACT_LOAD);

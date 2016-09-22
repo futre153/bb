@@ -182,7 +182,7 @@ public class HtmlTag implements Tag {
 	public String toString() {
 		ByteArrayOutputStream out=new ByteArrayOutputStream();
 		PrintWriter pw=new PrintWriter(out);
-		String tmp=super.toString();
+		String tmp="";//super.toString();
 		try {
 			this.doFinal(pw, 0);
 			pw.flush();

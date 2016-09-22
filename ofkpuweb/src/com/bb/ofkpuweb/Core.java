@@ -7,8 +7,11 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.Statement;
+import java.util.Base64;
 import java.util.Locale;
 import java.util.Properties;
+import java.util.Base64.Decoder;
+import java.util.Base64.Encoder;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletConfig;
@@ -17,6 +20,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.pabk.emanager.sql.sap.Delete;
 import org.pabk.html.A;
 import org.pabk.html.Button;
 import org.pabk.html.Div;
@@ -62,6 +66,7 @@ abstract class Core extends HttpServlet {
 	protected static final char VERTICAL_BAR_CHAR = '|';
 	protected static final char COLON_CHAR = ':';
 	protected static final char SEMICOLON_CHAR = ';';
+	protected static final char DOUBLE_QUOTE_CHAR = '"';
 
 	private static final String PROPERTIES_CONST = ".properties.xml";
 	private static final String CONFIG_PATH = "conf";
@@ -78,6 +83,20 @@ abstract class Core extends HttpServlet {
 	protected static final String DB_ARTICLES_CONTENT_KEY = "core.ofkpudb.articles.content";
 	protected static final String DB_ARTICLES_MODIFIED_KEY = "core.ofkpudb.articles.modified";
 	protected static final String DB_ARTICLES_CATEGORY_ID_KEY = "core.ofkpudb.articles.categoryId";
+	protected static final String DB_ARTICLES_PHOTO_IDS_KEY = "core.ofkpudb.articles.photoIds";
+	protected static final String DB_ARTICLES_AUTHOR_KEY = "core.ofkpudb.articles.photoIds";
+	
+	protected static final String DB_ARTICLES_TMP_KEY = "core.ofkpudb.articlesTmp";
+	protected static final String DB_ARTICLES_TMP_ID_KEY = "core.ofkpudb.articlesTmp.id";
+	protected static final String DB_ARTICLES_TMP_ARTICLE_ID_KEY = "core.ofkpudb.articlesTmp.articleId";
+	protected static final String DB_ARTICLES_TMP_CAPTION_KEY = "core.ofkpudb.articlesTmp.caption";
+	protected static final String DB_ARTICLES_TMP_CONTENT_KEY = "core.ofkpudb.articlesTmp.content";
+	protected static final String DB_ARTICLES_TMP_MODIFIED_KEY = "core.ofkpudb.articlesTmp.modified";
+	protected static final String DB_ARTICLES_TMP_CATEGORY_ID_KEY = "core.ofkpudb.articlesTmp.categoryId";
+	protected static final String DB_ARTICLES_TMP_PHOTO_IDS_KEY = "core.ofkpudb.articlesTmp.photoIds";
+	protected static final String DB_ARTICLES_TMP_AUTHOR_KEY = "core.ofkpudb.articlesTmp.author";
+	protected static final String DB_ARTICLES_TMP_LOCKED_KEY = "core.ofkpudb.articlesTmp.locked";
+	protected static final String DB_ARTICLES_TMP_CREATED_KEY = "core.ofkpudb.articlesTmp.created";
 	
 	protected static final String DB_PHOTOS_KEY = "core.ofkpudb.photos";
 	protected static final String DB_PHOTOS_ID_KEY = "core.ofkpudb.photos.id";
@@ -112,9 +131,13 @@ abstract class Core extends HttpServlet {
 	protected static final String DB_SHORT_MESSAGES_CAPTION_KEY = "core.ofkpudb.shortMessages.caption";
 	protected static final String DB_SHORT_MESSAGES_TEXT_KEY = "core.ofkpudb.shortMessages.text";
 	
-	private static Locale locale;
+	protected static final String CONTENT_DISPOSITION_HEADER = "Content-Disposition";
+	private static final String LANGUAGE_KEY = "language";
 	
+	private static Locale locale;
+
 	private Properties props = null;
+	
     
     /**
      * @see HttpServlet#HttpServlet()
@@ -131,6 +154,7 @@ abstract class Core extends HttpServlet {
     	InputStream stream = null;
     	Statement statement = null;
     	try {
+    		Delete.setFrom(true);
     		con.setAutoCommit(false);
     		stream = config.getServletContext().getResourceAsStream(DB_CONFIG_PATH + SLASH_CHAR + createDBBatch);
     		statement = con.createStatement();
@@ -231,6 +255,7 @@ abstract class Core extends HttpServlet {
            	}
         }
 		props = Core.loadProperties(config, props, this.getClass());
+		setLocale(props.getProperty(LANGUAGE_KEY, DEFAULT_LANGUAGE));
 	}
 	
 	protected Properties getProperties() {
@@ -303,8 +328,18 @@ abstract class Core extends HttpServlet {
 	public static final String NBSP = "&#160;";
 	public static final String GT = "&#062;";
 
-	public static final String ROWSPAN_ATT_NAME = "rowspan";
+	protected static final String ROWSPAN_ATT_NAME = "rowspan";
 
+	protected static final String COLSPAN_ATT_NAME = "colspan";
+
+	protected static final String LT_ENTITY = "&lt;";
+	protected static final String GT_ENTITY = "&gt;";
+	protected static final String NBSP_ENTITY = "&nbsp;";
+	protected static final String ENCTYPE_ATT_NAME = "enctype";
+
+	public static final char TILDE_CHAR = '~';
+
+	
 	
 
 	

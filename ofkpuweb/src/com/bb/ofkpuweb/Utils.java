@@ -34,6 +34,7 @@ import com.bb.commons.Article;
 import com.bb.commons.Partner;
 import com.bb.commons.Photo;
 import com.bb.commons.ShortMessage;
+import com.bb.commons.TempArticle;
 
 final class Utils {
 	
@@ -46,21 +47,47 @@ final class Utils {
 		return DBConnector.select(con, DBConnector.createSelect().addFromClause(new TableName(new SchemaName(new Identifier(schema)), new Identifier(table))).addTableSpec(where));
 	}
 	
+	private static TempArticle loadTempArticleFromRow (Row row, Properties props, String charset, Connection con) throws IOException, SQLException {
+		TempArticle article = new TempArticle((long) row.get(props.getProperty(Core.DB_ARTICLES_TMP_ID_KEY)));
+		article.setCaption((String) row.get(props.getProperty(Core.DB_ARTICLES_TMP_CAPTION_KEY)));
+		article.setContent(Utils.readCharsToHtml(getClobReader(row, props.getProperty(Core.DB_ARTICLES_TMP_CONTENT_KEY), charset)));
+		article.setModified(((Timestamp) row.get(props.getProperty(Core.DB_ARTICLES_TMP_MODIFIED_KEY))).getTime());
+		article.setCategoryId((long) row.get(props.getProperty(Core.DB_ARTICLES_TMP_CATEGORY_ID_KEY)));
+		article.setAuthor((String) row.get(props.getProperty(Core.DB_ARTICLES_TMP_AUTHOR_KEY)));
+		article.setCreated(((Timestamp) row.get(props.getProperty(Core.DB_ARTICLES_TMP_CREATED_KEY))).getTime());
+		article.setArticleId((long) row.get(props.getProperty(Core.DB_ARTICLES_TMP_ARTICLE_ID_KEY)));
+		article.setLocked(((String) row.get(props.getProperty(Core.DB_ARTICLES_TMP_LOCKED_KEY))).charAt(0));
+		String pids = (String) row.get(props.getProperty(Core.DB_ARTICLES_PHOTO_IDS_KEY));
+		article.setPhotos(loadPhotosFromRows(getPhotosForAtricle(con, props, pids == null || pids.length() == 0? new String[0] : pids.split(new String(new char[]{Article.PHOTO_IDS_SEPARATOR}))), props));
+		Utils.freeXlob (row.get(props.getProperty(Core.DB_ARTICLES_TMP_CONTENT_KEY)));
+		return article;
+	}
+	
+	
 	private static Article loadArticleFromRow (Row row, Properties props, String charset, Connection con) throws IOException, SQLException {
 		Article article = new Article((long) row.get(props.getProperty(Core.DB_ARTICLES_ID_KEY)));
 		article.setCaption((String) row.get(props.getProperty(Core.DB_ARTICLES_CAPTION_KEY)));
 		article.setContent(Utils.readCharsToHtml(getClobReader(row, props.getProperty(Core.DB_ARTICLES_CONTENT_KEY), charset)));
 		article.setModified(((Timestamp) row.get(props.getProperty(Core.DB_ARTICLES_MODIFIED_KEY))).getTime());
-		article.setPhotos(loadPhotosFromRows(getPhotosForAtricle(con, props, (int) article.getIndex()), props));
+		article.setCategoryId((long) row.get(props.getProperty(Core.DB_ARTICLES_CATEGORY_ID_KEY)));
+		article.setAuthor((String) row.get(props.getProperty(Core.DB_ARTICLES_AUTHOR_KEY)));
+		String pids = (String) row.get(props.getProperty(Core.DB_ARTICLES_PHOTO_IDS_KEY));
+		article.setPhotos(loadPhotosFromRows(getPhotosForAtricle(con, props, pids == null || pids.length() == 0 ? new String[0]: pids.split(new String(new char[]{Article.PHOTO_IDS_SEPARATOR}))), props));
 		Utils.freeXlob (row.get(props.getProperty(Core.DB_ARTICLES_CONTENT_KEY)));
 		return article;
 	}
 	
-	private static Rows getPhotosForAtricle(Connection con, Properties props, long index) throws SQLException {
+	private static Rows getPhotosForAtricle(Connection con, Properties props, String[] ids) throws SQLException {
 		String schema = props.getProperty(Core.DB_KEY);
 		String table = props.getProperty(Core.DB_PHOTOS_KEY);
-		WhereClause where = new WhereClause(new CompPred(new Object[]{new Identifier(props.getProperty(Core.DB_PHOTOS_ARTICLE_ID_KEY))}, new Object[]{index}, CompPred.EQUAL));
-		return Utils.getRows(con, schema, table, where);
+		Object[] where = ids.length == 0 ? null : new Object[ids.length * 2 - 1];
+		for(int i = 0; i < ids.length; i ++) {
+			if(i > 0) {
+				where[i * 2 - 1] = WhereClause.OR;
+			}
+			where[i * 2] = new CompPred(new Object[]{new Identifier(props.getProperty(Core.DB_PHOTOS_ID_KEY))}, new Object[]{Long.parseLong(ids[i])}, CompPred.EQUAL);
+		}
+		return where == null ? new Rows() : Utils.getRows(con, schema, table, new WhereClause(where));
 	}
 	
 	private static Photo[] loadPhotosFromRows (Rows rows, Properties props) {
@@ -157,6 +184,15 @@ final class Utils {
 		}
 	}
 	
+	public static TempArticle[] loadTempArticleFromRows (Connection con, Rows rows, Properties props, String charset) throws IOException, SQLException {
+		rows = rows == null ? new Rows() : rows;
+		TempArticle[] articles = new TempArticle[rows.size()];
+		for (int i = 0; i < articles.length; i ++) {
+			articles[i] = loadTempArticleFromRow (rows.get(i), props, charset, con);
+		}
+		return articles;
+	}
+	
 	public static Article[] loadArticlesFromRows (Connection con, Rows rows, Properties props, String charset) throws IOException, SQLException {
 		rows = rows == null ? new Rows() : rows;
 		Article[] articles = new Article[rows.size()];
@@ -251,6 +287,14 @@ final class Utils {
 			partners[i].setType((String) DBConnector.select(con, DBConnector.createSelect().addFromClause(tableName).addTableSpec(new WhereClause(new CompPred(new Object[]{new Identifier(props.getProperty(Core.DB_PARTNER_TYPES_ID_KEY))}, new Object[]{((long) row.get(props.getProperty(Core.DB_PARTNERS_TYPE_ID_KEY)))}, CompPred.EQUAL)))).get(0).get(props.getProperty(Core.DB_PARTNER_TYPES_NAME_KEY)));
 		}
 		return partners;
+	}
+
+	public static String getCategoryName(Connection con, Properties props, long categoryId) throws SQLException {
+		Rows rows = Utils.getRows(con, props.getProperty(Core.DB_KEY), props.getProperty(Core.DB_CATEGORIES_KEY), new WhereClause(new CompPred(new Object[]{props.getProperty(Core.DB_CATEGORIES_ID_KEY)}, new Object[]{categoryId}, CompPred.EQUAL)));
+		if(rows.size() == 1) {
+			return (String) rows.get(0).get(props.getProperty(Core.DB_CATEGORIES_NAME_KEY));
+		}
+		return null;
 	}
 	
 }

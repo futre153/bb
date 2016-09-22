@@ -169,30 +169,27 @@
 		border: 2px solid maroon; 
 	}
 	
-	div.ia-arp-frm table, div.ia-art-frm table {
+	div.ia-arp-frm table, div.ia-art-frm table, div.ia-arp-del-frm table, div.ia-art-del-frm table{
 		border-spacing: 0;
 		width: 100%;
 		background-color: whitesmoke;
 	}
-	div.ia-arp-frm td,div.ia-art-frm td {
+	div.ia-arp-frm img,div.ia-art-frm img, div.ia-arp-del-frm img, div.ia-art-del-frm img {
+		cursor: pointer;
+	}
+	div.ia-arp-frm td,div.ia-art-frm td, div.ia-arp-del-frm td, div.ia-art-del-frm td {
 		
 		border-bottom: 1px solid lightgray;
 		border-right: 1px solid lightgray;
 		padding: 1px 0.5ex;
 	}
-	div.ia-arp-frm th,div.ia-art-frm th {
+	div.ia-arp-frm th,div.ia-art-frm th, div.ia-arp-del-frm th, div.ia-art-del-frm th {
 		background-color: maroon;
-		color: whitesmoke;
+		color: lightblue;
 		padding: 2px 0.5ex;
 	}
-	div.ia-arp-frm button,div.ia-art-frm button {
-		width: 3ex;
-		height: 3ex;
-		padding:0;
-		font-size: 75%;
-		font-weight: bold;
-		cursor: pointer;
-	}
+	
+	
 	div.ia-dia-arp-1, div.ia-dia-art-1 {
 		width: 800px;
 	}
@@ -200,7 +197,7 @@
 		display: none;
 	}
 	.ia-hdr-col-2 {
-		ewidth: 100ex;
+		width: 47em;
 	}
 	
 	div.ia-hdr-frm-2 td {
@@ -221,7 +218,7 @@
 		font-size: 250%;
 		font-weight: bold;
 	}
-	div.ia-dia-frm, div.ia-dia-txt-frm, div.ia-pic-frm, div.ia-pic-del-frm, div.ia-err-frm, div.ia-con-frm, div.ia-arp-frm {
+	div.ia-dia-frm, div.ia-dia-txt-frm, div.ia-pic-frm, div.ia-pic-del-frm, div.ia-err-frm, div.ia-con-frm, div.ia-arp-frm, div.ia-art-frm, div.ia-arp-del-frm, div.ia-art-del-frm {
 		display: none;
 	}
 	.ia-dig-but {
@@ -254,7 +251,7 @@
 		padding: 0 0 0 10px;
 	}
 	div.ia-cnt-rban button {
-		width: 5em;
+		width: 7em;
 		height: 5em;
 	}
 	div.ia-cnt-art-cap {
@@ -295,6 +292,10 @@
 	span.ai-pic-aga {
 		color: yellow;
 	}
+	div.ai-art-cancel {
+		padding: 1ex;
+		text-align: right;
+	}
 	
 </style>
 <script type="text/javascript">
@@ -320,6 +321,8 @@
 	var inpi;
 	var inte;
 	var inac;
+	var inti;
+	var inpi;
 	var form;
 	var dfte;
 	var tate;
@@ -338,29 +341,62 @@
 	var cote;
 	var cobu;
 	var coac;
+	var arte;
+	var artt;
+	var artn;
+	var artf;
+	var arpe;
+	var arpt;
+	var arpn;
+	var arpf;
+	var arxc;
+	var arxi;
+	var adte;
+	var adtt;
+	var adtn;
+	var adtf;
+	var adpe;
+	var adpt;
+	var adpn;
+	var adpf;
+	var adxi;
 	var acna;
+	var aclt;
+	var aclp;
+	var acdt;
+	var acdp;
+	var acsa;
+	var hpag;
 	
 	function initDialogFrame(dialogFrameClass, dialogFrameCaptionId) {
 		dfel = document.getElementsByClassName(dialogFrameClass)[0];
 		dfcp = document.getElementById (dialogFrameCaptionId);
 	}
-	function init(dialogFrameClass, dialogFrameCaptionId, textareaId, textDialogFrameClass, textTextareaId, articleCaptionClass, articleCreationClass, articleAuthorClass, articleTextClass, articleFirstLineClass, articleLineClass, articleImageUrl, inputCaptionName, inputAuthotName, inputCreationName, inputModifiedName, inputPublishedName, inputIdName, inputPicturesName, inputTextName, inputActionName, pictureDialogClass, pictureTBodyClass, pictureGalleriesSliderClass, pictureActiveGalleryClass, pictureNotActiveGalleryClass, pictureDeleteText, maxGalleries, errorMessageClass, errorMessageTextClass, errorMessage, confirmMessageClass, confirmMessageTextClass, confirmButtonClass, actionNewArticle) {
+	function init(dialogFrameClass, dialogFrameCaptionId, textareaId, textDialogFrameClass, textTextareaId, articleCaptionClass, articleCreationClass, articleAuthorClass, articleTextClass, articleFirstLineClass, articleLineClass, articleImageUrl, inputCaptionName, inputAuthotName, inputCreationName, inputModifiedName, inputPublishedName, inputIdName, inputPicturesName, inputTextName, inputActionName, inputArticleTmpId, inputArticlePublishedId, pictureDialogClass, pictureTBodyClass, pictureGalleriesSliderClass, pictureActiveGalleryClass, pictureNotActiveGalleryClass, pictureDeleteText, maxGalleries, errorMessageClass, errorMessageTextClass, errorMessage, confirmMessageClass, confirmMessageTextClass, confirmButtonClass, tmpArticlesClass, tmpArticlesName, tmpArticlesFunction, publishedArticlesClass, publishedArticlesName, publishedArticlesFunction, tmpDelArticlesClass, tmpDelArticlesName, tmpDelArticlesFunction, publishedDelArticlesClass, publishedDelArticlesName, publishedDelArticlesFunction, articlesSplitChar, articlesImageSrc, articlesDelImageSrc, actionNewArticle, actionLoadTmpArticle, actionLoadPublishedArticle, actionDelTmpArticle, actionDelPublishedArticle, actionSaveArticle, homePage) {
 		initDialogFrame(dialogFrameClass, dialogFrameCaptionId);
 		initTextarea (textareaId);
 		initTextDialog (textDialogFrameClass, textTextareaId);
 		initArticle(articleCaptionClass, articleCreationClass, articleAuthorClass, articleTextClass, articleFirstLineClass, articleLineClass, articleImageUrl);
-		initInputs(inputCaptionName, inputAuthotName, inputCreationName, inputModifiedName, inputPublishedName, inputIdName, inputPicturesName, inputTextName, inputActionName);
+		initInputs(inputCaptionName, inputAuthotName, inputCreationName, inputModifiedName, inputPublishedName, inputIdName, inputPicturesName, inputTextName, inputActionName, inputArticleTmpId, inputArticlePublishedId);
 		initPictureGallery(pictureDialogClass, pictureTBodyClass, pictureGalleriesSliderClass, pictureActiveGalleryClass, pictureNotActiveGalleryClass, maxGalleries);
 		reloadArticle();
 		returnHTML(getText());
 		initConfirmMessage(confirmMessageClass, confirmMessageTextClass, confirmButtonClass);
 		initErrorMessage(errorMessageClass, errorMessageTextClass, errorMessage);
-		initActions(actionNewArticle);
+		initActions(actionNewArticle, actionLoadTmpArticle, actionLoadPublishedArticle, actionDelTmpArticle, actionDelPublishedArticle, actionSaveArticle);
+		initTmpArticles (tmpArticlesClass, tmpArticlesName, tmpArticlesFunction, publishedArticlesClass, publishedArticlesName, publishedArticlesFunction, articlesSplitChar, articlesImageSrc);
+		initDelTmpArticles (tmpDelArticlesClass, tmpDelArticlesName, tmpDelArticlesFunction, publishedDelArticlesClass, publishedDelArticlesName, publishedDelArticlesFunction, articlesDelImageSrc);
+		hpag = homePage;
 		save = 1;
 	}
 	
-	function initActions(actionNewArticle) {
+	function initActions(actionNewArticle, actionLoadTmpArticle, actionLoadPublishedArticle, actionDelTmpArticle, actionDelPublishedArticle, actionSaveArticle) {
 		acna = actionNewArticle;
+		aclt = actionLoadTmpArticle;
+		aclp = actionLoadPublishedArticle;
+		acdt = actionDelTmpArticle;
+		acdp = actionDelPublishedArticle;
+		acsa =actionSaveArticle;
 	}
 	
 	function initConfirmMessage(confirmMessageClass, confirmMessageTextClass, confirmButtonClass) {
@@ -400,7 +436,7 @@
 		dfte = document.getElementsByClassName(textDialogFrameClass)[0];
 		tate = document.getElementById (textTextareaId);
 	}
-	function initInputs(inputCaptionName, inputAuthotName, inputCreationName, inputModifiedName, inputPublishedName, inputIdName, inputPicturesName, inputTextName, inputActionName) {
+	function initInputs(inputCaptionName, inputAuthotName, inputCreationName, inputModifiedName, inputPublishedName, inputIdName, inputPicturesName, inputTextName, inputActionName, inputArticleTmpId, inputArticlePublishedId) {
 		incp = document.getElementsByName(inputCaptionName)[0];
 		inau = document.getElementsByName(inputAuthotName)[0];
 		indc = document.getElementsByName(inputCreationName)[0];
@@ -410,6 +446,8 @@
 		inpi = document.getElementsByName(inputPicturesName)[0];
 		inte = document.getElementsByName(inputTextName)[0];
 		inac = document.getElementsByName(inputActionName)[0];
+		inti = document.getElementsByName(inputArticleTmpId)[0];
+		inpi = document.getElementsByName(inputArticlePublishedId)[0];
 		form = document.getElementsByTagName("FORM")[0];
 	}
 	function initArticle(articleCaptionClass, articleCreationClass, articleAuthorClass, articleTextClass, articleFirstLineClass, articleLineClass, articleImageUrl) {
@@ -601,6 +639,7 @@
 		return html;
 	}
 	function setConfirm(fn, buttonText, msg) {
+		//alert (save);
 		if(save == 1) {
 			fn();
 		}
@@ -623,9 +662,183 @@
 		inac.value = acna;
 		form.submit();
 	}
+	
+	function loadArticle() {
+		arte.style.display = "block";
+	}
+	
+	function loadPubArticle() {
+		arpe.style.display = "block";
+	}
+	
+	function delArticle() {
+		adte.style.display = "block";
+	}
+	
+	function delPubArticle() {
+		adpe.style.display = "block";
+	}
+	
+	function loadPublishedArticle(id) {
+		inac.value = aclp;
+		inpi.value = id;
+		form.submit();
+	}
+	
+	function saveArticle() {
+		inac.value = acsa;
+		inte = getText();
+		form.submit();
+	}
+	
+	function delTempArticle(id) {
+		inac.value = acdt;
+		inti.value = id;
+		form.submit();
+	}
+	
+	function delPublishedArticle(id) {
+		inac.value = acdp;
+		inpi.value = id;
+		form.submit();
+	}
+	
+	
+	
+	function loadTempArticle(id) {
+		inac.value = aclt;
+		inti.value = id;
+		form.submit();
+	}
+	
+	function cancelLoadPublished() {
+		arpe.style.display = "";
+	}
+	
+	function cancelLoadTemp() {
+		arte.style.display = "";
+	}
+	
+	function cancelDelPublished() {
+		adpe.style.display = "";
+	}
+	
+	function cancelDelTemp() {
+		adte.style.display = "";
+	}
+	
+	
+	function initTmpArticles (tmpArticlesClass, tmpArticlesName, tmpArticlesFunction, publishedArticlesClass, publishedArticlesName, publishedArticlesFunction, articlesSplitChar, articlesImageSrc) {
+		arte = document.getElementsByClassName(tmpArticlesClass)[0];
+		artt = arte.getElementsByTagName("TABLE")[0];
+		artn = tmpArticlesName;
+		artf = tmpArticlesFunction;
+		arpe = document.getElementsByClassName(publishedArticlesClass)[0];
+		arpt = arpe.getElementsByTagName("TABLE")[0];
+		arpn = publishedArticlesName;
+		arpf = publishedArticlesFunction;
+		arxc = articlesSplitChar;
+		arxi = articlesImageSrc;
+		loadArticlesTable (artt, artn, artf, arxc, arxi);
+		loadArticlesTable (arpt, arpn, arpf, arxc, arxi);
+	}
+	
+	function initDelTmpArticles (tmpDelArticlesClass, tmpDelArticlesName, tmpDelArticlesFunction, publishedDelArticlesClass, publishedDelArticlesName, publishedDelArticlesFunction, articlesDelImageSrc) {
+		adte = document.getElementsByClassName(tmpDelArticlesClass)[0];
+		adtt = adte.getElementsByTagName("TABLE")[0];
+		adtn = tmpDelArticlesName;
+		adtf = tmpDelArticlesFunction;
+		adpe = document.getElementsByClassName(publishedDelArticlesClass)[0];
+		adpt = adpe.getElementsByTagName("TABLE")[0];
+		adpn = publishedDelArticlesName;
+		adpf = publishedDelArticlesFunction;
+		adxi = articlesDelImageSrc;
+		loadArticlesTable (adtt, adtn, adtf, arxc, adxi);
+		loadArticlesTable (adpt, adpn, adpf, arxc, adxi);
+	}
+	
+	function loadArticlesTable (table, name, fn, chr, imageSrc) {
+		var tbody = table.getElementsByTagName("TBODY")[0];
+		var inputs = document.getElementsByName(name);
+		var i;
+		var html = "";
+		for(i = 0; i < inputs.length; i ++) {
+			var b64 = inputs[i].value.split(chr);
+			var id = convertToUtf8 (atob(b64[0]));
+			var caption = convertToUtf8 (atob(b64[1]));
+			var author = convertToUtf8 (atob(b64[2]));
+			var date = convertToUtf8 (atob(b64[3]));
+			html += ("<tr><td>" + id + "</td><td>" + caption + "</td><td>" + author + "</td><td>" + date + "</td><td><img src=\"" + imageSrc + "\" onclick=\"" + fn.replace(chr, id) + ";\"></img></td></tr>");
+		}
+		tbody.innerHTML = html;
+	}
+	
+	function convertToUtf8 (ascii) {
+		var ret = new String();
+		var i;
+		for(i = 0; i < ascii.length; i ++) {
+			var c = ascii.charCodeAt(i);
+			if(c < 128) {
+				ret = ret + String.fromCharCode(c);
+			}
+			else if (c < 224) {
+				ret = ret + String.fromCharCode(((c & 31) * 64) + (ascii.charCodeAt(i + 1) & 63));
+				i ++;
+			}
+			else if (c < 240) {
+				c = ((c & 31) * 64 * 64) + ((ascii.charCodeAt(i + 1) & 63) * 64) + (ascii.charCodeAt(i + 2) & 63);
+				i += 2;
+			}
+		}
+		return ret;
+	}
+	function closeApp() {
+		window.location.replace(hpag);
+	}
 </script>
 </head>
-<body class="ia-fnt" onload="init('ia-dia-frm', 'ia-dia-cap', 'ia-dia-val', 'ia-dia-txt-frm', 'ia-dia-txt-val', 'ia-cnt-art-cap', 'ia-cnt-art-inf-dcr', 'ia-cnt-art-inf-aut', 'ia-cnt-art-txt', 'ia-cnt-art-txt-fln', 'ia-cnt-art-txt-lne', 'http://localhost:8080/ofkpuweb/image?idi=', 'acp' ,'aau', 'adc', 'alm', 'apu', 'aid', 'api', 'ate', 'aac', 'ia-pic-frm', 'ai-pic-bdy', 'ai-pic-gsl', 'ai-pic-aga', 'ai-pic-nga', 'Kliknutím obrázok odoberiete z textu článku', 2, 'ia-err-frm', 'ai-err-msg', null, 'ia-con-frm', 'ai-con-msg', 'ia-con-but', 'ana');">
+<body class="ia-fnt" onload="init('ia-dia-frm', 'ia-dia-cap', 'ia-dia-val', 'ia-dia-txt-frm', 'ia-dia-txt-val', 'ia-cnt-art-cap', 'ia-cnt-art-inf-dcr', 'ia-cnt-art-inf-aut', 'ia-cnt-art-txt', 'ia-cnt-art-txt-fln', 'ia-cnt-art-txt-lne', 'http://localhost:8080/ofkpuweb/image?idi=', 'acp' ,'aau', 'adc', 'alm', 'apu', 'aid', 'api', 'ate', 'aac', 'ati', 'api', 'ia-pic-frm', 'ai-pic-bdy', 'ai-pic-gsl', 'ai-pic-aga', 'ai-pic-nga', 'Kliknutím obrázok odoberiete z textu článku', 2, 'ia-err-frm', 'ai-err-msg', null, 'ia-con-frm', 'ai-con-msg', 'ia-con-but', 'ia-art-frm', 'art', 'loadTempArticle(~)', 'ia-arp-frm', 'arp', 'loadPublishedArticle(~)','ia-art-del-frm', 'art', 'delTempArticle(~)', 'ia-arp-del-frm', 'arp', 'delPublishedArticle(~)', '~', 'conf/images/Open-icon.png', 'conf/images/delete.png', 'ana', 'alt', 'alp', 'adt', 'adp', 'asa', 'http://localhost:8080/ofkpuweb');">
+	<input type="hidden" name="arp" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="arp" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="arp" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="arp" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="arp" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="arp" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="arp" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="arp" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="arp" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="arp" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="arp" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="arp" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="arp" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="arp" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="arp" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="arp" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="arp" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="arp" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="arp" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="arp" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="arp" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="art" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="art" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="art" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="art" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="art" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="art" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="art" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="art" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="art" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="art" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="art" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="art" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="art" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="art" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="art" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="art" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="art" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="art" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="art" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
+	<input type="hidden" name="art" value="Mg==~SmEgc29tIGJhxI1hIHZlxL5taSBzdGFyw70sIG5lZG/FvmlqZW0gZG8gamFyaSwgbmVidWTDuiBtaSBvdmXEjWt5IGJlaGHFpSBwbyB0b20gbW9qb20ga2/FoWlhcmk=~YnJhbmR5cw==~MTIuMDguMjAxNiAxNTowMA==">
 	
 	<div class="ia-dia-txt-frm">
 		<div class = "ia-opa"></div>
@@ -702,11 +915,38 @@
 		</div>
 	</div>
 	
-	<div class="ia-art-frm">
+	<div class="ia-art-del-frm">
 		<div class = "ia-opa"></div>
 		<div class="ia-dia">
 			<div class = "ia-dia-art-1">
-				<div class = "ia-art-cap"><div>Kliknutím nahraj a uprav uložený článkok</div></div>
+				<div class = "ia-art-cap"><div>Kliknutím zmaž dočasne uložený článkok</div></div>
+				<div class="ia-dia-art-2">
+					<table>
+					
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Názov článku</th>
+								<th>Autor</th>
+								<th colspan="2">posledná zmena</th>
+							</tr>
+						</thead>
+						<tbody>
+							
+							
+						</tbody>
+					</table>
+				</div>
+				<div class="ai-art-cancel"><button type="button" onclick="cancelDelTemp();">Zrušiť</button></div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="ia-arp-del-frm">
+		<div class = "ia-opa"></div>
+		<div class="ia-dia">
+			<div class = "ia-dia-art-1">
+				<div class = "ia-art-cap"><div>Kliknutím zmaž publikovaný článkok</div></div>
 				<div class="ia-dia-art-2">
 					<table>
 					
@@ -725,11 +965,35 @@
 								<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
 								<td>brandys</td>
 								<td>12.08.2016 15:00</td>
-								<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
+								<td><img src = "conf/images/Open-icon.png" onclick="loadTempArticle(1)"></td> 
 							</tr>
 						</tbody>
 					</table>
 				</div>
+				<div class="ai-art-cancel"><button type="button" onclick="cancelDelPublished();">Zrušiť</button></div>
+			</div>
+		</div>
+	</div>
+	
+	<div class="ia-art-frm">
+		<div class = "ia-opa"></div>
+		<div class="ia-dia">
+			<div class = "ia-dia-art-1">
+				<div class = "ia-art-cap"><div>Kliknutím nahraj a uprav uložený článkok</div></div>
+					<div class="ia-dia-art-2">
+						<table>
+							<thead>
+								<tr>
+									<th>ID</th>
+									<th>Názov článku</th>
+									<th>Autor</th>
+									<th colspan="2">posledná zmena</th>
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+					</div>
+				<div class="ai-art-cancel"><button type="button" onclick="cancelLoadTemp();">Zrušiť</button></div>
 			</div>
 		</div>
 	</div>
@@ -739,170 +1003,20 @@
 		<div class="ia-dia">
 			<div class = "ia-dia-arp-1">
 				<div class = "ia-arp-cap"><div>Kliknutím nahraj už publikovaný článok a upravuj ho</div></div>
-				<div class="ia-dia-arp-2">
-					
-					<table>
-					<thead>
-						<tr>
-							<th>ID</th>
-							<th>Názov článku</th>
-							<th>Autor</th>
-							<th colspan="2">posledná zmena</th>
-						</tr>
-					</thead>
-					<tbody>
-						
-						<tr>
-							<td>2</td>
-							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
-							<td>brandys</td>
-							<td>12.08.2016 15:00</td>
-							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
-							<td>brandys</td>
-							<td>12.08.2016 15:00</td>
-							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
-							<td>brandys</td>
-							<td>12.08.2016 15:00</td>
-							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
-							<td>brandys</td>
-							<td>12.08.2016 15:00</td>
-							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
-							<td>brandys</td>
-							<td>12.08.2016 15:00</td>
-							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
-							<td>brandys</td>
-							<td>12.08.2016 15:00</td>
-							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
-							<td>brandys</td>
-							<td>12.08.2016 15:00</td>
-							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
-							<td>brandys</td>
-							<td>12.08.2016 15:00</td>
-							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
-							<td>brandys</td>
-							<td>12.08.2016 15:00</td>
-							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
-							<td>brandys</td>
-							<td>12.08.2016 15:00</td>
-							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
-							<td>brandys</td>
-							<td>12.08.2016 15:00</td>
-							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
-							<td>brandys</td>
-							<td>12.08.2016 15:00</td>
-							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
-							<td>brandys</td>
-							<td>12.08.2016 15:00</td>
-							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
-							<td>brandys</td>
-							<td>12.08.2016 15:00</td>
-							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
-							<td>brandys</td>
-							<td>12.08.2016 15:00</td>
-							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
-							<td>brandys</td>
-							<td>12.08.2016 15:00</td>
-							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
-							<td>brandys</td>
-							<td>12.08.2016 15:00</td>
-							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
-							<td>brandys</td>
-							<td>12.08.2016 15:00</td>
-							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
-							<td>brandys</td>
-							<td>12.08.2016 15:00</td>
-							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
-							<td>brandys</td>
-							<td>12.08.2016 15:00</td>
-							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
-						</tr>
-						<tr>
-							<td>2</td>
-							<td>Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
-							<td>brandys</td>
-							<td>12.08.2016 15:00</td>
-							<td><button type="button" onclick="loadTempArticle(1)">X</button></td> 
-						</tr>
-					
-					</tbody>
-				</table>
-			</div>
+					<div class="ia-dia-arp-2">
+						<table>
+						<thead>
+							<tr>
+								<th>ID</th>
+								<th>Názov článku</th>
+								<th>Autor</th>
+								<th colspan="2">posledná zmena</th>
+							</tr>
+						</thead>
+						<tbody></tbody>
+					</table>
+				</div>
+			<div class="ai-art-cancel"><button type="button" onclick="cancelLoadPublished();">Zrušiť</button></div>
 			</div>
 		</div>
 	</div>
@@ -921,95 +1035,10 @@
 						</tr>
 					</thead>
 					<tbody class = "ai-pic-bdy">
-						<tr>
-							<td><div onclick="addImage(1);"><img src="http://localhost:8080/ofkpuweb/image?idi=1"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=2"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=3"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=4"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=5"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=6"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=7"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=8"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=9"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=10"></div></td>
-						</tr>
-						<tr>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=11"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=12"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=13"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=14"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=15"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=16"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=17"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=18"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=19"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=20"></div></td>
-						</tr>
-						<tr>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=21"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=22"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=23"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=24"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=25"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=26"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=27"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=28"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=29"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=30"></div></td>
-						</tr>
-						<tr>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=41"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=42"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=43"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=44"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=45"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=46"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=47"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=48"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=49"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=50"></div></td>
-						</tr>
-						<tr>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=61"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=62"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=63"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=64"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=65"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=66"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=67"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=68"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=69"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=70"></div></td>
-						</tr>
-						<tr>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=81"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=82"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=83"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=84"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=85"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=86"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=87"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=88"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=89"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=90"></div></td>
-						</tr>
-						<tr>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=91"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=92"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=93"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=94"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=95"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=96"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=97"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=98"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=99"></div></td>
-							<td><div><img src="http://localhost:8080/ofkpuweb/image?idi=100"></div></td>
-						</tr>
 					</tbody>
 				</table>
 			</div>
 		</div>
-		
 	</div>
 	
 	
@@ -1029,7 +1058,7 @@
 							<tbody>
 								<tr class="tab-fln tab-oln">
 									<td>Názov&#160;článku:</td>
-									<td id="ia-hdr-acp">Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
+									<td id="ia-hdr-acp">Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari Ja som bača veľmi starý, nedožijem do jari, nebudú mi ovečky behať po tom mojom košiari</td>
 									<td><img src="conf/images/write.png" onclick="editCaption('ia-hdr-acp', 'acp', 128, 'Zadaj názov článku');"></td>
 								</tr>
 								<tr class="tab-ln tab-eln">
@@ -1070,6 +1099,8 @@
 						<input type = "hidden" name="api" value="1,2,3,4,7">
 						<input type = "hidden" name="ate">
 						<input type = "hidden" name="aac">
+						<input type = "hidden" name="ati">
+						<input type = "hidden" name="api">
 					</div>
 				</div>
 				<div class="ia-cnt-frm">
@@ -1109,6 +1140,18 @@ Za najväčší problém považuje Andrej Kovarik zo Štátnej ochrany prírody 
 							<button type="button" onclick="setConfirm (loadArticle, 'Nahraj článok', 'Článok nie je uložený, všetky zmeny budú zahodené. Chcete napriek tomu pokračovať?');">Nahrať článok</button>
 						</div>
 						<div>
+							<button type="button" onclick="setConfirm (loadPubArticle, 'Nahraj publikovaný článok', 'Článok nie je uložený, všetky zmeny budú zahodené. Chcete napriek tomu pokračovať?');">Nahrať publikovaný článok</button>
+						</div>
+						<div>
+							<button type="button" onclick="setConfirm (delArticle, 'Zmaž článok', 'Článok nie je uložený, všetky zmeny budú zahodené. Chcete napriek tomu pokračovať?');">Zmazať článok</button>
+						</div>
+						<div>
+							<button type="button" onclick="setConfirm (delPubArticle, 'Zmaž publikovaný článok', 'Článok nie je uložený, všetky zmeny budú zahodené. Chcete napriek tomu pokračovať?');">Zmazať publikovaný článok</button>
+						</div>
+						<div>
+							<button type="button" onclick="saveArticle();">Uložiť článok</button>
+						</div>
+						<div>
 							<button type="button" onclick="editText();">Vlož Text</button>
 						</div>
 						<div>
@@ -1116,6 +1159,9 @@ Za najväčší problém považuje Andrej Kovarik zo Štátnej ochrany prírody 
 						</div>
 						<div>
 							<button type="button" onclick="removePicture(0);">Zmaž obrázky</button>
+						</div>
+						<div>
+							<button type="button" onclick="setConfirm (closeApp, 'Návrat na domovskú stránku', 'Článok nie je uložený, všetky zmeny budú zahodené. Chcete napriek tomu pokračovať?');">Návrat na domovskú stránku</button>
 						</div>
 					</div>
 				</div>

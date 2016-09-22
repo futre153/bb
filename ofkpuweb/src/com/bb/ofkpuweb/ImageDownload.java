@@ -60,7 +60,7 @@ public class ImageDownload extends Core {
 			//response.setStatus(HTTP_OK);
 		}
 		catch (Exception e) {
-			//response.sendError(NOT_FOUND);
+			response.sendError(NOT_FOUND);
 			
 		}
 		finally {

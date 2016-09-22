@@ -1,0 +1,37 @@
+package com.bb.commons;
+
+public class TempArticle extends Article {
+	
+	private long articleId = 1;
+	private long created;
+	private boolean locked;
+	
+	public TempArticle(long l) {
+		super(l);
+	}
+
+	public long getArticleId() {
+		return articleId;
+	}
+
+	public void setArticleId(long articleId) {
+		this.articleId = articleId;
+	}
+
+	public long getCreated() {
+		return created;
+	}
+
+	public void setCreated(long created) {
+		this.created = created;
+	}
+
+	public boolean isLocked() {
+		return locked;
+	}
+
+	public void setLocked(char l) {
+		this.locked = (l == '1' || l == 'Y' || l == 'y');
+	}
+
+}

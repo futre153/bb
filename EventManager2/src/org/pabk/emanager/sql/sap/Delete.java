@@ -11,7 +11,7 @@ public class Delete extends SQLSyntaxImpl {
 	protected Identifier identifier;
 	private Identifier whereCurrent;
 	protected WhereClause whereClause;
-	private boolean from = false;
+	private static boolean from = false;
 	private boolean ignoreTrigger = false;
 	private boolean nowait = false;
 	private PreparedBuffer psb;
@@ -20,7 +20,9 @@ public class Delete extends SQLSyntaxImpl {
 		super(impls);
 		psb = new PreparedBuffer();
 	}
-		
+	
+	
+	
 	public final void setWhereCurrent(Identifier whereCurrent) {
 		this.whereCurrent = whereCurrent;
 	}
@@ -36,6 +38,18 @@ public class Delete extends SQLSyntaxImpl {
 	public PreparedBuffer getPreparedBuffer() {
 		return psb;
 	}
+	public static final boolean isFrom() {
+		return from;
+	}
+
+
+
+	public static final void setFrom(boolean from) {
+		Delete.from = from;
+	}
+
+
+
 	@Override
 	public String toSQLString(PreparedBuffer psb) throws SQLException {
 		if(psb == null) {
