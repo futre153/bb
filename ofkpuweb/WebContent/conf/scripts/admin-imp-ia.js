@@ -39,6 +39,8 @@ var mgid;
 var pdtt;
 var emel;
 var emte;
+var amel;
+var amte;
 var save;
 var coel;
 var cote;
@@ -76,7 +78,8 @@ function initDialogFrame(dialogFrameClass, dialogFrameCaptionId) {
 	dfel = document.getElementsByClassName(dialogFrameClass)[0];
 	dfcp = document.getElementById (dialogFrameCaptionId);
 }
-function init(dialogFrameClass, dialogFrameCaptionId, textareaId, textDialogFrameClass, textTextareaId, articleCaptionClass, articleCreationClass, articleAuthorClass, articleTextClass, articleFirstLineClass, articleLineClass, articleImageUrl, inputCaptionName, inputAuthotName, inputCreationName, inputModifiedName, inputPublishedName, inputIdName, inputPicturesName, inputTextName, inputActionName, inputArticleTmpId, inputArticlePublishedId, pictureDialogClass, pictureTBodyClass, pictureGalleriesSliderClass, pictureActiveGalleryClass, pictureNotActiveGalleryClass, pictureDeleteText, maxGalleries, errorMessageClass, errorMessageTextClass, errorMessage, confirmMessageClass, confirmMessageTextClass, confirmButtonClass, tmpArticlesClass, tmpArticlesName, tmpArticlesFunction, publishedArticlesClass, publishedArticlesName, publishedArticlesFunction, tmpDelArticlesClass, tmpDelArticlesName, tmpDelArticlesFunction, publishedDelArticlesClass, publishedDelArticlesName, publishedDelArticlesFunction, articlesSplitChar, articlesImageSrc, articlesDelImageSrc, actionNewArticle, actionLoadTmpArticle, actionLoadPublishedArticle, actionDelTmpArticle, actionDelPublishedArticle, actionSaveArticle, homePage) {
+function init(dialogFrameClass, dialogFrameCaptionId, textareaId, textDialogFrameClass, textTextareaId, articleCaptionClass, articleCreationClass, articleAuthorClass, articleTextClass, articleFirstLineClass, articleLineClass, articleImageUrl, inputCaptionName, inputAuthotName, inputCreationName, inputModifiedName, inputPublishedName, inputIdName, inputPicturesName, inputTextName, inputActionName, inputArticleTmpId, inputArticlePublishedId, pictureDialogClass, pictureTBodyClass, pictureGalleriesSliderClass, pictureActiveGalleryClass, pictureNotActiveGalleryClass, pictureDeleteText, maxGalleries, errorMessageClass, errorMessageTextClass, errorMessage, adviceMessageClass, adviceMessageTextClass, adviceMessage, confirmMessageClass, confirmMessageTextClass, confirmButtonClass, tmpArticlesClass, tmpArticlesName, tmpArticlesFunction, publishedArticlesClass, publishedArticlesName, publishedArticlesFunction, tmpDelArticlesClass, tmpDelArticlesName, tmpDelArticlesFunction, publishedDelArticlesClass, publishedDelArticlesName, publishedDelArticlesFunction, articlesSplitChar, articlesImageSrc, articlesDelImageSrc, actionNewArticle, actionLoadTmpArticle, actionLoadPublishedArticle, actionDelTmpArticle, actionDelPublishedArticle, actionSaveArticle, homePage) {
+	save = 1;
 	initDialogFrame(dialogFrameClass, dialogFrameCaptionId);
 	initTextarea (textareaId);
 	initTextDialog (textDialogFrameClass, textTextareaId);
@@ -85,13 +88,13 @@ function init(dialogFrameClass, dialogFrameCaptionId, textareaId, textDialogFram
 	initPictureGallery(pictureDialogClass, pictureTBodyClass, pictureGalleriesSliderClass, pictureActiveGalleryClass, pictureNotActiveGalleryClass, maxGalleries);
 	initConfirmMessage(confirmMessageClass, confirmMessageTextClass, confirmButtonClass);
 	initErrorMessage(errorMessageClass, errorMessageTextClass, errorMessage);
+	initAdviceMessage(adviceMessageClass, adviceMessageTextClass, adviceMessage);
 	initActions(actionNewArticle, actionLoadTmpArticle, actionLoadPublishedArticle, actionDelTmpArticle, actionDelPublishedArticle, actionSaveArticle);
 	initTmpArticles (tmpArticlesClass, tmpArticlesName, tmpArticlesFunction, publishedArticlesClass, publishedArticlesName, publishedArticlesFunction, articlesSplitChar, articlesImageSrc);
 	initDelTmpArticles (tmpDelArticlesClass, tmpDelArticlesName, tmpDelArticlesFunction, publishedDelArticlesClass, publishedDelArticlesName, publishedDelArticlesFunction, articlesDelImageSrc);
 	reloadArticle();
 	returnHTML(inte.value);
 	hpag = homePage;
-	save = 1;
 }
 
 function initActions(actionNewArticle, actionLoadTmpArticle, actionLoadPublishedArticle, actionDelTmpArticle, actionDelPublishedArticle, actionSaveArticle) {
@@ -113,17 +116,36 @@ function initErrorMessage(errorMessageClass, errorMessageTextClass, errorMessage
 	emel = document.getElementsByClassName(errorMessageClass)[0];
 	emte = document.getElementsByClassName(errorMessageTextClass)[0].getElementsByTagName("DIV")[0];
 	if(errorMessage != null && errorMessage.length > 0) {
-		dislayErrorMessage(errorMessage);
+		displayErrorMessage(convertToUtf8 (atob(errorMessage)));
+		save = 0;
 	}
 }
 
-function dislayErrorMessage(errorMessage) {
+function initAdviceMessage(adviceMessageClass, adviceMessageTextClass, adviceMessage) {
+	amel = document.getElementsByClassName(adviceMessageClass)[0];
+	amte = document.getElementsByClassName(adviceMessageTextClass)[0].getElementsByTagName("DIV")[0];
+	if(adviceMessage != null && adviceMessage.length > 0) {
+		displayAdviceMessage(convertToUtf8 (atob(adviceMessage)));
+	}
+}
+
+function displayErrorMessage(errorMessage) {
 	emte.textContent = errorMessage;
 	emel.style.display = "block";
 }
 
+function displayAdviceMessage(advice) {
+	amte.textContent = advice;
+	amel.style.display = "block";
+}
+
+
 function returnError() {
 	emel.style.display = "";
+}
+
+function returnAdvice() {
+	amel.style.display = "";
 }
 
 function initPictureGallery(pictureDialogClass, pictureTBodyClass, pictureGalleriesSliderClass, pictureActiveGalleryClass, pictureNotActiveGalleryClass, pictureDeleteText, maxGalleries) {
@@ -189,7 +211,7 @@ function getText () {
 		}
 		text += elems[i].innerHTML;
 	}
-	return text;
+	return text.substring(24);
 }
 
 function returnTextDialogValue() {
@@ -394,7 +416,8 @@ function loadPublishedArticle(id) {
 
 function saveArticle() {
 	inac.value = acsa;
-	inte = getText();
+	inte.value = getText();
+	//window.alert(inte.value);
 	form.submit();
 }
 

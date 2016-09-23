@@ -11,7 +11,9 @@
 	<entry key="ia.dialog.caption.caption">Zadaj názov článku</entry>
 	<entry key="ia.dialog.caption.button.text">OK</entry>
 	<entry key="ia.dialog.error.caption">Chybové hlásenie</entry>
+	<entry key="ia.dialog.advice.caption">Oznámenie</entry>
 	<entry key="ia.dialog.error.button.text">OK</entry>
+	<entry key="ia.dialog.advice.button.text">OK</entry>
 	<entry key="ia.dialog.confirm.caption">Varovanie</entry>
 	<entry key="ia.dialog.confirm.buttonConfirm.text">Potvrdiť</entry>
 	<entry key="ia.dialog.confirm.buttonCancel.text">Zrušiť</entry>
@@ -70,4 +72,10 @@
 	<entry key="ia.error.actionNotDefined">Akcia %s nie je definovaná</entry>
 	<entry key="ia.error.publishedIdNotDefined">Index publikovaného článku nie je definovaný</entry>
 	<entry key="ia.error.publishedIdNotFound">Článok s indexom %d nebol nájdený</entry>
+	<entry key="ia.advice.newArticle">Nový článok bol úspešne otvorený</entry>
+	<entry key="ia.advice.loadTempArticle">Dočasný článok čislo %s bol úspešne otvorený</entry>
+	<entry key="ia.advice.loadPublishedArticle">Publikovaný článok čislo %s bol úspešne otvorený a bol presunutý do dočasného priečinku pod číslom %s</entry>
+	<entry key="ia.error.IntegrityFails">Integrita aplikácie bola narušená. Pravdepodobne bola použitá funkcia back (návrat) vo Vašom prehliadači alebo bola stlačená klávesa Backspace. Prosím vyvarujte sa v budúcnosti použitiu týchto funkcionalít. Všetky neuložené zmeny sú stratené a bude otvorený nový článok na editáciu.</entry>
+	<entry key="ia.advice.saveArticle">Dočasný článok číslo %s bol úspešne uložený</entry>
+	<entry key="ia.error.saveFails">Uloženie článko číslo %s zlyhalo.</entry>
 </properties>

@@ -5,7 +5,6 @@ import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Base64;
 import java.util.Properties;
 
@@ -58,11 +57,11 @@ public class ImportPictures extends Core {
 	private static final String TEXT_TYPE = "text";
 	private static final String DEFAULT_GALLERY_ID_KEY = "ip.default.galleryId";
 	private static final String MAX_OPTION_LENGHT_KEY = "ip.maxOptionLength";
-	private static final String DEFAULT_ARTICLE_ID_KEY = "ip.default.articleId";
+	//private static final String DEFAULT_ARTICLE_ID_KEY = "ip.default.articleId";
 	private static final String COLSPAN_ATT_NAME = "colspan";
 	private static final String ID_TEXT_KEY = "ip.id.text";
 	private static final String GALLERY_ID_TEXT_KEY = "ip.galleryId.text";
-	private static final String ARTICLE_ID_TEXT_KEY = "ip.articleId.text";
+	//private static final String ARTICLE_ID_TEXT_KEY = "ip.articleId.text";
 	private static final String DESCRIPTION_TEXT_KEY = "ip.description.text";
 	private static final String TYPE_SUBMIT = "submit";
 	
@@ -235,11 +234,6 @@ public class ImportPictures extends Core {
 					getOptionIndex(props.getProperty(Core.DB_PHOTO_GALLERIES_ID_KEY), rows, props.getProperty(DEFAULT_GALLERY_ID_KEY), p[4]),
 					a != ACT_LOAD);
 			rows = Utils.getAllRows(props, props.getProperty(Core.DB_ARTICLES_KEY), con);
-			Select aid = getSelect(AID_PARAM,
-					getStringsFromStrings(rows, props.getProperty(Core.DB_ARTICLES_CAPTION_KEY), len),
-					getStringsFromLongs(rows, props.getProperty(Core.DB_ARTICLES_ID_KEY), len),
-					getOptionIndex(props.getProperty(Core.DB_ARTICLES_ID_KEY), rows, props.getProperty(DEFAULT_ARTICLE_ID_KEY), p[5]),
-					a != ACT_LOAD);
 			Input mim = getInput(MIM_PARAM, HIDDEN_TYPE, p[6], a != ACT_LOAD);
 			Input des = getInput(DES_PARAM, TEXT_TYPE, p[7], a != ACT_LOAD);
 			
@@ -253,7 +247,7 @@ public class ImportPictures extends Core {
 			buttons.appendChild(Core.getInstance(null, null, TYPE_BUTTON, props.getProperty(SUBMIT_RETURN_TEXT_KEY), String.format(props.getProperty(SUBMIT_RETURN_ONCLICK_KEY), request.getContextPath()), false));
 			work.addRow(new Tag[]{TextTag.getInstanceNBSP(props.getProperty(ID_TEXT_KEY)), pid, TextTag.NBSP});
 			work.addRow(new Tag[]{TextTag.getInstanceNBSP(props.getProperty(GALLERY_ID_TEXT_KEY)), gid, TextTag.NBSP});
-			work.addRow(new Tag[]{TextTag.getInstanceNBSP(props.getProperty(ARTICLE_ID_TEXT_KEY)), aid, TextTag.NBSP});
+			
 			work.addRow(new Tag[]{TextTag.getInstanceNBSP(props.getProperty(DESCRIPTION_TEXT_KEY)), des, TextTag.NBSP});
 			work.addRow(new Tag[]{Core.getInstance(ACT_PARAM, Integer.toString(a), TYPE_SUBMIT, props.getProperty(SUBMIT_TEXT_KEY), null, !(a == ACT_LOAD)),
 					Core.getInstance(ACT_PARAM, Integer.toString(a), TYPE_SUBMIT, props.getProperty(SUBMIT_ADD_KEY), null, !(a == ACT_ADD_)),
@@ -322,7 +316,6 @@ public class ImportPictures extends Core {
 			blob = con.createBlob();
 			long pid = parseLong (p[2], -1);
 			long gid = parseLong (p[4], -1);
-			long aid = parseLong (p[5], -1);
 			String mim = p[6];
 			String des = p[7];
 			int index = p[3].indexOf(COMMA_CHAR);
@@ -337,10 +330,6 @@ public class ImportPictures extends Core {
 			if(gid >= 0) {
 				v.add(gid);
 				c.add(props.getProperty(Core.DB_PHOTOS_GALLERY_ID_KEY));
-			}
-			if(aid >= 0) {
-				v.add(aid);
-				c.add(props.getProperty(Core.DB_PHOTOS_ARTICLE_ID_KEY));
 			}
 			if(mim != null && mim.length() > 0) {
 				v.add(mim);

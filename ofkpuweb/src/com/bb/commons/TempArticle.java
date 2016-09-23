@@ -1,5 +1,7 @@
 package com.bb.commons;
 
+import java.sql.Timestamp;
+
 public class TempArticle extends Article {
 	
 	private long articleId = 1;
@@ -33,5 +35,7 @@ public class TempArticle extends Article {
 	public void setLocked(char l) {
 		this.locked = (l == '1' || l == 'Y' || l == 'y');
 	}
-
+	public Timestamp getPublished() {
+		return articleId > 0 ? new Timestamp (getCreated()) : null;
+	}
 }

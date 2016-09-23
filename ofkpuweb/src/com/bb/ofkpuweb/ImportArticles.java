@@ -1,6 +1,7 @@
 package com.bb.ofkpuweb;
 
 import java.io.IOException;
+import java.sql.Clob;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -54,7 +55,7 @@ public class ImportArticles extends Core {
 	private static final String STYLE_URL_KEY = "ia.style.url";
 	private static final String SCRIPT_SOURCE_KEY = "ia.script.source";
 	private static final String IA_DATEFORMAT_KEY = "ia.dateformat";
-	private static final String FORM_ATT_NAME = "ia.form";
+	private static final String IA_FORM_ATT_NAME = "ia.form";
 	private static final char IA_INPUT_VALUE_SEPARATOR = Core.TILDE_CHAR;
 	private static final String IA_PUBLISHED_ARTICLE_PARAM_NAME = "arp";
 	private static final String IA_TEMP_ARTICLE_PARAM_NAME = "art";
@@ -88,8 +89,20 @@ public class ImportArticles extends Core {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Object form = request.getSession().getAttribute(FORM_ATT_NAME);
-		String[] tags = form == null ? newArticle(request, getProperties()) : ((String[]) form);
+		Object form = request.getSession().getAttribute(IA_FORM_ATT_NAME);
+		String[] tags = form == null ? newArticle(new String[PARAM_LENGTH], request, getProperties()) : ((String[]) form);
+		request.getSession().removeAttribute(IA_FORM_ATT_NAME);
+		doPage(request, response, tags);
+		super.doGet(request, response);
+	}
+	
+	/**
+	 * @throws  
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String[] tags = getParameters(request);
+		actionProcessor(tags, request, getProperties());
 		doPage(request, response, tags);
 		super.doGet(request, response);
 	}
@@ -100,7 +113,7 @@ public class ImportArticles extends Core {
 			+ "\"%s\" ,\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", "
 			+ "\"%s\" ,\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", "
 			+ "\"%s\" ,\"%s\", \"%s\", \"%s\", \"%s\", %d, "
-			+ "\"%s\" ,\"%s\", %s, \"%s\", \"%s\", \"%s\", "
+			+ "\"%s\" ,\"%s\", %s, \"%s\" ,\"%s\", %s, \"%s\", \"%s\", \"%s\", "
 			+ "\"%s\" ,\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", "
 			+ "\"%s\" ,\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", "
 			+ "\"%s\" ,\"%s\", \"%s\", \"%s\", \"%s\", \"%s\", "
@@ -119,7 +132,7 @@ public class ImportArticles extends Core {
 				ACP_PARAM, AAU_PARAM, ADC_PARAM, ALM_PARAM, APU_PARAM, AID_PARAM,
 				API_PARAM, ATE_PARAM, AAC_PARAM, ATI_PARAM, ASI_PARAM, IA_PIC_FRM_CLASS,
 				IA_PIC_BDY_CLASS, IA_PIC_GLS_CLASS, IA_PIC_AGA_CLASS, IA_PIC_NGA_CLASS, props.getProperty(CONTENT_DELETE_PICTURE_TEXT_KEY), 2,
-				IA_ERR_FRM_CLASS, IA_ERR_MSG_CLASS, params[0] == null || params[0].length() == 0 ? null : (Core.DOUBLE_QUOTE_CHAR + params[0] + Core.DOUBLE_QUOTE_CHAR) , IA_CON_FRM_CLASS, IA_CON_MSG_CLASS, IA_CON_BUT_CLASS,
+				IA_ERR_FRM_CLASS, IA_ERR_MSG_CLASS, params[0] == null || params[0].length() == 0 ? null : (Core.DOUBLE_QUOTE_CHAR + params[0] + Core.DOUBLE_QUOTE_CHAR), IA_ADV_FRM_CLASS, IA_ADV_MSG_CLASS, params[13] == null || params[13].length() == 0 ? null : (Core.DOUBLE_QUOTE_CHAR + params[13] + Core.DOUBLE_QUOTE_CHAR), IA_CON_FRM_CLASS, IA_CON_MSG_CLASS, IA_CON_BUT_CLASS,
 				IA_ART_FRM_CLASS, IA_TEMP_ARTICLE_PARAM_NAME, CONTENT_LOAD_TEMP_ARTICLE_FN, IA_ARP_FRM_CLASS, IA_PUBLISHED_ARTICLE_PARAM_NAME, CONTENT_LOAD_PUBLISHED_ARTICLE_2_FN,
 				IA_ART_DEL_FRM_CLASS, IA_TEMP_ARTICLE_PARAM_NAME, CONTENT_REMOVE_TEMP_ARTICLE_FN, IA_ARP_DEL_FRM_CLASS, IA_PUBLISHED_ARTICLE_PARAM_NAME, CONTENT_REMOVE_PUBLISHED_ARTICLE_2_FN,
 				IA_INPUT_VALUE_SEPARATOR, props.getProperty(CONTENT_OPEN_IMAGE_URL_KEY), props.getProperty(CONTENT_DELETE_IMAGE_URL_KEY), ACA_NEW_ARTICLE, ACA_LOAD_TEMP_ARTICLE, ACA_LOAD_PUBLISHED_ARTICLE,
@@ -164,6 +177,15 @@ public class ImportArticles extends Core {
 	private static final String IA_ERR_BDY_CLASS = "ia-err-bdy";
 	private static final String IA_ERR_2_CLASS = "ia-err-2";
 	private static final String IA_ERR_FRM_CLASS = "ia-err-frm";
+	private static final String DIALOG_ADVICE_CAPTION_KEY = "ia.dialog.advice.caption";
+	private static final String DIALOG_ADVICE_BUTTON_TEXT_KEY = "ia.dialog.advice.button.text";
+	private static final String DIALOG_ADVICE_RETURN_FN = "returnAdvice();";
+	private static final String IA_ADV_MSG_CLASS = "ia-adv-msg";
+	private static final String IA_ADV_BUT_CLASS = "ia-adv-but";
+	private static final String IA_ADV_CAP_CLASS = "ia-adv-cap";
+	private static final String IA_ADV_BDY_CLASS = "ia-adv-bdy";
+	private static final String IA_ADV_2_CLASS = "ia-adv-2";
+	private static final String IA_ADV_FRM_CLASS = "ia-adv-frm";
 	private static final String DIALOG_CONFIRM_CAPTION_KEY = "ia.dialog.confirm.caption";
 	private static final String DIALOG_CONFIRM_BUTTON_CONFIRM_TEXT_KEY = "ia.dialog.confirm.buttonConfirm.text";
 	private static final String DIALOG_CONFIRM_BUTTON_CANCEL_TEXT_KEY = "ia.dialog.confirm.buttonCancel.text";
@@ -275,6 +297,7 @@ public class ImportArticles extends Core {
 	private static final String CONTENT_REMOVE_PICTURES_FN = "removePicture(0);";
 	private static final String EDITOR_HEADER_NO_PUBLISHED_KEY = "ia.editor.noPublished";
 	private static final String CONTENT_PUBLISH_ARTICLE_FN = "publishArticle();";
+	private static final String IA_FORM_ID = "ia-form";
 	
 	private static Tag getRightContent(Properties props) {
 		Tag rban = Core.getDiv(IA_CNT_RBAN_CLASS, Core.getDiv(null, Core.getInstance(null, null, TYPE_BUTTON, props.getProperty(CONTENT_NEW_ARTICLE_BUTTON_TEXT_KEY), String.format(CONTENT_CONFIRM_FN, CONTENT_NEW_ARTICLE_FN, props.getProperty(CONTENT_CONFIRM_NEW_ARTICLE_BUTTON_TEXT_KEY), props.getProperty(CONTENT_CONFIRM_NEW_ARTICLE_MESSAGE_KEY)), false)));
@@ -305,6 +328,7 @@ public class ImportArticles extends Core {
 	private static Tag getImportArticlesForm(Properties props, String[] params, Connection con) throws IOException, SQLException {
 		Tag form = Form.getInstance(null, props.getProperty(FORM_METHOD_KEY));
 		form.setAttribute(ENCTYPE_ATT_NAME, props.getProperty(FORM_ENCTYPE_KEY));
+		form.setAttribute(ID_ATT_NAME, IA_FORM_ID);
 		Table header = Table.getInstance(props.getProperty(EDITOR_CAPTION_KEY), 3, 1, null);
 		header.setColgroup(IA_HDR_COL_1_CLASS, IA_HDR_COL_2_CLASS, IA_HDR_COL_3_CLASS);
 		header.setBody(TextTag.getInstanceNBSP(props.getProperty(EDITOR_HEADER_CAPTION_KEY)), params[1] == null ? null : TextTag.getInstance(params[1]), getHeaderIcon(props.getProperty(EDITOR_HEADER_ICON_SOURCE_KEY), String.format(EDITOR_HEADER_EDIT_CAPTION_FN, IA_HDR_ACP_ID, ACP_PARAM, DIALOG_CAPTION_MAX, props.getProperty(EDITOR_HEADER_CAPTION_TEXT_KEY))));
@@ -336,7 +360,8 @@ public class ImportArticles extends Core {
 		form.appendChild(Input.getInstance(AAC_PARAM, HIDDEN_TYPE, params[9]));
 		form.appendChild(Input.getInstance(ATI_PARAM, HIDDEN_TYPE, params[10]));
 		form.appendChild(Input.getInstance(ASI_PARAM, HIDDEN_TYPE, params[11]));
-		form.appendChild(Input.getInstance(ACA_PARAM, HIDDEN_TYPE, params[12]));
+		//form.appendChild(Input.getInstance(ACA_PARAM, HIDDEN_TYPE, params[12]));
+		form.appendChild(Input.getInstance(ASE_PARAM, HIDDEN_TYPE, params[14]));
 		form.appendChild(Core.getDiv(IA_HDR_FRM_CLASS, Core.getDiv(IA_HDR_FRM_2_CLASS, header)));
 		Tag content = Core.getDiv(IA_CNT_FRM_CLASS, Core.getDiv(IA_CNT_LBAN_CLASS, getLeftContent(props)));
 		content.appendChild(getRightContent(props));
@@ -352,8 +377,9 @@ public class ImportArticles extends Core {
 			options[i] = (String) rows.get(i).get(props.getProperty(Core.DB_CATEGORIES_NAME_KEY));
 			selected = aca != null && aca.equals(options[i]) && selected < 0 ? i : selected; 
 		}
-		Tag select = Select.getInstance(ACA_PARAM, options, null, selected < 0 ? 0 : selected);
+		Tag select = Select.getInstance(ACA_PARAM, options, options, selected < 0 ? 0 : selected);
 		select.setAttribute(CLASS_ATT_NAME, IA_FNT_CLASS);
+		select.setAttribute(FORM_ATT_NAME, IA_FORM_ID);
 		return select;
 	}
 
@@ -417,6 +443,19 @@ public class ImportArticles extends Core {
 		return Core.getDiv(IA_ERR_2_CLASS, table);
 	}
 	
+	private static Tag getAdviceDialog (Properties props) {
+		Table table = Table.getInstance(props.getProperty(DIALOG_ADVICE_CAPTION_KEY), 1, 2, null);
+		table.setContent(Core.getDiv(null, null), 0, 0);
+		Tag button = Core.getInstance(null, null, TYPE_BUTTON, props.getProperty(DIALOG_ADVICE_BUTTON_TEXT_KEY), DIALOG_ADVICE_RETURN_FN, false);
+		button.setAttribute(CLASS_ATT_NAME, IA_FNT_CLASS);
+		table.setContent(button, 0, 1);
+		table.getRows()[0].getCells()[0].setAttribute(CLASS_ATT_NAME, IA_ADV_MSG_CLASS);
+		table.getRows()[1].getCells()[0].setAttribute(CLASS_ATT_NAME, IA_ADV_BUT_CLASS);
+		table.getBody().setAttribute(CLASS_ATT_NAME, IA_ADV_BDY_CLASS);
+		table.getCaption().setAttribute(CLASS_ATT_NAME, IA_ADV_CAP_CLASS);
+		return Core.getDiv(IA_ADV_2_CLASS, table);
+	}
+	
 	private static Tag getCaptionDialog (Properties props) {
 		Table table = Table.getInstance(props.getProperty(DIALOG_CAPTION_CAPTION_KEY), 1, 2, null);
 		Tag textarea = Textarea.getInstance(DIALOG_CAPTION_COLS, DIALOG_CAPTION_ROWS, DIALOG_CAPTION_MAX);
@@ -463,6 +502,7 @@ public class ImportArticles extends Core {
 			body.appendChild(getDialogTag (IA_DIA_TXT_FRM_CLASS, getTextDialog(props)));
 			body.appendChild(getDialogTag (IA_DIA_FRM_CLASS, getCaptionDialog(props)));
 			body.appendChild(getDialogTag (IA_ERR_FRM_CLASS, getErrorDialog(props)));
+			body.appendChild(getDialogTag (IA_ADV_FRM_CLASS, getAdviceDialog(props)));
 			body.appendChild(getDialogTag (IA_CON_FRM_CLASS, getConfirmDialog(props)));
 			body.appendChild(getDialogTag (IA_ART_DEL_FRM_CLASS, getArticleDialog(props.getProperty(DIALOG_ARTICLE_TMP_DELETE_CAPTION_KEY), DIALOG_ARTICLE_TMP_DELETE_FN, props)));
 			body.appendChild(getDialogTag (IA_ARP_DEL_FRM_CLASS, getArticleDialog(props.getProperty(DIALOG_ARTICLE_PUB_DELETE_CAPTION_KEY), DIALOG_ARTICLE_PUB_DELETE_FN, props)));
@@ -501,15 +541,7 @@ public class ImportArticles extends Core {
 	
 	
 
-	/**
-	 * @throws  
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String[] tags = getParameters(request);
-		actionProcessor(tags, request, getProperties());
-		doGet(request, response);
-	}
+	
 	
 	private static final String ACP_PARAM = "acp";
 	private static final String AAU_PARAM = "aau";
@@ -523,6 +555,7 @@ public class ImportArticles extends Core {
 	private static final String ATI_PARAM = "ati";
 	private static final String ASI_PARAM = "asi";
 	private static final String ACA_PARAM = "aca";
+	private static final String ASE_PARAM = "ase";
 	private static final String ACA_NEW_ARTICLE = "ana";
 	private static final String ACA_LOAD_TEMP_ARTICLE = "alt";
 	private static final String ACA_LOAD_PUBLISHED_ARTICLE = "alp";
@@ -534,10 +567,16 @@ public class ImportArticles extends Core {
 	private static final char YES_CHAR = 'Y';
 	private static final char NO_CHAR = 'N';
 	private static final String ERROR_MSG_TEMP_ARTICLES_FAILED_KEY = "ia.errorMsg.tempArticleFailed";
-	private static final int PARAM_LENGTH = 13;
+	private static final int PARAM_LENGTH = 15;
 	private static final String ERROR_ACTION_NOT_DEFINED_KEY = "ia.error.actionNotDefined";
 	private static final String ERROR_PUBLISHED_ID_NOT_DEFINED_KEY = "ia.error.publishedIdNotDefined";
 	private static final String ERROR_PUBLISHED_ID_NOT_FOUND_KEY = "ia.error.publishedIdNotFound";
+	private static final String ADVICE_NEW_ARTICLE_KEY = "ia.advice.newArticle";
+	private static final String ADVICE_LOAD_TEMP_ARTICLE_KEY = "ia.advice.loadTempArticle";
+	private static final String ADVICE_LOAD_PUBLISHED_ARTICLE_KEY = "ia.advice.loadPublishedArticle";
+	private static final String ERROR_INTEGRITY_FAILS_KEY = "ia.error.IntegrityFails";
+	private static final String ADVICE_SAVE_ARTICLE_KEY = "ia.advice.saveArticle";
+	private static final String ERROR_SAVE_FAILS_KEY = "ia.error.saveFails";
 	
 	private static String[] getParameters(HttpServletRequest request) throws IOException {
 		String[] tags = new String[PARAM_LENGTH];
@@ -555,6 +594,7 @@ public class ImportArticles extends Core {
 		tags[10] = multi.getParameter(ATI_PARAM);
 		tags[11] = multi.getParameter(ASI_PARAM);
 		tags[12] = multi.getParameter(ACA_PARAM);
+		tags[14] = multi.getParameter(ASE_PARAM);
 		return tags;
 	}
 	
@@ -572,36 +612,73 @@ public class ImportArticles extends Core {
 		 * 9	import articles action name
 		 * 10	article temporary id for action processor
 		 * 11	article published id for action processor
+		 * 12	article categories
+		 * 13	advice message
+		 * 14	integrity check
 		 */
 		
 		Connection con = null;
 		try {
 			con = DBConnector.lookup(props.getProperty(DSN_KEY));
 			
-			System.out.println(Arrays.toString(tags));
 			
+			Object obj = request.getSession().getAttribute(IA_FORM_ATT_NAME);
+			String[] params = obj == null ? tags : ((String[]) obj);
 			
+			System.out.println("parameters = " +  Arrays.toString(tags));
+			System.out.println("attributes = " + Arrays.toString(params));
+			String key = getNewIntegrityKey (tags[14], params[14]);
+			if(params[14] == null || tags[14] == null || ! tags[14].equals(params[14])) {
+				tags[14] = key;
+				unlockTempArticle(con, props, tags[6], true);
+				newArticle(tags, request, props);
+				tags[0] = props.getProperty(ERROR_INTEGRITY_FAILS_KEY);
+				throw new IOException();
+			}
+			tags[14] = key;
 			if(tags[9].equals(ACA_NEW_ARTICLE)) {
 				unlockTempArticle(con, props, tags[6], true);
-				tags = newArticle(request, props);
+				newArticle(tags, request, props);
+				tags[13] = props.getProperty(ADVICE_NEW_ARTICLE_KEY);
 			}
 			else if (tags[9].equals(ACA_LOAD_TEMP_ARTICLE)) {
 				loadTempArticle(tags, props, con);
+				tags[13] = String.format(props.getProperty(ADVICE_LOAD_TEMP_ARTICLE_KEY), tags[10]);
 			}
 			else if (tags[9].equals(ACA_LOAD_PUBLISHED_ARTICLE)) {
 				loadPublishedArticle(tags, props, con);
+				tags[13] = String.format(props.getProperty(ADVICE_LOAD_PUBLISHED_ARTICLE_KEY), tags[11], tags[10]);
+			}
+			else if (tags[9].equals(ACA_SAVE_ARTICLE)) {
+				saveArticle(tags, props, con);
+				tags[13] = String.format(props.getProperty(ADVICE_SAVE_ARTICLE_KEY), tags[10]);
 			}
 			else {
 				tags[0] = String.format(props.getProperty(ERROR_ACTION_NOT_DEFINED_KEY), tags[9]);
 			}
 		}
 		catch (Exception e) {
-			request.getSession().removeAttribute(FORM_ATT_NAME);
-			tags[0] = e.getMessage();
+			e.printStackTrace();
+			tags[0] = tags[0] == null || tags[0].length() == 0 ? e.getMessage() : tags[0];
+			tags[0] = tags[0] == null || tags[0].length() == 0 ? e.toString() : tags[0];
 		}
 		finally {
 			tags[9] = null;
-			request.getSession().setAttribute(FORM_ATT_NAME, tags);
+			Encoder enc = Base64.getEncoder();
+			String charset = props.getProperty(ENCODING_KEY);
+			try {
+				tags [0] = tags[0] == null || tags[0].length() == 0 ? tags[0] : enc.encodeToString(tags[0].getBytes(charset));
+			}
+			catch (Exception e) {
+				tags[0] = "Unknown Error";
+			}
+			try {
+				tags [13] = tags[13] == null || tags[13].length() == 0 ? tags[13] : enc.encodeToString(tags[13].getBytes(charset));
+			}
+			catch (Exception e) {
+				tags[13] = "Unknown Error";
+			}
+			request.getSession().setAttribute(IA_FORM_ATT_NAME, tags);
 			if(con != null) {
 				try {
 					con.close();
@@ -614,6 +691,87 @@ public class ImportArticles extends Core {
 		return tags;
 	}
 	
+	private static void saveArticle(String[] tags, Properties props, Connection con) throws Exception {
+		SchemaName schema = new SchemaName(new Identifier(props.getProperty(DB_KEY)));
+		TableName tableName = new TableName(schema, new Identifier(props.getProperty(Core.DB_ARTICLES_TMP_KEY)));
+		if(tags[6] == null || tags[6].length() == 0) {
+			String[] cols = {
+				props.getProperty(Core.DB_ARTICLES_TMP_CAPTION_KEY),
+				props.getProperty(Core.DB_ARTICLES_TMP_CONTENT_KEY),
+				props.getProperty(Core.DB_ARTICLES_TMP_CREATED_KEY),
+				props.getProperty(Core.DB_ARTICLES_TMP_CATEGORY_ID_KEY),
+				props.getProperty(Core.DB_ARTICLES_TMP_PHOTO_IDS_KEY),
+				props.getProperty(Core.DB_ARTICLES_TMP_AUTHOR_KEY),
+				props.getProperty(Core.DB_ARTICLES_TMP_LOCKED_KEY),
+			};
+			Clob clob = con.createClob();
+			clob.setString(1, tags[8]);
+			Timestamp created = new Timestamp(iaDateFormat.parse(tags[3]).getTime());
+			long categoryId = Utils.getCategoryId(con, props, tags[12]);
+			String locked = new String(new char[]{YES_CHAR});
+			Object[] values = new Object[] {tags[1], clob, created, categoryId, tags[7], tags[2], locked};
+			boolean commit = false;
+			try {
+				if(DBConnector.insert(con, DBConnector.createInsert(tableName, values, cols), false) != 1) {
+					throw new IOException (String.format(props.getProperty(ERROR_SAVE_FAILS_KEY), "XX"));
+				}
+				CompPred comp = new CompPred (new Object[] {
+						new Identifier(props.getProperty(Core.DB_ARTICLES_TMP_CAPTION_KEY)),
+						new Identifier(props.getProperty(Core.DB_ARTICLES_TMP_CREATED_KEY)),
+						new Identifier(props.getProperty(Core.DB_ARTICLES_TMP_CATEGORY_ID_KEY)),
+						new Identifier(props.getProperty(Core.DB_ARTICLES_TMP_PHOTO_IDS_KEY)),
+						new Identifier(props.getProperty(Core.DB_ARTICLES_TMP_AUTHOR_KEY)),
+						new Identifier(props.getProperty(Core.DB_ARTICLES_TMP_LOCKED_KEY))
+					}, new Object[] {tags[8], created, categoryId, tags[7], tags[3], locked}, CompPred.EQUAL);
+				Rows rows = DBConnector.select(con, DBConnector.createSelect().addFromClause(tableName).addTableSpec(new WhereClause(comp)));
+				if(rows.size() < 1) {
+					throw new IOException (String.format(props.getProperty(ERROR_SAVE_FAILS_KEY), "XX"));
+				}
+				tags[6] = Long.toString ((long)rows.get(0).get(props.getProperty(Core.DB_ARTICLES_TMP_ID_KEY)));
+				tags[10] = tags[6];
+			}
+			catch (Exception e) {
+				con.rollback();
+				e.printStackTrace();
+			}
+			finally {
+				con.commit();
+				Utils.freeXlob(clob);
+				con.setAutoCommit(commit);
+			}
+		}
+		else {
+			String[] cols = {
+				props.getProperty(Core.DB_ARTICLES_TMP_CAPTION_KEY),
+				props.getProperty(Core.DB_ARTICLES_TMP_CONTENT_KEY),
+				props.getProperty(Core.DB_ARTICLES_TMP_MODIFIED_KEY),
+				props.getProperty(Core.DB_ARTICLES_TMP_CATEGORY_ID_KEY),
+				props.getProperty(Core.DB_ARTICLES_TMP_PHOTO_IDS_KEY),
+				props.getProperty(Core.DB_ARTICLES_TMP_AUTHOR_KEY),
+			};
+			Clob clob = con.createClob();
+			clob.setString(1, tags[8]);
+			Object[] values = new Object[] {tags[1], clob, new Timestamp(new Date().getTime()), Utils.getCategoryId(con, props, tags[12]), tags[7], tags[2]};
+			WhereClause whereClause = new WhereClause (new CompPred(new Object[]{new Identifier(props.getProperty(Core.DB_ARTICLES_TMP_ID_KEY))}, new Object[]{Long.parseLong(tags[10])}, CompPred.EQUAL));
+			if(DBConnector.update(con, DBConnector.createUpdate(tableName, cols, values, whereClause)) != 1) {
+				tags[0] = String.format(props.getProperty(ERROR_SAVE_FAILS_KEY), tags[10]);
+				Utils.freeXlob(clob);
+			}
+			else {
+				Utils.freeXlob(clob);
+			}
+		}
+	}
+
+	private static String getNewIntegrityKey(String tag, String att) {
+		String key = null;
+		do {
+			key = Long.toString(new Date().getTime()) + Long.toString((long) Math.ceil((Math.random() * 100000)));
+		}
+		while ((tag != null && tag.equals(key)) || (att != null && att.equals(key)));
+		return key;
+	}
+
 	private static void loadPublishedArticle(String[] tags, Properties props, Connection con) throws IOException {
 		long index = -1;
 		Article article = null;
@@ -674,6 +832,7 @@ public class ImportArticles extends Core {
 						tags[6] = Long.toString(articles[0].getIndex());
 						tags[7] = Article.getPhotoIds(articles[0].getPhotos(), Article.PHOTO_IDS_SEPARATOR);
 						tags[8] = articles[0].getContent();
+						tags[9] = null;
 						tags[10] = Long.toString(articles[0].getIndex());
 						tags[11] = Long.toString(articles[0].getArticleId());
 						tags[12] = Utils.getCategoryName(con, props, articles[0].getCategoryId());
@@ -719,9 +878,12 @@ public class ImportArticles extends Core {
 			tags[2] = articles[0].getAuthor();
 			tags[3] = iaDateFormat.format(new Date(articles[0].getCreated()));
 			tags[4] = iaDateFormat.format(new Date(articles[0].getModified()));
+			Timestamp pub = articles[0].getPublished();
+			tags[5] = pub == null ? null : iaDateFormat.format(pub.getTime());
 			tags[6] = Long.toString(articles[0].getIndex());
 			tags[7] = Article.getPhotoIds(articles[0].getPhotos(), Article.PHOTO_IDS_SEPARATOR);
 			tags[8] = articles[0].getContent();
+			tags[9] = null;
 			
 		}
 	}
@@ -773,8 +935,7 @@ public class ImportArticles extends Core {
 		return temp;
 	}
 
-	private static String[] newArticle(HttpServletRequest request, Properties props) throws IOException {
-		String [] tags = new String[PARAM_LENGTH];
+	private static String[] newArticle(String tags[], HttpServletRequest request, Properties props) throws IOException {
 		tags[1] = null;
 		tags[2] = request.getRemoteUser();
 		tags[3] = iaDateFormat.format(new Date());

@@ -100,7 +100,6 @@ abstract class Core extends HttpServlet {
 	
 	protected static final String DB_PHOTOS_KEY = "core.ofkpudb.photos";
 	protected static final String DB_PHOTOS_ID_KEY = "core.ofkpudb.photos.id";
-	protected static final String DB_PHOTOS_ARTICLE_ID_KEY = "core.ofkpudb.photos.articleId";
 	protected static final String DB_PHOTOS_GALLERY_ID_KEY = "core.ofkpudb.photos.galleryId";
 	protected static final String DB_PHOTOS_PHOTO_KEY = "core.ofkpudb.photos.photo";
 	protected static final String DB_PHOTOS_DESCRIPTION_KEY = "core.ofkpudb.photos.description";
@@ -290,6 +289,7 @@ abstract class Core extends HttpServlet {
 	protected static final String ONMOUSEOVER_ATT_NAME = "onmouseover";
 	protected static final String ONMOUSEOUT_ATT_NAME = "onmouseout";
 	protected static final String DISABLED_ATT_NAME = "disabled";
+	protected static final String FORM_ATT_NAME = "form";
 	protected static final String EMPTY = "";
 	private static final String ONLOAD_ATT_NAME = "onload";
 	protected static final String STYLE_ATT_NAME = "style";

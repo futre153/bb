@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.Reader;
+import java.io.StringReader;
 import java.sql.Blob;
 import java.sql.Clob;
 import java.sql.Connection;
@@ -40,6 +41,7 @@ final class Utils {
 	
 	private static final Object BR = "<br/>";
 	private static final int MAX_READED_BYTES = 2048;
+	private static final int MAX_READED_CHARS = 2048;
 	
 	private Utils(){};
 		
@@ -50,7 +52,8 @@ final class Utils {
 	private static TempArticle loadTempArticleFromRow (Row row, Properties props, String charset, Connection con) throws IOException, SQLException {
 		TempArticle article = new TempArticle((long) row.get(props.getProperty(Core.DB_ARTICLES_TMP_ID_KEY)));
 		article.setCaption((String) row.get(props.getProperty(Core.DB_ARTICLES_TMP_CAPTION_KEY)));
-		article.setContent(Utils.readCharsToHtml(getClobReader(row, props.getProperty(Core.DB_ARTICLES_TMP_CONTENT_KEY), charset)));
+		//article.setContent(Utils.readCharsToHtml(getClobReader(row, props.getProperty(Core.DB_ARTICLES_TMP_CONTENT_KEY), charset)));
+		article.setContent(Utils.read(getClobReader(row, props.getProperty(Core.DB_ARTICLES_TMP_CONTENT_KEY), charset)));
 		article.setModified(((Timestamp) row.get(props.getProperty(Core.DB_ARTICLES_TMP_MODIFIED_KEY))).getTime());
 		article.setCategoryId((long) row.get(props.getProperty(Core.DB_ARTICLES_TMP_CATEGORY_ID_KEY)));
 		article.setAuthor((String) row.get(props.getProperty(Core.DB_ARTICLES_TMP_AUTHOR_KEY)));
@@ -67,7 +70,8 @@ final class Utils {
 	private static Article loadArticleFromRow (Row row, Properties props, String charset, Connection con) throws IOException, SQLException {
 		Article article = new Article((long) row.get(props.getProperty(Core.DB_ARTICLES_ID_KEY)));
 		article.setCaption((String) row.get(props.getProperty(Core.DB_ARTICLES_CAPTION_KEY)));
-		article.setContent(Utils.readCharsToHtml(getClobReader(row, props.getProperty(Core.DB_ARTICLES_CONTENT_KEY), charset)));
+		//article.setContent(Utils.readCharsToHtml(getClobReader(row, props.getProperty(Core.DB_ARTICLES_CONTENT_KEY), charset)));
+		article.setContent(Utils.read(getClobReader(row, props.getProperty(Core.DB_ARTICLES_CONTENT_KEY), charset)));
 		article.setModified(((Timestamp) row.get(props.getProperty(Core.DB_ARTICLES_MODIFIED_KEY))).getTime());
 		article.setCategoryId((long) row.get(props.getProperty(Core.DB_ARTICLES_CATEGORY_ID_KEY)));
 		article.setAuthor((String) row.get(props.getProperty(Core.DB_ARTICLES_AUTHOR_KEY)));
@@ -111,7 +115,6 @@ final class Utils {
 	
 	private static Photo loadPhotoFromRow(Row row, Properties props) {
 		Photo photo = new Photo((long) row.get(props.getProperty(Core.DB_PHOTOS_ID_KEY)));
-		photo.setArticleId((long) row.get(props.getProperty(Core.DB_PHOTOS_ARTICLE_ID_KEY)));
 		photo.setGalleryId((long) row.get(props.getProperty(Core.DB_PHOTOS_GALLERY_ID_KEY)));
 		photo.setData(row.get(props.getProperty(Core.DB_PHOTOS_PHOTO_KEY)));
 		photo.setDescription ((String) row.get(props.getProperty(Core.DB_PHOTOS_DESCRIPTION_KEY)));
@@ -150,10 +153,21 @@ final class Utils {
 		}
 		return new BufferedReader(new InputStreamReader(new ByteArrayInputStream(s.getBytes(charset)), charset));
 	}
-
-	private static String readCharsToHtml (Reader reader) throws IOException {
+	
+	private static String read (Reader reader) throws IOException {
 		StringBuffer sb = new StringBuffer();
-		BufferedReader br = new BufferedReader(reader);
+		char[] c = new char[MAX_READED_CHARS];
+		int i = -1;
+		while ((i = reader.read(c)) >= 0) {
+			sb.append(c, 0, i);
+		}
+		reader.close();
+		return sb.toString();
+	}
+	
+	public static String readCharsToHtml (String text) throws IOException {
+		StringBuffer sb = new StringBuffer();
+		BufferedReader br = new BufferedReader(new StringReader(text));
 		String line = null;
 		boolean first = true;
 		while((line = br.readLine()) != null) {
@@ -295,6 +309,14 @@ final class Utils {
 			return (String) rows.get(0).get(props.getProperty(Core.DB_CATEGORIES_NAME_KEY));
 		}
 		return null;
+	}
+
+	public static long getCategoryId(Connection con, Properties props, String name) throws SQLException {
+		Rows rows = Utils.getRows(con, props.getProperty(Core.DB_KEY), props.getProperty(Core.DB_CATEGORIES_KEY), new WhereClause(new CompPred(new Object[]{new Identifier(props.getProperty(Core.DB_CATEGORIES_NAME_KEY))}, new Object[]{name}, CompPred.EQUAL)));
+		if(rows.size() == 1) {
+			return (long) rows.get(0).get(props.getProperty(Core.DB_CATEGORIES_ID_KEY));
+		}
+		return 1;
 	}
 	
 }

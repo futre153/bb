@@ -7,7 +7,6 @@ import java.sql.SQLException;
 
 public class Photo {
 	private long id;
-	private long articleId;
 	private long galleryId;
 	private Object data;
 	private String description;
@@ -20,12 +19,6 @@ public class Photo {
 	}
 	void setId(long id) {
 		this.id = id;
-	}
-	long getArticleId() {
-		return articleId;
-	}
-	public void setArticleId(long articleId) {
-		this.articleId = articleId;
 	}
 	long getGalleryId() {
 		return galleryId;

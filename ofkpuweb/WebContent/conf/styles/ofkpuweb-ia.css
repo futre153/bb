@@ -64,6 +64,13 @@ body {
     	justify-content: center;
 
 	}
+	div.ia-adv-2 {
+		width: 500px;
+		background-color: lightblue;
+		padding: 2px;
+		border-radius: 4px;
+		border: 1px outset lightblue;
+	}
 	div.ia-err-2 {
 		width: 500px;
 		background-color: red;
@@ -78,7 +85,7 @@ body {
 		border-radius: 4px;
 		border: 1px outset green;
 	}
-	div.ia-err-frm table, div.ia-con-frm table {
+	div.ia-err-frm table, div.ia-con-frm table, div.ia-adv-frm table {
 		width: 100%;
 		
 	}
@@ -97,8 +104,19 @@ body {
 		border-radius: 2px;
 		border: 1px inset red;
 	}
+	td.ia-adv-msg {
+		background-color: whitesmoke;
+		padding: 1ex;
+		border-radius: 2px;
+		border: 1px inset lightblue;
+	}
 	td.ia-err-msg div {
 		color: darkred;
+		font-weight: bold;
+		text-align: center;
+	}
+	td.ia-adv-msg div {
+		color: blue;
 		font-weight: bold;
 		text-align: center;
 	}
@@ -120,7 +138,7 @@ body {
 	td.ia-cnn-but {
 		text-align: right;
 	}
-	td.ia-err-but {
+	td.ia-err-but, td.ia-adv-but {
 		text-align: center;
 		vertical-align: center;
 		padding: 1ex;
@@ -143,10 +161,17 @@ body {
 		background-color: maroon;
 	}
 	
-	#ia-dia-cap, div.ia-dia-txt-frm caption, div.ia-pic-frm caption, div.ia-pic-del-frm caption, div.ia-err-frm caption, div.ia-con-frm caption, div.ia-arp-cap, div.ia-art-cap{
+	#ia-dia-cap, div.ia-dia-txt-frm caption, div.ia-pic-frm caption, div.ia-pic-del-frm caption, div.ia-err-frm caption, div.ia-con-frm caption, div.ia-arp-cap, div.ia-art-cap {
 		font-size: 150%;
 		font-weight: bold;
 		color: whitesmoke;
+		text-align: left;
+		padding: 0.5ex 0 0.5ex 5ex;
+	}
+	div.ia-adv-frm caption {
+		font-size: 150%;
+		font-weight: bold;
+		color: navy;
 		text-align: left;
 		padding: 0.5ex 0 0.5ex 5ex;
 	}
@@ -214,7 +239,7 @@ body {
 		font-size: 250%;
 		font-weight: bold;
 	}
-	div.ia-dia-frm, div.ia-dia-txt-frm, div.ia-pic-frm, div.ia-pic-del-frm, div.ia-err-frm, div.ia-con-frm, div.ia-arp-frm, div.ia-art-frm, div.ia-arp-del-frm, div.ia-art-del-frm {
+	div.ia-dia-frm, div.ia-dia-txt-frm, div.ia-pic-frm, div.ia-pic-del-frm, div.ia-err-frm, div.ia-adv-frm, div.ia-con-frm, div.ia-arp-frm, div.ia-art-frm, div.ia-arp-del-frm, div.ia-art-del-frm {
 		display: none;
 	}
 	.ia-dig-but {
